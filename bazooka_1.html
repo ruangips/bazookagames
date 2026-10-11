@@ -8,8 +8,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#051410">
 <meta name="format-detection" content="telephone=no">
-<meta name="description" content="BAZOOKA GAME - Game Edukasi Ekonomi Bab 1 oleh MAEDA GAME DEVELOPMENT FOR EDUCATION (MGDE)">
-<title>BAZOOKA GAME — Ekonomi Bab 1 | MGDE</title>
+<meta name="description" content="BAZOOKA GAME - Game Edukasi Ekonomi Bab 1 oleh MAEDA GAMES EDU">
+<title>BAZOOKA GAME — Ekonomi Bab 1 | MGE</title>
 <style>
 /* ========== RESET & GLOBAL ========== */
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -111,7 +111,7 @@ h1{
 .set-row input[type=checkbox]{width:clamp(18px,5vw,22px);height:clamp(18px,5vw,22px);accent-color:#00e676}
 .set-row span{font-size:clamp(10px,2.6vw,12px);opacity:.7;text-align:right}
 
-/* ========== MGDE FOOTER ========== */
+/* ========== MGE FOOTER ========== */
 .mgde-footer{
   margin-top:clamp(12px,3vw,18px);
   padding:clamp(9px,2.2vw,12px) clamp(10px,3vw,14px);
@@ -453,7 +453,7 @@ h1.title-main{
 }
 @keyframes btnShine{0%{left:-80%}40%,100%{left:130%}}
 
-#loading .panel,#menu .panel,#settings .panel,#howto .panel,#levelselect .panel{
+#menu .panel,#settings .panel,#howto .panel,#levelselect .panel{
   position:relative;z-index:2;
   background:
     radial-gradient(circle at 20% 0%,rgba(0,230,118,.28),transparent 55%),
@@ -466,108 +466,226 @@ h1.title-main{
 }
 @keyframes panelIn{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
 
-/* ========== LOADING ANIMATION ========== */
-.loading-stage{
+/* ========== MGE LOADING SCREEN ========== */
+#loading{padding:0 !important}
+#loading .panel{
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+  animation:none !important;
+  padding:0 !important;
+  max-width:100% !important;
+  width:100% !important;
+  border-radius:0 !important;
+}
+
+.mge-loader-wrap{
   position:relative;
-  width:min(480px,92vw);
-  margin:0 auto;
-  padding:clamp(24px,6vw,40px) 10px clamp(12px,3vw,20px);
-  overflow:visible;
+  z-index:1;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:clamp(14px,3.5vw,22px);
+  padding:clamp(20px,5vw,40px) 16px;
+  width:100%;
+  min-height:100dvh;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 20% 10%,#0a2a1a 0%,transparent 45%),
+    radial-gradient(circle at 80% 90%,#0a4a2a 0%,transparent 50%),
+    radial-gradient(circle at 50% 50%,#051810,#030a08 60%,#010604);
 }
-.load-bazooka{position:absolute;left:0;bottom:12px;width:clamp(56px,14vw,80px);height:clamp(28px,7vw,38px);z-index:3}
-.load-bazooka .tube{
-  position:absolute;left:0;top:10px;
-  width:clamp(44px,11vw,64px);height:clamp(14px,3.5vw,18px);
-  background:linear-gradient(180deg,#00e676,#00873e 60%,#003818);
-  border-radius:9px 4px 4px 9px;border:1.5px solid #002a12;
-  box-shadow:0 2px 8px rgba(0,0,0,.6),0 0 16px rgba(0,230,118,.55);
+
+.mge-loader-wrap::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(0,230,118,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,230,118,0.07) 1px, transparent 1px);
+  background-size:44px 44px;
+  mask-image:radial-gradient(ellipse at center, black 30%, transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse at center, black 30%, transparent 75%);
+  animation:gridMove 12s linear infinite;
+  pointer-events:none;
 }
-.load-bazooka .muzzle{
-  position:absolute;right:-8px;top:13px;
-  width:clamp(8px,2vw,10px);height:clamp(10px,2.5vw,12px);
-  background:#0a0a08;border-radius:2px;border:1px solid #333;
+@keyframes gridMove{
+  from{background-position:0 0}
+  to{background-position:44px 44px}
 }
-.load-trail-wrap{
-  position:absolute;left:clamp(50px,12.5vw,72px);right:0;top:50%;
-  height:14px;transform:translateY(-50%);overflow:visible;z-index:2;
+
+.mge-loader-wrap::after{
+  content:'';position:absolute;
+  width:clamp(400px,90vw,520px);height:clamp(400px,90vw,520px);
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(0,230,118,0.42), transparent 65%);
+  filter:blur(90px);
+  animation:orbPulse 3s ease-in-out infinite;
+  pointer-events:none;
 }
-.load-trail{
-  position:absolute;left:0;top:50%;height:6px;width:0%;
-  transform:translateY(-50%);
-  background:linear-gradient(90deg,rgba(0,230,118,1) 0%,rgba(105,240,174,1) 40%,rgba(255,255,255,1) 60%,rgba(0,229,255,0) 100%);
-  border-radius:3px;
-  box-shadow:0 0 14px rgba(0,230,118,.95),0 0 36px rgba(0,229,255,.6);
-  animation:trailGrow 3s cubic-bezier(.4,.0,.2,1) forwards;
+@keyframes orbPulse{
+  0%,100%{transform:scale(1);opacity:.6}
+  50%{transform:scale(1.15);opacity:1}
 }
-@keyframes trailGrow{0%{width:0%;opacity:0}4%{width:0%;opacity:1}85%{width:100%;opacity:1}100%{width:100%;opacity:1}}
-.load-flash{
-  position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:50;
-  animation:flashBoom 3s ease-out forwards;animation-delay:2.55s;
+
+.mge-logo-wrap{
+  position:relative;z-index:2;
+  width:clamp(120px,32vw,150px);
+  height:clamp(120px,32vw,150px);
+  display:flex;align-items:center;justify-content:center;
+  animation:logoFloat 3s ease-in-out infinite;
 }
-@keyframes flashBoom{0%{opacity:0}5%{opacity:.9}25%{opacity:.35}50%{opacity:0}100%{opacity:0}}
-.load-title-wrap{
-  position:relative;z-index:5;text-align:center;margin-top:clamp(16px,4vw,24px);
-  opacity:0;animation:titleReveal .6s ease-out forwards;animation-delay:2.7s;
+@keyframes logoFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
 }
-@keyframes titleReveal{from{opacity:0;transform:translateY(16px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
-.load-title-main{
+
+.mge-ring-outer{
+  position:absolute;inset:0;
+  border-radius:50%;
+  border:2px solid transparent;
+  border-top-color:#00e676;
+  border-right-color:#69f0ae;
+  border-bottom-color:transparent;
+  border-left-color:#00e5ff;
+  animation:spinRing 1.6s linear infinite;
+  filter:drop-shadow(0 0 8px rgba(0,230,118,0.9));
+}
+.mge-ring-inner{
+  position:absolute;inset:12px;
+  border-radius:50%;
+  border:1.5px dashed rgba(0,230,118,0.5);
+  animation:spinRingReverse 4s linear infinite;
+}
+@keyframes spinRing{to{transform:rotate(360deg)}}
+@keyframes spinRingReverse{to{transform:rotate(-360deg)}}
+
+.mge-circle{
+  position:absolute;inset:20px;
+  border-radius:50%;
+  background:radial-gradient(circle at 30% 25%, #0a4a2a 0%, #052418 55%, #010604 100%);
+  box-shadow:
+    0 0 0 1px rgba(0,230,118,0.35) inset,
+    0 0 24px rgba(0,230,118,0.55),
+    0 0 60px rgba(0,230,118,0.35),
+    inset 0 -8px 20px rgba(0,0,0,0.6);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.mge-circle::before{
+  content:'';
+  position:absolute;
+  top:-50%;left:-50%;
+  width:200%;height:200%;
+  background:conic-gradient(from 0deg, transparent 0%, rgba(0,230,118,0.25) 20%, transparent 40%);
+  animation:shimmer 3s linear infinite;
+  pointer-events:none;
+}
+@keyframes shimmer{to{transform:rotate(360deg)}}
+
+.mge-text{
+  position:relative;
   font-family:'Arial Black','Segoe UI',Impact,system-ui,sans-serif;
-  font-size:clamp(24px,7vw,48px);font-weight:900;
-  letter-spacing:clamp(3px,1.5vw,6px);line-height:1.1;
-  background:linear-gradient(180deg,#ffffff 0%,#b9f6ca 25%,#69f0ae 55%,#00e676 80%,#00873e 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  filter:drop-shadow(0 4px 22px rgba(0,230,118,1)) drop-shadow(0 0 40px rgba(0,229,255,.7));
-  margin-bottom:12px;
-}
-.load-title-combined{
-  display:block;
-  font-family:'Arial Black','Segoe UI',Impact,system-ui,sans-serif;
-  font-size:clamp(9px,2.5vw,16px);font-weight:900;
-  letter-spacing:clamp(1px,0.5vw,2px);color:#00e5ff;text-transform:uppercase;
-  text-align:center;line-height:1.35;margin-top:4px;
+  font-size:clamp(30px,8vw,44px);
+  font-weight:900;
+  letter-spacing:2px;
+  line-height:1;
+  background:linear-gradient(180deg, #ffffff 0%, #b9f6ca 25%, #69f0ae 55%, #00e676 80%, #00873e 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
   text-shadow:
-    0 0 10px rgba(0,229,255,1),0 0 22px rgba(0,229,255,.95),0 0 40px rgba(0,230,118,.7),
-    1.5px 1.5px 0 #000,-1.5px -1.5px 0 #000,1.5px -1.5px 0 #000,-1.5px 1.5px 0 #000;
+    0 1px 0 rgba(0,230,118,0.4),
+    0 2px 0 rgba(0,230,118,0.3),
+    0 3px 0 rgba(0,135,62,0.3),
+    0 4px 8px rgba(0,0,0,0.6),
+    0 0 22px rgba(0,230,118,0.85);
+  filter:drop-shadow(0 0 12px rgba(0,230,118,0.9));
+  animation:textPulse 2.4s ease-in-out infinite;
+  z-index:2;
+  transform:perspective(500px) rotateX(6deg);
 }
-@media (min-width:640px){.load-title-combined{white-space:nowrap;letter-spacing:2px}}
-.load-bar-wrap{
-  width:min(320px,80vw);margin:clamp(18px,4.5vw,26px) auto 0;
-  height:5px;background:rgba(0,230,118,.18);
-  border-radius:3px;overflow:hidden;
-  opacity:0;animation:barReveal .3s ease forwards;animation-delay:2.75s;
-  position:relative;
+@keyframes textPulse{
+  0%,100%{
+    filter:drop-shadow(0 0 12px rgba(0,230,118,0.9));
+    transform:perspective(500px) rotateX(6deg) scale(1);
+  }
+  50%{
+    filter:drop-shadow(0 0 22px rgba(0,230,118,1));
+    transform:perspective(500px) rotateX(6deg) scale(1.05);
+  }
 }
-@keyframes barReveal{to{opacity:1}}
-.load-bar-fill{
+.mge-text::after{
+  content:'MGE';
+  position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(255,255,255,0.85) 0%, transparent 55%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  pointer-events:none;
+  z-index:3;
+}
+
+.mge-brand-text{
+  position:relative;z-index:1;
+  display:flex;align-items:center;justify-content:center;
+  gap:10px;
+  animation:mgeFadeInUp .9s ease .2s both;
+}
+.mge-brand-text .brand-line{
+  width:clamp(18px,4.5vw,26px);height:1px;
+  background:linear-gradient(90deg, transparent, #00e676, transparent);
+}
+.mge-brand-text .brand-label{
+  font-family:'Arial Black','Segoe UI',Impact,system-ui,sans-serif;
+  font-size:clamp(9px,2.4vw,13px);
+  font-weight:700;
+  letter-spacing:clamp(3px,1vw,5px);
+  text-transform:uppercase;
+  background:linear-gradient(90deg, #00e676 0%, #00e5ff 50%, #00e676 100%);
+  background-size:200% 100%;
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:brandShine 3.5s linear infinite;
+  white-space:nowrap;
+}
+@keyframes brandShine{
+  0%{background-position:0% 50%}
+  100%{background-position:200% 50%}
+}
+
+.mge-loader-title{
+  position:relative;z-index:1;
+  font-size:clamp(11px,2.9vw,15px);font-weight:bold;
+  letter-spacing:4px;text-transform:uppercase;
+  color:#b9f6ca;
+  animation:mgeFadeInUp .8s ease .3s both;
+}
+.mge-loader-sub{
+  position:relative;z-index:1;
+  color:#69f0ae;font-size:clamp(8px,2.2vw,11px);
+  letter-spacing:2px;text-transform:uppercase;
+  animation:mgeFadeInUp .8s ease .4s both;
+}
+@keyframes mgeFadeInUp{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.mge-loader-bar{
+  position:relative;z-index:1;
+  width:min(240px,70vw);height:4px;
+  background:rgba(0,230,118,0.18);border-radius:4px;
+  overflow:hidden;
+  animation:mgeFadeInUp .8s ease .5s both;
+}
+.mge-loader-bar-fill{
   height:100%;width:0%;
   background:linear-gradient(90deg,#00e676,#00e5ff,#69f0ae);
-  border-radius:3px;
-  box-shadow:0 0 12px rgba(0,230,118,.8);
-  animation:barFill 3s cubic-bezier(.4,.0,.2,1) forwards;
+  border-radius:4px;
+  box-shadow:0 0 12px rgba(0,230,118,0.8);
+  animation:mgeLoadFill 1.8s cubic-bezier(.65,.05,.36,1) forwards;
 }
-@keyframes barFill{0%{width:0%}85%{width:100%}100%{width:100%}}
-.load-percent{
-  position:absolute;right:0;top:-16px;
-  font-size:clamp(8px,2vw,9px);letter-spacing:1.5px;
-  color:rgba(105,240,174,.85);font-weight:700;
-}
-.load-mgde-bottom{
-  margin-top:clamp(14px,3.5vw,22px);
-  padding:clamp(8px,2vw,10px) clamp(10px,3vw,12px);
-  width:100%;
-  border-top:1px solid rgba(0,229,255,.55);
-  border-bottom:1px solid rgba(0,229,255,.35);
-  background:linear-gradient(180deg,rgba(0,229,255,.10),rgba(0,229,255,.03));
-  border-radius:8px;
-  opacity:0;animation:fadeIn .6s ease forwards;animation-delay:2.9s;
-  text-align:center;
-}
-@keyframes fadeIn{to{opacity:1}}
-.load-mgde-bottom .mgde-text{
-  font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;
-  font-size:clamp(9px,2.2vw,11px);font-weight:800;
-  letter-spacing:clamp(1.6px,0.7vw,3px);color:#00e5ff;text-transform:uppercase;line-height:1.4;
-  text-shadow:0 0 10px rgba(0,229,255,.9),0 0 20px rgba(0,229,255,.5),1px 1px 0 rgba(0,0,0,.8);
+@keyframes mgeLoadFill{
+  0%{width:0%}
+  40%{width:45%}
+  70%{width:75%}
+  100%{width:100%}
 }
 
 /* ========== MGDE BADGE (in-game) ========== */
@@ -833,9 +951,6 @@ h1.title-main{
   .li-num{font-size:9px;letter-spacing:3px;margin-bottom:4px}
   .level-intro .mgde-footer{margin-top:6px;padding:6px 8px}
   .level-intro .mgde-footer .mgde-label{font-size:7.5px;letter-spacing:1.4px}
-  .load-title-main{font-size:clamp(22px,6vw,36px)}
-  .load-title-combined{font-size:clamp(9px,2.4vw,13px)}
-  .loading-stage{padding:18px 10px 12px}
   .mgde-badge{font-size:5.5px;padding:2px 7px;letter-spacing:0.6px}
   .wind-a{font-size:11px}
   .q-bar{height:2.5px}
@@ -889,8 +1004,6 @@ h1.title-main{
   .li-desc{font-size:9px;margin-bottom:8px}
   .li-tag,.li-lokasi{font-size:8px;padding:2px 7px;margin-bottom:4px}
   .li-num{font-size:8px;letter-spacing:2.5px;margin-bottom:3px}
-  .load-title-main{font-size:20px}
-  .load-title-combined{font-size:9px}
   .mgde-badge{font-size:5px;padding:1.5px 6px;letter-spacing:0.5px}
   .lbl{letter-spacing:0.8px}
 }
@@ -916,8 +1029,7 @@ h1.title-main{
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi){
   .mgde-footer .mgde-label,
-  .mgde-badge,
-  .load-mgde-bottom .mgde-text{
+  .mgde-badge{
     -webkit-font-smoothing:antialiased;
   }
 }
@@ -939,31 +1051,33 @@ h1.title-main{
   <div class="rot-title">Putar Perangkat</div>
   <div class="rot-desc">Game ini dirancang untuk dimainkan dalam <b>posisi landscape</b> (mendatar). Silakan putar HP Anda.</div>
   <div class="rot-hint"><span class="rot-arrow">↻</span> Putar ke Landscape</div>
-  <div class="rot-footer"><span>MAEDA GAME DEVELOPMENT FOR EDUCATION</span></div>
+  <div class="rot-footer"><span>MAEDA GAMES EDU</span></div>
 </div>
 
 <!-- LOADING -->
 <div id="loading" class="screen active">
-  <div class="panel">
-    <div class="loading-stage">
-      <div class="load-bazooka">
-        <div class="tube"></div>
-        <div class="muzzle"></div>
+  <div class="mge-loader-wrap">
+    <div class="mge-logo-wrap">
+      <div class="mge-ring-outer"></div>
+      <div class="mge-ring-inner"></div>
+      <div class="mge-circle">
+        <div class="mge-text">MGE</div>
       </div>
-      <div class="load-trail-wrap"><div class="load-trail"></div></div>
     </div>
-    <div class="load-flash"></div>
-    <div class="load-title-wrap">
-      <div class="load-title-main">BAZOOKA</div>
-      <div class="load-title-combined">Game Edukasi Ekonomi: Bab 1 Kegiatan Ekonomi & Kebutuhan</div>
+
+    <div class="mge-brand-text">
+      <span class="brand-line"></span>
+      <span class="brand-label">MAEDA GAMES EDU</span>
+      <span class="brand-line"></span>
     </div>
-    <div class="load-bar-wrap">
-      <div class="load-bar-fill"></div>
-      <div class="load-percent" id="loadPct">0%</div>
+
+    <div class="mge-loader-title">Memuat Game</div>
+
+    <div class="mge-loader-bar">
+      <div class="mge-loader-bar-fill"></div>
     </div>
-    <div class="load-mgde-bottom">
-      <div class="mgde-text">MAEDA GAME DEVELOPMENT FOR EDUCATION</div>
-    </div>
+
+    <div class="mge-loader-sub">BAZOOKA GAME · Ekonomi Bab 1</div>
   </div>
 </div>
 
@@ -993,7 +1107,7 @@ h1.title-main{
       <button class="btn btn-s btn-prem" id="bHow">? CARA MAIN</button>
     </div>
     <div class="mgde-footer">
-      <span class="mgde-label">MAEDA GAME DEVELOPMENT FOR EDUCATION</span>
+      <span class="mgde-label">MAEDA GAMES EDU</span>
     </div>
   </div>
 </div>
@@ -1008,7 +1122,7 @@ h1.title-main{
       <button class="btn btn-s" id="bLevelsBack">← KEMBALI KE MENU</button>
     </div>
     <div class="mgde-footer">
-      <span class="mgde-label">MAEDA GAME DEVELOPMENT FOR EDUCATION</span>
+      <span class="mgde-label">MAEDA GAMES EDU</span>
     </div>
   </div>
 </div>
@@ -1027,7 +1141,7 @@ h1.title-main{
       <button class="btn btn-d" id="bReset">RESET PROGRES</button>
     </div>
     <div class="mgde-footer">
-      <span class="mgde-label">MAEDA GAME DEVELOPMENT FOR EDUCATION</span>
+      <span class="mgde-label">MAEDA GAMES EDU</span>
     </div>
   </div>
 </div>
@@ -1066,7 +1180,7 @@ h1.title-main{
     </p>
     <div class="btns" style="margin-top:14px"><button class="btn btn-p" id="bHowBack">KEMBALI</button></div>
     <div class="mgde-footer">
-      <span class="mgde-label">MAEDA GAME DEVELOPMENT FOR EDUCATION</span>
+      <span class="mgde-label">MAEDA GAMES EDU</span>
     </div>
   </div>
 </div>
@@ -1104,7 +1218,7 @@ h1.title-main{
     </div>
     <div class="msg" id="hMsg"></div>
   </div>
-  <div class="mgde-badge">MAEDA GAME DEVELOPMENT FOR EDUCATION (MGDE)</div>
+  <div class="mgde-badge">MAEDA GAMES EDU</div>
   <div class="level-intro" id="levelIntro">
     <div class="li-content">
       <div class="li-tag" id="liTag">MISI 1 DARI 7</div>
@@ -1116,7 +1230,7 @@ h1.title-main{
       <div class="level-progress" id="liDots"></div>
       <button class="btn btn-p btn-prem" id="liStart" style="width:min(260px,80vw);margin:0 auto;display:block">⚔ MULAI PERTEMPURAN</button>
       <div class="mgde-footer">
-        <span class="mgde-label">MAEDA GAME DEVELOPMENT FOR EDUCATION</span>
+        <span class="mgde-label">MAEDA GAMES EDU</span>
       </div>
     </div>
   </div>
@@ -1127,7 +1241,7 @@ h1.title-main{
       <button class="btn btn-s" id="bRestart2" style="margin-top:8px">🔄 RESTART LEVEL</button>
       <button class="btn btn-d" id="bQuit" style="margin-top:8px">✕ KELUAR KE MENU</button>
       <div class="mgde-footer">
-        <span class="mgde-label">MAEDA GAME DEVELOPMENT FOR EDUCATION</span>
+        <span class="mgde-label">MAEDA GAMES EDU</span>
       </div>
     </div>
   </div>
@@ -1144,7 +1258,7 @@ h1.title-main{
       <button class="btn btn-p btn-prem" id="bAgain">🔄 ULANGI LEVEL INI</button>
       <button class="btn btn-s btn-prem" id="bMenu" style="margin-top:8px">🏠 KEMBALI KE MENU</button>
       <div class="mgde-footer">
-        <span class="mgde-label">MAEDA GAME DEVELOPMENT FOR EDUCATION</span>
+        <span class="mgde-label">MAEDA GAMES EDU</span>
       </div>
     </div>
   </div>
@@ -1471,7 +1585,7 @@ function startLevel(idx){
   document.getElementById('levelIntro').classList.add('active');
   document.getElementById('hLevel').textContent=(idx+1)+'/'+TOTAL_LEVELS;
   updateHudAll();
-  document.title='BAZOOKA GAME — '+level.name+' | MGDE';
+  document.title='BAZOOKA GAME — '+level.name+' | MGE';
 }
 function continueLevel(){document.getElementById('levelIntro').classList.remove('active');loadQuestion();}
 
@@ -1848,7 +1962,7 @@ function bindTouchButton(el,onDown,onUp){const down=(ev)=>{ev.preventDefault();e
 function bindTouchControls(){bindTouchButton(document.getElementById('tLeft'),()=>{touchState.left=true;},()=>{touchState.left=false;});bindTouchButton(document.getElementById('tRight'),()=>{touchState.right=true;},()=>{touchState.right=false;});bindTouchButton(document.getElementById('tFire'),()=>{if(state.gameOver||state.paused)return;if(state.roundLock||state.reloading>0)return;aimNearestEnemy();state.pendingTarget=findNearestEnemy();state.pendingFire=true;},null);bindTouchButton(document.getElementById('tReload'),()=>{if(!state.gameOver&&!state.paused)startReload();},null);}
 function updateTouchControlsVisibility(){const ctrls=document.getElementById('touchCtrls');const portrait=isPortrait();const on=IS_TOUCH&&settings.touch&&!portrait;ctrls.classList.toggle('on',on);}
 
-function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='menu'||id==='loading')document.title='BAZOOKA GAME — Ekonomi Bab 1 | MGDE';else if(id==='howto')document.title='BAZOOKA GAME — Cara Main | MGDE';else if(id==='settings')document.title='BAZOOKA GAME — Pengaturan | MGDE';else if(id==='levelselect')document.title='BAZOOKA GAME — Pilih Level | MGDE';}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='menu')document.title='BAZOOKA GAME — Ekonomi Bab 1 | MGE';else if(id==='howto')document.title='BAZOOKA GAME — Cara Main | MGE';else if(id==='settings')document.title='BAZOOKA GAME — Pengaturan | MGE';else if(id==='levelselect')document.title='BAZOOKA GAME — Pilih Level | MGE';}
 function togglePause(){if(state.gameOver)return;if(isPortrait())return;state.paused=!state.paused;document.getElementById('pauseOv').classList.toggle('active',state.paused);}
 function updateMenuProgress(){const idx=getUnlockedLevel();document.getElementById('progressVal').textContent='LEVEL '+(idx+1)+'/'+TOTAL_LEVELS;}
 
@@ -1888,18 +2002,12 @@ document.addEventListener('touchmove',e=>{if(e.target.closest('.panel')||e.targe
 document.addEventListener('gesturestart',e=>e.preventDefault());
 document.addEventListener('dblclick',e=>e.preventDefault());
 
-(function(){const el=document.getElementById('loadPct');const start=performance.now();const dur=3000;function tick(){const t=Math.min(1,(performance.now()-start)/dur);const pct=Math.round(t*100);if(el)el.textContent=pct+'%';if(t<1)requestAnimationFrame(tick);}requestAnimationFrame(tick);})();
-
 setTimeout(()=>{
   document.getElementById('hsVal').textContent=getHighscore();
   updateMenuProgress();
-  document.title='BAZOOKA GAME — Ekonomi Bab 1 | MGDE';
-  const loadingEl=document.getElementById('loading');
-  const menuEl=document.getElementById('menu');
+  document.title='BAZOOKA GAME — Ekonomi Bab 1 | MGE';
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  menuEl.classList.add('active');
-  requestAnimationFrame(()=>{loadingEl.classList.add('fade-out');});
-  setTimeout(()=>{loadingEl.classList.remove('active');loadingEl.classList.remove('fade-out');loadingEl.style.display='none';},900);
+  document.getElementById('menu').classList.add('active');
 },3000);
 
 requestAnimationFrame(loop);
