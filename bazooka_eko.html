@@ -136,6 +136,12 @@
       box-shadow: 0 4px 12px rgba(245, 158, 11, 0.45);
     }
 
+    .game-badge.purple {
+      background: linear-gradient(135deg, #a855f7, #d946ef);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(168, 85, 247, 0.5);
+    }
+
     /* Efek premium untuk kartu Bab 2 */
     .bab-card.premium {
       border: 2px solid rgba(245, 158, 11, 0.35);
@@ -161,6 +167,33 @@
 
     .bab-card.premium h3 {
       color: #fbbf24;
+    }
+
+    /* Efek premium untuk kartu Bab 3 — Roda Putar */
+    .bab-card.rodaputar {
+      border: 2px solid rgba(168, 85, 247, 0.35);
+      background: linear-gradient(135deg, #132941 0%, #1f2a4a 50%, #132941 100%);
+    }
+
+    .bab-card.rodaputar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #a855f7, #d946ef, #a855f7);
+      background-size: 200% auto;
+      animation: shine 3s linear infinite;
+    }
+
+    .bab-card.rodaputar:hover {
+      border-color: #d946ef;
+      box-shadow: 0 20px 40px -10px rgba(168, 85, 247, 0.5);
+    }
+
+    .bab-card.rodaputar h3 {
+      color: #d946ef;
     }
 
     @keyframes shine {
@@ -196,40 +229,48 @@
 
     <div class="bab-grid">
 
-      <a href="https://ruangips.github.io/bazookagames/bazooka_1.html" class="bab-card">
+      <a href="https://ruangips.github.io/bazookagames/bazooka_1.html"
+         class="bab-card" target="_blank" rel="noopener noreferrer">
         <div class="icon">🏭</div>
         <h3>Bab 1 — Kegiatan Ekonomi</h3>
         <p>Produksi, distribusi, dan konsumsi dalam kehidupan sehari-hari.</p>
         <span class="game-badge">🎮 Bazooka Game</span>
       </a>
 
-      <!-- 🔥 BAB 2 — UPDATE: sekarang mengarah ke Kuis Jutawan -->
-      <a href="https://ruangips.github.io/bazookagames/bab2ekokuisjutawan.html" class="bab-card premium">
+      <!-- 🔥 BAB 2 — Kuis Jutawan -->
+      <a href="https://ruangips.github.io/bazookagames/bab2ekokuisjutawan.html"
+         class="bab-card premium" target="_blank" rel="noopener noreferrer">
         <div class="icon">👥</div>
         <h3>Bab 2 — Pelaku Ekonomi</h3>
         <p>Rumah tangga, perusahaan, pemerintah, dan masyarakat luar negeri.</p>
         <span class="game-badge gold">👑 Kuis Jutawan</span>
       </a>
 
-      <a href="ekonomi-bab3.html" class="bab-card">
+      <!-- 🎡 BAB 3 — Roda Putar (BARU) -->
+      <a href="https://ruangips.github.io/bazookagames/bab3rodaputar.html"
+         class="bab-card rodaputar" target="_blank" rel="noopener noreferrer">
         <div class="icon">⚖️</div>
         <h3>Bab 3 — Harga dan Pasar</h3>
         <p>Permintaan, penawaran, harga keseimbangan, dan jenis pasar.</p>
+        <span class="game-badge purple">🎡 Roda Putar</span>
       </a>
 
-      <a href="ekonomi-bab4.html" class="bab-card">
+      <a href="ekonomi-bab4.html"
+         class="bab-card" target="_blank" rel="noopener noreferrer">
         <div class="icon">🏦</div>
         <h3>Bab 4 — Lembaga Keuangan</h3>
         <p>Bank, koperasi, dan lembaga keuangan non-bank.</p>
       </a>
 
-      <a href="ekonomi-bab5.html" class="bab-card">
+      <a href="ekonomi-bab5.html"
+         class="bab-card" target="_blank" rel="noopener noreferrer">
         <div class="icon">🌍</div>
         <h3>Bab 5 — Perdagangan Internasional</h3>
         <p>Ekspor, impor, dan kerja sama ekonomi antarnegara.</p>
       </a>
 
-      <a href="ekonomi-bab6.html" class="bab-card">
+      <a href="ekonomi-bab6.html"
+         class="bab-card" target="_blank" rel="noopener noreferrer">
         <div class="icon">💳</div>
         <h3>Bab 6 — Ekonomi Digital</h3>
         <p>Literasi finansial, uang digital, dan ekonomi berbasis teknologi.</p>
