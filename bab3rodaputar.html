@@ -158,23 +158,218 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
   }
   .overflow-safe{ word-wrap: break-word; overflow-wrap: break-word; }
   .opt-btn:focus-visible, .btn-primary:focus-visible, .btn-home:focus-visible, .spin-btn:focus-visible, #spinBtn:focus-visible, #soundToggle:focus-visible, #themeToggle:focus-visible{ outline: 3px solid var(--lvl-primary); outline-offset: 3px; }
-  #loadingScreen { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background: rgba(244,249,255,0.96); backdrop-filter: blur(12px); transition: opacity 0.7s ease, visibility 0.7s ease; flex-direction: column; padding: 20px; }
-  body.dark-mode #loadingScreen{ background: rgba(10,15,30,0.96); }
+
+  /* ========== MGE 3D LOADING SCREEN ========== */
+  #loadingScreen {
+    position: fixed; inset: 0; z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+    background:
+      radial-gradient(circle at 20% 10%, #dbeafe 0%, transparent 45%),
+      radial-gradient(circle at 80% 90%, #ede9fe 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, #f4f9ff, #eff6ff 60%, #dbeafe);
+    transition: opacity 0.7s ease, visibility 0.7s ease;
+    padding: 20px;
+    flex-direction: column;
+  }
+  body.dark-mode #loadingScreen {
+    background:
+      radial-gradient(circle at 20% 10%, #1e3a8a 0%, transparent 45%),
+      radial-gradient(circle at 80% 90%, #4c1d95 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, #0a0f1e, #1e293b 60%, #0a0f1e);
+  }
   #loadingScreen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-  .loader-content { text-align: center; max-width: 340px; width: 100%; }
-  .loader-ring-container { position: relative; width: 140px; height: 140px; margin: 0 auto; }
-  .loader-ring { position: absolute; border-radius: 50%; border: 4px solid transparent; animation: spinReverse 1.4s cubic-bezier(0.34,1.56,0.64,1) infinite; }
-  .loader-ring:nth-child(1) { width: 140px; height: 140px; border-top-color: var(--rose); border-right-color: var(--rose); animation-duration: 1.2s; }
-  .loader-ring:nth-child(2) { width: 110px; height: 110px; top: 15px; left: 15px; border-bottom-color: var(--orange); border-left-color: var(--orange); animation-direction: reverse; animation-duration: 1.0s; }
-  .loader-ring:nth-child(3) { width: 80px; height: 80px; top: 30px; left: 30px; border-top-color: var(--green); border-right-color: var(--green); animation-duration: 0.8s; }
-  @keyframes spinReverse { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-  .loader-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; background: linear-gradient(135deg, var(--primary), var(--accent), var(--secondary)); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmerText 2s ease-in-out infinite; margin-bottom: 6px; line-height: 1.2; }
-  .loader-sub { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 28px; }
-  .loader-bar { width: 100%; height: 5px; background: var(--border-light); border-radius: 99px; overflow: hidden; margin-bottom: 14px; }
-  .loader-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--accent), var(--green)); border-radius: 99px; animation: loadFill 1.4s ease-in-out forwards; box-shadow: 0 0 16px rgba(37,99,235,.4); }
-  @keyframes loadFill { 0% { width: 0%; } 100% { width: 100%; } }
-  .loader-text { font-size: 0.65rem; color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; font-weight: 700; animation: blinkText 1.4s ease-in-out infinite; }
-  @keyframes blinkText { 0%,100% { opacity: .6; } 50% { opacity: 1; } }
+
+  .mge-loader-content {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 18px;
+    max-width: 480px; width: 100%;
+  }
+  .mge-loader-content::before {
+    content: ''; position: absolute; inset: -40px;
+    background-image:
+      linear-gradient(rgba(37,99,235,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37,99,235,0.06) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    animation: mgeGridMove 12s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+  }
+  @keyframes mgeGridMove { from{background-position:0 0} to{background-position:44px 44px} }
+
+  .mge-logo-wrap {
+    position: relative;
+    width: clamp(120px, 32vw, 150px);
+    height: clamp(120px, 32vw, 150px);
+    display: flex; align-items: center; justify-content: center;
+    animation: mgeLogoFloat 3s ease-in-out infinite;
+  }
+  @keyframes mgeLogoFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+  .mge-ring-outer {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: #2563eb;
+    border-right-color: #3b82f6;
+    border-bottom-color: transparent;
+    border-left-color: #8b5cf6;
+    animation: mgeSpinRing 1.6s linear infinite;
+    filter: drop-shadow(0 0 8px rgba(37,99,235,0.7));
+  }
+  .mge-ring-inner {
+    position: absolute; inset: 12px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(37,99,235,0.5);
+    animation: mgeSpinRingReverse 4s linear infinite;
+  }
+  @keyframes mgeSpinRing { to{transform:rotate(360deg)} }
+  @keyframes mgeSpinRingReverse { to{transform:rotate(-360deg)} }
+
+  .mge-circle {
+    position: absolute; inset: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 25%, #dbeafe 0%, #bfdbfe 55%, #93c5fd 100%);
+    box-shadow:
+      0 0 0 1px rgba(37,99,235,0.35) inset,
+      0 0 24px rgba(37,99,235,0.45),
+      0 0 60px rgba(59,130,246,0.35),
+      inset 0 -8px 20px rgba(37,99,235,0.25);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  body.dark-mode .mge-circle {
+    background: radial-gradient(circle at 30% 25%, #1e3a8a 0%, #1e40af 55%, #0a0f1e 100%);
+    box-shadow:
+      0 0 0 1px rgba(96,165,250,0.35) inset,
+      0 0 24px rgba(96,165,250,0.55),
+      0 0 60px rgba(96,165,250,0.35),
+      inset 0 -8px 20px rgba(0,0,0,0.6);
+  }
+  .mge-circle::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: conic-gradient(from 0deg, transparent 0%, rgba(255,255,255,0.5) 20%, transparent 40%);
+    animation: mgeShimmer 3s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes mgeShimmer { to{transform:rotate(360deg)} }
+
+  .mge-text {
+    position: relative;
+    font-family: 'Space Grotesk', 'Arial Black', sans-serif;
+    font-size: clamp(30px, 8vw, 44px);
+    font-weight: 900;
+    letter-spacing: 2px;
+    line-height: 1;
+    background: linear-gradient(180deg, #ffffff 0%, #dbeafe 25%, #3b82f6 55%, #2563eb 80%, #1e3a8a 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 12px rgba(59,130,246,0.7));
+    animation: mgeTextPulse 2.4s ease-in-out infinite;
+    z-index: 2;
+    transform: perspective(500px) rotateX(6deg);
+  }
+  @keyframes mgeTextPulse {
+    0%, 100% { filter: drop-shadow(0 0 12px rgba(59,130,246,0.7)); transform: perspective(500px) rotateX(6deg) scale(1); }
+    50% { filter: drop-shadow(0 0 22px rgba(37,99,235,1)); transform: perspective(500px) rotateX(6deg) scale(1.05); }
+  }
+  .mge-text::after {
+    content: 'MGE';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, transparent 55%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    pointer-events: none; z-index: 3;
+  }
+
+  .mge-brand-text {
+    position: relative; z-index: 1;
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px;
+    animation: mgeFadeInUp 0.9s ease 0.2s both;
+  }
+  .mge-brand-text .brand-line {
+    width: clamp(18px, 4.5vw, 26px); height: 1px;
+    background: linear-gradient(90deg, transparent, #2563eb, transparent);
+  }
+  body.dark-mode .mge-brand-text .brand-line {
+    background: linear-gradient(90deg, transparent, #60a5fa, transparent);
+  }
+  .mge-brand-text .brand-label {
+    font-family: 'Space Grotesk', 'Arial Black', sans-serif;
+    font-size: clamp(9px, 2.4vw, 13px);
+    font-weight: 700;
+    letter-spacing: clamp(3px, 1vw, 5px);
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #2563eb 0%, #8b5cf6 50%, #2563eb 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: mgeBrandShine 3.5s linear infinite;
+    white-space: nowrap;
+  }
+  body.dark-mode .mge-brand-text .brand-label {
+    background: linear-gradient(90deg, #60a5fa 0%, #a78bfa 50%, #60a5fa 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  @keyframes mgeBrandShine { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+
+  .mge-loader-title {
+    position: relative; z-index: 1;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(14px, 3.5vw, 18px);
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #2563eb;
+    text-shadow: 0 0 18px rgba(37,99,235,0.35);
+    animation: mgeFadeInUp 0.8s ease 0.3s both;
+  }
+  body.dark-mode .mge-loader-title {
+    color: #60a5fa;
+    text-shadow: 0 0 18px rgba(96,165,250,0.5);
+  }
+  .mge-loader-sub {
+    position: relative; z-index: 1;
+    color: #64748b;
+    font-size: clamp(9px, 2.3vw, 11px);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.9;
+    animation: mgeFadeInUp 0.8s ease 0.4s both;
+  }
+  body.dark-mode .mge-loader-sub { color: #94a3b8; }
+
+  .mge-loader-bar {
+    position: relative; z-index: 1;
+    width: min(240px, 70vw); height: 5px;
+    background: rgba(37,99,235,0.15);
+    border-radius: 4px;
+    overflow: hidden;
+    animation: mgeFadeInUp 0.8s ease 0.5s both;
+  }
+  body.dark-mode .mge-loader-bar { background: rgba(96,165,250,0.18); }
+  .mge-loader-bar-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, #2563eb, #0ea5e9, #8b5cf6);
+    border-radius: 4px;
+    box-shadow: 0 0 12px rgba(37,99,235,0.6);
+    animation: mgeLoadFill 1.8s cubic-bezier(.65,.05,.36,1) forwards;
+  }
+  @keyframes mgeLoadFill { 0%{width:0%} 40%{width:45%} 70%{width:75%} 100%{width:100%} }
+  @keyframes mgeFadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
   .reveal { opacity: 0; transform: translateY(24px); transition: all 0.8s cubic-bezier(0.22,1,0.36,1); }
   .reveal.visible { opacity: 1; transform: translateY(0); }
   .glow-text { text-shadow: 0 0 20px rgba(37,99,235,0.3), 0 0 40px rgba(139,92,246,0.15); }
@@ -228,6 +423,8 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
   .review-scroll::-webkit-scrollbar { width: 6px; }
   .review-scroll::-webkit-scrollbar-thumb { background: var(--lvl-primary); border-radius: 3px; opacity: 0.5; }
   @media (max-width: 640px) { .review-scroll { max-height: 360px; } }
+
+  @keyframes shimmerText { 0%,100% { background-position: 0% center; } 50% { background-position: 100% center; } }
 </style>
 </head>
 <body>
@@ -239,17 +436,30 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
 <div id="screenTransition"></div>
 <div id="themeOverlay"></div>
 
+<!-- ========== MGE 3D LOADING SCREEN ========== -->
 <div id="loadingScreen">
-  <div class="loader-content">
-    <div class="loader-ring-container">
-      <div class="loader-ring"></div>
-      <div class="loader-ring"></div>
-      <div class="loader-ring"></div>
+  <div class="mge-loader-content">
+    <div class="mge-logo-wrap">
+      <div class="mge-ring-outer"></div>
+      <div class="mge-ring-inner"></div>
+      <div class="mge-circle">
+        <div class="mge-text">MGE</div>
+      </div>
     </div>
-    <div class="loader-title">KUIS RODA BERPUTAR</div>
-    <div class="loader-sub">Ekonomi • Pasar & Terbentuknya Harga</div>
-    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
-    <div class="loader-text">Memuat...</div>
+
+    <div class="mge-brand-text">
+      <span class="brand-line"></span>
+      <span class="brand-label">MAEDA GAMES EDU</span>
+      <span class="brand-line"></span>
+    </div>
+
+    <div class="mge-loader-title">Memuat Kuis</div>
+
+    <div class="mge-loader-bar">
+      <div class="mge-loader-bar-fill"></div>
+    </div>
+
+    <div class="mge-loader-sub">Kuis Roda Berputar · Ekonomi Bab 3</div>
   </div>
 </div>
 
@@ -839,7 +1049,7 @@ function onTimerEnd() {
   setTimeout(() => { hideRevealOverlay(); showFeedback(false, 0, cat, true); }, 1500);
 }
 
-/* ============ WHEEL — dengan pill putih solid ============ */
+/* ============ WHEEL ============ */
 function buildWheel() {
   const svg = $('wheelSvg'); if (!svg) return;
   const level = LEVELS[state.currentLevelIndex];
@@ -869,7 +1079,6 @@ function buildWheel() {
     segHtml += `<path d="${wedge}" fill="${cat.color}" fill-opacity="0.92" stroke="${strokeCol}" stroke-width="1.5"/>`;
     segHtml += `<path d="${wedge}" fill="url(#wheelInner)" fill-opacity="0.12"/>`;
 
-    // ===== PILL PUTIH SOLID + TEKS BERWARNA =====
     const label = cat.short.toUpperCase();
     let fontSize = 8.5;
     if (label.length > 10) fontSize = 6.2;
@@ -882,7 +1091,6 @@ function buildWheel() {
     let rotDeg = centerDeg;
     if (Math.cos(rad) < 0) rotDeg = centerDeg + 180;
 
-    // Ukuran pill
     const charW = fontSize * 0.62;
     const textW = label.length * charW + 5;
     const textH = fontSize + 4.5;
@@ -892,7 +1100,6 @@ function buildWheel() {
       <text x="${lx.toFixed(2)}" y="${ly.toFixed(2)}" font-size="${fontSize}" font-weight="900" fill="${cat.color}" text-anchor="middle" dominant-baseline="central" font-family="'Space Grotesk','Inter',sans-serif" letter-spacing="0.3">${label}</text>
     </g>`;
 
-    // Ikon di tepi luar
     const iconR = r * 0.87;
     const icx = cx + iconR * Math.cos(rad);
     const icy = cy + iconR * Math.sin(rad);
@@ -1462,7 +1669,7 @@ window.addEventListener('load', () => {
   setTimeout(() => {
     const ls = document.getElementById('loadingScreen');
     if (ls) { ls.classList.add('hidden'); setTimeout(() => ls.remove(), 700); }
-  }, 1400);
+  }, 2200);
 });
 </script>
 </body>
