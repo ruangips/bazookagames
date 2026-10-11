@@ -3,51 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0a0e1a">
-<title>Kuis Milioner Premium — Bab 2 Pelaku Ekonomi | Ruang IPS</title>
+<meta name="theme-color" content="#0c0820">
+<title>Kuis Milioner  — Bab 2 Pelaku Ekonomi | MGDE</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* ============================================================
-     PREMIUM THEME — OBSIDIAN & GOLD
-     ============================================================ */
-  :root {
-    --primary:#c9a227;
-    --primary-light:#e8c547;
-    --primary-bright:#f4d77a;
-    --accent:#10b981;
-    --accent-bright:#34d399;
-    --danger:#e74c3c;
-    --bg-deep:#0a0e1a;
-    --bg-mid:#0f1729;
-    --bg-card:rgba(20,28,48,.72);
-    --bg-card-hover:rgba(30,40,65,.85);
-    --text:#f4f6fb;
-    --text-soft:#c7cfe2;
-    --text-muted:#7d8aa3;
-    --gold-grad:linear-gradient(135deg,#c9a227 0%,#f4d77a 50%,#c9a227 100%);
-    --gold-grad-bright:linear-gradient(135deg,#f4d77a 0%,#fff4c2 50%,#f4d77a 100%);
-    --glass-border:rgba(201,162,39,.24);
-    --glass-border-soft:rgba(255,255,255,.08);
-    --shadow-premium:0 24px 60px -20px rgba(0,0,0,.75),0 8px 24px -8px rgba(201,162,39,.15);
-    --shadow-glow:0 0 40px rgba(201,162,39,.35);
-    --radius-xl:24px;
-    --radius-lg:18px;
-    --radius-md:12px;
+  :root{
+    --primary:#8b5cf6;--primary-light:#a78bfa;--primary-bright:#c4b5fd;
+    --accent:#ec4899;--accent-bright:#f472b6;--danger:#e74c3c;
+    --bg-deep:#0c0820;--bg-mid:#13102b;
+    --bg-card:rgba(30,20,55,.72);--bg-card-hover:rgba(45,30,80,.85);
+    --text:#f4f0ff;--text-soft:#d4c8f0;--text-muted:#8b7fa8;
+    --gold-grad:linear-gradient(135deg,#8b5cf6 0%,#c4b5fd 50%,#8b5cf6 100%);
+    --gold-grad-bright:linear-gradient(135deg,#a78bfa 0%,#e9d5ff 50%,#a78bfa 100%);
+    --glass-border:rgba(139,92,246,.30);--glass-border-soft:rgba(255,255,255,.08);
+    --shadow-premium:0 24px 60px -20px rgba(0,0,0,.75),0 8px 24px -8px rgba(139,92,246,.20);
+    --radius-xl:24px;--radius-lg:18px;--radius-md:12px;
   }
   @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
   @keyframes shimmerGold{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-  @keyframes shimmerText{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
   @keyframes revealPop{0%{opacity:0;transform:scale(.4) rotate(-8deg)}50%{transform:scale(1.1) rotate(2deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
   @keyframes salahShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
   @keyframes wrongShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
   @keyframes correctPulse{0%{transform:scale(1)}50%{transform:scale(1.025)}100%{transform:scale(1)}}
   @keyframes floatCard{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-  @keyframes auroraShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
   @keyframes ringSpin{to{transform:rotate(360deg)}}
   @keyframes shineBtn{0%{left:-100%}60%,100%{left:100%}}
-  @keyframes barShine{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
   @keyframes fadeInOut{0%{opacity:0;transform:translate(-50%,-10px)}15%{opacity:1;transform:translate(-50%,0)}85%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,-10px)}}
   @keyframes loaderPulse{0%,100%{transform:scale(1);filter:drop-shadow(0 0 30px var(--primary))}50%{transform:scale(1.08);filter:drop-shadow(0 0 50px var(--primary-light))}}
   @keyframes timerPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
@@ -56,548 +38,273 @@
   @keyframes burstOut{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--tx),var(--ty)) scale(.2)}}
   @keyframes heartBreak{0%,100%{transform:scale(1)}30%{transform:scale(1.5);filter:brightness(2)}60%{transform:scale(.9)}}
   @keyframes themeFlash{0%{filter:brightness(1)}30%{filter:brightness(1.4) saturate(1.4)}100%{filter:brightness(1)}}
-  @keyframes goldGlow{0%,100%{box-shadow:0 0 20px rgba(201,162,39,.3),0 0 40px rgba(201,162,39,.15)}50%{box-shadow:0 0 30px rgba(201,162,39,.5),0 0 60px rgba(201,162,39,.25)}}
+  @keyframes goldGlow{0%,100%{box-shadow:0 0 20px rgba(139,92,246,.35),0 0 40px rgba(139,92,246,.18)}50%{box-shadow:0 0 30px rgba(139,92,246,.55),0 0 60px rgba(139,92,246,.30)}}
   @keyframes sparkleFloat{0%{opacity:0;transform:translateY(0) scale(0)}20%{opacity:1;transform:translateY(-20px) scale(1)}100%{opacity:0;transform:translateY(-100px) scale(.5)}}
-  @keyframes crownShine{0%,100%{filter:drop-shadow(0 0 8px rgba(201,162,39,.6))}50%{filter:drop-shadow(0 0 20px rgba(244,215,122,.9))}}
+  @keyframes crownShine{0%,100%{filter:drop-shadow(0 0 8px rgba(139,92,246,.7))}50%{filter:drop-shadow(0 0 20px rgba(196,181,253,.95))}}
   @keyframes shieldPulse{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.15);opacity:1}}
+  @keyframes bkGlowPulse{0%,100%{opacity:.7;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}}
+  @keyframes bkTitleShimmer{
+    0%,100%{filter:drop-shadow(0 3px 18px rgba(196,181,253,.9)) drop-shadow(0 0 40px rgba(139,92,246,.7))}
+    50%{filter:drop-shadow(0 4px 28px rgba(233,213,255,1)) drop-shadow(0 0 75px rgba(196,181,253,.9))}
+  }
+  @keyframes bkSubPulse{
+    0%,100%{text-shadow:0 0 14px rgba(236,72,153,.9),0 0 32px rgba(139,92,246,.7)}
+    50%{text-shadow:0 0 26px rgba(244,114,182,1),0 0 55px rgba(236,72,153,.95)}
+  }
+  @keyframes bkValPulse{
+    0%,100%{text-shadow:0 0 22px rgba(196,181,253,.8),0 0 44px rgba(196,181,253,.5)}
+    50%{text-shadow:0 0 36px rgba(233,213,255,1),0 0 68px rgba(196,181,253,.7)}
+  }
+  @keyframes bkBtnShine{0%{left:-80%}40%,100%{left:130%}}
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   html{scroll-behavior:smooth}
   body{
-    background:var(--bg-deep);
-    color:var(--text);
-    min-height:100vh;
-    font-family:'Inter',system-ui,sans-serif;
-    font-size:15px;line-height:1.7;overflow-x:hidden;
-    position:relative;font-weight:500;
-    transition:background-color .8s ease;
-    letter-spacing:.01em;
+    background:var(--bg-deep);color:var(--text);min-height:100vh;
+    font-family:'Inter',system-ui,sans-serif;font-size:15px;line-height:1.7;
+    overflow-x:hidden;position:relative;font-weight:500;
+    transition:background-color .8s ease;letter-spacing:.01em;
   }
-  /* Background layered noise & gradient */
   body::before{
     content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;
     background:
-      radial-gradient(ellipse 80% 60% at 20% 20%, color-mix(in srgb, var(--primary) 18%, transparent) 0%, transparent 60%),
-      radial-gradient(ellipse 70% 50% at 80% 80%, color-mix(in srgb, var(--primary-light) 12%, transparent) 0%, transparent 55%),
-      radial-gradient(ellipse 100% 80% at 50% 0%, rgba(15,23,41,.9) 0%, transparent 50%),
+      radial-gradient(ellipse 80% 60% at 20% 20%, rgba(139,92,246,.22) 0%, transparent 60%),
+      radial-gradient(ellipse 70% 50% at 80% 80%, rgba(236,72,153,.14) 0%, transparent 55%),
+      radial-gradient(ellipse 100% 80% at 50% 0%, rgba(19,16,43,.9) 0%, transparent 50%),
       linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 50%, var(--bg-deep) 100%);
-    background-size:100% 100%;
     transition:background 1.2s ease;
   }
   body::after{
     content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.55;
     background-image:
-      repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(201,162,39,.02) 60px, rgba(201,162,39,.02) 61px),
-      repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(201,162,39,.02) 60px, rgba(201,162,39,.02) 61px);
+      repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(139,92,246,.025) 60px, rgba(139,92,246,.025) 61px),
+      repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(236,72,153,.02) 60px, rgba(236,72,153,.02) 61px);
   }
   body.theme-flash{animation:themeFlash .9s ease}
-  /* Floating gold particles */
   .gold-particles{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
-  .gold-particle{
-    position:absolute;width:2px;height:2px;border-radius:50%;
-    background:radial-gradient(circle,var(--primary-light),transparent 70%);
-    animation:sparkleFloat linear infinite;
-    opacity:0;
-  }
-  /* ============ TYPOGRAPHY ============ */
+  .gold-particle{position:absolute;width:2px;height:2px;border-radius:50%;background:radial-gradient(circle,var(--primary-light),transparent 70%);animation:sparkleFloat linear infinite;opacity:0}
   .font-display{font-family:'Cormorant Garamond',Georgia,serif;letter-spacing:.02em}
-  .font-mono-lg{font-family:'Space Grotesk',monospace;letter-spacing:.08em}
-  .gold-text{
-    background:var(--gold-grad-bright);
-    background-size:300% auto;
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    animation:shimmerGold 5s ease-in-out infinite;
-  }
-  .gold-text-static{
-    background:var(--gold-grad);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .theme-text{
-    background:linear-gradient(135deg,var(--primary),var(--primary-light),var(--primary-bright),var(--primary-light),var(--primary));
-    background-size:300% auto;
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    animation:shimmerText 5s ease-in-out infinite;
-  }
-  /* ============ PANELS ============ */
+  .gold-text{background:var(--gold-grad-bright);background-size:300% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmerGold 5s ease-in-out infinite}
+  .gold-text-static{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
   .premium-panel{
-    position:relative;
-    background:var(--bg-card);
-    backdrop-filter:blur(24px) saturate(140%);
-    -webkit-backdrop-filter:blur(24px) saturate(140%);
-    border:1px solid var(--glass-border);
-    border-radius:var(--radius-xl);
-    box-shadow:var(--shadow-premium);
-    overflow:hidden;
+    position:relative;background:var(--bg-card);
+    backdrop-filter:blur(24px) saturate(140%);-webkit-backdrop-filter:blur(24px) saturate(140%);
+    border:1px solid var(--glass-border);border-radius:var(--radius-xl);
+    box-shadow:var(--shadow-premium);overflow:hidden;
     animation:fadeUp .8s cubic-bezier(.2,.9,.3,1) both;
     transition:box-shadow .4s ease,transform .4s ease,border-color .6s ease;
   }
   .premium-panel::before{
     content:'';position:absolute;top:0;left:0;right:0;height:2px;
     background:linear-gradient(90deg, transparent, var(--primary), var(--primary-bright), var(--primary), transparent);
-    background-size:200% auto;
-    animation:shimmerGold 4s linear infinite;
-    z-index:2;
+    background-size:200% auto;animation:shimmerGold 4s linear infinite;z-index:2;
   }
   .premium-panel::after{
     content:'';position:absolute;inset:0;pointer-events:none;
     background:
-      radial-gradient(ellipse 60% 40% at 50% 0%, color-mix(in srgb, var(--primary) 8%, transparent), transparent 70%),
-      radial-gradient(ellipse 40% 30% at 100% 100%, color-mix(in srgb, var(--primary-light) 6%, transparent), transparent 70%);
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(139,92,246,.12), transparent 70%),
+      radial-gradient(ellipse 40% 30% at 100% 100%, rgba(236,72,153,.08), transparent 70%);
     z-index:0;
   }
   .premium-panel > *{position:relative;z-index:1}
-  .premium-panel:hover{
-    box-shadow:0 30px 80px -20px rgba(0,0,0,.85),0 12px 32px -8px color-mix(in srgb, var(--primary) 25%, transparent);
-    border-color:color-mix(in srgb, var(--primary) 35%, transparent);
-  }
   .is-hidden{display:none!important}
-  /* ============ LOADER ============ */
+
+  /* LOADER */
   #loader{
     position:fixed;inset:0;z-index:9999;
-    background:radial-gradient(ellipse at center, var(--bg-mid) 0%, var(--bg-deep) 70%);
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(139,92,246,.24), transparent 55%),
+      radial-gradient(ellipse at 80% 80%, rgba(236,72,153,.18), transparent 55%),
+      radial-gradient(ellipse at center, var(--bg-mid) 0%, var(--bg-deep) 70%);
     display:flex;flex-direction:column;align-items:center;justify-content:center;
     transition:opacity .8s ease,visibility .8s ease;padding:16px;
   }
   #loader.fade-out{opacity:0;visibility:hidden;pointer-events:none}
-  .loader-logo{
-    position:relative;width:120px;height:120px;
-    display:flex;align-items:center;justify-content:center;
-    font-size:80px;animation:loaderPulse 3s ease-in-out infinite;
-  }
-  .loader-ring{
-    position:absolute;inset:-30px;border-radius:50%;
-    border:3px solid transparent;
-    border-top-color:var(--primary-bright);
-    border-right-color:var(--primary);
-    border-bottom-color:var(--primary-light);
-    border-left-color:transparent;
-    animation:ringSpin 3s linear infinite;
-    box-shadow:0 0 60px color-mix(in srgb, var(--primary) 40%, transparent);
-  }
-  .loader-ring::after{
-    content:'';position:absolute;inset:14px;border-radius:50%;
-    border:2px dashed color-mix(in srgb, var(--primary) 30%, transparent);
-    animation:ringSpin 9s linear infinite reverse;
-  }
-  .loader-title{
-    font-family:'Cormorant Garamond',Georgia,serif;
-    font-size:clamp(2.4rem,8vw,4rem);font-weight:800;
-    letter-spacing:.02em;margin-top:36px;text-align:center;
-    background:var(--gold-grad-bright);
-    background-size:300% auto;
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    animation:shimmerGold 4s ease-in-out infinite;
-  }
-  .loader-sub{
-    font-size:.7rem;font-weight:800;color:var(--primary);
-    margin-top:14px;letter-spacing:6px;text-transform:uppercase;
-  }
-  .loader-bar-track{
-    width:min(360px,80vw);height:4px;
-    background:color-mix(in srgb, var(--primary) 15%, transparent);
-    border-radius:99px;margin-top:32px;overflow:hidden;
-  }
-  .loader-bar{
-    height:100%;width:0%;border-radius:99px;
-    background:var(--gold-grad);
-    background-size:200% auto;
-    animation:shimmerGold 2s linear infinite;
-    transition:width .4s ease;
-  }
-  .loader-percent{
-    color:var(--primary);font-size:.8rem;font-weight:900;
-    margin-top:16px;letter-spacing:5px;font-family:'Space Grotesk',monospace;
-  }
-  /* ============ BADGES & CHIPS ============ */
-  .premium-badge{
-    display:inline-flex;align-items:center;gap:10px;
-    padding:10px 24px;
-    background:linear-gradient(135deg, rgba(201,162,39,.10), rgba(244,215,122,.05));
-    border:1px solid var(--glass-border);
-    border-radius:99px;font-size:.68rem;font-weight:900;
-    letter-spacing:3px;text-transform:uppercase;
-    color:var(--primary-light);
-    position:relative;overflow:hidden;
-  }
-  .premium-badge::before{
-    content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
-    background:linear-gradient(90deg,transparent,rgba(244,215,122,.3),transparent);
-    animation:shineBtn 3.5s ease-in-out infinite;
-  }
-  /* ============ BUTTONS ============ */
-  .btn-gold{
-    position:relative;overflow:hidden;
-    padding:18px 40px;border-radius:60px;border:none;
-    font-family:'Space Grotesk',sans-serif;
-    font-size:1rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;
-    color:#1a1408;cursor:pointer;
-    background:var(--gold-grad);
-    background-size:200% auto;
-    box-shadow:0 12px 36px -8px rgba(201,162,39,.5),inset 0 1px 0 rgba(255,255,255,.4);
-    transition:all .35s cubic-bezier(.2,.9,.3,1.2);
-    width:100%;
-  }
-  .btn-gold::before{
-    content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
-    background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);
-    animation:shineBtn 3s ease-in-out infinite;
-  }
-  .btn-gold:hover{
-    transform:translateY(-3px);
-    background-position:100% center;
-    box-shadow:0 20px 48px -8px rgba(201,162,39,.7),inset 0 1px 0 rgba(255,255,255,.5);
-  }
-  .btn-gold:active{transform:translateY(0) scale(.98)}
-  .btn-outline-gold{
-    padding:14px 28px;border-radius:60px;
-    background:transparent;
-    border:1.5px solid var(--glass-border);
-    color:var(--primary-light);
-    font-weight:800;letter-spacing:.08em;
-    cursor:pointer;
-    transition:all .3s ease;
-  }
-  .btn-outline-gold:hover{
-    background:color-mix(in srgb, var(--primary) 10%, transparent);
-    border-color:var(--primary);
-  }
-  .lock-btn-gold{
-    padding:18px 48px;
-    font-family:'Space Grotesk',sans-serif;
-    font-size:.95rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase;
-    color:#1a1408;cursor:pointer;border:none;border-radius:60px;
-    background:var(--gold-grad);
-    background-size:200% auto;
-    box-shadow:0 14px 40px -8px rgba(201,162,39,.6),inset 0 1px 0 rgba(255,255,255,.4);
-    transition:all .35s cubic-bezier(.2,.9,.3,1.2);
-    position:relative;overflow:hidden;
-    animation:goldGlow 3s ease-in-out infinite;
-  }
-  .lock-btn-gold::before{
-    content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
-    background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);
-    animation:shineBtn 2.5s ease-in-out infinite;
-  }
-  .lock-btn-gold:hover:not(:disabled){
-    transform:translateY(-4px) scale(1.03);
-    background-position:100% center;
-    box-shadow:0 22px 55px -10px rgba(201,162,39,.8),inset 0 1px 0 rgba(255,255,255,.5);
-  }
+  .loader-logo{position:relative;width:120px;height:120px;display:flex;align-items:center;justify-content:center;font-size:80px;animation:loaderPulse 3s ease-in-out infinite}
+  .loader-ring{position:absolute;inset:-30px;border-radius:50%;border:3px solid transparent;border-top-color:var(--primary-bright);border-right-color:var(--primary);border-bottom-color:var(--primary-light);border-left-color:transparent;animation:ringSpin 3s linear infinite;box-shadow:0 0 60px rgba(139,92,246,.6)}
+  .loader-ring::after{content:'';position:absolute;inset:14px;border-radius:50%;border:2px dashed rgba(196,181,253,.40);animation:ringSpin 9s linear infinite reverse}
+  .loader-title{font-family:'Arial Black','Segoe UI',Impact,sans-serif;font-size:clamp(2.2rem,7vw,3.6rem);font-weight:900;letter-spacing:2px;margin-top:36px;text-align:center;background:linear-gradient(180deg,#ffffff 0%,#e9d5ff 30%,#c4b5fd 55%,#8b5cf6 80%,#4c1d95 100%);background-size:300% auto;-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 18px rgba(196,181,253,.9));animation:shimmerGold 4s ease-in-out infinite}
+  .loader-sub{font-size:.7rem;font-weight:800;color:var(--primary-bright);margin-top:14px;letter-spacing:6px;text-transform:uppercase;text-shadow:0 0 14px rgba(196,181,253,.9)}
+  .loader-bar-track{width:min(360px,80vw);height:4px;background:rgba(196,181,253,.18);border-radius:99px;margin-top:32px;overflow:hidden}
+  .loader-bar{height:100%;width:0%;border-radius:99px;background:var(--gold-grad);background-size:200% auto;animation:shimmerGold 2s linear infinite;transition:width .4s ease}
+  .loader-percent{color:var(--primary-bright);font-size:.8rem;font-weight:900;margin-top:16px;letter-spacing:5px;font-family:'Space Grotesk',monospace;text-shadow:0 0 10px rgba(196,181,253,.8)}
+
+  /* Buttons */
+  .btn-gold{position:relative;overflow:hidden;padding:18px 40px;border-radius:60px;border:none;font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#f5f3ff;cursor:pointer;background:var(--gold-grad);background-size:200% auto;box-shadow:0 12px 36px -8px rgba(139,92,246,.6),inset 0 1px 0 rgba(255,255,255,.35);transition:all .35s cubic-bezier(.2,.9,.3,1.2);width:100%}
+  .btn-gold::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);animation:shineBtn 3s ease-in-out infinite}
+  .btn-gold:hover{transform:translateY(-3px);background-position:100% center;box-shadow:0 20px 48px -8px rgba(139,92,246,.8),inset 0 1px 0 rgba(255,255,255,.5)}
+  .btn-outline-gold{padding:14px 28px;border-radius:60px;background:transparent;border:1.5px solid var(--glass-border);color:var(--primary-light);font-weight:800;letter-spacing:.08em;cursor:pointer;transition:all .3s ease}
+  .btn-outline-gold:hover{background:rgba(139,92,246,.12);border-color:var(--primary)}
+  .lock-btn-gold{padding:18px 48px;font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase;color:#f5f3ff;cursor:pointer;border:none;border-radius:60px;background:var(--gold-grad);background-size:200% auto;box-shadow:0 14px 40px -8px rgba(139,92,246,.7),inset 0 1px 0 rgba(255,255,255,.35);transition:all .35s cubic-bezier(.2,.9,.3,1.2);position:relative;overflow:hidden;animation:goldGlow 3s ease-in-out infinite}
+  .lock-btn-gold::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);animation:shineBtn 2.5s ease-in-out infinite}
+  .lock-btn-gold:hover:not(:disabled){transform:translateY(-4px) scale(1.03);background-position:100% center;box-shadow:0 22px 55px -10px rgba(139,92,246,.9),inset 0 1px 0 rgba(255,255,255,.5)}
   .lock-btn-gold:disabled{opacity:.45;cursor:not-allowed;animation:none}
-  /* ============ OPTION BUTTONS ============ */
-  .opt-btn{
-    width:100%;text-align:left;
-    background:linear-gradient(135deg, rgba(30,40,65,.6), rgba(20,28,48,.8));
-    backdrop-filter:blur(12px);
-    border:1.5px solid rgba(255,255,255,.08);
-    border-radius:16px;
-    padding:16px 20px;
-    font-size:.92rem;color:var(--text);
-    font-weight:600;line-height:1.5;
-    cursor:pointer;font-family:inherit;
-    transition:all .3s cubic-bezier(.2,.9,.3,1.2);
-    position:relative;overflow:hidden;
-    letter-spacing:.01em;
-  }
-  .opt-btn::before{
-    content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
-    background:linear-gradient(180deg,var(--primary),var(--primary-light));
-    opacity:0;transition:opacity .3s;
-  }
-  .opt-btn:hover:not(:disabled){
-    background:linear-gradient(135deg, rgba(201,162,39,.10), rgba(30,40,65,.9));
-    border-color:var(--primary);
-    color:var(--primary-bright);
-    transform:translateY(-3px);
-    box-shadow:0 12px 32px -8px rgba(201,162,39,.35),0 0 24px rgba(201,162,39,.15);
-  }
+
+  /* Option buttons */
+  .opt-btn{width:100%;text-align:left;background:linear-gradient(135deg, rgba(45,30,80,.6), rgba(30,20,55,.8));backdrop-filter:blur(12px);border:1.5px solid rgba(255,255,255,.08);border-radius:16px;padding:16px 20px;font-size:.92rem;color:var(--text);font-weight:600;line-height:1.5;cursor:pointer;font-family:inherit;transition:all .3s cubic-bezier(.2,.9,.3,1.2);position:relative;overflow:hidden;letter-spacing:.01em}
+  .opt-btn::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--primary),var(--primary-light));opacity:0;transition:opacity .3s}
+  .opt-btn:hover:not(:disabled){background:linear-gradient(135deg, rgba(139,92,246,.15), rgba(45,30,80,.9));border-color:var(--primary);color:var(--primary-bright);transform:translateY(-3px);box-shadow:0 12px 32px -8px rgba(139,92,246,.45),0 0 24px rgba(139,92,246,.20)}
   .opt-btn:hover:not(:disabled)::before{opacity:1}
   .opt-btn:disabled{cursor:not-allowed}
-  .opt-selected{
-    background:var(--gold-grad)!important;
-    border-color:var(--primary-bright)!important;
-    color:#1a1408!important;
-    font-weight:800;
-    transform:translateY(-2px);
-    box-shadow:0 14px 36px -6px rgba(201,162,39,.6),0 0 32px rgba(244,215,122,.4);
-  }
-  .opt-correct{
-    background:linear-gradient(135deg,#047857,#10b981,#34d399)!important;
-    border-color:#34d399!important;
-    color:#fff!important;
-    box-shadow:0 14px 36px -6px rgba(16,185,129,.6),0 0 32px rgba(52,211,153,.4);
-    animation:correctPulse .7s ease;
-  }
-  .opt-wrong{
-    background:linear-gradient(135deg,#991b1b,#dc2626,#ef4444)!important;
-    border-color:#ef4444!important;
-    color:#fff!important;
-    box-shadow:0 14px 36px -6px rgba(220,38,38,.6),0 0 32px rgba(239,68,68,.4);
-    animation:wrongShake .5s ease;
-  }
+  .opt-selected{background:var(--gold-grad)!important;border-color:var(--primary-bright)!important;color:#f5f3ff!important;font-weight:800;transform:translateY(-2px);box-shadow:0 14px 36px -6px rgba(139,92,246,.7),0 0 32px rgba(196,181,253,.5)}
+  .opt-correct{background:linear-gradient(135deg,#047857,#10b981,#34d399)!important;border-color:#34d399!important;color:#fff!important;box-shadow:0 14px 36px -6px rgba(16,185,129,.6),0 0 32px rgba(52,211,153,.4);animation:correctPulse .7s ease}
+  .opt-wrong{background:linear-gradient(135deg,#991b1b,#dc2626,#ef4444)!important;border-color:#ef4444!important;color:#fff!important;box-shadow:0 14px 36px -6px rgba(220,38,38,.6),0 0 32px rgba(239,68,68,.4);animation:wrongShake .5s ease}
   .opt-eliminated{opacity:.18!important;pointer-events:none!important;text-decoration:line-through}
-  /* ============ LIFELINES ============ */
-  .lifeline-item{
-    padding:14px 8px;font-size:.78rem;
-    border-radius:14px;
-    background:linear-gradient(135deg, rgba(30,40,65,.5), rgba(20,28,48,.7));
-    border:1.5px solid rgba(255,255,255,.08);
-    transition:all .3s cubic-bezier(.2,.9,.3,1.2);
-    color:var(--text-soft);font-weight:800;
-    cursor:pointer;
-    position:relative;overflow:hidden;
-  }
-  .lifeline-item:hover:not(:disabled){
-    background:linear-gradient(135deg, rgba(201,162,39,.15), rgba(30,40,65,.9));
-    border-color:var(--primary);
-    color:var(--primary-bright);
-    transform:translateY(-3px);
-    box-shadow:0 12px 28px -6px rgba(201,162,39,.4);
-  }
+
+  /* Lifelines */
+  .lifeline-item{padding:14px 8px;font-size:.78rem;border-radius:14px;background:linear-gradient(135deg, rgba(45,30,80,.5), rgba(30,20,55,.7));border:1.5px solid rgba(255,255,255,.08);transition:all .3s cubic-bezier(.2,.9,.3,1.2);color:var(--text-soft);font-weight:800;cursor:pointer;position:relative;overflow:hidden}
+  .lifeline-item:hover:not(:disabled){background:linear-gradient(135deg, rgba(139,92,246,.20), rgba(45,30,80,.9));border-color:var(--primary);color:var(--primary-bright);transform:translateY(-3px);box-shadow:0 12px 28px -6px rgba(139,92,246,.5)}
   .lifeline-item:disabled{opacity:.35;cursor:not-allowed}
-  /* ============ TIMER & HUDS ============ */
-  .hud-chip{
-    padding:10px 16px;border-radius:12px;
-    background:linear-gradient(135deg, rgba(30,40,65,.6), rgba(20,28,48,.8));
-    backdrop-filter:blur(10px);
-    border:1px solid rgba(255,255,255,.08);
-    display:inline-flex;align-items:center;gap:8px;
-    font-size:.82rem;font-weight:800;
-    color:var(--text-soft);
-    transition:all .3s ease;
-  }
-  .hud-chip-gold{
-    border-color:var(--glass-border);
-    background:linear-gradient(135deg, rgba(201,162,39,.12), rgba(30,40,65,.7));
-    color:var(--primary-bright);
-  }
+
+  /* HUD */
+  .hud-chip{padding:10px 16px;border-radius:12px;background:linear-gradient(135deg, rgba(45,30,80,.6), rgba(30,20,55,.8));backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.08);display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:800;color:var(--text-soft);transition:all .3s ease}
+  .hud-chip-gold{border-color:var(--glass-border);background:linear-gradient(135deg, rgba(139,92,246,.16), rgba(45,30,80,.7));color:var(--primary-bright)}
   .timer-pill{transition:all .3s ease}
-  .timer-pill.timer-warning{
-    background:linear-gradient(135deg, rgba(245,158,11,.18), rgba(251,191,36,.08))!important;
-    border-color:rgba(245,158,11,.5)!important;
-    animation:timerPulse .8s ease-in-out infinite;
-  }
+  .timer-pill.timer-warning{background:linear-gradient(135deg, rgba(245,158,11,.18), rgba(251,191,36,.08))!important;border-color:rgba(245,158,11,.5)!important;animation:timerPulse .8s ease-in-out infinite}
   .timer-pill.timer-warning #timer-display{color:#fbbf24!important}
-  .timer-pill.timer-danger{
-    background:linear-gradient(135deg, rgba(220,38,38,.22), rgba(192,57,43,.08))!important;
-    border-color:rgba(220,38,38,.7)!important;
-    animation:timerDangerPulse .6s ease-in-out infinite;
-  }
+  .timer-pill.timer-danger{background:linear-gradient(135deg, rgba(220,38,38,.22), rgba(192,57,43,.08))!important;border-color:rgba(220,38,38,.7)!important;animation:timerDangerPulse .6s ease-in-out infinite}
   .timer-pill.timer-danger #timer-display{color:#ef4444!important;font-weight:900}
-  /* ============ HEARTS (6 NYAWA) ============ */
-  .hearts-container{
-    display:inline-flex;align-items:center;gap:3px;
-    padding:8px 14px;border-radius:12px;
-    background:linear-gradient(135deg, rgba(220,38,38,.14), rgba(30,40,65,.6));
-    border:1px solid rgba(220,38,38,.35);
-  }
-  .heart-icon{
-    font-size:1.05rem;
-    transition:all .3s ease;
-    display:inline-block;
-    line-height:1;
-  }
+
+  /* Hearts */
+  .hearts-container{display:inline-flex;align-items:center;gap:3px;padding:8px 14px;border-radius:12px;background:linear-gradient(135deg, rgba(220,38,38,.14), rgba(30,20,55,.6));border:1px solid rgba(220,38,38,.35)}
+  .heart-icon{font-size:1.05rem;transition:all .3s ease;display:inline-block;line-height:1}
   .heart-icon.alive{filter:drop-shadow(0 0 6px rgba(239,68,68,.7));animation:shieldPulse 2s ease-in-out infinite}
   .heart-icon.lost{animation:heartBreak .7s ease;filter:grayscale(1);opacity:.22}
-  /* ============ DIFFICULTY BADGES ============ */
-  .diff-badge{
-    font-size:.6rem;letter-spacing:.15em;font-weight:900;
-    padding:5px 14px;border-radius:99px;
-    text-transform:uppercase;white-space:nowrap;
-    backdrop-filter:blur(8px);
-  }
+
+  /* Difficulty */
+  .diff-badge{font-size:.6rem;letter-spacing:.15em;font-weight:900;padding:5px 14px;border-radius:99px;text-transform:uppercase;white-space:nowrap;backdrop-filter:blur(8px)}
   .diff-mudah{color:#6ee7b7;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.4)}
   .diff-sedang{color:#fcd34d;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.4)}
   .diff-sulit{color:#fdba74;background:rgba(251,146,60,.12);border:1px solid rgba(251,146,60,.4)}
   .diff-sangat{color:#fca5a5;background:rgba(220,38,38,.14);border:1px solid rgba(220,38,38,.45)}
-  /* ============ PROGRESS BAR ============ */
-  .q-progress{
-    height:6px;background:rgba(255,255,255,.06);
-    border-radius:99px;overflow:hidden;margin-bottom:20px;
-  }
-  .q-progress>i{
-    display:block;height:100%;width:0%;
-    background:var(--gold-grad);background-size:200% auto;
-    animation:shimmerGold 3s linear infinite;
-    border-radius:99px;transition:width .7s cubic-bezier(.2,.9,.3,1.2);
-    box-shadow:0 0 12px rgba(201,162,39,.5);
-  }
-  /* ============ WAYPOINT TRAIL ============ */
+
+  /* Progress */
+  .q-progress{height:6px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden;margin-bottom:20px}
+  .q-progress>i{display:block;height:100%;width:0%;background:var(--gold-grad);background-size:200% auto;animation:shimmerGold 3s linear infinite;border-radius:99px;transition:width .7s cubic-bezier(.2,.9,.3,1.2);box-shadow:0 0 12px rgba(139,92,246,.6)}
+
+  /* Waypoints */
   .waypoint-trail{display:flex;align-items:center;gap:2px;margin-top:8px;flex-wrap:wrap}
-  .waypoint-dot{
-    width:5px;height:5px;border-radius:50%;
-    background:rgba(255,255,255,.12);transition:all .4s ease;
-  }
-  .waypoint-dot.done{background:var(--gold-grad);box-shadow:0 0 8px rgba(201,162,39,.5)}
-  .waypoint-dot.active{
-    background:linear-gradient(135deg,#fff,#f4d77a);
-    animation:waypointPulse 1.5s ease-in-out infinite;
-    width:8px;height:8px;
-    box-shadow:0 0 12px rgba(244,215,122,.8);
-  }
+  .waypoint-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.12);transition:all .4s ease}
+  .waypoint-dot.done{background:var(--gold-grad);box-shadow:0 0 8px rgba(139,92,246,.6)}
+  .waypoint-dot.active{background:linear-gradient(135deg,#fff,#c4b5fd);animation:waypointPulse 1.5s ease-in-out infinite;width:8px;height:8px;box-shadow:0 0 12px rgba(196,181,253,.85)}
   .waypoint-dot.skipped{background:rgba(120,130,150,.4)}
   .waypoint-dot.timedout{background:rgba(220,38,38,.6)}
   .waypoint-line{flex:1;height:1.5px;background:rgba(255,255,255,.06);min-width:2px}
   .waypoint-line.done{background:linear-gradient(90deg,var(--primary),var(--primary-light))}
-  /* ============ REVEAL OVERLAY ============ */
+
+  /* Reveal */
   #reveal-overlay{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;pointer-events:none;padding:16px}
-  #reveal-overlay.show{display:flex;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,14,26,.75);pointer-events:auto}
-  .reveal-badge{
-    font-family:'Cormorant Garamond',Georgia,serif;
-    font-size:clamp(2rem,8vw,4.5rem);font-weight:800;
-    letter-spacing:.04em;text-transform:uppercase;
-    padding:24px 56px;border-radius:24px;
-    text-align:center;line-height:1.1;
-    animation:revealPop .7s cubic-bezier(.34,1.56,.64,1);
-  }
-  .reveal-badge.benar{
-    color:#1a1408;
-    background:var(--gold-grad-bright);
-    box-shadow:0 0 80px rgba(244,215,122,.7),0 24px 60px -12px rgba(201,162,39,.5);
-    border:2px solid rgba(255,255,255,.5);
-  }
-  .reveal-badge.salah{
-    color:#fff;
-    background:linear-gradient(135deg,#7f1d1d,#c0392b,#e74c3c);
-    box-shadow:0 0 80px rgba(231,76,60,.6),0 24px 60px -12px rgba(127,29,29,.5);
-    border:2px solid rgba(255,255,255,.35);
-    animation:revealPop .7s cubic-bezier(.34,1.56,.64,1),salahShake .5s .7s ease;
-  }
-  .reveal-badge.timeout{
-    color:#1a1408;
-    background:linear-gradient(135deg,#92400e,#f59e0b,#fbbf24);
-    box-shadow:0 0 80px rgba(245,158,11,.6),0 24px 60px -12px rgba(120,53,15,.5);
-    border:2px solid rgba(255,255,255,.35);
-    animation:revealPop .7s cubic-bezier(.34,1.56,.64,1),salahShake .5s .7s ease;
-  }
-  .burst-particle{
-    position:absolute;width:8px;height:8px;border-radius:50%;
-    pointer-events:none;animation:burstOut 1.1s cubic-bezier(.2,.9,.3,1) forwards;
-  }
-  /* ============ LEVEL CARDS ============ */
-  .level-card{
-    background:linear-gradient(135deg, rgba(30,40,65,.5), rgba(20,28,48,.7));
-    backdrop-filter:blur(12px);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:16px;
-    padding:16px 18px;
-    display:flex;align-items:center;gap:14px;
-    margin-bottom:10px;
-    transition:all .35s cubic-bezier(.2,.9,.3,1.2);
-    cursor:pointer;
-    position:relative;overflow:hidden;
-  }
-  .level-card::before{
-    content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
-    background:var(--gold-grad);opacity:0;transition:opacity .3s;
-  }
-  .level-card:hover:not(.locked){
-    border-color:var(--glass-border);
-    transform:translateX(6px);
-    box-shadow:0 12px 32px -8px rgba(201,162,39,.3);
-  }
+  #reveal-overlay.show{display:flex;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(12,8,32,.78);pointer-events:auto}
+  .reveal-badge{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2rem,8vw,4.5rem);font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:24px 56px;border-radius:24px;text-align:center;line-height:1.1;animation:revealPop .7s cubic-bezier(.34,1.56,.64,1)}
+  .reveal-badge.benar{color:#1a0b3d;background:var(--gold-grad-bright);box-shadow:0 0 80px rgba(196,181,253,.8),0 24px 60px -12px rgba(139,92,246,.6);border:2px solid rgba(255,255,255,.5)}
+  .reveal-badge.salah{color:#fff;background:linear-gradient(135deg,#7f1d1d,#c0392b,#e74c3c);box-shadow:0 0 80px rgba(231,76,60,.6),0 24px 60px -12px rgba(127,29,29,.5);border:2px solid rgba(255,255,255,.35);animation:revealPop .7s cubic-bezier(.34,1.56,.64,1),salahShake .5s .7s ease}
+  .reveal-badge.timeout{color:#1a1408;background:linear-gradient(135deg,#92400e,#f59e0b,#fbbf24);box-shadow:0 0 80px rgba(245,158,11,.6),0 24px 60px -12px rgba(120,53,15,.5);border:2px solid rgba(255,255,255,.35);animation:revealPop .7s cubic-bezier(.34,1.56,.64,1),salahShake .5s .7s ease}
+  .burst-particle{position:absolute;width:8px;height:8px;border-radius:50%;pointer-events:none;animation:burstOut 1.1s cubic-bezier(.2,.9,.3,1) forwards}
+
+  /* Level cards */
+  .level-card{background:linear-gradient(135deg, rgba(45,30,80,.5), rgba(30,20,55,.7));backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:16px 18px;display:flex;align-items:center;gap:14px;margin-bottom:10px;transition:all .35s cubic-bezier(.2,.9,.3,1.2);cursor:pointer;position:relative;overflow:hidden}
+  .level-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold-grad);opacity:0;transition:opacity .3s}
+  .level-card:hover:not(.locked){border-color:var(--glass-border);transform:translateX(6px);box-shadow:0 12px 32px -8px rgba(139,92,246,.4)}
   .level-card:hover:not(.locked)::before{opacity:1}
   .level-card.locked{opacity:.42;cursor:not-allowed}
   .level-card.locked:hover{transform:none;box-shadow:none}
-  .level-card.completed{
-    border-color:rgba(16,185,129,.4);
-    background:linear-gradient(135deg, rgba(16,185,129,.08), rgba(20,28,48,.7));
-  }
-  .level-card.active-level{
-    border-color:var(--primary);
-    box-shadow:0 0 0 3px rgba(201,162,39,.15),0 12px 36px -8px rgba(201,162,39,.35);
-  }
+  .level-card.completed{border-color:rgba(16,185,129,.4);background:linear-gradient(135deg, rgba(16,185,129,.10), rgba(30,20,55,.7))}
+  .level-card.active-level{border-color:var(--primary);box-shadow:0 0 0 3px rgba(139,92,246,.20),0 12px 36px -8px rgba(139,92,246,.45)}
   .level-card.active-level::before{opacity:1}
-  .level-number{
-    width:48px;height:48px;border-radius:14px;
-    display:flex;align-items:center;justify-content:center;
-    font-family:'Space Grotesk',sans-serif;font-weight:800;
-    font-size:1.15rem;color:#fff;flex-shrink:0;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 6px 18px -4px rgba(0,0,0,.5);
-    position:relative;
-  }
-  .lv-color-1{background:linear-gradient(135deg,#065f46,#10b981)}
+  .level-number{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:1.15rem;color:#fff;flex-shrink:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 6px 18px -4px rgba(0,0,0,.5);position:relative}
+  .lv-color-1{background:linear-gradient(135deg,#6d28d9,#a78bfa)}
   .lv-color-2{background:linear-gradient(135deg,#1e40af,#3b82f6)}
-  .lv-color-3{background:linear-gradient(135deg,#6d28d9,#8b5cf6)}
-  .lv-color-4{background:linear-gradient(135deg,#c2410c,#f97316)}
-  .lv-color-5{background:linear-gradient(135deg,#991b1b,#dc2626)}
-  .lv-color-6{background:linear-gradient(135deg,#78350f,#f59e0b)}
-  /* ============ SCORE CIRCLE ============ */
+  .lv-color-3{background:linear-gradient(135deg,#be185d,#ec4899)}
+  .lv-color-4{background:linear-gradient(135deg,#4c1d95,#7c3aed)}
+
+  /* Score circle */
   .score-circle{position:relative;width:130px;height:130px;flex-shrink:0}
   @media (min-width:480px){.score-circle{width:160px;height:160px}}
   .score-circle svg{position:absolute;inset:0;transform:rotate(-90deg);width:100%;height:100%}
   .score-circle .track{stroke:rgba(255,255,255,.06);fill:none}
   .score-circle .bar{fill:none;stroke-linecap:round;transition:stroke-dashoffset 1.8s cubic-bezier(.2,.9,.3,1.2)}
   .score-circle .inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-  .score-circle .num{
-    font-family:'Cormorant Garamond',Georgia,serif;
-    font-size:2.6rem;font-weight:900;line-height:1;
-    background:var(--gold-grad-bright);
-    background-size:300% auto;
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    animation:shimmerGold 5s ease-in-out infinite;
-  }
-  .score-circle .lbl{
-    font-size:.55rem;letter-spacing:4px;
-    color:var(--primary);text-transform:uppercase;font-weight:900;margin-top:4px;
-  }
-  /* ============ GRADE BADGE ============ */
-  .grade-badge-big{
-    width:90px;height:90px;border-radius:20px;
-    display:flex;align-items:center;justify-content:center;
-    font-family:'Cormorant Garamond',Georgia,serif;
-    font-size:2.8rem;font-weight:900;color:#fff;
-    box-shadow:0 20px 48px -12px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.25);
-    position:relative;
-    animation:floatCard 4s ease-in-out infinite;
-  }
+  .score-circle .num{font-family:'Cormorant Garamond',Georgia,serif;font-size:2.6rem;font-weight:900;line-height:1;background:var(--gold-grad-bright);background-size:300% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmerGold 5s ease-in-out infinite}
+  .score-circle .lbl{font-size:.55rem;letter-spacing:4px;color:var(--primary-light);text-transform:uppercase;font-weight:900;margin-top:4px}
+
+  .grade-badge-big{width:90px;height:90px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',Georgia,serif;font-size:2.8rem;font-weight:900;color:#fff;box-shadow:0 20px 48px -12px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.25);position:relative;animation:floatCard 4s ease-in-out infinite}
   @media (min-width:480px){.grade-badge-big{width:110px;height:110px;font-size:3.4rem;border-radius:24px}}
   .grade-A{background:linear-gradient(135deg,#065f46,#10b981,#34d399)}
   .grade-B{background:linear-gradient(135deg,#1e40af,#3b82f6,#60a5fa)}
   .grade-C{background:linear-gradient(135deg,#92400e,#f59e0b,#fbbf24)}
   .grade-D{background:linear-gradient(135deg,#c2410c,#f97316,#fb923c)}
   .grade-E{background:linear-gradient(135deg,#991b1b,#dc2626,#ef4444)}
-  /* ============ MODALS ============ */
-  .premium-modal{
-    position:fixed;inset:0;z-index:50;
-    display:flex;align-items:center;justify-content:center;
-    padding:16px;overflow-y:auto;
-    background:rgba(5,8,16,.85);
-    backdrop-filter:blur(16px);
-    -webkit-backdrop-filter:blur(16px);
+
+  /* Modals */
+  .premium-modal{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:16px;overflow-y:auto;background:rgba(8,5,20,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+  .premium-modal-inner{position:relative;background:var(--bg-card);backdrop-filter:blur(28px) saturate(140%);-webkit-backdrop-filter:blur(28px) saturate(140%);border:1px solid var(--glass-border);border-radius:var(--radius-xl);box-shadow:0 40px 100px -20px rgba(0,0,0,.9),0 0 60px rgba(139,92,246,.28);padding:32px;max-width:540px;width:100%;animation:fadeUp .5s cubic-bezier(.2,.9,.3,1.2) both;overflow:hidden}
+  .premium-modal-inner::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg, transparent, var(--primary), var(--primary-bright), var(--primary), transparent);background-size:200% auto;animation:shimmerGold 4s linear infinite}
+  .hint-panel{background:linear-gradient(135deg, rgba(139,92,246,.12), rgba(45,30,80,.5));border:1px solid var(--glass-border);border-radius:16px;padding:18px 20px;margin-top:18px;position:relative}
+  .hint-panel::before{content:'';position:absolute;left:0;top:14px;bottom:14px;width:3px;background:var(--gold-grad);border-radius:2px}
+
+  /* START SCREEN */
+  #start-screen{background:transparent!important;border:none!important;box-shadow:none!important;backdrop-filter:none!important;max-width:min(600px,96vw)!important;position:relative;overflow:visible;padding:0!important;animation:fadeUp .8s cubic-bezier(.2,.9,.3,1) both;margin:0 auto}
+  #menuCanvas{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none}
+  .bk-panel{
+    position:relative;z-index:2;width:100%;
+    background:
+      radial-gradient(circle at 20% 0%, rgba(139,92,246,.28), transparent 55%),
+      radial-gradient(circle at 85% 100%, rgba(236,72,153,.18), transparent 55%),
+      radial-gradient(circle at 50% 50%, rgba(139,92,246,.10), transparent 70%),
+      rgba(19,16,43,.94);
+    border:1px solid var(--glass-border);border-radius:18px;
+    padding:clamp(18px,4vw,28px) clamp(16px,3.5vw,24px) 14px;
+    text-align:center;
+    box-shadow:0 0 0 1px rgba(139,92,246,.20),0 30px 100px rgba(0,0,0,.9),0 0 160px rgba(139,92,246,.45),inset 0 1px 0 rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    max-height:calc(100dvh - 32px);overflow-y:auto;
   }
-  .premium-modal-inner{
-    position:relative;
-    background:var(--bg-card);
-    backdrop-filter:blur(28px) saturate(140%);
-    -webkit-backdrop-filter:blur(28px) saturate(140%);
-    border:1px solid var(--glass-border);
-    border-radius:var(--radius-xl);
-    box-shadow:0 40px 100px -20px rgba(0,0,0,.9),0 0 60px color-mix(in srgb, var(--primary) 20%, transparent);
-    padding:32px;
-    max-width:540px;width:100%;
-    animation:fadeUp .5s cubic-bezier(.2,.9,.3,1.2) both;
-    overflow:hidden;
-  }
-  .premium-modal-inner::before{
-    content:'';position:absolute;top:0;left:0;right:0;height:2px;
-    background:linear-gradient(90deg, transparent, var(--primary), var(--primary-bright), var(--primary), transparent);
-    background-size:200% auto;
-    animation:shimmerGold 4s linear infinite;
-  }
-  /* ============ HINT PANEL ============ */
-  .hint-panel{
-    background:linear-gradient(135deg, rgba(201,162,39,.10), rgba(30,40,65,.5));
-    border:1px solid var(--glass-border);
-    border-radius:16px;
-    padding:18px 20px;
-    margin-top:18px;
-    position:relative;
-  }
-  .hint-panel::before{
-    content:'';position:absolute;left:0;top:14px;bottom:14px;width:3px;
-    background:var(--gold-grad);border-radius:2px;
-  }
-  /* ============ RESPONSIVE ============ */
+  .bk-panel::-webkit-scrollbar{width:5px}
+  .bk-panel::-webkit-scrollbar-thumb{background:rgba(139,92,246,.35);border-radius:3px}
+  .bk-title-wrap{position:relative;margin-bottom:6px;text-align:center}
+  .bk-title-glow{position:absolute;left:50%;top:55%;transform:translate(-50%,-50%);width:180%;height:300%;background:radial-gradient(ellipse at center,rgba(196,181,253,.5),rgba(139,92,246,.28) 40%,rgba(139,92,246,0) 70%);filter:blur(30px);pointer-events:none;z-index:-1;animation:bkGlowPulse 4s ease-in-out infinite}
+  .bk-title-main{position:relative;font-family:'Arial Black','Segoe UI',Impact,system-ui,sans-serif;font-size:clamp(26px,7vw,52px);font-weight:900;letter-spacing:clamp(2px,1vw,4px);line-height:1;background:linear-gradient(180deg,#ffffff 0%,#e9d5ff 25%,#c4b5fd 55%,#8b5cf6 80%,#4c1d95 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 18px rgba(196,181,253,1)) drop-shadow(0 0 40px rgba(139,92,246,.7));animation:bkTitleShimmer 4.5s ease-in-out infinite;margin-bottom:4px}
+  .bk-title-sub{font-family:'Arial Black','Segoe UI',Impact,system-ui,sans-serif;font-size:clamp(10px,2.6vw,14px);font-weight:900;letter-spacing:clamp(1.5px,0.6vw,3px);color:#f472b6;text-transform:uppercase;text-shadow:0 0 14px rgba(236,72,153,.9),0 0 32px rgba(139,92,246,.7);margin-bottom:3px;animation:bkSubPulse 3s ease-in-out infinite}
+  .bk-title-sub2{font-size:clamp(9px,2.4vw,13px);font-weight:700;letter-spacing:clamp(1.5px,0.6vw,3px);color:var(--primary-light);text-transform:uppercase;text-shadow:0 0 12px rgba(196,181,253,.9),0 0 28px rgba(139,92,246,.6)}
+  .bk-sub{font-size:clamp(9px,2.4vw,12px);color:var(--primary-light);opacity:.8;letter-spacing:clamp(1.5px,0.6vw,3px);text-transform:uppercase;margin:14px 0 14px}
+  .bk-prem-stat{position:relative;border-radius:14px;padding:10px 14px;margin-bottom:10px;overflow:hidden;border:1px solid var(--glass-border);background:linear-gradient(135deg,rgba(30,20,55,.9),rgba(45,30,80,.85))}
+  .bk-prem-stat.bk-gold{background:linear-gradient(135deg,rgba(196,181,253,.20),rgba(139,92,246,.12));border-color:rgba(196,181,253,.55);box-shadow:0 0 36px rgba(196,181,253,.35),inset 0 1px 0 rgba(255,255,255,.1)}
+  .bk-prem-stat.bk-green{background:linear-gradient(135deg,rgba(236,72,153,.18),rgba(244,114,182,.10));border-color:rgba(236,72,153,.55);box-shadow:0 0 36px rgba(236,72,153,.32),inset 0 1px 0 rgba(255,255,255,.1)}
+  .bk-stat-lbl{display:flex;align-items:center;justify-content:center;gap:6px;font-size:clamp(8px,2.2vw,10px);letter-spacing:2.5px;font-weight:800;opacity:.95;margin-bottom:4px}
+  .bk-prem-stat.bk-gold .bk-stat-lbl{color:#c4b5fd}
+  .bk-prem-stat.bk-green .bk-stat-lbl{color:#f472b6}
+  .bk-stat-val{font-size:clamp(20px,5.5vw,34px);font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:1px}
+  .bk-prem-stat.bk-gold .bk-stat-val{color:#c4b5fd;text-shadow:0 0 22px rgba(196,181,253,.8),0 0 44px rgba(196,181,253,.5);animation:bkValPulse 2.6s ease-in-out infinite}
+  .bk-prem-stat.bk-green .bk-stat-val{color:#f472b6;text-shadow:0 0 22px rgba(244,114,182,.75),0 0 44px rgba(236,72,153,.4)}
+  .bk-btns{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+  .bk-btn{font:inherit;font-weight:700;padding:14px 18px;border:none;border-radius:11px;cursor:pointer;letter-spacing:1.5px;transition:all .18s;font-size:clamp(12px,3vw,15px);min-height:48px;touch-action:manipulation;position:relative;overflow:hidden;isolation:isolate;font-family:'Space Grotesk',system-ui,sans-serif;-webkit-appearance:none;appearance:none}
+  .bk-btn:active{transform:scale(.97)}
+  .bk-btn::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-22deg);animation:bkBtnShine 3.6s ease-in-out infinite;pointer-events:none}
+  .bk-btn-p{background:var(--gold-grad);background-size:200% auto;color:#f5f3ff;box-shadow:0 10px 30px -6px rgba(139,92,246,.7),inset 0 1px 0 rgba(255,255,255,.35)}
+  .bk-btn-p:hover{background-position:100% center}
+  .bk-btn-s{background:rgba(139,92,246,.10);color:var(--primary-bright);border:1px solid var(--glass-border)}
+  .bk-btn-gold{background:linear-gradient(180deg,#c4b5fd,#8b5cf6);color:#f5f3ff;box-shadow:0 6px 24px rgba(196,181,253,.55),inset 0 1px 0 rgba(255,255,255,.35)}
+  .bk-btn-sm{padding:11px 16px;font-size:clamp(11px,2.6vw,13px);min-height:42px}
+  .bk-progress-panel{margin-top:14px;padding:12px 14px;border-radius:12px;background:linear-gradient(135deg,rgba(196,181,253,.18),rgba(45,30,80,.85));border:1px solid rgba(196,181,253,.55);box-shadow:0 0 30px rgba(196,181,253,.3);text-align:left}
+  .bk-progress-label{font-size:10px;font-weight:900;letter-spacing:2.5px;color:var(--primary-bright);text-transform:uppercase;margin-bottom:6px}
+  .bk-progress-text{font-size:12px;font-weight:600;color:var(--text-soft);line-height:1.5;margin-bottom:10px}
+  .bk-btns-row{display:flex;gap:8px;flex-wrap:wrap}
+  .bk-btns-row .bk-btn{flex:1;min-width:130px}
+  .bk-section-title{font-size:11px;font-weight:900;letter-spacing:2.5px;color:var(--primary-bright);text-transform:uppercase;margin:14px 0 10px;text-align:left;display:flex;align-items:center;gap:8px}
+  #level-list-wrap .level-card{background:linear-gradient(135deg,rgba(45,30,80,.9),rgba(30,20,55,.7));border:1px solid var(--glass-border);border-radius:12px;padding:11px 13px;text-align:left;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;margin-bottom:8px;display:flex;align-items:center;gap:11px}
+  #level-list-wrap .level-card:hover:not(.locked){border-color:var(--primary);transform:translateY(-2px)}
+  #level-list-wrap .level-card.locked{opacity:.45;cursor:not-allowed;filter:grayscale(.7)}
+  #level-list-wrap .level-card.completed{border-color:rgba(16,185,129,.6);background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(30,20,55,.7))}
+  #level-list-wrap .level-card.active-level{border-color:rgba(196,181,253,.7);box-shadow:0 0 24px rgba(196,181,253,.35)}
+  #level-list-wrap .level-card::before{display:none}
+  #howto-panel{margin-top:14px;text-align:left;font-size:12px;line-height:1.7;color:var(--text-soft);background:rgba(139,92,246,.08);border:1px solid var(--glass-border);border-radius:12px;padding:14px}
+  #howto-panel b{color:var(--primary-bright)}
+
+  /* MGDE FOOTER */
+  .mgde-footer{margin-top:14px;padding:10px 14px;width:100%;border-top:2px solid rgba(0,229,255,.6);border-bottom:2px solid rgba(0,229,255,.35);background:linear-gradient(180deg,rgba(0,229,255,.1),rgba(0,229,255,.03));border-radius:10px;text-align:center}
+  .mgde-footer .mgde-label{display:block;font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;font-size:clamp(9px,2.3vw,11px);font-weight:800;letter-spacing:clamp(1.6px,0.7vw,3px);color:#00e5ff;text-transform:uppercase;line-height:1.4;text-shadow:0 0 10px rgba(0,229,255,.9),0 0 20px rgba(0,229,255,.5),1px 1px 0 rgba(0,0,0,.8)}
+  .mgde-footer-dark{margin-top:18px;padding:9px 12px;border-top:1px solid rgba(0,229,255,.5);border-bottom:1px solid rgba(0,229,255,.28);background:linear-gradient(180deg,rgba(0,229,255,.08),rgba(0,229,255,.02));border-radius:8px;text-align:center}
+  .mgde-footer-dark .mgde-label{display:block;font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;font-size:clamp(8px,2.1vw,10px);font-weight:800;letter-spacing:clamp(1.4px,0.6vw,2.5px);color:#00e5ff;text-transform:uppercase;line-height:1.35;text-shadow:0 0 8px rgba(0,229,255,.9),0 0 16px rgba(0,229,255,.5)}
+
   @media (max-width:640px){
     .premium-panel{padding:16px!important}
     .premium-modal-inner{padding:22px}
@@ -607,12 +314,13 @@
     .opt-btn{padding:13px 16px;font-size:.86rem}
     .level-number{width:42px;height:42px;font-size:1rem}
     .level-card{padding:13px 14px;gap:11px}
+    #start-screen{max-width:100%!important}
+    .bk-panel{border-radius:14px}
   }
   @media (max-width:380px){
     .heart-icon{font-size:.9rem}
     .hud-chip{padding:8px 12px;font-size:.75rem}
   }
-  /* Custom scrollbar */
   ::-webkit-scrollbar{width:8px;height:8px}
   ::-webkit-scrollbar-track{background:rgba(255,255,255,.03)}
   ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--primary),var(--primary-light));border-radius:4px}
@@ -624,34 +332,37 @@
 <!-- LOADER -->
 <div id="loader">
   <div class="loader-logo">👑<div class="loader-ring"></div></div>
-  <div class="loader-title">Kuis Milioner</div>
+  <div class="loader-title">KUIS MILIONER</div>
   <div class="loader-sub">Premium Edition</div>
   <div class="loader-bar-track"><div class="loader-bar" id="loader-bar"></div></div>
   <div class="loader-percent" id="loader-percent">0%</div>
+  <div style="margin-top:22px;padding:8px 14px;border-top:1px solid rgba(0,229,255,.5);border-bottom:1px solid rgba(0,229,255,.28);background:linear-gradient(180deg,rgba(0,229,255,.08),rgba(0,229,255,.02));border-radius:8px">
+    <span style="font-family:'Segoe UI',Arial,sans-serif;font-size:10px;font-weight:800;letter-spacing:2.5px;color:#00e5ff;text-transform:uppercase;text-shadow:0 0 8px rgba(0,229,255,.9)">MAEDA GAME DEVELOPMENT FOR EDUCATION</span>
+  </div>
 </div>
 
-<!-- FLOATING GOLD PARTICLES -->
 <div class="gold-particles" id="gold-particles"></div>
+<canvas id="menuCanvas"></canvas>
 
 <!-- HEADER -->
-<header class="w-full sticky top-0 z-40 px-3 py-3 md:py-4" style="background:linear-gradient(180deg,rgba(10,14,26,.85),rgba(10,14,26,.65));backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border-soft)">
+<header class="w-full sticky top-0 z-40 px-3 py-3 md:py-4" style="background:linear-gradient(180deg,rgba(12,8,32,.85),rgba(12,8,32,.65));backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border-soft)">
   <div class="max-w-6xl mx-auto flex items-center justify-between gap-2">
     <div class="flex items-center gap-3 min-w-0 flex-1">
-      <div class="w-11 h-11 md:w-12 md:h-12 rounded-2xl flex items-center justify-center text-2xl shrink-0" id="header-icon" style="background:var(--gold-grad);box-shadow:0 8px 24px -6px rgba(201,162,39,.6),inset 0 1px 0 rgba(255,255,255,.4);color:#1a1408">👑</div>
+      <div class="w-11 h-11 md:w-12 md:h-12 rounded-2xl flex items-center justify-center text-2xl shrink-0" id="header-icon" style="background:var(--gold-grad);box-shadow:0 8px 24px -6px rgba(139,92,246,.7),inset 0 1px 0 rgba(255,255,255,.4);color:#f5f3ff">👑</div>
       <div class="min-w-0 flex-1">
         <h1 class="text-[11px] sm:text-sm md:text-base font-black tracking-[.15em] truncate font-display uppercase" style="color:var(--primary-bright)">Kuis Milioner Premium</h1>
         <p class="text-[10px] md:text-[11px] font-bold truncate" style="color:var(--text-muted)">
           <span class="gold-text-static font-black tracking-widest">RUANG IPS</span>
-          <span style="color:var(--primary)"> ◆ </span>
+          <span style="color:var(--primary-light)"> ◆ </span>
           <span style="color:var(--text-soft);letter-spacing:.05em">Bab 2 — Pelaku Ekonomi</span>
         </p>
       </div>
     </div>
     <div class="flex items-center gap-2 shrink-0">
-      <div class="hidden md:flex items-center gap-1.5 px-4 py-2 rounded-full" style="background:linear-gradient(135deg,rgba(201,162,39,.12),rgba(30,40,65,.5));border:1px solid var(--glass-border)">
-        <span class="text-[10px] font-black tracking-widest" style="color:var(--primary-bright)">🎯 6 LEVEL ◆ 90 SOAL</span>
+      <div class="hidden md:flex items-center gap-1.5 px-4 py-2 rounded-full" style="background:linear-gradient(135deg,rgba(139,92,246,.16),rgba(45,30,80,.5));border:1px solid var(--glass-border)">
+        <span class="text-[10px] font-black tracking-widest" style="color:var(--primary-bright)">🎯 4 LEVEL ◆ 90 SOAL</span>
       </div>
-      <button class="w-11 h-11 rounded-full flex items-center justify-center text-lg cursor-pointer transition" id="sound-toggle" style="background:linear-gradient(135deg,rgba(201,162,39,.12),rgba(30,40,65,.6));border:1px solid var(--glass-border);color:var(--primary-bright)">🔊</button>
+      <button class="w-11 h-11 rounded-full flex items-center justify-center text-lg cursor-pointer transition" id="sound-toggle" style="background:linear-gradient(135deg,rgba(139,92,246,.16),rgba(45,30,80,.6));border:1px solid var(--glass-border);color:var(--primary-bright)">🔊</button>
     </div>
   </div>
 </header>
@@ -659,99 +370,65 @@
 <main class="max-w-5xl mx-auto w-full px-3 py-5 md:px-4 md:py-8 flex-1 flex flex-col justify-center items-center relative">
 
   <!-- START SCREEN -->
-  <section id="start-screen" class="w-full max-w-2xl premium-panel p-6 md:p-9">
-    <div class="text-center mb-6">
-      <div class="premium-badge mb-4"><span>👑</span><span class="gold-text font-black">PREMIUM EDITION</span></div>
-    </div>
-
-    <div class="text-center mb-8">
-      <div class="text-6xl md:text-7xl mb-4" style="animation:floatCard 3s ease-in-out infinite;animation:crownShine 3s ease-in-out infinite;">👑</div>
-      <h2 class="text-3xl md:text-5xl font-black mb-3 leading-tight font-display gold-text">Kuis Milioner Pelaku Ekonomi</h2>
-      <p class="text-sm md:text-base font-bold" style="color:var(--text-soft)">
-        Materi: <span class="font-black tracking-widest uppercase" style="color:var(--primary-bright)">Bab 2 — Pelaku Ekonomi</span>
-      </p>
-    </div>
-
-    <!-- PENJELASAN -->
-    <div class="rounded-2xl p-5 mb-5" style="background:linear-gradient(135deg,rgba(201,162,39,.06),rgba(30,40,65,.4));border:1px solid var(--glass-border-soft)">
-      <div class="text-[11px] font-black uppercase tracking-[.2em] mb-3 flex items-center gap-2" style="color:var(--primary-bright)">
-        <span>📖</span> APA YANG AKAN KAMU PELAJARI?
+  <section id="start-screen" class="w-full max-w-2xl">
+    <div class="bk-panel">
+      <div class="bk-title-wrap">
+        <div class="bk-title-glow"></div>
+        <h1 class="bk-title-main">KUIS MILIONER</h1>
+        <p class="bk-title-sub">Premium Edition</p>
+        <p class="bk-title-sub2">Bab 2: Pelaku Ekonomi</p>
       </div>
-      <p class="text-sm md:text-[.95rem] font-semibold leading-relaxed mb-4" style="color:var(--text-soft)">
-        Kuis ini menguji pemahamanmu tentang <span class="font-bold" style="color:var(--primary-bright)">empat pelaku ekonomi</span> — Rumah Tangga Konsumen, Rumah Tangga Produsen, Pemerintah, dan Masyarakat Luar Negeri — serta bagaimana mereka saling berhubungan dalam perekonomian.
-      </p>
-      <div class="grid grid-cols-3 md:grid-cols-6 gap-2">
-        <div class="p-3 rounded-xl text-center" style="background:linear-gradient(135deg,rgba(201,162,39,.10),rgba(30,40,65,.5));border:1px solid var(--glass-border-soft)"><div class="text-xl mb-1">🏠</div><div class="text-[9px] font-black tracking-widest uppercase" style="color:var(--primary-bright)">RTK</div></div>
-        <div class="p-3 rounded-xl text-center" style="background:linear-gradient(135deg,rgba(201,162,39,.10),rgba(30,40,65,.5));border:1px solid var(--glass-border-soft)"><div class="text-xl mb-1">🏭</div><div class="text-[9px] font-black tracking-widest uppercase" style="color:var(--primary-bright)">RTP</div></div>
-        <div class="p-3 rounded-xl text-center" style="background:linear-gradient(135deg,rgba(201,162,39,.10),rgba(30,40,65,.5));border:1px solid var(--glass-border-soft)"><div class="text-xl mb-1">🏛️</div><div class="text-[9px] font-black tracking-widest uppercase" style="color:var(--primary-bright)">PEMERINTAH</div></div>
-        <div class="p-3 rounded-xl text-center" style="background:linear-gradient(135deg,rgba(201,162,39,.10),rgba(30,40,65,.5));border:1px solid var(--glass-border-soft)"><div class="text-xl mb-1">🌐</div><div class="text-[9px] font-black tracking-widest uppercase" style="color:var(--primary-bright)">LUAR NEGERI</div></div>
-        <div class="p-3 rounded-xl text-center" style="background:linear-gradient(135deg,rgba(201,162,39,.10),rgba(30,40,65,.5));border:1px solid var(--glass-border-soft)"><div class="text-xl mb-1">🔄</div><div class="text-[9px] font-black tracking-widest uppercase" style="color:var(--primary-bright)">CIRCULAR</div></div>
-        <div class="p-3 rounded-xl text-center" style="background:linear-gradient(135deg,rgba(201,162,39,.10),rgba(30,40,65,.5));border:1px solid var(--glass-border-soft)"><div class="text-xl mb-1">📊</div><div class="text-[9px] font-black tracking-widest uppercase" style="color:var(--primary-bright)">APLIKASI</div></div>
-      </div>
-    </div>
+      <p class="bk-sub">4 Level · 90 Pertanyaan Epik</p>
 
-    <!-- ATURAN -->
-    <div class="rounded-2xl p-5 mb-5" style="background:linear-gradient(135deg,rgba(201,162,39,.06),rgba(30,40,65,.4));border:1px solid var(--glass-border-soft)">
-      <div class="text-[11px] font-black uppercase tracking-[.2em] mb-4 flex items-center gap-2" style="color:var(--primary-bright)">
-        <span>🎯</span> ATURAN PERMAINAN
+      <div class="bk-prem-stat bk-gold">
+        <div class="bk-stat-lbl">👑 XP TOTAL</div>
+        <div class="bk-stat-val" id="hsVal">0</div>
       </div>
-      <div class="space-y-3.5 text-sm">
-        <div class="flex items-start gap-3">
-          <span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-black shrink-0 mt-0.5" style="background:var(--gold-grad);color:#1a1408;box-shadow:0 4px 12px -4px rgba(201,162,39,.6)">1</span>
-          <span style="color:var(--text-soft)"><b style="color:var(--primary-bright)">6 level bertingkat</b> — masing-masing berisi <b style="color:var(--primary-bright)">15 soal</b>. Total <b style="color:var(--primary-bright)">90 soal unik</b>, tidak ada yang berulang.</span>
-        </div>
-        <div class="flex items-start gap-3">
-          <span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-black shrink-0 mt-0.5" style="background:var(--gold-grad);color:#1a1408;box-shadow:0 4px 12px -4px rgba(201,162,39,.6)">2</span>
-          <span style="color:var(--text-soft)"><b style="color:#ef4444">6 nyawa ❤️</b> per level. Jawaban salah atau waktu habis = kehilangan 1 nyawa. Nyawa habis = <b style="color:#ef4444">level diulang dari awal level tersebut</b> (bukan dari level 1).</span>
-        </div>
-        <div class="flex items-start gap-3">
-          <span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-black shrink-0 mt-0.5" style="background:var(--gold-grad);color:#1a1408;box-shadow:0 4px 12px -4px rgba(201,162,39,.6)">3</span>
-          <span style="color:var(--text-soft)"><b style="color:var(--primary-bright)">Timer 45 detik</b>/soal + <b style="color:var(--primary-bright)">3 bantuan</b> (50:50, Petunjuk, Lewati) yang di-reset tiap level baru.</span>
-        </div>
-        <div class="flex items-start gap-3">
-          <span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-black shrink-0 mt-0.5" style="background:var(--gold-grad);color:#1a1408;box-shadow:0 4px 12px -4px rgba(201,162,39,.6)">4</span>
-          <span style="color:var(--text-soft)"><b style="color:var(--primary-bright)">Progres tersimpan otomatis</b>. Kalau keluar di tengah jalan, kamu bisa lanjut dari level terakhir yang kamu capai.</span>
-        </div>
-        <div class="flex items-start gap-3">
-          <span class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-black shrink-0 mt-0.5" style="background:linear-gradient(135deg,#78350f,#f59e0b,#fbbf24);color:#1a1408;box-shadow:0 4px 12px -4px rgba(245,158,11,.6)">5</span>
-          <span style="color:var(--text-soft)">Selesaikan <b style="color:var(--primary-bright)">semua 6 level</b> untuk melihat skor akhir dan gelar!</span>
+      <div class="bk-prem-stat bk-green">
+        <div class="bk-stat-lbl">📈 PROGRES MISI</div>
+        <div class="bk-stat-val" id="progressVal" style="font-size:clamp(16px,4.5vw,24px)">LEVEL 1/4</div>
+      </div>
+
+      <div class="bk-btns">
+        <button id="btn-start" class="bk-btn bk-btn-p">▶ MULAI PETUALANGAN</button>
+        <button id="btn-levels" class="bk-btn bk-btn-gold">🗺️ PILIH LEVEL</button>
+        <button id="btn-howto" class="bk-btn bk-btn-s">? CARA MAIN</button>
+      </div>
+
+      <div id="progress-panel" class="bk-progress-panel is-hidden">
+        <div class="bk-progress-label">💾 PROGRES TERSIMPAN DITEMUKAN</div>
+        <p class="bk-progress-text" id="progress-text">Kamu sudah mencapai Level 1.</p>
+        <div class="bk-btns-row">
+          <button id="btn-continue" class="bk-btn bk-btn-p bk-btn-sm">▶ Lanjutkan</button>
+          <button id="btn-reset-progress" class="bk-btn bk-btn-s bk-btn-sm">🗑️ Mulai dari Awal</button>
         </div>
       </div>
-    </div>
 
-    <!-- PROGRES TERSIMPAN -->
-    <div id="progress-panel" class="is-hidden rounded-2xl p-5 mb-5" style="background:linear-gradient(135deg,rgba(201,162,39,.14),rgba(30,40,65,.5));border:1px solid var(--glass-border)">
-      <div class="flex items-center gap-3 mb-3">
-        <span class="text-2xl">💾</span>
-        <div class="text-[11px] font-black uppercase tracking-[.2em]" style="color:var(--primary-bright)">PROGRES TERSIMPAN DITEMUKAN</div>
+      <div id="howto-panel" class="is-hidden">
+        <div class="bk-progress-label" style="margin-bottom:8px">📖 CARA MAIN</div>
+        <p><b>🎯 4 Level Bertingkat</b> — total <b>90 soal unik</b>.</p>
+        <p><b>❤️ 6 Nyawa</b> per level. Salah / waktu habis = −1 nyawa. Habis = ulangi level itu.</p>
+        <p><b>⏱️ Timer 45 detik</b> per soal + <b>3 bantuan</b> (50:50, Petunjuk, Lewati).</p>
+        <p><b>💾 Progres tersimpan otomatis</b> — bisa lanjut dari level terakhir.</p>
       </div>
-      <p class="text-sm font-bold mb-4" style="color:var(--text-soft)" id="progress-text">Kamu sudah mencapai Level 1.</p>
-      <div class="flex gap-2 flex-wrap">
-        <button id="btn-continue" class="btn-gold flex-1 min-w-[130px]" style="padding:14px 24px;font-size:.85rem">▶ Lanjutkan</button>
-        <button id="btn-reset-progress" class="btn-outline-gold flex-1 min-w-[130px] text-sm">🗑️ Mulai dari Awal</button>
+
+      <div id="level-list-wrap" class="is-hidden">
+        <div class="bk-section-title"><span>📋</span> 4 LEVEL PETUALANGAN</div>
+        <div id="levels-list"></div>
+      </div>
+
+      <div class="mgde-footer">
+        <span class="mgde-label">MAEDA GAME DEVELOPMENT FOR EDUCATION</span>
       </div>
     </div>
-
-    <!-- DAFTAR LEVEL -->
-    <div class="mb-6">
-      <div class="text-[11px] font-black uppercase tracking-[.2em] mb-3 flex items-center gap-2" style="color:var(--primary-bright)">
-        <span>📋</span> 6 LEVEL PETUALANGAN
-      </div>
-      <div id="levels-list"></div>
-    </div>
-
-    <button id="btn-start" class="btn-gold">▶ MULAI KUIS</button>
-
-    <div class="text-center mt-6 text-[10px] font-bold tracking-widest uppercase" style="color:var(--text-muted)">© Ruang IPS ◆ Materi Ekonomi SMP ◆ Bab 2</div>
   </section>
 
   <!-- GAME SCREEN -->
   <section id="game-screen" class="is-hidden w-full max-w-3xl mx-auto space-y-4">
-    <!-- Top HUD -->
     <div class="premium-panel p-4 flex items-center justify-between flex-wrap gap-3" style="border-radius:18px">
       <div class="flex items-center gap-2 flex-wrap">
         <div class="hud-chip hud-chip-gold">
-          <span>🎯</span> <span class="font-black tracking-widest">LEVEL <span id="hud-level">1</span>/6</span>
+          <span>🎯</span> <span class="font-black tracking-widest">LEVEL <span id="hud-level">1</span>/4</span>
         </div>
         <div class="hud-chip">
           <span>⚡</span> <span id="xp-counter" class="font-black">0</span> <span class="text-[10px] opacity-70">XP</span>
@@ -768,14 +445,13 @@
       </div>
     </div>
 
-    <!-- Level Info -->
     <div class="premium-panel p-4" style="border-radius:18px">
       <div class="flex items-center justify-between gap-2 mb-3 flex-wrap">
         <div class="flex items-center gap-3">
           <span id="level-icon" class="text-2xl">📘</span>
           <div>
             <div class="text-[10px] md:text-xs font-black uppercase tracking-[.15em]" style="color:var(--primary-bright)">LEVEL <span id="level-num">1</span> — <span id="level-name">Pengertian Dasar</span></div>
-            <div class="text-[10px] font-bold mt-0.5" style="color:var(--text-muted)">Soal <span id="question-counter">1</span>/15</div>
+            <div class="text-[10px] font-bold mt-0.5" style="color:var(--text-muted)">Soal <span id="question-counter">1</span>/<span id="question-total">15</span></div>
           </div>
         </div>
         <span class="text-[10px] md:text-xs font-black tracking-widest" style="color:var(--primary-bright)"><span id="progress-percent">0%</span> SELESAI</span>
@@ -783,7 +459,6 @@
       <div class="waypoint-trail" id="waypoint-trail"></div>
     </div>
 
-    <!-- Lifelines -->
     <div class="premium-panel p-4" style="border-radius:18px">
       <div class="text-[10px] font-black text-center mb-3 tracking-[.2em] uppercase" style="color:var(--primary-bright)">✦ BANTUAN — MASING-MASING 1× PER LEVEL ✦</div>
       <div class="flex justify-center gap-2 md:gap-3">
@@ -802,14 +477,13 @@
       </div>
     </div>
 
-    <!-- Question Panel -->
     <div class="premium-panel p-5 md:p-7" style="border-radius:22px;border-left:3px solid var(--primary)" id="question-panel">
       <div class="q-progress"><i id="q-progress"></i></div>
       <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
-        <span class="text-[11px] md:text-xs font-black uppercase tracking-[.15em]" style="color:var(--primary-bright)">PERTANYAAN <span id="current-q-num">1</span>/15</span>
+        <span class="text-[11px] md:text-xs font-black uppercase tracking-[.15em]" style="color:var(--primary-bright)">PERTANYAAN <span id="current-q-num">1</span>/<span id="current-q-total">15</span></span>
         <div class="flex items-center gap-2 flex-wrap">
           <span id="difficulty-tag" class="diff-badge diff-mudah">Mudah</span>
-          <span id="reward-tag" class="text-[11px] font-black tracking-widest px-3 py-1.5 rounded-full whitespace-nowrap" style="background:linear-gradient(135deg,rgba(201,162,39,.15),rgba(244,215,122,.06));color:var(--primary-bright);border:1px solid var(--glass-border)">💎 Rp 100</span>
+          <span id="reward-tag" class="text-[11px] font-black tracking-widest px-3 py-1.5 rounded-full whitespace-nowrap" style="background:linear-gradient(135deg,rgba(139,92,246,.20),rgba(196,181,253,.08));color:var(--primary-bright);border:1px solid var(--glass-border)">💎 Rp 100</span>
         </div>
       </div>
       <h3 id="question-text" class="text-base md:text-xl font-bold leading-snug" style="color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;font-size:1.15rem;letter-spacing:.01em;position:relative;z-index:1;">Memuat pertanyaan...</h3>
@@ -823,16 +497,19 @@
     <div id="lock-btn-container" class="is-hidden flex justify-center mt-5">
       <button id="btn-lock-answer" type="button" class="lock-btn-gold">🔒 KUNCI JAWABAN</button>
     </div>
+
+    <div class="mgde-footer">
+      <span class="mgde-label">MAEDA GAME DEVELOPMENT FOR EDUCATION</span>
+    </div>
   </section>
 
-  <!-- REVEAL OVERLAY -->
   <div id="reveal-overlay"><div class="reveal-badge" id="reveal-badge">BENAR</div></div>
 
   <!-- FEEDBACK MODAL -->
   <div id="feedback-modal" class="is-hidden premium-modal">
     <div class="premium-modal-inner" id="feedback-modal-content">
       <div class="flex items-center gap-4 mb-5">
-        <div id="feedback-icon-bg" class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl font-black shrink-0" style="background:var(--gold-grad);color:#1a1408;box-shadow:0 8px 24px -6px rgba(201,162,39,.5)">✓</div>
+        <div id="feedback-icon-bg" class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl font-black shrink-0" style="background:var(--gold-grad);color:#f5f3ff;box-shadow:0 8px 24px -6px rgba(139,92,246,.6)">✓</div>
         <div class="min-w-0">
           <h3 id="feedback-title" class="text-xl md:text-2xl font-black font-display" style="color:var(--primary-bright)">🎉 BENAR!</h3>
           <p id="feedback-subtitle" class="text-xs md:text-sm font-bold mt-1" style="color:var(--text-muted)">Apresiasi dan Penjelasan</p>
@@ -840,20 +517,21 @@
       </div>
       <div id="feedback-details" class="my-4"></div>
       <div class="my-4 space-y-2">
-        <div class="p-4 rounded-xl" style="background:linear-gradient(135deg,rgba(201,162,39,.06),rgba(30,40,65,.4));border:1px solid var(--glass-border-soft)">
+        <div class="p-4 rounded-xl" style="background:linear-gradient(135deg,rgba(139,92,246,.10),rgba(45,30,80,.4));border:1px solid var(--glass-border-soft)">
           <div class="text-[10px] font-black uppercase tracking-[.2em] mb-1.5" style="color:var(--primary-bright)">📚 TOPIK</div>
           <div id="fb-topic" class="text-xs md:text-sm font-bold" style="color:var(--primary-bright)">—</div>
         </div>
-        <div class="p-4 rounded-xl" style="background:linear-gradient(135deg,rgba(16,185,129,.06),rgba(30,40,65,.4));border:1px solid rgba(16,185,129,.2)">
+        <div class="p-4 rounded-xl" style="background:linear-gradient(135deg,rgba(16,185,129,.06),rgba(45,30,80,.4));border:1px solid rgba(16,185,129,.2)">
           <div class="text-[10px] font-black uppercase tracking-[.2em] mb-1.5" style="color:#34d399">💡 MENGAPA JAWABAN INI BENAR</div>
           <div id="fb-why" class="text-xs md:text-sm font-semibold leading-relaxed" style="color:var(--text-soft)">—</div>
         </div>
-        <div class="p-4 rounded-xl" style="background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(30,40,65,.4));border:1px solid rgba(245,158,11,.25)">
-          <div class="text-[10px] font-black uppercase tracking-[.2em] mb-1.5" style="color:#fbbf24">🎯 POIN KUNCI</div>
-          <div id="fb-key" class="text-xs md:text-sm font-bold leading-relaxed" style="color:#fcd34d">—</div>
+        <div class="p-4 rounded-xl" style="background:linear-gradient(135deg,rgba(236,72,153,.10),rgba(45,30,80,.4));border:1px solid rgba(236,72,153,.30)">
+          <div class="text-[10px] font-black uppercase tracking-[.2em] mb-1.5" style="color:#f472b6">🎯 POIN KUNCI</div>
+          <div id="fb-key" class="text-xs md:text-sm font-bold leading-relaxed" style="color:#f9a8d4">—</div>
         </div>
       </div>
       <button type="button" id="btn-next" class="btn-gold">➡ LANJUT</button>
+      <div class="mgde-footer-dark"><span class="mgde-label">MAEDA GAME DEVELOPMENT FOR EDUCATION</span></div>
     </div>
   </div>
 
@@ -867,19 +545,21 @@
         <button type="button" id="btn-skip-cancel" class="btn-outline-gold flex-1 text-sm">Batal</button>
         <button type="button" id="btn-skip-confirm" class="btn-gold flex-1" style="padding:14px 24px;font-size:.85rem">Ya, Lewati</button>
       </div>
+      <div class="mgde-footer-dark"><span class="mgde-label">MAEDA GAME DEVELOPMENT FOR EDUCATION</span></div>
     </div>
   </div>
 
-  <!-- LEVEL FAIL MODAL -->
+  <!-- FAIL MODAL -->
   <div id="fail-modal" class="is-hidden premium-modal">
     <div class="premium-modal-inner max-w-md text-center" style="border-color:rgba(220,38,38,.5)">
       <div class="text-6xl mb-4" style="animation:floatCard 3s ease-in-out infinite">💔</div>
       <h3 class="text-2xl md:text-3xl font-black mb-3 font-display" style="color:#ef4444">NYAWA HABIS!</h3>
       <p class="text-sm md:text-base font-bold mb-5 leading-relaxed" style="color:var(--text-soft)" id="fail-message">Kamu gagal menyelesaikan level ini.</p>
-      <div class="rounded-xl p-4 mb-6" style="background:linear-gradient(135deg,rgba(201,162,39,.08),rgba(30,40,65,.5));border:1px solid var(--glass-border)">
+      <div class="rounded-xl p-4 mb-6" style="background:linear-gradient(135deg,rgba(139,92,246,.10),rgba(45,30,80,.5));border:1px solid var(--glass-border)">
         <div class="text-xs font-bold" style="color:var(--text-soft)">📍 Kamu akan mengulang <b style="color:var(--primary-bright)" id="fail-level-name">Level 1</b> — <b style="color:var(--primary-bright)">bukan</b> dari level pertama.</div>
       </div>
       <button type="button" id="btn-retry-level" class="btn-gold">🔄 ULANGI LEVEL INI</button>
+      <div class="mgde-footer-dark"><span class="mgde-label">MAEDA GAME DEVELOPMENT FOR EDUCATION</span></div>
     </div>
   </div>
 
@@ -889,10 +569,11 @@
       <div class="text-6xl mb-4" style="animation:floatCard 3s ease-in-out infinite;animation:crownShine 3s ease-in-out infinite">🏆</div>
       <h3 class="text-2xl md:text-3xl font-black mb-3 font-display gold-text" id="complete-title">LEVEL SELESAI!</h3>
       <p class="text-sm md:text-base font-bold mb-5 leading-relaxed" style="color:var(--text-soft)" id="complete-message">Kerja bagus!</p>
-      <div class="rounded-xl p-4 mb-6" style="background:linear-gradient(135deg,rgba(201,162,39,.08),rgba(30,40,65,.5));border:1px solid var(--glass-border)">
+      <div class="rounded-xl p-4 mb-6" style="background:linear-gradient(135deg,rgba(139,92,246,.10),rgba(45,30,80,.5));border:1px solid var(--glass-border)">
         <div class="text-xs font-bold" style="color:var(--text-soft)" id="complete-detail">Selanjutnya: Level 2</div>
       </div>
       <button type="button" id="btn-next-level" class="btn-gold">➡ LANJUT KE LEVEL BERIKUTNYA</button>
+      <div class="mgde-footer-dark"><span class="mgde-label">MAEDA GAME DEVELOPMENT FOR EDUCATION</span></div>
     </div>
   </div>
 
@@ -900,7 +581,7 @@
   <section id="result-screen" class="is-hidden w-full max-w-2xl my-auto space-y-4">
     <div class="premium-panel p-6 md:p-10" style="border-radius:24px">
       <div class="pb-5 mb-6 text-center border-b" style="border-color:var(--glass-border)">
-        <div class="text-[10px] font-black tracking-[.3em] uppercase mb-2" style="color:var(--primary)">✦ RUANG IPS ✦</div>
+        <div class="text-[10px] font-black tracking-[.3em] uppercase mb-2" style="color:var(--primary-light)">✦ RUANG IPS ✦</div>
         <div class="text-xl md:text-3xl font-black tracking-wide font-display gold-text">HASIL AKHIR KUIS MILIONER</div>
         <div class="text-[10px] md:text-xs font-black uppercase tracking-[.25em] mt-2" style="color:var(--text-muted)">PELAKU EKONOMI — BAB 2</div>
       </div>
@@ -910,9 +591,9 @@
           <svg viewBox="0 0 120 120">
             <defs>
               <linearGradient id="scGrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#c9a227"/>
-                <stop offset="50%" stop-color="#f4d77a"/>
-                <stop offset="100%" stop-color="#10b981"/>
+                <stop offset="0%" stop-color="#8b5cf6"/>
+                <stop offset="50%" stop-color="#c4b5fd"/>
+                <stop offset="100%" stop-color="#ec4899"/>
               </linearGradient>
             </defs>
             <circle class="track" cx="60" cy="60" r="50" stroke-width="8"/>
@@ -933,7 +614,7 @@
         <div class="flex justify-between items-center py-3 border-b gap-2" style="border-color:var(--glass-border-soft)"><span class="font-black tracking-wide" style="color:var(--text-muted)">DILEWATI</span><span id="card-skipped" class="font-black font-mono" style="color:var(--text-muted);font-family:'Space Grotesk',monospace">0</span></div>
         <div class="flex justify-between items-center py-3 border-b gap-2" style="border-color:var(--glass-border-soft)"><span class="font-black tracking-wide" style="color:var(--text-muted)">SKOR AKHIR</span><span id="card-score" class="font-black text-xl font-mono" style="color:var(--primary-bright);font-family:'Space Grotesk',monospace">0</span></div>
         <div class="flex justify-between items-center py-3 border-b gap-2" style="border-color:var(--glass-border-soft)"><span class="font-black tracking-wide" style="color:var(--text-muted)">XP TOTAL</span><span id="card-xp" class="font-black font-mono" style="color:var(--primary-bright);font-family:'Space Grotesk',monospace">0 XP</span></div>
-        <div class="flex justify-between items-center py-3 border-b gap-2" style="border-color:var(--glass-border-soft)"><span class="font-black tracking-wide" style="color:var(--text-muted)">LEVEL SELESAI</span><span id="card-levels" class="font-black font-mono" style="color:var(--primary-bright);font-family:'Space Grotesk',monospace">0 / 6</span></div>
+        <div class="flex justify-between items-center py-3 border-b gap-2" style="border-color:var(--glass-border-soft)"><span class="font-black tracking-wide" style="color:var(--text-muted)">LEVEL SELESAI</span><span id="card-levels" class="font-black font-mono" style="color:var(--primary-bright);font-family:'Space Grotesk',monospace">0 / 4</span></div>
         <div class="flex justify-between items-center py-3 gap-2"><span class="font-black tracking-wide" style="color:var(--text-muted)">GELAR</span><span id="card-title" class="font-black text-xs md:text-sm text-right font-display" style="color:var(--primary-bright)">🌱 PEMBELAJAR EKONOMI</span></div>
       </div>
     </div>
@@ -943,13 +624,16 @@
       <button type="button" id="btn-copy" class="btn-outline-gold text-xs">📋 <span id="copy-btn-text">SALIN</span></button>
       <button type="button" id="btn-menu" class="btn-outline-gold text-xs">🏠 MENU</button>
     </div>
+
+    <div class="mgde-footer"><span class="mgde-label">MAEDA GAME DEVELOPMENT FOR EDUCATION</span></div>
   </section>
 
 </main>
 
-<footer class="w-full text-center py-5 px-3 text-[10px] md:text-xs font-bold tracking-widest uppercase" style="border-top:1px solid var(--glass-border-soft);color:var(--text-muted)">
-  <div class="gold-text-static text-xs md:text-sm mb-1 font-black tracking-[.3em]">RUANG IPS</div>
-  <div>Kuis Milioner Premium ◆ Bab 2 Pelaku Ekonomi ◆ Ekonomi SMP</div>
+<!-- GLOBAL FOOTER -->
+<footer class="w-full text-center py-5 px-3" style="border-top:1px solid var(--glass-border-soft)">
+  <div class="gold-text-static text-xs md:text-sm mb-2 font-black tracking-[.3em]">RUANG IPS</div>
+  <div class="text-[10px] md:text-xs font-bold tracking-widest uppercase" style="color:var(--text-muted)">Kuis Milioner ◆ Bab 2 Pelaku Ekonomi</div>
 </footer>
 
 <script>
@@ -961,10 +645,9 @@ const setText=(id,t)=>{const el=$(id);if(el)el.textContent=t;};
 const bind=(id,h)=>{const el=$(id);if(el)el.addEventListener('click',h);};
 
 const TIMER_PER_QUESTION=45;
-const MAX_LIVES=6; // ← 6 NYAWA
-const QUESTIONS_PER_LEVEL=15;
-const STORAGE_KEY='kuis_milioner_premium_pelaku_v3_progress';
-const SOUND_KEY='kuis_milioner_premium_pelaku_v3_sound';
+const MAX_LIVES=6;
+const STORAGE_KEY='kuis_milioner_premium_pelaku_amethyst_v1_progress';
+const SOUND_KEY='kuis_milioner_premium_pelaku_amethyst_v1_sound';
 
 let soundMuted=false;
 try{soundMuted=localStorage.getItem(SOUND_KEY)==='muted';}catch(e){}
@@ -1005,16 +688,12 @@ function sfx(type){
 const safeConfetti=(o)=>{try{if(typeof confetti==='function')confetti(o);}catch(e){}};
 const haptic=(p)=>{try{if(navigator.vibrate&&!soundMuted)navigator.vibrate(p);}catch(e){}};
 
-/* ============================================================
-   TEMA WARNA PER LEVEL — SEMUA NUANSA PREMIUM
-   ============================================================ */
+/* THEMES — AMETHYST PALETTE per level */
 const THEMES={
-  1:{primary:'#c9a227',light:'#e8c547',bright:'#f4d77a',dark:'#3d2f08',accent:'#10b981',bg:'#0a0e1a',icon:'📘'},
+  1:{primary:'#8b5cf6',light:'#a78bfa',bright:'#c4b5fd',dark:'#1e0b3d',accent:'#ec4899',bg:'#0c0820',icon:'📘'},
   2:{primary:'#3b82f6',light:'#60a5fa',bright:'#93c5fd',dark:'#0c1838',accent:'#06b6d4',bg:'#080d1c',icon:'🏠'},
-  3:{primary:'#8b5cf6',light:'#a78bfa',bright:'#c4b5fd',dark:'#1e0b3d',accent:'#ec4899',bg:'#0c0820',icon:'🏭'},
-  4:{primary:'#f97316',light:'#fb923c',bright:'#fdba74',dark:'#3b1504',accent:'#ef4444',bg:'#0f0906',icon:'🏛️'},
-  5:{primary:'#dc2626',light:'#ef4444',bright:'#f87171',dark:'#3d0808',accent:'#f59e0b',bg:'#0c0606',icon:'🔄'},
-  6:{primary:'#c9a227',light:'#e8c547',bright:'#fff4c2',dark:'#2d1f05',accent:'#f59e0b',bg:'#0a0806',icon:'👑'}
+  3:{primary:'#ec4899',light:'#f472b6',bright:'#f9a8d4',dark:'#3d0820',accent:'#8b5cf6',bg:'#0c0612',icon:'🏛️'},
+  4:{primary:'#7c3aed',light:'#a78bfa',bright:'#c4b5fd',dark:'#2d0b5c',accent:'#f59e0b',bg:'#0a0618',icon:'👑'}
 };
 function applyTheme(levelIdx){
   const t=THEMES[levelIdx+1];
@@ -1025,14 +704,8 @@ function applyTheme(levelIdx){
   root.style.setProperty('--primary-bright',t.bright);
   root.style.setProperty('--accent',t.accent);
   root.style.setProperty('--bg-deep',t.bg);
-  // For level 6 keep gold theme, others use theme-based gold too
-  if(levelIdx===5){
-    root.style.setProperty('--gold-grad',`linear-gradient(135deg,#c9a227 0%,#f4d77a 50%,#c9a227 100%)`);
-    root.style.setProperty('--gold-grad-bright',`linear-gradient(135deg,#f4d77a 0%,#fff4c2 50%,#f4d77a 100%)`);
-  }else{
-    root.style.setProperty('--gold-grad',`linear-gradient(135deg,${t.primary} 0%,${t.bright} 50%,${t.primary} 100%)`);
-    root.style.setProperty('--gold-grad-bright',`linear-gradient(135deg,${t.light} 0%,${t.bright} 50%,${t.light} 100%)`);
-  }
+  root.style.setProperty('--gold-grad',`linear-gradient(135deg,${t.primary} 0%,${t.bright} 50%,${t.primary} 100%)`);
+  root.style.setProperty('--gold-grad-bright',`linear-gradient(135deg,${t.light} 0%,${t.bright} 50%,${t.light} 100%)`);
   const hIcon=$('header-icon');
   if(hIcon)hIcon.style.background=`linear-gradient(135deg,${t.primary},${t.light})`;
   document.body.classList.add('theme-flash');
@@ -1041,12 +714,9 @@ function applyTheme(levelIdx){
   if(meta)meta.setAttribute('content',t.primary);
 }
 
-/* ============================================================
-   BANK SOAL — 6 LEVEL × 15 SOAL = 90 SOAL UNIK
-   ============================================================ */
 const LEVELS=[
 {
-  name:'Pengertian Dasar',icon:'📘',difficulty:'Mudah',reward:'Rp 100',
+  name:'Pengertian Dasar & Kegiatan Ekonomi',icon:'📘',difficulty:'Mudah',reward:'Rp 100',
   questions:[
     {q:'Pelaku ekonomi adalah...',o:['Orang yang hanya mengonsumsi barang','Semua pihak yang terlibat dalam produksi, distribusi, dan konsumsi','Hanya perusahaan besar','Hanya pemerintah pusat'],c:1,e:'Pelaku ekonomi mencakup semua pihak — individu, kelompok, lembaga, maupun organisasi — yang terlibat dalam kegiatan produksi, distribusi, dan konsumsi.',t:'Pengertian Pelaku Ekonomi',k:'Pelaku ekonomi = semua pihak dalam 3 kegiatan pokok ekonomi.'},
     {q:'Berapa jumlah pelaku ekonomi utama dalam perekonomian?',o:['2 pelaku','3 pelaku','4 pelaku','5 pelaku'],c:2,e:'Terdapat 4 pelaku ekonomi utama: RTK, RTP, RTN (Pemerintah), dan RTMLN (Masyarakat Luar Negeri).',t:'Jenis Pelaku Ekonomi',k:'4 pelaku: RTK, RTP, RTN, RTMLN.'},
@@ -1066,7 +736,7 @@ const LEVELS=[
   ]
 },
 {
-  name:'Rumah Tangga Konsumen',icon:'🏠',difficulty:'Mudah-Sedang',reward:'Rp 500',
+  name:'Rumah Tangga Konsumen & Produsen',icon:'🏠',difficulty:'Sedang',reward:'Rp 1.000',
   questions:[
     {q:'Rumah tangga konsumen adalah pelaku ekonomi yang...',o:['Memproduksi barang untuk dijual','Mengonsumsi barang/jasa dan menyediakan faktor produksi','Mengatur jalannya perekonomian','Melakukan ekspor-impor'],c:1,e:'RTK adalah pelaku ekonomi yang mengonsumsi barang/jasa sekaligus menyediakan faktor produksi kepada produsen.',t:'Rumah Tangga Konsumen',k:'RTK = konsumen + pemasok faktor produksi.'},
     {q:'Pelaku ekonomi yang paling banyak jumlahnya adalah...',o:['Rumah tangga produsen','Rumah tangga konsumen','Rumah tangga pemerintah','Masyarakat luar negeri'],c:1,e:'RTK adalah pelaku ekonomi paling banyak karena mencakup seluruh individu/keluarga yang melakukan konsumsi.',t:'Rumah Tangga Konsumen',k:'RTK = pelaku terbanyak.'},
@@ -1082,12 +752,7 @@ const LEVELS=[
     {q:'Contoh RTK menyediakan faktor produksi tanah adalah...',o:['Bekerja sebagai karyawan','Menyewakan lahan untuk perkebunan','Menabung di bank','Membuka usaha'],c:1,e:'Menyewakan lahan adalah bentuk penyediaan faktor produksi tanah dan menerima balas jasa berupa sewa.',t:'Faktor Produksi RTK',k:'Menyewakan lahan = menyediakan tanah.'},
     {q:'Contoh RTK menyediakan faktor produksi keahlian adalah...',o:['Bekerja di pabrik','Menyewakan mobil','Membuka usaha sendiri','Menabung di bank'],c:2,e:'Membuka usaha sendiri adalah bentuk penyediaan faktor produksi kewirausahaan/keahlian dan menerima laba.',t:'Faktor Produksi RTK',k:'Berwirausaha = menyediakan keahlian.'},
     {q:'Rumah tangga konsumen menerima pendapatan dari produsen berupa...',o:['Hanya upah','Hanya bunga','Upah, sewa, bunga, dan laba','Hanya laba'],c:2,e:'RTK menerima pendapatan dari produsen berupa upah, sewa, bunga, dan laba sesuai faktor produksi yang disediakan.',t:'Pendapatan RTK',k:'Pendapatan RTK = upah + sewa + bunga + laba.'},
-    {q:'Contoh keluarga sebagai RTK di lingkungan sekitar kita adalah...',o:['PT Pertamina','Pemerintah Desa','Keluarga Pak Andi yang membeli kebutuhan sehari-hari','Bank Indonesia'],c:2,e:'Keluarga Pak Andi yang membeli kebutuhan sehari-hari adalah contoh nyata RTK (rumah tangga konsumen).',t:'Rumah Tangga Konsumen',k:'Keluarga = contoh RTK.'}
-  ]
-},
-{
-  name:'Rumah Tangga Produsen',icon:'🏭',difficulty:'Sedang',reward:'Rp 2.500',
-  questions:[
+    {q:'Contoh keluarga sebagai RTK di lingkungan sekitar kita adalah...',o:['PT Pertamina','Pemerintah Desa','Keluarga Pak Andi yang membeli kebutuhan sehari-hari','Bank Indonesia'],c:2,e:'Keluarga Pak Andi yang membeli kebutuhan sehari-hari adalah contoh nyata RTK (rumah tangga konsumen).',t:'Rumah Tangga Konsumen',k:'Keluarga = contoh RTK.'},
     {q:'Rumah tangga produsen adalah pelaku ekonomi yang...',o:['Mengonsumsi barang/jasa','Menghasilkan barang/jasa untuk memenuhi kebutuhan masyarakat','Mengatur kebijakan ekonomi','Melakukan konsumsi rumah tangga'],c:1,e:'RTP (perusahaan) adalah pelaku ekonomi yang menghasilkan barang/jasa dan menambah nilai guna suatu benda.',t:'Rumah Tangga Produsen',k:'RTP = penghasil barang/jasa.'},
     {q:'Tujuan utama rumah tangga produsen adalah...',o:['Memperoleh laba/keuntungan','Mengumpulkan pajak','Memberikan subsidi','Mengatur harga pasar'],c:0,e:'Tujuan utama RTP adalah memperoleh laba (keuntungan) dari kegiatan produksi dan penjualan barang/jasa.',t:'Rumah Tangga Produsen',k:'Tujuan RTP = laba.'},
     {q:'PT Pertamina, PT KAI, dan PLN adalah contoh RTP milik...',o:['Swasta','Negara (BUMN)','Asing','Koperasi'],c:1,e:'Ketiganya adalah BUMN (Badan Usaha Milik Negara) yang dikelola pemerintah untuk menyediakan barang/jasa bagi masyarakat.',t:'BUMN',k:'Pertamina, KAI, PLN = BUMN.'},
@@ -1106,7 +771,7 @@ const LEVELS=[
   ]
 },
 {
-  name:'Pemerintah & Luar Negeri',icon:'🏛️',difficulty:'Sedang-Sulit',reward:'Rp 10.000',
+  name:'Pemerintah, Luar Negeri & Circular Flow',icon:'🏛️',difficulty:'Sulit',reward:'Rp 25.000',
   questions:[
     {q:'Pemerintah disebut memiliki peran ganda karena...',o:['Hanya mengatur perekonomian','Berperan sebagai regulator, konsumen, dan produsen sekaligus','Hanya sebagai konsumen','Hanya sebagai produsen'],c:1,e:'Pemerintah memiliki 3 peran sekaligus: regulator (mengatur), konsumen (membelanjakan anggaran), dan produsen (melalui BUMN).',t:'Peran Pemerintah',k:'Pemerintah = regulator + konsumen + produsen.'},
     {q:'Pemerintah menetapkan tarif pajak dan UU Ketenagakerjaan. Hal ini menunjukkan peran pemerintah sebagai...',o:['Konsumen','Produsen','Regulator','Distributor'],c:2,e:'Sebagai regulator, pemerintah mengatur jalannya perekonomian melalui kebijakan fiskal, moneter, dan peraturan.',t:'Peran Pemerintah',k:'Menetapkan aturan = regulator.'},
@@ -1122,12 +787,7 @@ const LEVELS=[
     {q:'Perusahaan asing yang membangun pabrik di Indonesia berperan sebagai...',o:['Konsumen','Produsen','Investor (penanam modal)','Regulator'],c:2,e:'Investasi langsung perusahaan asing menunjukkan peran masyarakat luar negeri sebagai investor yang menanamkan modal di Indonesia.',t:'Peran Luar Negeri',k:'Perusahaan asing buka pabrik = investor.'},
     {q:'Wisatawan Jepang membeli batik Indonesia. Wisatawan tersebut berperan sebagai...',o:['RTK dalam negeri','RTP','Masyarakat luar negeri sebagai konsumen ekspor','Pemerintah'],c:2,e:'Wisatawan asing yang membeli produk Indonesia adalah konsumen ekspor yang mendatangkan devisa.',t:'Peran Luar Negeri',k:'Wisatawan asing = konsumen ekspor.'},
     {q:'Ketika Indonesia mengimpor mesin dari Jepang, Jepang berperan sebagai...',o:['Konsumen ekspor Indonesia','Produsen barang impor bagi Indonesia','Investor di Indonesia','Regulator'],c:1,e:'Jepang yang menjual mesin ke Indonesia berperan sebagai produsen barang impor bagi Indonesia.',t:'Peran Luar Negeri',k:'Negara penjual ke Indonesia = produsen impor.'},
-    {q:'Sumber devisa negara berasal dari...',o:['Hanya pajak','Hanya pinjaman luar negeri','Ekspor barang/jasa dan kerja sama ekonomi dengan luar negeri','Hanya investasi asing'],c:2,e:'Sumber devisa utama berasal dari ekspor barang/jasa, pariwisata, investasi asing, dan kerja sama ekonomi internasional.',t:'Devisa',k:'Devisa dari ekspor & kerja sama LN.'}
-  ]
-},
-{
-  name:'Circular Flow Diagram',icon:'🔄',difficulty:'Sulit',reward:'Rp 50.000',
-  questions:[
+    {q:'Sumber devisa negara berasal dari...',o:['Hanya pajak','Hanya pinjaman luar negeri','Ekspor barang/jasa dan kerja sama ekonomi dengan luar negeri','Hanya investasi asing'],c:2,e:'Sumber devisa utama berasal dari ekspor barang/jasa, pariwisata, investasi asing, dan kerja sama ekonomi internasional.',t:'Devisa',k:'Devisa dari ekspor & kerja sama LN.'},
     {q:'Circular flow diagram adalah...',o:['Diagram aliran barang antar negara','Diagram yang menggambarkan arus barang, jasa, dan uang antar pelaku ekonomi','Diagram struktur perusahaan','Diagram harga pasar'],c:1,e:'Circular flow diagram adalah diagram yang menggambarkan arus uang dan barang antar pelaku ekonomi dalam suatu perekonomian.',t:'Circular Flow',k:'Circular flow = diagram arus barang/uang.'},
     {q:'Perekonomian 2 sektor (sederhana) melibatkan pelaku...',o:['RTK dan Pemerintah','RTK dan RTP','RTP dan Luar Negeri','Semua pelaku'],c:1,e:'Perekonomian 2 sektor hanya melibatkan RTK dan RTP (sederhana/tertutup).',t:'Circular Flow',k:'2 sektor = RTK + RTP.'},
     {q:'Perekonomian 3 sektor menambahkan pelaku...',o:['RTK','RTP','Pemerintah','Masyarakat luar negeri'],c:2,e:'Perekonomian 3 sektor = RTK + RTP + Pemerintah. Pemerintah menarik pajak dan menyediakan fasilitas publik.',t:'Circular Flow',k:'3 sektor = +Pemerintah.'},
@@ -1167,9 +827,6 @@ const LEVELS=[
 }
 ];
 
-/* ============================================================
-   STATE
-   ============================================================ */
 let currentLevel=0;
 let currentQuestionInLevel=0;
 let lives=MAX_LIVES;
@@ -1193,9 +850,9 @@ let gameActive=false;
 let unlockedLevel=0;
 let completedLevels=[];
 
-/* ============================================================
-   PROGRESS SAVE/LOAD
-   ============================================================ */
+function QPL(){ return LEVELS[currentLevel].questions.length; }
+function TotalQ(){ return LEVELS.reduce((s,l)=>s+l.questions.length, 0); }
+
 function saveProgress(){
   try{
     localStorage.setItem(STORAGE_KEY,JSON.stringify({
@@ -1222,9 +879,6 @@ function resetProgress(){
   wrongAnswersTotal=0;skippedTotal=0;userAnswersHistory=[];
 }
 
-/* ============================================================
-   UI RENDER
-   ============================================================ */
 function renderLevelsList(){
   const el=$('levels-list');if(!el)return;el.innerHTML='';
   LEVELS.forEach((lv,i)=>{
@@ -1240,9 +894,9 @@ function renderLevelsList(){
       '<div class="level-number lv-color-'+(i+1)+'">'+(isCompleted?'✓':(i+1))+'</div>'+
       '<div style="flex:1;min-width:0">'+
         '<div style="font-weight:800;font-size:.85rem;color:var(--text)">'+lv.icon+' '+lv.name+'</div>'+
-        '<div style="font-size:.7rem;color:var(--text-muted);font-weight:700;letter-spacing:.05em">15 soal ◆ '+lv.difficulty+' ◆ '+lv.reward+'</div>'+
+        '<div style="font-size:.7rem;color:var(--text-muted);font-weight:700;letter-spacing:.05em">'+lv.questions.length+' soal ◆ '+lv.difficulty+' ◆ '+lv.reward+'</div>'+
       '</div>'+
-      '<div style="font-size:1.4rem;filter:drop-shadow(0 0 8px rgba(201,162,39,.5))">'+(isCompleted?'🏅':(isUnlocked?'🔓':'🔒'))+'</div>';
+      '<div style="font-size:1.4rem;filter:drop-shadow(0 0 8px rgba(139,92,246,.6))">'+(isCompleted?'🏅':(isUnlocked?'🔓':'🔒'))+'</div>';
     el.appendChild(card);
   });
 }
@@ -1256,6 +910,9 @@ function renderProgressPanel(){
   }else{
     panel.classList.add('is-hidden');
   }
+  const hs=$('hsVal'),pv=$('progressVal');
+  if(hs)hs.textContent=xpTotal.toLocaleString('id-ID');
+  if(pv)pv.textContent='LEVEL '+(Math.min(unlockedLevel,LEVELS.length-1)+1)+'/'+LEVELS.length;
 }
 function renderHearts(){
   const el=$('hearts');if(!el)return;
@@ -1268,11 +925,12 @@ function renderHearts(){
 }
 function renderWaypointTrail(){
   const trail=$('waypoint-trail');if(!trail)return;trail.innerHTML='';
-  for(let i=0;i<QUESTIONS_PER_LEVEL;i++){
+  const n=QPL();
+  for(let i=0;i<n;i++){
     const dot=document.createElement('div');
     dot.className='waypoint-dot';dot.id='wp-dot-'+i;
     trail.appendChild(dot);
-    if(i<QUESTIONS_PER_LEVEL-1){
+    if(i<n-1){
       const line=document.createElement('div');line.className='waypoint-line';line.id='wp-line-'+i;
       trail.appendChild(line);
     }
@@ -1280,25 +938,23 @@ function renderWaypointTrail(){
   updateWaypointTrail();
 }
 function updateWaypointTrail(){
-  for(let i=0;i<QUESTIONS_PER_LEVEL;i++){
+  const n=QPL();
+  for(let i=0;i<n;i++){
     const dot=$('wp-dot-'+i);const line=$('wp-line-'+i);
     if(!dot)continue;
     dot.className='waypoint-dot';
     if(i<currentQuestionInLevel){
-      const h=userAnswersHistory[userAnswersHistory.length-QUESTIONS_PER_LEVEL+i];
+      const h=userAnswersHistory[userAnswersHistory.length-n+i];
       if(h&&h.isSkipped)dot.classList.add('skipped');
       else if(h&&h.isTimedOut)dot.classList.add('timedout');
       else dot.classList.add('done');
     }else if(i===currentQuestionInLevel)dot.classList.add('active');
     if(line){line.className='waypoint-line';if(i<currentQuestionInLevel)line.classList.add('done');}
   }
-  const pct=Math.round(currentQuestionInLevel/QUESTIONS_PER_LEVEL*100);
+  const pct=Math.round(currentQuestionInLevel/n*100);
   setText('progress-percent',pct+'%');
 }
 
-/* ============================================================
-   TIMER
-   ============================================================ */
 function updateTimerDisplay(){
   const el=$('timer-display');if(el)el.textContent=countdownTime;
   const pill=$('timer-pill');if(!pill)return;
@@ -1319,9 +975,6 @@ function startCountdown(){
 }
 function stopCountdown(){clearInterval(countdownInterval);countdownInterval=null;}
 
-/* ============================================================
-   GAME FLOW
-   ============================================================ */
 function startGame(fromLevel){
   sfx('click');
   gameActive=true;
@@ -1349,6 +1002,7 @@ function loadQuestion(){
     updateWaypointTrail();
     selectedAnswerIndex=null;answerLocked=false;
     const lv=LEVELS[currentLevel];
+    const n=QPL();
     const qRaw=lv.questions[currentQuestionInLevel];
     const correctText=qRaw.o[qRaw.c];
     const shuffled=qRaw.o.slice();
@@ -1360,6 +1014,8 @@ function loadQuestion(){
     };
     setText('current-q-num',currentQuestionInLevel+1);
     setText('question-counter',currentQuestionInLevel+1);
+    setText('question-total',n);
+    setText('current-q-total',n);
     setText('reward-tag','💎 '+lv.reward);
     setText('question-text',currentQuestion.q);
     hide('hint-panel');hide('lock-btn-container');
@@ -1375,7 +1031,7 @@ function loadQuestion(){
       diffTag.textContent=lv.difficulty;
     }
     const prog=$('q-progress');
-    if(prog)prog.style.width=(currentQuestionInLevel/QUESTIONS_PER_LEVEL*100)+'%';
+    if(prog)prog.style.width=(currentQuestionInLevel/n*100)+'%';
     const c=$('answers-container');if(!c)return;c.innerHTML='';
     currentQuestion.o.forEach((opt,index)=>{
       const btn=document.createElement('button');
@@ -1429,7 +1085,7 @@ function useHint(){
   if(ht){
     ht.innerHTML=
       '<div class="flex flex-wrap items-center gap-2 mb-3">'+
-        '<span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest" style="background:rgba(201,162,39,.15);color:var(--primary-bright);border:1px solid var(--glass-border)">'+q.t+'</span>'+
+        '<span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest" style="background:rgba(139,92,246,.20);color:var(--primary-bright);border:1px solid var(--glass-border)">'+q.t+'</span>'+
       '</div>'+
       '<div class="mb-2 font-bold" style="color:var(--primary-bright)">💡 Konsep kunci: <span style="color:var(--text-soft)">'+q.k+'</span></div>'+
       '<div class="text-xs font-semibold mt-2" style="color:var(--text-muted)">📖 Baca kembali materi Bab 2 tentang <b>'+q.t+'</b> untuk memastikan jawabanmu.</div>';
@@ -1523,7 +1179,7 @@ function showRevealOverlay(text,type){
   const o=$('reveal-overlay'),b=$('reveal-badge');
   if(!o||!b)return;
   b.className='reveal-badge';b.textContent=text;
-  if(type==='benar'){b.classList.add('benar');createBurst(window.innerWidth/2,window.innerHeight/2,['#c9a227','#f4d77a','#fff4c2','#10b981']);}
+  if(type==='benar'){b.classList.add('benar');createBurst(window.innerWidth/2,window.innerHeight/2,['#8b5cf6','#c4b5fd','#e9d5ff','#ec4899']);}
   else if(type==='timeout'){b.classList.add('timeout');createBurst(window.innerWidth/2,window.innerHeight/2,['#f59e0b','#fbbf24','#fb923c','#fde047']);}
   else{b.classList.add('salah');createBurst(window.innerWidth/2,window.innerHeight/2,['#c0392b','#e74c3c','#f59e0b','#fbbf24']);}
   o.classList.add('show');
@@ -1544,14 +1200,14 @@ function createBurst(cx,cy,colors){
 }
 
 function showFeedbackModal(q,isCorrect,selectedIdx,earnedXP){
-  const mc=$('feedback-modal-content'),ib=$('feedback-icon-bg'),ti=$('feedback-title'),
+  const ib=$('feedback-icon-bg'),ti=$('feedback-title'),
         su=$('feedback-subtitle'),de=$('feedback-details');
   const letters=['A','B','C','D'];
   if(isCorrect){
-    if(ib){ib.style.background='var(--gold-grad)';ib.style.color='#1a1408';ib.textContent='✓';}
+    if(ib){ib.style.background='var(--gold-grad)';ib.style.color='#f5f3ff';ib.textContent='✓';}
     if(ti){ti.style.color='var(--primary-bright)';ti.textContent='🎉 JAWABAN BENAR!';}
     if(su){su.style.color='var(--text-muted)';su.textContent='+'+earnedXP.toLocaleString('id-ID')+' XP — Luar biasa!';}
-    if(de)de.innerHTML='<div class="p-4 rounded-xl" style="background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(30,40,65,.4));border:1px solid rgba(16,185,129,.25)"><div class="text-[10px] font-black uppercase tracking-widest mb-1" style="color:#34d399">JAWABANMU</div><div class="font-black text-sm md:text-base" style="color:var(--text)">'+letters[selectedIdx]+'. '+q.o[selectedIdx]+'</div></div>';
+    if(de)de.innerHTML='<div class="p-4 rounded-xl" style="background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(45,30,80,.4));border:1px solid rgba(16,185,129,.25)"><div class="text-[10px] font-black uppercase tracking-widest mb-1" style="color:#34d399">JAWABANMU</div><div class="font-black text-sm md:text-base" style="color:var(--text)">'+letters[selectedIdx]+'. '+q.o[selectedIdx]+'</div></div>';
   }else{
     if(ib){ib.style.background='linear-gradient(135deg,#991b1b,#e74c3c)';ib.style.color='#fff';ib.textContent=selectedIdx===null?'⏰':'✗';}
     if(ti){ti.style.color='#ef4444';ti.textContent=selectedIdx===null?'⏰ WAKTU HABIS':'❌ BELUM TEPAT';}
@@ -1559,9 +1215,9 @@ function showFeedbackModal(q,isCorrect,selectedIdx,earnedXP){
     if(de){
       let html='';
       if(selectedIdx!==null){
-        html+='<div class="p-4 rounded-xl mb-2" style="background:linear-gradient(135deg,rgba(220,38,38,.10),rgba(30,40,65,.4));border:1px solid rgba(220,38,38,.3)"><div class="text-[10px] font-black uppercase tracking-widest mb-1" style="color:#fca5a5">JAWABANMU</div><div class="font-bold text-sm" style="color:#fca5a5">'+letters[selectedIdx]+'. '+q.o[selectedIdx]+'</div></div>';
+        html+='<div class="p-4 rounded-xl mb-2" style="background:linear-gradient(135deg,rgba(220,38,38,.10),rgba(45,30,80,.4));border:1px solid rgba(220,38,38,.3)"><div class="text-[10px] font-black uppercase tracking-widest mb-1" style="color:#fca5a5">JAWABANMU</div><div class="font-bold text-sm" style="color:#fca5a5">'+letters[selectedIdx]+'. '+q.o[selectedIdx]+'</div></div>';
       }
-      html+='<div class="p-4 rounded-xl" style="background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(30,40,65,.4));border:1px solid rgba(16,185,129,.25)"><div class="text-[10px] font-black uppercase tracking-widest mb-1" style="color:#34d399">JAWABAN YANG BENAR</div><div class="font-black text-sm" style="color:var(--text)">'+letters[q.c]+'. '+q.o[q.c]+'</div></div>';
+      html+='<div class="p-4 rounded-xl" style="background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(45,30,80,.4));border:1px solid rgba(16,185,129,.25)"><div class="text-[10px] font-black uppercase tracking-widest mb-1" style="color:#34d399">JAWABAN YANG BENAR</div><div class="font-black text-sm" style="color:var(--text)">'+letters[q.c]+'. '+q.o[q.c]+'</div></div>';
       de.innerHTML=html;
     }
   }
@@ -1573,7 +1229,7 @@ function showFeedbackModal(q,isCorrect,selectedIdx,earnedXP){
 }
 function updateNextButtonText(){
   const btn=$('btn-next');if(!btn)return;
-  const isLastQ=currentQuestionInLevel===QUESTIONS_PER_LEVEL-1;
+  const isLastQ=currentQuestionInLevel===QPL()-1;
   btn.innerHTML=isLastQ?'🏁 SELESAIKAN LEVEL':'➡ LANJUT KE SOAL BERIKUTNYA';
 }
 function nextQuestion(){
@@ -1583,7 +1239,7 @@ function nextQuestion(){
 function advanceQuestion(){
   currentQuestionInLevel++;
   if(lives<=0){showFailModal();return;}
-  if(currentQuestionInLevel>=QUESTIONS_PER_LEVEL){
+  if(currentQuestionInLevel>=QPL()){
     if(!completedLevels.includes(currentLevel))completedLevels.push(currentLevel);
     if(currentLevel+1>unlockedLevel)unlockedLevel=currentLevel+1;
     saveProgress();
@@ -1604,7 +1260,7 @@ function showLevelCompleteModal(){
   const title=$('complete-title'),msg=$('complete-message'),detail=$('complete-detail'),btn=$('btn-next-level');
   if(isLast){
     if(title)title.textContent='👑 SEMUA LEVEL SELESAI!';
-    if(msg)msg.textContent='Kamu berhasil menaklukkan 6 level Pelaku Ekonomi!';
+    if(msg)msg.textContent='Kamu berhasil menaklukkan 4 level Pelaku Ekonomi!';
     if(detail)detail.textContent='Skor akhirmu akan ditampilkan sebentar lagi...';
     if(btn)btn.textContent='📊 LIHAT HASIL AKHIR';
   }else{
@@ -1615,7 +1271,7 @@ function showLevelCompleteModal(){
     if(btn)btn.textContent='➡ LANJUT KE LEVEL BERIKUTNYA';
   }
   sfx('levelUp');haptic([30,50,30,50,30]);
-  safeConfetti({particleCount:100,spread:100,origin:{y:.6},colors:['#c9a227','#f4d77a','#fff4c2','#10b981','#34d399']});
+  safeConfetti({particleCount:100,spread:100,origin:{y:.6},colors:['#8b5cf6','#c4b5fd','#e9d5ff','#ec4899','#f472b6']});
   show('level-complete-modal');
 }
 function goToNextLevel(){
@@ -1655,7 +1311,7 @@ function endGame(){
   stopCountdown();
   gameActive=false;
   hide('game-screen');show('result-screen');
-  const totalQ=LEVELS.length*QUESTIONS_PER_LEVEL;
+  const totalQ=TotalQ();
   const score=Math.round((correctAnswersTotal/totalQ)*100);
   const earnedTitle=calculateTitle(score);
   const grade=calculateGrade(score);
@@ -1671,7 +1327,7 @@ function endGame(){
   setText('card-skipped',skippedTotal);
   setText('card-score',score);
   setText('card-xp',xpTotal.toLocaleString('id-ID')+' XP');
-  setText('card-levels',completedLevels.length+' / 6');
+  setText('card-levels',completedLevels.length+' / '+LEVELS.length);
   setText('card-title',earnedTitle);
   sfx('win');
   triggerConfetti(true);
@@ -1680,7 +1336,7 @@ function endGame(){
 function calculateTitle(s){if(s>=90)return'👑 MASTER PELAKU EKONOMI';if(s>=75)return'⭐ AHLI EKONOMI MUDA';if(s>=60)return'📚 PEMBELAJAR EKONOMI';return'🌱 CALON AHLI EKONOMI';}
 function calculateGrade(s){if(s>=90)return'A';if(s>=80)return'B';if(s>=70)return'C';if(s>=60)return'D';return'E';}
 function triggerConfetti(isRecord){
-  const colors=['#c9a227','#f4d77a','#fff4c2','#10b981','#34d399'];
+  const colors=['#8b5cf6','#c4b5fd','#e9d5ff','#ec4899','#f472b6'];
   safeConfetti({particleCount:100,spread:100,origin:{y:.6},colors});
   if(isRecord){
     setTimeout(()=>safeConfetti({particleCount:70,angle:60,spread:75,origin:{x:0,y:.7},colors}),300);
@@ -1692,19 +1348,19 @@ function triggerConfetti(isRecord){
 function showToast(msg){
   const t=document.createElement('div');
   t.className='fixed top-24 left-1/2 transform -translate-x-1/2 z-50 px-6 py-4 rounded-2xl font-black text-sm md:text-base shadow-2xl max-w-[90vw] text-center';
-  t.style.background='var(--gold-grad)';t.style.color='#1a1408';
-  t.style.boxShadow='0 20px 50px -10px rgba(201,162,39,.6)';
+  t.style.background='var(--gold-grad)';t.style.color='#f5f3ff';
+  t.style.boxShadow='0 20px 50px -10px rgba(139,92,246,.7)';
   t.style.animation='fadeInOut 2s ease';t.textContent=msg;
   document.body.appendChild(t);setTimeout(()=>t.remove(),2000);
 }
 
 function copyFormattedResult(){
   sfx('click');
-  const totalQ=LEVELS.length*QUESTIONS_PER_LEVEL;
+  const totalQ=TotalQ();
   const score=Math.round((correctAnswersTotal/totalQ)*100);
   const earnedTitle=calculateTitle(score);const grade=calculateGrade(score);
   const durasi=Math.floor(totalElapsed/60)+'m '+(totalElapsed%60)+'s';
-  const txt='HASIL KUIS MILIONER PREMIUM — BAB 2 PELAKU EKONOMI\nRuang IPS\n━━━━━━━━━━━━━━━━━━━━\nMateri: Pelaku Ekonomi\nLevel Selesai: '+completedLevels.length+'/6\nJawaban Benar: '+correctAnswersTotal+'/'+totalQ+'\nJawaban Salah: '+wrongAnswersTotal+'\nDilewati: '+skippedTotal+'\nSkor: '+score+'\nGrade: '+grade+'\nXP: '+xpTotal.toLocaleString('id-ID')+'\nDurasi: '+durasi+'\nGelar: '+earnedTitle+'\n━━━━━━━━━━━━━━━━━━━━';
+  const txt='HASIL KUIS MILIONER — BAB 2 PELAKU EKONOMI\nRuang IPS × MGDE\n━━━━━━━━━━━━━━━━━━━━\nMateri: Pelaku Ekonomi\nLevel Selesai: '+completedLevels.length+'/'+LEVELS.length+'\nJawaban Benar: '+correctAnswersTotal+'/'+totalQ+'\nJawaban Salah: '+wrongAnswersTotal+'\nDilewati: '+skippedTotal+'\nSkor: '+score+'\nGrade: '+grade+'\nXP: '+xpTotal.toLocaleString('id-ID')+'\nDurasi: '+durasi+'\nGelar: '+earnedTitle+'\n━━━━━━━━━━━━━━━━━━━━\nMAEDA GAME DEVELOPMENT FOR EDUCATION';
   const onSuccess=()=>{const cbt=$('copy-btn-text');if(cbt){cbt.textContent='TERSALIN! ✓';setTimeout(()=>cbt.textContent='SALIN',2000);}};
   const onFail=()=>{try{const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);onSuccess();}catch(err){alert('Gagal menyalin.');}};
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(onSuccess).catch(onFail);}
@@ -1728,9 +1384,6 @@ function returnToMenu(){
   show('start-screen');
 }
 
-/* ============================================================
-   GOLD PARTICLES
-   ============================================================ */
 function initGoldParticles(){
   const layer=$('gold-particles');if(!layer)return;
   const n=window.innerWidth<640?10:20;
@@ -1748,9 +1401,96 @@ function initGoldParticles(){
   }
 }
 
-/* ============================================================
-   INIT
-   ============================================================ */
+/* MENU CANVAS — partikel VIOLET */
+function initMenuCanvas(){
+  const cv=$('menuCanvas');if(!cv)return;
+  const c2=cv.getContext('2d');
+  let MW=0,MH=0,DPR=1;
+  function fit(){
+    MW=window.innerWidth;MH=window.innerHeight;
+    DPR=Math.min(window.devicePixelRatio||1,2);
+    cv.width=MW*DPR;cv.height=MH*DPR;
+    cv.style.width=MW+'px';cv.style.height=MH+'px';
+    c2.setTransform(DPR,0,0,DPR,0,0);
+  }
+  fit();
+  window.addEventListener('resize',fit);
+  const pts=[];const N=Math.min(70,Math.floor(MW/14));
+  for(let i=0;i<N;i++)pts.push({
+    x:Math.random()*MW,y:Math.random()*MH,
+    vx:(Math.random()-.5)*20,vy:(Math.random()-.5)*20,
+    r:.8+Math.random()*2.2,
+    hue:265+Math.random()*40,   /* VIOLET-PINK range */
+    phase:Math.random()*Math.PI*2
+  });
+  const sparks=[];
+  function spawnSpark(){
+    sparks.push({
+      x:Math.random()*MW,y:MH+20,
+      vx:(Math.random()-.5)*30,
+      vy:-40-Math.random()*90,
+      life:3+Math.random()*3,maxLife:6,
+      r:1.2+Math.random()*2.5,
+      hue:265+Math.random()*45
+    });
+  }
+  for(let i=0;i<12;i++)spawnSpark();
+  let lastT=performance.now();
+  function loop(now){
+    const dt=Math.min(.05,(now-lastT)/1000);lastT=now;
+    c2.clearRect(0,0,MW,MH);
+    const startVisible=$('start-screen')&&!$('start-screen').classList.contains('is-hidden');
+    if(startVisible){
+      const g1=c2.createRadialGradient(MW*.28,MH*.2,0,MW*.28,MH*.2,MH*.95);
+      g1.addColorStop(0,'rgba(196,181,253,0.22)');
+      g1.addColorStop(1,'rgba(196,181,253,0)');
+      c2.fillStyle=g1;c2.fillRect(0,0,MW,MH);
+      const g2=c2.createRadialGradient(MW*.78,MH*.85,0,MW*.78,MH*.85,MH*.85);
+      g2.addColorStop(0,'rgba(236,72,153,0.16)');
+      g2.addColorStop(1,'rgba(236,72,153,0)');
+      c2.fillStyle=g2;c2.fillRect(0,0,MW,MH);
+      c2.strokeStyle='rgba(196,181,253,.08)';c2.lineWidth=.5;
+      for(let x=0;x<MW;x+=60){c2.beginPath();c2.moveTo(x,0);c2.lineTo(x,MH);c2.stroke();}
+      for(let y=0;y<MH;y+=60){c2.beginPath();c2.moveTo(0,y);c2.lineTo(MW,y);c2.stroke();}
+      for(const p of pts){
+        p.x+=p.vx*dt;p.y+=p.vy*dt;
+        if(p.x<-10)p.x=MW+10;if(p.x>MW+10)p.x=-10;
+        if(p.y<-10)p.y=MH+10;if(p.y>MH+10)p.y=-10;
+        p.phase+=dt*2;
+        const tw=.5+.5*Math.sin(p.phase);
+        c2.fillStyle='hsla('+p.hue+',95%,72%,'+(.4+tw*.5)+')';
+        c2.shadowBlur=8;
+        c2.shadowColor='hsla('+p.hue+',95%,60%,.6)';
+        c2.beginPath();c2.arc(p.x,p.y,p.r*(.8+tw*.5),0,Math.PI*2);c2.fill();
+        c2.shadowBlur=0;
+      }
+      c2.lineWidth=.7;
+      for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+        const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y;
+        const d2=dx*dx+dy*dy;
+        if(d2<130*130){
+          const a=(1-Math.sqrt(d2)/130)*.22;
+          const hue=(pts[i].hue+pts[j].hue)/2;
+          c2.strokeStyle='hsla('+hue+',90%,70%,'+a+')';
+          c2.beginPath();c2.moveTo(pts[i].x,pts[i].y);c2.lineTo(pts[j].x,pts[j].y);c2.stroke();
+        }
+      }
+      for(let i=sparks.length-1;i>=0;i--){
+        const s=sparks[i];s.x+=s.vx*dt;s.y+=s.vy*dt;s.vy+=8*dt;s.life-=dt;
+        if(s.life<=0||s.y<-20){sparks.splice(i,1);spawnSpark();continue;}
+        const a=Math.min(1,s.life/s.maxLife);
+        c2.fillStyle='hsla('+s.hue+',100%,72%,'+a+')';
+        c2.shadowBlur=14;
+        c2.shadowColor='hsla('+s.hue+',100%,65%,'+a+')';
+        c2.beginPath();c2.arc(s.x,s.y,s.r,0,Math.PI*2);c2.fill();
+        c2.shadowBlur=0;
+      }
+    }
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+}
+
 (function loaderInit(){
   const bar=$('loader-bar'),pct=$('loader-percent');
   let p=0;
@@ -1786,6 +1526,16 @@ window.addEventListener('DOMContentLoaded',()=>{
       showToast('🗑️ Progres dihapus — mulai dari Level 1');
     }
   });
+  bind('btn-levels',()=>{
+    sfx('click');
+    const w=$('level-list-wrap');
+    if(w)w.classList.toggle('is-hidden');
+  });
+  bind('btn-howto',()=>{
+    sfx('click');
+    const w=$('howto-panel');
+    if(w)w.classList.toggle('is-hidden');
+  });
   bind('btn-lock-answer',confirmAnswer);
   bind('btn-next',nextQuestion);
   bind('btn-restart',restartGame);
@@ -1804,6 +1554,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   renderLevelsList();
   renderProgressPanel();
   initGoldParticles();
+  initMenuCanvas();
 });
 </script>
 </body>
