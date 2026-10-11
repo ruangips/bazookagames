@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pesawat Tempur IPS</title>
+  <title>Bazooka Games — Game Edukasi IPS</title>
 
   <style>
     * {
@@ -41,7 +41,6 @@
       pointer-events: none;
     }
 
-    /* Grid background */
     #loader::before {
       content: '';
       position: absolute;
@@ -60,7 +59,6 @@
       to { background-position: 44px 44px; }
     }
 
-    /* Orb glow */
     #loader::after {
       content: '';
       position: absolute;
@@ -77,7 +75,6 @@
       50% { transform: scale(1.15); opacity: 1; }
     }
 
-    /* ====== LOGO MGE 3D ====== */
     .mge-logo-wrap {
       position: relative;
       z-index: 1;
@@ -188,7 +185,6 @@
       z-index: 3;
     }
 
-    /* ====== BRAND TEXT ====== */
     .brand-text {
       position: relative;
       z-index: 1;
@@ -291,14 +287,36 @@
       color: #d946ef;
     }
 
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
     nav a {
       color: white;
       text-decoration: none;
-      margin-left: 25px;
+      font-size: 15px;
+      transition: color .3s ease;
     }
 
     nav a:hover {
       color: #d946ef;
+    }
+
+    nav a.materi-link {
+      background: linear-gradient(135deg, #c026d3, #a855f7);
+      padding: 9px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      box-shadow: 0 4px 14px rgba(192,38,211,0.4);
+    }
+
+    nav a.materi-link:hover {
+      background: linear-gradient(135deg, #a21caf, #9333ea);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(192,38,211,0.55);
+      color: white;
     }
 
     /* ========== HERO ========== */
@@ -320,6 +338,7 @@
     .hero-text h1 {
       font-size: 55px;
       margin-bottom: 20px;
+      line-height: 1.15;
     }
 
     .hero-text h1 span {
@@ -372,7 +391,15 @@
 
     .subjects h2 {
       font-size: 35px;
-      margin-bottom: 40px;
+      margin-bottom: 15px;
+    }
+
+    .subjects .section-desc {
+      color: #d8b4fe;
+      font-size: 16px;
+      max-width: 680px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
     }
 
     .cards {
@@ -499,6 +526,7 @@
 
     @media (max-width: 500px) {
       .cards { grid-template-columns: 1fr; }
+      .logo { font-size: 18px; }
     }
   </style>
 </head>
@@ -527,28 +555,32 @@
       <div class="loader-bar-fill"></div>
     </div>
 
-    <div class="loader-sub">Pesawat Tempur IPS</div>
+    <div class="loader-sub">Bazooka Games</div>
   </div>
 
   <header>
-    <div class="logo">✈️ PESAWAT TEMPUR IPS</div>
+    <div class="logo">🎮 BAZOOKA GAMES</div>
 
     <nav>
+      <a href="https://ruangips.github.io/ekonomi/"
+         class="materi-link" target="_blank" rel="noopener noreferrer">
+        📚 Materi
+      </a>
       <a href="#beranda">Beranda</a>
-      <a href="#materi">Materi</a>
-      <a href="#main">Mulai Game</a>
+      <a href="#materi">Game</a>
+      <a href="#main">Mulai</a>
     </nav>
   </header>
 
   <!-- ===== HERO ===== -->
   <section class="hero" id="beranda">
     <div class="hero-text">
-      <h1>Belajar IPS dengan <span>Seru!</span></h1>
+      <h1>Belajar IPS Lewat <span>Game Seru!</span></h1>
 
       <p>
-        Terbang, bertempur, dan uji pengetahuanmu
-        tentang ekonomi, sejarah, geografi, dan sosiologi
-        dalam game Pesawat Tempur IPS.
+        Bazooka Games menghadirkan pengalaman belajar IPS yang berbeda —
+        tembak jawaban benar, kalahkan lawan, dan kuasai materi ekonomi,
+        sejarah, geografi, serta sosiologi sambil bermain.
       </p>
 
       <a href="#materi" class="btn">
@@ -556,19 +588,22 @@
       </a>
     </div>
 
-    <div class="plane">✈️</div>
+    <div class="plane">🎮</div>
 
-    <!-- Brand bawah hero -->
     <div class="section-brand">
       <span class="brand-line"></span>
-      <span class="brand-name">MAEDA GAMES EDU</span>
+      <span class="brand-name">BAZOOKA GAMES</span>
       <span class="brand-line"></span>
     </div>
   </section>
 
-  <!-- ===== MATERI ===== -->
+  <!-- ===== MATERI / DAFTAR GAME ===== -->
   <section class="subjects" id="materi">
-    <h2>📚 Materi IPS</h2>
+    <h2>🎯 Pilih Game IPS</h2>
+    <p class="section-desc">
+      Setiap game dirancang untuk menguji pemahamanmu dengan cara yang seru —
+      tembak, jawab, dan menangkan pertempuran pengetahuan!
+    </p>
 
     <div class="cards">
 
@@ -576,63 +611,62 @@
          class="card" target="_blank" rel="noopener noreferrer">
         <div class="icon">💰</div>
         <h3>Ekonomi</h3>
-        <p>Uji pengetahuan tentang kegiatan ekonomi dan kehidupan masyarakat.</p>
+        <p>Tembak jawaban tentang kegiatan ekonomi, pelaku ekonomi, dan kehidupan masyarakat.</p>
       </a>
 
       <a href="https://ruangips.github.io/bazookagames/bazzokasejarah.html"
          class="card" target="_blank" rel="noopener noreferrer">
         <div class="icon">🏛️</div>
         <h3>Sejarah</h3>
-        <p>Kenali berbagai peristiwa penting dalam sejarah.</p>
+        <p>Kalahkan lawan dengan jawaban tepat tentang peristiwa penting sejarah Indonesia dan dunia.</p>
       </a>
 
       <a href="https://ruangips.github.io/bazookagames/bazooka_geo.html"
          class="card" target="_blank" rel="noopener noreferrer">
         <div class="icon">🌍</div>
         <h3>Geografi</h3>
-        <p>Jelajahi pengetahuan tentang bumi, wilayah, dan lingkungan.</p>
+        <p>Jelajahi bumi, wilayah, dan lingkungan lewat pertempuran pengetahuan geografi.</p>
       </a>
 
       <a href="https://ruangips.github.io/bazookagames/bazookasos.html"
          class="card" target="_blank" rel="noopener noreferrer">
         <div class="icon">👥</div>
         <h3>Sosiologi</h3>
-        <p>Pelajari kehidupan sosial dan interaksi dalam masyarakat.</p>
+        <p>Pahami interaksi sosial dan kehidupan masyarakat sambil bermain menembak jawaban.</p>
       </a>
 
       <a href="https://ruangips.github.io/bazookagames/bab3rodaputar.html"
          class="card" target="_blank" rel="noopener noreferrer">
         <div class="icon">🎡</div>
-        <h3>Bab 3 - Roda Putar</h3>
-        <p>Putar roda dan jawab pertanyaan seru seputar materi IPS Bab 3.</p>
+        <h3>Bab 3 — Roda Putar</h3>
+        <p>Putar roda, jawab pertanyaan, dan uji pemahamanmu tentang materi IPS Bab 3.</p>
       </a>
 
     </div>
 
-    <!-- Brand bawah materi -->
     <div class="section-brand">
       <span class="brand-line"></span>
-      <span class="brand-name">MAEDA GAMES EDU</span>
+      <span class="brand-name">BAZOOKA GAMES</span>
       <span class="brand-line"></span>
     </div>
   </section>
 
   <!-- ===== MAIN ===== -->
   <section class="subjects" id="main">
-    <h2>🎮 Siap Menjadi Pilot IPS?</h2>
+    <h2>🎮 Siap Bertempur?</h2>
 
-    <p style="margin-bottom: 25px; color:#d8b4fe;">
-      Pilih salah satu materi di atas untuk mulai bermain!
+    <p class="section-desc">
+      Pilih salah satu game di atas dan buktikan bahwa kamu bisa menang
+      di medan tempur IPS!
     </p>
 
     <a href="#materi" class="btn">
-      🚀 PILIH MATERI
+      🎯 PILIH GAME
     </a>
 
-    <!-- Brand bawah main -->
     <div class="section-brand">
       <span class="brand-line"></span>
-      <span class="brand-name">MAEDA GAMES EDU</span>
+      <span class="brand-name">BAZOOKA GAMES</span>
       <span class="brand-line"></span>
     </div>
   </section>
@@ -641,10 +675,10 @@
   <footer>
     <div class="footer-brand">
       <span class="brand-line"></span>
-      <span class="brand-name">MAEDA GAMES EDU</span>
+      <span class="brand-name">BAZOOKA GAMES</span>
       <span class="brand-line"></span>
     </div>
-    © 2026 Pesawat Tempur IPS | Game Edukasi
+    © 2026 Bazooka Games | Game Edukasi IPS
   </footer>
 
   <script>
