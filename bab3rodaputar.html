@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f4f9ff" id="themeColorMeta">
+<title>Kuis Roda Berputar — Ekonomi Bab 3: Pasar & Terbentuknya Harga</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script>
+try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-serif'], display: ['Space Grotesk','sans-serif'] } } } }; } catch(e){}
+</script>
+<style>
+  :root {
+    --primary: #2563eb; --primary-light: #3b82f6; --primary-soft: #dbeafe;
+    --secondary: #0ea5e9; --accent: #8b5cf6; --accent-soft: #ede9fe;
+    --green: #10b981; --green-soft: #d1fae5;
+    --orange: #f59e0b; --orange-soft: #fef3c7;
+    --rose: #f43f5e; --rose-soft: #ffe4e6;
+    --bg-body: #f4f9ff; --bg-card: rgba(255,255,255,0.82); --bg-card-solid: #ffffff;
+    --bg-soft: #f0f7ff; --bg-header: rgba(255,255,255,0.88);
+    --text-dark: #0f172a; --text-muted: #475569;
+    --border-light: #e2e8f0;
+    --shadow: 0 12px 40px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.02);
+    --shadow-hover: 0 20px 60px rgba(37,99,235,0.08), 0 8px 24px rgba(0,0,0,0.02);
+    --lvl-primary: #2563eb; --lvl-accent: #3b82f6; --lvl-soft: #dbeafe; --lvl-gradient: linear-gradient(135deg, #2563eb, #3b82f6);
+  }
+  body.dark-mode {
+    --primary: #60a5fa; --primary-light: #93c5fd; --primary-soft: #1e3a8a;
+    --secondary: #22d3ee; --accent: #a78bfa; --accent-soft: #4c1d95;
+    --green: #34d399; --green-soft: #064e3b;
+    --orange: #fbbf24; --orange-soft: #78350f;
+    --rose: #fb7185; --rose-soft: #7f1d1d;
+    --bg-body: #0a0f1e; --bg-card: rgba(17,24,39,0.82); --bg-card-solid: #111827;
+    --bg-soft: #1e293b; --bg-header: rgba(17,24,39,0.88);
+    --text-dark: #f1f5f9; --text-muted: #94a3b8;
+    --border-light: #334155;
+    --shadow: 0 12px 40px rgba(0,0,0,0.35), 0 4px 16px rgba(0,0,0,0.2);
+    --shadow-hover: 0 20px 60px rgba(96,165,250,0.15), 0 8px 24px rgba(0,0,0,0.3);
+  }
+  * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body { background: var(--bg-body); color: var(--text-dark); line-height: 1.7; font-family: 'Inter', system-ui, sans-serif; font-size: 15px; overflow-x: hidden; min-height: 100vh; position: relative; transition: background-color 0.5s ease, color 0.5s ease; }
+  .bg-pattern { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; background: radial-gradient(ellipse at 20% 50%, rgba(37,99,235,0.04) 0%, transparent 60%), radial-gradient(ellipse at 80% 50%, rgba(139,92,246,0.04) 0%, transparent 60%), radial-gradient(ellipse at 50% 100%, rgba(16,185,129,0.03) 0%, transparent 50%); transition: background 0.5s ease; }
+  body.dark-mode .bg-pattern { background: radial-gradient(ellipse at 20% 50%, rgba(96,165,250,0.08) 0%, transparent 60%), radial-gradient(ellipse at 80% 50%, rgba(167,139,250,0.08) 0%, transparent 60%), radial-gradient(ellipse at 50% 100%, rgba(52,211,153,0.06) 0%, transparent 50%); }
+  .orb { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(60px); opacity: 0.35; animation: orbFloat 18s ease-in-out infinite alternate; transition: opacity 0.5s ease, background 0.5s ease; }
+  body.dark-mode .orb { opacity: 0.22; }
+  .orb-1 { width: 300px; height: 300px; top: -80px; left: -80px; background: var(--lvl-primary); opacity: 0.25; }
+  .orb-2 { width: 250px; height: 250px; bottom: -60px; right: -60px; background: var(--lvl-accent); opacity: 0.22; animation-delay: -6s; }
+  .orb-3 { width: 200px; height: 200px; top: 40%; right: 10%; background: var(--lvl-primary); opacity: 0.18; animation-delay: -12s; }
+  @keyframes orbFloat { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(30px,-30px) scale(1.15); } }
+  .is-hidden{display:none!important}
+  .glass-panel { background: var(--bg-card); backdrop-filter: blur(20px) saturate(140%); -webkit-backdrop-filter: blur(20px) saturate(140%); border: 1px solid var(--border-light); box-shadow: var(--shadow); border-radius: 20px; position: relative; overflow: hidden; transition: all 0.4s cubic-bezier(0.22,1,0.36,1); }
+  .glass-panel:hover { box-shadow: var(--shadow-hover); border-color: var(--primary-light); transform: translateY(-2px); }
+  .glass-panel::before { content:''; position: absolute; top:0; left:10%; right:10%; height:1px; background: linear-gradient(90deg, transparent, rgba(37,99,235,0.3), transparent); }
+  .navy-input { background: var(--bg-card-solid); border: 1.5px solid var(--border-light); color: var(--text-dark); transition: all .22s; width: 100%; border-radius: 12px; padding: 13px 16px; font-size: 16px; font-weight: 500; }
+  .navy-input:focus{ outline:none; border-color: var(--primary-light); box-shadow: 0 0 0 4px rgba(37,99,235,0.12); }
+  .btn-primary { background: var(--lvl-gradient, linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%)); color: #fff; font-weight: 900; letter-spacing: 2px; padding: 15px 28px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 10px 34px rgba(37,99,235,0.25), 0 1px 0 rgba(255,255,255,0.4) inset; transition: all .22s; cursor: pointer; font-size: .92rem; width: 100%; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; position: relative; overflow: hidden; }
+  @media (min-width:480px){ .btn-primary{padding:16px 32px;font-size:1rem;} }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow: 0 14px 46px rgba(37,99,235,0.35); }
+  .btn-primary:active{ transform:translateY(0) scale(.98); }
+  .btn-primary::after { content:''; position: absolute; top:0; left:-100%; width:100%; height:100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); animation: shineBtn 2.6s ease-in-out infinite; }
+  @keyframes shineBtn{0%{left:-100%}60%,100%{left:100%}}
+  .wheel-stage { position: relative; width: min(88vw, 430px); aspect-ratio: 1; margin: 20px auto; filter: drop-shadow(0 20px 60px rgba(37,99,235,0.15)); }
+  #wheelSvg { width: 100%; height: 100%; display: block; transform-origin: center center; will-change: transform; filter: drop-shadow(0 0 30px var(--lvl-primary)); cursor: pointer; overflow: visible; }
+  .wheel-pointer { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 30px solid transparent; border-right: 30px solid transparent; border-top: 56px solid var(--lvl-primary); filter: drop-shadow(0 4px 12px var(--lvl-primary)); z-index: 5; animation: pointerBounce 2s ease-in-out infinite; }
+  @media (min-width:480px){ .wheel-pointer{ border-left-width:34px; border-right-width:34px; border-top-width:64px; top:-12px; } }
+  @keyframes pointerBounce{0%,100%{transform: translateX(-50%) translateY(0);}50%{transform: translateX(-50%) translateY(-5px);}}
+  .spin-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 33%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 35% 30%, var(--bg-card-solid), var(--lvl-soft) 40%, var(--lvl-primary) 100%); border: 5px solid var(--bg-card-solid); color: #fff; font-family: 'Space Grotesk', sans-serif; font-weight: 900; letter-spacing: 1px; font-size: clamp(0.85rem, 3.4vw, 1.2rem); cursor: pointer; box-shadow: 0 0 0 5px rgba(255,255,255,0.15), 0 12px 34px var(--lvl-primary), inset 0 3px 0 rgba(255,255,255,0.3); z-index: 4; transition: transform .2s ease, box-shadow .2s; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.05; animation: spinPulse 2.4s ease-in-out infinite; text-shadow: 0 1px 4px rgba(0,0,0,.35); }
+  @keyframes spinPulse{0%,100%{ box-shadow: 0 0 0 5px rgba(255,255,255,0.15), 0 12px 34px var(--lvl-primary), inset 0 3px 0 rgba(255,255,255,0.3); }50%{ box-shadow: 0 0 0 9px rgba(255,255,255,0.08), 0 12px 40px var(--lvl-primary), inset 0 3px 0 rgba(255,255,255,0.3); }}
+  .spin-btn:hover{ transform: translate(-50%,-50%) scale(1.07); }
+  .spin-btn:active{ transform: translate(-50%,-50%) scale(.95); }
+  .spin-btn:disabled{ opacity: .65; cursor: wait; animation: none; }
+  .spin-btn .spin-icon{ font-size: 2.1em; display: block; animation: spinIcon 4s linear infinite; }
+  @keyframes spinIcon{ to { transform: rotate(360deg); } }
+  .opt-btn { width: 100%; text-align: left; background: var(--bg-card-solid); border: 1.5px solid var(--border-light); border-radius: 14px; padding: 13px 15px; font-size: .85rem; color: var(--text-dark); font-weight: 500; line-height: 1.4; transition: all .22s cubic-bezier(.4,0,.2,1); cursor: pointer; position: relative; overflow: hidden; }
+  @media (min-width:768px){ .opt-btn{font-size:.9rem;padding:14px 17px;} }
+  .opt-btn:hover { background: var(--bg-soft); border-color: var(--lvl-primary); transform: translateY(-2px); box-shadow: 0 8px 24px var(--lvl-primary); }
+  .opt-btn:active{ transform: scale(.99); }
+  .opt-btn:disabled{ cursor: not-allowed; }
+  .opt-correct{ background: linear-gradient(135deg,#16a34a,#22c55e) !important; border-color: #4ade80 !important; color: #fff !important; box-shadow: 0 0 36px rgba(34,197,94,.4); }
+  .opt-wrong{ background: linear-gradient(135deg,#dc2626,#ef4444) !important; border-color: #f87171 !important; color: #fff !important; box-shadow: 0 0 36px rgba(239,68,68,.4); }
+  .cat-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 99px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; font-size: .72rem; box-shadow: 0 4px 20px currentColor, inset 0 1px 0 rgba(255,255,255,.5); animation: catPop .5s cubic-bezier(.2,.9,.3,1.4); white-space: nowrap; }
+  @keyframes catPop{ 0%{opacity:0;transform:scale(.6)} 60%{transform:scale(1.08)} 100%{opacity:1;transform:scale(1)} }
+  .stat-pill { display: flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 99px; background: var(--bg-card-solid); border: 1px solid var(--border-light); font-size: .72rem; font-weight: 700; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+  .stat-pill .lbl{ color: var(--text-muted); font-size:.62rem; text-transform:uppercase; letter-spacing:1px; }
+  .timer-ring { position: relative; width: 64px; height: 64px; flex-shrink: 0; }
+  .timer-ring svg { transform: rotate(-90deg); }
+  .timer-ring .ring-bg { fill: none; stroke: var(--border-light); stroke-width: 5; }
+  .timer-ring .ring-fill { fill: none; stroke: var(--lvl-primary); stroke-width: 5; stroke-linecap: round; transition: stroke-dashoffset 1s linear, stroke 0.3s; }
+  .timer-ring .ring-text { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-weight: 900; font-size: 1.1rem; color: var(--text-dark); }
+  .timer-ring.warning .ring-fill { stroke: var(--orange); }
+  .timer-ring.danger .ring-fill { stroke: var(--rose); }
+  .timer-ring.danger .ring-text { color: var(--rose); animation: timerPulse 0.5s ease-in-out infinite; }
+  @keyframes timerPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
+  #revealOverlay{ position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; pointer-events: none; padding: 16px; }
+  #revealOverlay.show{ display: flex; }
+  #revealOverlay.backdrop{ backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); background: rgba(244,249,255,.75); pointer-events: auto; animation: fadeInBackdrop .25s ease; }
+  body.dark-mode #revealOverlay.backdrop{ background: rgba(10,15,30,.82); }
+  @keyframes fadeInBackdrop{ from{opacity:0} to{opacity:1} }
+  .reveal-badge{ font-size: clamp(1.6rem, 6.5vw, 3.5rem); font-weight: 900; letter-spacing: 3px; text-transform: uppercase; font-family: 'Space Grotesk', sans-serif; padding: 16px 36px; border-radius: 20px; text-align: center; line-height: 1.1; animation: revealPop .7s cubic-bezier(.34,1.56,.64,1); }
+  @media (min-width:480px){ .reveal-badge{ font-size: clamp(2rem,7vw,4.5rem); padding: 22px 52px; letter-spacing: 4px; border-radius: 24px; } }
+  @keyframes revealPop{ 0%{opacity:0;transform:scale(.4) rotate(-8deg)} 50%{transform:scale(1.1) rotate(2deg)} 100%{opacity:1;transform:scale(1) rotate(0)} }
+  .reveal-badge.benar{ color:#fff; background: linear-gradient(135deg,#15803d 0%,#22c55e 50%,#4ade80 100%); box-shadow: 0 0 60px rgba(34,197,94,.5), 0 16px 44px rgba(0,0,0,.15), inset 0 2px 0 rgba(255,255,255,.5); text-shadow: 0 0 18px rgba(255,255,255,.6); border: 2.5px solid rgba(255,255,255,.8); }
+  .reveal-badge.benar::before{ content:'✓'; display:block; font-size:.6em; margin-bottom:-.1em; animation: checkPop .5s .25s cubic-bezier(.34,1.56,.64,1) both; }
+  .reveal-badge.salah{ color:#fff; background: linear-gradient(135deg,#7f1d1d 0%,#dc2626 50%,#f87171 100%); box-shadow: 0 0 60px rgba(239,68,68,.5), 0 16px 44px rgba(0,0,0,.15), inset 0 2px 0 rgba(255,255,255,.5); text-shadow: 0 0 18px rgba(255,255,255,.6); border: 2.5px solid rgba(255,255,255,.8); animation: revealPop .7s cubic-bezier(.34,1.56,.64,1), salahShake .5s .7s ease; }
+  .reveal-badge.salah::before{ content:'✗'; display:block; font-size:.6em; margin-bottom:-.1em; animation: checkPop .5s .25s cubic-bezier(.34,1.56,.64,1) both; }
+  .reveal-badge.timeout{ color:#fff; background: linear-gradient(135deg,#78350f 0%,#f59e0b 50%,#fbbf24 100%); box-shadow: 0 0 60px rgba(245,158,11,.6), 0 16px 44px rgba(0,0,0,.15), inset 0 2px 0 rgba(255,255,255,.5); text-shadow: 0 0 18px rgba(255,255,255,.6); border: 2.5px solid rgba(255,255,255,.8); animation: revealPop .7s cubic-bezier(.34,1.56,.64,1), salahShake .5s .7s ease; }
+  .reveal-badge.timeout::before{ content:'⏰'; display:block; font-size:.6em; margin-bottom:-.1em; animation: checkPop .5s .25s cubic-bezier(.34,1.56,.64,1) both; }
+  @keyframes checkPop{0%{opacity:0;transform:scale(0)}100%{opacity:1;transform:scale(1)}}
+  @keyframes salahShake{ 0%,100%{transform:translateX(0) rotate(0)} 20%{transform:translateX(-8px) rotate(-1.5deg)} 40%{transform:translateX(8px) rotate(1.5deg)} 60%{transform:translateX(-5px) rotate(-.8deg)} 80%{transform:translateX(5px) rotate(.8deg)} }
+  .burst-particle{ position: absolute; width: 10px; height: 10px; border-radius: 50%; pointer-events: none; animation: burstOut 1.1s cubic-bezier(.2,.9,.3,1) forwards; }
+  @keyframes burstOut{ 0%{opacity:1;transform:translate(0,0) scale(1)} 100%{opacity:0;transform:translate(var(--tx),var(--ty)) scale(.2)} }
+  .achievement-card{ position: relative; padding: 14px 16px; border-radius: 16px; border: 2px solid; overflow: hidden; animation: achIn .7s cubic-bezier(.2,.9,.3,1.3); }
+  @keyframes achIn{0%{opacity:0;transform:scale(.85) translateY(20px)}100%{opacity:1;transform:scale(1) translateY(0)}}
+  .achievement-card::before{ content:''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.4), transparent 60%); pointer-events: none; }
+  .ach-tier-gold{ background: linear-gradient(135deg, rgba(251,191,36,.15), rgba(245,158,11,.05)); border-color: rgba(251,191,36,.6); box-shadow: 0 0 40px rgba(251,191,36,.2); }
+  .ach-tier-emerald{ background: linear-gradient(135deg, rgba(34,197,94,.15), rgba(34,197,94,.05)); border-color: rgba(34,197,94,.6); box-shadow: 0 0 40px rgba(34,197,94,.2); }
+  .ach-tier-blue{ background: linear-gradient(135deg, rgba(37,99,235,.15), rgba(37,99,235,.05)); border-color: rgba(37,99,235,.6); box-shadow: 0 0 40px rgba(37,99,235,.2); }
+  .ach-tier-violet{ background: linear-gradient(135deg, rgba(139,92,246,.15), rgba(139,92,246,.05)); border-color: rgba(139,92,246,.6); box-shadow: 0 0 40px rgba(139,92,246,.2); }
+  .ach-tier-slate{ background: linear-gradient(135deg, rgba(148,163,184,.15), rgba(148,163,184,.05)); border-color: rgba(148,163,184,.6); box-shadow: 0 0 40px rgba(148,163,184,.2); }
+  .ach-icon{ width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; flex-shrink: 0; background: var(--bg-card-solid); border: 1px solid var(--border-light); }
+  .cat-stat-row{ display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 10px; background: var(--bg-soft); border: 1px solid var(--border-light); }
+  .cat-stat-bar{ flex: 1; height: 6px; border-radius: 99px; background: var(--border-light); overflow: hidden; }
+  .cat-stat-bar > i{ display: block; height: 100%; border-radius: 99px; transition: width 1.2s cubic-bezier(.2,.9,.3,1.2); }
+  .kuis-selesai-banner{ text-align: center; padding: 20px 16px; border-radius: 20px; background: linear-gradient(135deg, var(--lvl-soft), var(--bg-soft), var(--lvl-soft)); border: 2px solid var(--lvl-primary); box-shadow: 0 0 50px rgba(37,99,235,.1); margin-bottom: 18px; animation: selesaiIn .9s cubic-bezier(.2,.9,.3,1.3); position: relative; overflow: hidden; }
+  .kuis-selesai-banner::before{ content:''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 0%, rgba(37,99,235,.15), transparent 60%); pointer-events: none; }
+  @keyframes selesaiIn{0%{opacity:0;transform:scale(.7) translateY(-30px)}60%{transform:scale(1.05) translateY(4px)}100%{opacity:1;transform:scale(1) translateY(0)}}
+  .kuis-selesai-title{ font-family: 'Space Grotesk', sans-serif; font-size: 2.2rem; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; background: var(--lvl-gradient); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmerText 3s ease-in-out infinite; line-height: 1; margin-bottom: 8px; }
+  @media (min-width:480px){ .kuis-selesai-title{ font-size: 3rem; letter-spacing: 5px; } }
+  @media (min-width:768px){ .kuis-selesai-title{ font-size: 3.8rem; letter-spacing: 6px; } }
+  .kuis-selesai-sub{ font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; }
+  @media (min-width:480px){ .kuis-selesai-sub{ font-size: .85rem; } }
+  .btn-home{ background: var(--lvl-gradient, linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, var(--secondary) 100%)); color: #fff; font-weight: 900; letter-spacing: 2px; padding: 18px 28px; border-radius: 16px; border: 2px solid rgba(255,255,255,0.2); box-shadow: 0 0 40px var(--lvl-primary), 0 14px 40px rgba(0,0,0,.08), inset 0 1px 0 rgba(255,255,255,.5); transition: all .22s; cursor: pointer; font-size: 1rem; width: 100%; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; position: relative; overflow: hidden; animation: homePulse 2s ease-in-out infinite; }
+  @media (min-width:480px){ .btn-home{ padding: 20px 36px; font-size: 1.15rem; letter-spacing: 3px; } }
+  @keyframes homePulse{0%,100%{ box-shadow: 0 0 40px var(--lvl-primary), 0 14px 40px rgba(0,0,0,.08), inset 0 1px 0 rgba(255,255,255,.5); }50%{ box-shadow: 0 0 70px var(--lvl-accent), 0 14px 40px rgba(0,0,0,.08), inset 0 1px 0 rgba(255,255,255,.5); }}
+  .btn-home:hover{ transform: translateY(-3px) scale(1.02); }
+  .btn-home:active{ transform: translateY(0) scale(.98); }
+  .btn-home::after{ content:''; position: absolute; top:0; left:-100%; width:100%; height:100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.5), transparent); animation: shineBtn 2.6s ease-in-out infinite; }
+  .progress-container{ width: 100%; height: 8px; border-radius: 99px; background: var(--border-light); overflow: hidden; }
+  .progress-fill{ height: 100%; width: 0%; border-radius: 99px; background: var(--lvl-gradient); box-shadow: 0 0 12px var(--lvl-primary); transition: width .5s cubic-bezier(.4,0,.2,1); }
+  @media (max-width: 640px){
+    .glass-panel{ padding: 14px; }
+    main{ padding: 12px 10px 20px !important; }
+    header{ padding: 10px 12px !important; }
+    .wheel-stage{ width: min(92vw, 380px); margin: 14px auto; }
+    .wheel-pointer{ border-left-width:26px; border-right-width:26px; border-top-width:48px; top:-8px; }
+    .opt-btn{ min-height: 48px; padding: 14px 16px; font-size: 0.9rem; }
+    .btn-primary, .btn-home{ min-height: 48px; }
+    #spinBtn{ min-width: 88px; min-height: 88px; }
+  }
+  @media (max-width: 380px){
+    body{ font-size: 14px; }
+    .opt-btn{ padding: 13px 12px; font-size: .85rem; border-radius: 12px; min-height: 48px; }
+    .wheel-stage{ width: min(94vw, 330px); }
+    .kuis-selesai-title{ font-size: 1.8rem; }
+  }
+  .overflow-safe{ word-wrap: break-word; overflow-wrap: break-word; }
+  .opt-btn:focus-visible, .btn-primary:focus-visible, .btn-home:focus-visible, .spin-btn:focus-visible, #spinBtn:focus-visible, #soundToggle:focus-visible, #themeToggle:focus-visible{ outline: 3px solid var(--lvl-primary); outline-offset: 3px; }
+  #loadingScreen { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background: rgba(244,249,255,0.96); backdrop-filter: blur(12px); transition: opacity 0.7s ease, visibility 0.7s ease; flex-direction: column; padding: 20px; }
+  body.dark-mode #loadingScreen{ background: rgba(10,15,30,0.96); }
+  #loadingScreen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+  .loader-content { text-align: center; max-width: 340px; width: 100%; }
+  .loader-ring-container { position: relative; width: 140px; height: 140px; margin: 0 auto; }
+  .loader-ring { position: absolute; border-radius: 50%; border: 4px solid transparent; animation: spinReverse 1.4s cubic-bezier(0.34,1.56,0.64,1) infinite; }
+  .loader-ring:nth-child(1) { width: 140px; height: 140px; border-top-color: var(--rose); border-right-color: var(--rose); animation-duration: 1.2s; }
+  .loader-ring:nth-child(2) { width: 110px; height: 110px; top: 15px; left: 15px; border-bottom-color: var(--orange); border-left-color: var(--orange); animation-direction: reverse; animation-duration: 1.0s; }
+  .loader-ring:nth-child(3) { width: 80px; height: 80px; top: 30px; left: 30px; border-top-color: var(--green); border-right-color: var(--green); animation-duration: 0.8s; }
+  @keyframes spinReverse { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  .loader-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; background: linear-gradient(135deg, var(--primary), var(--accent), var(--secondary)); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmerText 2s ease-in-out infinite; margin-bottom: 6px; line-height: 1.2; }
+  .loader-sub { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 28px; }
+  .loader-bar { width: 100%; height: 5px; background: var(--border-light); border-radius: 99px; overflow: hidden; margin-bottom: 14px; }
+  .loader-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--accent), var(--green)); border-radius: 99px; animation: loadFill 1.4s ease-in-out forwards; box-shadow: 0 0 16px rgba(37,99,235,.4); }
+  @keyframes loadFill { 0% { width: 0%; } 100% { width: 100%; } }
+  .loader-text { font-size: 0.65rem; color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; font-weight: 700; animation: blinkText 1.4s ease-in-out infinite; }
+  @keyframes blinkText { 0%,100% { opacity: .6; } 50% { opacity: 1; } }
+  .reveal { opacity: 0; transform: translateY(24px); transition: all 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .glow-text { text-shadow: 0 0 20px rgba(37,99,235,0.3), 0 0 40px rgba(139,92,246,0.15); }
+  body.dark-mode .glow-text { text-shadow: 0 0 20px rgba(96,165,250,0.4), 0 0 40px rgba(167,139,250,0.25); }
+  #themeToggle { position: relative; overflow: hidden; }
+  #themeToggle .theme-icon { display: inline-block; transition: transform 0.6s cubic-bezier(0.34,1.56,0.64,1); }
+  body.dark-mode #themeToggle .theme-icon { transform: rotate(360deg); }
+  @keyframes screenIn { 0% { opacity: 0; transform: translateY(30px) scale(0.98); filter: blur(4px); } 100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
+  @keyframes slideInRight { from { opacity: 0; transform: translateX(40px) scale(0.98); filter: blur(4px); } to { opacity: 1; transform: translateX(0) scale(1); filter: blur(0); } }
+  .anim-screen-in { animation: screenIn 0.6s cubic-bezier(0.22,1,0.36,1) both; }
+  .anim-slide-in-right { animation: slideInRight 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+  #screenTransition { position: fixed; inset: 0; z-index: 90; background: var(--bg-body); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+  #screenTransition.active { opacity: 1; pointer-events: auto; }
+  .timer-ring.sound-beat { animation: soundBeat 0.4s ease-out; }
+  @keyframes soundBeat { 0%{transform:scale(1)} 50%{transform:scale(1.12)} 100%{transform:scale(1)} }
+  .timer-ring.danger.sound-beat .ring-fill { filter: drop-shadow(0 0 8px var(--rose)); }
+  #themeOverlay { position: fixed; inset: 0; z-index: 9998; pointer-events: none; background: radial-gradient(circle at var(--cx, 50%) var(--cy, 50%), rgba(37,99,235,0.15) 0%, transparent 70%); opacity: 0; transition: opacity 0.5s ease; }
+  #themeOverlay.active { opacity: 1; }
+  .level-card { cursor: pointer; transition: all .3s cubic-bezier(.22,1,.36,1); position: relative; overflow: hidden; }
+  .level-card:hover { transform: translateY(-4px) scale(1.02); }
+  .level-card.locked { opacity: .5; cursor: not-allowed; }
+  .level-card.locked:hover { transform: none; }
+  .level-hero { border-radius: 18px; padding: 18px 16px; margin-bottom: 16px; text-align: center; position: relative; overflow: hidden; border: 2px solid; box-shadow: 0 8px 30px rgba(0,0,0,0.08); animation: heroIn 0.7s cubic-bezier(.22,1,.36,1); }
+  @keyframes heroIn { from { opacity: 0; transform: translateY(-20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  .level-hero::before { content:''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 0%, rgba(255,255,255,0.35), transparent 60%); pointer-events: none; }
+  .level-hero-icon { font-size: 2.4rem; line-height: 1; display: inline-block; margin-bottom: 6px; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.18)); }
+  .level-hero-title { font-family: 'Space Grotesk', sans-serif; font-weight: 900; font-size: 1.05rem; letter-spacing: 1.5px; text-transform: uppercase; line-height: 1.2; position: relative; z-index: 1; }
+  @media (min-width:480px){ .level-hero-title{ font-size: 1.3rem; } }
+  .level-hero-sub { font-size: .72rem; margin-top: 4px; opacity: .85; font-weight: 600; letter-spacing: 0.4px; position: relative; z-index: 1; }
+  @media (min-width:480px){ .level-hero-sub{ font-size: .8rem; } }
+  .level-hero-tag { display: inline-block; margin-top: 8px; padding: 3px 12px; border-radius: 99px; font-size: .65rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; background: rgba(255,255,255,0.28); border: 1.5px solid rgba(255,255,255,0.5); backdrop-filter: blur(4px); position: relative; z-index: 1; }
+  .review-item { padding: 12px 14px; border-radius: 14px; margin-bottom: 10px; background: var(--bg-card-solid); border: 1.5px solid var(--border-light); position: relative; overflow: hidden; animation: reviewIn .5s cubic-bezier(.22,1,.36,1) both; }
+  @keyframes reviewIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .review-item.correct { border-left: 5px solid var(--green); }
+  .review-item.wrong { border-left: 5px solid var(--rose); }
+  .review-item.timeout { border-left: 5px solid var(--orange); }
+  .review-num { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; font-size: 11px; font-weight: 900; flex-shrink: 0; }
+  .review-num.correct { background: var(--green-soft); color: var(--green); }
+  .review-num.wrong { background: var(--rose-soft); color: var(--rose); }
+  .review-num.timeout { background: var(--orange-soft); color: var(--orange); }
+  .review-q { font-size: .82rem; font-weight: 700; line-height: 1.5; margin-bottom: 8px; color: var(--text-dark); }
+  .review-answer-box { padding: 8px 10px; border-radius: 9px; font-size: .76rem; line-height: 1.5; margin-bottom: 6px; }
+  .review-answer-box.user-wrong { background: var(--rose-soft); border: 1px solid var(--rose); color: var(--rose); }
+  .review-answer-box.user-correct { background: var(--green-soft); border: 1px solid var(--green); color: var(--green); }
+  .review-answer-box.correct-ans { background: var(--green-soft); border: 1px solid var(--green); color: var(--green); }
+  .review-explain { padding: 10px 12px; border-radius: 10px; margin-top: 8px; background: var(--bg-soft); border-left: 3px solid var(--lvl-primary); font-size: .76rem; line-height: 1.55; color: var(--text-muted); }
+  .review-explain .lbl { display: block; font-size: .6rem; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; color: var(--lvl-primary); }
+  .review-key { padding: 8px 12px; border-radius: 10px; margin-top: 6px; background: linear-gradient(90deg, var(--lvl-soft), transparent); border-left: 3px solid var(--lvl-primary); font-size: .74rem; font-weight: 700; color: var(--lvl-primary); line-height: 1.5; }
+  body.dark-mode .review-key { background: linear-gradient(90deg, rgba(255,255,255,0.08), transparent); }
+  .review-scroll { max-height: 480px; overflow-y: auto; padding-right: 4px; margin-bottom: 16px; }
+  .review-scroll::-webkit-scrollbar { width: 6px; }
+  .review-scroll::-webkit-scrollbar-thumb { background: var(--lvl-primary); border-radius: 3px; opacity: 0.5; }
+  @media (max-width: 640px) { .review-scroll { max-height: 360px; } }
+</style>
+</head>
+<body>
+
+<div class="bg-pattern"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div id="screenTransition"></div>
+<div id="themeOverlay"></div>
+
+<div id="loadingScreen">
+  <div class="loader-content">
+    <div class="loader-ring-container">
+      <div class="loader-ring"></div>
+      <div class="loader-ring"></div>
+      <div class="loader-ring"></div>
+    </div>
+    <div class="loader-title">KUIS RODA BERPUTAR</div>
+    <div class="loader-sub">Ekonomi • Pasar & Terbentuknya Harga</div>
+    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+    <div class="loader-text">Memuat...</div>
+  </div>
+</div>
+
+<header class="w-full border-b backdrop-blur-xl sticky top-0 z-40 px-3 py-2.5" style="background: var(--bg-header); border-color: var(--border-light); transition: background-color 0.5s ease;">
+  <div class="max-w-6xl mx-auto flex items-center justify-between gap-2">
+    <div class="flex items-center gap-2 min-w-0 flex-1">
+      <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl flex items-center justify-center text-white font-black text-lg md:text-xl shrink-0"
+        id="headerIcon" style="background: var(--lvl-gradient); box-shadow: 0 4px 16px var(--lvl-primary); transition: background 0.5s ease, box-shadow 0.5s ease;">🏪</div>
+      <div class="min-w-0 flex-1">
+        <h1 class="text-[11px] sm:text-sm md:text-lg font-black tracking-wide truncate glow-text"
+          style="font-family:'Space Grotesk',sans-serif; color: var(--text-dark);">KUIS RODA BERPUTAR</h1>
+        <p class="text-[9px] md:text-[11px] font-medium truncate" id="headerSubtitle">
+          <span style="color: var(--lvl-primary); font-weight: 700;">Ekonomi</span>
+          <span style="color: var(--text-muted);"> • Pasar & Terbentuknya Harga</span>
+        </p>
+      </div>
+    </div>
+    <div class="flex items-center gap-1.5 shrink-0">
+      <button class="w-9 h-9 rounded-full flex items-center justify-center border cursor-pointer transition-all hover:scale-110"
+        style="background: var(--bg-card-solid); border-color: var(--border-light);" id="themeToggle" type="button" aria-label="Ganti mode gelap/terang">
+        <span class="theme-icon" id="themeIcon">🌙</span>
+      </button>
+      <button class="w-9 h-9 rounded-full flex items-center justify-center border cursor-pointer transition-all hover:scale-110"
+        style="background: var(--bg-card-solid); border-color: var(--border-light);" id="soundToggle" type="button" aria-label="Aktifkan atau matikan suara">🔊</button>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-5xl mx-auto w-full px-3 py-4 md:px-4 md:py-6 flex-1 flex flex-col justify-center items-center relative z-10">
+
+  <section id="startScreen" class="w-full max-w-lg glass-panel p-5 md:p-7 rounded-2xl my-auto reveal">
+    <div class="text-center mb-5">
+      <div class="text-5xl md:text-6xl mb-3" style="filter:drop-shadow(0 8px 24px rgba(37,99,235,.2))">🎡</div>
+      <h2 class="text-xl md:text-2xl lg:text-3xl font-black mb-1.5 leading-tight glow-text"
+        style="font-family:'Space Grotesk',sans-serif; color: var(--text-dark);">KUIS RODA BERPUTAR</h2>
+      <p class="text-xs md:text-sm" style="color: var(--text-muted);">Ekonomi • Pasar & Terbentuknya Harga</p>
+    </div>
+    <div class="rounded-xl p-3 md:p-4 mb-5 space-y-2 text-xs md:text-sm" style="background: var(--bg-soft); border: 1px solid var(--border-light);">
+      <div class="flex items-center gap-2.5">
+        <span class="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0" style="background: var(--primary-soft); color: var(--primary); border: 1px solid var(--primary-light);">1</span>
+        <span style="color: var(--text-muted);">Pilih <b style="color: var(--primary);">Level</b> yang ingin dimainkan</span>
+      </div>
+      <div class="flex items-center gap-2.5">
+        <span class="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0" style="background: var(--primary-soft); color: var(--primary); border: 1px solid var(--primary-light);">2</span>
+        <span style="color: var(--text-muted);">Putar roda & jawab <b style="color: var(--primary);">10 soal</b> per level</span>
+      </div>
+      <div class="flex items-center gap-2.5">
+        <span class="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0" style="background: var(--primary-soft); color: var(--primary); border: 1px solid var(--primary-light);">3</span>
+        <span style="color: var(--text-muted);">Pembahasan muncul di <b style="color: var(--primary);">akhir level</b></span>
+      </div>
+    </div>
+    <button type="button" id="btnStart" class="btn-primary mb-2">▶ MULAI PERMAINAN</button>
+    <div id="bestScoreSummary" class="is-hidden mt-4 pt-4 text-center" style="border-top: 1px solid var(--border-light);">
+      <div class="text-[10px] uppercase tracking-widest font-bold mb-1.5" style="color: var(--primary);">🏆 Skor Terbaik</div>
+      <div class="flex justify-center gap-3 text-xs">
+        <div><div class="text-[10px] uppercase" style="color: var(--text-muted);">Total Poin</div>
+          <div id="bestScorePoints" class="font-bold text-sm md:text-base" style="color: var(--primary);">0</div></div>
+        <div style="border-left: 1px solid var(--border-light);"></div>
+        <div><div class="text-[10px] uppercase" style="color: var(--text-muted);">Akurasi</div>
+          <div id="bestScoreAcc" class="font-bold text-sm md:text-base" style="color: var(--green);">0%</div></div>
+        <div style="border-left: 1px solid var(--border-light);"></div>
+        <div><div class="text-[10px] uppercase" style="color: var(--text-muted);">Gelar</div>
+          <div id="bestScoreTitle" class="font-bold text-[11px] mt-0.5" style="color: var(--orange);">—</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="levelScreen" class="is-hidden w-full max-w-2xl my-auto">
+    <div class="glass-panel p-4 md:p-6 rounded-2xl">
+      <div class="text-center mb-5">
+        <div class="text-4xl md:text-5xl mb-2">🗺️</div>
+        <h2 class="text-xl md:text-2xl font-black glow-text" style="font-family:'Space Grotesk',sans-serif; color: var(--text-dark);">PILIH LEVEL</h2>
+        <p class="text-xs md:text-sm mt-1" style="color: var(--text-muted);">Selesaikan setiap level untuk membuka level berikutnya</p>
+      </div>
+      <div class="flex items-center justify-end gap-2 flex-wrap mb-4">
+        <div class="stat-pill">⚡ Total Poin: <span id="levelTotalScore" style="color: var(--green); font-family:monospace;">0</span></div>
+      </div>
+      <div id="levelList" class="space-y-3"></div>
+      <div class="mt-4 pt-4 text-center" style="border-top: 1px solid var(--border-light);">
+        <button id="btnResetProgress" type="button" class="text-[11px] font-bold px-4 py-2 rounded-lg cursor-pointer transition-all hover:scale-105"
+          style="background: var(--rose-soft); color: var(--rose); border: 1px solid var(--rose);">🔄 Reset Progres</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="wheelScreen" class="is-hidden w-full max-w-2xl my-auto">
+    <div class="glass-panel p-4 md:p-5 rounded-2xl">
+      <div id="wheelLevelHero" class="level-hero"></div>
+      <div class="flex items-center justify-between gap-2 flex-wrap mb-3">
+        <div class="flex gap-1.5 flex-wrap">
+          <div class="stat-pill"><span class="lbl">Level</span> <span id="levelIndicator" style="color: var(--lvl-primary); font-family:monospace;">1/4</span></div>
+          <div class="stat-pill"><span class="lbl">Putaran</span> <span id="roundCounter" style="color: var(--lvl-primary); font-family:monospace;">1/10</span></div>
+        </div>
+        <div class="stat-pill">⚡ <span id="scoreCounter" style="color: var(--green); font-family:monospace;">0</span></div>
+      </div>
+      <div class="progress-container mb-3"><div id="wheelProgressBar" class="progress-fill"></div></div>
+      <div class="wheel-stage">
+        <div class="wheel-pointer"></div>
+        <svg id="wheelSvg" viewBox="0 0 200 200" role="img" aria-label="Roda putar kategori soal ekonomi"></svg>
+        <button id="spinBtn" class="spin-btn" type="button" aria-label="Putar roda untuk memilih kategori soal">
+          <span class="spin-icon">🎯</span><span>PUTAR</span>
+        </button>
+      </div>
+      <div id="wheelInstruction" class="text-center mt-3 md:mt-4">
+        <div class="text-xs md:text-sm font-semibold" style="color: var(--lvl-primary);">👆 Tekan tombol <b>PUTAR</b> di tengah roda untuk memilih kategori!</div>
+      </div>
+      <div id="categoryResult" class="is-hidden text-center mt-3 md:mt-4" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section id="questionScreen" class="is-hidden w-full max-w-2xl my-auto">
+    <div class="glass-panel p-4 md:p-6 rounded-2xl">
+      <div id="questionLevelBar" class="level-hero" style="padding: 12px 14px; margin-bottom: 14px;"></div>
+      <div class="flex items-center justify-between gap-2 flex-wrap mb-3">
+        <div class="stat-pill"><span class="lbl">Level</span> <span id="qLevelIndicator" style="color: var(--lvl-primary); font-family:monospace;">1/4</span></div>
+        <div class="stat-pill"><span class="lbl">Putaran</span> <span id="qRoundCounter" style="color: var(--lvl-primary); font-family:monospace;">1/10</span></div>
+        <div class="flex items-center gap-2">
+          <div class="timer-ring" id="timerRing">
+            <svg width="64" height="64" viewBox="0 0 64 64">
+              <circle class="ring-bg" cx="32" cy="32" r="26"></circle>
+              <circle class="ring-fill" cx="32" cy="32" r="26" id="timerRingFill" stroke-dasharray="163.36" stroke-dashoffset="0"></circle>
+            </svg>
+            <div class="ring-text" id="timerText">30</div>
+          </div>
+          <div class="stat-pill">⚡ <span id="qScoreCounter" style="color: var(--green); font-family:monospace;">0</span></div>
+        </div>
+      </div>
+      <div class="progress-container mb-3"><div id="questionProgressBar" class="progress-fill"></div></div>
+      <div id="qCatBadge" class="text-center mb-3"></div>
+      <div class="rounded-xl p-3.5 md:p-5 mb-3" style="background: var(--bg-soft); border: 1px solid var(--border-light);">
+        <div class="text-[10px] uppercase tracking-widest font-bold mb-1.5" style="color: var(--lvl-primary);">❓ Pertanyaan</div>
+        <h3 id="qText" class="text-base md:text-lg font-bold leading-relaxed overflow-safe" style="color: var(--text-dark);" aria-live="polite">Memuat...</h3>
+      </div>
+      <div id="qOptions" class="grid grid-cols-1 md:grid-cols-2 gap-2.5 md:gap-3 mb-3" role="radiogroup" aria-label="Pilihan Jawaban"></div>
+      <div id="qFeedback" class="is-hidden" aria-live="polite" aria-atomic="true"></div>
+      <div id="qActions" class="is-hidden flex gap-2 mt-3">
+        <button id="btnNextSpin" type="button" class="btn-primary flex-1">🎡 PUTAR LAGI</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="levelCompleteScreen" class="is-hidden w-full max-w-3xl my-auto">
+    <div class="glass-panel p-4 md:p-6 rounded-2xl">
+      <div class="text-center mb-4">
+        <div id="lcHeroIcon" class="text-5xl md:text-6xl mb-2">🎉</div>
+        <div class="kuis-selesai-title" id="lcTitle" style="font-size: 1.8rem;">LEVEL SELESAI!</div>
+        <p id="levelCompleteSub" class="text-sm mt-1" style="color: var(--text-muted);">Level 1 telah diselesaikan</p>
+      </div>
+      <div class="grid grid-cols-3 gap-2 mb-5">
+        <div class="p-3 rounded-xl text-center" style="background: var(--green-soft); border: 1px solid var(--green);">
+          <div class="text-[9px] uppercase font-bold" style="color: var(--green);">Benar</div>
+          <div id="lcCorrect" class="text-xl font-black" style="color: var(--green); font-family:'Space Grotesk';">0</div>
+        </div>
+        <div class="p-3 rounded-xl text-center" style="background: var(--rose-soft); border: 1px solid var(--rose);">
+          <div class="text-[9px] uppercase font-bold" style="color: var(--rose);">Salah</div>
+          <div id="lcWrong" class="text-xl font-black" style="color: var(--rose); font-family:'Space Grotesk';">0</div>
+        </div>
+        <div class="p-3 rounded-xl text-center" style="background: var(--lvl-soft); border: 1px solid var(--lvl-primary);">
+          <div class="text-[9px] uppercase font-bold" style="color: var(--lvl-primary);">Poin</div>
+          <div id="lcPoints" class="text-xl font-black" style="color: var(--lvl-primary); font-family:'Space Grotesk';">0</div>
+        </div>
+      </div>
+      <div class="mb-4">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-xl">📖</span>
+          <div class="text-sm md:text-base font-black uppercase tracking-wider" style="color: var(--lvl-primary);">Pembahasan Soal Level Ini</div>
+        </div>
+        <div id="reviewList" class="review-scroll"></div>
+      </div>
+      <button id="btnNextLevel" type="button" class="btn-home mb-2">➡️ LANJUT KE LEVEL BERIKUTNYA</button>
+      <button id="btnBackToLevels" type="button" class="w-full font-bold p-3 rounded-xl text-xs cursor-pointer transition-all hover:scale-[1.02]"
+        style="background: var(--bg-soft); color: var(--text-muted); border: 1px solid var(--border-light);">🏠 KEMBALI KE PILIHAN LEVEL</button>
+    </div>
+  </section>
+
+  <section id="resultScreen" class="is-hidden w-full max-w-2xl my-auto space-y-3">
+    <div class="kuis-selesai-banner">
+      <div class="kuis-selesai-title">KUIS SELESAI</div>
+      <div class="kuis-selesai-sub">🎉 Semua Level Telah Selesai 🎉</div>
+    </div>
+    <div class="glass-panel p-4 md:p-8 rounded-2xl" style="border: 2px solid var(--lvl-primary);">
+      <div class="border-b-2 border-dashed pb-3 mb-4 text-center" style="border-color: var(--border-light);">
+        <div class="text-[9px] md:text-[10px] font-bold uppercase mt-2" style="color: var(--lvl-primary);">HASIL AKHIR — EKONOMI BAB 3</div>
+        <div class="text-xs md:text-sm font-bold mt-1" style="color: var(--text-muted);">Pasar & Terbentuknya Harga</div>
+      </div>
+      <div id="achievementWrap" class="mb-5"></div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
+        <div class="p-2.5 rounded-xl text-center" style="background: var(--green-soft); border: 1px solid var(--green);">
+          <div class="text-[9px] uppercase tracking-widest font-bold mb-0.5" style="color: var(--green);">Benar</div>
+          <div id="rCorrect" class="text-lg md:text-2xl font-black" style="color: var(--green); font-family:'Space Grotesk',sans-serif;">0</div>
+        </div>
+        <div class="p-2.5 rounded-xl text-center" style="background: var(--rose-soft); border: 1px solid var(--rose);">
+          <div class="text-[9px] uppercase tracking-widest font-bold mb-0.5" style="color: var(--rose);">Salah</div>
+          <div id="rWrong" class="text-lg md:text-2xl font-black" style="color: var(--rose); font-family:'Space Grotesk',sans-serif;">0</div>
+        </div>
+        <div class="p-2.5 rounded-xl text-center" style="background: var(--lvl-soft); border: 1px solid var(--lvl-primary);">
+          <div class="text-[9px] uppercase tracking-widest font-bold mb-0.5" style="color: var(--lvl-primary);">Akurasi</div>
+          <div id="rAcc" class="text-lg md:text-2xl font-black" style="color: var(--lvl-primary); font-family:'Space Grotesk',sans-serif;">0%</div>
+        </div>
+        <div class="p-2.5 rounded-xl text-center" style="background: var(--orange-soft); border: 1px solid var(--orange);">
+          <div class="text-[9px] uppercase tracking-widest font-bold mb-0.5" style="color: var(--orange);">Streak</div>
+          <div id="rStreak" class="text-lg md:text-2xl font-black" style="color: var(--orange); font-family:'Space Grotesk',sans-serif;">0🔥</div>
+        </div>
+      </div>
+      <div class="p-4 rounded-xl text-center mb-4" style="background: var(--lvl-gradient); border: 1px solid var(--lvl-primary);">
+        <div class="text-[10px] uppercase tracking-widest font-bold mb-1 text-white opacity-90">⚡ Total Poin Diperoleh</div>
+        <div id="totalScoreDisplay" class="text-4xl md:text-6xl font-black" style="font-family:'Space Grotesk',sans-serif; color: #fff; text-shadow: 0 4px 20px rgba(0,0,0,.3);">0</div>
+      </div>
+      <div class="mb-4">
+        <div class="text-[10px] uppercase tracking-widest font-bold mb-2 text-center" style="color: var(--text-muted);">📊 Capaian per Kategori (Semua Level)</div>
+        <div id="catBreakdown" class="space-y-1.5"></div>
+      </div>
+      <div class="mt-4 pt-4 text-center" style="border-top: 1px solid var(--border-light);">
+        <div class="text-[9px] md:text-[10px] uppercase tracking-widest font-black mb-1.5 flex items-center justify-center gap-1.5" style="color: var(--green);">
+          <span>👨‍🏫</span> GURU PENGAMPU
+        </div>
+        <div class="teacher-name text-sm md:text-base">SYAHRANI, S.Pd.</div>
+        <div class="nip-text text-[10px] md:text-[11px] mt-0.5">NIP. 197512172005011016</div>
+      </div>
+    </div>
+    <button id="btnHome" type="button" class="btn-home">🏠 KEMBALI KE HALAMAN UTAMA</button>
+    <button id="btnCopy" type="button" class="w-full font-bold p-3 rounded-xl text-xs cursor-pointer transition-all hover:scale-[1.02]"
+      style="background: var(--lvl-gradient); color:#fff; border: 1px solid var(--lvl-primary);">📋 SALIN HASIL</button>
+  </section>
+
+</main>
+
+<div id="revealOverlay" aria-hidden="true">
+  <div class="reveal-badge" id="revealBadge">BENAR</div>
+</div>
+
+<footer class="w-full text-center py-3 px-3" style="background: var(--bg-header); border-top: 1px solid var(--border-light); transition: background-color 0.5s ease;">
+  <div class="text-[10px] md:text-[11px] font-semibold tracking-wider" style="color: var(--text-muted);">
+    🎡 Kuis Roda Berputar • Ekonomi • Pasar & Terbentuknya Harga
+  </div>
+  <div class="text-[9px] mt-1" style="color: var(--text-muted); opacity:.6;">© 2024 — Media Pembelajaran Interaktif</div>
+</footer>
+
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+function show(id){const e=$(id);if(e)e.classList.remove('is-hidden');}
+function hide(id){const e=$(id);if(e)e.classList.add('is-hidden');}
+function setText(id,t){const e=$(id);if(e)e.textContent=t;}
+function safeConfetti(o){try{if(typeof confetti==='function')confetti(o);}catch(e){}}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+let audioCtx=null,soundMuted=false;
+function playTone(freq,dur,type,vol,delay){
+  if(soundMuted)return;
+  try{
+    if(!audioCtx){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;audioCtx=new AC();}
+    if(audioCtx.state==='suspended')audioCtx.resume();
+    const t=audioCtx.currentTime+(delay||0);
+    const osc=audioCtx.createOscillator(),gain=audioCtx.createGain();
+    osc.type=type||'sine';osc.frequency.setValueAtTime(freq,t);
+    gain.gain.setValueAtTime(0.0001,t);
+    gain.gain.exponentialRampToValueAtTime(vol||0.15,t+0.01);
+    gain.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+    osc.connect(gain).connect(audioCtx.destination);
+    osc.start(t);osc.stop(t+dur+0.05);
+  }catch(e){}
+}
+function sfx(type){
+  try{
+    if(type==='correct'){[523.25,659.25,783.99,1046.5].forEach((f,i)=>playTone(f,.2,'triangle',.2,i*.1));}
+    else if(type==='wrong'){playTone(220,.25,'sawtooth',.2,0);playTone(110,.4,'sawtooth',.2,.2);}
+    else if(type==='click'){playTone(440,.05,'sine',.08,0);}
+    else if(type==='tick'){playTone(1200,.03,'square',.06,0);}
+    else if(type==='spin'){playTone(400,.5,'sawtooth',.08,0);}
+    else if(type==='win'){[440,554.37,659.25,880].forEach((f,i)=>playTone(f,.25,'sine',.2,i*.13));}
+    else if(type==='timeout'){playTone(300,.3,'sawtooth',.2,0);playTone(200,.5,'sawtooth',.2,.3);playTone(100,.7,'sawtooth',.2,.6);}
+    else if(type==='beep'){playTone(880,.12,'square',.15,0);}
+    else if(type==='beepFinal'){playTone(1100,.15,'square',.2,0);playTone(1400,.15,'square',.18,.08);}
+    else if(type==='theme'){playTone(523.25,.15,'triangle',.15,0);playTone(784,.2,'triangle',.15,.1);}
+    else if(type==='levelup'){[523,659,784,1047].forEach((f,i)=>playTone(f,.3,'sine',.2,i*.15));}
+  }catch(e){}
+}
+
+const LEVEL_THEMES = [
+  { primary:'#2563eb', accent:'#3b82f6', soft:'#dbeafe',
+    gradient:'linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)',
+    heroGradient:'linear-gradient(135deg, #dbeafe 0%, #bfdbfe 50%, #93c5fd 100%)',
+    heroGradientDark:'linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%)',
+    heroBorder:'#2563eb', heroText:'#1e3a8a', heroTextDark:'#dbeafe' },
+  { primary:'#0891b2', accent:'#06b6d4', soft:'#cffafe',
+    gradient:'linear-gradient(135deg, #0891b2 0%, #06b6d4 100%)',
+    heroGradient:'linear-gradient(135deg, #cffafe 0%, #a5f3fc 50%, #67e8f9 100%)',
+    heroGradientDark:'linear-gradient(135deg, #164e63 0%, #0e7490 50%, #0891b2 100%)',
+    heroBorder:'#0891b2', heroText:'#164e63', heroTextDark:'#cffafe' },
+  { primary:'#8b5cf6', accent:'#a855f7', soft:'#ede9fe',
+    gradient:'linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%)',
+    heroGradient:'linear-gradient(135deg, #ede9fe 0%, #ddd6fe 50%, #c4b5fd 100%)',
+    heroGradientDark:'linear-gradient(135deg, #4c1d95 0%, #6d28d9 50%, #8b5cf6 100%)',
+    heroBorder:'#8b5cf6', heroText:'#4c1d95', heroTextDark:'#ede9fe' },
+  { primary:'#10b981', accent:'#22c55e', soft:'#d1fae5',
+    gradient:'linear-gradient(135deg, #10b981 0%, #22c55e 100%)',
+    heroGradient:'linear-gradient(135deg, #d1fae5 0%, #a7f3d0 50%, #6ee7b7 100%)',
+    heroGradientDark:'linear-gradient(135deg, #064e3b 0%, #047857 50%, #10b981 100%)',
+    heroBorder:'#10b981', heroText:'#064e3b', heroTextDark:'#d1fae5' }
+];
+function applyLevelTheme(levelIdx) {
+  const t = LEVEL_THEMES[levelIdx] || LEVEL_THEMES[0];
+  const root = document.documentElement;
+  root.style.setProperty('--lvl-primary', t.primary);
+  root.style.setProperty('--lvl-accent', t.accent);
+  root.style.setProperty('--lvl-soft', t.soft);
+  root.style.setProperty('--lvl-gradient', t.gradient);
+  const icon = LEVELS[levelIdx] ? LEVELS[levelIdx].icon : '🏪';
+  const hIcon = $('headerIcon');
+  if (hIcon) hIcon.textContent = icon;
+  const hSub = $('headerSubtitle');
+  if (hSub && LEVELS[levelIdx]) {
+    hSub.innerHTML = `<span style="color: var(--lvl-primary); font-weight: 700;">${LEVELS[levelIdx].title}</span><span style="color: var(--text-muted);"> • ${LEVELS[levelIdx].name}</span>`;
+  }
+}
+function renderLevelHero(containerId, levelIdx, compact) {
+  const el = $(containerId);
+  if (!el) return;
+  const t = LEVEL_THEMES[levelIdx];
+  const lvl = LEVELS[levelIdx];
+  const isDark = document.body.classList.contains('dark-mode');
+  const bg = isDark ? t.heroGradientDark : t.heroGradient;
+  const txt = isDark ? t.heroTextDark : t.heroText;
+  el.style.background = bg;
+  el.style.borderColor = t.heroBorder;
+  el.style.boxShadow = `0 8px 30px ${t.primary}40`;
+  if (compact) {
+    el.innerHTML = `<div style="position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+        <span style="font-size:1.5rem;">${lvl.icon}</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:900;font-size:.85rem;letter-spacing:1.5px;text-transform:uppercase;color:${txt};">${lvl.title} — ${lvl.name}</span>
+      </div>`;
+  } else {
+    el.innerHTML = `
+      <div class="level-hero-icon">${lvl.icon}</div>
+      <div class="level-hero-title" style="color:${txt};">${lvl.title} — ${lvl.name}</div>
+      <div class="level-hero-sub" style="color:${txt};">${lvl.subtitle}</div>
+      <div class="level-hero-tag" style="color:${txt};">LEVEL ${lvl.id} DARI 4</div>`;
+  }
+}
+
+const LEVELS = [
+  {
+    id: 1, title: "Level 1", name: "Konsep Dasar Pasar", icon: "🏪", color: "#2563eb",
+    subtitle: "Pengertian, unsur, fungsi, dan jenis-jenis pasar",
+    categories: [
+      { id:'l1_pengertian', name:'Pengertian Pasar', short:'Pengertian', icon:'📖', color:'#2563eb', points:100 },
+      { id:'l1_unsur', name:'Unsur & Syarat Pasar', short:'Unsur', icon:'🔗', color:'#0ea5e9', points:150 },
+      { id:'l1_fungsi', name:'Fungsi Pasar', short:'Fungsi', icon:'⚙️', color:'#14b8a6', points:200 },
+      { id:'l1_wujud', name:'Wujud Pasar', short:'Wujud', icon:'🏬', color:'#10b981', points:250 },
+      { id:'l1_waktu', name:'Waktu Pasar', short:'Waktu', icon:'🕐', color:'#22c55e', points:300 },
+      { id:'l1_wilayah', name:'Wilayah Pasar', short:'Wilayah', icon:'🌍', color:'#8b5cf6', points:350 }
+    ],
+    questions: [
+      { cat:'l1_pengertian', q:"Pasar dalam arti luas adalah...", options:["Bangunan tempat penjual dan pembeli bertemu","Proses interaksi antara permintaan dan penawaran yang membentuk harga","Tempat berjualan yang dikelola pemerintah","Kumpulan toko yang menjual barang kebutuhan"], correct:1, explanation:"Dalam ilmu ekonomi, pasar adalah proses interaksi antara permintaan dan penawaran yang pada akhirnya membentuk harga.", keyPoint:"Pasar arti luas = proses interaksi permintaan & penawaran." },
+      { cat:'l1_pengertian', q:"Dalam ilmu ekonomi, inti dari pengertian pasar adalah...", options:["Adanya bangunan dan lapak dagang","Terjadinya interaksi permintaan dan penawaran yang membentuk harga","Banyaknya pedagang di satu lokasi","Adanya izin dari pemerintah"], correct:1, explanation:"Inti pasar adalah interaksi permintaan dan penawaran yang membentuk kesepakatan harga, bukan sekadar bangunan fisik.", keyPoint:"Inti pasar = interaksi permintaan & penawaran." },
+      { cat:'l1_unsur', q:"Berikut yang BUKAN termasuk unsur pasar adalah...", options:["Penjual","Pembeli","Barang atau jasa","Izin usaha dari pemerintah"], correct:3, explanation:"Unsur pasar meliputi penjual, pembeli, barang/jasa, dan kesepakatan harga. Izin usaha bukan unsur pasar.", keyPoint:"Unsur pasar: penjual, pembeli, barang/jasa, kesepakatan harga." },
+      { cat:'l1_unsur', q:"Syarat terjadinya pasar menurut ilmu ekonomi, kecuali...", options:["Adanya permintaan","Adanya penawaran","Adanya harga yang disepakati","Adanya gedung permanen"], correct:3, explanation:"Syarat pasar dalam ilmu ekonomi: ada permintaan, ada penawaran, dan ada harga. Gedung permanen bukan syarat mutlak.", keyPoint:"Syarat pasar: permintaan, penawaran, harga." },
+      { cat:'l1_fungsi', q:"Fungsi pasar yang berkaitan dengan menyalurkan barang dari produsen ke konsumen disebut fungsi...", options:["Promosi","Distribusi","Pembentukan harga","Konsumsi"], correct:1, explanation:"Fungsi distribusi adalah fungsi pasar dalam menyalurkan barang/jasa dari produsen kepada konsumen.", keyPoint:"Fungsi distribusi = penyaluran barang." },
+      { cat:'l1_fungsi', q:"Ketika harga cabai naik karena permintaan meningkat menjelang hari raya, hal ini menunjukkan fungsi pasar sebagai...", options:["Fungsi distribusi","Fungsi promosi","Fungsi pembentukan harga","Fungsi penyediaan kerja"], correct:2, explanation:"Kenaikan harga akibat interaksi permintaan dan penawaran merupakan fungsi pembentukan harga.", keyPoint:"Fungsi pembentukan harga = interaksi permintaan & penawaran." },
+      { cat:'l1_wujud', q:"Pasar di mana penjual dan pembeli tidak bertemu secara langsung dan transaksi dilakukan melalui internet disebut pasar...", options:["Konkret","Abstrak","Harian","Regional"], correct:1, explanation:"Pasar abstrak adalah pasar di mana penjual dan pembeli tidak bertemu langsung, transaksi melalui internet/telepon.", keyPoint:"Pasar abstrak = tidak bertemu langsung." },
+      { cat:'l1_wujud', q:"Pasar tradisional, supermarket, dan mal termasuk jenis pasar...", options:["Abstrak","Konkret","Internasional","Tahunan"], correct:1, explanation:"Pasar konkret (nyata) adalah pasar di mana penjual dan pembeli bertemu langsung dan barang tersedia di tempat.", keyPoint:"Pasar konkret = bertemu langsung, barang tersedia." },
+      { cat:'l1_waktu', q:"Pasar yang hanya diselenggarakan satu kali dalam seminggu disebut pasar...", options:["Harian","Mingguan","Bulanan","Tahunan"], correct:1, explanation:"Pasar mingguan hanya buka satu kali dalam seminggu, contohnya pasar kaget dan pasar hewan.", keyPoint:"Pasar mingguan = buka seminggu sekali." },
+      { cat:'l1_waktu', q:"Pasar malam menjelang tahun baru yang hanya ada sekali setahun termasuk pasar...", options:["Harian","Mingguan","Bulanan","Tahunan"], correct:3, explanation:"Pasar tahunan hanya diselenggarakan sekali dalam setahun, contohnya pasar malam tahun baru.", keyPoint:"Pasar tahunan = sekali setahun." },
+      { cat:'l1_wilayah', q:"Pasar yang melayani kebutuhan seluruh wilayah negara disebut pasar...", options:["Lokal","Daerah","Nasional","Internasional"], correct:2, explanation:"Pasar nasional melayani kebutuhan seluruh wilayah negara, contohnya pasar saham dan pasar uang nasional.", keyPoint:"Pasar nasional = seluruh wilayah negara." },
+      { cat:'l1_wilayah', q:"Pasar minyak dunia yang melibatkan banyak negara merupakan contoh pasar...", options:["Lokal","Regional","Nasional","Internasional"], correct:3, explanation:"Pasar internasional melibatkan banyak negara, contohnya pasar minyak dunia dan ekspor-impor antarnegara.", keyPoint:"Pasar internasional = melibatkan banyak negara." }
+    ]
+  },
+  {
+    id: 2, title: "Level 2", name: "Permintaan & Penawaran", icon: "📊", color: "#0891b2",
+    subtitle: "Hukum, kurva, dan faktor yang mempengaruhi permintaan & penawaran",
+    categories: [
+      { id:'l2_permintaan', name:'Permintaan (Demand)', short:'Permintaan', icon:'🛒', color:'#0891b2', points:150 },
+      { id:'l2_faktor_permintaan', name:'Faktor Permintaan', short:'Faktor D', icon:'📋', color:'#06b6d4', points:200 },
+      { id:'l2_hukum_permintaan', name:'Hukum & Kurva Permintaan', short:'Hukum D', icon:'📉', color:'#14b8a6', points:250 },
+      { id:'l2_penawaran', name:'Penawaran (Supply)', short:'Penawaran', icon:'📦', color:'#10b981', points:300 },
+      { id:'l2_faktor_penawaran', name:'Faktor Penawaran', short:'Faktor S', icon:'📋', color:'#22c55e', points:350 },
+      { id:'l2_hukum_penawaran', name:'Hukum & Kurva Penawaran', short:'Hukum S', icon:'📈', color:'#84cc16', points:400 }
+    ],
+    questions: [
+      { cat:'l2_permintaan', q:"Permintaan adalah...", options:["Keinginan konsumen untuk membeli barang/jasa pada berbagai tingkat harga","Jumlah barang yang tersedia di pasar","Kemampuan produsen memproduksi barang","Jumlah uang yang beredar di masyarakat"], correct:0, explanation:"Permintaan adalah keinginan konsumen membeli barang/jasa pada berbagai tingkat harga dalam periode tertentu.", keyPoint:"Permintaan = keinginan membeli pada tingkat harga tertentu." },
+      { cat:'l2_permintaan', q:"Permintaan yang didukung oleh kemampuan membayar disebut permintaan...", options:["Absolut","Potensial","Efektif","Individu"], correct:2, explanation:"Permintaan efektif adalah keinginan membeli yang didukung kemampuan membayar. Permintaan absolut tidak didukung kemampuan membayar.", keyPoint:"Permintaan efektif = keinginan + kemampuan membayar." },
+      { cat:'l2_faktor_permintaan', q:"Berikut yang BUKAN faktor yang mempengaruhi permintaan adalah...", options:["Pendapatan konsumen","Selera konsumen","Harga barang itu sendiri","Jumlah barang yang diproduksi pabrik"], correct:3, explanation:"Jumlah barang yang diproduksi berkaitan dengan penawaran, bukan permintaan.", keyPoint:"Produksi = faktor penawaran, bukan permintaan." },
+      { cat:'l2_faktor_permintaan', q:"Ketika harga barang substitusi (pengganti) naik, maka permintaan barang utama akan...", options:["Turun","Naik","Tetap","Tidak terpengaruh"], correct:1, explanation:"Jika harga barang pengganti naik, konsumen beralih ke barang utama sehingga permintaannya meningkat.", keyPoint:"Harga substitusi naik → permintaan barang utama naik." },
+      { cat:'l2_hukum_permintaan', q:"Hukum permintaan menyatakan bahwa...", options:["Harga naik, jumlah yang diminta naik","Harga turun, jumlah yang diminta turun","Harga naik, jumlah yang diminta turun","Harga dan jumlah yang diminta tidak berhubungan"], correct:2, explanation:"Hukum permintaan: hubungan berbanding terbalik — jika harga naik, jumlah yang diminta turun; jika harga turun, jumlah yang diminta naik.", keyPoint:"Hukum permintaan = berbanding terbalik." },
+      { cat:'l2_hukum_permintaan', q:"Kurva permintaan miring dari...", options:["Kiri atas ke kanan bawah","Kiri bawah ke kanan atas","Kiri atas ke kiri bawah","Kanan atas ke kanan bawah"], correct:0, explanation:"Kurva permintaan miring dari kiri atas ke kanan bawah, menunjukkan hubungan negatif antara harga dan jumlah yang diminta.", keyPoint:"Kurva permintaan = kiri atas → kanan bawah." },
+      { cat:'l2_penawaran', q:"Penawaran adalah...", options:["Jumlah barang yang ingin dibeli konsumen","Jumlah barang yang bersedia dan mampu dijual produsen pada tingkat harga tertentu","Jumlah barang yang tersedia di gudang","Jumlah barang yang diproduksi pabrik"], correct:1, explanation:"Penawaran adalah kesediaan penjual menawarkan barang/jasa di pasar pada tingkat harga tertentu.", keyPoint:"Penawaran = kesediaan penjual menawarkan barang." },
+      { cat:'l2_penawaran', q:"Penawaran dari seluruh produsen di pasar disebut penawaran...", options:["Individu","Pasar","Kolektif","Nasional"], correct:1, explanation:"Penawaran pasar adalah total penawaran seluruh produsen di pasar.", keyPoint:"Penawaran pasar = total seluruh produsen." },
+      { cat:'l2_faktor_penawaran', q:"Berikut yang BUKAN faktor yang mempengaruhi penawaran adalah...", options:["Biaya produksi","Teknologi","Selera konsumen","Pajak dan subsidi"], correct:2, explanation:"Selera konsumen mempengaruhi permintaan, bukan penawaran. Penawaran dipengaruhi biaya produksi, teknologi, pajak/subsidi, dll.", keyPoint:"Selera = faktor permintaan, bukan penawaran." },
+      { cat:'l2_faktor_penawaran', q:"Ketika biaya produksi naik, maka penawaran barang tersebut akan...", options:["Naik","Turun","Tetap","Tidak terpengaruh"], correct:1, explanation:"Biaya produksi naik membuat produsen mengurangi produksi sehingga penawaran turun.", keyPoint:"Biaya produksi naik → penawaran turun." },
+      { cat:'l2_hukum_penawaran', q:"Hukum penawaran bersifat...", options:["Berbanding terbalik","Berbanding lurus","Tidak berhubungan","Acak"], correct:1, explanation:"Hukum penawaran: harga naik → penawaran naik; harga turun → penawaran turun (berbanding lurus).", keyPoint:"Hukum penawaran = berbanding lurus." },
+      { cat:'l2_hukum_penawaran', q:"Kurva penawaran miring dari...", options:["Kiri atas ke kanan bawah","Kiri bawah ke kanan atas","Kiri atas ke kiri bawah","Kanan atas ke kanan bawah"], correct:1, explanation:"Kurva penawaran miring dari kiri bawah ke kanan atas, menunjukkan hubungan positif antara harga dan jumlah yang ditawarkan.", keyPoint:"Kurva penawaran = kiri bawah → kanan atas." }
+    ]
+  },
+  {
+    id: 3, title: "Level 3", name: "Keseimbangan, Elastisitas & Struktur Pasar", icon: "⚖️", color: "#8b5cf6",
+    subtitle: "Harga keseimbangan, surplus/shortage, elastisitas, dan struktur persaingan",
+    categories: [
+      { id:'l3_keseimbangan', name:'Harga Keseimbangan', short:'Seimbang', icon:'⚖️', color:'#8b5cf6', points:200 },
+      { id:'l3_surplus', name:'Surplus & Shortage', short:'Surplus', icon:'📊', color:'#a855f7', points:250 },
+      { id:'l3_struktur', name:'Struktur Persaingan', short:'Struktur', icon:'🏢', color:'#d946ef', points:300 },
+      { id:'l3_elastisitas_d', name:'Elastisitas Permintaan', short:'Elastis D', icon:'📉', color:'#ec4899', points:350 },
+      { id:'l3_elastisitas_s', name:'Elastisitas Penawaran', short:'Elastis S', icon:'📈', color:'#f43f5e', points:400 },
+      { id:'l3_penerapan', name:'Penerapan Sehari-hari', short:'Penerapan', icon:'🌰', color:'#f97316', points:450 }
+    ],
+    questions: [
+      { cat:'l3_keseimbangan', q:"Harga keseimbangan pasar terjadi apabila...", options:["Jumlah yang diminta lebih besar daripada yang ditawarkan","Jumlah yang ditawarkan lebih besar daripada yang diminta","Jumlah yang diminta sama dengan jumlah yang ditawarkan","Harga ditentukan sepenuhnya oleh pemerintah"], correct:2, explanation:"Harga keseimbangan terbentuk ketika Qd = Qs, yaitu jumlah barang yang diminta sama dengan jumlah barang yang ditawarkan.", keyPoint:"Keseimbangan: Qd = Qs." },
+      { cat:'l3_keseimbangan', q:"Rumus harga keseimbangan pasar adalah...", options:["Qd > Qs","Qd < Qs","Qd = Qs","Qd ≠ Qs"], correct:2, explanation:"Harga keseimbangan terjadi ketika jumlah yang diminta sama dengan jumlah yang ditawarkan (Qd = Qs).", keyPoint:"Qd = Qs → keseimbangan." },
+      { cat:'l3_surplus', q:"Kelebihan penawaran (surplus) terjadi ketika...", options:["Jumlah yang diminta lebih besar dari yang ditawarkan","Jumlah yang ditawarkan lebih besar dari yang diminta","Jumlah yang diminta sama dengan yang ditawarkan","Harga terlalu rendah"], correct:1, explanation:"Surplus terjadi ketika jumlah yang ditawarkan lebih besar daripada yang diminta, biasanya karena harga terlalu tinggi.", keyPoint:"Surplus = penawaran > permintaan." },
+      { cat:'l3_surplus', q:"Kelebihan permintaan (shortage) terjadi ketika...", options:["Jumlah yang ditawarkan lebih besar dari yang diminta","Jumlah yang diminta lebih besar dari yang ditawarkan","Jumlah yang diminta sama dengan yang ditawarkan","Harga terlalu tinggi"], correct:1, explanation:"Shortage terjadi ketika jumlah yang diminta lebih besar daripada yang ditawarkan, biasanya karena harga terlalu rendah.", keyPoint:"Shortage = permintaan > penawaran." },
+      { cat:'l3_struktur', q:"Pasar yang dikuasai oleh satu penjual tunggal tanpa barang pengganti disebut pasar...", options:["Oligopoli","Monopoli","Monopolistik","Persaingan sempurna"], correct:1, explanation:"Pasar monopoli dikuasai satu penjual tunggal tanpa barang pengganti, contohnya PLN untuk listrik rumah tangga.", keyPoint:"Monopoli = satu penjual, tanpa pengganti." },
+      { cat:'l3_struktur', q:"Pasar yang dikuasai oleh beberapa penjual besar sehingga kebijakan harga satu perusahaan memengaruhi yang lain disebut pasar...", options:["Monopoli","Oligopoli","Monopolistik","Persaingan sempurna"], correct:1, explanation:"Pasar oligopoli dikuasai beberapa penjual besar, contohnya industri operator seluler dan otomotif.", keyPoint:"Oligopoli = beberapa penjual besar." },
+      { cat:'l3_struktur', q:"Ciri pasar persaingan sempurna adalah...", options:["Hanya ada satu penjual","Barang yang dijual sejenis dan jumlah penjual banyak","Produk memiliki merek yang berbeda-beda","Harga ditentukan oleh satu perusahaan besar"], correct:1, explanation:"Ciri pasar persaingan sempurna: jumlah penjual dan pembeli banyak, barang sejenis (homogen), dan harga ditentukan pasar.", keyPoint:"Persaingan sempurna = banyak penjual, barang homogen." },
+      { cat:'l3_struktur', q:"Pasar dengan banyak penjual yang menjual produk sejenis namun berbeda merek disebut pasar...", options:["Monopoli","Oligopoli","Monopolistik","Persaingan sempurna"], correct:2, explanation:"Pasar monopolistik memiliki banyak penjual dengan produk sejenis tetapi berbeda merek, contohnya restoran dan salon.", keyPoint:"Monopolistik = banyak penjual, produk berbeda merek." },
+      { cat:'l3_elastisitas_d', q:"Elastisitas permintaan mengukur...", options:["Seberapa peka permintaan terhadap perubahan harga","Seberapa besar keuntungan produsen","Seberapa banyak barang yang diproduksi","Seberapa cepat barang terjual"], correct:0, explanation:"Elastisitas permintaan mengukur seberapa peka/sensitif jumlah yang diminta terhadap perubahan harga.", keyPoint:"Elastisitas = kepekaan terhadap perubahan harga." },
+      { cat:'l3_elastisitas_d', q:"Jika Ed > 1, permintaan bersifat...", options:["Inelastis","Elastis","Unit elastis","Inelastis sempurna"], correct:1, explanation:"Jika Ed > 1, permintaan bersifat elastis, artinya perubahan harga menyebabkan perubahan besar pada jumlah yang diminta.", keyPoint:"Ed > 1 = elastis." },
+      { cat:'l3_elastisitas_d', q:"Barang kebutuhan pokok seperti beras dan obat cenderung memiliki permintaan yang...", options:["Elastis","Inelastis","Unit elastis","Elastis sempurna"], correct:1, explanation:"Barang kebutuhan pokok bersifat inelastis karena konsumen tetap membelinya meskipun harga naik.", keyPoint:"Kebutuhan pokok = inelastis." },
+      { cat:'l3_elastisitas_d', q:"Jika harga kopi naik 10% dan permintaan turun 20%, maka elastisitas permintaannya adalah...", options:["0,5 (inelastis)","2 (elastis)","1 (unit elastis)","0 (inelastis sempurna)"], correct:1, explanation:"Ed = 20% ÷ 10% = 2. Karena Ed > 1, permintaan kopi bersifat elastis.", keyPoint:"Ed = %ΔQ ÷ %ΔP." },
+      { cat:'l3_elastisitas_s', q:"Penawaran cenderung lebih elastis dalam jangka panjang karena...", options:["Konsumen lebih kaya","Produsen punya lebih banyak waktu menyesuaikan kapasitas produksi","Harga selalu naik","Pemerintah memberi subsidi"], correct:1, explanation:"Dalam jangka panjang, produsen memiliki lebih banyak waktu untuk menyesuaikan kapasitas produksinya sehingga penawaran lebih elastis.", keyPoint:"Jangka panjang → penawaran lebih elastis." },
+      { cat:'l3_elastisitas_s', q:"Faktor yang membuat permintaan suatu barang menjadi lebih elastis adalah...", options:["Barang tersebut kebutuhan pokok","Banyak barang substitusi tersedia","Barang tersebut sangat penting","Tidak ada barang pengganti"], correct:1, explanation:"Semakin banyak barang substitusi tersedia, semakin elastis permintaan karena konsumen mudah beralih ke produk lain.", keyPoint:"Banyak substitusi → permintaan elastis." },
+      { cat:'l3_penerapan', q:"Ketika harga cabai naik, petani terdorong menanam lebih banyak cabai pada musim berikutnya. Peristiwa ini mencerminkan...", options:["Hukum permintaan","Hukum penawaran","Hukum keseimbangan","Hukum konsumsi"], correct:1, explanation:"Kenaikan harga mendorong produsen menambah jumlah yang ditawarkan — sesuai hukum penawaran (berbanding lurus).", keyPoint:"Harga naik → produsen tambah produksi." },
+      { cat:'l3_penerapan', q:"Pada harga Rp9.000, jumlah yang diminta 60 unit dan jumlah yang ditawarkan 60 unit. Maka harga Rp9.000 merupakan...", options:["Harga tertinggi","Harga terendah","Harga keseimbangan","Harga monopoli"], correct:2, explanation:"Karena Qd = Qs = 60 pada harga Rp9.000, maka harga tersebut adalah harga keseimbangan pasar.", keyPoint:"Qd = Qs → harga keseimbangan." }
+    ]
+  },
+  {
+    id: 4, title: "Level 4", name: "Pasar Era Digital & Glosarium", icon: "💻", color: "#10b981",
+    subtitle: "E-commerce, marketplace, perubahan perilaku, dampak, dan istilah penting",
+    categories: [
+      { id:'l4_ecommerce', name:'E-Commerce', short:'E-Com', icon:'🛒', color:'#10b981', points:250 },
+      { id:'l4_marketplace', name:'Marketplace', short:'Market', icon:'📱', color:'#22c55e', points:300 },
+      { id:'l4_perubahan', name:'Perubahan Perilaku', short:'Perilaku', icon:'🔄', color:'#84cc16', points:350 },
+      { id:'l4_dampak', name:'Dampak Pasar Digital', short:'Dampak', icon:'⚠️', color:'#eab308', points:400 },
+      { id:'l4_glosarium', name:'Glosarium', short:'Glosarium', icon:'📚', color:'#f59e0b', points:450 },
+      { id:'l4_penerapan', name:'Penerapan Sehari-hari', short:'Penerapan', icon:'🌰', color:'#f97316', points:500 }
+    ],
+    questions: [
+      { cat:'l4_ecommerce', q:"E-commerce adalah...", options:["Aktivitas jual beli barang dan jasa yang dilakukan secara online melalui internet","Sistem pembayaran tunai di toko","Kegiatan promosi di media cetak","Pasar tradisional yang dikelola pemerintah"], correct:0, explanation:"E-commerce adalah aktivitas jual beli barang dan jasa yang dilakukan secara online melalui internet.", keyPoint:"E-commerce = jual beli online." },
+      { cat:'l4_ecommerce', q:"Contoh platform e-commerce di Indonesia adalah...", options:["PLN","Shopee dan Tokopedia","PT KAI","Bank Indonesia"], correct:1, explanation:"Shopee dan Tokopedia adalah contoh platform e-commerce di Indonesia.", keyPoint:"Shopee, Tokopedia = e-commerce." },
+      { cat:'l4_marketplace', q:"Marketplace adalah...", options:["Toko fisik yang menjual barang","Platform digital yang mempertemukan penjual dan pembeli","Alat pembayaran digital","Perusahaan ekspedisi"], correct:1, explanation:"Marketplace adalah platform digital yang mempertemukan penjual dan pembeli secara online.", keyPoint:"Marketplace = platform pertemuan penjual & pembeli." },
+      { cat:'l4_marketplace', q:"Platform seperti Shopee, Tokopedia, dan Grab dapat dikategorikan sebagai...", options:["Pasar konkret","Pasar abstrak / pasar digital","Pasar tradisional","Pasar monopoli"], correct:1, explanation:"Platform tersebut adalah pasar abstrak atau pasar digital karena mempertemukan penjual dan pembeli secara online tanpa tatap muka langsung.", keyPoint:"Platform digital = pasar abstrak." },
+      { cat:'l4_perubahan', q:"Perubahan perilaku belanja masyarakat di era digital adalah...", options:["Harus datang ke toko fisik","Belanja online via aplikasi dari rumah","Hanya bisa bayar tunai","Hanya bisa belanja siang hari"], correct:1, explanation:"Di era digital, masyarakat bisa belanja online via aplikasi dari rumah tanpa harus datang ke toko fisik.", keyPoint:"Era digital = belanja online dari rumah." },
+      { cat:'l4_perubahan', q:"Alat pembayaran digital yang menggantikan uang tunai di Indonesia contohnya...", options:["Cek","GoPay, OVO, Dana, QRIS","Kartu kredit","Wesel"], correct:1, explanation:"GoPay, OVO, Dana, dan QRIS adalah contoh dompet digital/alat pembayaran digital di Indonesia.", keyPoint:"Dompet digital: GoPay, OVO, Dana, QRIS." },
+      { cat:'l4_dampak', q:"Dampak positif pasar digital bagi UMKM adalah...", options:["UMKM kesulitan bersaing","UMKM dapat menjangkau pasar lebih luas","UMKM harus tutup","UMKM tidak bisa berjualan"], correct:1, explanation:"Pasar digital membuka peluang UMKM menjangkau pasar lebih luas tanpa batasan wilayah.", keyPoint:"Pasar digital = jangkauan UMKM lebih luas." },
+      { cat:'l4_dampak', q:"Dampak negatif pasar digital bagi pasar tradisional adalah...", options:["Pasar tradisional semakin ramai","Pasar tradisional mengalami penurunan jumlah pembeli dan omzet","Pasar tradisional semakin modern","Pasar tradisional mendapat subsidi"], correct:1, explanation:"Pasar tradisional mengalami penurunan jumlah pembeli dan omzet karena peralihan ke belanja online.", keyPoint:"Pasar tradisional turun omzet." },
+      { cat:'l4_dampak', q:"Tantangan utama pasar digital adalah...", options:["Terlalu banyak pembeli","Keamanan data dan penipuan online","Harga terlalu murah","Tidak ada tantangan"], correct:1, explanation:"Tantangan pasar digital antara lain keamanan data, penipuan online, dan kesenjangan digital.", keyPoint:"Tantangan digital = keamanan data & penipuan." },
+      { cat:'l4_dampak', q:"Kesenjangan digital dalam pasar era digital berarti...", options:["Semua orang punya akses internet","Ada kesenjangan akses dan literasi teknologi bagi sebagian pedagang","Harga barang seragam","Tidak ada perbedaan"], correct:1, explanation:"Kesenjangan digital adalah perbedaan akses dan kemampuan literasi teknologi, yang membuat sebagian pedagang tertinggal.", keyPoint:"Kesenjangan digital = beda akses & literasi." },
+      { cat:'l4_glosarium', q:"Ceteris paribus berarti...", options:["Faktor lain berubah-ubah","Faktor-faktor lain dianggap tetap","Semua faktor berubah","Tidak ada faktor"], correct:1, explanation:"Ceteris paribus adalah asumsi bahwa faktor-faktor lain dianggap tetap atau tidak berubah.", keyPoint:"Ceteris paribus = faktor lain tetap." },
+      { cat:'l4_glosarium', q:"Barang substitusi adalah...", options:["Barang pelengkap","Barang pengganti yang dapat menggantikan fungsi barang lain","Barang mewah","Barang bekas"], correct:1, explanation:"Barang substitusi adalah barang pengganti, contohnya teh dan kopi.", keyPoint:"Substitusi = barang pengganti." },
+      { cat:'l4_glosarium', q:"Barang komplementer adalah...", options:["Barang pengganti","Barang pelengkap yang penggunaannya saling melengkapi","Barang tiruan","Barang impor"], correct:1, explanation:"Barang komplementer adalah barang pelengkap, contohnya motor dan bensin.", keyPoint:"Komplementer = barang pelengkap." },
+      { cat:'l4_penerapan', q:"Seorang siswa membuka usaha kue secara online melalui Instagram dan menerima pembayaran via QRIS. Ini adalah contoh...", options:["Pasar konkret","Pasar digital / e-commerce","Pasar tradisional","Pasar monopoli"], correct:1, explanation:"Berjualan online melalui Instagram dan menerima QRIS adalah contoh penerapan pasar digital/e-commerce.", keyPoint:"Jualan online + QRIS = pasar digital." },
+      { cat:'l4_penerapan', q:"Pedagang pasar tradisional mulai berjualan melalui marketplace untuk memperluas jangkauan pembeli. Ini menunjukkan...", options:["Pasar tradisional akan hilang","Adaptasi pedagang terhadap era digital","Pasar tradisional lebih baik","Marketplace tidak berguna"], correct:1, explanation:"Pedagang pasar tradisional yang mulai berjualan online menunjukkan adaptasi terhadap era digital untuk memperluas jangkauan.", keyPoint:"Adaptasi digital pedagang tradisional." }
+    ]
+  }
+];
+
+const TOTAL_LEVELS = LEVELS.length;
+const ROUNDS_PER_LEVEL = 10;
+const TIMER_SECONDS = 30;
+const CIRCUMFERENCE = 2 * Math.PI * 26;
+const STORAGE_PREFIX = 'kuis_roda_ekonomi_bab3_v4_';
+
+const state = {
+  currentLevelIndex: 0, currentRound: 0, totalScore: 0,
+  correctCount: 0, wrongCount: 0, streak: 0, maxStreak: 0,
+  currentCategory: null, currentQuestion: null, currentRotation: 0,
+  spinning: false, answerLocked: false, levelFinished: false, gameFinished: false,
+  selectedAnswerIndex: null, usedQuestions: new Set(), history: [],
+  catStats: {}, levelStats: [], unlockedLevels: 1
+};
+let kuisAktif = false;
+let wheelBuiltOnce = false;
+let themeChangeInProgress = false;
+let timerInterval = null;
+let timeLeft = TIMER_SECONDS;
+let lastBeepSecond = -1;
+
+window.addEventListener('beforeunload', function(e) {
+  if (kuisAktif && !state.gameFinished) { e.preventDefault(); e.returnValue = ''; return ''; }
+});
+
+const THEME_KEY = 'kuis_roda_ekonomi_theme';
+function applyTheme(dark) {
+  if (dark) {
+    document.body.classList.add('dark-mode');
+    $('themeIcon').textContent = '☀️';
+    $('themeColorMeta').setAttribute('content', '#0a0f1e');
+  } else {
+    document.body.classList.remove('dark-mode');
+    $('themeIcon').textContent = '🌙';
+    $('themeColorMeta').setAttribute('content', '#f4f9ff');
+  }
+  try { localStorage.setItem(THEME_KEY, dark ? 'dark' : 'light'); } catch(err) {}
+}
+function initTheme() {
+  let saved = 'light';
+  try { saved = localStorage.getItem(THEME_KEY) || 'light'; } catch(e) {}
+  if (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) saved = 'dark';
+  applyTheme(saved === 'dark');
+  $('themeToggle').addEventListener('click', () => {
+    if (themeChangeInProgress) return;
+    themeChangeInProgress = true; sfx('theme');
+    const rect = $('themeToggle').getBoundingClientRect();
+    const cx = ((rect.left + rect.width/2) / window.innerWidth) * 100;
+    const cy = ((rect.top + rect.height/2) / window.innerHeight) * 100;
+    const overlay = $('themeOverlay');
+    overlay.style.setProperty('--cx', cx + '%'); overlay.style.setProperty('--cy', cy + '%');
+    overlay.classList.add('active');
+    setTimeout(() => overlay.classList.remove('active'), 500);
+    const willBeDark = !document.body.classList.contains('dark-mode');
+    applyTheme(willBeDark);
+    setTimeout(() => {
+      buildWheel();
+      renderLevelHero('wheelLevelHero', state.currentLevelIndex, false);
+      renderLevelHero('questionLevelBar', state.currentLevelIndex, true);
+      themeChangeInProgress = false;
+    }, 350);
+  });
+}
+
+function switchScreen(fromId, toId, direction) {
+  const fromEl = fromId ? $(fromId) : null;
+  const toEl = $(toId);
+  const trans = $('screenTransition');
+  if (!toEl) return;
+  if (!fromEl || fromEl.classList.contains('is-hidden')) {
+    toEl.classList.remove('is-hidden', 'anim-slide-in-right', 'anim-screen-in');
+    void toEl.offsetWidth;
+    toEl.classList.add('anim-screen-in');
+    if (trans) { trans.classList.add('active'); setTimeout(() => trans.classList.remove('active'), 300); }
+    return;
+  }
+  if (trans) trans.classList.add('active');
+  setTimeout(() => {
+    fromEl.classList.add('is-hidden');
+    fromEl.classList.remove('anim-slide-in-right', 'anim-screen-in');
+    toEl.classList.remove('is-hidden', 'anim-slide-in-right', 'anim-screen-in');
+    void toEl.offsetWidth;
+    if (direction === 'back') {
+      toEl.classList.add('anim-slide-in-right');
+      setTimeout(() => toEl.classList.remove('anim-slide-in-right'), 600);
+    } else {
+      toEl.classList.add('anim-screen-in');
+      setTimeout(() => toEl.classList.remove('anim-screen-in'), 700);
+    }
+    setTimeout(() => { if (trans) trans.classList.remove('active'); }, 200);
+  }, 300);
+}
+
+function startTimer() {
+  clearInterval(timerInterval);
+  timeLeft = TIMER_SECONDS; lastBeepSecond = -1;
+  updateTimerDisplay();
+  const ring = $('timerRing');
+  ring.classList.remove('warning', 'danger', 'sound-beat');
+  timerInterval = setInterval(() => {
+    timeLeft--; updateTimerDisplay();
+    if (timeLeft <= 5 && timeLeft > 3) ring.classList.add('warning');
+    else if (timeLeft <= 3 && timeLeft >= 1) { ring.classList.add('danger'); ring.classList.remove('warning'); }
+    if (timeLeft <= 5 && timeLeft >= 1 && timeLeft !== lastBeepSecond) {
+      lastBeepSecond = timeLeft;
+      if (timeLeft > 3) sfx('beep'); else sfx('beepFinal');
+      ring.classList.remove('sound-beat'); void ring.offsetWidth; ring.classList.add('sound-beat');
+      setTimeout(() => ring.classList.remove('sound-beat'), 400);
+    }
+    if (timeLeft <= 0) { clearInterval(timerInterval); onTimerEnd(); }
+  }, 1000);
+}
+function updateTimerDisplay() {
+  const fill = $('timerRingFill'); const text = $('timerText');
+  const offset = CIRCUMFERENCE * (1 - timeLeft / TIMER_SECONDS);
+  fill.style.strokeDashoffset = offset; text.textContent = timeLeft;
+}
+function stopTimer() { clearInterval(timerInterval); timerInterval = null; }
+function onTimerEnd() {
+  if (state.answerLocked) return;
+  sfx('timeout'); state.answerLocked = true;
+  const q = state.currentQuestion; const cat = state.currentCategory;
+  if (!state.catStats[cat.id]) state.catStats[cat.id] = { total: 0, correct: 0, points: 0, level: state.currentLevelIndex + 1 };
+  state.catStats[cat.id].total++;
+  const btns = document.querySelectorAll('#qOptions .opt-btn');
+  btns.forEach(b => { b.disabled = true; b.setAttribute('aria-checked', 'false'); });
+  btns[q.correct].classList.add('opt-correct');
+  showRevealOverlay('WAKTU HABIS', 'timeout');
+  state.wrongCount++; state.streak = 0;
+  state.history.push({ level: state.currentLevelIndex + 1, round: state.currentRound + 1, cat: cat.name, catColor: cat.color, catIcon: cat.icon, question: q.q, userAnswer: '(tidak dijawab)', correctAnswer: q.options[q.correct], explanation: q.explanation, keyPoint: q.keyPoint, isCorrect: false, isTimeout: true, points: 0 });
+  setTimeout(() => { hideRevealOverlay(); showFeedback(false, 0, cat, true); }, 1500);
+}
+
+/* ============ WHEEL — dengan pill putih solid ============ */
+function buildWheel() {
+  const svg = $('wheelSvg'); if (!svg) return;
+  const level = LEVELS[state.currentLevelIndex];
+  const categories = level.categories;
+  const cx = 100, cy = 100, r = 94;
+  const total = categories.length;
+  const segAngle = 360 / total;
+  const half = segAngle / 2;
+  const isDark = document.body.classList.contains('dark-mode');
+  const strokeCol = isDark ? '#0f172a' : '#ffffff';
+
+  let defsHtml = `<radialGradient id="wheelInner" cx="50%" cy="50%">
+      <stop offset="0%" stop-color="${isDark ? '#0a0f1e' : '#ffffff'}" stop-opacity="0.85"/>
+      <stop offset="62%" stop-color="${isDark ? '#0a0f1e' : '#ffffff'}" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="${isDark ? '#0a0f1e' : '#ffffff'}" stop-opacity="0"/>
+    </radialGradient>`;
+  let segHtml = '';
+  for (let i = 0; i < total; i++) {
+    const cat = categories[i];
+    const centerDeg = -90 + i * segAngle;
+    const rad = centerDeg * Math.PI / 180;
+    const a0 = (centerDeg - half) * Math.PI / 180;
+    const a1 = (centerDeg + half) * Math.PI / 180;
+    const sx = cx + r * Math.cos(a0), sy = cy + r * Math.sin(a0);
+    const ex = cx + r * Math.cos(a1), ey = cy + r * Math.sin(a1);
+    const wedge = `M ${cx} ${cy} L ${sx.toFixed(2)} ${sy.toFixed(2)} A ${r} ${r} 0 0 1 ${ex.toFixed(2)} ${ey.toFixed(2)} Z`;
+    segHtml += `<path d="${wedge}" fill="${cat.color}" fill-opacity="0.92" stroke="${strokeCol}" stroke-width="1.5"/>`;
+    segHtml += `<path d="${wedge}" fill="url(#wheelInner)" fill-opacity="0.12"/>`;
+
+    // ===== PILL PUTIH SOLID + TEKS BERWARNA =====
+    const label = cat.short.toUpperCase();
+    let fontSize = 8.5;
+    if (label.length > 10) fontSize = 6.2;
+    else if (label.length > 8) fontSize = 7;
+    else if (label.length > 6) fontSize = 7.8;
+
+    const labelR = r * 0.6;
+    const lx = cx + labelR * Math.cos(rad);
+    const ly = cy + labelR * Math.sin(rad);
+    let rotDeg = centerDeg;
+    if (Math.cos(rad) < 0) rotDeg = centerDeg + 180;
+
+    // Ukuran pill
+    const charW = fontSize * 0.62;
+    const textW = label.length * charW + 5;
+    const textH = fontSize + 4.5;
+
+    segHtml += `<g transform="rotate(${rotDeg.toFixed(2)} ${lx.toFixed(2)} ${ly.toFixed(2)})">
+      <rect x="${(lx - textW/2).toFixed(2)}" y="${(ly - textH/2).toFixed(2)}" width="${textW.toFixed(2)}" height="${textH.toFixed(2)}" rx="${(textH/2).toFixed(2)}" ry="${(textH/2).toFixed(2)}" fill="#ffffff" stroke="${cat.color}" stroke-width="1" filter="drop-shadow(0 1px 2px rgba(0,0,0,0.25))"/>
+      <text x="${lx.toFixed(2)}" y="${ly.toFixed(2)}" font-size="${fontSize}" font-weight="900" fill="${cat.color}" text-anchor="middle" dominant-baseline="central" font-family="'Space Grotesk','Inter',sans-serif" letter-spacing="0.3">${label}</text>
+    </g>`;
+
+    // Ikon di tepi luar
+    const iconR = r * 0.87;
+    const icx = cx + iconR * Math.cos(rad);
+    const icy = cy + iconR * Math.sin(rad);
+    segHtml += `<g transform="translate(${icx.toFixed(2)} ${icy.toFixed(2)})">
+      <circle r="6.5" fill="#ffffff" stroke="${cat.color}" stroke-width="1"/>
+      <text x="0" y="2.5" text-anchor="middle" font-size="7.8" font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif">${cat.icon}</text>
+    </g>`;
+  }
+  let html = `<defs>${defsHtml}</defs>`;
+  html += `<circle cx="${cx}" cy="${cy}" r="${r + 4}" fill="${isDark ? '#111827' : '#fff'}" stroke="var(--lvl-primary)" stroke-width="2" opacity="0.5"/>`;
+  html += segHtml;
+  html += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${strokeCol}" stroke-width="1.6" opacity="0.8"/>`;
+  const dots = total * 2;
+  for (let i = 0; i < dots; i++) {
+    const ang = (i * (360 / dots)) * Math.PI / 180;
+    const dx = cx + (r + 2) * Math.cos(ang);
+    const dy = cy + (r + 2) * Math.sin(ang);
+    html += `<circle cx="${dx.toFixed(2)}" cy="${dy.toFixed(2)}" r="0.9" fill="${strokeCol}" opacity="0.7"/>`;
+  }
+  svg.innerHTML = html;
+}
+
+function getAvailableCategories(level) {
+  const used = state.usedQuestions;
+  return level.categories.filter(cat => {
+    const pool = level.questions.filter(q => q.cat === cat.id);
+    const unused = pool.filter(q => !used.has(q.q));
+    return unused.length > 0;
+  });
+}
+function pickQuestion(level, catId) {
+  const pool = level.questions.filter(q => q.cat === catId);
+  const unused = pool.filter(q => !state.usedQuestions.has(q.q));
+  const source = unused.length > 0 ? unused : pool;
+  const chosen = source[Math.floor(Math.random() * source.length)];
+  state.usedQuestions.add(chosen.q);
+  return chosen;
+}
+function shuffleOptions(q) {
+  const arr = q.options.slice();
+  const correctText = arr[q.correct];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+  }
+  return { cat: q.cat, q: q.q, options: arr, correct: arr.indexOf(correctText), explanation: q.explanation, keyPoint: q.keyPoint };
+}
+
+function spin() {
+  if (state.gameFinished || state.levelFinished || state.spinning) return;
+  const level = LEVELS[state.currentLevelIndex];
+  const availableCats = getAvailableCategories(level);
+  if (availableCats.length === 0) { endLevel(); return; }
+  state.spinning = true;
+  $('spinBtn').disabled = true;
+  hide('categoryResult'); hide('wheelInstruction');
+  sfx('spin');
+  const targetCat = availableCats[Math.floor(Math.random() * availableCats.length)];
+  const targetIdx = level.categories.findIndex(c => c.id === targetCat.id);
+  const segAngle = 360 / level.categories.length;
+  const extraSpins = 5 + Math.floor(Math.random() * 3);
+  const jitter = (Math.random() - 0.5) * (segAngle * 0.6);
+  const baseTarget = -targetIdx * segAngle + jitter;
+  const currentMod = ((state.currentRotation % 360) + 360) % 360;
+  const targetMod = ((baseTarget % 360) + 360) % 360;
+  const delta = ((targetMod - currentMod) + 360) % 360;
+  const finalRotation = state.currentRotation + extraSpins * 360 + delta;
+  state.currentRotation = finalRotation;
+  const wheel = $('wheelSvg');
+  const duration = 5000;
+  wheel.style.transition = `transform ${duration}ms cubic-bezier(0.15, 0.9, 0.25, 1)`;
+  wheel.style.transform = `rotate(${finalRotation}deg)`;
+  let t = 0;
+  while (t < duration) {
+    const progress = t / duration;
+    setTimeout(() => sfx('tick'), t);
+    t += 30 + progress * progress * 260;
+  }
+  setTimeout(() => { state.spinning = false; onSpinComplete(targetIdx); }, duration + 100);
+}
+function onSpinComplete(targetIdx) {
+  const level = LEVELS[state.currentLevelIndex];
+  const cat = level.categories[targetIdx];
+  state.currentCategory = cat;
+  const res = $('categoryResult');
+  res.innerHTML = `<div class="cat-badge" style="background: linear-gradient(135deg, ${cat.color}, ${cat.color}cc); color: #fff; border: 2px solid ${cat.color}">
+      <span style="font-size: 1.2em">${cat.icon}</span><span>${cat.name}</span>
+      <span class="ml-1 px-2 py-0.5 rounded-full font-mono text-[10px]" style="background: rgba(0,0,0,.15)">+${cat.points}</span></div>`;
+  show('categoryResult');
+  playTone(660, .1, 'sine', .15, 0); playTone(880, .15, 'sine', .15, .1);
+  setTimeout(() => startQuestion(cat), 1400);
+}
+
+function startQuestion(cat) {
+  if (state.gameFinished || state.levelFinished) return;
+  const level = LEVELS[state.currentLevelIndex];
+  state.currentQuestion = shuffleOptions(pickQuestion(level, cat.id));
+  state.answerLocked = false; state.selectedAnswerIndex = null;
+  switchScreen('wheelScreen', 'questionScreen', 'forward');
+  renderLevelHero('questionLevelBar', state.currentLevelIndex, true);
+  setText('qLevelIndicator', `${state.currentLevelIndex + 1}/${TOTAL_LEVELS}`);
+  setText('qRoundCounter', `${state.currentRound + 1}/${ROUNDS_PER_LEVEL}`);
+  setText('qScoreCounter', state.totalScore);
+  updateProgressBars();
+  $('qCatBadge').innerHTML = `<div class="cat-badge" style="background: linear-gradient(135deg, ${cat.color}, ${cat.color}cc); color: #fff; border: 2px solid ${cat.color}">
+      <span>${cat.icon}</span><span>${cat.name}</span>
+      <span class="ml-1 px-2 py-0.5 rounded-full font-mono text-[10px]" style="background: rgba(0,0,0,.15)">+${cat.points} poin</span></div>`;
+  setText('qText', state.currentQuestion.q);
+  const opts = $('qOptions'); opts.innerHTML = '';
+  state.currentQuestion.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'opt-btn overflow-safe';
+    btn.setAttribute('role', 'radio'); btn.setAttribute('aria-checked', 'false');
+    const letter = String.fromCharCode(65 + i);
+    btn.textContent = letter + '. ' + opt;
+    btn.setAttribute('aria-label', `Pilihan ${letter}: ${opt}`);
+    btn.addEventListener('click', () => selectAnswer(i));
+    opts.appendChild(btn);
+  });
+  hide('qFeedback'); hide('qActions');
+  const spinBtn = $('spinBtn'); if (spinBtn) spinBtn.disabled = false;
+  setTimeout(() => startTimer(), 800);
+}
+function selectAnswer(idx) {
+  if (state.answerLocked) return;
+  state.answerLocked = true; state.selectedAnswerIndex = idx;
+  stopTimer(); sfx('click');
+  const q = state.currentQuestion; const isCorrect = idx === q.correct;
+  const cat = state.currentCategory;
+  if (!state.catStats[cat.id]) state.catStats[cat.id] = { total: 0, correct: 0, points: 0, level: state.currentLevelIndex + 1 };
+  state.catStats[cat.id].total++;
+  const btns = document.querySelectorAll('#qOptions .opt-btn');
+  btns.forEach((b, i) => { b.disabled = true; b.setAttribute('aria-checked', i === idx ? 'true' : 'false'); });
+  btns[idx].classList.add(isCorrect ? 'opt-correct' : 'opt-wrong');
+  if (!isCorrect) btns[q.correct].classList.add('opt-correct');
+  showRevealOverlay(isCorrect ? 'BENAR' : 'SALAH', isCorrect ? 'benar' : 'salah');
+  let earnedPoints = 0;
+  if (isCorrect) {
+    sfx('correct'); state.correctCount++; state.streak++;
+    if (state.streak > state.maxStreak) state.maxStreak = state.streak;
+    const streakBonus = Math.min(state.streak - 1, 5) * 0.1;
+    earnedPoints = Math.round(cat.points * (1 + streakBonus));
+    state.totalScore += earnedPoints;
+    state.catStats[cat.id].correct++; state.catStats[cat.id].points += earnedPoints;
+  } else {
+    sfx('wrong'); state.wrongCount++; state.streak = 0;
+  }
+  state.history.push({ level: state.currentLevelIndex + 1, round: state.currentRound + 1, cat: cat.name, catColor: cat.color, catIcon: cat.icon, question: q.q, userAnswer: q.options[idx], correctAnswer: q.options[q.correct], explanation: q.explanation, keyPoint: q.keyPoint, isCorrect, isTimeout: false, points: earnedPoints });
+  setTimeout(() => { hideRevealOverlay(); showFeedback(isCorrect, earnedPoints, cat); }, 1500);
+}
+
+function showFeedback(isCorrect, earnedPoints, cat, timeout) {
+  const q = state.currentQuestion; const fb = $('qFeedback');
+  let html = '';
+  if (isCorrect) {
+    html = `<div class="p-3 rounded-xl mb-2" style="background: var(--green-soft); border: 1px solid var(--green);">
+      <div class="text-[10px] font-bold uppercase mb-1" style="color: var(--green);">✓ Jawaban Benar</div>
+      <div class="font-bold text-xs md:text-sm overflow-safe" style="color: var(--green);">${escapeHtml(q.options[state.selectedAnswerIndex])}</div>
+      <div class="text-[11px] mt-1.5 font-bold" style="color: var(--green);">+${earnedPoints} poin ${state.streak >= 2 ? `(🔥 Streak x${state.streak})` : ''}</div>
+    </div>
+    <div class="text-[11px] text-center italic" style="color: var(--text-muted);">📖 Pembahasan akan tampil di akhir level</div>`;
+  } else {
+    html = `<div class="p-3 rounded-xl mb-2" style="background: var(--rose-soft); border: 1px solid var(--rose);">
+      <div class="text-[10px] font-bold uppercase mb-1" style="color: var(--rose);">✗ Jawaban Salah</div>
+      <div class="font-semibold text-xs md:text-sm overflow-safe mb-1" style="color: var(--rose);">Jawabanmu: ${timeout ? '(Tidak dijawab — waktu habis)' : escapeHtml(q.options[state.selectedAnswerIndex])}</div>
+      <div class="font-bold text-xs md:text-sm overflow-safe" style="color: var(--green);">Jawaban benar: ${escapeHtml(q.options[q.correct])}</div>
+    </div>
+    <div class="text-[11px] text-center italic" style="color: var(--text-muted);">📖 Pembahasan akan tampil di akhir level</div>`;
+  }
+  fb.innerHTML = html; show('qFeedback');
+  const btn = $('btnNextSpin');
+  if (state.currentRound >= ROUNDS_PER_LEVEL - 1) {
+    btn.innerHTML = '🏁 SELESAIKAN LEVEL';
+    btn.style.background = 'linear-gradient(135deg,var(--orange),#f59e0b)';
+  } else {
+    btn.innerHTML = '🎡 PUTAR LAGI';
+    btn.style.background = 'var(--lvl-gradient)';
+  }
+  show('qActions'); setText('qScoreCounter', state.totalScore);
+  if (isCorrect && state.streak >= 3) safeConfetti({ particleCount: 40, spread: 60, origin: { y: .7 }, colors: ['#2563eb','#8b5cf6','#10b981'] });
+}
+function nextRound() {
+  sfx('click'); stopTimer();
+  if (state.gameFinished || state.levelFinished) return;
+  state.currentRound++;
+  if (state.currentRound >= ROUNDS_PER_LEVEL) { endLevel(); return; }
+  switchScreen('questionScreen', 'wheelScreen', 'back');
+  setText('roundCounter', `${state.currentRound + 1}/${ROUNDS_PER_LEVEL}`);
+  setText('scoreCounter', state.totalScore);
+  show('wheelInstruction'); hide('categoryResult');
+  updateProgressBars();
+}
+
+function buildReviewList(levelIdx) {
+  const reviewList = $('reviewList');
+  if (!reviewList) return;
+  const items = state.history.filter(h => h.level === levelIdx + 1);
+  reviewList.innerHTML = '';
+  items.forEach((item, i) => {
+    const isTimeout = item.isTimeout;
+    const stateClass = item.isCorrect ? 'correct' : (isTimeout ? 'timeout' : 'wrong');
+    const div = document.createElement('div');
+    div.className = `review-item ${stateClass}`;
+    div.style.animationDelay = (i * 0.06) + 's';
+    let answerHtml = '';
+    if (item.isCorrect) {
+      answerHtml = `<div class="review-answer-box user-correct"><b>✓ Jawabanmu:</b> ${escapeHtml(item.userAnswer)}</div>`;
+    } else if (isTimeout) {
+      answerHtml = `<div class="review-answer-box user-wrong"><b>⏰ Tidak dijawab</b> (waktu habis)</div>
+        <div class="review-answer-box correct-ans"><b>✓ Jawaban benar:</b> ${escapeHtml(item.correctAnswer)}</div>`;
+    } else {
+      answerHtml = `<div class="review-answer-box user-wrong"><b>✗ Jawabanmu:</b> ${escapeHtml(item.userAnswer)}</div>
+        <div class="review-answer-box correct-ans"><b>✓ Jawaban benar:</b> ${escapeHtml(item.correctAnswer)}</div>`;
+    }
+    div.innerHTML = `
+      <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;">
+        <span class="review-num ${stateClass}">${i + 1}</span>
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px;">
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full" style="background: ${item.catColor}22; color: ${item.catColor};">${item.catIcon} ${item.cat}</span>
+            ${item.isCorrect ? `<span class="text-[10px] font-bold px-2 py-0.5 rounded-full" style="background: var(--green-soft); color: var(--green);">+${item.points} poin</span>` : `<span class="text-[10px] font-bold px-2 py-0.5 rounded-full" style="background: var(--rose-soft); color: var(--rose);">0 poin</span>`}
+          </div>
+          <div class="review-q">${escapeHtml(item.question)}</div>
+          ${answerHtml}
+          <div class="review-explain">
+            <span class="lbl">💡 Pembahasan</span>
+            ${escapeHtml(item.explanation)}
+          </div>
+          <div class="review-key">🎯 <b>Poin Kunci:</b> ${escapeHtml(item.keyPoint)}</div>
+        </div>
+      </div>`;
+    reviewList.appendChild(div);
+  });
+}
+function endLevel() {
+  state.levelFinished = true;
+  stopTimer();
+  const level = LEVELS[state.currentLevelIndex];
+  let levelCorrect = 0, levelWrong = 0, levelPoints = 0;
+  state.history.filter(h => h.level === state.currentLevelIndex + 1).forEach(h => {
+    if (h.isCorrect) levelCorrect++; else levelWrong++;
+    levelPoints += h.points;
+  });
+  state.levelStats[state.currentLevelIndex] = { correct: levelCorrect, wrong: levelWrong, points: levelPoints };
+  sfx('levelup');
+  safeConfetti({ particleCount: 80, spread: 100, origin: { y: .6 }, colors: [LEVEL_THEMES[state.currentLevelIndex].primary, LEVEL_THEMES[state.currentLevelIndex].accent, '#f59e0b'] });
+  setText('lcCorrect', levelCorrect);
+  setText('lcWrong', levelWrong);
+  setText('lcPoints', levelPoints);
+  setText('levelCompleteSub', `${level.title}: ${level.name} telah diselesaikan!`);
+  setText('lcHeroIcon', level.icon);
+  setText('lcTitle', `LEVEL ${level.id} SELESAI!`);
+  buildReviewList(state.currentLevelIndex);
+  if (state.currentLevelIndex + 1 < TOTAL_LEVELS) {
+    state.unlockedLevels = Math.max(state.unlockedLevels, state.currentLevelIndex + 2);
+    $('btnNextLevel').innerHTML = `➡️ LANJUT KE ${LEVELS[state.currentLevelIndex + 1].title.toUpperCase()}`;
+    show('btnNextLevel');
+  } else {
+    $('btnNextLevel').innerHTML = '🏆 LIHAT HASIL AKHIR';
+    show('btnNextLevel');
+  }
+  saveProgress();
+  switchScreen('questionScreen', 'levelCompleteScreen', 'forward');
+}
+function goToNextLevel() {
+  sfx('click');
+  if (state.currentLevelIndex + 1 >= TOTAL_LEVELS) {
+    state.gameFinished = true; kuisAktif = false;
+    applyLevelTheme(0);
+    switchScreen('levelCompleteScreen', 'resultScreen', 'forward');
+    setTimeout(() => endGame(), 500);
+    return;
+  }
+  state.currentLevelIndex++;
+  state.currentRound = 0;
+  state.levelFinished = false;
+  state.currentRotation = 0;
+  applyLevelTheme(state.currentLevelIndex);
+  const wheel = $('wheelSvg'); wheel.style.transition = 'none'; wheel.style.transform = 'rotate(0deg)';
+  buildWheel();
+  renderLevelHero('wheelLevelHero', state.currentLevelIndex, false);
+  setText('levelIndicator', `${state.currentLevelIndex + 1}/${TOTAL_LEVELS}`);
+  setText('roundCounter', `1/${ROUNDS_PER_LEVEL}`);
+  setText('scoreCounter', state.totalScore);
+  show('wheelInstruction'); hide('categoryResult');
+  updateProgressBars();
+  switchScreen('levelCompleteScreen', 'wheelScreen', 'forward');
+}
+
+function getAchievement(accuracy, correct, total) {
+  if (accuracy >= 95) return { tier: 'gold', icon: '👑', title: 'LEGENDA EKONOMI', desc: 'Sempurna! Kamu menguasai seluruh materi Pasar & Terbentuknya Harga dengan sangat luar biasa.', color: '#f59e0b' };
+  if (accuracy >= 85) return { tier: 'gold', icon: '🏆', title: 'MASTER PASAR', desc: 'Luar biasa! Pemahamanmu tentang pasar dan mekanisme harga sangat tinggi.', color: '#f59e0b' };
+  if (accuracy >= 70) return { tier: 'emerald', icon: '🌟', title: 'AHLI EKONOMI', desc: 'Hebat! Kamu sudah menguasai sebagian besar konsep pasar dan harga.', color: '#10b981' };
+  if (accuracy >= 55) return { tier: 'blue', icon: '🧭', title: 'PENJELAJAH PASAR', desc: 'Bagus! Kemampuanmu sudah baik, terus tingkatkan lagi.', color: '#2563eb' };
+  if (accuracy >= 40) return { tier: 'violet', icon: '📜', title: 'PEMBELAJAR AKTIF', desc: 'Cukup baik! Pelajari kembali materi yang belum dikuasai.', color: '#8b5cf6' };
+  return { tier: 'slate', icon: '🌱', title: 'PEMULA SEMANGAT', desc: 'Jangan menyerah! Setiap perjalanan dimulai dari langkah pertama.', color: '#64748b' };
+}
+function endGame() {
+  stopTimer();
+  const total = state.correctCount + state.wrongCount;
+  const correct = state.correctCount, wrong = state.wrongCount;
+  const accuracy = total > 0 ? Math.round((correct / total) * 100) : 0;
+  const score = state.totalScore;
+  const ach = getAchievement(accuracy, correct, total);
+  $('achievementWrap').innerHTML = `
+    <div class="achievement-card ach-tier-${ach.tier}">
+      <div class="flex items-center gap-3 relative z-10">
+        <div class="ach-icon">${ach.icon}</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-[10px] uppercase tracking-widest font-black mb-1" style="color: ${ach.color};">🏅 KATEGORI CAPAIAN</div>
+          <div class="text-lg md:text-2xl font-black leading-tight overflow-safe" style="color: ${ach.color}; font-family:'Space Grotesk',sans-serif;">${ach.title}</div>
+          <div class="text-[11px] md:text-xs mt-1.5 leading-snug" style="color: var(--text-muted);">${ach.desc}</div></div></div></div>`;
+  setText('rCorrect', correct); setText('rWrong', wrong); setText('rAcc', accuracy + '%'); setText('rStreak', state.maxStreak + '🔥');
+  let counter = 0; const step = Math.max(1, Math.ceil(score / 40));
+  const iv = setInterval(() => { counter += step; if (counter >= score) { counter = score; clearInterval(iv); } $('totalScoreDisplay').textContent = counter; }, 30);
+  const breakdown = $('catBreakdown'); breakdown.innerHTML = '';
+  LEVELS.forEach(level => {
+    level.categories.forEach(cat => {
+      const s = state.catStats[cat.id];
+      if (!s || s.total === 0) return;
+      const pct = Math.round((s.correct / s.total) * 100);
+      const row = document.createElement('div'); row.className = 'cat-stat-row';
+      row.innerHTML = `<span class="text-base shrink-0">${cat.icon}</span>
+        <div class="flex-1 min-w-0"><div class="flex items-center justify-between gap-2 mb-1">
+            <span class="text-[10px] md:text-[11px] font-bold truncate" style="color: ${cat.color};">${cat.name} <span style="opacity:.6;font-weight:400;">(L${s.level})</span></span>
+            <span class="text-[10px] md:text-[11px] font-mono font-bold shrink-0" style="color: var(--text-muted);">${s.correct}/${s.total} • ${s.points} poin</span></div>
+          <div class="cat-stat-bar"><i style="width: ${pct}%; background: linear-gradient(90deg, ${cat.color}, ${cat.color}cc);"></i></div></div>`;
+      breakdown.appendChild(row);
+    });
+  });
+  let prev = null; try { prev = localStorage.getItem(STORAGE_PREFIX + 'best_score'); } catch(e) {}
+  if (prev === null || score > parseInt(prev)) {
+    try { localStorage.setItem(STORAGE_PREFIX + 'best_score', score); localStorage.setItem(STORAGE_PREFIX + 'best_acc', accuracy); localStorage.setItem(STORAGE_PREFIX + 'best_title', ach.title); } catch(e) {}
+    sfx('win');
+    safeConfetti({ particleCount: 100, spread: 100, origin: { y: .6 }, colors: ['#2563eb','#8b5cf6','#10b981','#f59e0b'] });
+    setTimeout(() => safeConfetti({ particleCount: 60, angle: 60, spread: 70, origin: { x: 0, y: .7 }, colors: ['#2563eb','#0ea5e9'] }), 300);
+    setTimeout(() => safeConfetti({ particleCount: 60, angle: 120, spread: 70, origin: { x: 1, y: .7 }, colors: ['#10b981','#8b5cf6'] }), 500);
+  } else { if (accuracy >= 60) safeConfetti({ particleCount: 40, spread: 80, origin: { y: .6 } }); }
+}
+
+function renderLevelList() {
+  const list = $('levelList');
+  list.innerHTML = '';
+  LEVELS.forEach((level, idx) => {
+    const unlocked = idx < state.unlockedLevels;
+    const stats = state.levelStats[idx];
+    const isDone = stats !== undefined;
+    const theme = LEVEL_THEMES[idx];
+    const card = document.createElement('div');
+    card.className = 'level-card glass-panel p-4 rounded-xl flex items-center gap-3' + (unlocked ? '' : ' locked');
+    card.style.border = `2px solid ${unlocked ? theme.primary : 'var(--border-light)'}`;
+    if (unlocked) {
+      card.style.background = `linear-gradient(135deg, ${theme.primary}10, ${theme.accent}05), var(--bg-card)`;
+      card.style.boxShadow = `0 8px 24px ${theme.primary}20`;
+    }
+    card.innerHTML = `
+      <div class="w-14 h-14 rounded-xl flex items-center justify-center text-2xl shrink-0" style="background: ${unlocked ? theme.primary + '22' : 'var(--border-light)'}20; border: 2px solid ${unlocked ? theme.primary : 'var(--border-light)'};">${unlocked ? level.icon : '🔒'}</div>
+      <div class="flex-1 min-w-0">
+        <div class="flex items-center gap-2 mb-0.5 flex-wrap">
+          <span class="text-[10px] font-black px-2 py-0.5 rounded-full" style="background: ${theme.primary}22; color: ${theme.primary};">${level.title}</span>
+          ${isDone ? `<span class="text-[10px] font-bold px-2 py-0.5 rounded-full" style="background: var(--green-soft); color: var(--green);">✓ ${stats.correct}/10 • ${stats.points} poin</span>` : ''}
+        </div>
+        <div class="text-sm md:text-base font-black truncate" style="color: var(--text-dark);">${level.name}</div>
+        <div class="text-[10px] md:text-xs truncate" style="color: var(--text-muted);">${level.subtitle}</div>
+      </div>
+      <div class="shrink-0 text-xl" style="color: ${unlocked ? theme.primary : 'var(--text-muted)'};">${unlocked ? '▶' : '🔒'}</div>`;
+    if (unlocked) card.addEventListener('click', () => startLevel(idx));
+    list.appendChild(card);
+  });
+}
+function startLevel(idx) {
+  sfx('click');
+  state.currentLevelIndex = idx;
+  state.currentRound = 0;
+  state.levelFinished = false;
+  state.currentRotation = 0;
+  applyLevelTheme(idx);
+  const wheel = $('wheelSvg'); wheel.style.transition = 'none'; wheel.style.transform = 'rotate(0deg)';
+  buildWheel();
+  renderLevelHero('wheelLevelHero', idx, false);
+  setText('levelIndicator', `${idx + 1}/${TOTAL_LEVELS}`);
+  setText('roundCounter', `1/${ROUNDS_PER_LEVEL}`);
+  setText('scoreCounter', state.totalScore);
+  setText('levelTotalScore', state.totalScore);
+  show('wheelInstruction'); hide('categoryResult');
+  updateProgressBars();
+  switchScreen('levelScreen', 'wheelScreen', 'forward');
+}
+function saveProgress() {
+  try {
+    localStorage.setItem(STORAGE_PREFIX + 'unlocked', state.unlockedLevels);
+    localStorage.setItem(STORAGE_PREFIX + 'levelStats', JSON.stringify(state.levelStats));
+  } catch(e) {}
+}
+function loadProgress() {
+  try {
+    const u = localStorage.getItem(STORAGE_PREFIX + 'unlocked');
+    if (u) state.unlockedLevels = Math.max(1, parseInt(u) || 1);
+    const ls = localStorage.getItem(STORAGE_PREFIX + 'levelStats');
+    if (ls) state.levelStats = JSON.parse(ls) || [];
+  } catch(e) {}
+}
+function resetProgress() {
+  if (!confirm('Yakin ingin mereset semua progres dan skor terbaik?')) return;
+  try { Object.keys(localStorage).forEach(k => { if (k.startsWith(STORAGE_PREFIX)) localStorage.removeItem(k); }); } catch(e) {}
+  state.unlockedLevels = 1;
+  state.levelStats = [];
+  state.totalScore = 0; state.correctCount = 0; state.wrongCount = 0; state.maxStreak = 0;
+  state.usedQuestions.clear(); state.history = []; state.catStats = {};
+  renderLevelList();
+  setText('levelTotalScore', 0);
+  hide('bestScoreSummary');
+  sfx('click');
+}
+
+function updateProgressBars() {
+  const pct = Math.round((state.currentRound / ROUNDS_PER_LEVEL) * 100);
+  ['wheelProgressBar','questionProgressBar'].forEach(id => { const e = $(id); if(e) e.style.width = pct + '%'; });
+}
+
+function showRevealOverlay(text, type) {
+  const o = $('revealOverlay'), b = $('revealBadge');
+  b.className = 'reveal-badge'; b.textContent = text;
+  if (type === 'benar') { b.classList.add('benar'); createBurst(window.innerWidth/2, window.innerHeight/2, ['#22c55e','#4ade80','#34d399','#86efac']); }
+  else if (type === 'timeout') { b.classList.add('timeout'); createBurst(window.innerWidth/2, window.innerHeight/2, ['#f59e0b','#fbbf24','#f97316','#fde047']); }
+  else { b.classList.add('salah'); createBurst(window.innerWidth/2, window.innerHeight/2, ['#ef4444','#f87171','#f59e0b','#fca5a5']); }
+  o.classList.add('show', 'backdrop');
+}
+function hideRevealOverlay() { const o = $('revealOverlay'); o.classList.remove('show', 'backdrop'); }
+function createBurst(cx, cy, colors) {
+  const count = window.innerWidth < 640 ? 18 : 28;
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('div');
+    p.className = 'burst-particle';
+    p.style.left = cx + 'px'; p.style.top = cy + 'px'; p.style.background = colors[i % colors.length];
+    const angle = (Math.PI * 2 * i) / count, dist = 90 + Math.random() * 200;
+    p.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
+    p.style.setProperty('--ty', Math.sin(angle) * dist + 'px');
+    p.style.animationDelay = (Math.random() * .15) + 's';
+    p.style.boxShadow = '0 0 14px ' + colors[i % colors.length];
+    document.body.appendChild(p); setTimeout(() => p.remove(), 1300);
+  }
+}
+
+function copyResult() {
+  sfx('click');
+  const total = state.correctCount + state.wrongCount;
+  const accuracy = total > 0 ? Math.round((state.correctCount / total) * 100) : 0;
+  const ach = getAchievement(accuracy, state.correctCount, total);
+  let catBreakdownText = '';
+  LEVELS.forEach(level => {
+    level.categories.forEach(cat => {
+      const s = state.catStats[cat.id];
+      if (!s || s.total === 0) return;
+      catBreakdownText += `  • [L${s.level}] ${cat.name}: ${s.correct}/${s.total} (${s.points} poin)\n`;
+    });
+  });
+  const txt = `HASIL KUIS RODA BERPUTAR — EKONOMI BAB 3
+PASAR & TERBENTUKNYA HARGA
+━━━━━━━━━━━━━━━━━━━━
+Materi: Pasar & Terbentuknya Harga
+━━━━━━━━━━━━━━━━━━━━
+🏅 KATEGORI CAPAIAN: ${ach.title}
+${ach.icon} ${ach.desc}
+━━━━━━━━━━━━━━━━━━━━
+📊 STATISTIK:
+  • Total Poin: ${state.totalScore}
+  • Jawaban Benar: ${state.correctCount}
+  • Jawaban Salah: ${state.wrongCount}
+  • Total Soal: ${total}
+  • Akurasi: ${accuracy}%
+  • Streak Terbaik: ${state.maxStreak}
+━━━━━━━━━━━━━━━━━━━━
+📚 CAPAIAN PER KATEGORI:
+${catBreakdownText}━━━━━━━━━━━━━━━━━━━━`;
+  const ta = document.createElement('textarea'); ta.value = txt;
+  document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+  const btn = $('btnCopy'), oldText = btn.textContent; btn.textContent = '✓ TERSALIN!';
+  setTimeout(() => { btn.textContent = oldText; }, 2000);
+}
+
+function returnToMainScreen() {
+  sfx('click'); kuisAktif = false; stopTimer();
+  Object.assign(state, {
+    currentLevelIndex: 0, currentRound: 0, totalScore: 0,
+    correctCount: 0, wrongCount: 0, streak: 0, maxStreak: 0, currentRotation: 0,
+    catStats: {}, currentCategory: null, currentQuestion: null, selectedAnswerIndex: null,
+    answerLocked: false, spinning: false, levelFinished: false, gameFinished: false
+  });
+  state.usedQuestions.clear(); state.history = []; state.levelStats = [];
+  applyLevelTheme(0);
+  const wheel = $('wheelSvg'); wheel.style.transition = 'none'; wheel.style.transform = 'rotate(0deg)';
+  const spinBtn = $('spinBtn'); if (spinBtn) spinBtn.disabled = false;
+  ['wheelScreen','questionScreen','resultScreen','levelScreen','levelCompleteScreen'].forEach(hide);
+  hide('categoryResult'); hide('wheelInstruction'); hide('qFeedback'); hide('qActions');
+  switchScreen(null, 'startScreen', 'back');
+  updateProgressBars();
+  try {
+    const bs = localStorage.getItem(STORAGE_PREFIX + 'best_score'), ba = localStorage.getItem(STORAGE_PREFIX + 'best_acc'), bt = localStorage.getItem(STORAGE_PREFIX + 'best_title');
+    if (bs !== null) { show('bestScoreSummary'); setText('bestScorePoints', bs); setText('bestScoreAcc', ba + '%'); setText('bestScoreTitle', bt); }
+    else hide('bestScoreSummary');
+  } catch(e) {}
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function backToLevels() {
+  sfx('click'); stopTimer(); state.levelFinished = false;
+  applyLevelTheme(0);
+  renderLevelList();
+  setText('levelTotalScore', state.totalScore);
+  switchScreen('levelCompleteScreen', 'levelScreen', 'back');
+}
+
+function init() {
+  initTheme();
+  loadProgress();
+  applyLevelTheme(0);
+  renderLevelList();
+  buildWheel();
+  wheelBuiltOnce = true;
+  const themeObserver = new MutationObserver(() => {
+    if (!wheelBuiltOnce) return;
+    if (themeChangeInProgress) return;
+    buildWheel();
+    renderLevelHero('wheelLevelHero', state.currentLevelIndex, false);
+    renderLevelHero('questionLevelBar', state.currentLevelIndex, true);
+  });
+  themeObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  $('soundToggle').addEventListener('click', () => {
+    soundMuted = !soundMuted;
+    $('soundToggle').textContent = soundMuted ? '🔇' : '🔊';
+    $('soundToggle').style.opacity = soundMuted ? '0.5' : '1';
+    if (!soundMuted) sfx('click');
+  });
+  $('btnStart').addEventListener('click', () => {
+    sfx('click');
+    state.currentLevelIndex = 0; state.currentRound = 0;
+    state.totalScore = 0; state.correctCount = 0; state.wrongCount = 0;
+    state.streak = 0; state.maxStreak = 0; state.currentRotation = 0;
+    state.catStats = {}; state.levelStats = [];
+    state.gameFinished = false; state.levelFinished = false;
+    state.usedQuestions.clear(); state.history = [];
+    kuisAktif = true;
+    applyLevelTheme(0);
+    setText('levelTotalScore', 0);
+    renderLevelList();
+    switchScreen('startScreen', 'levelScreen', 'forward');
+  });
+  $('spinBtn').addEventListener('click', spin);
+  $('wheelSvg').addEventListener('click', () => { if (!state.spinning && !state.levelFinished && !state.gameFinished) spin(); });
+  $('btnNextSpin').addEventListener('click', nextRound);
+  $('btnNextLevel').addEventListener('click', goToNextLevel);
+  $('btnBackToLevels').addEventListener('click', backToLevels);
+  $('btnHome').addEventListener('click', returnToMainScreen);
+  $('btnCopy').addEventListener('click', copyResult);
+  $('btnResetProgress').addEventListener('click', () => { resetProgress(); });
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  try {
+    const bs = localStorage.getItem(STORAGE_PREFIX + 'best_score'), ba = localStorage.getItem(STORAGE_PREFIX + 'best_acc'), bt = localStorage.getItem(STORAGE_PREFIX + 'best_title');
+    if (bs !== null) { show('bestScoreSummary'); setText('bestScorePoints', bs); setText('bestScoreAcc', ba + '%'); setText('bestScoreTitle', bt); }
+  } catch(e) {}
+}
+document.addEventListener('DOMContentLoaded', init);
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const ls = document.getElementById('loadingScreen');
+    if (ls) { ls.classList.add('hidden'); setTimeout(() => ls.remove(), 700); }
+  }, 1400);
+});
+</script>
+</body>
+</html>
