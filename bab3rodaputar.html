@@ -18,6 +18,7 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
     --green: #34d399; --green-soft: #064e3b;
     --orange: #fbbf24; --orange-soft: #78350f;
     --rose: #fb7185; --rose-soft: #7f1d1d;
+    --maroon: #8b0000; --maroon-dark: #5c0000;
     --bg-body: #0a0f1e; --bg-card: rgba(17,24,39,0.82); --bg-card-solid: #111827;
     --bg-soft: #1e293b; --bg-header: rgba(17,24,39,0.88);
     --text-dark: #f1f5f9; --text-muted: #94a3b8;
@@ -45,11 +46,42 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
   .btn-primary:active{ transform:translateY(0) scale(.98); }
   .btn-primary::after { content:''; position: absolute; top:0; left:-100%; width:100%; height:100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); animation: shineBtn 2.6s ease-in-out infinite; }
   @keyframes shineBtn{0%{left:-100%}60%,100%{left:100%}}
+
   .wheel-stage { position: relative; width: min(88vw, 430px); aspect-ratio: 1; margin: 20px auto; filter: drop-shadow(0 20px 60px rgba(37,99,235,0.25)); }
   #wheelSvg { width: 100%; height: 100%; display: block; transform-origin: center center; will-change: transform; filter: drop-shadow(0 0 30px var(--lvl-primary)); cursor: pointer; overflow: visible; }
-  .wheel-pointer { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 30px solid transparent; border-right: 30px solid transparent; border-top: 56px solid var(--lvl-primary); filter: drop-shadow(0 4px 12px var(--lvl-primary)); z-index: 5; animation: pointerBounce 2s ease-in-out infinite; }
-  @media (min-width:480px){ .wheel-pointer{ border-left-width:34px; border-right-width:34px; border-top-width:64px; top:-12px; } }
+
+  /* ========== PANAH MERAH MAROON ========== */
+  .wheel-pointer {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-top: 56px solid var(--maroon);
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,.5)) drop-shadow(0 0 14px rgba(139,0,0,.85));
+    z-index: 5;
+    animation: pointerBounce 2s ease-in-out infinite;
+  }
+  .wheel-pointer::after {
+    content: '';
+    position: absolute;
+    top: -58px;
+    left: -8px;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #d44242, var(--maroon) 60%, var(--maroon-dark) 100%);
+    box-shadow: 0 0 10px rgba(139,0,0,.9), inset 0 1px 0 rgba(255,255,255,.35);
+  }
+  @media (min-width:480px){
+    .wheel-pointer{
+      border-left-width:34px; border-right-width:34px; border-top-width:64px; top:-12px;
+    }
+    .wheel-pointer::after{ top:-66px; left:-9px; width:18px; height:18px; }
+  }
   @keyframes pointerBounce{0%,100%{transform: translateX(-50%) translateY(0);}50%{transform: translateX(-50%) translateY(-5px);}}
+
   .spin-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 33%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 35% 30%, var(--bg-card-solid), var(--lvl-soft) 40%, var(--lvl-primary) 100%); border: 5px solid var(--bg-card-solid); color: #fff; font-family: 'Space Grotesk', sans-serif; font-weight: 900; letter-spacing: 1px; font-size: clamp(0.85rem, 3.4vw, 1.2rem); cursor: pointer; box-shadow: 0 0 0 5px rgba(255,255,255,0.1), 0 12px 34px var(--lvl-primary), inset 0 3px 0 rgba(255,255,255,0.15); z-index: 4; transition: transform .2s ease, box-shadow .2s; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.05; animation: spinPulse 2.4s ease-in-out infinite; text-shadow: 0 1px 4px rgba(0,0,0,.5); }
   @keyframes spinPulse{0%,100%{ box-shadow: 0 0 0 5px rgba(255,255,255,0.1), 0 12px 34px var(--lvl-primary), inset 0 3px 0 rgba(255,255,255,0.15); }50%{ box-shadow: 0 0 0 9px rgba(255,255,255,0.05), 0 12px 40px var(--lvl-primary), inset 0 3px 0 rgba(255,255,255,0.15); }}
   .spin-btn:hover{ transform: translate(-50%,-50%) scale(1.07); }
@@ -57,6 +89,7 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
   .spin-btn:disabled{ opacity: .65; cursor: wait; animation: none; }
   .spin-btn .spin-icon{ font-size: 2.1em; display: block; animation: spinIcon 4s linear infinite; }
   @keyframes spinIcon{ to { transform: rotate(360deg); } }
+
   .opt-btn { width: 100%; text-align: left; background: var(--bg-card-solid); border: 1.5px solid var(--border-light); border-radius: 14px; padding: 13px 15px; font-size: .85rem; color: var(--text-dark); font-weight: 500; line-height: 1.4; transition: all .22s cubic-bezier(.4,0,.2,1); cursor: pointer; position: relative; overflow: hidden; }
   @media (min-width:768px){ .opt-btn{font-size:.9rem;padding:14px 17px;} }
   .opt-btn:hover { background: var(--bg-soft); border-color: var(--lvl-primary); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.3); }
@@ -114,7 +147,6 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
     80%{transform:translateX(6px) rotate(.8deg)}
   }
 
-  /* ---- BENAR ---- */
   .reveal-badge.benar{
     background:
       radial-gradient(circle at 50% 0%, rgba(74,222,128,.38), transparent 62%),
@@ -127,7 +159,6 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
       inset 0 1px 0 rgba(255,255,255,.25);
     color: #86efac;
   }
-  /* ---- SALAH ---- */
   .reveal-badge.salah{
     background:
       radial-gradient(circle at 50% 0%, rgba(248,113,113,.38), transparent 62%),
@@ -141,7 +172,6 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
     color: #fca5a5;
     animation: revealPop .85s cubic-bezier(.34,1.56,.64,1) both, salahShake .6s .8s ease;
   }
-  /* ---- TIMEOUT ---- */
   .reveal-badge.timeout{
     background:
       radial-gradient(circle at 50% 0%, rgba(251,191,36,.38), transparent 62%),
@@ -156,7 +186,6 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
     animation: revealPop .85s cubic-bezier(.34,1.56,.64,1) both, salahShake .6s .8s ease;
   }
 
-  /* Ikon bulat + cincin gelombang */
   .reveal-icon-wrap{
     position: relative;
     width: clamp(70px, 19vw, 94px);
@@ -210,7 +239,6 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
     font-size: clamp(1.7rem, 6.5vw, 2.5rem);
   }
 
-  /* Teks utama BENAR / SALAH */
   .reveal-text{
     font-family: 'Space Grotesk', sans-serif;
     font-size: clamp(1.9rem, 7.5vw, 3.1rem);
@@ -245,7 +273,6 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
     letter-spacing: clamp(2px, 1vw, 5px);
   }
 
-  /* Sub-label poin / pesan */
   .reveal-sub{
     font-family: 'Space Grotesk', sans-serif;
     font-size: clamp(.68rem, 2.6vw, .85rem);
@@ -1327,6 +1354,7 @@ let wheelBuiltOnce = false;
 let timerInterval = null;
 let timeLeft = TIMER_SECONDS;
 let lastBeepSecond = -1;
+let labelGroups = [];  /* <g class="wheel-label"> untuk counter-rotation */
 
 window.addEventListener('beforeunload', function(e) {
   if (kuisAktif && !state.gameFinished) { e.preventDefault(); e.returnValue = ''; return ''; }
@@ -1401,6 +1429,9 @@ function onTimerEnd() {
   setTimeout(() => { hideRevealOverlay(); showFeedback(false, 0, cat, true); }, 1500);
 }
 
+/* =====================================================
+   BUILD WHEEL — Label horizontal, tidak miring, tidak terbalik
+   ===================================================== */
 function buildWheel() {
   const svg = $('wheelSvg'); if (!svg) return;
   const level = LEVELS[state.currentLevelIndex];
@@ -1412,11 +1443,15 @@ function buildWheel() {
   const strokeCol = '#0f172a';
 
   let defsHtml = `<radialGradient id="wheelInner" cx="50%" cy="50%">
-      <stop offset="0%" stop-color="#0a0f1e" stop-opacity="0.85"/>
-      <stop offset="62%" stop-color="#0a0f1e" stop-opacity="0.3"/>
+      <stop offset="0%" stop-color="#0a0f1e" stop-opacity="0.75"/>
+      <stop offset="62%" stop-color="#0a0f1e" stop-opacity="0.22"/>
       <stop offset="100%" stop-color="#0a0f1e" stop-opacity="0"/>
     </radialGradient>`;
   let segHtml = '';
+  labelGroups = [];
+
+  /* Gambar segmen + kumpulkan data label */
+  const labelData = [];
   for (let i = 0; i < total; i++) {
     const cat = categories[i];
     const centerDeg = -90 + i * segAngle;
@@ -1426,38 +1461,53 @@ function buildWheel() {
     const sx = cx + r * Math.cos(a0), sy = cy + r * Math.sin(a0);
     const ex = cx + r * Math.cos(a1), ey = cy + r * Math.sin(a1);
     const wedge = `M ${cx} ${cy} L ${sx.toFixed(2)} ${sy.toFixed(2)} A ${r} ${r} 0 0 1 ${ex.toFixed(2)} ${ey.toFixed(2)} Z`;
-    segHtml += `<path d="${wedge}" fill="${cat.color}" fill-opacity="0.92" stroke="${strokeCol}" stroke-width="1.5"/>`;
-    segHtml += `<path d="${wedge}" fill="url(#wheelInner)" fill-opacity="0.12"/>`;
+    segHtml += `<path d="${wedge}" fill="${cat.color}" fill-opacity="0.95" stroke="${strokeCol}" stroke-width="1.6"/>`;
+    segHtml += `<path d="${wedge}" fill="url(#wheelInner)" fill-opacity="0.1"/>`;
+    labelData.push({ cat, rad });
+  }
 
+  /* Label horizontal, posisi 0.66r */
+  labelData.forEach(({ cat, rad }) => {
     const label = cat.short.toUpperCase();
-    let fontSize = 8.5;
-    if (label.length > 10) fontSize = 6.2;
-    else if (label.length > 8) fontSize = 7;
-    else if (label.length > 6) fontSize = 7.8;
 
-    const labelR = r * 0.6;
+    let fontSize;
+    if (label.length <= 5)       fontSize = 11.5;
+    else if (label.length <= 7)  fontSize = 10.2;
+    else if (label.length <= 9)  fontSize = 9.2;
+    else                          fontSize = 8.2;
+
+    const labelR = r * 0.66;
     const lx = cx + labelR * Math.cos(rad);
     const ly = cy + labelR * Math.sin(rad);
-    let rotDeg = centerDeg;
-    if (Math.cos(rad) < 0) rotDeg = centerDeg + 180;
 
-    const charW = fontSize * 0.62;
-    const textW = label.length * charW + 5;
-    const textH = fontSize + 4.5;
+    const charW = fontSize * 0.66;
+    const textW = label.length * charW + 8;
+    const textH = fontSize + 6;
+    const padX = textW / 2;
+    const padY = textH / 2;
 
-    segHtml += `<g transform="rotate(${rotDeg.toFixed(2)} ${lx.toFixed(2)} ${ly.toFixed(2)})">
-      <rect x="${(lx - textW/2).toFixed(2)}" y="${(ly - textH/2).toFixed(2)}" width="${textW.toFixed(2)}" height="${textH.toFixed(2)}" rx="${(textH/2).toFixed(2)}" ry="${(textH/2).toFixed(2)}" fill="#ffffff" stroke="${cat.color}" stroke-width="1" filter="drop-shadow(0 1px 2px rgba(0,0,0,0.25))"/>
-      <text x="${lx.toFixed(2)}" y="${ly.toFixed(2)}" font-size="${fontSize}" font-weight="900" fill="${cat.color}" text-anchor="middle" dominant-baseline="central" font-family="'Space Grotesk','Inter',sans-serif" letter-spacing="0.3">${label}</text>
+    /* <g class="wheel-label"> — akan di-counter-rotate via JS */
+    segHtml += `<g class="wheel-label"
+        data-lx="${lx.toFixed(2)}"
+        data-ly="${ly.toFixed(2)}"
+        transform="rotate(0 ${lx.toFixed(2)} ${ly.toFixed(2)})">
+      <rect x="${(lx - padX).toFixed(2)}" y="${(ly - padY).toFixed(2)}"
+            width="${textW.toFixed(2)}" height="${textH.toFixed(2)}"
+            rx="${(textH / 2).toFixed(2)}" ry="${(textH / 2).toFixed(2)}"
+            fill="#ffffff"
+            stroke="${cat.color}" stroke-width="1.6"
+            filter="drop-shadow(0 2px 3px rgba(0,0,0,0.45))"/>
+      <text x="${lx.toFixed(2)}" y="${ly.toFixed(2)}"
+            font-size="${fontSize}"
+            font-weight="900"
+            fill="${cat.color}"
+            text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Space Grotesk','Inter',sans-serif"
+            letter-spacing="0.2">${label}</text>
     </g>`;
+  });
 
-    const iconR = r * 0.87;
-    const icx = cx + iconR * Math.cos(rad);
-    const icy = cy + iconR * Math.sin(rad);
-    segHtml += `<g transform="translate(${icx.toFixed(2)} ${icy.toFixed(2)})">
-      <circle r="6.5" fill="#ffffff" stroke="${cat.color}" stroke-width="1"/>
-      <text x="0" y="2.5" text-anchor="middle" font-size="7.8" font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif">${cat.icon}</text>
-    </g>`;
-  }
   let html = `<defs>${defsHtml}</defs>`;
   html += `<circle cx="${cx}" cy="${cy}" r="${r + 4}" fill="#111827" stroke="var(--lvl-primary)" stroke-width="2" opacity="0.5"/>`;
   html += segHtml;
@@ -1470,6 +1520,19 @@ function buildWheel() {
     html += `<circle cx="${dx.toFixed(2)}" cy="${dy.toFixed(2)}" r="0.9" fill="${strokeCol}" opacity="0.7"/>`;
   }
   svg.innerHTML = html;
+
+  /* Simpan referensi untuk counter-rotation */
+  labelGroups = Array.from(svg.querySelectorAll('.wheel-label'));
+}
+
+/* Update counter-rotation label agar tetap horizontal */
+function updateLabelRotation(rotationDeg) {
+  const theta = -rotationDeg;
+  for (const g of labelGroups) {
+    const lx = g.dataset.lx;
+    const ly = g.dataset.ly;
+    g.setAttribute('transform', `rotate(${theta} ${lx} ${ly})`);
+  }
 }
 
 function getAvailableCategories(level) {
@@ -1498,6 +1561,10 @@ function shuffleOptions(q) {
   return { cat: q.cat, q: q.q, options: arr, correct: arr.indexOf(correctText), explanation: q.explanation, keyPoint: q.keyPoint };
 }
 
+/* =====================================================
+   SPIN — Animasi manual dengan requestAnimationFrame
+   agar label bisa di-counter-rotate setiap frame
+   ===================================================== */
 function spin() {
   if (state.gameFinished || state.levelFinished || state.spinning) return;
   const level = LEVELS[state.currentLevelIndex];
@@ -1507,6 +1574,7 @@ function spin() {
   $('spinBtn').disabled = true;
   hide('categoryResult'); hide('wheelInstruction');
   sfx('spin');
+
   const targetCat = availableCats[Math.floor(Math.random() * availableCats.length)];
   const targetIdx = level.categories.findIndex(c => c.id === targetCat.id);
   const segAngle = 360 / level.categories.length;
@@ -1516,20 +1584,48 @@ function spin() {
   const currentMod = ((state.currentRotation % 360) + 360) % 360;
   const targetMod = ((baseTarget % 360) + 360) % 360;
   const delta = ((targetMod - currentMod) + 360) % 360;
-  const finalRotation = state.currentRotation + extraSpins * 360 + delta;
-  state.currentRotation = finalRotation;
+
+  const startRotation = state.currentRotation;
+  const finalRotation = startRotation + extraSpins * 360 + delta;
+
   const wheel = $('wheelSvg');
   const duration = 5000;
-  wheel.style.transition = `transform ${duration}ms cubic-bezier(0.15, 0.9, 0.25, 1)`;
-  wheel.style.transform = `rotate(${finalRotation}deg)`;
-  let t = 0;
-  while (t < duration) {
-    const progress = t / duration;
-    setTimeout(() => sfx('tick'), t);
-    t += 30 + progress * progress * 260;
+  const startTime = performance.now();
+  let nextTickAt = 0;
+
+  /* Easing easeOutQuart — mendekati cubic-bezier(0.15, 0.9, 0.25, 1) */
+  function easeOutQuart(t) {
+    return 1 - Math.pow(1 - t, 4);
   }
-  setTimeout(() => { state.spinning = false; onSpinComplete(targetIdx); }, duration + 100);
+
+  function animate(now) {
+    const elapsed = now - startTime;
+    const t = Math.min(elapsed / duration, 1);
+    const eased = easeOutQuart(t);
+    const currentRot = startRotation + (finalRotation - startRotation) * eased;
+
+    wheel.style.transform = `rotate(${currentRot}deg)`;
+    /* Counter-rotate setiap label agar selalu horizontal */
+    updateLabelRotation(currentRot);
+
+    /* Tick sound */
+    if (elapsed >= nextTickAt) {
+      sfx('tick');
+      nextTickAt = elapsed + 30 + t * t * 260;
+    }
+
+    if (t < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      state.currentRotation = finalRotation;
+      updateLabelRotation(finalRotation);
+      state.spinning = false;
+      onSpinComplete(targetIdx);
+    }
+  }
+  requestAnimationFrame(animate);
 }
+
 function onSpinComplete(targetIdx) {
   const level = LEVELS[state.currentLevelIndex];
   const cat = level.categories[targetIdx];
@@ -1590,7 +1686,6 @@ function selectAnswer(idx) {
   btns[idx].classList.add(isCorrect ? 'opt-correct' : 'opt-wrong');
   if (!isCorrect) btns[q.correct].classList.add('opt-correct');
 
-  /* --- Hitung poin DULU supaya overlay bisa menampilkannya --- */
   let earnedPoints = 0;
   if (isCorrect) {
     sfx('correct'); state.correctCount++; state.streak++;
@@ -1604,7 +1699,6 @@ function selectAnswer(idx) {
     sfx('wrong'); state.wrongCount++; state.streak = 0;
   }
 
-  /* --- Overlay baru: bawa poin + streak --- */
   showRevealOverlay(
     isCorrect ? 'BENAR' : 'SALAH',
     isCorrect ? 'benar' : 'salah',
@@ -1767,7 +1861,7 @@ function goToNextLevel() {
   state.levelFinished = false;
   state.currentRotation = 0;
   applyLevelTheme(state.currentLevelIndex);
-  const wheel = $('wheelSvg'); wheel.style.transition = 'none'; wheel.style.transform = 'rotate(0deg)';
+  const wheel = $('wheelSvg'); wheel.style.transform = 'rotate(0deg)';
   buildWheel();
   renderLevelHero('wheelLevelHero', state.currentLevelIndex, false);
   setText('levelIndicator', `${state.currentLevelIndex + 1}/${TOTAL_LEVELS}`);
@@ -1867,7 +1961,7 @@ function startLevel(idx) {
   state.levelFinished = false;
   state.currentRotation = 0;
   applyLevelTheme(idx);
-  const wheel = $('wheelSvg'); wheel.style.transition = 'none'; wheel.style.transform = 'rotate(0deg)';
+  const wheel = $('wheelSvg'); wheel.style.transform = 'rotate(0deg)';
   buildWheel();
   renderLevelHero('wheelLevelHero', idx, false);
   setText('levelIndicator', `${idx + 1}/${TOTAL_LEVELS}`);
@@ -2007,7 +2101,7 @@ function returnToMainScreen() {
   });
   state.usedQuestions.clear(); state.history = []; state.levelStats = [];
   applyLevelTheme(0);
-  const wheel = $('wheelSvg'); wheel.style.transition = 'none'; wheel.style.transform = 'rotate(0deg)';
+  const wheel = $('wheelSvg'); wheel.style.transform = 'rotate(0deg)';
   const spinBtn = $('spinBtn'); if (spinBtn) spinBtn.disabled = false;
   ['wheelScreen','questionScreen','resultScreen','levelScreen','levelCompleteScreen','settingsScreen','howtoScreen'].forEach(hide);
   hide('categoryResult'); hide('wheelInstruction'); hide('qFeedback'); hide('qActions');
