@@ -22,12 +22,226 @@
       color: white;
     }
 
+    /* ========== LOADING SCREEN ========== */
+    #loader {
+      position:fixed; inset:0; z-index:9999;
+      background:#0f0a1a;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      gap:24px;
+      transition: opacity .7s ease, visibility .7s ease;
+    }
+    #loader.hide { opacity:0; visibility:hidden; pointer-events:none; }
+
+    /* Grid background */
+    #loader::before {
+      content:''; position:absolute; inset:0;
+      background-image:
+        linear-gradient(rgba(217,70,239,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(217,70,239,0.06) 1px, transparent 1px);
+      background-size:44px 44px;
+      mask-image:radial-gradient(ellipse at center, black 30%, transparent 75%);
+      -webkit-mask-image:radial-gradient(ellipse at center, black 30%, transparent 75%);
+      animation:gridMove 12s linear infinite;
+      pointer-events:none;
+    }
+    @keyframes gridMove {
+      from { background-position:0 0; }
+      to { background-position:44px 44px; }
+    }
+
+    /* Orb glow */
+    #loader::after {
+      content:''; position:absolute;
+      width:520px; height:520px; border-radius:50%;
+      background:radial-gradient(circle, rgba(217,70,239,0.4), transparent 65%);
+      filter:blur(90px);
+      animation:orbPulse 3s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes orbPulse {
+      0%,100% { transform:scale(1); opacity:.6; }
+      50% { transform:scale(1.15); opacity:1; }
+    }
+
+    /* ====== LOGO MGE 3D (Tema Ungu-Fuchsia) ====== */
+    .mge-logo-wrap {
+      position:relative; z-index:1;
+      width:150px; height:150px;
+      display:flex; align-items:center; justify-content:center;
+      animation:logoFloat 3s ease-in-out infinite;
+    }
+    @keyframes logoFloat {
+      0%, 100% { transform:translateY(0); }
+      50% { transform:translateY(-8px); }
+    }
+
+    .mge-ring-outer {
+      position:absolute; inset:0;
+      border-radius:50%;
+      border:2px solid transparent;
+      border-top-color:#d946ef;
+      border-right-color:#a855f7;
+      border-bottom-color:transparent;
+      border-left-color:#c026d3;
+      animation:spinRing 1.6s linear infinite;
+      filter:drop-shadow(0 0 8px rgba(217,70,239,0.9));
+    }
+    .mge-ring-inner {
+      position:absolute;
+      inset:12px;
+      border-radius:50%;
+      border:1.5px dashed rgba(217,70,239,0.5);
+      animation:spinRingReverse 4s linear infinite;
+    }
+    @keyframes spinRing { to { transform:rotate(360deg); } }
+    @keyframes spinRingReverse { to { transform:rotate(-360deg); } }
+
+    .mge-circle {
+      position:absolute;
+      inset:20px;
+      border-radius:50%;
+      background:
+        radial-gradient(circle at 30% 25%, #2a1a4a 0%, #1a0f2e 55%, #0a0614 100%);
+      box-shadow:
+        0 0 0 1px rgba(217,70,239,0.4) inset,
+        0 0 24px rgba(217,70,239,0.55),
+        0 0 60px rgba(192,38,211,0.4),
+        inset 0 -8px 20px rgba(0,0,0,0.6);
+      display:flex; align-items:center; justify-content:center;
+      overflow:hidden;
+    }
+
+    .mge-circle::before {
+      content:'';
+      position:absolute;
+      top:-50%; left:-50%;
+      width:200%; height:200%;
+      background:conic-gradient(from 0deg, transparent 0%, rgba(217,70,239,0.3) 20%, transparent 40%);
+      animation:shimmer 3s linear infinite;
+      pointer-events:none;
+    }
+    @keyframes shimmer { to { transform:rotate(360deg); } }
+
+    .mge-text {
+      position:relative;
+      font-family:'Space Grotesk', Arial, sans-serif;
+      font-size:44px;
+      font-weight:900;
+      letter-spacing:2px;
+      line-height:1;
+      background:linear-gradient(180deg, #f5d0fe 0%, #d946ef 45%, #a855f7 100%);
+      -webkit-background-clip:text; background-clip:text;
+      -webkit-text-fill-color:transparent;
+      text-shadow:
+        0 1px 0 rgba(217,70,239,0.4),
+        0 2px 0 rgba(217,70,239,0.3),
+        0 3px 0 rgba(168,85,247,0.3),
+        0 4px 8px rgba(0,0,0,0.6),
+        0 0 22px rgba(217,70,239,0.85);
+      filter:drop-shadow(0 0 12px rgba(217,70,239,0.9));
+      animation:textPulse 2.4s ease-in-out infinite;
+      z-index:2;
+      transform:perspective(500px) rotateX(6deg);
+    }
+    @keyframes textPulse {
+      0%, 100% {
+        filter:drop-shadow(0 0 12px rgba(217,70,239,0.9));
+        transform:perspective(500px) rotateX(6deg) scale(1);
+      }
+      50% {
+        filter:drop-shadow(0 0 22px rgba(217,70,239,1));
+        transform:perspective(500px) rotateX(6deg) scale(1.05);
+      }
+    }
+    .mge-text::after {
+      content:'MGE';
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(255,255,255,0.85) 0%, transparent 55%);
+      -webkit-background-clip:text; background-clip:text;
+      -webkit-text-fill-color:transparent;
+      pointer-events:none;
+      z-index:3;
+    }
+
+    /* ====== BRAND TEXT "MAEDA GAMES EDU" ====== */
+    .brand-text {
+      position:relative; z-index:1;
+      display:flex; align-items:center; justify-content:center;
+      gap:10px;
+      margin-top:4px;
+      animation:fadeInUp .9s ease .2s both;
+    }
+    .brand-text .brand-line {
+      width:26px; height:1px;
+      background:linear-gradient(90deg, transparent, #d946ef, transparent);
+    }
+    .brand-text .brand-label {
+      font-family:'Space Grotesk', Arial, sans-serif;
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:5px;
+      text-transform:uppercase;
+      background:linear-gradient(90deg, #d946ef 0%, #a855f7 50%, #d946ef 100%);
+      background-size:200% 100%;
+      -webkit-background-clip:text; background-clip:text;
+      -webkit-text-fill-color:transparent;
+      animation:brandShine 3.5s linear infinite;
+      white-space:nowrap;
+    }
+    @keyframes brandShine {
+      0% { background-position:0% 50%; }
+      100% { background-position:200% 50%; }
+    }
+
+    .loader-title {
+      position:relative; z-index:1;
+      font-size:15px; font-weight:bold;
+      letter-spacing:4px; text-transform:uppercase;
+      color:#e9d5ff;
+      animation:fadeInUp .8s ease .3s both;
+    }
+    .loader-sub {
+      position:relative; z-index:1;
+      color:#a78bfa; font-size:11px;
+      letter-spacing:2px; text-transform:uppercase;
+      animation:fadeInUp .8s ease .4s both;
+    }
+    @keyframes fadeInUp {
+      from { opacity:0; transform:translateY(10px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+
+    .loader-bar {
+      position:relative; z-index:1;
+      width:240px; height:4px;
+      background:#1a0f2e; border-radius:4px;
+      overflow:hidden;
+      margin-top:4px;
+      animation:fadeInUp .8s ease .5s both;
+    }
+    .loader-bar-fill {
+      height:100%; width:0%;
+      background:linear-gradient(90deg,#c026d3,#d946ef,#a855f7);
+      border-radius:4px;
+      box-shadow:0 0 12px rgba(217,70,239,0.8);
+      animation:loadFill 1.8s cubic-bezier(.65,.05,.36,1) forwards;
+    }
+    @keyframes loadFill {
+      0% { width:0%; }
+      40% { width:45%; }
+      70% { width:75%; }
+      100% { width:100%; }
+    }
+
+    /* ========== HEADER ========== */
     header {
       padding: 20px 8%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #1a0f2e; /* ungu lebih terang */
+      background: #1a0f2e;
       position: sticky;
       top: 0;
       z-index: 100;
@@ -36,7 +250,7 @@
     .logo {
       font-size: 24px;
       font-weight: bold;
-      color: #d946ef; /* fuchsia */
+      color: #d946ef;
     }
 
     nav a {
@@ -49,6 +263,7 @@
       color: #d946ef;
     }
 
+    /* ========== HERO ========== */
     .hero {
       min-height: 85vh;
       display: flex;
@@ -74,14 +289,14 @@
     .hero-text p {
       font-size: 18px;
       line-height: 1.6;
-      color: #e9d5ff; /* ungu muda */
+      color: #e9d5ff;
       margin-bottom: 30px;
     }
 
     .btn {
       display: inline-block;
       padding: 14px 28px;
-      background: #c026d3; /* fuchsia gelap */
+      background: #c026d3;
       color: white;
       text-decoration: none;
       border-radius: 10px;
@@ -103,18 +318,16 @@
     }
 
     @keyframes terbang {
-      0%, 100% {
-        transform: translateY(0) rotate(-5deg);
-      }
-      50% {
-        transform: translateY(-20px) rotate(5deg);
-      }
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
     }
 
+    /* ========== SECTION ========== */
     .subjects {
       padding: 70px 8%;
       text-align: center;
       background: #1a0f2e;
+      position: relative;
     }
 
     .subjects h2 {
@@ -157,49 +370,117 @@
     }
 
     .card p {
-      color: #d8b4fe; /* ungu pastel */
+      color: #d8b4fe;
     }
 
+    /* ========== BRAND FOOTER PER SECTION ========== */
+    .section-brand {
+      margin-top: 50px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(217,70,239,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .section-brand .brand-line {
+      width:36px; height:1px;
+      background:linear-gradient(90deg, transparent, #d946ef, transparent);
+    }
+    .section-brand .brand-name {
+      font-family:'Space Grotesk', Arial, sans-serif;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:5px;
+      text-transform:uppercase;
+      background:linear-gradient(90deg, #d946ef 0%, #a855f7 50%, #d946ef 100%);
+      background-size:200% 100%;
+      -webkit-background-clip:text; background-clip:text;
+      -webkit-text-fill-color:transparent;
+      animation:brandShine 3.5s linear infinite;
+      white-space:nowrap;
+    }
+
+    /* ========== FOOTER ========== */
     footer {
       text-align: center;
       padding: 25px;
       background: #0a0614;
       color: #a78bfa;
     }
+    footer .footer-brand {
+      display:flex; align-items:center; justify-content:center;
+      gap:12px;
+      margin-bottom:12px;
+      padding-bottom:14px;
+      border-bottom:1px solid rgba(217,70,239,0.15);
+    }
+    footer .footer-brand .brand-line {
+      width:36px; height:1px;
+      background:linear-gradient(90deg, transparent, #d946ef, transparent);
+    }
+    footer .footer-brand .brand-name {
+      font-family:'Space Grotesk', Arial, sans-serif;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:5px;
+      text-transform:uppercase;
+      background:linear-gradient(90deg, #d946ef 0%, #a855f7 50%, #d946ef 100%);
+      background-size:200% 100%;
+      -webkit-background-clip:text; background-clip:text;
+      -webkit-text-fill-color:transparent;
+      animation:brandShine 3.5s linear infinite;
+    }
 
+    /* ========== RESPONSIVE ========== */
     @media (max-width: 800px) {
       .hero {
         flex-direction: column;
         text-align: center;
         gap: 40px;
       }
-
-      .hero-text h1 {
-        font-size: 40px;
-      }
-
-      .plane {
-        font-size: 100px;
-      }
-
-      .cards {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      nav {
-        display: none;
-      }
+      .hero-text h1 { font-size: 40px; }
+      .plane { font-size: 100px; }
+      .cards { grid-template-columns: 1fr 1fr; }
+      nav { display: none; }
+      .mge-logo-wrap { width:120px; height:120px; }
+      .mge-text { font-size:34px; }
+      .brand-text .brand-label { font-size:11px; letter-spacing:4px; }
+      .brand-text .brand-line { width:18px; }
     }
 
     @media (max-width: 500px) {
-      .cards {
-        grid-template-columns: 1fr;
-      }
+      .cards { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 
 <body>
+
+  <!-- ========== LOADING SCREEN ========== -->
+  <div id="loader">
+    <div class="mge-logo-wrap">
+      <div class="mge-ring-outer"></div>
+      <div class="mge-ring-inner"></div>
+      <div class="mge-circle">
+        <div class="mge-text">MGE</div>
+      </div>
+    </div>
+
+    <div class="brand-text">
+      <span class="brand-line"></span>
+      <span class="brand-label">MAEDA GAMES EDU</span>
+      <span class="brand-line"></span>
+    </div>
+
+    <div class="loader-title">Memuat Game</div>
+
+    <div class="loader-bar">
+      <div class="loader-bar-fill"></div>
+    </div>
+
+    <div class="loader-sub">Pesawat Tempur IPS</div>
+  </div>
 
   <header>
     <div class="logo">✈️ PESAWAT TEMPUR IPS</div>
@@ -211,6 +492,7 @@
     </nav>
   </header>
 
+  <!-- ===== HERO ===== -->
   <section class="hero" id="beranda">
     <div class="hero-text">
       <h1>Belajar IPS dengan <span>Seru!</span></h1>
@@ -227,8 +509,16 @@
     </div>
 
     <div class="plane">✈️</div>
+
+    <!-- Brand bawah hero -->
+    <div class="section-brand" style="grid-column:1/-1; width:100%;">
+      <span class="brand-line"></span>
+      <span class="brand-name">MAEDA GAMES EDU</span>
+      <span class="brand-line"></span>
+    </div>
   </section>
 
+  <!-- ===== MATERI ===== -->
   <section class="subjects" id="materi">
     <h2>📚 Materi IPS</h2>
 
@@ -259,8 +549,16 @@
       </a>
 
     </div>
+
+    <!-- Brand bawah materi -->
+    <div class="section-brand">
+      <span class="brand-line"></span>
+      <span class="brand-name">MAEDA GAMES EDU</span>
+      <span class="brand-line"></span>
+    </div>
   </section>
 
+  <!-- ===== MAIN ===== -->
   <section class="subjects" id="main">
     <h2>🎮 Siap Menjadi Pilot IPS?</h2>
 
@@ -271,11 +569,44 @@
     <a href="#materi" class="btn">
       🚀 PILIH MATERI
     </a>
+
+    <!-- Brand bawah main -->
+    <div class="section-brand">
+      <span class="brand-line"></span>
+      <span class="brand-name">MAEDA GAMES EDU</span>
+      <span class="brand-line"></span>
+    </div>
   </section>
 
+  <!-- ===== FOOTER ===== -->
   <footer>
+    <div class="footer-brand">
+      <span class="brand-line"></span>
+      <span class="brand-name">MAEDA GAMES EDU</span>
+      <span class="brand-line"></span>
+    </div>
     © 2026 Pesawat Tempur IPS | Game Edukasi
   </footer>
+
+  <script>
+    /* ========== LOADING SCREEN ========== */
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('loader');
+      setTimeout(() => {
+        loader.classList.add('hide');
+        setTimeout(() => loader.remove(), 800);
+      }, 2200);
+    });
+
+    // Fallback
+    setTimeout(() => {
+      const loader = document.getElementById('loader');
+      if (loader && !loader.classList.contains('hide')) {
+        loader.classList.add('hide');
+        setTimeout(() => loader.remove(), 800);
+      }
+    }, 4500);
+  </script>
 
 </body>
 </html>
