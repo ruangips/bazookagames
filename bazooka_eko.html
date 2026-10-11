@@ -89,6 +89,8 @@
       transition: 0.3s;
       border: 2px solid transparent;
       display: block;
+      position: relative;
+      overflow: hidden;
     }
 
     .bab-card:hover {
@@ -112,6 +114,58 @@
       font-size: 14px;
       color: #94a3b8;
       line-height: 1.5;
+    }
+
+    /* Badge baru untuk menandai jenis game */
+    .game-badge {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+      color: #041018;
+      text-transform: uppercase;
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.35);
+    }
+
+    .game-badge.gold {
+      background: linear-gradient(135deg, #f59e0b, #fbbf24);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.45);
+    }
+
+    /* Efek premium untuk kartu Bab 2 */
+    .bab-card.premium {
+      border: 2px solid rgba(245, 158, 11, 0.35);
+      background: linear-gradient(135deg, #132941 0%, #1a2f4a 50%, #132941 100%);
+    }
+
+    .bab-card.premium::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #f59e0b, #fbbf24, #f59e0b);
+      background-size: 200% auto;
+      animation: shine 3s linear infinite;
+    }
+
+    .bab-card.premium:hover {
+      border-color: #fbbf24;
+      box-shadow: 0 20px 40px -10px rgba(245, 158, 11, 0.35);
+    }
+
+    .bab-card.premium h3 {
+      color: #fbbf24;
+    }
+
+    @keyframes shine {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
     }
 
     footer {
@@ -146,12 +200,15 @@
         <div class="icon">🏭</div>
         <h3>Bab 1 — Kegiatan Ekonomi</h3>
         <p>Produksi, distribusi, dan konsumsi dalam kehidupan sehari-hari.</p>
+        <span class="game-badge">🎮 Bazooka Game</span>
       </a>
 
-      <a href="ekonomi-bab2.html" class="bab-card">
+      <!-- 🔥 BAB 2 — UPDATE: sekarang mengarah ke Kuis Jutawan -->
+      <a href="https://ruangips.github.io/bazookagames/bab2ekokuisjutawan.html" class="bab-card premium">
         <div class="icon">👥</div>
         <h3>Bab 2 — Pelaku Ekonomi</h3>
         <p>Rumah tangga, perusahaan, pemerintah, dan masyarakat luar negeri.</p>
+        <span class="game-badge gold">👑 Kuis Jutawan</span>
       </a>
 
       <a href="ekonomi-bab3.html" class="bab-card">
