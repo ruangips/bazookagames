@@ -286,6 +286,7 @@
       font-size: 20px;
       font-weight: bold;
       color: #38bdf8;
+      letter-spacing: 1px;
     }
 
     .back-btn {
@@ -453,12 +454,41 @@
       100% { background-position: 200% 50%; }
     }
 
+    /* ========== FOOTER ========== */
     footer {
       text-align: center;
-      padding: 20px;
+      padding: 25px;
       background: #050c16;
       color: #94a3b8;
       font-size: 14px;
+    }
+    footer .footer-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(56,189,248,0.15);
+    }
+    footer .footer-brand .brand-line {
+      width: 36px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+    }
+    footer .footer-brand .brand-name {
+      font-family: 'Space Grotesk', Arial, sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #38bdf8 0%, #0ea5e9 50%, #38bdf8 100%);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: brandShine 3.5s linear infinite;
+      white-space: nowrap;
     }
 
     @media (max-width: 500px) {
@@ -468,6 +498,9 @@
       .mge-text { font-size: 34px; }
       .brand-text .brand-label { font-size: 11px; letter-spacing: 4px; }
       .brand-text .brand-line { width: 18px; }
+      .logo { font-size: 15px; }
+      footer .footer-brand .brand-name { font-size: 10px; letter-spacing: 4px; }
+      footer .footer-brand .brand-line { width: 22px; }
     }
   </style>
 </head>
@@ -500,7 +533,7 @@
   </div>
 
   <header>
-    <div class="logo">✈️ EKONOMI — PESAWAT TEMPUR IPS</div>
+    <div class="logo">🎮 BAZOOKA GAMES - EKONOMI</div>
     <a href="index.html" class="back-btn">← Kembali</a>
   </header>
 
@@ -561,7 +594,12 @@
   </div>
 
   <footer>
-    © 2026 Pesawat Tempur IPS | Game Edukasi Ekonomi
+    <div class="footer-brand">
+      <span class="brand-line"></span>
+      <span class="brand-name">MAEDA GAMES EDU</span>
+      <span class="brand-line"></span>
+    </div>
+    © 2026 Bazooka Games - Ekonomi | Game Edukasi IPS
   </footer>
 
   <script>
