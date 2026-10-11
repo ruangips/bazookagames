@@ -1,547 +1,199 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#07152e">
-  <meta name="description" content="BazookaGames adalah game edukasi interaktif untuk belajar Sejarah, Ekonomi, Geografi, dan Sosiologi melalui pertempuran udara.">
-  <title>BazookaGames — Aim, Shoot, Learn!</title>
+  <title>Pesawat Tempur IPS</title>
 
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-    }
-
-    :root {
-      --bg: #07152e;
-      --panel: #102442;
-      --blue: #39a9ff;
-      --yellow: #ffcc4d;
-      --white: #f4f8ff;
-      --muted: #a9bad3;
+      font-family: Arial, sans-serif;
     }
 
     html {
-      scroll-behavior: smooth;
+      scroll-behavior: smooth; /* scroll halus */
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--white);
-      line-height: 1.6;
-      overflow-x: hidden;
+      background: #07111f;
+      color: white;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      width: min(1120px, 90%);
-      margin: auto;
-    }
-
-    /* NAVBAR */
     header {
+      padding: 20px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0b1b30;
       position: sticky;
       top: 0;
-      z-index: 10;
-      background: rgba(7, 21, 46, 0.94);
-      border-bottom: 1px solid rgba(255,255,255,.1);
-      backdrop-filter: blur(12px);
-    }
-
-    nav {
-      min-height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
+      z-index: 100;
     }
 
     .logo {
-      font-size: 1.45rem;
-      font-weight: 900;
-      letter-spacing: -1px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #38bdf8;
     }
 
-    .logo span {
-      color: var(--yellow);
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 25px;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      align-items: center;
-      color: var(--muted);
-      font-size: .92rem;
+    nav a:hover {
+      color: #38bdf8;
     }
 
-    .nav-links a:hover {
-      color: var(--yellow);
-    }
-
-    .nav-button {
-      background: var(--yellow);
-      color: #15213a !important;
-      padding: 10px 18px;
-      border-radius: 9px;
-      font-weight: 800;
-    }
-
-    /* HERO */
     .hero {
-      position: relative;
-      overflow: hidden;
-      min-height: 590px;
+      min-height: 85vh;
       display: flex;
       align-items: center;
-      background:
-        radial-gradient(ellipse at 80% 45%, #164d81 0%, transparent 38%),
-        linear-gradient(130deg, #07152e 15%, #0b2850 70%, #123f68);
+      justify-content: space-between;
+      padding: 60px 8%;
+      background: linear-gradient(135deg, #07111f, #12365a);
     }
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      opacity: .2;
-      background-image: radial-gradient(#b8e3ff 1px, transparent 1px);
-      background-size: 38px 38px;
-      pointer-events: none;
+    .hero-text {
+      max-width: 550px;
     }
 
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 680px;
-      padding: 85px 0;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      border: 1px solid rgba(57,169,255,.5);
-      background: rgba(57,169,255,.12);
-      color: #8bd1ff;
-      border-radius: 30px;
-      padding: 7px 14px;
-      font-size: .78rem;
-      font-weight: 800;
-      letter-spacing: 1px;
-      margin-bottom: 24px;
-    }
-
-    h1 {
-      font-size: clamp(2.8rem, 7vw, 5.4rem);
-      line-height: 1.03;
-      letter-spacing: -3px;
-      margin-bottom: 24px;
-    }
-
-    h1 span {
-      color: var(--yellow);
-    }
-
-    .hero-description {
-      max-width: 570px;
-      color: #c2d2e9;
-      font-size: 1.08rem;
-      margin-bottom: 30px;
-    }
-
-    .actions {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .button {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 23px;
-      border-radius: 10px;
-      font-weight: 800;
-      transition: transform .2s, background .2s;
-      cursor: pointer;
-    }
-
-    .button:hover {
-      transform: translateY(-3px);
-    }
-
-    .button-primary {
-      color: #17213a;
-      background: var(--yellow);
-      box-shadow: 0 7px 25px rgba(255,204,77,.18);
-    }
-
-    .button-primary:hover {
-      background: #ffdb78;
-    }
-
-    .button-secondary {
-      border: 1px solid #6885a9;
-      color: var(--white);
-    }
-
-    .button-secondary:hover {
-      background: rgba(255,255,255,.08);
-    }
-
-    .hero-art {
-      position: absolute;
-      right: 4%;
-      top: 20%;
-      width: 38%;
-      height: 65%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-    }
-
-    .radar {
-      position: absolute;
-      width: min(380px, 100%);
-      aspect-ratio: 1;
-      border: 1px solid rgba(117,198,255,.22);
-      border-radius: 50%;
-      background: repeating-radial-gradient(
-        circle,
-        transparent 0 43px,
-        rgba(117,198,255,.12) 44px 45px
-      );
-    }
-
-    .radar::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      border-top: 2px solid rgba(255,204,77,.7);
-      animation: spin 8s linear infinite;
-    }
-
-    .jet {
-      position: relative;
-      z-index: 1;
-      font-size: clamp(6rem, 17vw, 12rem);
-      filter: drop-shadow(0 15px 25px rgba(0,0,0,.4));
-      transform: rotate(-12deg);
-      animation: float 3s ease-in-out infinite;
-    }
-
-    .target {
-      position: absolute;
-      right: 4%;
-      top: 10%;
-      font-size: 2rem;
-      color: var(--yellow);
-      animation: pulse 1.8s infinite;
-    }
-
-    .trail {
-      position: absolute;
-      width: 180px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--blue));
-      transform: rotate(-24deg);
-      left: -5%;
-      top: 66%;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(-12deg); }
-      50% { transform: translateY(-15px) rotate(-8deg); }
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: .5; transform: scale(.9); }
-      50% { opacity: 1; transform: scale(1.1); }
-    }
-
-    /* STATS */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      border: 1px solid rgba(255,255,255,.09);
-      background: #0b1d39;
-      border-radius: 16px;
-      margin-top: -30px;
-      position: relative;
-      z-index: 3;
-      padding: 24px 10px;
-    }
-
-    .stat {
-      text-align: center;
-      padding: 5px 12px;
-    }
-
-    .stat + .stat {
-      border-left: 1px solid rgba(255,255,255,.12);
-    }
-
-    .stat strong {
-      display: block;
-      color: var(--yellow);
-      font-size: 1.45rem;
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: .85rem;
-    }
-
-    /* SUBJECTS */
-    section {
-      padding: 90px 0;
-    }
-
-    .section-heading {
-      text-align: center;
-      max-width: 650px;
-      margin: 0 auto 42px;
-    }
-
-    .section-heading .eyebrow {
-      margin-bottom: 12px;
-    }
-
-    h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1.2;
-      margin-bottom: 15px;
-      letter-spacing: -1px;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-    }
-
-    .subjects {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-    }
-
-    .subject-card {
-      background: linear-gradient(145deg, #142c4d, #0c1d38);
-      border: 1px solid rgba(255,255,255,.09);
-      padding: 26px 21px;
-      border-radius: 16px;
-      transition: transform .2s, border-color .2s;
-    }
-
-    .subject-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--blue);
-    }
-
-    .subject-icon {
-      display: grid;
-      place-items: center;
-      width: 58px;
-      height: 58px;
-      background: rgba(57,169,255,.12);
-      border-radius: 14px;
-      font-size: 1.9rem;
+    .hero-text h1 {
+      font-size: 55px;
       margin-bottom: 20px;
     }
 
-    .subject-card h3 {
-      margin-bottom: 9px;
-      font-size: 1.12rem;
+    .hero-text h1 span {
+      color: #38bdf8;
     }
 
-    .subject-card p {
-      color: var(--muted);
-      font-size: .9rem;
-      min-height: 72px;
+    .hero-text p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #d1d5db;
+      margin-bottom: 30px;
     }
 
-    .subject-link {
+    .btn {
       display: inline-block;
-      color: var(--yellow);
-      font-size: .9rem;
-      font-weight: 800;
-      margin-top: 18px;
+      padding: 14px 28px;
+      background: #0ea5e9;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: 0.3s;
+      cursor: pointer;
+      border: none;
+      font-size: 16px;
     }
 
-    /* HOW TO PLAY */
-    .how {
-      background: #0b1d39;
+    .btn:hover {
+      background: #0284c7;
+      transform: scale(1.05);
     }
 
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
+    .plane {
+      font-size: 180px;
+      animation: terbang 3s infinite ease-in-out;
     }
 
-    .step {
-      padding: 28px;
-      border-radius: 15px;
-      background: var(--panel);
-      border: 1px solid rgba(255,255,255,.07);
+    @keyframes terbang {
+      0%, 100% {
+        transform: translateY(0) rotate(-5deg);
+      }
+      50% {
+        transform: translateY(-20px) rotate(5deg);
+      }
     }
 
-    .step-number {
-      color: var(--yellow);
-      font-size: 2rem;
-      font-weight: 900;
-      margin-bottom: 12px;
-    }
-
-    .step h3 {
-      margin-bottom: 10px;
-    }
-
-    .step p {
-      color: var(--muted);
-      font-size: .95rem;
-    }
-
-    /* CTA */
-    .cta {
-      padding: 70px 25px;
+    .subjects {
+      padding: 70px 8%;
       text-align: center;
-      border-radius: 22px;
-      background:
-        radial-gradient(ellipse at top right, #1a5680, transparent 55%),
-        linear-gradient(120deg, #112d50, #10213e);
-      border: 1px solid rgba(255,255,255,.1);
+      background: #0b1b30;
     }
 
-    .cta p {
-      color: #c2d2e9;
-      max-width: 570px;
-      margin: 0 auto 25px;
+    .subjects h2 {
+      font-size: 35px;
+      margin-bottom: 40px;
     }
 
-    /* FOOTER */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      padding: 30px 20px;
+      background: #132941;
+      border-radius: 15px;
+      transition: 0.3s;
+      text-decoration: none;
+      color: white;
+      display: block;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      background: #1b3b5d;
+      border-color: #38bdf8;
+    }
+
+    .card .icon {
+      font-size: 45px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      color: #38bdf8;
+    }
+
+    .card p {
+      color: #cbd5e1;
+    }
+
     footer {
-      padding: 28px 0;
-      border-top: 1px solid rgba(255,255,255,.09);
-      color: var(--muted);
-      font-size: .85rem;
+      text-align: center;
+      padding: 25px;
+      background: #050c16;
+      color: #94a3b8;
     }
 
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    footer strong {
-      color: var(--white);
-    }
-
-    @media (max-width: 850px) {
-      .hero-art {
-        right: -9%;
-        width: 43%;
-        opacity: .5;
-      }
-
-      .hero-content {
-        max-width: 620px;
-      }
-
-      .subjects {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .steps {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .nav-links {
-        gap: 12px;
-        font-size: .8rem;
-      }
-
-      .nav-links .nav-button {
-        padding: 8px 10px;
-      }
-
-      .logo {
-        font-size: 1.12rem;
-      }
-
+    @media (max-width: 800px) {
       .hero {
-        min-height: 570px;
-      }
-
-      .hero-art {
-        width: 65%;
-        right: -22%;
-        top: 32%;
-        opacity: .22;
-      }
-
-      h1 {
-        letter-spacing: -2px;
-      }
-
-      .hero-description {
-        font-size: 1rem;
-      }
-
-      .stats {
-        padding: 18px 4px;
-      }
-
-      .stat strong {
-        font-size: 1.15rem;
-      }
-
-      .stat span {
-        font-size: .72rem;
-      }
-
-      section {
-        padding: 68px 0;
-      }
-
-      .subjects {
-        gap: 12px;
-      }
-
-      .subject-card {
-        padding: 19px 15px;
-      }
-
-      .subject-card p {
-        min-height: 100px;
-      }
-
-      .footer-inner {
-        justify-content: center;
+        flex-direction: column;
         text-align: center;
+        gap: 40px;
+      }
+
+      .hero-text h1 {
+        font-size: 40px;
+      }
+
+      .plane {
+        font-size: 100px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      nav {
+        display: none;
       }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
+    @media (max-width: 500px) {
+      .cards {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -550,208 +202,81 @@
 <body>
 
   <header>
-    <nav class="container">
-      <a href="#beranda" class="logo">🚀 BAZOOKA<span>GAMES</span></a>
+    <div class="logo">✈️ PESAWAT TEMPUR IPS</div>
 
-      <div class="nav-links">
-        <a href="#pelajaran">Pelajaran</a>
-        <a href="#cara-bermain">Cara Bermain</a>
-        <a href="game.html" class="nav-button">Main Sekarang ↗</a>
-      </div>
+    <nav>
+      <a href="#beranda">Beranda</a>
+      <a href="#materi">Materi</a>
+      <a href="#main">Mulai Game</a>
     </nav>
   </header>
 
-  <main>
-    <section class="hero" id="beranda">
-      <div class="container">
-        <div class="hero-content">
-          <div class="eyebrow">🎯 GAME EDUKASI INTERAKTIF</div>
+  <section class="hero" id="beranda">
+    <div class="hero-text">
+      <h1>Belajar IPS dengan <span>Seru!</span></h1>
 
-          <h1>
-            AIM.<br>
-            SHOOT.<br>
-            <span>LEARN!</span>
-          </h1>
+      <p>
+        Terbang, bertempur, dan uji pengetahuanmu
+        tentang ekonomi, sejarah, geografi, dan sosiologi
+        dalam game Pesawat Tempur IPS.
+      </p>
 
-          <p class="hero-description">
-            Siap memasuki pertempuran pengetahuan?
-            Gunakan bazokamu, bidik pesawat pembawa jawaban,
-            dan buktikan kemampuanmu dalam Sejarah, Ekonomi,
-            Geografi, dan Sosiologi!
-          </p>
-
-          <div class="actions">
-            <a href="game.html" class="button button-primary">
-              ▶ MULAI BERMAIN
-            </a>
-            <a href="#pelajaran" class="button button-secondary">
-              Jelajahi Pelajaran ↓
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-art" aria-hidden="true">
-        <div class="radar"></div>
-        <div class="target">⊕</div>
-        <div class="trail"></div>
-        <div class="jet">✈</div>
-      </div>
-    </section>
-
-    <div class="container">
-      <div class="stats">
-        <div class="stat">
-          <strong>04</strong>
-          <span>Mata Pelajaran</span>
-        </div>
-        <div class="stat">
-          <strong>🎯</strong>
-          <span>Tantangan Pengetahuan</span>
-        </div>
-        <div class="stat">
-          <strong>∞</strong>
-          <span>Kesempatan Belajar</span>
-        </div>
-      </div>
+      <!-- Tombol langsung scroll ke Materi, tanpa popup -->
+      <a href="#materi" class="btn">
+        🚀 Mulai Bermain
+      </a>
     </div>
 
-    <section id="pelajaran">
-      <div class="container">
-        <div class="section-heading">
-          <div class="eyebrow">PILIH MISIMU</div>
-          <h2>Empat Bidang Ilmu.<br>Satu Medan Pertempuran.</h2>
-          <p>
-            Pilih bidang ilmu yang ingin kamu kuasai.
-            Setiap pertanyaan adalah misi, setiap jawaban benar
-            adalah kemenangan!
-          </p>
-        </div>
+    <div class="plane">✈️</div>
+  </section>
 
-        <div class="subjects">
-          <article class="subject-card">
-            <div class="subject-icon">🏛️</div>
-            <h3>Sejarah</h3>
-            <p>
-              Jelajahi masa lalu, kenali tokoh penting,
-              dan pecahkan misteri peristiwa bersejarah.
-            </p>
-            <a class="subject-link"
-               href="game.html?mapel=sejarah">
-              Pilih Misi →
-            </a>
-          </article>
+  <section class="subjects" id="materi">
+    <h2>📚 Materi IPS</h2>
 
-          <article class="subject-card">
-            <div class="subject-icon">📈</div>
-            <h3>Ekonomi</h3>
-            <p>
-              Uji kemampuanmu memahami uang, pasar,
-              kebutuhan, dan kegiatan ekonomi.
-            </p>
-            <a class="subject-link"
-               href="game.html?mapel=ekonomi">
-              Pilih Misi →
-            </a>
-          </article>
+    <div class="cards">
 
-          <article class="subject-card">
-            <div class="subject-icon">🌍</div>
-            <h3>Geografi</h3>
-            <p>
-              Kenali bumi, bentang alam, peta,
-              iklim, dan fenomena lingkungan.
-            </p>
-            <a class="subject-link"
-               href="game.html?mapel=geografi">
-              Pilih Misi →
-            </a>
-          </article>
+      <a href="https://ruangips.github.io/pesawattempur/ekonomi.html" class="card">
+        <div class="icon">💰</div>
+        <h3>Ekonomi</h3>
+        <p>Uji pengetahuan tentang kegiatan ekonomi dan kehidupan masyarakat.</p>
+      </a>
 
-          <article class="subject-card">
-            <div class="subject-icon">👥</div>
-            <h3>Sosiologi</h3>
-            <p>
-              Pahami kehidupan masyarakat, interaksi sosial,
-              kelompok, dan perubahan sosial.
-            </p>
-            <a class="subject-link"
-               href="game.html?mapel=sosiologi">
-              Pilih Misi →
-            </a>
-          </article>
-        </div>
-      </div>
-    </section>
+      <a href="https://ruangips.github.io/pesawattempur/sejarah.html" class="card">
+        <div class="icon">🏛️</div>
+        <h3>Sejarah</h3>
+        <p>Kenali berbagai peristiwa penting dalam sejarah.</p>
+      </a>
 
-    <section class="how" id="cara-bermain">
-      <div class="container">
-        <div class="section-heading">
-          <div class="eyebrow">PANDUAN MISI</div>
-          <h2>Bagaimana Cara Bermain?</h2>
-          <p>
-            Asah pengetahuanmu melalui tiga langkah sederhana.
-          </p>
-        </div>
+      <a href="https://ruangips.github.io/pesawattempur/geografi.html" class="card">
+        <div class="icon">🌍</div>
+        <h3>Geografi</h3>
+        <p>Jelajahi pengetahuan tentang bumi, wilayah, dan lingkungan.</p>
+      </a>
 
-        <div class="steps">
-          <article class="step">
-            <div class="step-number">01</div>
-            <h3>📚 Pilih Pelajaran</h3>
-            <p>
-              Tentukan bidang ilmu dan bersiaplah menerima
-              tantangan pengetahuan.
-            </p>
-          </article>
+      <a href="https://ruangips.github.io/pesawattempur/sosiologi.html" class="card">
+        <div class="icon">👥</div>
+        <h3>Sosiologi</h3>
+        <p>Pelajari kehidupan sosial dan interaksi dalam masyarakat.</p>
+      </a>
 
-          <article class="step">
-            <div class="step-number">02</div>
-            <h3>🎯 Bidik Jawaban</h3>
-            <p>
-              Baca pertanyaan, amati jawaban yang dibawa
-              pesawat, lalu pilih target yang tepat.
-            </p>
-          </article>
+    </div>
+  </section>
 
-          <article class="step">
-            <div class="step-number">03</div>
-            <h3>🏆 Raih Kemenangan</h3>
-            <p>
-              Jawab dengan benar, kumpulkan poin,
-              dan tingkatkan kemampuanmu.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
+  <section class="subjects" id="main">
+    <h2>🎮 Siap Menjadi Pilot IPS?</h2>
 
-    <section>
-      <div class="container">
-        <div class="cta">
-          <div class="eyebrow">MISI SIAP DIMULAI</div>
-          <h2>Berani Menguji Pengetahuanmu?</h2>
-          <p>
-            Tinggalkan cara belajar yang monoton.
-            Masuk ke medan pertempuran dan jadilah
-            juara pengetahuan bersama BazookaGames!
-          </p>
-          <a href="game.html" class="button button-primary">
-            🚀 MULAI MISI SEKARANG
-          </a>
-        </div>
-      </div>
-    </section>
-  </main>
+    <p style="margin-bottom: 25px; color:#cbd5e1;">
+      Pilih salah satu materi di atas untuk mulai bermain!
+    </p>
+
+    <!-- Tombol juga scroll ke Materi, tanpa popup -->
+    <a href="#materi" class="btn">
+      🚀 PILIH MATERI
+    </a>
+  </section>
 
   <footer>
-    <div class="container footer-inner">
-      <div>
-        <strong>🚀 BazookaGames</strong> — Aim, Shoot, Learn!
-      </div>
-      <div>
-        Game Edukasi Interaktif · Dibuat untuk Belajar
-      </div>
-    </div>
+    © 2026 Pesawat Tempur IPS | Game Edukasi
   </footer>
 
 </body>
