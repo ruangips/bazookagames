@@ -86,6 +86,45 @@
     100%{opacity:0;transform:translate(-50%,-50%) scale(2.5)}
   }
 
+  /* ===== MONEY TOAST (SELAMAT / SALAH) ===== */
+  @keyframes moneyPop{
+    0%{opacity:0;transform:translate(-50%,30px) scale(.5)}
+    15%{opacity:1;transform:translate(-50%,-12px) scale(1.12)}
+    30%{transform:translate(-50%,0) scale(1)}
+    82%{opacity:1;transform:translate(-50%,0) scale(1)}
+    100%{opacity:0;transform:translate(-50%,-40px) scale(.9)}
+  }
+  .money-toast{
+    position:fixed;top:16%;left:50%;transform:translate(-50%,0);
+    padding:18px 34px;border-radius:22px;
+    font-family:'Space Grotesk',system-ui,sans-serif;font-weight:900;
+    text-align:center;z-index:200;pointer-events:none;
+    min-width:250px;max-width:92vw;
+    animation:moneyPop 2.6s cubic-bezier(.2,.9,.3,1.2) forwards;
+    letter-spacing:.02em;
+  }
+  .money-toast.correct{
+    background:linear-gradient(135deg,#065f46 0%,#10b981 50%,#34d399 100%);
+    color:#fff;border:2px solid #6ee7b7;
+    box-shadow:0 20px 60px rgba(16,185,129,.55),0 0 90px rgba(52,211,153,.45),inset 0 1px 0 rgba(255,255,255,.45);
+  }
+  .money-toast.wrong{
+    background:linear-gradient(135deg,#7f1d1d 0%,#dc2626 50%,#ef4444 100%);
+    color:#fff;border:2px solid #fca5a5;
+    box-shadow:0 20px 60px rgba(220,38,38,.55),0 0 90px rgba(239,68,68,.45),inset 0 1px 0 rgba(255,255,255,.45);
+  }
+  .money-toast .mt-head{font-size:1.3rem;margin-bottom:6px;letter-spacing:.05em}
+  .money-toast .mt-sub{font-size:.78rem;opacity:.92;margin-bottom:4px;letter-spacing:.08em;text-transform:uppercase}
+  .money-toast .mt-amount{font-size:1.85rem;letter-spacing:.5px;line-height:1.1;font-family:'Space Grotesk',monospace}
+  .money-toast .mt-total{font-size:.75rem;opacity:.9;margin-top:8px;padding-top:6px;border-top:1px solid rgba(255,255,255,.28)}
+
+  .prize-chip{
+    background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(30,20,55,.8))!important;
+    border-color:rgba(52,211,153,.45)!important;
+    color:#6ee7b7!important;
+  }
+  .prize-chip.prize-flash{animation:correctPulse .5s ease}
+
   @keyframes mgeLogoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
   @keyframes mgeSpinRing{to{transform:rotate(360deg)}}
   @keyframes mgeSpinRingReverse{to{transform:rotate(-360deg)}}
@@ -479,6 +518,7 @@
   .summary-status.ok{background:rgba(16,185,129,.15);color:#34d399;border:1px solid rgba(16,185,129,.4)}
   .summary-status.no{background:rgba(220,38,38,.15);color:#fca5a5;border:1px solid rgba(220,38,38,.4)}
   .summary-status.skip{background:rgba(120,130,150,.15);color:var(--text-muted);border:1px solid rgba(120,130,150,.4)}
+  .summary-money{font-size:.75rem;margin-top:6px;font-weight:800;color:#6ee7b7}
 
   #start-screen{background:transparent!important;border:none!important;box-shadow:none!important;backdrop-filter:none!important;max-width:min(600px,96vw)!important;position:relative;overflow:visible;padding:0!important;animation:fadeUp .8s cubic-bezier(.2,.9,.3,1) both;margin:0 auto}
   #menuCanvas{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none}
@@ -505,13 +545,13 @@
   .bk-title-sub2{font-size:clamp(9px,2.4vw,13px);font-weight:700;letter-spacing:clamp(1.5px,0.6vw,3px);color:var(--primary-light);text-transform:uppercase;text-shadow:0 0 12px rgba(196,181,253,.9),0 0 28px rgba(139,92,246,.6)}
   .bk-sub{font-size:clamp(9px,2.4vw,12px);color:var(--primary-light);opacity:.8;letter-spacing:clamp(1.5px,0.6vw,3px);text-transform:uppercase;margin:14px 0 14px}
   .bk-prem-stat{position:relative;border-radius:14px;padding:10px 14px;margin-bottom:10px;overflow:hidden;border:1px solid var(--glass-border);background:linear-gradient(135deg,rgba(30,20,55,.9),rgba(45,30,80,.85))}
-  .bk-prem-stat.bk-gold{background:linear-gradient(135deg,rgba(196,181,253,.20),rgba(139,92,246,.12));border-color:rgba(196,181,253,.55);box-shadow:0 0 36px rgba(196,181,253,.35),inset 0 1px 0 rgba(255,255,255,.1)}
+  .bk-prem-stat.bk-money{background:linear-gradient(135deg,rgba(16,185,129,.20),rgba(52,211,153,.10));border-color:rgba(52,211,153,.55);box-shadow:0 0 36px rgba(52,211,153,.35),inset 0 1px 0 rgba(255,255,255,.1)}
   .bk-prem-stat.bk-green{background:linear-gradient(135deg,rgba(236,72,153,.18),rgba(244,114,182,.10));border-color:rgba(236,72,153,.55);box-shadow:0 0 36px rgba(236,72,153,.32),inset 0 1px 0 rgba(255,255,255,.1)}
   .bk-stat-lbl{display:flex;align-items:center;justify-content:center;gap:6px;font-size:clamp(8px,2.2vw,10px);letter-spacing:2.5px;font-weight:800;opacity:.95;margin-bottom:4px}
-  .bk-prem-stat.bk-gold .bk-stat-lbl{color:#c4b5fd}
+  .bk-prem-stat.bk-money .bk-stat-lbl{color:#6ee7b7}
   .bk-prem-stat.bk-green .bk-stat-lbl{color:#f472b6}
   .bk-stat-val{font-size:clamp(20px,5.5vw,34px);font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:1px}
-  .bk-prem-stat.bk-gold .bk-stat-val{color:#c4b5fd;text-shadow:0 0 22px rgba(196,181,253,.8),0 0 44px rgba(196,181,253,.5);animation:bkValPulse 2.6s ease-in-out infinite}
+  .bk-prem-stat.bk-money .bk-stat-val{color:#6ee7b7;text-shadow:0 0 22px rgba(110,231,183,.8),0 0 44px rgba(52,211,153,.5);font-family:'Space Grotesk',monospace}
   .bk-prem-stat.bk-green .bk-stat-val{color:#f472b6;text-shadow:0 0 22px rgba(244,114,182,.75),0 0 44px rgba(236,72,153,.4)}
   .bk-btns{display:flex;flex-direction:column;gap:10px;margin-top:14px}
   .bk-btn{font:inherit;font-weight:700;padding:14px 18px;border:none;border-radius:11px;cursor:pointer;letter-spacing:1.5px;transition:all .18s;font-size:clamp(12px,3vw,15px);min-height:48px;touch-action:manipulation;position:relative;overflow:hidden;isolation:isolate;font-family:'Space Grotesk',system-ui,sans-serif;-webkit-appearance:none;appearance:none}
@@ -553,6 +593,9 @@
     #start-screen{max-width:100%!important}
     .bk-panel{border-radius:14px}
     .answer-label{font-size:1.1rem;right:8px}
+    .money-toast{padding:14px 22px;min-width:220px}
+    .money-toast .mt-head{font-size:1.1rem}
+    .money-toast .mt-amount{font-size:1.5rem}
   }
   @media (max-width:380px){
     .heart-icon{font-size:.9rem}
@@ -609,8 +652,8 @@
       </div>
     </div>
     <div class="flex items-center gap-2 shrink-0">
-      <div class="hidden md:flex items-center gap-1.5 px-4 py-2 rounded-full" style="background:linear-gradient(135deg,rgba(139,92,246,.16),rgba(45,30,80,.5));border:1px solid var(--glass-border)">
-        <span class="text-[10px] font-black tracking-widest" style="color:var(--primary-bright)">🎯 4 LEVEL ◆ 60 SOAL</span>
+      <div class="hidden md:flex items-center gap-1.5 px-4 py-2 rounded-full" style="background:linear-gradient(135deg,rgba(16,185,129,.16),rgba(45,30,80,.5));border:1px solid rgba(52,211,153,.4)">
+        <span class="text-[10px] font-black tracking-widest" style="color:#6ee7b7">🎯 4 LEVEL · 60 SOAL · 💰 Rp 1 MILIAR</span>
       </div>
       <button class="w-11 h-11 rounded-full flex items-center justify-center text-lg cursor-pointer transition" id="sound-toggle" style="background:linear-gradient(135deg,rgba(139,92,246,.16),rgba(45,30,80,.6));border:1px solid var(--glass-border);color:var(--primary-bright)">🔊</button>
     </div>
@@ -628,11 +671,11 @@
         <p class="bk-title-sub">Premium Edition</p>
         <p class="bk-title-sub2">Bab 2: Pelaku Ekonomi</p>
       </div>
-      <p class="bk-sub">4 Level · 60 Pertanyaan Epik</p>
+      <p class="bk-sub">4 Level · 60 Pertanyaan · Hadiah Hingga Rp 1 Miliar</p>
 
-      <div class="bk-prem-stat bk-gold">
-        <div class="bk-stat-lbl">👑 XP TOTAL</div>
-        <div class="bk-stat-val" id="hsVal">0</div>
+      <div class="bk-prem-stat bk-money">
+        <div class="bk-stat-lbl">💰 UANG TERKUMPUL</div>
+        <div class="bk-stat-val" id="moneyVal">Rp 0</div>
       </div>
       <div class="bk-prem-stat bk-green">
         <div class="bk-stat-lbl">📈 PROGRES MISI</div>
@@ -659,6 +702,7 @@
         <p><b>🎯 4 Level Bertingkat</b> — total <b>60 soal unik</b> (15 soal per level).</p>
         <p><b>❤️ 6 Nyawa</b> per level. Salah / waktu habis = −1 nyawa. Habis = ulangi level itu.</p>
         <p><b>⏱️ Timer 45 detik</b> per soal + <b>3 bantuan</b> (50:50, Petunjuk, Lewati).</p>
+        <p><b>💰 Hadiah Uang:</b> Benar = dapat uang (mulai Rp 250.000 di soal 1, naik terus hingga total Rp 1.000.000.000). Salah = uangmu <b>berkurang 20%</b>.</p>
         <p><b>🔀 Soal & jawaban diacak</b> — tidak ada soal yang terulang di level yang sama.</p>
         <p><b>💾 Progres tersimpan otomatis</b> — bisa lanjut dari level terakhir.</p>
       </div>
@@ -681,8 +725,8 @@
         <div class="hud-chip hud-chip-gold">
           <span>🎯</span> <span class="font-black tracking-widest">LEVEL <span id="hud-level">1</span>/4</span>
         </div>
-        <div class="hud-chip">
-          <span>⚡</span> <span id="xp-counter" class="font-black">0</span> <span class="text-[10px] opacity-70">XP</span>
+        <div class="hud-chip prize-chip" id="prize-chip">
+          <span>💰</span> <span id="prize-counter" class="font-black">Rp 0</span>
         </div>
       </div>
       <div class="flex items-center gap-2 flex-wrap">
@@ -734,7 +778,7 @@
         <span class="text-[11px] md:text-xs font-black uppercase tracking-[.15em]" style="color:var(--primary-bright)">PERTANYAAN <span id="current-q-num">1</span>/<span id="current-q-total">15</span></span>
         <div class="flex items-center gap-2 flex-wrap">
           <span id="difficulty-tag" class="diff-badge diff-mudah">Mudah</span>
-          <span id="reward-tag" class="text-[11px] font-black tracking-widest px-3 py-1.5 rounded-full whitespace-nowrap" style="background:linear-gradient(135deg,rgba(139,92,246,.20),rgba(196,181,253,.08));color:var(--primary-bright);border:1px solid var(--glass-border)">💎 Rp 100</span>
+          <span id="reward-tag" class="text-[11px] font-black tracking-widest px-3 py-1.5 rounded-full whitespace-nowrap" style="background:linear-gradient(135deg,rgba(16,185,129,.22),rgba(52,211,153,.10));color:#6ee7b7;border:1px solid rgba(52,211,153,.45)">💰 +Rp 250.000</span>
         </div>
       </div>
       <h3 id="question-text" class="text-base md:text-xl font-bold leading-snug" style="color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;font-size:1.15rem;letter-spacing:.01em;position:relative;z-index:1;">Memuat pertanyaan...</h3>
@@ -759,7 +803,7 @@
     <div class="premium-modal-inner max-w-sm text-center">
       <div class="text-5xl mb-4" style="animation:floatCard 3s ease-in-out infinite">⏭️</div>
       <h3 class="text-xl md:text-2xl font-black mb-3 font-display" style="color:var(--primary-bright)">Lewati Soal Ini?</h3>
-      <p class="text-sm font-bold mb-6 leading-relaxed" style="color:var(--text-soft)">Soal ini akan ditandai <b style="color:var(--primary-bright)">dilewati</b> dan tidak dihitung benar/salah.</p>
+      <p class="text-sm font-bold mb-6 leading-relaxed" style="color:var(--text-soft)">Soal ini akan ditandai <b style="color:var(--primary-bright)">dilewati</b> dan tidak dihitung benar/salah. Uangmu tidak akan berubah.</p>
       <div class="flex gap-3">
         <button type="button" id="btn-skip-cancel" class="btn-outline-gold flex-1 text-sm">Batal</button>
         <button type="button" id="btn-skip-confirm" class="btn-gold flex-1" style="padding:14px 24px;font-size:.85rem">Ya, Lewati</button>
@@ -776,6 +820,7 @@
       <p class="text-sm md:text-base font-bold mb-5 leading-relaxed" style="color:var(--text-soft)" id="fail-message">Kamu gagal menyelesaikan level ini.</p>
       <div class="rounded-xl p-4 mb-6" style="background:linear-gradient(135deg,rgba(139,92,246,.10),rgba(45,30,80,.5));border:1px solid var(--glass-border)">
         <div class="text-xs font-bold" style="color:var(--text-soft)">📍 Kamu akan mengulang <b style="color:var(--primary-bright)" id="fail-level-name">Level 1</b> — <b style="color:var(--primary-bright)">bukan</b> dari level pertama.</div>
+        <div class="text-xs font-bold mt-2" style="color:var(--text-soft)">💰 Uangmu akan dikembalikan ke posisi awal level ini.</div>
       </div>
       <button type="button" id="btn-retry-level" class="btn-gold">🔄 ULANGI LEVEL INI</button>
       <div class="mgde-footer-dark"><span class="mgde-label">MAEDA GAMES EDU</span></div>
@@ -788,8 +833,10 @@
       <div class="text-6xl mb-4" style="animation:crownShine 3s ease-in-out infinite">🏆</div>
       <h3 class="text-2xl md:text-3xl font-black mb-3 font-display gold-text" id="complete-title">LEVEL SELESAI!</h3>
       <p class="text-sm md:text-base font-bold mb-5 leading-relaxed" style="color:var(--text-soft)" id="complete-message">Kerja bagus!</p>
-      <div class="rounded-xl p-4 mb-6" style="background:linear-gradient(135deg,rgba(139,92,246,.10),rgba(45,30,80,.5));border:1px solid var(--glass-border)">
-        <div class="text-xs font-bold" style="color:var(--text-soft)" id="complete-detail">Selanjutnya: Level 2</div>
+      <div class="rounded-xl p-4 mb-6" style="background:linear-gradient(135deg,rgba(16,185,129,.12),rgba(45,30,80,.5));border:1px solid rgba(52,211,153,.4)">
+        <div class="text-[10px] font-black tracking-widest uppercase mb-1" style="color:#6ee7b7">💰 UANG SAAT INI</div>
+        <div class="text-xl font-black" id="complete-money" style="color:#6ee7b7;font-family:'Space Grotesk',monospace">Rp 0</div>
+        <div class="text-xs font-bold mt-3" style="color:var(--text-soft)" id="complete-detail">Selanjutnya: Level 2</div>
       </div>
       <div class="space-y-3">
         <button type="button" id="btn-view-summary" class="btn-outline-gold w-full text-sm" style="border-color:var(--glass-border);color:var(--primary-bright)">📖 LIHAT PEMBAHASAN LEVEL INI</button>
@@ -847,8 +894,8 @@
         <div class="flex justify-between items-center py-3 border-b gap-2" style="border-color:var(--glass-border-soft)"><span class="font-black tracking-wide" style="color:var(--text-muted)">SALAH</span><span id="card-wrong" class="font-black font-mono" style="color:#ef4444;font-family:'Space Grotesk',monospace">0</span></div>
         <div class="flex justify-between items-center py-3 border-b gap-2" style="border-color:var(--glass-border-soft)"><span class="font-black tracking-wide" style="color:var(--text-muted)">DILEWATI</span><span id="card-skipped" class="font-black font-mono" style="color:var(--text-muted);font-family:'Space Grotesk',monospace">0</span></div>
         <div class="flex justify-between items-center py-3 border-b gap-2" style="border-color:var(--glass-border-soft)"><span class="font-black tracking-wide" style="color:var(--text-muted)">SKOR AKHIR</span><span id="card-score" class="font-black text-xl font-mono" style="color:var(--primary-bright);font-family:'Space Grotesk',monospace">0</span></div>
-        <div class="flex justify-between items-center py-3 border-b gap-2" style="border-color:var(--glass-border-soft)"><span class="font-black tracking-wide" style="color:var(--text-muted)">XP TOTAL</span><span id="card-xp" class="font-black font-mono" style="color:var(--primary-bright);font-family:'Space Grotesk',monospace">0 XP</span></div>
         <div class="flex justify-between items-center py-3 border-b gap-2" style="border-color:var(--glass-border-soft)"><span class="font-black tracking-wide" style="color:var(--text-muted)">LEVEL SELESAI</span><span id="card-levels" class="font-black font-mono" style="color:var(--primary-bright);font-family:'Space Grotesk',monospace">0 / 4</span></div>
+        <div class="flex justify-between items-center py-3 border-b-2 gap-2" style="border-color:rgba(52,211,153,.5)"><span class="font-black tracking-wide" style="color:#6ee7b7">💰 HADIAH AKHIR</span><span id="card-prize" class="font-black text-xl md:text-2xl font-mono" style="color:#6ee7b7;font-family:'Space Grotesk',monospace;text-shadow:0 0 20px rgba(110,231,183,.7)">Rp 0</span></div>
         <div class="flex justify-between items-center py-3 gap-2"><span class="font-black tracking-wide" style="color:var(--text-muted)">GELAR</span><span id="card-title" class="font-black text-xs md:text-sm text-right font-display" style="color:var(--primary-bright)">🌱 PEMBELAJAR EKONOMI</span></div>
       </div>
     </div>
@@ -883,8 +930,45 @@ const bind=(id,h)=>{const el=$(id);if(el)el.addEventListener('click',h);};
 
 const TIMER_PER_QUESTION=45;
 const MAX_LIVES=6;
-const STORAGE_KEY='kuis_milioner_premium_pelaku_amethyst_v2_progress';
-const SOUND_KEY='kuis_milioner_premium_pelaku_amethyst_v2_sound';
+const STORAGE_KEY='kuis_milioner_premium_pelaku_money_v4_progress';
+const SOUND_KEY='kuis_milioner_premium_pelaku_money_v4_sound';
+
+/* ============================================================
+   💰 SISTEM HADIAH UANG
+   60 nilai reward per soal. Bila semua benar, total = Rp 1.000.000.000
+   Level 1 (Q1-15)  : total Rp 30 juta     (mulai Rp 250.000)
+   Level 2 (Q16-30) : total Rp 120 juta    (kumulatif Rp 150 juta)
+   Level 3 (Q31-45) : total Rp 350 juta    (kumulatif Rp 500 juta)
+   Level 4 (Q46-60) : total Rp 500 juta    (kumulatif Rp 1 MILIAR)
+   ============================================================ */
+const REWARDS = [
+  // Level 1 — Q1 s.d. Q15 (total 30 juta)
+  250000, 250000, 500000, 500000, 1000000, 1000000, 1500000, 2000000, 2000000, 2500000,
+  3000000, 3500000, 4000000, 3500000, 4500000,
+  // Level 2 — Q16 s.d. Q30 (total 120 juta)
+  5000000, 5000000, 6000000, 6000000, 7000000, 7000000, 8000000, 8000000, 9000000, 9000000,
+  10000000, 10000000, 10000000, 10000000, 10000000,
+  // Level 3 — Q31 s.d. Q45 (total 350 juta)
+  15000000, 18000000, 20000000, 22000000, 25000000, 25000000, 25000000, 25000000, 25000000,
+  25000000, 25000000, 25000000, 25000000, 25000000, 25000000,
+  // Level 4 — Q46 s.d. Q60 (total 500 juta)
+  30000000, 30000000, 30000000, 30000000, 30000000, 35000000, 35000000, 35000000, 35000000,
+  35000000, 35000000, 35000000, 35000000, 35000000, 35000000
+];
+
+function formatRupiah(n){
+  n = Math.max(0, Math.round(n||0));
+  return 'Rp ' + n.toLocaleString('id-ID');
+}
+function getGlobalQIndex(levelIdx, qInLevel){
+  let idx = 0;
+  for(let i=0; i<levelIdx; i++) idx += LEVELS[i].questions.length;
+  return idx + qInLevel;
+}
+function getQuestionReward(levelIdx, qInLevel){
+  const idx = getGlobalQIndex(levelIdx, qInLevel);
+  return REWARDS[idx] || 0;
+}
 
 let soundMuted=false;
 try{soundMuted=localStorage.getItem(SOUND_KEY)==='muted';}catch(e){}
@@ -920,6 +1004,8 @@ function sfx(type){
     else if(type==='beepFinal'){playTone(1100,.15,'square',.2,0);playTone(1400,.15,'square',.18,.08);}
     else if(type==='heartLost'){playTone(300,.15,'square',.22,0);playTone(150,.25,'square',.22,.1);playTone(90,.35,'square',.2,.25);}
     else if(type==='levelUp'){[523.25,659.25,783.99,1046.5,1318.51,1567.98].forEach((f,i)=>playTone(f,.25,'triangle',.22,i*.1));}
+    else if(type==='money'){[880,1100,1318.51].forEach((f,i)=>playTone(f,.14,'triangle',.2,i*.06));}
+    else if(type==='moneyLoss'){playTone(400,.15,'sawtooth',.18,0);playTone(250,.25,'sawtooth',.18,.12);}
   }catch(e){}
 }
 const safeConfetti=(o)=>{try{if(typeof confetti==='function')confetti(o);}catch(e){}};
@@ -950,14 +1036,9 @@ function applyTheme(levelIdx){
   if(meta)meta.setAttribute('content',t.primary);
 }
 
-/* ============================================================
-   LEVELS — OPSI C: 15 SOAL PER LEVEL (TOTAL 60 SOAL)
-   Level 2 & 3 dipangkas jadi 15 soal terbaik.
-   TIDAK ADA SOAL YANG GANDA / TERULANG di level yang sama.
-   ============================================================ */
 const LEVELS=[
 {
-  name:'Pengertian Dasar & Kegiatan Ekonomi',icon:'📘',difficulty:'Mudah',reward:'Rp 100',
+  name:'Pengertian Dasar & Kegiatan Ekonomi',icon:'📘',difficulty:'Mudah',levelPrize:'Rp 30 Juta',
   questions:[
     {q:'Pelaku ekonomi adalah...',o:['Orang yang hanya mengonsumsi barang','Semua pihak yang terlibat dalam produksi, distribusi, dan konsumsi','Hanya perusahaan besar','Hanya pemerintah pusat'],c:1,e:'Pelaku ekonomi mencakup semua pihak — individu, kelompok, lembaga, maupun organisasi — yang terlibat dalam kegiatan produksi, distribusi, dan konsumsi.',t:'Pengertian Pelaku Ekonomi',k:'Pelaku ekonomi = semua pihak dalam 3 kegiatan pokok ekonomi.'},
     {q:'Berapa jumlah pelaku ekonomi utama dalam perekonomian?',o:['2 pelaku','3 pelaku','4 pelaku','5 pelaku'],c:2,e:'Terdapat 4 pelaku ekonomi utama: RTK, RTP, RTN (Pemerintah), dan RTMLN (Masyarakat Luar Negeri).',t:'Jenis Pelaku Ekonomi',k:'4 pelaku: RTK, RTP, RTN, RTMLN.'},
@@ -977,7 +1058,7 @@ const LEVELS=[
   ]
 },
 {
-  name:'Rumah Tangga Konsumen & Produsen',icon:'🏠',difficulty:'Sedang',reward:'Rp 1.000',
+  name:'Rumah Tangga Konsumen & Produsen',icon:'🏠',difficulty:'Sedang',levelPrize:'Rp 150 Juta',
   questions:[
     {q:'Rumah tangga konsumen adalah pelaku ekonomi yang...',o:['Memproduksi barang untuk dijual','Mengonsumsi barang/jasa dan menyediakan faktor produksi','Mengatur jalannya perekonomian','Melakukan ekspor-impor'],c:1,e:'RTK adalah pelaku ekonomi yang mengonsumsi barang/jasa sekaligus menyediakan faktor produksi kepada produsen.',t:'Rumah Tangga Konsumen',k:'RTK = konsumen + pemasok faktor produksi.'},
     {q:'Pelaku ekonomi yang paling banyak jumlahnya adalah...',o:['Rumah tangga produsen','Rumah tangga konsumen','Rumah tangga pemerintah','Masyarakat luar negeri'],c:1,e:'RTK adalah pelaku ekonomi paling banyak karena mencakup seluruh individu/keluarga yang melakukan konsumsi.',t:'Rumah Tangga Konsumen',k:'RTK = pelaku terbanyak.'},
@@ -997,7 +1078,7 @@ const LEVELS=[
   ]
 },
 {
-  name:'Pemerintah, Luar Negeri & Circular Flow',icon:'🏛️',difficulty:'Sulit',reward:'Rp 25.000',
+  name:'Pemerintah, Luar Negeri & Circular Flow',icon:'🏛️',difficulty:'Sulit',levelPrize:'Rp 500 Juta',
   questions:[
     {q:'Pemerintah disebut memiliki peran ganda karena...',o:['Hanya mengatur perekonomian','Berperan sebagai regulator, konsumen, dan produsen sekaligus','Hanya sebagai konsumen','Hanya sebagai produsen'],c:1,e:'Pemerintah memiliki 3 peran sekaligus: regulator (mengatur), konsumen (membelanjakan anggaran), dan produsen (melalui BUMN).',t:'Peran Pemerintah',k:'Pemerintah = regulator + konsumen + produsen.'},
     {q:'Pemerintah menetapkan tarif pajak dan UU Ketenagakerjaan. Hal ini menunjukkan peran pemerintah sebagai...',o:['Konsumen','Produsen','Regulator','Distributor'],c:2,e:'Sebagai regulator, pemerintah mengatur jalannya perekonomian melalui kebijakan fiskal, moneter, dan peraturan.',t:'Peran Pemerintah',k:'Menetapkan aturan = regulator.'},
@@ -1017,7 +1098,7 @@ const LEVELS=[
   ]
 },
 {
-  name:'Aplikasi & Analisis',icon:'👑',difficulty:'Sangat Sulit',reward:'Rp 1.000.000',
+  name:'Aplikasi & Analisis',icon:'👑',difficulty:'Sangat Sulit',levelPrize:'Rp 1 Miliar',
   questions:[
     {q:'Pak Andi bekerja sebagai karyawan pabrik dan menerima gaji setiap bulan. Pak Andi berperan sebagai...',o:['RTP','RTK','Pemerintah','Masyarakat luar negeri'],c:1,e:'Pak Andi adalah bagian dari RTK yang menyediakan tenaga kerja dan menerima balas jasa berupa gaji.',t:'Aplikasi Pelaku Ekonomi',k:'Karyawan = RTK.'},
     {q:'Seorang mahasiswa bekerja sambil kuliah dan menerima gaji paruh waktu. Ia berperan sebagai...',o:['Produsen','Konsumen (RTK) sekaligus penyedia tenaga kerja','Regulator','Investor'],c:1,e:'Mahasiswa tersebut adalah RTK yang menyediakan tenaga kerja (faktor produksi) dan menerima upah.',t:'Aplikasi Pelaku Ekonomi',k:'Pekerja paruh waktu = RTK.'},
@@ -1038,9 +1119,6 @@ const LEVELS=[
 }
 ];
 
-/* ============================================================
-   VALIDASI: Cek duplikat soal per level (dev only)
-   ============================================================ */
 (function validateNoDuplicates(){
   LEVELS.forEach((lv,i)=>{
     const seen=new Set();
@@ -1054,13 +1132,9 @@ const LEVELS=[
   });
 })();
 
-/* ============================================================
-   STATE
-   ============================================================ */
 let currentLevel=0;
 let currentQuestionInLevel=0;
 let lives=MAX_LIVES;
-let xpTotal=0;
 let correctAnswersTotal=0;
 let wrongAnswersTotal=0;
 let skippedTotal=0;
@@ -1081,20 +1155,60 @@ let gameActive=false;
 let unlockedLevel=0;
 let completedLevels=[];
 
-/* Urutan soal yang sudah diacak per sesi (biar tidak berubah saat reload question) */
+/* 💰 UANG */
+let prizeMoney = 0;
+let levelStartPrize = 0;
+
 let shuffledQuestionsOrder=[];
 
 function QPL(){ return LEVELS[currentLevel].questions.length; }
 function TotalQ(){ return LEVELS.reduce((s,l)=>s+l.questions.length, 0); }
 
 /* ============================================================
-   PERSISTENCE
+   MONEY TOAST
    ============================================================ */
+function showMoneyToast(type, amount, totalAmount){
+  const div = document.createElement('div');
+  div.className = 'money-toast ' + type;
+  if(type === 'correct'){
+    div.innerHTML =
+      '<div class="mt-head">🎉 SELAMAT! 🎉</div>' +
+      '<div class="mt-sub">Kamu mendapatkan</div>' +
+      '<div class="mt-amount">+' + formatRupiah(amount) + '</div>' +
+      '<div class="mt-total">💰 Total uang: <b>' + formatRupiah(totalAmount) + '</b></div>';
+  } else if(type === 'wrong'){
+    div.innerHTML =
+      '<div class="mt-head">❌ SALAH! ❌</div>' +
+      '<div class="mt-sub">Uangmu berkurang 20%</div>' +
+      '<div class="mt-amount">−' + formatRupiah(amount) + '</div>' +
+      '<div class="mt-total">💰 Total uang: <b>' + formatRupiah(totalAmount) + '</b></div>';
+  } else if(type === 'timeout'){
+    div.innerHTML =
+      '<div class="mt-head">⏰ WAKTU HABIS! ⏰</div>' +
+      '<div class="mt-sub">Uangmu berkurang 20%</div>' +
+      '<div class="mt-amount">−' + formatRupiah(amount) + '</div>' +
+      '<div class="mt-total">💰 Total uang: <b>' + formatRupiah(totalAmount) + '</b></div>';
+  }
+  document.body.appendChild(div);
+  setTimeout(() => { try{ div.remove(); }catch(e){} }, 2700);
+}
+function flashPrizeChip(){
+  const chip = $('prize-chip');
+  if(!chip) return;
+  chip.classList.add('prize-flash');
+  setTimeout(()=>chip.classList.remove('prize-flash'), 600);
+}
+function updatePrizeDisplay(){
+  setText('prize-counter', formatRupiah(prizeMoney));
+  setText('moneyVal', formatRupiah(prizeMoney));
+}
+
 function saveProgress(){
   try{
     localStorage.setItem(STORAGE_KEY,JSON.stringify({
-      unlockedLevel,completedLevels,xpTotal,correctAnswersTotal,
-      wrongAnswersTotal,skippedTotal,userAnswersHistory
+      unlockedLevel,completedLevels,correctAnswersTotal,
+      wrongAnswersTotal,skippedTotal,userAnswersHistory,
+      prizeMoney
     }));
   }catch(e){}
 }
@@ -1103,22 +1217,20 @@ function loadProgress(){
     const d=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');
     if(typeof d.unlockedLevel==='number')unlockedLevel=d.unlockedLevel;
     if(Array.isArray(d.completedLevels))completedLevels=d.completedLevels;
-    if(typeof d.xpTotal==='number')xpTotal=d.xpTotal;
     if(typeof d.correctAnswersTotal==='number')correctAnswersTotal=d.correctAnswersTotal;
     if(typeof d.wrongAnswersTotal==='number')wrongAnswersTotal=d.wrongAnswersTotal;
     if(typeof d.skippedTotal==='number')skippedTotal=d.skippedTotal;
     if(Array.isArray(d.userAnswersHistory))userAnswersHistory=d.userAnswersHistory;
+    if(typeof d.prizeMoney==='number')prizeMoney=d.prizeMoney;
   }catch(e){}
 }
 function resetProgress(){
   try{localStorage.removeItem(STORAGE_KEY);}catch(e){}
-  unlockedLevel=0;completedLevels=[];xpTotal=0;correctAnswersTotal=0;
+  unlockedLevel=0;completedLevels=[];correctAnswersTotal=0;
   wrongAnswersTotal=0;skippedTotal=0;userAnswersHistory=[];
+  prizeMoney=0;levelStartPrize=0;
 }
 
-/* ============================================================
-   UTIL: SHUFFLE (Fisher-Yates)
-   ============================================================ */
 function shuffleArray(arr){
   const a=arr.slice();
   for(let i=a.length-1;i>0;i--){
@@ -1128,9 +1240,6 @@ function shuffleArray(arr){
   return a;
 }
 
-/* ============================================================
-   RENDER
-   ============================================================ */
 function renderLevelsList(){
   const el=$('levels-list');if(!el)return;el.innerHTML='';
   LEVELS.forEach((lv,i)=>{
@@ -1146,7 +1255,7 @@ function renderLevelsList(){
       '<div class="level-number lv-color-'+(i+1)+'">'+(isCompleted?'✓':(i+1))+'</div>'+
       '<div style="flex:1;min-width:0">'+
         '<div style="font-weight:800;font-size:.85rem;color:var(--text)">'+lv.icon+' '+lv.name+'</div>'+
-        '<div style="font-size:.7rem;color:var(--text-muted);font-weight:700;letter-spacing:.05em">'+lv.questions.length+' soal ◆ '+lv.difficulty+' ◆ '+lv.reward+'</div>'+
+        '<div style="font-size:.7rem;color:var(--text-muted);font-weight:700;letter-spacing:.05em">'+lv.questions.length+' soal · '+lv.difficulty+' · 💰 '+lv.levelPrize+'</div>'+
       '</div>'+
       '<div style="font-size:1.4rem;filter:drop-shadow(0 0 8px rgba(139,92,246,.6))">'+(isCompleted?'🏅':(isUnlocked?'🔓':'🔒'))+'</div>';
     el.appendChild(card);
@@ -1162,9 +1271,9 @@ function renderProgressPanel(){
   }else{
     panel.classList.add('is-hidden');
   }
-  const hs=$('hsVal'),pv=$('progressVal');
-  if(hs)hs.textContent=xpTotal.toLocaleString('id-ID');
+  const pv=$('progressVal');
   if(pv)pv.textContent='LEVEL '+(Math.min(unlockedLevel,LEVELS.length-1)+1)+'/'+LEVELS.length;
+  updatePrizeDisplay();
 }
 function renderHearts(){
   const el=$('hearts');if(!el)return;
@@ -1207,9 +1316,6 @@ function updateWaypointTrail(){
   setText('progress-percent',pct+'%');
 }
 
-/* ============================================================
-   TIMER
-   ============================================================ */
 function updateTimerDisplay(){
   const el=$('timer-display');if(el)el.textContent=countdownTime;
   const pill=$('timer-pill');if(!pill)return;
@@ -1230,9 +1336,6 @@ function startCountdown(){
 }
 function stopCountdown(){clearInterval(countdownInterval);countdownInterval=null;}
 
-/* ============================================================
-   GAME FLOW
-   ============================================================ */
 function startGame(fromLevel){
   sfx('click');
   gameActive=true;
@@ -1244,18 +1347,21 @@ function startGame(fromLevel){
   levelAnswersHistory=[];
   lifelinesUsed={'5050':false,'hint':false,'skip':false};
   selectedAnswerIndex=null;answerLocked=false;
-  
-  // Acak urutan soal untuk sesi ini
+
+  // Reset uang untuk playthrough baru
+  prizeMoney = 0;
+  levelStartPrize = 0;
+
   shuffledQuestionsOrder=shuffleArray(
     LEVELS[currentLevel].questions.map((_,i)=>i)
   );
-  
+
   applyTheme(currentLevel);
   setText('hud-level',currentLevel+1);
   setText('level-num',currentLevel+1);
   setText('level-name',LEVELS[currentLevel].name);
   setText('level-icon',LEVELS[currentLevel].icon);
-  setText('xp-counter',xpTotal);
+  updatePrizeDisplay();
   renderHearts();
   renderWaypointTrail();
   hide('start-screen');hide('result-screen');
@@ -1268,25 +1374,27 @@ function loadQuestion(){
     selectedAnswerIndex=null;answerLocked=false;
     const lv=LEVELS[currentLevel];
     const n=QPL();
-    
-    // Ambil soal berdasarkan urutan yang sudah diacak
+
     const qRaw=lv.questions[shuffledQuestionsOrder[currentQuestionInLevel]];
     const correctText=qRaw.o[qRaw.c];
-    
-    // Acak opsi jawaban
+
     const shuffled=qRaw.o.slice();
     for(let i=shuffled.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]];}
     const newCorrect=shuffled.indexOf(correctText);
-    
+
     currentQuestion={
       q:qRaw.q,o:shuffled,c:newCorrect,e:qRaw.e,t:qRaw.t,k:qRaw.k,
-      difficulty:lv.difficulty,reward:lv.reward
+      difficulty:lv.difficulty
     };
     setText('current-q-num',currentQuestionInLevel+1);
     setText('question-counter',currentQuestionInLevel+1);
     setText('question-total',n);
     setText('current-q-total',n);
-    setText('reward-tag','💎 '+lv.reward);
+
+    // Tampilkan reward uang untuk soal ini
+    const rwd = getQuestionReward(currentLevel, currentQuestionInLevel);
+    setText('reward-tag', '💰 +' + formatRupiah(rwd));
+
     setText('question-text',currentQuestion.q);
     hide('hint-panel');hide('lock-btn-container');
     const lockBtn=$('btn-lock-answer');if(lockBtn)lockBtn.disabled=false;
@@ -1313,6 +1421,7 @@ function loadQuestion(){
       c.appendChild(btn);
     });
     updateLifelineButtons();
+    updatePrizeDisplay();
     startCountdown();
   }catch(e){console.error(e);}
 }
@@ -1373,7 +1482,8 @@ function confirmSkip(){
     correctAnswer:['A','B','C','D'][q.c]+'. '+q.o[q.c],
     explanation:q.e,topic:q.t,keyPoint:q.k,
     difficulty:q.difficulty,level:currentLevel+1,
-    isCorrect:false,isSkipped:true
+    isCorrect:false,isSkipped:true,
+    reward:0, prizeAfter:prizeMoney
   };
   userAnswersHistory.push(rec);
   levelAnswersHistory.push(rec);
@@ -1389,14 +1499,17 @@ function confirmAnswer(){
   hide('lock-btn-container');stopCountdown();
   const q=currentQuestion;if(!q)return;
   const isCorrect=selectedAnswerIndex===q.c;
-  
+
   document.querySelectorAll('#answers-container button').forEach(b=>b.disabled=true);
   updateLifelineButtons();
-  
+
   const sb=$('opt-btn-'+selectedAnswerIndex);
   const cb=$('opt-btn-'+q.c);
   if(sb)sb.classList.remove('opt-selected');
-  
+
+  const rewardThisQ = getQuestionReward(currentLevel, currentQuestionInLevel);
+  let rewardDelta = 0;
+
   if(isCorrect){
     if(sb){
       sb.classList.add('opt-correct');
@@ -1404,13 +1517,18 @@ function confirmAnswer(){
       addAnswerLabel(sb, '✅');
       createAnswerBurst(sb, 'green');
     }
-    sfx('correct');haptic([30,40,30]);
+    sfx('correct');setTimeout(()=>sfx('money'),200);haptic([30,40,30]);
     correctAnswersTotal++;levelCorrect++;
-    const earnedXP=(currentLevel+1)*100;
-    xpTotal+=earnedXP;
-    setText('xp-counter',xpTotal);
+
+    // 💰 TAMBAH UANG
+    rewardDelta = rewardThisQ;
+    prizeMoney += rewardThisQ;
+    updatePrizeDisplay();
+    flashPrizeChip();
+    showMoneyToast('correct', rewardThisQ, prizeMoney);
+
     safeConfetti({particleCount:50,spread:90,origin:{y:.4},colors:['#10b981','#34d399','#6ee7b7','#c4b5fd']});
-    setTimeout(()=>{advanceQuestion();},1800);
+    setTimeout(()=>{advanceQuestion();},2000);
   } else {
     if(sb){
       sb.classList.add('opt-wrong');
@@ -1424,14 +1542,23 @@ function confirmAnswer(){
       addAnswerLabel(cb, '✅');
       createAnswerBurst(cb, 'green');
     }
-    sfx('wrong');haptic([50,80,50]);
+    sfx('wrong');setTimeout(()=>sfx('moneyLoss'),250);haptic([50,80,50]);
     wrongAnswersTotal++;levelWrong++;
     lives--;
     renderHearts();
-    sfx('heartLost');
-    setTimeout(()=>{advanceQuestion();},2000);
+    setTimeout(()=>sfx('heartLost'), 400);
+
+    // 💰 KURANGI UANG 20%
+    const before = prizeMoney;
+    prizeMoney = Math.round(prizeMoney * 0.8);
+    rewardDelta = -(before - prizeMoney);
+    updatePrizeDisplay();
+    flashPrizeChip();
+    showMoneyToast('wrong', before - prizeMoney, prizeMoney);
+
+    setTimeout(()=>{advanceQuestion();},2200);
   }
-  
+
   const sl=['A','B','C','D'][selectedAnswerIndex];
   const cl=['A','B','C','D'][q.c];
   const rec={
@@ -1440,7 +1567,9 @@ function confirmAnswer(){
     correctAnswer:cl+'. '+q.o[q.c],
     explanation:q.e,topic:q.t,keyPoint:q.k,
     difficulty:q.difficulty,level:currentLevel+1,
-    isCorrect:isCorrect
+    isCorrect:isCorrect,
+    reward: rewardDelta,
+    prizeAfter: prizeMoney
   };
   userAnswersHistory.push(rec);
   levelAnswersHistory.push(rec);
@@ -1459,7 +1588,7 @@ function createAnswerBurst(btn, colorType){
   const rect = btn.getBoundingClientRect();
   const cx = rect.left + rect.width/2;
   const cy = rect.top + rect.height/2;
-  
+
   const ring = document.createElement('div');
   ring.className = 'answer-shockwave ' + colorType;
   ring.style.left = cx + 'px';
@@ -1468,11 +1597,11 @@ function createAnswerBurst(btn, colorType){
   ring.style.transform = 'translate(-50%,-50%)';
   document.body.appendChild(ring);
   setTimeout(()=>ring.remove(), 1100);
-  
+
   const colors = colorType === 'green'
     ? ['#10b981','#34d399','#6ee7b7','#a7f3d0','#c4b5fd','#fbbf24']
     : ['#dc2626','#ef4444','#f87171','#fca5a5','#fbbf24','#f59e0b'];
-  
+
   const count = window.innerWidth < 640 ? 24 : 36;
   for(let i=0;i<count;i++){
     const p = document.createElement('div');
@@ -1501,29 +1630,41 @@ function onTimeout(){
   document.querySelectorAll('#answers-container button').forEach(b=>b.disabled=true);
   const q=currentQuestion;if(!q)return;
   const cb=$('opt-btn-'+q.c);
-  
+
   if(cb){
     cb.classList.add('opt-correct');
     cb.classList.add('opt-locked-correct');
     addAnswerLabel(cb, '✅');
     createAnswerBurst(cb, 'green');
   }
-  
+
   wrongAnswersTotal++;levelWrong++;lives--;
-  renderHearts();sfx('heartLost');
+  renderHearts();setTimeout(()=>sfx('heartLost'), 300);
   updateLifelineButtons();
+
+  // 💰 KURANGI UANG 20%
+  const before = prizeMoney;
+  prizeMoney = Math.round(prizeMoney * 0.8);
+  const lost = before - prizeMoney;
+  updatePrizeDisplay();
+  flashPrizeChip();
+  showMoneyToast('timeout', lost, prizeMoney);
+  setTimeout(()=>sfx('moneyLoss'), 350);
+
   const rec={
     questionNum:currentQuestionInLevel+1,questionText:q.q,
     userAnswer:'— Waktu Habis —',
     correctAnswer:['A','B','C','D'][q.c]+'. '+q.o[q.c],
     explanation:q.e,topic:q.t,keyPoint:q.k,
     difficulty:q.difficulty,level:currentLevel+1,
-    isCorrect:false,isTimedOut:true
+    isCorrect:false,isTimedOut:true,
+    reward: -lost,
+    prizeAfter: prizeMoney
   };
   userAnswersHistory.push(rec);
   levelAnswersHistory.push(rec);
   saveProgress();
-  setTimeout(()=>{advanceQuestion();},2000);
+  setTimeout(()=>{advanceQuestion();},2200);
 }
 function advanceQuestion(){
   currentQuestionInLevel++;
@@ -1547,18 +1688,21 @@ function showLevelCompleteModal(){
   stopCountdown();
   const isLast=currentLevel===LEVELS.length-1;
   const title=$('complete-title'),msg=$('complete-message'),detail=$('complete-detail'),btn=$('btn-next-level');
-  if(isLast){
-    if(title)title.textContent='👑 SEMUA LEVEL SELESAI!';
-    if(msg)msg.textContent='Kamu berhasil menaklukkan 4 level Pelaku Ekonomi!';
-    if(detail)detail.textContent='Skor akhirmu akan ditampilkan sebentar lagi...';
-    if(btn)btn.textContent='📊 LIHAT HASIL AKHIR';
-  }else{
-    const nextLv=LEVELS[currentLevel+1];
-    if(title)title.textContent='🏆 LEVEL '+(currentLevel+1)+' SELESAI!';
-    if(msg)msg.textContent='Kerja bagus! Lanjut ke level berikutnya.';
-    if(detail)detail.innerHTML='Level selanjutnya: <b style="color:var(--primary-bright)">Level '+(currentLevel+2)+' — '+nextLv.icon+' '+nextLv.name+'</b>';
-    if(btn)btn.textContent='➡ LANJUT KE LEVEL BERIKUTNYA';
+  if(title)title.textContent = isLast ? '👑 SEMUA LEVEL SELESAI!' : ('🏆 LEVEL '+(currentLevel+1)+' SELESAI!');
+  if(msg)msg.textContent = isLast ? 'Kamu berhasil menaklukkan 4 level Pelaku Ekonomi!' : 'Kerja bagus! Lanjut ke level berikutnya.';
+  if(detail){
+    if(isLast){
+      detail.textContent = 'Skor akhirmu akan ditampilkan sebentar lagi...';
+    } else {
+      const nextLv=LEVELS[currentLevel+1];
+      detail.innerHTML = 'Level selanjutnya: <b style="color:var(--primary-bright)">Level '+(currentLevel+2)+' — '+nextLv.icon+' '+nextLv.name+'</b>';
+    }
   }
+  if(btn)btn.textContent = isLast ? '📊 LIHAT HASIL AKHIR' : '➡ LANJUT KE LEVEL BERIKUTNYA';
+
+  const moneyEl = $('complete-money');
+  if(moneyEl) moneyEl.textContent = formatRupiah(prizeMoney);
+
   sfx('levelUp');haptic([30,50,30,50,30]);
   safeConfetti({particleCount:100,spread:100,origin:{y:.6},colors:['#8b5cf6','#c4b5fd','#e9d5ff','#ec4899','#f472b6']});
   show('level-complete-modal');
@@ -1571,10 +1715,10 @@ function showSummaryModal(){
   const content=$('summary-content');
   if(title)title.textContent='📖 PEMBAHASAN LEVEL '+(currentLevel+1);
   if(subtitle)subtitle.textContent=LEVELS[currentLevel].icon+' '+LEVELS[currentLevel].name+' — '+levelAnswersHistory.length+' soal';
-  
+
   if(!content)return;
   content.innerHTML='';
-  
+
   if(levelAnswersHistory.length===0){
     content.innerHTML='<p style="color:var(--text-muted);text-align:center;padding:20px">Belum ada jawaban di level ini.</p>';
   } else {
@@ -1584,7 +1728,7 @@ function showSummaryModal(){
       let statusIcon='';
       let statusText='';
       let statusCls='';
-      
+
       if(h.isSkipped){
         cls+=' skipped';
         statusIcon='⏭️';
@@ -1601,7 +1745,18 @@ function showSummaryModal(){
         statusText='SALAH';
         statusCls='no';
       }
-      
+
+      let moneyLine = '';
+      if(typeof h.reward === 'number' && h.reward !== 0){
+        if(h.reward > 0){
+          moneyLine = '<div class="summary-money">💰 Uang: <b style="color:#6ee7b7">+'+formatRupiah(h.reward)+'</b> → Total: '+formatRupiah(h.prizeAfter)+'</div>';
+        } else {
+          moneyLine = '<div class="summary-money" style="color:#fca5a5">💰 Uang: <b>−'+formatRupiah(Math.abs(h.reward))+'</b> → Total: '+formatRupiah(h.prizeAfter)+'</div>';
+        }
+      } else if(typeof h.reward === 'number'){
+        moneyLine = '<div class="summary-money" style="color:var(--text-muted)">💰 Uang: tidak berubah → Total: '+formatRupiah(h.prizeAfter)+'</div>';
+      }
+
       div.className=cls;
       div.innerHTML=
         '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px;flex-wrap:wrap">'+
@@ -1619,11 +1774,12 @@ function showSummaryModal(){
         '</div>'+
         '<div class="summary-key">'+
           '🎯 Poin kunci: '+h.keyPoint+
-        '</div>';
+        '</div>'+
+        moneyLine;
       content.appendChild(div);
     });
   }
-  
+
   show('summary-modal');
 }
 function closeSummaryModal(){
@@ -1640,12 +1796,14 @@ function goToNextLevel(){
   levelAnswersHistory=[];
   lifelinesUsed={'5050':false,'hint':false,'skip':false};
   selectedAnswerIndex=null;answerLocked=false;
-  
-  // Acak urutan soal untuk level baru
+
+  // Simpan uang di awal level baru (untuk reset saat retry)
+  levelStartPrize = prizeMoney;
+
   shuffledQuestionsOrder=shuffleArray(
     LEVELS[currentLevel].questions.map((_,i)=>i)
   );
-  
+
   applyTheme(currentLevel);
   setText('hud-level',currentLevel+1);
   setText('level-num',currentLevel+1);
@@ -1653,6 +1811,7 @@ function goToNextLevel(){
   setText('level-icon',LEVELS[currentLevel].icon);
   renderHearts();
   renderWaypointTrail();
+  updatePrizeDisplay();
   loadQuestion();
 }
 function retryLevel(){
@@ -1664,12 +1823,15 @@ function retryLevel(){
   lifelinesUsed={'5050':false,'hint':false,'skip':false};
   selectedAnswerIndex=null;answerLocked=false;
   userAnswersHistory=userAnswersHistory.filter(h=>h.level!==currentLevel+1);
-  
-  // Acak ulang urutan soal saat retry
+
+  // 💰 RESET UANG KE AWAL LEVEL
+  prizeMoney = levelStartPrize;
+  updatePrizeDisplay();
+
   shuffledQuestionsOrder=shuffleArray(
     LEVELS[currentLevel].questions.map((_,i)=>i)
   );
-  
+
   saveProgress();
   applyTheme(currentLevel);
   renderHearts();
@@ -1696,14 +1858,33 @@ function endGame(){
   setText('card-wrong',wrongAnswersTotal);
   setText('card-skipped',skippedTotal);
   setText('card-score',score);
-  setText('card-xp',xpTotal.toLocaleString('id-ID')+' XP');
   setText('card-levels',completedLevels.length+' / '+LEVELS.length);
+
+  // 💰 HADIAH AKHIR
+  const prizeEl = $('card-prize');
+  if(prizeEl){
+    prizeEl.textContent = formatRupiah(0);
+    let pCounter = 0;
+    const pStep = Math.max(1, Math.ceil(prizeMoney/40));
+    const pIv = setInterval(()=>{
+      pCounter += pStep;
+      if(pCounter >= prizeMoney){pCounter = prizeMoney;clearInterval(pIv);}
+      prizeEl.textContent = formatRupiah(pCounter);
+    }, 40);
+  }
+
   setText('card-title',earnedTitle);
   sfx('win');
+  setTimeout(()=>sfx('money'), 500);
   triggerConfetti(true);
   haptic([100,50,100]);
 }
-function calculateTitle(s){if(s>=90)return'👑 MASTER PELAKU EKONOMI';if(s>=75)return'⭐ AHLI EKONOMI MUDA';if(s>=60)return'📚 PEMBELAJAR EKONOMI';return'🌱 CALON AHLI EKONOMI';}
+function calculateTitle(s){
+  if(s>=90)return'👑 MASTER PELAKU EKONOMI';
+  if(s>=75)return'⭐ AHLI EKONOMI MUDA';
+  if(s>=60)return'📚 PEMBELAJAR EKONOMI';
+  return'🌱 CALON AHLI EKONOMI';
+}
 function calculateGrade(s){if(s>=90)return'A';if(s>=80)return'B';if(s>=70)return'C';if(s>=60)return'D';return'E';}
 function triggerConfetti(isRecord){
   const colors=['#8b5cf6','#c4b5fd','#e9d5ff','#ec4899','#f472b6'];
@@ -1728,7 +1909,7 @@ function copyFormattedResult(){
   const score=Math.round((correctAnswersTotal/totalQ)*100);
   const earnedTitle=calculateTitle(score);const grade=calculateGrade(score);
   const durasi=Math.floor(totalElapsed/60)+'m '+(totalElapsed%60)+'s';
-  const txt='HASIL KUIS MILIONER — BAB 2 PELAKU EKONOMI\nRuang IPS × MGE\n━━━━━━━━━━━━━━━━━━━━\nMateri: Pelaku Ekonomi\nLevel Selesai: '+completedLevels.length+'/'+LEVELS.length+'\nJawaban Benar: '+correctAnswersTotal+'/'+totalQ+'\nJawaban Salah: '+wrongAnswersTotal+'\nDilewati: '+skippedTotal+'\nSkor: '+score+'\nGrade: '+grade+'\nXP: '+xpTotal.toLocaleString('id-ID')+'\nDurasi: '+durasi+'\nGelar: '+earnedTitle+'\n━━━━━━━━━━━━━━━━━━━━\nMAEDA GAMES EDU';
+  const txt='HASIL KUIS MILIONER — BAB 2 PELAKU EKONOMI\nRuang IPS × MGE\n━━━━━━━━━━━━━━━━━━━━\nMateri: Pelaku Ekonomi\nLevel Selesai: '+completedLevels.length+'/'+LEVELS.length+'\nJawaban Benar: '+correctAnswersTotal+'/'+totalQ+'\nJawaban Salah: '+wrongAnswersTotal+'\nDilewati: '+skippedTotal+'\nSkor: '+score+'\nGrade: '+grade+'\n💰 HADIAH AKHIR: '+formatRupiah(prizeMoney)+'\nDurasi: '+durasi+'\nGelar: '+earnedTitle+'\n━━━━━━━━━━━━━━━━━━━━\nMAEDA GAMES EDU';
   const onSuccess=()=>{const cbt=$('copy-btn-text');if(cbt){cbt.textContent='TERSALIN! ✓';setTimeout(()=>cbt.textContent='SALIN',2000);}};
   const onFail=()=>{try{const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);onSuccess();}catch(err){alert('Gagal menyalin.');}};
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(onSuccess).catch(onFail);}
@@ -1876,7 +2057,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   bind('btn-start',()=>startGame(unlockedLevel));
   bind('btn-continue',()=>startGame(unlockedLevel));
   bind('btn-reset-progress',()=>{
-    if(confirm('Yakin ingin memulai dari awal? Semua progres akan dihapus.')){
+    if(confirm('Yakin ingin memulai dari awal? Semua progres dan uang akan dihapus.')){
       resetProgress();renderLevelsList();renderProgressPanel();
       applyTheme(0);
       showToast('🗑️ Progres dihapus — mulai dari Level 1');
