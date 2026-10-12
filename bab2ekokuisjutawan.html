@@ -119,6 +119,75 @@
   .money-toast .mt-amount{font-size:1.85rem;letter-spacing:.5px;line-height:1.1;font-family:'Space Grotesk',monospace}
   .money-toast .mt-total{font-size:.75rem;opacity:.9;margin-top:8px;padding-top:6px;border-top:1px solid rgba(255,255,255,.28)}
 
+  /* ===== TOAST LANJUT KE PERTANYAAN BERIKUTNYA (HITAM PEKAT) ===== */
+  @keyframes nextQPop{
+    0%{opacity:0;transform:translate(-50%,22px) scale(.85)}
+    18%{opacity:1;transform:translate(-50%,0) scale(1)}
+    82%{opacity:1;transform:translate(-50%,0) scale(1)}
+    100%{opacity:0;transform:translate(-50%,-12px) scale(.95)}
+  }
+  .next-q-toast{
+    position:fixed;
+    bottom:14%;
+    left:50%;
+    transform:translate(-50%,0);
+    padding:16px 34px;
+    border-radius:18px;
+    font-family:'Space Grotesk',system-ui,sans-serif;
+    font-weight:900;
+    font-size:clamp(.9rem,2.8vw,1.15rem);
+    letter-spacing:.12em;
+    text-align:center;
+    white-space:nowrap;
+    color:#FFD700;
+    background:#000000;
+    border:3px solid #FFD700;
+    box-shadow:
+      0 20px 55px rgba(0,0,0,.95),
+      0 0 0 2px rgba(0,0,0,.9),
+      0 0 70px rgba(255,215,0,.55),
+      inset 0 0 24px rgba(255,215,0,.15);
+    z-index:210;
+    pointer-events:none;
+    text-shadow:
+      0 0 10px rgba(255,215,0,.9),
+      0 0 22px rgba(255,215,0,.6),
+      0 2px 4px rgba(0,0,0,1);
+    animation:nextQPop 2.2s cubic-bezier(.2,.9,.3,1.2) forwards;
+  }
+  .next-q-toast .nq-num{
+    display:inline-block;
+    font-size:1.55em;
+    margin:0 8px;
+    padding:2px 14px;
+    border-radius:10px;
+    color:#000000;
+    background:#FFD700;
+    border:2px solid #FFFFFF;
+    text-shadow:none;
+    box-shadow:0 0 18px rgba(255,215,0,.9);
+    vertical-align:middle;
+    font-weight:900;
+  }
+  .next-q-toast.nq-finish{
+    color:#00FF7F;
+    background:#000000;
+    border-color:#00FF7F;
+    box-shadow:
+      0 20px 55px rgba(0,0,0,.95),
+      0 0 0 2px rgba(0,0,0,.9),
+      0 0 70px rgba(0,255,127,.55),
+      inset 0 0 24px rgba(0,255,127,.15);
+    text-shadow:
+      0 0 10px rgba(0,255,127,.9),
+      0 0 22px rgba(0,255,127,.6),
+      0 2px 4px rgba(0,0,0,1);
+  }
+  @media (max-width:640px){
+    .next-q-toast{padding:12px 22px;bottom:12%;letter-spacing:.08em;border-width:2px}
+    .next-q-toast .nq-num{font-size:1.35em;padding:2px 10px;margin:0 5px}
+  }
+
   .prize-chip{
     background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(30,20,55,.8))!important;
     border-color:rgba(52,211,153,.45)!important;
@@ -874,6 +943,9 @@
     .money-toast .mt-amount{font-size:1.35rem !important}
     .money-toast .mt-total{font-size:.65rem !important;margin-top:5px !important;padding-top:4px !important}
 
+    .next-q-toast{padding:10px 18px !important;bottom:9% !important;font-size:.78rem !important;border-width:2px !important}
+    .next-q-toast .nq-num{font-size:1.25em !important;padding:2px 8px !important;margin:0 4px !important}
+
     #level-intro-screen{max-width:100% !important}
     .level-intro-panel{
       display:flex;flex-wrap:wrap;
@@ -977,6 +1049,9 @@
     .score-circle{width:76px !important;height:76px !important}
     .score-circle .num{font-size:1.5rem !important}
     .grade-badge-big{width:56px !important;height:56px !important;font-size:1.7rem !important}
+
+    .next-q-toast{padding:8px 16px !important;bottom:7% !important;font-size:.72rem !important}
+    .next-q-toast .nq-num{font-size:1.2em !important;padding:2px 6px !important;margin:0 3px !important}
 
     .level-intro-number{font-size:clamp(50px,12vw,72px) !important}
     .level-intro-panel{padding:6px 14px 4px !important}
@@ -1487,9 +1562,7 @@ function applyTheme(levelIdx){
 }
 
 /* ============================================================
-   DATA SOAL — SUDAH DIPERBAIKI
-   Setiap pertanyaan memiliki struktur kalimat berbeda & pilihan
-   jawaban yang jelas, spesifik, dan tidak mudah ditebak.
+   DATA SOAL
    ============================================================ */
 const LEVELS=[
 {
@@ -1573,9 +1646,6 @@ const LEVELS=[
   ]
 }
 ];
-/* ============================================================
-   AKHIR DATA SOAL YANG SUDAH DIPERBAIKI
-   ============================================================ */
 
 (function validateNoDuplicates(){
   LEVELS.forEach((lv,i)=>{
@@ -1676,6 +1746,31 @@ function showMoneyToast(type, amount, totalAmount){
   document.body.appendChild(div);
   setTimeout(() => { try{ div.remove(); }catch(e){} }, 2700);
 }
+
+/* ===== Toast: Lanjut ke pertanyaan ke-X ===== */
+function showNextQuestionToast(){
+  document.querySelectorAll('.next-q-toast').forEach(e=>{try{e.remove();}catch(_){}});
+
+  const total   = QPL();
+  const nextNum = currentQuestionInLevel + 2;
+
+  const toast = document.createElement('div');
+  toast.className = 'next-q-toast';
+
+  if(nextNum > total){
+    toast.classList.add('nq-finish');
+    toast.innerHTML = '🏁 <b>LEVEL SELESAI</b> 🏁';
+  } else {
+    toast.innerHTML =
+      '➡ LANJUT KE PERTANYAAN KE-' +
+      '<span class="nq-num">' + nextNum + '</span>' +
+      '<span style="opacity:.85;font-size:.85em">/ ' + total + '</span>';
+  }
+
+  document.body.appendChild(toast);
+  setTimeout(()=>{try{toast.remove();}catch(_){}}, 2400);
+}
+
 function flashPrizeChip(){
   const chip = $('prize-chip');
   if(!chip) return;
@@ -2015,6 +2110,7 @@ function confirmSkip(){
   levelAnswersHistory.push(rec);
   skippedTotal++;levelSkipped++;updateWaypointTrail();
   showToast('⏭️ Soal dilewati — lanjut berikutnya');
+  showNextQuestionToast();
   setTimeout(advanceQuestion,900);
 }
 function confirmAnswer(){
@@ -2051,6 +2147,7 @@ function confirmAnswer(){
     updatePrizeDisplay();
     flashPrizeChip();
     showMoneyToast('correct', rewardThisQ, prizeMoney);
+    showNextQuestionToast();
 
     safeConfetti({particleCount:50,spread:90,origin:{y:.4},colors:['#10b981','#34d399','#6ee7b7','#c4b5fd']});
     setTimeout(()=>{advanceQuestion();},2000);
@@ -2079,6 +2176,7 @@ function confirmAnswer(){
     updatePrizeDisplay();
     flashPrizeChip();
     showMoneyToast('wrong', before - prizeMoney, prizeMoney);
+    showNextQuestionToast();
 
     setTimeout(()=>{advanceQuestion();},2200);
   }
@@ -2172,6 +2270,7 @@ function onTimeout(){
   updatePrizeDisplay();
   flashPrizeChip();
   showMoneyToast('timeout', lost, prizeMoney);
+  showNextQuestionToast();
   setTimeout(()=>sfx('moneyLoss'), 350);
 
   const rec={
