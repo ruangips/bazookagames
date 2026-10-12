@@ -2047,7 +2047,7 @@ function makeEnemies(options){
       fade: 1,
       labelLift: rnd(8,18)*s,
       entrySpeed: rnd(100, 126),
-      cruiseSpeed: rnd(15, 21),
+      cruiseSpeed: rnd(6, 9),
       hoverPhase: Math.random()*TAU,
       hoverAmp: rnd(6,12),
       hoverSpd: rnd(0.4,0.75),
@@ -2308,21 +2308,21 @@ function update(dt){
     if(e.recoil>0)e.recoil=Math.max(0,e.recoil-dt*60);
     if(!e.alive){if(e.fade>0)e.fade=Math.max(0,e.fade-dt*2);continue;}
 
-    // ==== FAST RETURN ====
+    // ==== FAST RETURN: kabur secepat kilat ke kanan-atas ====
     if(e.fastReturn){
-      e.x += 720*dt;
-      e.gy -= 40*dt;
+      e.x += 1800*dt;
+      e.gy -= 70*dt;
       e.trailTimer-=dt;
       if(e.trailTimer<=0){
         e.trailTimer=0.02;
         spawnParticle({x:e.x-88*e.s,y:e.gy+rnd(-5,5),vx:rnd(180,380),vy:rnd(-20,20),life:rnd(0.5,1.2),size:rnd(4,10)*e.s,color:Math.random()<0.5?FX.goldLight:FX.cream,grav:-8,smoke:true});
       }
-      if(e.x > W + 160){
+      if(e.x > W + 60){
         e.x = W + 80;
         e.gy = e.baseGy;
         e.targetX = rnd(e.laneMinX, e.laneMaxX);
         e.entering = true;
-        e.entrySpeed = rnd(100,126);
+        e.entrySpeed = rnd(70, 95);
         e.fastReturn = false;
         e.shotCooldown = Math.max(e.shotCooldown, 3.5);
       }
@@ -2346,7 +2346,7 @@ function update(dt){
       e.hoverPhase += dt*e.hoverSpd;
       e.gy += Math.sin(e.hoverPhase)*3*dt;
 
-      const passThreshold = player.x + 30;
+      const passThreshold = player.x + 15;
       if(e.x < passThreshold){
         e.fastReturn = true;
         continue;
