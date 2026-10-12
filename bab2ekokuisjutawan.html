@@ -650,6 +650,129 @@
   .mgde-footer-dark{margin-top:18px;padding:9px 12px;border-top:1px solid rgba(196,181,253,.5);border-bottom:1px solid rgba(196,181,253,.28);background:linear-gradient(180deg,rgba(196,181,253,.08),rgba(196,181,253,.02));border-radius:8px;text-align:center}
   .mgde-footer-dark .mgde-label{display:block;font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;font-size:clamp(8px,2.1vw,10px);font-weight:800;letter-spacing:clamp(1.4px,0.6vw,2.5px);color:#c4b5fd;text-transform:uppercase;line-height:1.35;text-shadow:0 0 8px rgba(196,181,253,.9),0 0 16px rgba(139,92,246,.5)}
 
+  /* ============ LEVEL INTRO SCREEN (PREMIUM) ============ */
+  #level-intro-screen{
+    padding:0 !important;
+    max-width:min(560px, 96vw) !important;
+    margin:0 auto;
+    animation:fadeUp .7s cubic-bezier(.2,.9,.3,1) both;
+  }
+  .level-intro-panel{
+    position:relative !important;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    padding:clamp(20px,4vw,34px) clamp(18px,3.5vw,30px) clamp(16px,3vw,22px) !important;
+    overflow:hidden;
+    border-radius:18px !important;
+  }
+  .level-intro-glow{
+    position:absolute;left:50%;top:42%;
+    transform:translate(-50%,-50%);
+    width:140%;height:140%;
+    background:radial-gradient(circle, rgba(196,181,253,.38), rgba(139,92,246,.16) 40%, transparent 70%);
+    filter:blur(55px);
+    pointer-events:none;
+    z-index:0;
+    animation:bkGlowPulse 4s ease-in-out infinite;
+  }
+  .level-intro-badge{
+    position:relative;z-index:1;
+    display:inline-block;
+    padding:5px 16px;
+    border-radius:99px;
+    background:rgba(139,92,246,.15);
+    border:1px solid rgba(196,181,253,.5);
+    color:#c4b5fd;
+    font-size:10px;font-weight:900;
+    letter-spacing:3px;text-transform:uppercase;
+    margin-bottom:10px;
+    box-shadow:0 0 22px rgba(139,92,246,.4);
+  }
+  .level-intro-number{
+    position:relative;z-index:1;
+    font-family:'Arial Black','Segoe UI',Impact,sans-serif;
+    font-size:clamp(80px,18vw,130px);
+    font-weight:900;line-height:.95;
+    background:linear-gradient(180deg,#ffffff 0%,#e9d5ff 30%,#c4b5fd 60%,#8b5cf6 100%);
+    -webkit-background-clip:text;background-clip:text;
+    color:transparent;
+    filter:drop-shadow(0 4px 22px rgba(196,181,253,.9)) drop-shadow(0 0 50px rgba(139,92,246,.6));
+    animation:mgeTextPulse 3s ease-in-out infinite;
+  }
+  .level-intro-label{
+    position:relative;z-index:1;
+    font-family:'Arial Black',sans-serif;
+    font-size:clamp(14px,3vw,20px);
+    font-weight:900;
+    letter-spacing:10px;
+    padding-left:10px;
+    color:#f472b6;
+    text-shadow:0 0 14px rgba(236,72,153,.95),0 0 32px rgba(139,92,246,.7);
+    margin-top:-4px;margin-bottom:12px;
+    animation:bkSubPulse 3s ease-in-out infinite;
+  }
+  .level-intro-icon{
+    position:relative;z-index:1;
+    font-size:clamp(36px,8vw,54px);
+    margin-bottom:8px;
+    filter:drop-shadow(0 0 22px rgba(196,181,253,.85));
+    animation:floatCard 3s ease-in-out infinite;
+  }
+  .level-intro-name{
+    position:relative;z-index:1;
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:clamp(18px,4vw,28px);
+    font-weight:800;color:#f4f0ff;
+    margin-bottom:12px;letter-spacing:.02em;
+    text-shadow:0 0 18px rgba(196,181,253,.5);
+    line-height:1.2;
+  }
+  .level-intro-meta{
+    position:relative;z-index:1;
+    display:flex;justify-content:center;align-items:center;
+    gap:8px;flex-wrap:wrap;margin-bottom:16px;
+  }
+  .level-intro-meta > span:not(.diff-badge){
+    padding:5px 12px;border-radius:99px;
+    background:rgba(139,92,246,.12);
+    border:1px solid rgba(139,92,246,.45);
+    color:#c4b5fd;
+    font-size:11px;font-weight:800;
+    letter-spacing:.5px;white-space:nowrap;
+  }
+  .level-intro-quote{
+    position:relative;z-index:1;
+    padding:16px 20px 16px 46px;
+    border-radius:14px;
+    background:linear-gradient(135deg, rgba(139,92,246,.16), rgba(45,30,80,.55));
+    border:1px solid rgba(196,181,253,.28);
+    border-left:3px solid var(--primary);
+    margin-bottom:20px;text-align:left;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 0 30px rgba(139,92,246,.18);
+    width:100%;max-width:460px;
+  }
+  .quote-mark{
+    position:absolute;top:2px;left:12px;
+    font-size:46px;line-height:1;color:#c4b5fd;
+    opacity:.45;
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-weight:900;pointer-events:none;
+  }
+  .quote-text{
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-style:italic;
+    font-size:clamp(13px,3vw,16.5px);
+    line-height:1.55;color:#e9d5ff;
+    font-weight:600;letter-spacing:.01em;
+  }
+  .level-intro-btn{
+    position:relative;z-index:1;
+    max-width:320px;margin:0 auto;display:block;
+  }
+
   /* ============ PORTRAIT WARNING (HP only) ============ */
   @media (orientation: portrait) and (max-width: 900px){
     #rotateOverlay{display:flex !important}
@@ -766,6 +889,87 @@
 
     /* Rotate overlay in landscape should be hidden */
     #rotateOverlay{display:none !important}
+
+    /* LEVEL INTRO COMPACT */
+    #level-intro-screen{max-width:100% !important}
+    .level-intro-panel{
+      display:flex;flex-wrap:wrap;
+      align-items:center;
+      gap:6px 16px;
+      padding:10px 18px 8px !important;
+      text-align:left;
+    }
+    .level-intro-glow{opacity:.55;filter:blur(35px)}
+    .level-intro-badge{
+      flex-basis:100%;
+      margin-bottom:0 !important;
+      padding:3px 10px !important;
+      font-size:8px !important;
+      letter-spacing:2px !important;
+    }
+    .level-intro-number{
+      font-size:clamp(60px,14vw,90px) !important;
+      flex:0 0 auto;
+      align-self:center;
+      line-height:1;
+    }
+    .level-intro-label{
+      font-size:11px !important;
+      letter-spacing:6px !important;
+      margin:-6px 0 6px !important;
+      align-self:center;
+      flex:0 0 auto;
+    }
+    .level-intro-icon{
+      font-size:22px !important;
+      margin-bottom:0 !important;
+    }
+    .level-intro-name{
+      font-size:13px !important;
+      margin-bottom:2px !important;
+    }
+    .level-intro-meta{
+      justify-content:flex-start;
+      margin-bottom:4px !important;
+      gap:4px !important;
+    }
+    .level-intro-meta > span:not(.diff-badge){
+      font-size:9px !important;
+      padding:2px 8px !important;
+    }
+    .level-intro-quote{
+      padding:7px 10px 7px 28px !important;
+      margin-bottom:6px !important;
+      border-radius:9px !important;
+      max-width:100%;
+    }
+    .quote-mark{font-size:22px !important;top:0 !important;left:6px !important}
+    .quote-text{font-size:10.5px !important;line-height:1.4 !important}
+    .level-intro-btn{
+      padding:9px 22px !important;
+      font-size:.72rem !important;
+      max-width:100% !important;
+      width:auto !important;
+      margin:0 !important;
+      align-self:center;
+    }
+    .level-intro-icon,
+    .level-intro-name,
+    .level-intro-meta,
+    .level-intro-quote,
+    .level-intro-btn{
+      flex-basis:calc(100% - 140px);
+      max-width:calc(100% - 140px);
+    }
+    .level-intro-panel > .mgde-footer{
+      flex-basis:100% !important;
+      margin-top:4px !important;
+      padding:5px 10px !important;
+    }
+    .level-intro-panel > .mgde-footer .mgde-label{
+      font-size:7.5px !important;
+      letter-spacing:1.4px !important;
+    }
   }
 
   /* ============ LANDSCAPE HP — SUPER COMPACT (short) ============ */
@@ -791,6 +995,22 @@
     .score-circle{width:76px !important;height:76px !important}
     .score-circle .num{font-size:1.5rem !important}
     .grade-badge-big{width:56px !important;height:56px !important;font-size:1.7rem !important}
+
+    /* LEVEL INTRO SUPER COMPACT */
+    .level-intro-number{font-size:clamp(50px,12vw,72px) !important}
+    .level-intro-panel{padding:6px 14px 4px !important}
+    .level-intro-name{font-size:12px !important}
+    .level-intro-icon{font-size:18px !important}
+    .quote-text{font-size:9.5px !important}
+    .level-intro-btn{padding:7px 16px !important;font-size:.66rem !important}
+    .level-intro-icon,
+    .level-intro-name,
+    .level-intro-meta,
+    .level-intro-quote,
+    .level-intro-btn{
+      flex-basis:calc(100% - 110px);
+      max-width:calc(100% - 110px);
+    }
   }
 
   /* ============ LANDSCAPE TABLET/DESKTOP (bigger) ============ */
@@ -955,6 +1175,29 @@
       <div class="mgde-footer">
         <span class="mgde-label">MAEDA GAMES EDU</span>
       </div>
+    </div>
+  </section>
+
+  <!-- LEVEL INTRO SCREEN -->
+  <section id="level-intro-screen" class="is-hidden w-full max-w-2xl my-auto">
+    <div class="bk-panel level-intro-panel">
+      <div class="level-intro-glow"></div>
+      <div class="level-intro-badge">✦ PERSIAPAN LEVEL ✦</div>
+      <div class="level-intro-number" id="intro-level-num">1</div>
+      <div class="level-intro-label">LEVEL</div>
+      <div class="level-intro-icon" id="intro-level-icon">📘</div>
+      <div class="level-intro-name" id="intro-level-name">Pengertian Dasar</div>
+      <div class="level-intro-meta">
+        <span id="intro-difficulty" class="diff-badge diff-mudah">Mudah</span>
+        <span id="intro-questions">15 Soal</span>
+        <span id="intro-prize">💰 Rp 30 Juta</span>
+      </div>
+      <div class="level-intro-quote">
+        <div class="quote-mark">&ldquo;</div>
+        <div class="quote-text" id="intro-quote">Motivasi...</div>
+      </div>
+      <button id="btn-start-level" type="button" class="btn-gold level-intro-btn">▶ MULAI LEVEL INI</button>
+      <div class="mgde-footer"><span class="mgde-label">MAEDA GAMES EDU</span></div>
     </div>
   </section>
 
@@ -1360,6 +1603,16 @@ const LEVELS=[
   });
 })();
 
+/* ============ LEVEL MOTIVATION QUOTES ============ */
+const LEVEL_QUOTES = [
+  "Setiap langkah kecil hari ini adalah awal dari pencapaian besar esok hari. Mulailah dengan berani!",
+  "Belajar bukan tentang menjadi sempurna, tetapi tentang menjadi lebih baik setiap hari. Kamu pasti bisa!",
+  "Tantangan adalah kesempatan untuk membuktikan seberapa kuat dirimu. Teruslah melangkah maju!",
+  "Kerja kerasmu telah membawamu sejauh ini. Buktikan bahwa kamu layak menjadi sang juara!"
+];
+
+let _levelStartCallback = null;
+
 let currentLevel=0;
 let currentQuestionInLevel=0;
 let lives=MAX_LIVES;
@@ -1578,36 +1831,80 @@ function startCountdown(){
 }
 function stopCountdown(){clearInterval(countdownInterval);countdownInterval=null;}
 
+/* ============ SHOW LEVEL INTRO SCREEN ============ */
+function showLevelIntro(callback){
+  setText('intro-level-num', currentLevel+1);
+  setText('intro-level-name', LEVELS[currentLevel].name);
+  setText('intro-level-icon', LEVELS[currentLevel].icon);
+  setText('intro-questions', LEVELS[currentLevel].questions.length + ' Soal');
+  setText('intro-prize', '💰 ' + LEVELS[currentLevel].levelPrize);
+  setText('intro-quote', LEVEL_QUOTES[currentLevel] || LEVEL_QUOTES[0]);
+
+  const diffEl = $('intro-difficulty');
+  if(diffEl){
+    const d = LEVELS[currentLevel].difficulty.toLowerCase();
+    let cls = 'diff-mudah';
+    if(d.indexOf('sangat') >= 0) cls = 'diff-sangat';
+    else if(d.indexOf('sulit') >= 0) cls = 'diff-sulit';
+    else if(d.indexOf('sedang') >= 0) cls = 'diff-sedang';
+    diffEl.className = 'diff-badge ' + cls;
+    diffEl.textContent = LEVELS[currentLevel].difficulty;
+  }
+
+  applyTheme(currentLevel);
+  _levelStartCallback = callback;
+
+  hide('start-screen');
+  hide('game-screen');
+  hide('result-screen');
+  hide('level-complete-modal');
+  hide('fail-modal');
+  hide('skip-modal');
+  hide('summary-modal');
+
+  show('level-intro-screen');
+  sfx('levelUp');
+  safeConfetti({particleCount:60, spread:85, origin:{y:.5}, colors:['#8b5cf6','#c4b5fd','#e9d5ff','#ec4899','#f472b6']});
+  haptic(20);
+}
+
+/* ============ BEGIN PLAY AFTER INTRO ============ */
+function _beginLevelPlay(){
+  applyTheme(currentLevel);
+  setText('hud-level', currentLevel+1);
+  setText('level-num', currentLevel+1);
+  setText('level-name', LEVELS[currentLevel].name);
+  setText('level-icon', LEVELS[currentLevel].icon);
+  updatePrizeDisplay();
+  renderHearts();
+  renderWaypointTrail();
+  hide('level-intro-screen');
+  hide('start-screen');
+  hide('result-screen');
+  show('game-screen');
+  loadQuestion();
+}
+
 function startGame(fromLevel){
   sfx('click');
-  gameActive=true;
-  if(typeof fromLevel==='number')currentLevel=fromLevel;
-  else currentLevel=unlockedLevel;
-  currentQuestionInLevel=0;
-  lives=MAX_LIVES;
-  levelCorrect=0;levelWrong=0;levelSkipped=0;
-  levelAnswersHistory=[];
-  lifelinesUsed={'5050':false,'hint':false,'skip':false};
-  selectedAnswerIndex=null;answerLocked=false;
+  gameActive = true;
+  if(typeof fromLevel === 'number') currentLevel = fromLevel;
+  else currentLevel = unlockedLevel;
+  currentQuestionInLevel = 0;
+  lives = MAX_LIVES;
+  levelCorrect = 0; levelWrong = 0; levelSkipped = 0;
+  levelAnswersHistory = [];
+  lifelinesUsed = {'5050':false,'hint':false,'skip':false};
+  selectedAnswerIndex = null; answerLocked = false;
 
   prizeMoney = 0;
   levelStartPrize = 0;
 
-  shuffledQuestionsOrder=shuffleArray(
+  shuffledQuestionsOrder = shuffleArray(
     LEVELS[currentLevel].questions.map((_,i)=>i)
   );
 
-  applyTheme(currentLevel);
-  setText('hud-level',currentLevel+1);
-  setText('level-num',currentLevel+1);
-  setText('level-name',LEVELS[currentLevel].name);
-  setText('level-icon',LEVELS[currentLevel].icon);
-  updatePrizeDisplay();
-  renderHearts();
-  renderWaypointTrail();
-  hide('start-screen');hide('result-screen');
-  show('game-screen');
-  loadQuestion();
+  showLevelIntro(_beginLevelPlay);
 }
 function loadQuestion(){
   try{
@@ -2024,31 +2321,24 @@ function closeSummaryModal(){
   hide('summary-modal');
 }
 function goToNextLevel(){
-  sfx('click');hide('level-complete-modal');
-  if(currentLevel===LEVELS.length-1){endGame();return;}
-  currentLevel++;
-  currentQuestionInLevel=0;
-  lives=MAX_LIVES;
-  levelCorrect=0;levelWrong=0;levelSkipped=0;
-  levelAnswersHistory=[];
-  lifelinesUsed={'5050':false,'hint':false,'skip':false};
-  selectedAnswerIndex=null;answerLocked=false;
+  sfx('click');
+  hide('level-complete-modal');
+  if(currentLevel === LEVELS.length-1){ endGame(); return; }
 
+  currentLevel++;
+  currentQuestionInLevel = 0;
+  lives = MAX_LIVES;
+  levelCorrect = 0; levelWrong = 0; levelSkipped = 0;
+  levelAnswersHistory = [];
+  lifelinesUsed = {'5050':false,'hint':false,'skip':false};
+  selectedAnswerIndex = null; answerLocked = false;
   levelStartPrize = prizeMoney;
 
-  shuffledQuestionsOrder=shuffleArray(
+  shuffledQuestionsOrder = shuffleArray(
     LEVELS[currentLevel].questions.map((_,i)=>i)
   );
 
-  applyTheme(currentLevel);
-  setText('hud-level',currentLevel+1);
-  setText('level-num',currentLevel+1);
-  setText('level-name',LEVELS[currentLevel].name);
-  setText('level-icon',LEVELS[currentLevel].icon);
-  renderHearts();
-  renderWaypointTrail();
-  updatePrizeDisplay();
-  loadQuestion();
+  showLevelIntro(_beginLevelPlay);
 }
 function retryLevel(){
   sfx('click');hide('fail-modal');
@@ -2152,7 +2442,7 @@ function copyFormattedResult(){
 function restartGame(){
   sfx('click');
   resetProgress();
-  hide('result-screen');hide('game-screen');
+  hide('result-screen');hide('game-screen');hide('level-intro-screen');
   applyTheme(0);
   renderLevelsList();
   renderProgressPanel();
@@ -2160,7 +2450,7 @@ function restartGame(){
 }
 function returnToMenu(){
   sfx('click');stopCountdown();
-  hide('result-screen');hide('game-screen');
+  hide('result-screen');hide('game-screen');hide('level-intro-screen');
   renderLevelsList();
   renderProgressPanel();
   show('start-screen');
@@ -2306,6 +2596,15 @@ window.addEventListener('DOMContentLoaded',()=>{
     sfx('click');
     const w=$('howto-panel');
     if(w)w.classList.toggle('is-hidden');
+  });
+  bind('btn-start-level',()=>{
+    sfx('click');
+    hide('level-intro-screen');
+    if(typeof _levelStartCallback === 'function'){
+      const cb = _levelStartCallback;
+      _levelStartCallback = null;
+      cb();
+    }
   });
   bind('btn-lock-answer',confirmAnswer);
   bind('btn-restart',restartGame);
