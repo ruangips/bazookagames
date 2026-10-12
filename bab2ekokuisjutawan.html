@@ -773,10 +773,8 @@
     max-width:320px;margin:0 auto;display:block;
   }
 
-  /* ============ PORTRAIT WARNING (HP only) ============ */
-  @media (orientation: portrait) and (max-width: 900px){
-    #rotateOverlay{display:flex !important}
-  }
+  /* Overlay landscape default tersembunyi; dikendalikan JS saat gameplay */
+  #rotateOverlay{display:none}
 
   /* ============ LANDSCAPE HP — COMPACT MODE ============ */
   @media (orientation: landscape) and (max-height: 520px) and (max-width: 950px){
@@ -886,9 +884,6 @@
     .money-toast .mt-sub{font-size:.68rem !important}
     .money-toast .mt-amount{font-size:1.35rem !important}
     .money-toast .mt-total{font-size:.65rem !important;margin-top:5px !important;padding-top:4px !important}
-
-    /* Rotate overlay in landscape should be hidden */
-    #rotateOverlay{display:none !important}
 
     /* LEVEL INTRO COMPACT */
     #level-intro-screen{max-width:100% !important}
@@ -1059,7 +1054,7 @@
 <div id="rotateOverlay">
   <div class="rot-phone"></div>
   <div class="rot-title">Putar Perangkat</div>
-  <div class="rot-desc">Kuis Milioner dirancang untuk dimainkan dalam <b>posisi landscape</b> (mendatar) agar tampilan lebih luas, nyaman, dan premium.</div>
+  <div class="rot-desc">Kuis Milioner dimainkan dalam <b>posisi landscape</b> (mendatar) agar tampilan lebih luas, nyaman, dan premium.</div>
   <div class="rot-hint"><span class="rot-arrow">↻</span> Putar ke Landscape</div>
   <div class="rot-features">
     <span class="rot-feat">✨ Tampilan Lebih Luas</span>
@@ -1643,18 +1638,24 @@ function QPL(){ return LEVELS[currentLevel].questions.length; }
 function TotalQ(){ return LEVELS.reduce((s,l)=>s+l.questions.length, 0); }
 
 /* ============ ORIENTATION HANDLING ============ */
-let _wasPortrait=false;
+/* Overlay landscape hanya muncul saat gameplay (game-screen / level-intro).
+   Di menu / pilih level / hasil akhir, portrait diperbolehkan. */
 function isPortrait(){return window.innerHeight > window.innerWidth && window.innerWidth <= 900;}
 function handleOrientation(){
   const portrait = isPortrait();
   const overlay = $('rotateOverlay');
   if(!overlay) return;
-  if(portrait){
+
+  const gameScreen  = $('game-screen');
+  const introScreen = $('level-intro-screen');
+  const isGameplayVisible =
+    (gameScreen && !gameScreen.classList.contains('is-hidden')) ||
+    (introScreen && !introScreen.classList.contains('is-hidden'));
+
+  if(portrait && isGameplayVisible){
     overlay.style.display = 'flex';
-    _wasPortrait = true;
   } else {
     overlay.style.display = 'none';
-    _wasPortrait = false;
   }
 }
 window.addEventListener('resize',()=>setTimeout(handleOrientation,80));
@@ -1866,6 +1867,7 @@ function showLevelIntro(callback){
   sfx('levelUp');
   safeConfetti({particleCount:60, spread:85, origin:{y:.5}, colors:['#8b5cf6','#c4b5fd','#e9d5ff','#ec4899','#f472b6']});
   haptic(20);
+  setTimeout(handleOrientation, 60);
 }
 
 /* ============ BEGIN PLAY AFTER INTRO ============ */
@@ -1883,6 +1885,7 @@ function _beginLevelPlay(){
   hide('result-screen');
   show('game-screen');
   loadQuestion();
+  setTimeout(handleOrientation, 60);
 }
 
 function startGame(fromLevel){
@@ -2362,6 +2365,7 @@ function retryLevel(){
   renderHearts();
   renderWaypointTrail();
   loadQuestion();
+  setTimeout(handleOrientation, 60);
 }
 
 function endGame(){
@@ -2402,6 +2406,7 @@ function endGame(){
   setTimeout(()=>sfx('money'), 500);
   triggerConfetti(true);
   haptic([100,50,100]);
+  setTimeout(handleOrientation, 60);
 }
 function calculateTitle(s){
   if(s>=90)return'👑 MASTER PELAKU EKONOMI';
@@ -2447,6 +2452,7 @@ function restartGame(){
   renderLevelsList();
   renderProgressPanel();
   show('start-screen');
+  setTimeout(handleOrientation, 60);
 }
 function returnToMenu(){
   sfx('click');stopCountdown();
@@ -2454,6 +2460,7 @@ function returnToMenu(){
   renderLevelsList();
   renderProgressPanel();
   show('start-screen');
+  setTimeout(handleOrientation, 60);
 }
 function initGoldParticles(){
   const layer=$('gold-particles');if(!layer)return;
