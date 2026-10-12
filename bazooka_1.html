@@ -142,7 +142,7 @@ h1{
 .shield .val{color:#a78bfa;text-shadow:0 0 10px rgba(167,139,250,.65)}
 .shield .val.low{color:#f43f5e;text-shadow:0 0 10px rgba(244,63,94,.6)}
 
-/* ========== QUESTION BOX — DIPINDAH KE BAWAH ========== */
+/* ========== QUESTION BOX — DIPINDAH KE BAWAH, z-index RENDAH ========== */
 .qbox{
   position:absolute;
   left:50%;
@@ -155,16 +155,15 @@ h1{
   border-radius:clamp(11px, 2.6vw, 16px);
   padding:clamp(9px,2vw,14px) clamp(14px,3vw,24px) clamp(8px,1.8vw,12px);
   text-align:center;
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   box-shadow:
     0 10px 40px rgba(0,0,0,.85),
     0 0 60px rgba(212,175,55,.28),
     0 0 1px 1px rgba(167,139,250,.15),
     inset 0 1px 0 rgba(255,255,255,.08);
-  z-index:7;
+  z-index:4;
   pointer-events:none;
 }
-/* Pada perangkat sentuh, qbox lebih ramping agar tidak menutupi tombol kontrol di sudut */
+.qbox *{pointer-events:none !important;}
 @media (pointer:coarse){
   .qbox{
     width:min(680px, calc(100% - clamp(200px, 26vw, 280px)));
@@ -377,11 +376,17 @@ h1{
   font-style:normal;
 }
 
-/* ========== TOUCH CONTROLS ========== */
-.touch-controls{position:absolute;inset:0;pointer-events:none;z-index:5;display:none}
+/* ========== TOUCH CONTROLS — z-index TERTINGGI ========== */
+.touch-controls{
+  position:absolute;inset:0;
+  pointer-events:none;
+  z-index:15;
+  display:none;
+}
 .touch-controls.on{display:block}
 .touch-btn{
-  position:absolute;pointer-events:auto;
+  position:absolute;
+  pointer-events:auto;
   background:rgba(18,24,45,.78);
   border:2px solid rgba(212,175,55,.6);
   border-radius:50%;
@@ -390,13 +395,17 @@ h1{
   font-size:clamp(18px,5vw,30px);font-weight:900;color:#fdf6e3;
   backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
   box-shadow:0 4px 20px rgba(0,0,0,.6),0 0 20px rgba(212,175,55,.35);
-  user-select:none;touch-action:none;transition:background .1s,transform .1s;
+  user-select:none;-webkit-user-select:none;
+  touch-action:none;
+  cursor:pointer;
+  transition:background .1s,transform .1s;
 }
 .touch-btn:active,.touch-btn.pressed{background:rgba(212,175,55,.75);transform:scale(.94);color:#0a0820}
 .touch-btn.left{left:calc(env(safe-area-inset-left) + clamp(8px,2.5vw,14px));bottom:calc(env(safe-area-inset-bottom) + clamp(50px,12vw,70px))}
 .touch-btn.right{left:calc(env(safe-area-inset-left) + clamp(8px,2.5vw,14px) + clamp(50px,12vw,72px) + clamp(8px,2.5vw,14px));bottom:calc(env(safe-area-inset-bottom) + clamp(50px,12vw,70px))}
 .touch-fire{
-  position:absolute;right:calc(env(safe-area-inset-right) + clamp(8px,2.5vw,14px));
+  position:absolute;
+  right:calc(env(safe-area-inset-right) + clamp(8px,2.5vw,14px));
   bottom:calc(env(safe-area-inset-bottom) + clamp(50px,12vw,70px));
   width:clamp(60px,15vw,92px);height:clamp(60px,15vw,92px);
   border-radius:50%;
@@ -406,12 +415,16 @@ h1{
   font-size:clamp(18px,5vw,30px);font-weight:900;color:#fff;
   pointer-events:auto;
   box-shadow:0 6px 22px rgba(244,63,94,.65),0 0 30px rgba(244,63,94,.45);
-  user-select:none;touch-action:none;
+  user-select:none;-webkit-user-select:none;
+  touch-action:none;
+  cursor:pointer;
   text-shadow:0 2px 4px rgba(0,0,0,.6);
+  transition:transform .1s, box-shadow .1s;
 }
 .touch-fire:active,.touch-fire.pressed{transform:scale(.94);box-shadow:0 4px 12px rgba(244,63,94,.9)}
 .touch-reload{
-  position:absolute;right:calc(env(safe-area-inset-right) + clamp(8px,2.5vw,14px));
+  position:absolute;
+  right:calc(env(safe-area-inset-right) + clamp(8px,2.5vw,14px));
   bottom:calc(env(safe-area-inset-bottom) + clamp(50px,12vw,70px) + clamp(60px,15vw,92px) + clamp(8px,2.5vw,12px));
   width:clamp(42px,10vw,60px);height:clamp(42px,10vw,60px);
   border-radius:50%;
@@ -421,7 +434,10 @@ h1{
   font-size:clamp(14px,4vw,24px);font-weight:900;color:#0a0620;
   pointer-events:auto;
   box-shadow:0 4px 16px rgba(0,0,0,.5),0 0 20px rgba(167,139,250,.6);
-  user-select:none;touch-action:none;
+  user-select:none;-webkit-user-select:none;
+  touch-action:none;
+  cursor:pointer;
+  transition:transform .1s, background .1s;
 }
 .touch-reload:active,.touch-reload.pressed{transform:scale(.94);background:rgba(196,181,253,1)}
 
@@ -966,7 +982,6 @@ h1.title-main{
   .lbl{font-size:6.5px}
   .val{font-size:11px}
 
-  /* Qbox tetap di bawah, sedikit dirapatkan */
   .qbox{
     bottom:calc(env(safe-area-inset-bottom) + clamp(22px, 5vw, 32px));
     padding:7px 12px 6px;
@@ -2069,7 +2084,7 @@ function update(dt){
   player.aimSwayX=Math.sin(player.aimSwayPhase)*baseAmp+Math.sin(state.time*4.3)*0.25;
   player.aimSwayY=Math.cos(player.aimSwayPhase*1.27)*baseAmp*0.7+Math.sin(state.time*3.7)*0.22;
   state.lockTarget=findEnemyNearAngle(player.target,0.13);
-  if(state.pendingFire&&state.cooldown<=0&&!state.roundLock&&state.reloading<=0){if(Math.abs(player.target-player.angle)<0.06){state.pendingFire=false;fire();}}
+  if(state.pendingFire&&state.cooldown<=0&&!state.roundLock&&state.reloading<=0){if(Math.abs(player.target-player.angle)<0.10){state.pendingFire=false;fire();}}
   for(let i=state.bullets.length-1;i>=0;i--){
     const b=state.bullets[i];
     if(!b.enemyBullet){
@@ -2189,8 +2204,76 @@ window.addEventListener('keydown',ev=>{const k=ev.key;if(['ArrowLeft','ArrowRigh
 window.addEventListener('keyup',ev=>{keys[ev.key]=false;});
 window.addEventListener('blur',()=>{for(const k in keys)keys[k]=false;touchState.left=false;touchState.right=false;});
 
-function bindTouchButton(el,onDown,onUp){const down=(ev)=>{ev.preventDefault();ev.stopPropagation();ensureAudio();el.classList.add('pressed');if(onDown)onDown();};const up=(ev)=>{ev.preventDefault();ev.stopPropagation();el.classList.remove('pressed');if(onUp)onUp();};el.addEventListener('touchstart',down,{passive:false});el.addEventListener('touchend',up,{passive:false});el.addEventListener('touchcancel',up,{passive:false});el.addEventListener('mousedown',down);el.addEventListener('mouseup',up);el.addEventListener('mouseleave',up);el.addEventListener('contextmenu',e=>e.preventDefault());}
-function bindTouchControls(){bindTouchButton(document.getElementById('tLeft'),()=>{touchState.left=true;},()=>{touchState.left=false;});bindTouchButton(document.getElementById('tRight'),()=>{touchState.right=true;},()=>{touchState.right=false;});bindTouchButton(document.getElementById('tFire'),()=>{if(state.gameOver||state.paused)return;if(state.roundLock||state.reloading>0)return;aimNearestEnemy();state.pendingTarget=findNearestEnemy();state.pendingFire=true;},null);bindTouchButton(document.getElementById('tReload'),()=>{if(!state.gameOver&&!state.paused)startReload();},null);}
+/* ============================================================
+   BIND TOUCH BUTTON — dengan debounce anti-dobel (pointer + touch)
+   ============================================================ */
+function bindTouchButton(el,onDown,onUp){
+  if(!el)return;
+  let lastDown=0;
+  const down=(ev)=>{
+    if(ev.cancelable)ev.preventDefault();
+    ev.stopPropagation();
+    const now=performance.now();
+    if(now-lastDown<80)return;
+    lastDown=now;
+    ensureAudio();
+    el.classList.add('pressed');
+    if(onDown)onDown();
+  };
+  const up=(ev)=>{
+    if(ev.cancelable)ev.preventDefault();
+    ev.stopPropagation();
+    el.classList.remove('pressed');
+    if(onUp)onUp();
+  };
+  el.addEventListener('pointerdown',down);
+  el.addEventListener('pointerup',up);
+  el.addEventListener('pointercancel',up);
+  el.addEventListener('pointerleave',up);
+  el.addEventListener('touchstart',down,{passive:false});
+  el.addEventListener('touchend',up,{passive:false});
+  el.addEventListener('touchcancel',up,{passive:false});
+  el.addEventListener('mousedown',down);
+  el.addEventListener('mouseup',up);
+  el.addEventListener('contextmenu',e=>e.preventDefault());
+}
+function bindTouchControls(){
+  bindTouchButton(document.getElementById('tLeft'),
+    ()=>{touchState.left=true;},
+    ()=>{touchState.left=false;});
+  bindTouchButton(document.getElementById('tRight'),
+    ()=>{touchState.right=true;},
+    ()=>{touchState.right=false;});
+
+  // 🔥 TOMBOL TEMBAK — langsung snap aim + fire, tidak menunggu animasi
+  bindTouchButton(document.getElementById('tFire'),()=>{
+    if(state.gameOver||state.paused)return;
+    if(state.roundLock||state.reloading>0)return;
+    const e=findNearestEnemy();
+    if(e){
+      const pr=placardRect(e);
+      const p=PIVOT();
+      const ang=clamp(Math.atan2(pr.cy-p.y, pr.cx-p.x),-1.4,0.45);
+      player.target=ang;
+      player.angle=ang;        // langsung snap
+      state.lockTarget=e;
+      state.pendingTarget=e;
+      if(state.cooldown<=0){
+        fire();                // tembak SEKARANG
+      } else {
+        state.pendingFire=true;
+      }
+    } else {
+      // tidak ada musuh → tembak lurus aja
+      if(state.cooldown<=0) fire();
+    }
+  },null);
+
+  // 🔄 TOMBOL RELOAD
+  bindTouchButton(document.getElementById('tReload'),()=>{
+    if(!state.gameOver&&!state.paused) startReload();
+  },null);
+}
 function updateTouchControlsVisibility(){const ctrls=document.getElementById('touchCtrls');const portrait=isPortrait();const on=IS_TOUCH&&settings.touch&&!portrait;ctrls.classList.toggle('on',on);}
 
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='menu')document.title='BAZOOKA GAME — Ekonomi Bab 1 | MGE';else if(id==='howto')document.title='BAZOOKA GAME — Cara Main | MGE';else if(id==='settings')document.title='BAZOOKA GAME — Pengaturan | MGE';else if(id==='levelselect')document.title='BAZOOKA GAME — Pilih Level | MGE';else if(id==='welcome')document.title='BAZOOKA GAME — Selamat Datang | MGE';}
