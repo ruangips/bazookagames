@@ -2192,8 +2192,184 @@ function drawCasings(){for(const c of state.casings){ctx.save();ctx.translate(c.
 function drawShockwaves(){for(const w of state.shockwaves){const a=w.life/w.maxLife;ctx.strokeStyle='rgba(240,216,120,'+(a*0.75).toFixed(2)+')';ctx.lineWidth=3*a;ctx.beginPath();ctx.arc(w.x,w.y,w.r*(1-a),0,TAU);ctx.stroke();}}
 function drawCrosshair(){if(IS_TOUCH)return;const m=state.mouse;const target=findTargetAtMouse();const col=target?'#a78bfa':'rgba(255,255,255,.9)';ctx.strokeStyle=col;ctx.lineWidth=2;ctx.beginPath();ctx.arc(m.x,m.y,14,0,TAU);ctx.stroke();ctx.beginPath();ctx.moveTo(m.x-22,m.y);ctx.lineTo(m.x-7,m.y);ctx.moveTo(m.x+7,m.y);ctx.lineTo(m.x+22,m.y);ctx.moveTo(m.x,m.y-22);ctx.lineTo(m.x,m.y-7);ctx.moveTo(m.x,m.y+7);ctx.lineTo(m.x,m.y+22);ctx.stroke();ctx.fillStyle=col;ctx.beginPath();ctx.arc(m.x,m.y,2,0,TAU);ctx.fill();}
 function drawLockOn(){const t=state.lockTarget;if(!t||!t.alive||t.fleeing)return;const r=placardRect(t);const pad=12*t.s;const x=r.x-pad,y=r.y-pad,w=r.w+pad*2,h=r.h+pad*2;const pulse=0.5+0.5*Math.sin(state.time*7);const c=Math.min(w,h)*0.35;ctx.save();ctx.strokeStyle='rgba(167,139,250,'+(0.5+pulse*0.5).toFixed(2)+')';ctx.lineWidth=2.6;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(x,y+c);ctx.lineTo(x,y);ctx.lineTo(x+c,y);ctx.moveTo(x+w-c,y);ctx.lineTo(x+w,y);ctx.lineTo(x+w,y+c);ctx.moveTo(x+w,y+h-c);ctx.lineTo(x+w,y+h);ctx.lineTo(x+w-c,y+h);ctx.moveTo(x+c,y+h);ctx.lineTo(x,y+h);ctx.lineTo(x,y+h-c);ctx.stroke();ctx.restore();}
+
+/* ============================================================
+   AIM GUIDE — garis laser + reticle besar + highlight target
+   ============================================================ */
+function drawAimGuide(){
+  if(state.gameOver||state.paused||state.roundLock) return;
+  const origin = bazookaTip();
+  const t = state.lockTarget;
+  const pulse = 0.5 + 0.5*Math.sin(state.time*8);
+
+  if(t && t.alive && !t.fleeing){
+    const pr = placardRect(t);
+
+    // 1) Garis laser dari bazooka ke target
+    ctx.save();
+    ctx.globalCompositeOperation = 'lighter';
+
+    const grad = ctx.createLinearGradient(origin.x, origin.y, pr.cx, pr.cy);
+    grad.addColorStop(0,   'rgba(167,139,250,'+(0.55+pulse*0.25)+')');
+    grad.addColorStop(0.5, 'rgba(240,216,120,'+(0.35+pulse*0.15)+')');
+    grad.addColorStop(1,   'rgba(244,63,94,'  +(0.55+pulse*0.25)+')');
+
+    ctx.strokeStyle = grad;
+    ctx.lineWidth = 6;
+    ctx.setLineDash([14, 10]);
+    ctx.lineDashOffset = -state.time*60;
+    ctx.beginPath();
+    ctx.moveTo(origin.x, origin.y);
+    ctx.lineTo(pr.cx, pr.cy);
+    ctx.stroke();
+
+    ctx.setLineDash([]);
+    ctx.strokeStyle = 'rgba(255,255,255,'+(0.75+pulse*0.2)+')';
+    ctx.lineWidth = 1.8;
+    ctx.beginPath();
+    ctx.moveTo(origin.x, origin.y);
+    ctx.lineTo(pr.cx, pr.cy);
+    ctx.stroke();
+
+    ctx.restore();
+
+    // 2) Reticle besar di sekitar target
+    drawTargetReticle(pr.cx, pr.cy, pr, pulse);
+  }
+  else {
+    // Tidak ada target → garis bidik pendek menunjukkan arah tembakan
+    const len = 130;
+    const ex = origin.x + Math.cos(player.angle)*len;
+    const ey = origin.y + Math.sin(player.angle)*len;
+    ctx.save();
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.strokeStyle = 'rgba(167,139,250,.5)';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([8, 6]);
+    ctx.lineDashOffset = -state.time*40;
+    ctx.beginPath();
+    ctx.moveTo(origin.x, origin.y);
+    ctx.lineTo(ex, ey);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.restore();
+  }
+}
+
+function drawTargetReticle(cx, cy, pr, pulse){
+  const size = Math.max(pr.w, pr.h);
+  const r = size * 0.9 + pulse*6;
+
+  ctx.save();
+  ctx.globalCompositeOperation = 'lighter';
+
+  // Lingkaran luar solid
+  ctx.strokeStyle = 'rgba(167,139,250,'+(0.55+pulse*0.35)+')';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, TAU);
+  ctx.stroke();
+
+  // Lingkaran luar putus-putus berputar
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate(state.time*2.5);
+  ctx.strokeStyle = 'rgba(240,216,120,'+(0.6+pulse*0.3)+')';
+  ctx.lineWidth = 3;
+  ctx.setLineDash([12, 8]);
+  ctx.beginPath();
+  ctx.arc(0, 0, r*1.15, 0, TAU);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.restore();
+
+  // 4 bracket sudut tebal
+  const pad = 8;
+  const bx1 = pr.x - pad,           by1 = pr.y - pad;
+  const bx2 = pr.x + pr.w + pad,    by2 = pr.y + pr.h + pad;
+  const cLen = Math.min(pr.w, pr.h) * 0.4;
+  ctx.strokeStyle = 'rgba(255,255,255,'+(0.85+pulse*0.15)+')';
+  ctx.lineWidth = 3.2;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(bx1, by1+cLen); ctx.lineTo(bx1, by1); ctx.lineTo(bx1+cLen, by1);
+  ctx.moveTo(bx2-cLen, by1); ctx.lineTo(bx2, by1); ctx.lineTo(bx2, by1+cLen);
+  ctx.moveTo(bx2, by2-cLen); ctx.lineTo(bx2, by2); ctx.lineTo(bx2-cLen, by2);
+  ctx.moveTo(bx1+cLen, by2); ctx.lineTo(bx1, by2); ctx.lineTo(bx1, by2-cLen);
+  ctx.stroke();
+
+  // Titik tengah merah
+  ctx.fillStyle = 'rgba(244,63,94,'+(0.75+pulse*0.25)+')';
+  ctx.beginPath();
+  ctx.arc(cx, cy, 4+pulse*2, 0, TAU);
+  ctx.fill();
+
+  // Arrow segitiga di atas target
+  const arrowY = by1 - 18;
+  ctx.fillStyle = 'rgba(240,216,120,'+(0.85+pulse*0.15)+')';
+  ctx.beginPath();
+  ctx.moveTo(cx, arrowY + 10);
+  ctx.lineTo(cx - 9, arrowY - 4);
+  ctx.lineTo(cx + 9, arrowY - 4);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.restore();
+}
+
+function drawTargetGlow(e){
+  const pr = placardRect(e);
+  const pulse = 0.5 + 0.5*Math.sin(state.time*6);
+  ctx.save();
+  ctx.globalCompositeOperation = 'lighter';
+  const g = ctx.createRadialGradient(pr.cx, pr.cy, 0, pr.cx, pr.cy, Math.max(pr.w, pr.h)*0.85);
+  g.addColorStop(0,   'rgba(240,216,120,'+(0.35*pulse)+')');
+  g.addColorStop(0.5, 'rgba(167,139,250,'+(0.25*pulse)+')');
+  g.addColorStop(1,   'rgba(167,139,250,0)');
+  ctx.fillStyle = g;
+  ctx.beginPath();
+  ctx.arc(pr.cx, pr.cy, Math.max(pr.w, pr.h)*0.85, 0, TAU);
+  ctx.fill();
+  ctx.restore();
+}
+
 function drawVignette(){const vg=ctx.createRadialGradient(W/2,H/2,H*0.42,W/2,H/2,H*0.95);vg.addColorStop(0,'rgba(0,0,0,0)');vg.addColorStop(1,'rgba(2,6,15,.75)');ctx.fillStyle=vg;ctx.fillRect(0,0,W,H);}
-function render(){ctx.save();if(state.shake>0&&settings.shake){const s=state.shake;ctx.translate(rnd(-s,s),rnd(-s,s));}drawSky();drawAurora();drawVolcanicGlow();drawMidground();drawForeground();drawPlayerBoat();for(const e of state.enemies){if(e.fade<=0)continue;ctx.save();ctx.globalAlpha=e.fade;drawJet(e);drawPlacard(e);ctx.restore();}drawSoldier();drawWall();drawShield();drawBullets();drawCasings();drawParticles();drawShockwaves();if(state.flash>0){ctx.fillStyle='rgba(253,246,227,'+(state.flash*1.6).toFixed(3)+')';ctx.fillRect(0,0,W,H);}drawColorGrade();drawVignette();ctx.restore();if(!state.gameOver&&!state.paused){drawLockOn();drawCrosshair();}}
+function render(){
+  ctx.save();
+  if(state.shake>0&&settings.shake){const s=state.shake;ctx.translate(rnd(-s,s),rnd(-s,s));}
+  drawSky();
+  drawAurora();
+  drawVolcanicGlow();
+  drawMidground();
+  drawForeground();
+  drawPlayerBoat();
+  for(const e of state.enemies){
+    if(e.fade<=0)continue;
+    ctx.save();
+    ctx.globalAlpha=e.fade;
+    drawJet(e);
+    // ==== GLOW HIGHLIGHT di belakang placard target ====
+    if(state.lockTarget===e) drawTargetGlow(e);
+    drawPlacard(e);
+    ctx.restore();
+  }
+  drawSoldier();
+  drawWall();
+  drawShield();
+  drawBullets();
+  drawCasings();
+  drawParticles();
+  drawShockwaves();
+  if(state.flash>0){ctx.fillStyle='rgba(253,246,227,'+(state.flash*1.6).toFixed(3)+')';ctx.fillRect(0,0,W,H);}
+  drawColorGrade();
+  drawVignette();
+  ctx.restore();
+  if(!state.gameOver&&!state.paused){
+    drawAimGuide();     // ← BARU: garis laser + reticle besar
+    drawLockOn();       // bracket kecil (tetap)
+    drawCrosshair();
+  }
+}
 
 let lastT=performance.now();
 function loop(now){let dt=(now-lastT)/1000;lastT=now;if(dt>0.05)dt=0.05;if(state.running&&!state.paused)update(dt);render();requestAnimationFrame(loop);}
@@ -2245,26 +2421,38 @@ function bindTouchControls(){
     ()=>{touchState.right=true;},
     ()=>{touchState.right=false;});
 
-  // 🔥 TOMBOL TEMBAK — langsung snap aim + fire, tidak menunggu animasi
+  // 🔥 TOMBOL TEMBAK — cari musuh berdasarkan sudut bidikan
   bindTouchButton(document.getElementById('tFire'),()=>{
     if(state.gameOver||state.paused)return;
     if(state.roundLock||state.reloading>0)return;
-    const e=findNearestEnemy();
+
+    // Cari musuh yang paling dekat dengan sudut bidikan, fallback ke terdekat
+    let e = null;
+    let bestDiff = 0.9;
+    const p = PIVOT();
+    for(const en of state.enemies){
+      if(!en.alive||en.fleeing) continue;
+      const pr = placardRect(en);
+      const ang = Math.atan2(pr.cy-p.y, pr.cx-p.x);
+      let d = Math.abs(ang - player.angle);
+      if(d > Math.PI) d = TAU - d;
+      if(d < bestDiff){ bestDiff = d; e = en; }
+    }
+    if(!e) e = findNearestEnemy();
+
     if(e){
       const pr=placardRect(e);
-      const p=PIVOT();
       const ang=clamp(Math.atan2(pr.cy-p.y, pr.cx-p.x),-1.4,0.45);
       player.target=ang;
-      player.angle=ang;        // langsung snap
+      player.angle=ang;
       state.lockTarget=e;
       state.pendingTarget=e;
       if(state.cooldown<=0){
-        fire();                // tembak SEKARANG
+        fire();
       } else {
         state.pendingFire=true;
       }
     } else {
-      // tidak ada musuh → tembak lurus aja
       if(state.cooldown<=0) fire();
     }
   },null);
