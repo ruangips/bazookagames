@@ -737,19 +737,21 @@ h1.title-main{
 .level-card.current .lv-status{color:#c4b5fd}
 .level-card.done .lv-status{color:#f0d878}
 
-/* ========== WELCOME SCREEN ========== */
+/* ============================================================
+   WELCOME SCREEN — RAPI & JELAS
+   ============================================================ */
 .welcome-content{
-  width:min(700px,94vw);
-  max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 16px);
-  max-height:calc(100vh - 16px);
+  width:min(720px,94vw);
+  max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 20px);
+  max-height:calc(100vh - 20px);
   overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;
   background:
     radial-gradient(circle at 20% 0%,rgba(212,175,55,.20),transparent 55%),
     radial-gradient(circle at 85% 100%,rgba(167,139,250,.18),transparent 55%),
     rgba(13,17,32,.94);
   border:1px solid rgba(212,175,55,.5);
-  border-radius:clamp(12px,3vw,20px);
-  padding:clamp(16px,4vw,30px) clamp(14px,3.5vw,26px) clamp(12px,3vw,18px);
+  border-radius:clamp(14px,3vw,22px);
+  padding:clamp(20px,4.5vw,34px) clamp(18px,4vw,30px) clamp(16px,3.5vw,22px);
   text-align:center;
   box-shadow:0 30px 100px rgba(0,0,0,.9),0 0 160px rgba(212,175,55,.4),inset 0 1px 0 rgba(255,255,255,.08);
   animation:panelIn .9s cubic-bezier(.2,.9,.3,1.05);
@@ -757,86 +759,109 @@ h1.title-main{
 }
 .welcome-content::-webkit-scrollbar{width:5px}
 .welcome-content::-webkit-scrollbar-thumb{background:rgba(212,175,55,.4);border-radius:3px}
+
 .welcome-badge{
   display:inline-block;
-  padding:5px 14px;
-  background:linear-gradient(90deg,rgba(212,175,55,.15),rgba(167,139,250,.15));
-  border:1px solid rgba(212,175,55,.5);
+  padding:6px 20px;
+  background:linear-gradient(90deg,rgba(212,175,55,.18),rgba(167,139,250,.18));
+  border:1px solid rgba(212,175,55,.6);
   border-radius:20px;
-  font-size:clamp(8px,2.2vw,11px);
-  font-weight:800;letter-spacing:clamp(2px,0.8vw,3.5px);
-  color:#f0d878;text-transform:uppercase;
-  margin-bottom:12px;
-  text-shadow:0 0 12px rgba(212,175,55,.7);
+  font-size:clamp(10px,2.5vw,13px);
+  font-weight:800;
+  letter-spacing:clamp(2.5px,1vw,4.5px);
+  color:#f0d878;
+  text-transform:uppercase;
+  margin-bottom:16px;
+  text-shadow:0 0 14px rgba(212,175,55,.85);
 }
+
 .welcome-title{
   font-family:'Arial Black','Segoe UI',Impact,system-ui,sans-serif;
-  font-size:clamp(26px,7vw,52px);font-weight:900;
-  letter-spacing:clamp(2px,1vw,4px);line-height:1;
+  font-size:clamp(32px,8.5vw,60px);
+  font-weight:900;
+  letter-spacing:clamp(2px,1vw,4px);
+  line-height:1.05;
   background:linear-gradient(180deg,#ffffff 0%,#fef3c7 25%,#f0d878 55%,#d4af37 80%,#8b6914 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
   filter:drop-shadow(0 3px 18px rgba(212,175,55,1)) drop-shadow(0 0 40px rgba(167,139,250,.7));
-  margin-bottom:6px;
+  margin-bottom:10px;
   animation:titleShimmer 4.5s ease-in-out infinite;
 }
+
 .welcome-sub{
-  font-size:clamp(10px,2.6vw,14px);font-weight:700;
-  letter-spacing:clamp(1.5px,0.6vw,3px);
-  color:#c4b5fd;text-transform:uppercase;
-  margin-bottom:14px;
-  text-shadow:0 0 12px rgba(167,139,250,.7);
+  font-size:clamp(12px,3.1vw,17px);
+  font-weight:800;
+  letter-spacing:clamp(1.5px,0.7vw,3.5px);
+  color:#c4b5fd;
+  text-transform:uppercase;
+  margin-bottom:20px;
+  text-shadow:0 0 16px rgba(167,139,250,.85),0 0 32px rgba(167,139,250,.45);
 }
+
 .welcome-rotate{
-  display:flex;align-items:center;gap:12px;
-  padding:clamp(10px,2.5vw,14px) clamp(12px,3vw,18px);
-  background:linear-gradient(135deg,rgba(167,139,250,.15),rgba(212,175,55,.10));
-  border:1px solid rgba(167,139,250,.55);
+  display:flex;align-items:center;gap:14px;
+  padding:clamp(12px,2.8vw,16px) clamp(14px,3.2vw,20px);
+  background:linear-gradient(135deg,rgba(167,139,250,.16),rgba(212,175,55,.10));
+  border:1px solid rgba(167,139,250,.6);
   border-radius:clamp(10px,2.5vw,14px);
-  margin-bottom:14px;
+  margin-bottom:20px;
   text-align:left;
-  box-shadow:0 0 30px rgba(167,139,250,.25),inset 0 1px 0 rgba(255,255,255,.06);
+  box-shadow:0 0 30px rgba(167,139,250,.28),inset 0 1px 0 rgba(255,255,255,.06);
 }
 .welcome-rotate .wr-icon{
-  font-size:clamp(26px,6.5vw,36px);
+  font-size:clamp(28px,7vw,40px);
   animation:rotArrow 2s ease-in-out infinite;
   display:inline-block;flex-shrink:0;
   filter:drop-shadow(0 0 12px rgba(240,216,120,.85));
 }
-.welcome-rotate .wr-text{
-  font-size:clamp(10px,2.5vw,13px);
-  line-height:1.5;color:#fdf6e3;font-weight:600;
+@keyframes rotArrow{
+  0%,100%{transform:rotate(-12deg)}
+  50%{transform:rotate(12deg)}
 }
-.welcome-rotate .wr-text b{color:#f0d878;text-shadow:0 0 8px rgba(212,175,55,.8)}
+.welcome-rotate .wr-text{
+  font-size:clamp(11px,2.8vw,14px);
+  line-height:1.55;
+  color:#fdf6e3;
+  font-weight:600;
+}
+.welcome-rotate .wr-text b{
+  color:#f0d878;
+  text-shadow:0 0 10px rgba(212,175,55,.85);
+}
+
 .welcome-features{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:clamp(6px,1.8vw,10px);
-  margin-bottom:16px;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:clamp(8px,2vw,12px);
+  margin-bottom:22px;
   text-align:left;
 }
 .wf-item{
-  display:flex;gap:10px;align-items:flex-start;
-  padding:clamp(8px,2vw,12px) clamp(10px,2.5vw,14px);
+  display:flex;gap:12px;align-items:flex-start;
+  padding:clamp(11px,2.4vw,15px) clamp(13px,3vw,17px);
   background:linear-gradient(135deg,rgba(18,24,45,.92),rgba(45,30,80,.72));
-  border:1px solid rgba(212,175,55,.32);
-  border-radius:clamp(8px,2vw,12px);
+  border:1px solid rgba(212,175,55,.35);
+  border-radius:clamp(10px,2.2vw,12px);
   transition:all .25s;
 }
-.wf-item:hover{border-color:rgba(212,175,55,.65);transform:translateY(-2px)}
+.wf-item:hover{border-color:rgba(212,175,55,.7);transform:translateY(-2px)}
 .wf-item .wf-icon{
-  font-size:clamp(18px,4.5vw,24px);
+  font-size:clamp(20px,5vw,26px);
   line-height:1;flex-shrink:0;
   filter:drop-shadow(0 0 8px rgba(212,175,55,.6));
 }
 .wf-item .wf-title{
-  font-size:clamp(10px,2.5vw,12px);
-  font-weight:800;color:#f0d878;
-  letter-spacing:0.5px;margin-bottom:2px;
+  font-size:clamp(12px,2.8vw,14px);
+  font-weight:800;
+  color:#f0d878;
+  letter-spacing:0.5px;
+  margin-bottom:4px;
+  text-shadow:0 0 8px rgba(212,175,55,.5);
 }
 .wf-item .wf-desc{
-  font-size:clamp(8px,2.1vw,10px);
-  color:rgba(253,246,227,.78);
-  line-height:1.4;
+  font-size:clamp(10px,2.4vw,12px);
+  color:rgba(253,246,227,.9);
+  line-height:1.5;
 }
 
 /* ============================================================
@@ -941,9 +966,18 @@ h1.title-main{
   .touch-fire{bottom:calc(env(safe-area-inset-bottom) + 46px)}
   .touch-reload{bottom:calc(env(safe-area-inset-bottom) + 46px + 56px + 8px)}
   .mgde-badge{font-size:5.5px;padding:2px 6px;letter-spacing:0.5px}
-  .welcome-features{grid-template-columns:1fr}
-  .wf-item .wf-title{font-size:10px}
-  .wf-item .wf-desc{font-size:8px}
+  .welcome-content{padding:16px 14px 14px}
+  .welcome-badge{font-size:9px;padding:4px 14px;letter-spacing:2px;margin-bottom:12px}
+  .welcome-title{font-size:30px;margin-bottom:8px}
+  .welcome-sub{font-size:11px;margin-bottom:14px}
+  .welcome-rotate{padding:10px 12px;margin-bottom:14px;gap:10px}
+  .welcome-rotate .wr-icon{font-size:26px}
+  .welcome-rotate .wr-text{font-size:11px}
+  .welcome-features{grid-template-columns:1fr;margin-bottom:16px}
+  .wf-item{padding:10px 12px;gap:10px}
+  .wf-item .wf-icon{font-size:20px}
+  .wf-item .wf-title{font-size:12px}
+  .wf-item .wf-desc{font-size:10px}
 }
 @media (min-width:360px) and (max-width:479px){
   .panel{padding:14px 12px 9px}
@@ -1033,18 +1067,18 @@ h1.title-main{
   .level-intro .mgde-footer{margin-top:6px;padding:6px 8px}
   .level-intro .mgde-footer .mgde-label{font-size:7.5px;letter-spacing:1.4px}
   .mgde-badge{font-size:5px;padding:2px 6px;letter-spacing:0.5px;bottom:calc(env(safe-area-inset-bottom) + 1px)}
-  .welcome-content{padding:10px 14px 8px}
-  .welcome-badge{padding:3px 10px;font-size:8px;margin-bottom:6px}
-  .welcome-title{font-size:clamp(20px,5vw,32px);margin-bottom:3px}
-  .welcome-sub{font-size:9px;margin-bottom:8px}
-  .welcome-rotate{padding:7px 10px;margin-bottom:8px}
-  .welcome-rotate .wr-icon{font-size:22px}
-  .welcome-rotate .wr-text{font-size:9px}
-  .welcome-features{margin-bottom:10px;gap:5px}
-  .wf-item{padding:5px 8px}
-  .wf-item .wf-icon{font-size:15px}
-  .wf-item .wf-title{font-size:9px}
-  .wf-item .wf-desc{font-size:7.5px}
+  .welcome-content{padding:14px 16px 12px}
+  .welcome-badge{padding:4px 12px;font-size:9px;margin-bottom:8px;letter-spacing:2.5px}
+  .welcome-title{font-size:clamp(24px,5.5vw,36px);margin-bottom:6px}
+  .welcome-sub{font-size:10px;margin-bottom:10px}
+  .welcome-rotate{padding:8px 12px;margin-bottom:10px;gap:10px}
+  .welcome-rotate .wr-icon{font-size:24px}
+  .welcome-rotate .wr-text{font-size:10px}
+  .welcome-features{margin-bottom:12px;gap:6px}
+  .wf-item{padding:7px 10px;gap:9px}
+  .wf-item .wf-icon{font-size:17px}
+  .wf-item .wf-title{font-size:10px}
+  .wf-item .wf-desc{font-size:9px}
 }
 
 /* ====== LANDSCAPE SANGAT PENDEK (max-height: 380px) ====== */
@@ -1114,18 +1148,18 @@ h1.title-main{
   .li-motivation .li-mot-star{font-size:11px;margin-bottom:1px}
   .mgde-badge{font-size:4.5px;padding:1.5px 5px;letter-spacing:0.4px;bottom:calc(env(safe-area-inset-bottom) + 1px)}
   .lbl{letter-spacing:0.8px}
-  .welcome-content{padding:8px 12px 6px;border-radius:12px}
-  .welcome-badge{padding:2px 8px;font-size:7px;margin-bottom:4px}
-  .welcome-title{font-size:clamp(18px,4.5vw,26px)}
-  .welcome-sub{font-size:8px;margin-bottom:5px}
-  .welcome-rotate{padding:5px 8px;margin-bottom:5px;gap:8px}
-  .welcome-rotate .wr-icon{font-size:18px}
-  .welcome-rotate .wr-text{font-size:8px}
-  .welcome-features{margin-bottom:6px;gap:4px}
-  .wf-item{padding:4px 6px;gap:6px}
-  .wf-item .wf-icon{font-size:13px}
-  .wf-item .wf-title{font-size:8px}
-  .wf-item .wf-desc{font-size:7px}
+  .welcome-content{padding:10px 14px 8px;border-radius:12px}
+  .welcome-badge{padding:3px 10px;font-size:8px;margin-bottom:6px;letter-spacing:2px}
+  .welcome-title{font-size:clamp(20px,5vw,28px);margin-bottom:4px}
+  .welcome-sub{font-size:9px;margin-bottom:8px}
+  .welcome-rotate{padding:6px 10px;margin-bottom:8px;gap:8px}
+  .welcome-rotate .wr-icon{font-size:20px}
+  .welcome-rotate .wr-text{font-size:9px}
+  .welcome-features{margin-bottom:8px;gap:5px}
+  .wf-item{padding:6px 9px;gap:8px}
+  .wf-item .wf-icon{font-size:15px}
+  .wf-item .wf-title{font-size:9px;margin-bottom:2px}
+  .wf-item .wf-desc{font-size:8px}
 }
 @media (orientation: landscape) and (min-aspect-ratio: 2/1){
   .box{min-width:clamp(56px,10vw,80px)}
@@ -1183,14 +1217,14 @@ h1.title-main{
 <!-- WELCOME -->
 <div id="welcome" class="screen">
   <div class="welcome-content">
-    <div class="welcome-badge">MAEDA GAMES EDU · PRESENTS</div>
+    <div class="welcome-badge">EDISI PREMIUM</div>
     <h1 class="welcome-title">BAZOOKA GAME</h1>
-    <p class="welcome-sub">Ekonomi Bab 1 · Edisi Premium</p>
+    <p class="welcome-sub">Ekonomi Bab 1 · Kegiatan Ekonomi</p>
 
     <div class="welcome-rotate">
       <span class="wr-icon">📱</span>
       <div class="wr-text">
-        <b>Rekomendasi:</b> putar perangkat ke <b>MODE LANDSCAPE</b> (mendatar) untuk pengalaman <b>premium</b> terbaik — grafik jernih, kontrol nyaman, dan misi tanpa hambatan.
+        <b>Rekomendasi:</b> Putar perangkat ke <b>Mode Landscape</b> (mendatar) untuk pengalaman bermain terbaik — grafik lebih jernih dan kontrol lebih nyaman.
       </div>
     </div>
 
