@@ -164,7 +164,6 @@ h1{
 }
 .qbox *{pointer-events:none !important;}
 
-/* Di HP sentuh, qbox lebih ramping lagi */
 @media (pointer:coarse){
   .qbox{
     width:min(440px, calc(100% - 220px));
@@ -1348,6 +1347,13 @@ h1.title-main{
       <b>Nyawa 5</b> · dipulihkan penuh di setiap level baru.<br>
       <b>Progres tersimpan</b> — gagal = ulangi level itu saja.
     </p>
+    <p style="line-height:1.7;font-size:clamp(10px,2.6vw,13px);background:rgba(167,139,250,.10);border-left:3px solid #a78bfa;border-radius:6px;padding:10px;margin-top:8px">
+      <b>🎮 Di HP — Pilih target sendiri:</b><br>
+      • <b>Tap pesawat/placard musuh</b> = 🎯 kunci target itu<br>
+      • <b>Drag jari</b> = 🕹️ putar bidikan manual<br>
+      • <b>Tap area kosong</b> = lepas kunci<br>
+      • <b>Tap tombol 🔥</b> = 💥 tembak target yang dikunci
+    </p>
     <p style="line-height:1.7;font-size:clamp(10px,2.6vw,13px);background:rgba(212,175,55,.10);border-left:3px solid #d4af37;border-radius:6px;padding:10px;margin-top:8px">
       <b>💡 Tips:</b><br>
       • Jawaban benar = pesawat lain KABUR<br>
@@ -1803,7 +1809,6 @@ function drawParticles(){for(const p of state.particles){const a=Math.max(0,p.li
    ENEMY — Speed -40%, lane di kanan player, baseGy disimpan
    ============================================================ */
 function makeEnemies(options){
-  // Lane diatur supaya target selalu di sebelah KANAN player (x >= ~420)
   const configs=[
     {gy:170, s:0.52, xMin:420, xMax:500, offset:820},
     {gy:235, s:0.62, xMin:560, xMax:660, offset:890},
@@ -1816,14 +1821,14 @@ function makeEnemies(options){
       x: targetX+c.offset,
       targetX,
       gy: c.gy,
-      baseGy: c.gy,                       // ← posisi Y asli untuk reset
+      baseGy: c.gy,
       s,
       value: options[i],
       alive: true,
       fade: 1,
       labelLift: rnd(8,18)*s,
-      entrySpeed: rnd(100, 126),          // ← -40% dari 170-210
-      cruiseSpeed: rnd(15, 21),           // ← -40% dari 26-36
+      entrySpeed: rnd(100, 126),
+      cruiseSpeed: rnd(15, 21),
       hoverPhase: Math.random()*TAU,
       hoverAmp: rnd(6,12),
       hoverSpd: rnd(0.4,0.75),
@@ -1832,7 +1837,7 @@ function makeEnemies(options){
       shotCooldown: 9+i*1.5,
       entering: true,
       fleeing: false,
-      fastReturn: false,                  // ← BARU: state kabur cepat ke kanan
+      fastReturn: false,
       fleeVx: 0,
       fleeVy: 0,
       laneMinX: c.xMin,
@@ -2084,17 +2089,16 @@ function update(dt){
     if(e.recoil>0)e.recoil=Math.max(0,e.recoil-dt*60);
     if(!e.alive){if(e.fade>0)e.fade=Math.max(0,e.fade-dt*2);continue;}
 
-    // ==== FAST RETURN: kabur cepat ke kanan ====
+    // ==== FAST RETURN ====
     if(e.fastReturn){
-      e.x += 720*dt;                  // terbang cepat ke kanan
-      e.gy -= 40*dt;                  // sedikit naik
+      e.x += 720*dt;
+      e.gy -= 40*dt;
       e.trailTimer-=dt;
       if(e.trailTimer<=0){
         e.trailTimer=0.02;
         spawnParticle({x:e.x-88*e.s,y:e.gy+rnd(-5,5),vx:rnd(180,380),vy:rnd(-20,20),life:rnd(0.5,1.2),size:rnd(4,10)*e.s,color:Math.random()<0.5?FX.goldLight:FX.cream,grav:-8,smoke:true});
       }
       if(e.x > W + 160){
-        // Reset: muncul lagi dari sisi kanan
         e.x = W + 80;
         e.gy = e.baseGy;
         e.targetX = rnd(e.laneMinX, e.laneMaxX);
@@ -2119,19 +2123,16 @@ function update(dt){
       e.trailTimer-=dt;
       if(e.trailTimer<=0){e.trailTimer=0.03;spawnParticle({x:e.x+92*e.s,y:e.gy+rnd(-5,5),vx:rnd(60,140),vy:rnd(-12,12),life:rnd(0.35,0.85),size:rnd(4,9)*e.s,color:'rgba(240,216,120,.75)',grav:-3,smoke:true});}
     } else {
-      // ==== CRUISE: bergerak lambat ke kiri ====
       e.x -= e.cruiseSpeed*dt;
       e.hoverPhase += dt*e.hoverSpd;
       e.gy += Math.sin(e.hoverPhase)*3*dt;
 
-      // ==== Cek apakah sudah melewati player ====
       const passThreshold = player.x + 30;
       if(e.x < passThreshold){
         e.fastReturn = true;
         continue;
       }
 
-      // Safety: kalau terlalu jauh ke kiri (harusnya tidak terjadi)
       if(e.x < -200){
         e.x = W+500;
         e.targetX = rnd(e.laneMinX, e.laneMaxX);
@@ -2291,7 +2292,7 @@ function drawBullets(){for(const b of state.bullets){for(const t of b.trail){con
 function drawCasings(){for(const c of state.casings){ctx.save();ctx.translate(c.x,c.y);ctx.rotate(c.rot);ctx.globalAlpha=Math.min(1,c.life/1.0);ctx.fillStyle='#d4af37';rrect(ctx,-3,-1.2,6,2.4,0.6);ctx.fill();ctx.restore();}ctx.globalAlpha=1;}
 function drawShockwaves(){for(const w of state.shockwaves){const a=w.life/w.maxLife;ctx.strokeStyle='rgba(240,216,120,'+(a*0.75).toFixed(2)+')';ctx.lineWidth=3*a;ctx.beginPath();ctx.arc(w.x,w.y,w.r*(1-a),0,TAU);ctx.stroke();}}
 function drawCrosshair(){if(IS_TOUCH)return;const m=state.mouse;const target=findTargetAtMouse();const col=target?'#a78bfa':'rgba(255,255,255,.9)';ctx.strokeStyle=col;ctx.lineWidth=2;ctx.beginPath();ctx.arc(m.x,m.y,14,0,TAU);ctx.stroke();ctx.beginPath();ctx.moveTo(m.x-22,m.y);ctx.lineTo(m.x-7,m.y);ctx.moveTo(m.x+7,m.y);ctx.lineTo(m.x+22,m.y);ctx.moveTo(m.x,m.y-22);ctx.lineTo(m.x,m.y-7);ctx.moveTo(m.x,m.y+7);ctx.lineTo(m.x,m.y+22);ctx.stroke();ctx.fillStyle=col;ctx.beginPath();ctx.arc(m.x,m.y,2,0,TAU);ctx.fill();}
-function drawLockOn(){const t=state.lockTarget;if(!t||!t.alive||t.fleeing)return;const r=placardRect(t);const pad=12*t.s;const x=r.x-pad,y=r.y-pad,w=r.w+pad*2,h=r.h+pad*2;const pulse=0.5+0.5*Math.sin(state.time*7);const c=Math.min(w,h)*0.35;ctx.save();ctx.strokeStyle='rgba(167,139,250,'+(0.5+pulse*0.5).toFixed(2)+')';ctx.lineWidth=2.6;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(x,y+c);ctx.lineTo(x,y);ctx.lineTo(x+c,y);ctx.moveTo(x+w-c,y);ctx.lineTo(x+w,y);ctx.lineTo(x+w,y+c);ctx.moveTo(x+w,y+h-c);ctx.lineTo(x+w,y+h);ctx.lineTo(x+w-c,y+h);ctx.moveTo(x+c,y+h);ctx.lineTo(x,y+h);ctx.lineTo(x,y+h-c);ctx.stroke();ctx.restore();}
+function drawLockOn(){const t=state.lockTarget;if(!t||!t.alive||t.fleeing||t.fastReturn)return;const r=placardRect(t);const pad=12*t.s;const x=r.x-pad,y=r.y-pad,w=r.w+pad*2,h=r.h+pad*2;const pulse=0.5+0.5*Math.sin(state.time*7);const c=Math.min(w,h)*0.35;ctx.save();ctx.strokeStyle='rgba(167,139,250,'+(0.5+pulse*0.5).toFixed(2)+')';ctx.lineWidth=2.6;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(x,y+c);ctx.lineTo(x,y);ctx.lineTo(x+c,y);ctx.moveTo(x+w-c,y);ctx.lineTo(x+w,y);ctx.lineTo(x+w,y+c);ctx.moveTo(x+w,y+h-c);ctx.lineTo(x+w,y+h);ctx.lineTo(x+w-c,y+h);ctx.moveTo(x+c,y+h);ctx.lineTo(x,y+h);ctx.lineTo(x,y+h-c);ctx.stroke();ctx.restore();}
 
 /* ============================================================
    AIM GUIDE — garis laser + reticle besar + highlight target
@@ -2501,6 +2502,7 @@ function bindTouchButton(el,onDown,onUp){
   el.addEventListener('mouseup',up);
   el.addEventListener('contextmenu',e=>e.preventDefault());
 }
+
 function bindTouchControls(){
   bindTouchButton(document.getElementById('tLeft'),
     ()=>{touchState.left=true;},
@@ -2509,25 +2511,34 @@ function bindTouchControls(){
     ()=>{touchState.right=true;},
     ()=>{touchState.right=false;});
 
+  // 🔥 TOMBOL TEMBAK — prioritas: lockTarget manual, lalu sudut bidikan, lalu terdekat
   bindTouchButton(document.getElementById('tFire'),()=>{
     if(state.gameOver||state.paused)return;
     if(state.roundLock||state.reloading>0)return;
 
-    let e = null;
-    let bestDiff = 0.9;
-    const p = PIVOT();
-    for(const en of state.enemies){
-      if(!en.alive||en.fleeing||en.fastReturn) continue;
-      const pr = placardRect(en);
-      const ang = Math.atan2(pr.cy-p.y, pr.cx-p.x);
-      let d = Math.abs(ang - player.angle);
-      if(d > Math.PI) d = TAU - d;
-      if(d < bestDiff){ bestDiff = d; e = en; }
+    // 1) Prioritas: target yang di-lock (hasil tap manual)
+    let e = state.lockTarget;
+
+    // 2) Kalau target lock mati/kabur → cari yang paling dekat sudut bidikan
+    if(!e || !e.alive || e.fleeing || e.fastReturn){
+      let bestDiff = 0.9;
+      const p = PIVOT();
+      e = null;
+      for(const en of state.enemies){
+        if(!en.alive||en.fleeing||en.fastReturn) continue;
+        const pr = placardRect(en);
+        const ang = Math.atan2(pr.cy-p.y, pr.cx-p.x);
+        let d = Math.abs(ang - player.angle);
+        if(d > Math.PI) d = TAU - d;
+        if(d < bestDiff){ bestDiff = d; e = en; }
+      }
     }
+    // 3) Fallback terakhir: musuh terdekat
     if(!e) e = findNearestEnemy();
 
     if(e){
       const pr=placardRect(e);
+      const p=PIVOT();
       const ang=clamp(Math.atan2(pr.cy-p.y, pr.cx-p.x),-1.4,0.45);
       player.target=ang;
       player.angle=ang;
@@ -2543,10 +2554,123 @@ function bindTouchControls(){
     }
   },null);
 
+  // 🔄 TOMBOL RELOAD
   bindTouchButton(document.getElementById('tReload'),()=>{
     if(!state.gameOver&&!state.paused) startReload();
   },null);
 }
+
+/* ============================================================
+   TAP-TO-LOCK TARGET — pilih target dengan menyentuh pesawat/placard
+   Drag = putar bidikan manual. Tap area kosong = lepas lock.
+   ============================================================ */
+function setupTapToAim(){
+  const el = document.getElementById('cvs');
+  if(!el) return;
+
+  let touchStartX = 0, touchStartY = 0;
+  let touchStartTime = 0;
+  let isDragging = false;
+  const TAP_MAX_MOVE = 14;
+  const TAP_MAX_TIME = 320;
+
+  function toCanvas(clientX, clientY){
+    const r = el.getBoundingClientRect();
+    return {
+      x: (clientX - r.left) * (W / r.width),
+      y: (clientY - r.top)  * (H / r.height)
+    };
+  }
+
+  function findEnemyAtPoint(px, py){
+    // 1. Placard (kotak jawaban) — prioritas utama
+    for(let i = state.enemies.length-1; i >= 0; i--){
+      const e = state.enemies[i];
+      if(!e.alive || e.fleeing || e.fastReturn) continue;
+      const r = placardRect(e);
+      const pad = 24;
+      if(px > r.x-pad && px < r.x+r.w+pad &&
+         py > r.y-pad && py < r.y+r.h+pad) return e;
+    }
+    // 2. Body pesawat
+    for(let i = state.enemies.length-1; i >= 0; i--){
+      const e = state.enemies[i];
+      if(!e.alive || e.fleeing || e.fastReturn) continue;
+      const br = bodyRect(e);
+      const pad = 20;
+      if(px > br.x-pad && px < br.x+br.w+pad &&
+         py > br.y-pad && py < br.y+br.h+pad) return e;
+    }
+    // 3. Fallback radius
+    let best = null, bestD = 90;
+    for(const e of state.enemies){
+      if(!e.alive || e.fleeing || e.fastReturn) continue;
+      const pr = placardRect(e);
+      const d = Math.hypot(px - pr.cx, py - pr.cy);
+      if(d < bestD){ bestD = d; best = e; }
+    }
+    return best;
+  }
+
+  // ==== TAP = LOCK TARGET / DRAG = AIM MANUAL ====
+  el.addEventListener('touchstart', (ev)=>{
+    if(state.gameOver || state.paused) return;
+    if(state.roundLock || state.reloading > 0) return;
+    const t = ev.touches[0];
+    if(!t) return;
+    touchStartX = t.clientX;
+    touchStartY = t.clientY;
+    touchStartTime = performance.now();
+    isDragging = false;
+  }, {passive:true});
+
+  el.addEventListener('touchmove', (ev)=>{
+    if(state.gameOver || state.paused) return;
+    const t = ev.touches[0];
+    if(!t) return;
+    const dx = t.clientX - touchStartX;
+    const dy = t.clientY - touchStartY;
+    if(Math.hypot(dx, dy) > TAP_MAX_MOVE){
+      isDragging = true;
+      const p = toCanvas(t.clientX, t.clientY);
+      aimAt(p.x, p.y);
+    }
+  }, {passive:true});
+
+  el.addEventListener('touchend', (ev)=>{
+    if(state.gameOver || state.paused) return;
+    if(state.roundLock || state.reloading > 0) return;
+    const elapsed = performance.now() - touchStartTime;
+
+    if(!isDragging && elapsed < TAP_MAX_TIME){
+      const t = ev.changedTouches[0];
+      if(!t) return;
+      const p = toCanvas(t.clientX, t.clientY);
+      const hit = findEnemyAtPoint(p.x, p.y);
+
+      if(hit){
+        // Kunci target ini
+        const pr = placardRect(hit);
+        const pivot = PIVOT();
+        const ang = clamp(Math.atan2(pr.cy - pivot.y, pr.cx - pivot.x), -1.4, 0.45);
+        player.target = ang;
+        player.angle = ang;
+        state.lockTarget = hit;
+        state.pendingTarget = hit;
+        // Konfirmasi: bunyi + getar
+        SFX.click();
+        try{ if(navigator.vibrate) navigator.vibrate(20); }catch(e){}
+      } else {
+        // Tap di area kosong → arahkan bidikan & lepas lock
+        aimAt(p.x, p.y);
+      }
+    }
+    isDragging = false;
+  }, {passive:true});
+
+  el.addEventListener('touchcancel', ()=>{ isDragging = false; }, {passive:true});
+}
+
 function updateTouchControlsVisibility(){const ctrls=document.getElementById('touchCtrls');const portrait=isPortrait();const on=IS_TOUCH&&settings.touch&&!portrait;ctrls.classList.toggle('on',on);}
 
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='menu')document.title='BAZOOKA GAME — Ekonomi Bab 1 | MGE';else if(id==='howto')document.title='BAZOOKA GAME — Cara Main | MGE';else if(id==='settings')document.title='BAZOOKA GAME — Pengaturan | MGE';else if(id==='levelselect')document.title='BAZOOKA GAME — Pilih Level | MGE';else if(id==='welcome')document.title='BAZOOKA GAME — Selamat Datang | MGE';}
@@ -2583,6 +2707,7 @@ function bindUI(){
 }
 
 loadSettings();bindUI();
+setupTapToAim();
 document.getElementById('hsVal').textContent=getHighscore();
 updateMenuProgress();
 
