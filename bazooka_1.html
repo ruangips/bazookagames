@@ -840,79 +840,66 @@ h1.title-main{
 }
 
 /* ============================================================
-   ROTATE OVERLAY (PORTRAIT WARNING)
+   ROTATE BANNER — HANYA PEMBERITAHUAN (TIDAK DIKUNCI)
    ============================================================ */
 #rotateOverlay{
-  position:fixed;inset:0;z-index:9999;display:none;
-  align-items:center;justify-content:center;flex-direction:column;
-  background:radial-gradient(circle at 50% 40%,#1a1145 0%,#04060f 60%,#020308 100%);
-  color:#f5f0e0;text-align:center;
-  padding:max(env(safe-area-inset-top),20px) max(env(safe-area-inset-right),20px) max(env(safe-area-inset-bottom),20px) max(env(safe-area-inset-left),20px);
+  position:fixed;
+  top:calc(env(safe-area-inset-top, 0px) + 8px);
+  left:50%;
+  transform:translateX(-50%);
+  z-index:9999;
+  display:none;
+  align-items:center;
+  gap:10px;
+  padding:8px 14px;
+  background:linear-gradient(135deg, rgba(212,175,55,.95), rgba(167,139,250,.92));
+  border:1.5px solid rgba(255,255,255,.65);
+  border-radius:50px;
+  box-shadow:0 8px 32px rgba(0,0,0,.6), 0 0 24px rgba(212,175,55,.55), inset 0 1px 0 rgba(255,255,255,.4);
+  color:#0a0e1f;
   font-family:system-ui,-apple-system,sans-serif;
+  pointer-events:none;
+  max-width:min(380px, 90vw);
+  animation:rotBannerIn .5s cubic-bezier(.2,.9,.3,1.2);
 }
-#rotateOverlay .rot-phone{
-  width:clamp(60px,18vw,78px);height:clamp(100px,30vw,130px);
-  border:clamp(4px,1vw,5px) solid #d4af37;border-radius:14px;position:relative;
-  margin-bottom:clamp(16px,4vw,26px);
-  box-shadow:0 0 30px rgba(212,175,55,.65),inset 0 0 20px rgba(212,175,55,.18);
-  animation:rotPhone 2.2s ease-in-out infinite;
-  background:rgba(18,24,45,.55);
+@keyframes rotBannerIn{
+  from{opacity:0;transform:translate(-50%,-28px) scale(.85)}
+  to{opacity:1;transform:translate(-50%,0) scale(1)}
 }
-#rotateOverlay .rot-phone::before{
-  content:'';position:absolute;left:50%;top:8px;transform:translateX(-50%);
-  width:clamp(20px,6vw,26px);height:4px;border-radius:2px;background:#f0d878;opacity:.75;
+#rotateOverlay .rot-icon{
+  font-size:clamp(20px,5vw,26px);
+  animation:rotIconSpin 2.4s ease-in-out infinite;
+  display:inline-block;
+  flex-shrink:0;
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,.25));
 }
-#rotateOverlay .rot-phone::after{
-  content:'';position:absolute;left:50%;bottom:7px;transform:translateX(-50%);
-  width:8px;height:8px;border-radius:50%;background:#f0d878;opacity:.75;
+@keyframes rotIconSpin{
+  0%,20%{transform:rotate(0deg)}
+  55%,80%{transform:rotate(-90deg)}
+  100%{transform:rotate(0deg)}
 }
-@keyframes rotPhone{0%,25%{transform:rotate(0deg)}55%,75%{transform:rotate(-90deg)}100%{transform:rotate(-90deg)}}
+#rotateOverlay .rot-content{text-align:left;line-height:1.25}
 #rotateOverlay .rot-title{
-  font-family:'Arial Black','Segoe UI',Impact,sans-serif;
-  font-size:clamp(16px,4.5vw,26px);font-weight:900;
-  letter-spacing:clamp(2px,1vw,3px);
-  background:linear-gradient(180deg,#fff,#f0d878 55%,#d4af37);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  filter:drop-shadow(0 3px 14px rgba(212,175,55,.85));
-  margin-bottom:clamp(8px,2.5vw,12px);text-transform:uppercase;
+  font-size:clamp(11px,2.8vw,13px);
+  font-weight:900;
+  letter-spacing:.6px;
+  color:#0a0e1f;
+  text-transform:uppercase;
+  margin-bottom:1px;
+  text-shadow:0 1px 0 rgba(255,255,255,.35);
 }
-#rotateOverlay .rot-desc{font-size:clamp(11px,3vw,15px);color:#fdf6e3;line-height:1.6;max-width:min(340px,86vw);opacity:.95;margin-bottom:clamp(12px,3vw,18px)}
-#rotateOverlay .rot-hint{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:clamp(6px,1.8vw,8px) clamp(12px,3.5vw,16px);
-  border-radius:20px;
-  background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.55);
-  font-size:clamp(9px,2.5vw,12px);font-weight:700;letter-spacing:clamp(1.2px,0.5vw,2px);
-  color:#c4b5fd;text-transform:uppercase;
-  text-shadow:0 0 10px rgba(167,139,250,.85);
-  box-shadow:0 0 20px rgba(167,139,250,.3);
-}
-#rotateOverlay .rot-hint .rot-arrow{font-size:clamp(14px,3.5vw,18px);display:inline-block;animation:rotArrow 1.6s ease-in-out infinite}
-@keyframes rotArrow{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-90deg)}}
-#rotateOverlay .rot-footer{
-  margin-top:clamp(20px,5vw,28px);padding:clamp(8px,2vw,10px) clamp(12px,3.5vw,16px);
-  border-top:1px solid rgba(167,139,250,.55);
-  border-bottom:1px solid rgba(167,139,250,.3);
-  border-radius:8px;
-  background:linear-gradient(180deg,rgba(167,139,250,.10),rgba(167,139,250,.02));
-  max-width:min(340px,90vw);
-}
-#rotateOverlay .rot-footer span{
-  display:block;font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;
-  font-size:clamp(8px,2.2vw,10px);font-weight:800;
-  letter-spacing:clamp(1.4px,0.6vw,3px);color:#c4b5fd;
-  text-transform:uppercase;text-shadow:0 0 10px rgba(167,139,250,.9);
+#rotateOverlay .rot-desc{
+  font-size:clamp(9px,2.3vw,11px);
+  color:rgba(10,14,31,.85);
+  font-weight:600;
+  letter-spacing:.2px;
 }
 
 /* ============================================================
-   PORTRAIT MODE
+   PORTRAIT MODE — Banner notifikasi saja, tidak memblokir
    ============================================================ */
 @media (orientation: portrait) and (max-width: 900px){
   #rotateOverlay{display:flex}
-  .screen{display:none !important}
-  .screen.active{display:none !important}
-  .touch-controls{display:none !important}
-  #cvs{cursor:default}
 }
 
 /* ============================================================
@@ -1149,9 +1136,6 @@ h1.title-main{
   .touch-btn{width:clamp(54px,7vh,72px);height:clamp(54px,7vh,72px)}
   .touch-fire{width:clamp(64px,8.5vh,92px);height:clamp(64px,8.5vh,92px)}
 }
-@media (min-width:600px) and (max-width:768px) and (orientation:portrait){
-  #rotateOverlay{display:flex}
-}
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi){
   .mgde-footer .mgde-label,.mgde-badge{-webkit-font-smoothing:antialiased}
 }
@@ -1166,13 +1150,13 @@ h1.title-main{
 </head>
 <body>
 
-<!-- ROTATE OVERLAY -->
+<!-- ROTATE BANNER (hanya pemberitahuan, tidak mengunci) -->
 <div id="rotateOverlay">
-  <div class="rot-phone"></div>
-  <div class="rot-title">Putar Perangkat</div>
-  <div class="rot-desc">Game ini dirancang untuk dimainkan dalam <b>posisi landscape</b> (mendatar). Silakan putar HP Anda.</div>
-  <div class="rot-hint"><span class="rot-arrow">↻</span> Putar ke Landscape</div>
-  <div class="rot-footer"><span>MAEDA GAMES EDU</span></div>
+  <span class="rot-icon">📱</span>
+  <div class="rot-content">
+    <div class="rot-title">Putar ke Landscape</div>
+    <div class="rot-desc">Pengalaman terbaik saat mendatar</div>
+  </div>
 </div>
 
 <!-- LOADING -->
@@ -1206,7 +1190,7 @@ h1.title-main{
     <div class="welcome-rotate">
       <span class="wr-icon">📱</span>
       <div class="wr-text">
-        Putar perangkat ke <b>MODE LANDSCAPE</b> (mendatar) untuk membuka pengalaman <b>premium</b> terbaik — grafik jernih, kontrol nyaman, dan misi tanpa hambatan.
+        <b>Rekomendasi:</b> putar perangkat ke <b>MODE LANDSCAPE</b> (mendatar) untuk pengalaman <b>premium</b> terbaik — grafik jernih, kontrol nyaman, dan misi tanpa hambatan.
       </div>
     </div>
 
@@ -1455,23 +1439,15 @@ function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor
 function rrect(c,x,y,w,h,r){r=Math.min(r,Math.abs(w)/2,Math.abs(h)/2);c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
 const IS_TOUCH=('ontouchstart' in window)||(navigator.maxTouchPoints>0);
 
-let _wasPortrait = false;
+/* ============================================================
+   ORIENTASI — HANYA MEMUNCULKAN BANNER, TIDAK MEMBLOKIR
+   ============================================================ */
 function isPortrait(){return window.innerHeight > window.innerWidth && window.innerWidth <= 900;}
 function handleOrientation(){
   const portrait = isPortrait();
-  const overlay = document.getElementById('rotateOverlay');
-  if(portrait){
-    overlay.style.display = 'flex';
-    if(!_wasPortrait){
-      if(state.running && !state.paused && !state.gameOver){
-        state.paused = true;
-        document.getElementById('pauseOv').classList.add('active');
-      }
-      _wasPortrait = true;
-    }
-  } else {
-    overlay.style.display = 'none';
-    _wasPortrait = false;
+  const banner = document.getElementById('rotateOverlay');
+  if(banner){
+    banner.style.display = portrait ? 'flex' : 'none';
   }
   updateTouchControlsVisibility();
 }
@@ -1524,12 +1500,7 @@ const TEMA_SNOW={
   tree:'#4c1d95',treeLight:'#a78bfa',ice:'#e9d5ff'
 };
 
-/* ============================================================
-   LEVELS — 7 Level × 10 Soal = 70 Soal Unik (Tanpa Duplikasi)
-   Diverifikasi akurat sesuai materi Bab 1 Ekonomi SMP
-   ============================================================ */
 const LEVELS = [
-  /* ---------- LEVEL 1 — KELANGKAAN & KEBUTUHAN ---------- */
   {
     id:1, name:"KELANGKAAN & KEBUTUHAN", year:"Materi 1 — Masalah Pokok Ekonomi",
     tag:"MISI 1 DARI 7", location:"mountain", locationName:"🏔️ GUNUNG SENJA",
@@ -1539,52 +1510,18 @@ const LEVELS = [
     questions:[
       {q:"Kelangkaan (scarcity) terjadi karena...",
        a:"Kebutuhan manusia tidak terbatas, alat pemuas terbatas",
-       w:["Kebutuhan manusia terbatas, alat pemuas tidak terbatas",
-          "Semua kebutuhan dapat dipenuhi manusia",
-          "Alat pemuas kebutuhan jumlahnya tidak terbatas"]},
-      {q:"Masalah pokok ekonomi yang dihadapi setiap manusia adalah...",
-       a:"Kelangkaan",
-       w:["Kemiskinan","Inflasi","Pengangguran"]},
-      {q:"Salah satu penyebab kelangkaan adalah...",
-       a:"Sumber daya alam jumlahnya terbatas",
-       w:["Kebutuhan manusia jumlahnya tetap",
-          "Alat pemuas kebutuhan melimpah",
-          "Jumlah penduduk semakin berkurang"]},
-      {q:"Akibat kelangkaan, manusia harus melakukan...",
-       a:"Pilihan dalam memenuhi kebutuhan",
-       w:["Pemborosan barang",
-          "Pengabaian semua kebutuhan",
-          "Pembelian semua barang"]},
-      {q:"Segala sesuatu yang diperlukan manusia untuk mempertahankan hidup disebut...",
-       a:"Kebutuhan",
-       w:["Keinginan","Barang mewah","Alat pemuas"]},
-      {q:"Contoh sumber daya alam yang TIDAK dapat diperbarui adalah...",
-       a:"Minyak bumi",
-       w:["Air","Hutan","Angin"]},
-      {q:"Contoh sumber daya alam yang DAPAT diperbarui adalah...",
-       a:"Air dan hutan",
-       w:["Minyak bumi dan batu bara",
-          "Gas alam dan tambang emas",
-          "Bensin dan solar"]},
-      {q:"Bencana alam dapat menyebabkan kelangkaan karena...",
-       a:"Merusak sumber daya dan menghambat produksi",
-       w:["Menambah jumlah barang di pasar",
-          "Meningkatkan hasil pertanian",
-          "Mempercepat distribusi barang"]},
-      {q:"Contoh kelangkaan di kehidupan sehari-hari adalah...",
-       a:"Air bersih saat musim kemarau",
-       w:["Udara di pagi hari",
-          "Sinar matahari di siang hari",
-          "Angin sepoi-sepoi di pantai"]},
-      {q:"Akibat kelangkaan bagi konsumen adalah...",
-       a:"Harga barang cenderung naik",
-       w:["Harga barang cenderung turun",
-          "Barang menjadi melimpah",
-          "Pendapatan konsumen naik"]}
+       w:["Kebutuhan manusia terbatas, alat pemuas tidak terbatas","Semua kebutuhan dapat dipenuhi manusia","Alat pemuas kebutuhan jumlahnya tidak terbatas"]},
+      {q:"Masalah pokok ekonomi yang dihadapi setiap manusia adalah...",a:"Kelangkaan",w:["Kemiskinan","Inflasi","Pengangguran"]},
+      {q:"Salah satu penyebab kelangkaan adalah...",a:"Sumber daya alam jumlahnya terbatas",w:["Kebutuhan manusia jumlahnya tetap","Alat pemuas kebutuhan melimpah","Jumlah penduduk semakin berkurang"]},
+      {q:"Akibat kelangkaan, manusia harus melakukan...",a:"Pilihan dalam memenuhi kebutuhan",w:["Pemborosan barang","Pengabaian semua kebutuhan","Pembelian semua barang"]},
+      {q:"Segala sesuatu yang diperlukan manusia untuk mempertahankan hidup disebut...",a:"Kebutuhan",w:["Keinginan","Barang mewah","Alat pemuas"]},
+      {q:"Contoh sumber daya alam yang TIDAK dapat diperbarui adalah...",a:"Minyak bumi",w:["Air","Hutan","Angin"]},
+      {q:"Contoh sumber daya alam yang DAPAT diperbarui adalah...",a:"Air dan hutan",w:["Minyak bumi dan batu bara","Gas alam dan tambang emas","Bensin dan solar"]},
+      {q:"Bencana alam dapat menyebabkan kelangkaan karena...",a:"Merusak sumber daya dan menghambat produksi",w:["Menambah jumlah barang di pasar","Meningkatkan hasil pertanian","Mempercepat distribusi barang"]},
+      {q:"Contoh kelangkaan di kehidupan sehari-hari adalah...",a:"Air bersih saat musim kemarau",w:["Udara di pagi hari","Sinar matahari di siang hari","Angin sepoi-sepoi di pantai"]},
+      {q:"Akibat kelangkaan bagi konsumen adalah...",a:"Harga barang cenderung naik",w:["Harga barang cenderung turun","Barang menjadi melimpah","Pendapatan konsumen naik"]}
     ]
   },
-
-  /* ---------- LEVEL 2 — MACAM KEBUTUHAN ---------- */
   {
     id:2, name:"MACAM KEBUTUHAN", year:"Materi 2 — Klasifikasi Kebutuhan Manusia",
     tag:"MISI 2 DARI 7", location:"river", locationName:"🌅 DELTA EMAS",
@@ -1592,48 +1529,18 @@ const LEVELS = [
     motivation:"Kenali kebutuhanmu, maka kau kan bijak memilih. Maju pantang mundur!",
     theme: TEMA_RIVER,
     questions:[
-      {q:"Kebutuhan pokok yang wajib dipenuhi disebut kebutuhan...",
-       a:"Primer",
-       w:["Sekunder","Tersier","Rohani"]},
-      {q:"Kebutuhan pelengkap yang dipenuhi setelah kebutuhan primer disebut kebutuhan...",
-       a:"Sekunder",
-       w:["Primer","Tersier","Jasmani"]},
-      {q:"Mobil mewah dan perhiasan termasuk kebutuhan...",
-       a:"Tersier",
-       w:["Primer","Sekunder","Jasmani"]},
-      {q:"Kebutuhan yang berkaitan dengan fisik atau tubuh disebut kebutuhan...",
-       a:"Jasmani",
-       w:["Rohani","Sekunder","Tersier"]},
-      {q:"Ibadah dan pendidikan termasuk kebutuhan...",
-       a:"Rohani",
-       w:["Jasmani","Primer","Tersier"]},
-      {q:"Menurut waktu, kebutuhan dibedakan menjadi...",
-       a:"Sekarang dan masa depan",
-       w:["Jasmani dan rohani",
-          "Primer dan sekunder",
-          "Individu dan kolektif"]},
-      {q:"Tabungan dan asuransi pendidikan termasuk kebutuhan...",
-       a:"Masa depan",
-       w:["Sekarang","Jasmani","Rohani"]},
-      {q:"Menurut subjeknya, kebutuhan dibedakan menjadi...",
-       a:"Individu dan kolektif",
-       w:["Primer dan sekunder",
-          "Jasmani dan rohani",
-          "Sekarang dan masa depan"]},
-      {q:"Contoh kebutuhan kolektif adalah...",
-       a:"Jalan raya dan jembatan",
-       w:["Makanan pribadi",
-          "Pakaian pribadi",
-          "Sepatu pribadi"]},
-      {q:"Faktor yang mempengaruhi kebutuhan seseorang adalah...",
-       a:"Pendapatan dan lingkungan",
-       w:["Warna kulit dan tinggi badan",
-          "Golongan darah dan berat badan",
-          "Warna rambut dan jenis kelamin"]}
+      {q:"Kebutuhan pokok yang wajib dipenuhi disebut kebutuhan...",a:"Primer",w:["Sekunder","Tersier","Rohani"]},
+      {q:"Kebutuhan pelengkap yang dipenuhi setelah kebutuhan primer disebut kebutuhan...",a:"Sekunder",w:["Primer","Tersier","Jasmani"]},
+      {q:"Mobil mewah dan perhiasan termasuk kebutuhan...",a:"Tersier",w:["Primer","Sekunder","Jasmani"]},
+      {q:"Kebutuhan yang berkaitan dengan fisik atau tubuh disebut kebutuhan...",a:"Jasmani",w:["Rohani","Sekunder","Tersier"]},
+      {q:"Ibadah dan pendidikan termasuk kebutuhan...",a:"Rohani",w:["Jasmani","Primer","Tersier"]},
+      {q:"Menurut waktu, kebutuhan dibedakan menjadi...",a:"Sekarang dan masa depan",w:["Jasmani dan rohani","Primer dan sekunder","Individu dan kolektif"]},
+      {q:"Tabungan dan asuransi pendidikan termasuk kebutuhan...",a:"Masa depan",w:["Sekarang","Jasmani","Rohani"]},
+      {q:"Menurut subjeknya, kebutuhan dibedakan menjadi...",a:"Individu dan kolektif",w:["Primer dan sekunder","Jasmani dan rohani","Sekarang dan masa depan"]},
+      {q:"Contoh kebutuhan kolektif adalah...",a:"Jalan raya dan jembatan",w:["Makanan pribadi","Pakaian pribadi","Sepatu pribadi"]},
+      {q:"Faktor yang mempengaruhi kebutuhan seseorang adalah...",a:"Pendapatan dan lingkungan",w:["Warna kulit dan tinggi badan","Golongan darah dan berat badan","Warna rambut dan jenis kelamin"]}
     ]
   },
-
-  /* ---------- LEVEL 3 — ALAT PEMUAS KEBUTUHAN ---------- */
   {
     id:3, name:"ALAT PEMUAS KEBUTUHAN", year:"Materi 3 — Barang & Jasa",
     tag:"MISI 3 DARI 7", location:"forest", locationName:"🌿 KUIL ZAMRUD",
@@ -1641,46 +1548,18 @@ const LEVELS = [
     motivation:"Prioritas adalah kunci kesuksesan. Susun strategimu, raih kemenangan!",
     theme: TEMA_FOREST,
     questions:[
-      {q:"Segala sesuatu yang dapat memenuhi kebutuhan manusia disebut...",
-       a:"Alat pemuas kebutuhan",
-       w:["Keinginan","Motif ekonomi","Biaya peluang"]},
-      {q:"Alat pemuas kebutuhan dibedakan menjadi...",
-       a:"Barang dan jasa",
-       w:["Uang dan saham",
-          "Tenaga kerja dan modal",
-          "Kekayaan alam"]},
-      {q:"Perbedaan utama antara barang dan jasa terletak pada...",
-       a:"Wujud fisiknya",
-       w:["Harganya","Namanya","Warnanya"]},
-      {q:"Barang yang langsung digunakan untuk memenuhi kebutuhan konsumen disebut barang...",
-       a:"Konsumsi",
-       w:["Produksi","Substitusi","Komplementer"]},
-      {q:"Mesin dan traktor termasuk barang...",
-       a:"Produksi",
-       w:["Konsumsi","Bebas","Substitusi"]},
-      {q:"Barang pengganti barang lain disebut barang...",
-       a:"Substitusi",
-       w:["Komplementer","Bebas","Ekonomi"]},
-      {q:"Contoh barang substitusi adalah...",
-       a:"Nasi diganti dengan mie",
-       w:["Motor dan bensin",
-          "Pena dan tinta",
-          "Beras dan air"]},
-      {q:"Barang yang saling melengkapi satu sama lain disebut barang...",
-       a:"Komplementer",
-       w:["Substitusi","Bebas","Ekonomi"]},
-      {q:"Contoh barang komplementer adalah...",
-       a:"Motor dan bensin",
-       w:["Nasi dan mie",
-          "Sepeda dan motor",
-          "Beras dan air"]},
-      {q:"Barang yang tersedia banyak di alam tanpa perlu pengorbanan disebut barang...",
-       a:"Bebas",
-       w:["Ekonomi","Produksi","Substitusi"]}
+      {q:"Segala sesuatu yang dapat memenuhi kebutuhan manusia disebut...",a:"Alat pemuas kebutuhan",w:["Keinginan","Motif ekonomi","Biaya peluang"]},
+      {q:"Alat pemuas kebutuhan dibedakan menjadi...",a:"Barang dan jasa",w:["Uang dan saham","Tenaga kerja dan modal","Kekayaan alam"]},
+      {q:"Perbedaan utama antara barang dan jasa terletak pada...",a:"Wujud fisiknya",w:["Harganya","Namanya","Warnanya"]},
+      {q:"Barang yang langsung digunakan untuk memenuhi kebutuhan konsumen disebut barang...",a:"Konsumsi",w:["Produksi","Substitusi","Komplementer"]},
+      {q:"Mesin dan traktor termasuk barang...",a:"Produksi",w:["Konsumsi","Bebas","Substitusi"]},
+      {q:"Barang pengganti barang lain disebut barang...",a:"Substitusi",w:["Komplementer","Bebas","Ekonomi"]},
+      {q:"Contoh barang substitusi adalah...",a:"Nasi diganti dengan mie",w:["Motor dan bensin","Pena dan tinta","Beras dan air"]},
+      {q:"Barang yang saling melengkapi satu sama lain disebut barang...",a:"Komplementer",w:["Substitusi","Bebas","Ekonomi"]},
+      {q:"Contoh barang komplementer adalah...",a:"Motor dan bensin",w:["Nasi dan mie","Sepeda dan motor","Beras dan air"]},
+      {q:"Barang yang tersedia banyak di alam tanpa perlu pengorbanan disebut barang...",a:"Bebas",w:["Ekonomi","Produksi","Substitusi"]}
     ]
   },
-
-  /* ---------- LEVEL 4 — SKALA PRIORITAS, MOTIF & PRINSIP ---------- */
   {
     id:4, name:"SKALA PRIORITAS & MOTIF PRINSIP", year:"Materi 4 — Urutan Kebutuhan & Dorongan Ekonomi",
     tag:"MISI 4 DARI 7", location:"sea", locationName:"🌊 LAUT AZURE",
@@ -1688,54 +1567,18 @@ const LEVELS = [
     motivation:"Setiap pilihan ada harganya. Pilih dengan cerdas, bertarung dengan gagah!",
     theme: TEMA_SEA,
     questions:[
-      {q:"Daftar urutan kebutuhan berdasarkan tingkat kepentingannya disebut...",
-       a:"Skala prioritas",
-       w:["Biaya peluang","Motif ekonomi","Prinsip ekonomi"]},
-      {q:"Urutan pertama dalam skala prioritas adalah kebutuhan yang...",
-       a:"Penting dan mendesak",
-       w:["Kurang penting dan kurang mendesak",
-          "Murah dan mudah didapat",
-          "Mewah dan mahal harganya"]},
-      {q:"Contoh kebutuhan penting dan mendesak adalah...",
-       a:"Makan saat lapar",
-       w:["Membeli mainan baru",
-          "Jalan-jalan ke mall",
-          "Menonton film di bioskop"]},
-      {q:"Contoh kebutuhan kurang penting dan kurang mendesak adalah...",
-       a:"Membeli mainan baru",
-       w:["Berobat saat sakit",
-          "Makan saat lapar",
-          "Membeli buku pelajaran"]},
-      {q:"Manfaat menyusun skala prioritas adalah...",
-       a:"Menghindari pemborosan",
-       w:["Menambah utang",
-          "Memperbanyak keinginan",
-          "Menghabiskan uang dengan cepat"]},
-      {q:"Dorongan atau alasan seseorang melakukan tindakan ekonomi disebut...",
-       a:"Motif ekonomi",
-       w:["Prinsip ekonomi","Biaya peluang","Skala prioritas"]},
-      {q:"Pedoman berusaha dengan pengorbanan sekecil mungkin untuk hasil maksimal disebut...",
-       a:"Prinsip ekonomi",
-       w:["Motif ekonomi","Biaya peluang","Tindakan ekonomi"]},
-      {q:"Contoh motif berbuat sosial adalah...",
-       a:"Menyumbang korban bencana",
-       w:["Mencari laba besar",
-          "Mengejar jabatan tinggi",
-          "Membeli barang mewah"]},
-      {q:"Contoh tindakan ekonomi rasional adalah...",
-       a:"Membandingkan harga sebelum membeli",
-       w:["Membeli barang tanpa berpikir",
-          "Ikut-ikutan teman berbelanja",
-          "Membeli karena gengsi semata"]},
-      {q:"Contoh tindakan ekonomi irasional adalah...",
-       a:"Membeli barang tanpa pertimbangan",
-       w:["Membandingkan harga di dua toko",
-          "Menabung secara rutin",
-          "Membuat anggaran belanja"]}
+      {q:"Daftar urutan kebutuhan berdasarkan tingkat kepentingannya disebut...",a:"Skala prioritas",w:["Biaya peluang","Motif ekonomi","Prinsip ekonomi"]},
+      {q:"Urutan pertama dalam skala prioritas adalah kebutuhan yang...",a:"Penting dan mendesak",w:["Kurang penting dan kurang mendesak","Murah dan mudah didapat","Mewah dan mahal harganya"]},
+      {q:"Contoh kebutuhan penting dan mendesak adalah...",a:"Makan saat lapar",w:["Membeli mainan baru","Jalan-jalan ke mall","Menonton film di bioskop"]},
+      {q:"Contoh kebutuhan kurang penting dan kurang mendesak adalah...",a:"Membeli mainan baru",w:["Berobat saat sakit","Makan saat lapar","Membeli buku pelajaran"]},
+      {q:"Manfaat menyusun skala prioritas adalah...",a:"Menghindari pemborosan",w:["Menambah utang","Memperbanyak keinginan","Menghabiskan uang dengan cepat"]},
+      {q:"Dorongan atau alasan seseorang melakukan tindakan ekonomi disebut...",a:"Motif ekonomi",w:["Prinsip ekonomi","Biaya peluang","Skala prioritas"]},
+      {q:"Pedoman berusaha dengan pengorbanan sekecil mungkin untuk hasil maksimal disebut...",a:"Prinsip ekonomi",w:["Motif ekonomi","Biaya peluang","Tindakan ekonomi"]},
+      {q:"Contoh motif berbuat sosial adalah...",a:"Menyumbang korban bencana",w:["Mencari laba besar","Mengejar jabatan tinggi","Membeli barang mewah"]},
+      {q:"Contoh tindakan ekonomi rasional adalah...",a:"Membandingkan harga sebelum membeli",w:["Membeli barang tanpa berpikir","Ikut-ikutan teman berbelanja","Membeli karena gengsi semata"]},
+      {q:"Contoh tindakan ekonomi irasional adalah...",a:"Membeli barang tanpa pertimbangan",w:["Membandingkan harga di dua toko","Menabung secara rutin","Membuat anggaran belanja"]}
     ]
   },
-
-  /* ---------- LEVEL 5 — BIAYA PELUANG & ILMU EKONOMI ---------- */
   {
     id:5, name:"BIAYA PELUANG & ILMU EKONOMI", year:"Materi 5 — Pilihan & Ruang Lingkup Ilmu Ekonomi",
     tag:"MISI 5 DARI 7", location:"snow", locationName:"❄️ AURORA ROSE",
@@ -1743,56 +1586,18 @@ const LEVELS = [
     motivation:"Produksi, distribusi, konsumsi — rantai ekonomi yang menggerakkan dunia!",
     theme: TEMA_SNOW,
     questions:[
-      {q:"Nilai barang atau manfaat yang dikorbankan karena memilih alternatif lain disebut...",
-       a:"Biaya peluang",
-       w:["Biaya produksi","Biaya konsumsi","Biaya distribusi"]},
-      {q:"Biaya peluang muncul karena adanya...",
-       a:"Pilihan",
-       w:["Banyak uang","Banyak teman","Banyak barang"]},
-      {q:"Andi punya uang Rp50.000. Ia bisa membeli buku ATAU menonton bioskop. Jika ia memilih buku, biaya peluangnya adalah...",
-       a:"Kesenangan menonton bioskop yang dikorbankan",
-       w:["Harga buku yang dibeli",
-          "Ongkos transportasi ke toko buku",
-          "Uang kembalian dari membeli buku"]},
-      {q:"Berikut yang BUKAN ciri biaya peluang adalah...",
-       a:"Selalu berhubungan dengan uang",
-       w:["Bisa berupa waktu atau kesenangan",
-          "Memiliki banyak kemungkinan penggunaan",
-          "Tergantung pada tujuan dan situasi individu"]},
-      {q:"Ilmu ekonomi mikro mempelajari...",
-       a:"Bagian kecil perekonomian seperti rumah tangga dan perusahaan",
-       w:["Perekonomian negara secara keseluruhan",
-          "Inflasi dan pengangguran nasional",
-          "Perdagangan internasional"]},
-      {q:"Ilmu ekonomi makro mempelajari...",
-       a:"Perekonomian secara keseluruhan",
-       w:["Harga pasar di pasar lokal",
-          "Perilaku konsumen individu",
-          "Keuntungan satu perusahaan"]},
-      {q:"Contoh kajian ekonomi mikro adalah...",
-       a:"Harga pasar beras di pasar lokal",
-       w:["Tingkat inflasi nasional",
-          "Tingkat pengangguran negara",
-          "Pertumbuhan ekonomi nasional"]},
-      {q:"Contoh kajian ekonomi makro adalah...",
-       a:"Tingkat inflasi dan pengangguran nasional",
-       w:["Harga barang di warung",
-          "Keuntungan toko kelontong",
-          "Belanja bulanan keluarga"]},
-      {q:"Ekonomi positif bersifat...",
-       a:"Menggambarkan fakta apa adanya",
-       w:["Memberi saran dan penilaian",
-          "Berisi opini pribadi tanpa data",
-          "Hanya berupa ramalan masa depan"]},
-      {q:"Ekonomi normatif bersifat...",
-       a:"Memberi penilaian atau saran",
-       w:["Fakta murni tanpa penilaian",
-          "Angka statistik semata",
-          "Data kuantitatif murni"]}
+      {q:"Nilai barang atau manfaat yang dikorbankan karena memilih alternatif lain disebut...",a:"Biaya peluang",w:["Biaya produksi","Biaya konsumsi","Biaya distribusi"]},
+      {q:"Biaya peluang muncul karena adanya...",a:"Pilihan",w:["Banyak uang","Banyak teman","Banyak barang"]},
+      {q:"Andi punya uang Rp50.000. Ia bisa membeli buku ATAU menonton bioskop. Jika ia memilih buku, biaya peluangnya adalah...",a:"Kesenangan menonton bioskop yang dikorbankan",w:["Harga buku yang dibeli","Ongkos transportasi ke toko buku","Uang kembalian dari membeli buku"]},
+      {q:"Berikut yang BUKAN ciri biaya peluang adalah...",a:"Selalu berhubungan dengan uang",w:["Bisa berupa waktu atau kesenangan","Memiliki banyak kemungkinan penggunaan","Tergantung pada tujuan dan situasi individu"]},
+      {q:"Ilmu ekonomi mikro mempelajari...",a:"Bagian kecil perekonomian seperti rumah tangga dan perusahaan",w:["Perekonomian negara secara keseluruhan","Inflasi dan pengangguran nasional","Perdagangan internasional"]},
+      {q:"Ilmu ekonomi makro mempelajari...",a:"Perekonomian secara keseluruhan",w:["Harga pasar di pasar lokal","Perilaku konsumen individu","Keuntungan satu perusahaan"]},
+      {q:"Contoh kajian ekonomi mikro adalah...",a:"Harga pasar beras di pasar lokal",w:["Tingkat inflasi nasional","Tingkat pengangguran negara","Pertumbuhan ekonomi nasional"]},
+      {q:"Contoh kajian ekonomi makro adalah...",a:"Tingkat inflasi dan pengangguran nasional",w:["Harga barang di warung","Keuntungan toko kelontong","Belanja bulanan keluarga"]},
+      {q:"Ekonomi positif bersifat...",a:"Menggambarkan fakta apa adanya",w:["Memberi saran dan penilaian","Berisi opini pribadi tanpa data","Hanya berupa ramalan masa depan"]},
+      {q:"Ekonomi normatif bersifat...",a:"Memberi penilaian atau saran",w:["Fakta murni tanpa penilaian","Angka statistik semata","Data kuantitatif murni"]}
     ]
   },
-
-  /* ---------- LEVEL 6 — KEGIATAN EKONOMI & FAKTOR PRODUKSI ---------- */
   {
     id:6, name:"KEGIATAN EKONOMI & FAKTOR PRODUKSI", year:"Materi 6 — Produksi, Distribusi, Konsumsi & Balas Jasa",
     tag:"MISI 6 DARI 7", location:"mountain", locationName:"🏔️ GUNUNG SENJA",
@@ -1800,40 +1605,18 @@ const LEVELS = [
     motivation:"Faktor produksi & pelaku ekonomi — pilar kekuatan bangsa. Taklukkan!",
     theme: TEMA_MOUNTAIN,
     questions:[
-      {q:"Kegiatan menghasilkan barang atau jasa disebut...",
-       a:"Produksi",
-       w:["Distribusi","Konsumsi","Investasi"]},
-      {q:"Kegiatan menyalurkan barang dari produsen ke konsumen disebut...",
-       a:"Distribusi",
-       w:["Produksi","Konsumsi","Investasi"]},
-      {q:"Kegiatan menghabiskan atau mengurangi nilai guna barang/jasa disebut...",
-       a:"Konsumsi",
-       w:["Produksi","Distribusi","Investasi"]},
-      {q:"Pertambangan dan penangkapan ikan termasuk produksi...",
-       a:"Ekstraktif",
-       w:["Agraris","Industri","Jasa"]},
-      {q:"Pertanian dan perkebunan termasuk produksi...",
-       a:"Agraris",
-       w:["Ekstraktif","Industri","Jasa"]},
-      {q:"Pabrik sepatu dan pabrik tekstil termasuk produksi...",
-       a:"Industri",
-       w:["Ekstraktif","Agraris","Jasa"]},
-      {q:"Guru mengajar dan dokter mengobati termasuk produksi...",
-       a:"Jasa",
-       w:["Ekstraktif","Agraris","Industri"]},
-      {q:"Petani menjual langsung hasil panen ke pembeli termasuk distribusi...",
-       a:"Langsung",
-       w:["Tidak langsung","Semi langsung","Bertingkat"]},
-      {q:"Faktor produksi alam mendapat balas jasa berupa...",
-       a:"Sewa",
-       w:["Upah","Bunga","Laba"]},
-      {q:"Faktor produksi kewirausahaan mendapat balas jasa berupa...",
-       a:"Laba",
-       w:["Sewa","Bunga","Upah"]}
+      {q:"Kegiatan menghasilkan barang atau jasa disebut...",a:"Produksi",w:["Distribusi","Konsumsi","Investasi"]},
+      {q:"Kegiatan menyalurkan barang dari produsen ke konsumen disebut...",a:"Distribusi",w:["Produksi","Konsumsi","Investasi"]},
+      {q:"Kegiatan menghabiskan atau mengurangi nilai guna barang/jasa disebut...",a:"Konsumsi",w:["Produksi","Distribusi","Investasi"]},
+      {q:"Pertambangan dan penangkapan ikan termasuk produksi...",a:"Ekstraktif",w:["Agraris","Industri","Jasa"]},
+      {q:"Pertanian dan perkebunan termasuk produksi...",a:"Agraris",w:["Ekstraktif","Industri","Jasa"]},
+      {q:"Pabrik sepatu dan pabrik tekstil termasuk produksi...",a:"Industri",w:["Ekstraktif","Agraris","Jasa"]},
+      {q:"Guru mengajar dan dokter mengobati termasuk produksi...",a:"Jasa",w:["Ekstraktif","Agraris","Industri"]},
+      {q:"Petani menjual langsung hasil panen ke pembeli termasuk distribusi...",a:"Langsung",w:["Tidak langsung","Semi langsung","Bertingkat"]},
+      {q:"Faktor produksi alam mendapat balas jasa berupa...",a:"Sewa",w:["Upah","Bunga","Laba"]},
+      {q:"Faktor produksi kewirausahaan mendapat balas jasa berupa...",a:"Laba",w:["Sewa","Bunga","Upah"]}
     ]
   },
-
-  /* ---------- LEVEL 7 — PELAKU EKONOMI & EKONOMI INDONESIA ---------- */
   {
     id:7, name:"PELAKU EKONOMI & EKONOMI INDONESIA", year:"Materi 7 — Circular Flow & Sistem Ekonomi Pancasila",
     tag:"MISI 7 DARI 7", location:"snow", locationName:"❄️ AURORA ROSE",
@@ -1841,40 +1624,16 @@ const LEVELS = [
     motivation:"Ekonomi Pancasila, jiwa gotong royong. Akhiri misi ini dengan kejayaan!",
     theme: TEMA_SNOW,
     questions:[
-      {q:"Pelaku ekonomi yang kegiatan utamanya mengonsumsi barang/jasa adalah...",
-       a:"Rumah tangga konsumen",
-       w:["Rumah tangga produsen","Pemerintah","Masyarakat luar negeri"]},
-      {q:"Pelaku ekonomi yang kegiatan utamanya memproduksi barang/jasa adalah...",
-       a:"Rumah tangga produsen",
-       w:["Rumah tangga konsumen","Pemerintah","Masyarakat luar negeri"]},
-      {q:"Dalam perekonomian, pemerintah berperan sebagai...",
-       a:"Regulator, konsumen, dan produsen",
-       w:["Hanya sebagai pembeli",
-          "Hanya sebagai penjual",
-          "Hanya sebagai produsen"]},
-      {q:"Perekonomian 3 sektor adalah perekonomian 2 sektor ditambah dengan...",
-       a:"Pemerintah",
-       w:["Masyarakat luar negeri","Bank","Koperasi"]},
-      {q:"Perekonomian 4 sektor adalah perekonomian 3 sektor ditambah dengan...",
-       a:"Masyarakat luar negeri",
-       w:["Bank","Koperasi","BUMN"]},
-      {q:"Sistem ekonomi Indonesia berlandaskan...",
-       a:"Pancasila",
-       w:["Kapitalisme murni","Sosialisme murni","Liberalisme"]},
-      {q:"Dasar hukum ekonomi Indonesia adalah...",
-       a:"Pasal 33 UUD 1945",
-       w:["Pasal 30 UUD 1945","Pasal 31 UUD 1945","Pasal 32 UUD 1945"]},
-      {q:"Soko guru perekonomian Indonesia adalah...",
-       a:"Koperasi",
-       w:["Perusahaan asing","Bank swasta","BUMN"]},
-      {q:"Asas perekonomian Indonesia menurut Pasal 33 ayat (1) UUD 1945 adalah...",
-       a:"Kekeluargaan",
-       w:["Individualisme","Persaingan bebas","Liberalisme"]},
-      {q:"Tujuan akhir perekonomian Indonesia adalah...",
-       a:"Kesejahteraan seluruh rakyat",
-       w:["Kekayaan pengusaha besar",
-          "Menambah utang negara",
-          "Dominasi asing di Indonesia"]}
+      {q:"Pelaku ekonomi yang kegiatan utamanya mengonsumsi barang/jasa adalah...",a:"Rumah tangga konsumen",w:["Rumah tangga produsen","Pemerintah","Masyarakat luar negeri"]},
+      {q:"Pelaku ekonomi yang kegiatan utamanya memproduksi barang/jasa adalah...",a:"Rumah tangga produsen",w:["Rumah tangga konsumen","Pemerintah","Masyarakat luar negeri"]},
+      {q:"Dalam perekonomian, pemerintah berperan sebagai...",a:"Regulator, konsumen, dan produsen",w:["Hanya sebagai pembeli","Hanya sebagai penjual","Hanya sebagai produsen"]},
+      {q:"Perekonomian 3 sektor adalah perekonomian 2 sektor ditambah dengan...",a:"Pemerintah",w:["Masyarakat luar negeri","Bank","Koperasi"]},
+      {q:"Perekonomian 4 sektor adalah perekonomian 3 sektor ditambah dengan...",a:"Masyarakat luar negeri",w:["Bank","Koperasi","BUMN"]},
+      {q:"Sistem ekonomi Indonesia berlandaskan...",a:"Pancasila",w:["Kapitalisme murni","Sosialisme murni","Liberalisme"]},
+      {q:"Dasar hukum ekonomi Indonesia adalah...",a:"Pasal 33 UUD 1945",w:["Pasal 30 UUD 1945","Pasal 31 UUD 1945","Pasal 32 UUD 1945"]},
+      {q:"Soko guru perekonomian Indonesia adalah...",a:"Koperasi",w:["Perusahaan asing","Bank swasta","BUMN"]},
+      {q:"Asas perekonomian Indonesia menurut Pasal 33 ayat (1) UUD 1945 adalah...",a:"Kekeluargaan",w:["Individualisme","Persaingan bebas","Liberalisme"]},
+      {q:"Tujuan akhir perekonomian Indonesia adalah...",a:"Kesejahteraan seluruh rakyat",w:["Kekayaan pengusaha besar","Menambah utang negara","Dominasi asing di Indonesia"]}
     ]
   }
 ];
@@ -1891,7 +1650,6 @@ const QUESTIONS_PER_LEVEL=10;
 const PASS_THRESHOLD=7;
 const MAX_LIVES=5;
 
-/* ============ PAL — NAVY & GOLD TACTICAL ============ */
 const PAL={
 soldier:{
   uniform:'#1e3a8a',uniformDark:'#0c1e4a',uniformLight:'#3b82f6',uniformShadow:'#050f28',
@@ -1954,7 +1712,6 @@ let oceanWaves=[],seaShips=[],seaFoam=[];
 let snowHills=[],snowTrees=[],iceCrystals=[];
 let ambient=[];
 
-/* ============ FX — Warna efek premium ============ */
 const FX={
   gold:'#d4af37',goldLight:'#f0d878',goldBright:'#ffd700',goldDark:'#8b6914',goldDeep:'#3a2a08',
   cream:'#fdf6e3',
@@ -2024,9 +1781,6 @@ function spawnParticle(opts){if(state.particles.length>2500)state.particles.shif
 function updateParticles(dt){for(let i=state.particles.length-1;i>=0;i--){const p=state.particles[i];p.vy+=(p.grav||420)*dt;p.vx*=0.985;p.x+=p.vx*dt;p.y+=p.vy*dt;p.life-=dt;if(p.life<=0)state.particles.splice(i,1);}}
 function drawParticles(){for(const p of state.particles){const a=Math.max(0,p.life/p.maxLife);if(p.glow&&settings.bloom){ctx.globalAlpha=a*0.5;const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.size*3);g.addColorStop(0,p.color);g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,p.size*3,0,TAU);ctx.fill();}if(p.smoke){ctx.globalAlpha=a*0.5;ctx.fillStyle=p.color||FX.smoke;ctx.beginPath();ctx.arc(p.x,p.y,p.size*(1.6-a*0.6),0,TAU);ctx.fill();}else{ctx.globalAlpha=a;ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,TAU);ctx.fill();}}ctx.globalAlpha=1;}
 
-/* ============================================================
-   ENEMY — Speed -40%, lane di kanan player, baseGy disimpan
-   ============================================================ */
 function makeEnemies(options){
   const configs=[
     {gy:170, s:0.52, xMin:420, xMax:500, offset:820},
@@ -2301,14 +2055,10 @@ function update(dt){
   for(let i=state.casings.length-1;i>=0;i--){const c=state.casings[i];c.vy+=480*dt;c.vx*=0.99;c.x+=c.vx*dt;c.y+=c.vy*dt;c.rot+=c.rotSpd*dt;c.life-=dt;if(c.y>player.gy-2){c.y=player.gy-2;c.vy*=-0.35;c.vx*=0.6;c.rotSpd*=0.5;}if(c.life<=0)state.casings.splice(i,1);}
   for(let i=state.shockwaves.length-1;i>=0;i--){state.shockwaves[i].life-=dt;if(state.shockwaves[i].life<=0)state.shockwaves.splice(i,1);}
 
-  /* ============================================================
-     ENEMY UPDATE — dengan FAST RETURN
-     ============================================================ */
   for(const e of state.enemies){
     if(e.recoil>0)e.recoil=Math.max(0,e.recoil-dt*60);
     if(!e.alive){if(e.fade>0)e.fade=Math.max(0,e.fade-dt*2);continue;}
 
-    // ==== FAST RETURN: kabur secepat kilat ke kanan-atas ====
     if(e.fastReturn){
       e.x += 1800*dt;
       e.gy -= 70*dt;
@@ -2871,14 +2621,14 @@ function setupTapToAim(){
   el.addEventListener('touchcancel', ()=>{ isDragging = false; }, {passive:true});
 }
 
-function updateTouchControlsVisibility(){const ctrls=document.getElementById('touchCtrls');const portrait=isPortrait();const on=IS_TOUCH&&settings.touch&&!portrait;ctrls.classList.toggle('on',on);}
+function updateTouchControlsVisibility(){const ctrls=document.getElementById('touchCtrls');const on=IS_TOUCH&&settings.touch;ctrls.classList.toggle('on',on);}
 
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='menu')document.title='BAZOOKA GAME — Ekonomi Bab 1 | MGE';else if(id==='howto')document.title='BAZOOKA GAME — Cara Main | MGE';else if(id==='settings')document.title='BAZOOKA GAME — Pengaturan | MGE';else if(id==='levelselect')document.title='BAZOOKA GAME — Pilih Level | MGE';else if(id==='welcome')document.title='BAZOOKA GAME — Selamat Datang | MGE';}
-function togglePause(){if(state.gameOver)return;if(isPortrait())return;state.paused=!state.paused;document.getElementById('pauseOv').classList.toggle('active',state.paused);}
+function togglePause(){if(state.gameOver)return;state.paused=!state.paused;document.getElementById('pauseOv').classList.toggle('active',state.paused);}
 function updateMenuProgress(){const idx=getUnlockedLevel();document.getElementById('progressVal').textContent='LEVEL '+(idx+1)+'/'+TOTAL_LEVELS;}
 
-function renderLevelGrid(){const grid=document.getElementById('levelGrid');const unlocked=getUnlockedLevel();let html='';for(let i=0;i<TOTAL_LEVELS;i++){const lv=LEVELS[i];let cls='level-card';let statusText='',icon='';if(i>unlocked){cls+=' locked';statusText='🔒 TERKUNCI';icon='🔒';}else if(i<unlocked){cls+=' done';statusText='✓ SELESAI';icon='✓';}else{cls+=' current';statusText='▶ MAIN SEKARANG';icon='▶';}html+='<div class="'+cls+'" data-idx="'+i+'"><div class="lv-num">LEVEL '+(i+1)+'</div><div class="lv-name">'+lv.name+'</div><div class="lv-status">'+statusText+'</div><div class="lv-icon">'+icon+'</div></div>';}grid.innerHTML=html;grid.querySelectorAll('.level-card').forEach(card=>{card.addEventListener('click',()=>{const idx=parseInt(card.dataset.idx,10);if(idx>getUnlockedLevel())return;if(isPortrait())return;SFX.click();showScreen('game');document.getElementById('goOv').classList.remove('active');document.getElementById('pauseOv').classList.remove('active');reset();startLevel(idx);state.running=true;updateTouchControlsVisibility();});});}
-function startGame(){ensureAudio();if(isPortrait())return;showScreen('game');document.getElementById('goOv').classList.remove('active');document.getElementById('pauseOv').classList.remove('active');reset();const startIdx=getUnlockedLevel();startLevel(startIdx);state.running=true;updateTouchControlsVisibility();}
+function renderLevelGrid(){const grid=document.getElementById('levelGrid');const unlocked=getUnlockedLevel();let html='';for(let i=0;i<TOTAL_LEVELS;i++){const lv=LEVELS[i];let cls='level-card';let statusText='',icon='';if(i>unlocked){cls+=' locked';statusText='🔒 TERKUNCI';icon='🔒';}else if(i<unlocked){cls+=' done';statusText='✓ SELESAI';icon='✓';}else{cls+=' current';statusText='▶ MAIN SEKARANG';icon='▶';}html+='<div class="'+cls+'" data-idx="'+i+'"><div class="lv-num">LEVEL '+(i+1)+'</div><div class="lv-name">'+lv.name+'</div><div class="lv-status">'+statusText+'</div><div class="lv-icon">'+icon+'</div></div>';}grid.innerHTML=html;grid.querySelectorAll('.level-card').forEach(card=>{card.addEventListener('click',()=>{const idx=parseInt(card.dataset.idx,10);if(idx>getUnlockedLevel())return;SFX.click();showScreen('game');document.getElementById('goOv').classList.remove('active');document.getElementById('pauseOv').classList.remove('active');reset();startLevel(idx);state.running=true;updateTouchControlsVisibility();});});}
+function startGame(){ensureAudio();showScreen('game');document.getElementById('goOv').classList.remove('active');document.getElementById('pauseOv').classList.remove('active');reset();const startIdx=getUnlockedLevel();startLevel(startIdx);state.running=true;updateTouchControlsVisibility();}
 function doRestart(){document.getElementById('goOv').classList.remove('active');showScreen('game');reset();startLevel(state.levelIndex);state.running=true;updateTouchControlsVisibility();}
 function quitToMenu(){state.running=false;document.getElementById('levelIntro').classList.remove('active');showScreen('menu');document.getElementById('hsVal').textContent=getHighscore();updateMenuProgress();}
 
