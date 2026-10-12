@@ -193,7 +193,6 @@
   .premium-panel > *{position:relative;z-index:1}
   .is-hidden{display:none!important}
 
-  /* ============ ROTATE OVERLAY ============ */
   #rotateOverlay{
     position:fixed;inset:0;z-index:99999;display:none;
     align-items:center;justify-content:center;flex-direction:column;
@@ -650,7 +649,6 @@
   .mgde-footer-dark{margin-top:18px;padding:9px 12px;border-top:1px solid rgba(196,181,253,.5);border-bottom:1px solid rgba(196,181,253,.28);background:linear-gradient(180deg,rgba(196,181,253,.08),rgba(196,181,253,.02));border-radius:8px;text-align:center}
   .mgde-footer-dark .mgde-label{display:block;font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;font-size:clamp(8px,2.1vw,10px);font-weight:800;letter-spacing:clamp(1.4px,0.6vw,2.5px);color:#c4b5fd;text-transform:uppercase;line-height:1.35;text-shadow:0 0 8px rgba(196,181,253,.9),0 0 16px rgba(139,92,246,.5)}
 
-  /* ============ LEVEL INTRO SCREEN (PREMIUM) ============ */
   #level-intro-screen{
     padding:0 !important;
     max-width:min(560px, 96vw) !important;
@@ -773,10 +771,8 @@
     max-width:320px;margin:0 auto;display:block;
   }
 
-  /* Overlay landscape default tersembunyi; dikendalikan JS saat gameplay */
   #rotateOverlay{display:none}
 
-  /* ============ LANDSCAPE HP — COMPACT MODE ============ */
   @media (orientation: landscape) and (max-height: 520px) and (max-width: 950px){
     body{font-size:13px;line-height:1.45}
     header{padding:5px 10px !important}
@@ -807,7 +803,6 @@
     .mgde-footer-dark{margin-top:9px !important;padding:5px 8px !important}
     .mgde-footer-dark .mgde-label{font-size:7.5px !important;letter-spacing:1.2px !important}
 
-    /* GAME SCREEN */
     #game-screen{max-width:100% !important;gap:6px !important}
     #game-screen > .premium-panel{padding:8px 10px !important;border-radius:12px !important}
     .hud-chip{padding:5px 10px !important;font-size:10px !important;border-radius:9px !important;gap:5px !important}
@@ -826,22 +821,18 @@
     .hint-panel .text-\[10px\]{font-size:8px !important}
     #hint-text{font-size:10.5px !important}
 
-    /* OPTIONS — 2 kolom lebih padat */
     #answers-container{grid-template-columns:repeat(2,1fr) !important;gap:6px !important}
     .opt-btn{padding:9px 11px !important;font-size:11px !important;line-height:1.35 !important;border-radius:11px !important}
     .opt-btn::before{width:2px !important}
     .answer-label{font-size:1rem !important;right:7px !important}
 
-    /* LIFELINE compact */
     #game-screen .premium-panel.p-4 > .text-\[10px\]{font-size:8px !important;margin-bottom:6px !important;letter-spacing:.15em !important}
     .lifeline-item{padding:7px 4px !important;font-size:10px !important;border-radius:9px !important}
     .lifeline-item .text-\[9px\]{font-size:8px !important;margin-top:2px !important}
 
-    /* Lock button */
     #lock-btn-container{margin-top:8px !important}
     .lock-btn-gold{padding:11px 32px !important;font-size:.78rem !important;letter-spacing:.1em !important;border-radius:40px !important}
 
-    /* Modal */
     .premium-modal{padding:6px !important}
     .premium-modal-inner{padding:14px 16px !important;max-height:96vh !important;border-radius:14px !important}
     .premium-modal-inner .text-5xl{font-size:2.2rem !important;margin-bottom:6px !important}
@@ -863,7 +854,6 @@
     .summary-money{font-size:9.5px !important}
     .summary-status{font-size:8px !important;padding:1.5px 7px !important}
 
-    /* Result screen */
     #result-screen{max-width:100% !important;gap:6px !important}
     #result-screen > .premium-panel{padding:12px 16px !important;border-radius:14px !important}
     #result-screen .text-xl{font-size:1.1rem !important}
@@ -878,14 +868,12 @@
     #result-screen .grid{grid-template-columns:repeat(3,1fr) !important;gap:6px !important}
     #result-screen .grid button{padding:10px 12px !important;font-size:.7rem !important}
 
-    /* Money toast */
     .money-toast{padding:11px 20px !important;min-width:200px !important;border-radius:16px !important;top:12% !important}
     .money-toast .mt-head{font-size:1rem !important;margin-bottom:3px !important}
     .money-toast .mt-sub{font-size:.68rem !important}
     .money-toast .mt-amount{font-size:1.35rem !important}
     .money-toast .mt-total{font-size:.65rem !important;margin-top:5px !important;padding-top:4px !important}
 
-    /* LEVEL INTRO COMPACT */
     #level-intro-screen{max-width:100% !important}
     .level-intro-panel{
       display:flex;flex-wrap:wrap;
@@ -967,7 +955,6 @@
     }
   }
 
-  /* ============ LANDSCAPE HP — SUPER COMPACT (short) ============ */
   @media (orientation: landscape) and (max-height: 400px) and (max-width: 950px){
     header{padding:4px 8px !important}
     #header-icon{width:30px !important;height:30px !important;font-size:1rem !important}
@@ -991,7 +978,6 @@
     .score-circle .num{font-size:1.5rem !important}
     .grade-badge-big{width:56px !important;height:56px !important;font-size:1.7rem !important}
 
-    /* LEVEL INTRO SUPER COMPACT */
     .level-intro-number{font-size:clamp(50px,12vw,72px) !important}
     .level-intro-panel{padding:6px 14px 4px !important}
     .level-intro-name{font-size:12px !important}
@@ -1008,13 +994,11 @@
     }
   }
 
-  /* ============ LANDSCAPE TABLET/DESKTOP (bigger) ============ */
   @media (orientation: landscape) and (min-height: 700px){
     .bk-title-main{font-size:clamp(32px,4vw,56px)}
     #answers-container{grid-template-columns:repeat(2,1fr)}
   }
 
-  /* ============ RESPONSIVE BASE (existing) ============ */
   @media (max-width:640px){
     .premium-panel{padding:16px!important}
     .premium-modal-inner{padding:22px}
@@ -1502,88 +1486,96 @@ function applyTheme(levelIdx){
   if(meta)meta.setAttribute('content',t.primary);
 }
 
+/* ============================================================
+   DATA SOAL — SUDAH DIPERBAIKI
+   Setiap pertanyaan memiliki struktur kalimat berbeda & pilihan
+   jawaban yang jelas, spesifik, dan tidak mudah ditebak.
+   ============================================================ */
 const LEVELS=[
 {
   name:'Pengertian Dasar & Kegiatan Ekonomi',icon:'📘',difficulty:'Mudah',levelPrize:'Rp 30 Juta',
   questions:[
-    {q:'Pelaku ekonomi adalah...',o:['Orang yang hanya mengonsumsi barang','Semua pihak yang terlibat dalam produksi, distribusi, dan konsumsi','Hanya perusahaan besar','Hanya pemerintah pusat'],c:1,e:'Pelaku ekonomi mencakup semua pihak — individu, kelompok, lembaga, maupun organisasi — yang terlibat dalam kegiatan produksi, distribusi, dan konsumsi.',t:'Pengertian Pelaku Ekonomi',k:'Pelaku ekonomi = semua pihak dalam 3 kegiatan pokok ekonomi.'},
-    {q:'Berapa jumlah pelaku ekonomi utama dalam perekonomian?',o:['2 pelaku','3 pelaku','4 pelaku','5 pelaku'],c:2,e:'Terdapat 4 pelaku ekonomi utama: RTK, RTP, RTN (Pemerintah), dan RTMLN (Masyarakat Luar Negeri).',t:'Jenis Pelaku Ekonomi',k:'4 pelaku: RTK, RTP, RTN, RTMLN.'},
-    {q:'Manusia disebut makhluk ekonomi karena...',o:['Selalu bekerja sepanjang hari','Selalu berusaha memenuhi kebutuhan dengan cara rasional','Suka berbelanja','Selalu menabung'],c:1,e:'Manusia adalah makhluk ekonomi karena selalu berusaha memenuhi kebutuhannya secara rasional, menggunakan akal dan pertimbangan.',t:'Pengertian Pelaku Ekonomi',k:'Makhluk ekonomi = pemenuhan kebutuhan rasional.'},
-    {q:'Kegiatan menghasilkan barang dan jasa disebut...',o:['Konsumsi','Distribusi','Produksi','Investasi'],c:2,e:'Produksi adalah kegiatan menghasilkan barang/jasa. Pelakunya disebut produsen.',t:'Kegiatan Ekonomi',k:'Produksi = menghasilkan barang/jasa.'},
-    {q:'Kegiatan menyalurkan barang dari produsen ke konsumen disebut...',o:['Produksi','Distribusi','Konsumsi','Investasi'],c:1,e:'Distribusi adalah kegiatan menyalurkan barang/jasa agar sampai tepat waktu dan tepat sasaran.',t:'Kegiatan Ekonomi',k:'Distribusi = menyalurkan barang/jasa.'},
-    {q:'Kegiatan menghabiskan atau mengurangi nilai guna barang/jasa disebut...',o:['Produksi','Distribusi','Konsumsi','Investasi'],c:2,e:'Konsumsi adalah kegiatan menghabiskan/mengurangi nilai guna barang/jasa untuk memenuhi kebutuhan. Pelakunya disebut konsumen.',t:'Kegiatan Ekonomi',k:'Konsumsi = menghabiskan nilai guna.'},
-    {q:'Berapa jumlah faktor produksi utama?',o:['2','3','4','5'],c:2,e:'Terdapat 4 faktor produksi: alam (tanah), tenaga kerja, modal, dan kewirausahaan (keahlian).',t:'Faktor Produksi',k:'4 faktor: alam, tenaga kerja, modal, keahlian.'},
-    {q:'Balas jasa untuk faktor produksi alam (tanah) adalah...',o:['Upah','Sewa','Bunga','Laba'],c:1,e:'Faktor produksi alam, terutama tanah, mendapat balas jasa berupa sewa.',t:'Balas Jasa Faktor Produksi',k:'Alam/Tanah → Sewa.'},
-    {q:'Balas jasa untuk faktor produksi tenaga kerja adalah...',o:['Sewa','Upah','Bunga','Laba'],c:1,e:'Tenaga kerja sebagai faktor produksi mendapat balas jasa berupa upah atau gaji.',t:'Balas Jasa Faktor Produksi',k:'Tenaga Kerja → Upah.'},
-    {q:'Balas jasa untuk faktor produksi modal adalah...',o:['Sewa','Upah','Bunga','Laba'],c:2,e:'Modal mendapat balas jasa berupa bunga, misalnya bunga tabungan atau imbal hasil investasi.',t:'Balas Jasa Faktor Produksi',k:'Modal → Bunga.'},
-    {q:'Balas jasa untuk faktor produksi kewirausahaan adalah...',o:['Sewa','Upah','Bunga','Laba'],c:3,e:'Kewirausahaan (keahlian) mendapat balas jasa berupa laba/keuntungan usaha.',t:'Balas Jasa Faktor Produksi',k:'Kewirausahaan → Laba.'},
-    {q:'Berikut yang BUKAN pelaku ekonomi adalah...',o:['Rumah tangga konsumen','Rumah tangga produsen','Bank sentral','Pemerintah'],c:2,e:'Bank sentral adalah lembaga keuangan, bukan pelaku ekonomi utama. 4 pelaku utama: RTK, RTP, Pemerintah, Masyarakat Luar Negeri.',t:'Jenis Pelaku Ekonomi',k:'Bank sentral bukan pelaku ekonomi utama.'},
-    {q:'Contoh kegiatan produksi ekstraktif adalah...',o:['Menanam padi di sawah','Menambang emas di pertambangan','Menjual sayur di pasar','Makan nasi di rumah'],c:1,e:'Produksi ekstraktif adalah mengambil langsung dari alam, seperti pertambangan, penangkapan ikan, dan penebangan kayu.',t:'Kegiatan Produksi',k:'Ekstraktif = ambil langsung dari alam.'},
-    {q:'Contoh kegiatan konsumsi adalah...',o:['Petani menanam padi','Pabrik membuat sepatu','Keluarga makan malam bersama','Toko menjual buku'],c:2,e:'Konsumsi adalah menghabiskan/mengurangi nilai guna barang. Keluarga makan malam bersama adalah contoh konsumsi.',t:'Kegiatan Konsumsi',k:'Makan = contoh konsumsi.'},
-    {q:'Tujuan utama kegiatan ekonomi adalah...',o:['Mencari keuntungan sebanyak mungkin','Memenuhi kebutuhan manusia yang tidak terbatas','Mengumpulkan kekayaan','Menguasai pasar'],c:1,e:'Tujuan utama kegiatan ekonomi adalah memenuhi kebutuhan manusia yang tidak terbatas dengan sumber daya yang terbatas.',t:'Tujuan Kegiatan Ekonomi',k:'Tujuan = memenuhi kebutuhan manusia.'}
+    {q:'Dalam kajian ilmu ekonomi, istilah "pelaku ekonomi" merujuk pada...',o:['Orang yang hanya melakukan kegiatan konsumsi sehari-hari','Semua pihak yang terlibat dalam produksi, distribusi, dan konsumsi barang/jasa','Perusahaan besar yang menguasai pasar','Pejabat pemerintah yang mengatur kebijakan fiskal'],c:1,e:'Pelaku ekonomi mencakup semua pihak — individu, kelompok, lembaga, maupun organisasi — yang terlibat dalam kegiatan produksi, distribusi, dan konsumsi.',t:'Pengertian Pelaku Ekonomi',k:'Pelaku ekonomi = semua pihak dalam 3 kegiatan pokok ekonomi (produksi, distribusi, konsumsi).'},
+    {q:'Apabila ditinjau dari peran utamanya, perekonomian Indonesia mengenal berapa kelompok pelaku ekonomi?',o:['Dua kelompok pelaku','Tiga kelompok pelaku','Empat kelompok pelaku','Lima kelompok pelaku'],c:2,e:'Terdapat 4 pelaku ekonomi utama: Rumah Tangga Konsumen (RTK), Rumah Tangga Produsen (RTP), Rumah Tangga Negara/Pemerintah (RTN), dan Rumah Tangga Masyarakat Luar Negeri (RTMLN).',t:'Jenis Pelaku Ekonomi',k:'4 pelaku: RTK, RTP, RTN, RTMLN.'},
+    {q:'Mengapa manusia sering disebut sebagai makhluk ekonomi?',o:['Karena manusia bekerja tanpa henti sepanjang hidupnya','Karena manusia selalu berusaha memenuhi kebutuhan dengan cara yang rasional','Karena manusia gemar berbelanja dan menabung','Karena manusia tidak pernah puas dengan apa yang dimilikinya'],c:1,e:'Manusia disebut makhluk ekonomi karena selalu berusaha memenuhi kebutuhannya secara rasional, menggunakan akal dan pertimbangan dalam bertindak.',t:'Pengertian Pelaku Ekonomi',k:'Makhluk ekonomi = pemenuhan kebutuhan secara rasional.'},
+    {q:'Proses mengubah sumber daya menjadi barang atau jasa yang memiliki nilai guna lebih tinggi dinamakan...',o:['Kegiatan konsumsi','Kegiatan distribusi','Kegiatan produksi','Kegiatan investasi'],c:2,e:'Produksi adalah kegiatan menghasilkan atau menambah nilai guna barang/jasa. Pelakunya disebut produsen.',t:'Kegiatan Ekonomi',k:'Produksi = menghasilkan/menambah nilai guna barang/jasa.'},
+    {q:'Apa nama kegiatan yang bertujuan menyampaikan hasil produksi dari produsen kepada konsumen?',o:['Produksi','Distribusi','Konsumsi','Investasi'],c:1,e:'Distribusi adalah kegiatan menyalurkan barang/jasa dari produsen ke konsumen agar sampai tepat waktu dan tepat sasaran.',t:'Kegiatan Ekonomi',k:'Distribusi = menyalurkan barang/jasa dari produsen ke konsumen.'},
+    {q:'Ketika seseorang menggunakan barang atau jasa untuk memenuhi kebutuhannya hingga nilai gunanya berkurang, kegiatan tersebut disebut...',o:['Produksi','Distribusi','Konsumsi','Investasi'],c:2,e:'Konsumsi adalah kegiatan menghabiskan atau mengurangi nilai guna barang/jasa. Pelakunya disebut konsumen.',t:'Kegiatan Ekonomi',k:'Konsumsi = menghabiskan/mengurangi nilai guna barang/jasa.'},
+    {q:'Dalam kegiatan produksi, terdapat berapa macam faktor produksi yang umumnya diakui dalam ilmu ekonomi?',o:['Dua macam faktor','Tiga macam faktor','Empat macam faktor','Lima macam faktor'],c:2,e:'Terdapat 4 faktor produksi: alam (tanah), tenaga kerja, modal, dan kewirausahaan (keahlian).',t:'Faktor Produksi',k:'4 faktor produksi: alam, tenaga kerja, modal, keahlian.'},
+    {q:'Pemilik lahan yang menyewakan tanahnya kepada perusahaan akan menerima balas jasa berupa...',o:['Upah atau gaji','Sewa','Bunga','Laba usaha'],c:1,e:'Faktor produksi alam, terutama tanah, mendapat balas jasa berupa sewa.',t:'Balas Jasa Faktor Produksi',k:'Alam/Tanah → Sewa.'},
+    {q:'Apa bentuk imbalan yang diterima seseorang karena telah mengorbankan tenaga dan waktunya untuk bekerja?',o:['Sewa','Upah atau gaji','Bunga','Laba'],c:1,e:'Tenaga kerja sebagai faktor produksi mendapat balas jasa berupa upah atau gaji.',t:'Balas Jasa Faktor Produksi',k:'Tenaga Kerja → Upah/Gaji.'},
+    {q:'Seorang investor yang menanamkan modalnya pada suatu usaha berhak menerima balas jasa berupa...',o:['Sewa','Upah','Bunga','Laba'],c:2,e:'Modal mendapat balas jasa berupa bunga, misalnya bunga tabungan atau imbal hasil investasi.',t:'Balas Jasa Faktor Produksi',k:'Modal → Bunga.'},
+    {q:'Keuntungan yang diperoleh seorang pengusaha atas keberanian dan keahliannya mengelola usaha disebut...',o:['Sewa','Upah','Bunga','Laba'],c:3,e:'Kewirausahaan (keahlian) mendapat balas jasa berupa laba/keuntungan usaha.',t:'Balas Jasa Faktor Produksi',k:'Kewirausahaan → Laba.'},
+    {q:'Di antara lembaga-lembaga berikut, manakah yang TIDAK termasuk sebagai pelaku ekonomi utama?',o:['Rumah tangga konsumen','Rumah tangga produsen','Bank sentral','Pemerintah'],c:2,e:'Bank sentral adalah lembaga keuangan yang mengatur kebijakan moneter, bukan pelaku ekonomi utama. 4 pelaku utama: RTK, RTP, Pemerintah, dan Masyarakat Luar Negeri.',t:'Jenis Pelaku Ekonomi',k:'Bank sentral bukan pelaku ekonomi utama.'},
+    {q:'Kegiatan produksi yang dilakukan dengan cara mengambil langsung kekayaan alam tanpa mengolahnya lebih dulu disebut produksi...',o:['Produksi agraris','Produksi ekstraktif','Produksi industri','Produksi jasa'],c:1,e:'Produksi ekstraktif adalah mengambil langsung dari alam, seperti pertambangan, penangkapan ikan, dan penebangan kayu.',t:'Kegiatan Produksi',k:'Ekstraktif = ambil langsung dari alam.'},
+    {q:'Perhatikan beberapa aktivitas berikut! Manakah yang merupakan contoh kegiatan konsumsi?',o:['Petani menanam padi di sawah','Pabrik memproduksi sepatu kulit','Keluarga makan malam bersama di restoran','Toko menjual buku pelajaran'],c:2,e:'Konsumsi adalah menghabiskan/mengurangi nilai guna barang. Keluarga makan malam bersama adalah contoh konsumsi.',t:'Kegiatan Konsumsi',k:'Makan bersama = contoh kegiatan konsumsi.'},
+    {q:'Apa sesungguhnya tujuan akhir dari seluruh rangkaian kegiatan ekonomi yang dilakukan manusia?',o:['Mencari keuntungan sebesar-besarnya','Memenuhi kebutuhan manusia yang tidak terbatas','Mengumpulkan kekayaan pribadi','Menguasai pasar dan pesaing'],c:1,e:'Tujuan utama kegiatan ekonomi adalah memenuhi kebutuhan manusia yang tidak terbatas dengan sumber daya yang terbatas.',t:'Tujuan Kegiatan Ekonomi',k:'Tujuan = memenuhi kebutuhan manusia.'}
   ]
 },
 {
   name:'Rumah Tangga Konsumen & Produsen',icon:'🏠',difficulty:'Sedang',levelPrize:'Rp 150 Juta',
   questions:[
-    {q:'Rumah tangga konsumen adalah pelaku ekonomi yang...',o:['Memproduksi barang untuk dijual','Mengonsumsi barang/jasa dan menyediakan faktor produksi','Mengatur jalannya perekonomian','Melakukan ekspor-impor'],c:1,e:'RTK adalah pelaku ekonomi yang mengonsumsi barang/jasa sekaligus menyediakan faktor produksi kepada produsen.',t:'Rumah Tangga Konsumen',k:'RTK = konsumen + pemasok faktor produksi.'},
-    {q:'Pelaku ekonomi yang paling banyak jumlahnya adalah...',o:['Rumah tangga produsen','Rumah tangga konsumen','Rumah tangga pemerintah','Masyarakat luar negeri'],c:1,e:'RTK adalah pelaku ekonomi paling banyak karena mencakup seluruh individu/keluarga yang melakukan konsumsi.',t:'Rumah Tangga Konsumen',k:'RTK = pelaku terbanyak.'},
-    {q:'Dua peran utama rumah tangga konsumen adalah...',o:['Produsen dan distributor','Konsumen dan pemasok faktor produksi','Regulator dan investor','Distributor dan regulator'],c:1,e:'RTK berperan sebagai konsumen (pengguna barang/jasa) dan pemasok faktor produksi kepada RTP.',t:'Rumah Tangga Konsumen',k:'Peran RTK: konsumen + pemasok faktor produksi.'},
-    {q:'Contoh nyata RTK sebagai konsumen adalah...',o:['Seorang ayah bekerja di kantor','Keluarga membeli sembako di pasar','Sebuah keluarga menyewakan kamar kos','Seseorang menanam padi di sawah'],c:1,e:'Membeli sembako adalah contoh RTK sebagai konsumen (pengguna barang/jasa).',t:'Rumah Tangga Konsumen',k:'Belanja = konsumsi.'},
-    {q:'Contoh nyata RTK sebagai pemasok faktor produksi adalah...',o:['Membeli sembako di pasar','Menonton film di bioskop','Seorang ayah bekerja di kantor dan menerima gaji','Membayar listrik bulanan'],c:2,e:'Bekerja berarti menyediakan tenaga kerja (faktor produksi) kepada perusahaan dan menerima balas jasa berupa gaji.',t:'Rumah Tangga Konsumen',k:'Bekerja = menyediakan faktor produksi.'},
-    {q:'Yang menerima balas jasa berupa upah adalah...',o:['Pemilik tanah','Pekerja/karyawan','Pemilik modal','Pengusaha'],c:1,e:'Pekerja/karyawan menyediakan tenaga kerja, sehingga menerima balas jasa berupa upah atau gaji.',t:'Balas Jasa Faktor Produksi',k:'Upah untuk tenaga kerja.'},
-    {q:'Yang menerima balas jasa berupa sewa adalah...',o:['Pemilik tanah yang menyewakan lahan','Karyawan pabrik','Pemilik saham','Pengusaha restoran'],c:0,e:'Pemilik tanah yang menyewakan lahan menerima balas jasa berupa sewa.',t:'Balas Jasa Faktor Produksi',k:'Sewa untuk pemilik tanah.'},
-    {q:'Yang menerima balas jasa berupa bunga adalah...',o:['Pekerja bangunan','Pemilik tanah','Penabung di bank','Pengusaha'],c:2,e:'Penabung di bank menerima bunga sebagai balas jasa atas modal (uang) yang disimpan.',t:'Balas Jasa Faktor Produksi',k:'Bunga untuk pemilik modal.'},
-    {q:'Yang menerima balas jasa berupa laba adalah...',o:['Karyawan','Pemilik tanah','Penabung','Pengusaha/pemilik usaha'],c:3,e:'Pengusaha/pemilik usaha menerima laba sebagai balas jasa atas kewirausahaan dan keahliannya.',t:'Balas Jasa Faktor Produksi',k:'Laba untuk pengusaha.'},
-    {q:'Contoh RTK menyediakan faktor produksi tenaga kerja adalah...',o:['Menyewakan rumah','Menabung di bank','Bekerja sebagai guru','Berinvestasi saham'],c:2,e:'Bekerja sebagai guru berarti menyediakan tenaga kerja (faktor produksi) dan menerima upah.',t:'Faktor Produksi RTK',k:'Bekerja = menyediakan tenaga kerja.'},
-    {q:'Contoh RTK menyediakan faktor produksi modal adalah...',o:['Bekerja di kantor','Menyewakan tanah','Menabung di bank','Mengelola usaha'],c:2,e:'Menabung di bank berarti menyediakan modal (faktor produksi) dan menerima balas jasa berupa bunga.',t:'Faktor Produksi RTK',k:'Menabung = menyediakan modal.'},
-    {q:'Contoh RTK menyediakan faktor produksi tanah adalah...',o:['Bekerja sebagai karyawan','Menyewakan lahan untuk perkebunan','Menabung di bank','Membuka usaha'],c:1,e:'Menyewakan lahan adalah bentuk penyediaan faktor produksi tanah dan menerima balas jasa berupa sewa.',t:'Faktor Produksi RTK',k:'Menyewakan lahan = menyediakan tanah.'},
-    {q:'Contoh RTK menyediakan faktor produksi keahlian adalah...',o:['Bekerja di pabrik','Menyewakan mobil','Membuka usaha sendiri','Menabung di bank'],c:2,e:'Membuka usaha sendiri adalah bentuk penyediaan faktor produksi kewirausahaan/keahlian dan menerima laba.',t:'Faktor Produksi RTK',k:'Berwirausaha = menyediakan keahlian.'},
-    {q:'Rumah tangga produsen adalah pelaku ekonomi yang...',o:['Mengonsumsi barang/jasa','Menghasilkan barang/jasa untuk memenuhi kebutuhan masyarakat','Mengatur kebijakan ekonomi','Melakukan konsumsi rumah tangga'],c:1,e:'RTP (perusahaan) adalah pelaku ekonomi yang menghasilkan barang/jasa dan menambah nilai guna suatu benda.',t:'Rumah Tangga Produsen',k:'RTP = penghasil barang/jasa.'},
-    {q:'Tujuan utama rumah tangga produsen adalah...',o:['Memperoleh laba/keuntungan','Mengumpulkan pajak','Memberikan subsidi','Mengatur harga pasar'],c:0,e:'Tujuan utama RTP adalah memperoleh laba (keuntungan) dari kegiatan produksi dan penjualan barang/jasa.',t:'Rumah Tangga Produsen',k:'Tujuan RTP = laba.'}
+    {q:'Dalam perekonomian, rumah tangga konsumen (RTK) didefinisikan sebagai...',o:['Pelaku ekonomi yang memproduksi barang untuk dijual ke pasar','Pelaku ekonomi yang mengonsumsi barang/jasa sekaligus menyediakan faktor produksi','Lembaga yang mengatur jalannya perekonomian negara','Pihak yang melakukan kegiatan ekspor dan impor'],c:1,e:'RTK adalah pelaku ekonomi yang mengonsumsi barang/jasa sekaligus menyediakan faktor produksi kepada produsen.',t:'Rumah Tangga Konsumen',k:'RTK = konsumen + pemasok faktor produksi.'},
+    {q:'Jika dihitung dari jumlahnya, kelompok pelaku ekonomi manakah yang populasinya paling besar?',o:['Rumah tangga produsen','Rumah tangga konsumen','Rumah tangga pemerintah','Masyarakat luar negeri'],c:1,e:'RTK adalah pelaku ekonomi paling banyak karena mencakup seluruh individu/keluarga yang melakukan konsumsi.',t:'Rumah Tangga Konsumen',k:'RTK = pelaku ekonomi terbanyak.'},
+    {q:'Sebutkan dua fungsi utama yang dijalankan rumah tangga konsumen dalam perekonomian!',o:['Produsen dan distributor','Konsumen dan pemasok faktor produksi','Regulator dan investor','Distributor dan regulator'],c:1,e:'RTK berperan sebagai konsumen (pengguna barang/jasa) dan pemasok faktor produksi kepada RTP.',t:'Rumah Tangga Konsumen',k:'Fungsi RTK: konsumen + pemasok faktor produksi.'},
+    {q:'Perhatikan pernyataan berikut! Kegiatan manakah yang mencerminkan peran rumah tangga konsumen sebagai pemakai barang/jasa?',o:['Seorang ayah bekerja di kantor setiap hari','Keluarga membeli sembako di pasar tradisional','Sebuah keluarga menyewakan kamar kos','Seseorang menanam padi di sawah'],c:1,e:'Membeli sembako adalah contoh RTK sebagai konsumen (pengguna barang/jasa).',t:'Rumah Tangga Konsumen',k:'Membeli barang = konsumsi RTK.'},
+    {q:'Aktivitas keluarga berikut yang menunjukkan peran RTK sebagai penyedia faktor produksi adalah...',o:['Membeli sembako di pasar','Menonton film di bioskop','Ayah bekerja di kantor dan menerima gaji','Membayar tagihan listrik bulanan'],c:2,e:'Bekerja berarti menyediakan tenaga kerja (faktor produksi) kepada perusahaan dan menerima balas jasa berupa gaji.',t:'Rumah Tangga Konsumen',k:'Bekerja = menyediakan faktor produksi tenaga kerja.'},
+    {q:'Kelompok manakah yang berhak menerima upah sebagai balas jasa atas faktor produksi yang diserahkannya?',o:['Pemilik tanah yang menyewakan lahan','Pekerja atau karyawan','Pemilik modal yang menabung di bank','Pengusaha pemilik usaha'],c:1,e:'Pekerja/karyawan menyediakan tenaga kerja, sehingga menerima balas jasa berupa upah atau gaji.',t:'Balas Jasa Faktor Produksi',k:'Upah diterima oleh tenaga kerja.'},
+    {q:'Balas jasa berupa sewa diberikan kepada pihak yang menyediakan faktor produksi...',o:['Tenaga kerja','Tanah atau lahan','Modal','Kewirausahaan'],c:1,e:'Pemilik tanah yang menyewakan lahan menerima balas jasa berupa sewa.',t:'Balas Jasa Faktor Produksi',k:'Sewa untuk pemilik tanah/lahan.'},
+    {q:'Seseorang menyimpan uangnya di bank dan memperoleh imbalan bulanan. Imbalan tersebut disebut...',o:['Upah','Sewa','Bunga','Laba'],c:2,e:'Penabung di bank menerima bunga sebagai balas jasa atas modal (uang) yang disimpan.',t:'Balas Jasa Faktor Produksi',k:'Bunga untuk pemilik modal.'},
+    {q:'Keuntungan usaha yang diperoleh seseorang karena keberaniannya menanggung risiko disebut...',o:['Upah','Sewa','Bunga','Laba'],c:3,e:'Pengusaha/pemilik usaha menerima laba sebagai balas jasa atas kewirausahaan dan keahliannya.',t:'Balas Jasa Faktor Produksi',k:'Laba untuk pengusaha.'},
+    {q:'Bu Sari setiap hari mengajar di sebuah SMA dan menerima gaji bulanan. Dalam konteks pelaku ekonomi, Bu Sari sedang...',o:['Menyewakan lahan miliknya','Menyediakan faktor produksi tenaga kerja','Menanamkan modal di perusahaan','Membuka usaha sendiri'],c:1,e:'Bekerja sebagai guru berarti menyediakan tenaga kerja (faktor produksi) dan menerima upah.',t:'Faktor Produksi RTK',k:'Bekerja = menyediakan tenaga kerja.'},
+    {q:'Pak Hadi menyimpan sebagian penghasilannya di bank agar memperoleh bunga. Tindakan Pak Hadi menunjukkan perannya sebagai...',o:['Penyedia faktor produksi tenaga kerja','Penyedia faktor produksi modal','Penyedia faktor produksi tanah','Penyedia faktor produksi keahlian'],c:1,e:'Menabung di bank berarti menyediakan modal (faktor produksi) dan menerima balas jasa berupa bunga.',t:'Faktor Produksi RTK',k:'Menabung = menyediakan faktor produksi modal.'},
+    {q:'Sebuah keluarga memiliki lahan kosong yang disewakan kepada perusahaan untuk gudang. Keluarga ini berperan menyediakan faktor produksi...',o:['Tenaga kerja','Tanah atau lahan','Modal','Keahlian'],c:1,e:'Menyewakan lahan adalah bentuk penyediaan faktor produksi tanah dan menerima balas jasa berupa sewa.',t:'Faktor Produksi RTK',k:'Menyewakan lahan = menyediakan faktor produksi tanah.'},
+    {q:'Bu Dewi membuka usaha katering sendiri. Sebagai pemilik usaha, Bu Dewi menyediakan faktor produksi berupa...',o:['Tenaga kerja','Tanah','Modal','Keahlian atau kewirausahaan'],c:3,e:'Membuka usaha sendiri adalah bentuk penyediaan faktor produksi kewirausahaan/keahlian dan menerima laba.',t:'Faktor Produksi RTK',k:'Berwirausaha = menyediakan faktor produksi keahlian.'},
+    {q:'Rumah tangga produsen (RTP) memiliki definisi sebagai pelaku ekonomi yang...',o:['Mengonsumsi barang/jasa untuk memenuhi kebutuhan','Menghasilkan barang/jasa untuk memenuhi kebutuhan masyarakat','Mengatur kebijakan ekonomi negara','Melakukan konsumsi rumah tangga sehari-hari'],c:1,e:'RTP (perusahaan) adalah pelaku ekonomi yang menghasilkan barang/jasa dan menambah nilai guna suatu benda.',t:'Rumah Tangga Produsen',k:'RTP = penghasil barang/jasa.'},
+    {q:'Apa motivasi utama yang mendorong rumah tangga produsen menjalankan kegiatan produksinya?',o:['Memperoleh laba atau keuntungan','Mengumpulkan pajak dari masyarakat','Memberikan subsidi kepada konsumen','Mengatur harga pasar'],c:0,e:'Tujuan utama RTP adalah memperoleh laba (keuntungan) dari kegiatan produksi dan penjualan barang/jasa.',t:'Rumah Tangga Produsen',k:'Tujuan RTP = memperoleh laba.'}
   ]
 },
 {
   name:'Pemerintah, Luar Negeri & Circular Flow',icon:'🏛️',difficulty:'Sulit',levelPrize:'Rp 500 Juta',
   questions:[
-    {q:'Pemerintah disebut memiliki peran ganda karena...',o:['Hanya mengatur perekonomian','Berperan sebagai regulator, konsumen, dan produsen sekaligus','Hanya sebagai konsumen','Hanya sebagai produsen'],c:1,e:'Pemerintah memiliki 3 peran sekaligus: regulator (mengatur), konsumen (membelanjakan anggaran), dan produsen (melalui BUMN).',t:'Peran Pemerintah',k:'Pemerintah = regulator + konsumen + produsen.'},
-    {q:'Pemerintah menetapkan tarif pajak dan UU Ketenagakerjaan. Hal ini menunjukkan peran pemerintah sebagai...',o:['Konsumen','Produsen','Regulator','Distributor'],c:2,e:'Sebagai regulator, pemerintah mengatur jalannya perekonomian melalui kebijakan fiskal, moneter, dan peraturan.',t:'Peran Pemerintah',k:'Menetapkan aturan = regulator.'},
-    {q:'Pemerintah membangun jalan dan jembatan menggunakan anggaran negara. Hal ini menunjukkan peran sebagai...',o:['Regulator','Konsumen','Produsen','Distributor'],c:1,e:'Sebagai konsumen, pemerintah membelanjakan anggaran negara untuk membeli barang/jasa, termasuk belanja pembangunan infrastruktur.',t:'Peran Pemerintah',k:'Belanja negara = konsumen.'},
-    {q:'PT Pertamina mengelola minyak bumi untuk masyarakat. Ini menunjukkan peran pemerintah sebagai...',o:['Regulator','Konsumen','Produsen','Investor'],c:2,e:'Melalui BUMN seperti PT Pertamina, pemerintah berperan sebagai produsen yang menyediakan barang/jasa bagi masyarakat.',t:'Peran Pemerintah',k:'BUMN = pemerintah sebagai produsen.'},
-    {q:'Pajak ditarik oleh pemerintah dari...',o:['Hanya RTK','Hanya RTP','RTK dan RTP','Masyarakat luar negeri'],c:2,e:'Pemerintah menarik pajak dari RTK dan RTP untuk membiayai pembangunan dan pelayanan publik.',t:'Pajak',k:'Pajak dari RTK dan RTP.'},
-    {q:'Subsidi dan transfer payment diberikan oleh...',o:['RTK','RTP','Pemerintah','Masyarakat luar negeri'],c:2,e:'Pemerintah memberikan subsidi dan transfer payment kepada RTK dan RTP untuk membantu perekonomian.',t:'Subsidi',k:'Subsidi dari pemerintah.'},
-    {q:'Contoh BUMN milik pemerintah adalah...',o:['PT Toyota','PT Pertamina','PT Unilever','PT Astra'],c:1,e:'PT Pertamina adalah BUMN (Badan Usaha Milik Negara). PT Toyota, Unilever, dan Astra adalah perusahaan swasta.',t:'BUMN',k:'Pertamina = BUMN.'},
-    {q:'Kegiatan menjual barang/jasa ke luar negeri disebut...',o:['Impor','Ekspor','Distribusi','Investasi'],c:1,e:'Ekspor adalah kegiatan menjual barang/jasa ke luar negeri. Ini mendatangkan devisa bagi negara.',t:'Ekspor',k:'Ekspor = jual ke luar negeri.'},
-    {q:'Kegiatan membeli barang/jasa dari luar negeri disebut...',o:['Ekspor','Impor','Distribusi','Investasi'],c:1,e:'Impor adalah kegiatan membeli barang/jasa dari luar negeri. Ini mengeluarkan devisa negara.',t:'Impor',k:'Impor = beli dari luar negeri.'},
-    {q:'Alat pembayaran luar negeri yang sah, biasanya berupa mata uang asing, disebut...',o:['Pajak','Subsidi','Devisa','Retribusi'],c:2,e:'Devisa adalah alat pembayaran luar negeri yang sah. Kegiatan ekspor merupakan salah satu sumber devisa negara.',t:'Devisa',k:'Devisa = alat bayar luar negeri.'},
-    {q:'Peran masyarakat luar negeri dalam perekonomian Indonesia ada...',o:['2 peran','3 peran','5 peran','10 peran'],c:2,e:'Masyarakat luar negeri memiliki 5 peran: konsumen ekspor, produsen impor, investor, sumber tenaga ahli, dan sumber devisa.',t:'Peran Luar Negeri',k:'5 peran masyarakat luar negeri.'},
-    {q:'Perusahaan asing yang membangun pabrik di Indonesia berperan sebagai...',o:['Konsumen','Produsen','Investor (penanam modal)','Regulator'],c:2,e:'Investasi langsung perusahaan asing menunjukkan peran masyarakat luar negeri sebagai investor yang menanamkan modal di Indonesia.',t:'Peran Luar Negeri',k:'Perusahaan asing buka pabrik = investor.'},
-    {q:'Wisatawan Jepang membeli batik Indonesia. Wisatawan tersebut berperan sebagai...',o:['RTK dalam negeri','RTP','Masyarakat luar negeri sebagai konsumen ekspor','Pemerintah'],c:2,e:'Wisatawan asing yang membeli produk Indonesia adalah konsumen ekspor yang mendatangkan devisa.',t:'Peran Luar Negeri',k:'Wisatawan asing = konsumen ekspor.'},
-    {q:'Sumber devisa negara berasal dari...',o:['Hanya pajak','Hanya pinjaman luar negeri','Ekspor barang/jasa dan kerja sama ekonomi dengan luar negeri','Hanya investasi asing'],c:2,e:'Sumber devisa utama berasal dari ekspor barang/jasa, pariwisata, investasi asing, dan kerja sama ekonomi internasional.',t:'Devisa',k:'Devisa dari ekspor & kerja sama LN.'},
-    {q:'Circular flow diagram adalah...',o:['Diagram aliran barang antar negara','Diagram yang menggambarkan arus barang, jasa, dan uang antar pelaku ekonomi','Diagram struktur perusahaan','Diagram harga pasar'],c:1,e:'Circular flow diagram adalah diagram yang menggambarkan arus uang dan barang antar pelaku ekonomi dalam suatu perekonomian.',t:'Circular Flow',k:'Circular flow = diagram arus barang/uang.'}
+    {q:'Mengapa pemerintah sering disebut memiliki peran ganda dalam perekonomian?',o:['Karena hanya bertugas mengatur perekonomian','Karena berperan sebagai regulator, konsumen, dan produsen sekaligus','Karena hanya berperan sebagai konsumen','Karena hanya berperan sebagai produsen'],c:1,e:'Pemerintah memiliki 3 peran sekaligus: regulator (mengatur), konsumen (membelanjakan anggaran), dan produsen (melalui BUMN).',t:'Peran Pemerintah',k:'Pemerintah = regulator + konsumen + produsen.'},
+    {q:'Ketika pemerintah menerbitkan peraturan tentang tarif pajak dan upah minimum, peran yang dijalankan adalah sebagai...',o:['Konsumen','Produsen','Regulator','Distributor'],c:2,e:'Sebagai regulator, pemerintah mengatur jalannya perekonomian melalui kebijakan fiskal, moneter, dan peraturan.',t:'Peran Pemerintah',k:'Menetapkan aturan = regulator.'},
+    {q:'Pemerintah menggunakan dana APBN untuk membangun jalan tol. Dalam konteks ini, pemerintah menjalankan perannya sebagai...',o:['Regulator','Konsumen','Produsen','Distributor'],c:1,e:'Sebagai konsumen, pemerintah membelanjakan anggaran negara untuk membeli barang/jasa, termasuk belanja pembangunan infrastruktur.',t:'Peran Pemerintah',k:'Belanja negara = konsumen.'},
+    {q:'Melalui PT Pertamina, negara mengelola sumber daya minyak untuk kepentingan rakyat. Peran pemerintah yang ditunjukkan adalah sebagai...',o:['Regulator','Konsumen','Produsen','Investor'],c:2,e:'Melalui BUMN seperti PT Pertamina, pemerintah berperan sebagai produsen yang menyediakan barang/jasa bagi masyarakat.',t:'Peran Pemerintah',k:'BUMN = pemerintah sebagai produsen.'},
+    {q:'Dari kelompok manakah pemerintah menarik pajak sebagai sumber utama penerimaan negara?',o:['Hanya dari rumah tangga konsumen','Hanya dari rumah tangga produsen','Dari rumah tangga konsumen dan produsen','Hanya dari masyarakat luar negeri'],c:2,e:'Pemerintah menarik pajak dari RTK dan RTP untuk membiayai pembangunan dan pelayanan publik.',t:'Pajak',k:'Pajak ditarik dari RTK dan RTP.'},
+    {q:'Bantuan berupa subsidi BBM dan BLT yang disalurkan kepada masyarakat merupakan bentuk peran pemerintah sebagai...',o:['Regulator yang mengatur harga','Pemberi bantuan kepada RTK dan RTP','Produsen barang publik','Investor dalam negeri'],c:1,e:'Pemerintah memberikan subsidi dan transfer payment kepada RTK dan RTP untuk membantu perekonomian.',t:'Subsidi',k:'Subsidi dari pemerintah kepada RTK/RTP.'},
+    {q:'Di antara perusahaan-perusahaan berikut, manakah yang merupakan Badan Usaha Milik Negara (BUMN)?',o:['PT Toyota Motor Manufacturing','PT Pertamina (Persero)','PT Unilever Indonesia','PT Astra International'],c:1,e:'PT Pertamina adalah BUMN (Badan Usaha Milik Negara). PT Toyota, Unilever, dan Astra adalah perusahaan swasta.',t:'BUMN',k:'Pertamina = contoh BUMN.'},
+    {q:'Apa istilah untuk kegiatan menjual barang atau jasa dari dalam negeri ke pasar internasional?',o:['Impor','Ekspor','Distribusi','Investasi'],c:1,e:'Ekspor adalah kegiatan menjual barang/jasa ke luar negeri. Ini mendatangkan devisa bagi negara.',t:'Ekspor',k:'Ekspor = jual barang ke luar negeri.'},
+    {q:'Kegiatan mendatangkan barang dari luar negeri untuk memenuhi kebutuhan dalam negeri disebut...',o:['Ekspor','Impor','Distribusi','Investasi'],c:1,e:'Impor adalah kegiatan membeli barang/jasa dari luar negeri. Ini mengeluarkan devisa negara.',t:'Impor',k:'Impor = beli barang dari luar negeri.'},
+    {q:'Mata uang asing yang digunakan sebagai alat pembayaran sah dalam transaksi internasional disebut...',o:['Pajak','Subsidi','Devisa','Retribusi'],c:2,e:'Devisa adalah alat pembayaran luar negeri yang sah. Kegiatan ekspor merupakan salah satu sumber devisa negara.',t:'Devisa',k:'Devisa = alat bayar luar negeri.'},
+    {q:'Berapa banyak peran yang dimainkan masyarakat luar negeri dalam perekonomian suatu negara?',o:['Dua peran','Tiga peran','Lima peran','Sepuluh peran'],c:2,e:'Masyarakat luar negeri memiliki 5 peran: konsumen ekspor, produsen impor, investor, sumber tenaga ahli, dan sumber devisa.',t:'Peran Luar Negeri',k:'5 peran masyarakat luar negeri.'},
+    {q:'Sebuah perusahaan Jepang membangun pabrik di Indonesia. Dalam konteks ini, perusahaan tersebut berperan sebagai...',o:['Konsumen ekspor','Produsen barang impor','Investor asing penanam modal','Regulator ekonomi'],c:2,e:'Investasi langsung perusahaan asing menunjukkan peran masyarakat luar negeri sebagai investor yang menanamkan modal di Indonesia.',t:'Peran Luar Negeri',k:'Perusahaan asing buka pabrik = investor asing.'},
+    {q:'Seorang turis asing membeli kain batik sebagai oleh-oleh. Dalam neraca perdagangan, aktivitas turis tersebut termasuk...',o:['Konsumsi dalam negeri oleh RTK','Ekspor jasa pariwisata','Impor barang mewah','Investasi portofolio'],c:1,e:'Wisatawan asing yang membeli produk Indonesia adalah konsumen ekspor yang mendatangkan devisa.',t:'Peran Luar Negeri',k:'Wisatawan asing = konsumen ekspor jasa pariwisata.'},
+    {q:'Dari manakah sumber devisa utama suatu negara diperoleh?',o:['Hanya dari penerimaan pajak','Hanya dari pinjaman luar negeri','Ekspor barang/jasa dan kerja sama ekonomi internasional','Hanya dari investasi asing'],c:2,e:'Sumber devisa utama berasal dari ekspor barang/jasa, pariwisata, investasi asing, dan kerja sama ekonomi internasional.',t:'Devisa',k:'Devisa dari ekspor & kerja sama luar negeri.'},
+    {q:'Dalam ilmu ekonomi, apa yang dimaksud dengan circular flow diagram?',o:['Diagram aliran barang antar negara','Diagram yang menggambarkan arus barang, jasa, dan uang antar pelaku ekonomi','Diagram struktur organisasi perusahaan','Diagram keseimbangan harga pasar'],c:1,e:'Circular flow diagram adalah diagram yang menggambarkan arus uang dan barang antar pelaku ekonomi dalam suatu perekonomian.',t:'Circular Flow',k:'Circular flow = diagram arus barang/uang antar pelaku ekonomi.'}
   ]
 },
 {
   name:'Aplikasi & Analisis',icon:'👑',difficulty:'Sangat Sulit',levelPrize:'Rp 1 Miliar',
   questions:[
-    {q:'Pak Andi bekerja sebagai karyawan pabrik dan menerima gaji setiap bulan. Pak Andi berperan sebagai...',o:['RTP','RTK','Pemerintah','Masyarakat luar negeri'],c:1,e:'Pak Andi adalah bagian dari RTK yang menyediakan tenaga kerja dan menerima balas jasa berupa gaji.',t:'Aplikasi Pelaku Ekonomi',k:'Karyawan = RTK.'},
-    {q:'Seorang mahasiswa bekerja sambil kuliah dan menerima gaji paruh waktu. Ia berperan sebagai...',o:['Produsen','Konsumen (RTK) sekaligus penyedia tenaga kerja','Regulator','Investor'],c:1,e:'Mahasiswa tersebut adalah RTK yang menyediakan tenaga kerja (faktor produksi) dan menerima upah.',t:'Aplikasi Pelaku Ekonomi',k:'Pekerja paruh waktu = RTK.'},
-    {q:'Bu Rina memiliki toko kue dan mempekerjakan 3 karyawan. Bu Rina berperan sebagai...',o:['RTK','RTP (produsen, distributor, agen pembangunan)','Pemerintah','Luar negeri'],c:1,e:'Bu Rina memproduksi kue (produsen), menjualnya (distributor), dan membuka lapangan kerja (agen pembangunan) — semuanya peran RTP.',t:'Aplikasi Pelaku Ekonomi',k:'Pemilik usaha = RTP.'},
-    {q:'PT Toyota membangun pabrik perakitan mobil di Karawang dan mempekerjakan tenaga kerja lokal. PT Toyota berperan sebagai...',o:['Konsumen ekspor','Produsen barang impor','Investor asing','Regulator'],c:2,e:'PT Toyota sebagai perusahaan asing yang menanamkan modal di Indonesia berperan sebagai investor asing.',t:'Aplikasi Pelaku Ekonomi',k:'Perusahaan asing = investor.'},
-    {q:'Ketika pemerintah membayar gaji guru ASN, pemerintah berperan sebagai...',o:['Regulator','Konsumen (membelanjakan anggaran)','Produsen','Distributor'],c:1,e:'Membayar gaji guru ASN adalah bentuk belanja pemerintah dari anggaran negara, mencerminkan peran pemerintah sebagai konsumen.',t:'Aplikasi Pelaku Ekonomi',k:'Bayar gaji = belanja negara (konsumen).'},
-    {q:'Ketika PLN menjual listrik kepada masyarakat, PLN berperan sebagai...',o:['RTK','RTP (BUMN sebagai produsen)','Regulator','Investor'],c:1,e:'PLN adalah BUMN yang menjual jasa listrik, sehingga berperan sebagai RTP (produsen jasa) milik negara.',t:'Aplikasi Pelaku Ekonomi',k:'PLN = RTP (BUMN).'},
-    {q:'Ketika keluarga Pak Budi menyewakan kamar kos kepada mahasiswa, keluarga tersebut berperan sebagai...',o:['RTP','RTK (menyediakan faktor produksi tanah/modal)','Pemerintah','Luar negeri'],c:1,e:'Keluarga yang menyewakan kamar kos berperan sebagai RTK yang menyediakan faktor produksi (tanah/modal) dan menerima sewa.',t:'Aplikasi Pelaku Ekonomi',k:'Sewa kamar = RTK penyedia faktor produksi.'},
-    {q:'Ketika koperasi warga menjual sembako ke anggotanya, koperasi berperan sebagai...',o:['RTK','RTP dan distributor','Pemerintah','Luar negeri'],c:1,e:'Koperasi yang menjual sembako adalah RTP (produsen/distributor) bagi anggotanya.',t:'Aplikasi Pelaku Ekonomi',k:'Koperasi jual sembako = RTP.'},
-    {q:'Ketika sebuah startup teknologi merekrut 50 karyawan baru, hal ini menunjukkan peran RTP sebagai...',o:['Konsumen','Distributor','Agen pembangunan','Regulator'],c:2,e:'Membuka lapangan kerja baru adalah wujud peran RTP sebagai agen pembangunan.',t:'Aplikasi Pelaku Ekonomi',k:'Rekrut karyawan = agen pembangunan.'},
-    {q:'Ketika anak menerima uang saku dari orang tua, dalam keluarga tersebut anak berperan sebagai...',o:['Produsen','Konsumen (bagian RTK)','Pemerintah','Investor'],c:1,e:'Anak yang menerima uang saku dan membelanjakannya adalah bagian dari RTK (konsumen).',t:'Aplikasi Pelaku Ekonomi',k:'Terima uang saku = RTK.'},
-    {q:'Ketika pabrik membayar pajak bumi dan bangunan ke pemerintah, pabrik berperan sebagai...',o:['Konsumen','Wajib pajak dari kalangan RTP','Produsen','Distributor'],c:1,e:'Pabrik sebagai RTP membayar pajak kepada pemerintah, yang kemudian digunakan untuk pembangunan.',t:'Aplikasi Pelaku Ekonomi',k:'Pajak pabrik = kewajiban RTP.'},
-    {q:'Ketika WNA membeli saham perusahaan Indonesia di Bursa Efek, WNA tersebut berperan sebagai...',o:['Konsumen ekspor','Investor asing (portofolio)','Produsen impor','Regulator'],c:1,e:'Membeli saham perusahaan Indonesia adalah bentuk investasi portofolio, menunjukkan peran luar negeri sebagai investor.',t:'Aplikasi Pelaku Ekonomi',k:'Beli saham = investor asing.'},
-    {q:'Ketika keluarga membeli produk impor seperti buah dari Thailand di supermarket, keluarga tersebut berperan sebagai...',o:['Produsen','RTK yang mengonsumsi produk impor','Regulator','Investor'],c:1,e:'Keluarga yang membeli produk impor berperan sebagai RTK yang mengonsumsi barang, sekaligus menunjukkan keterlibatan luar negeri sebagai produsen barang impor.',t:'Aplikasi Pelaku Ekonomi',k:'Beli produk impor = RTK konsumen.'},
-    {q:'Ketika perusahaan multinasional mengirim insinyur ahli ke proyek infrastruktur di Indonesia, perusahaan tersebut berperan sebagai...',o:['Konsumen','Masyarakat luar negeri sebagai sumber tenaga ahli','Regulator','Distributor'],c:1,e:'Mengirim tenaga ahli ke Indonesia menunjukkan peran masyarakat luar negeri sebagai sumber tenaga ahli dan alih teknologi.',t:'Aplikasi Pelaku Ekonomi',k:'Tenaga ahli asing = sumber tenaga ahli.'},
-    {q:'Sebuah keluarga membeli rumah secara kredit dan menyewakannya kepada orang lain. Keluarga ini berperan ganda sebagai...',o:['Produsen dan konsumen','RTK (konsumen) sekaligus penyedia faktor produksi modal/tanah','Pemerintah dan investor','Regulator dan distributor'],c:1,e:'Keluarga ini berperan ganda: sebagai RTK (konsumen yang membeli rumah) sekaligus penyedia faktor produksi modal/tanah (menyewakan rumah) dan menerima balas jasa sewa.',t:'Aplikasi Pelaku Ekonomi',k:'Konsumsi + sewa = RTK berperan ganda.'}
+    {q:'Pak Andi bekerja sebagai operator mesin di sebuah pabrik tekstil dan menerima gaji setiap bulan. Dalam kegiatan ekonomi, Pak Andi termasuk...',o:['Rumah tangga produsen','Rumah tangga konsumen','Pemerintah','Masyarakat luar negeri'],c:1,e:'Pak Andi adalah bagian dari RTK yang menyediakan tenaga kerja dan menerima balas jasa berupa gaji.',t:'Aplikasi Pelaku Ekonomi',k:'Karyawan pabrik = bagian dari RTK.'},
+    {q:'Rina adalah mahasiswi yang bekerja paruh waktu di kafe untuk membiayai kuliahnya. Peran Rina dalam perekonomian adalah sebagai...',o:['Produsen barang/jasa','Konsumen sekaligus penyedia tenaga kerja','Regulator ekonomi','Investor asing'],c:1,e:'Mahasiswa tersebut adalah RTK yang menyediakan tenaga kerja (faktor produksi) dan menerima upah.',t:'Aplikasi Pelaku Ekonomi',k:'Pekerja paruh waktu = RTK penyedia tenaga kerja.'},
+    {q:'Bu Rina mengelola toko kue dengan 5 karyawan, membeli bahan baku, dan menjual kue ke pelanggan. Peran Bu Rina sebagai pelaku ekonomi adalah...',o:['Rumah tangga konsumen','Rumah tangga produsen dan distributor','Pemerintah','Masyarakat luar negeri'],c:1,e:'Bu Rina memproduksi kue (produsen), menjualnya (distributor), dan membuka lapangan kerja (agen pembangunan) — semuanya peran RTP.',t:'Aplikasi Pelaku Ekonomi',k:'Pemilik usaha = RTP (produsen/distributor).'},
+    {q:'PT Toyota Motor Manufacturing Indonesia membangun pabrik perakitan di Karawang dan menyerap ribuan tenaga kerja lokal. Peran perusahaan tersebut bagi perekonomian Indonesia adalah sebagai...',o:['Konsumen ekspor','Produsen barang impor','Investor asing penanam modal','Regulator ekonomi'],c:2,e:'PT Toyota sebagai perusahaan asing yang menanamkan modal di Indonesia berperan sebagai investor asing.',t:'Aplikasi Pelaku Ekonomi',k:'Perusahaan asing buka pabrik = investor asing.'},
+    {q:'Setiap bulan, pemerintah mencairkan gaji untuk jutaan guru ASN dari kas negara. Aktivitas tersebut mencerminkan peran pemerintah sebagai...',o:['Regulator ekonomi','Konsumen yang membelanjakan anggaran negara','Produsen barang publik','Distributor hasil pembangunan'],c:1,e:'Membayar gaji guru ASN adalah bentuk belanja pemerintah dari anggaran negara, mencerminkan peran pemerintah sebagai konsumen.',t:'Aplikasi Pelaku Ekonomi',k:'Bayar gaji ASN = belanja negara (konsumen).'},
+    {q:'PT PLN (Persero) menjual listrik kepada masyarakat dan industri. Dalam kegiatan ini, PLN menjalankan peran sebagai...',o:['Rumah tangga konsumen','RTP (BUMN) yang memproduksi jasa listrik','Regulator sektor energi','Investor asing'],c:1,e:'PLN adalah BUMN yang menjual jasa listrik, sehingga berperan sebagai RTP (produsen jasa) milik negara.',t:'Aplikasi Pelaku Ekonomi',k:'PLN = RTP (BUMN) produsen jasa listrik.'},
+    {q:'Keluarga Pak Budi menyewakan tiga kamar rumahnya kepada mahasiswa dan menerima uang sewa bulanan. Peran yang dijalankan keluarga ini adalah...',o:['Rumah tangga produsen','RTK yang menyediakan faktor produksi tanah/modal','Pemerintah sebagai regulator','Masyarakat luar negeri'],c:1,e:'Keluarga yang menyewakan kamar kos berperan sebagai RTK yang menyediakan faktor produksi (tanah/modal) dan menerima sewa.',t:'Aplikasi Pelaku Ekonomi',k:'Sewa kamar = RTK penyedia faktor produksi tanah/modal.'},
+    {q:'Koperasi "Makmur Jaya" membeli sembako dari distributor lalu menjualnya kembali kepada anggota. Koperasi tersebut berperan sebagai...',o:['Rumah tangga konsumen murni','RTP dan distributor bagi anggotanya','Pemerintah','Masyarakat luar negeri'],c:1,e:'Koperasi yang menjual sembako adalah RTP (produsen/distributor) bagi anggotanya.',t:'Aplikasi Pelaku Ekonomi',k:'Koperasi jual sembako = RTP/distributor.'},
+    {q:'Sebuah startup teknologi merekrut 50 lulusan baru untuk mengisi berbagai posisi. Kontribusi perusahaan ini tercermin dalam perannya sebagai...',o:['Konsumen barang modal','Distributor produk digital','Agen pembangunan yang membuka lapangan kerja','Regulator industri teknologi'],c:2,e:'Membuka lapangan kerja baru adalah wujud peran RTP sebagai agen pembangunan.',t:'Aplikasi Pelaku Ekonomi',k:'Rekrut karyawan = agen pembangunan.'},
+    {q:'Setiap pagi, Andi menerima uang saku dari ibunya lalu membelanjakan sebagian untuk jajan di kantin sekolah. Dalam keluarga, Andi termasuk...',o:['Produsen barang/jasa','Konsumen (bagian dari RTK)','Pemerintah','Investor kecil'],c:1,e:'Anak yang menerima uang saku dan membelanjakannya adalah bagian dari RTK (konsumen).',t:'Aplikasi Pelaku Ekonomi',k:'Terima & belanjakan uang saku = bagian RTK.'},
+    {q:'Sebuah pabrik tekstil menyetorkan Pajak Bumi dan Bangunan (PBB) setiap tahun kepada pemerintah. Tindakan pabrik tersebut merupakan bagian dari...',o:['Kegiatan konsumsi murni','Kewajiban RTP sebagai wajib pajak','Peran pemerintah sebagai produsen','Peran masyarakat luar negeri'],c:1,e:'Pabrik sebagai RTP membayar pajak kepada pemerintah, yang kemudian digunakan untuk pembangunan.',t:'Aplikasi Pelaku Ekonomi',k:'Pajak pabrik = kewajiban RTP.'},
+    {q:'Seorang warga negara Singapura membeli saham perusahaan tambang Indonesia di Bursa Efek. Kegiatan tersebut menunjukkan peran masyarakat luar negeri sebagai...',o:['Konsumen ekspor barang','Investor asing portofolio','Produsen barang impor','Regulator pasar modal'],c:1,e:'Membeli saham perusahaan Indonesia adalah bentuk investasi portofolio, menunjukkan peran luar negeri sebagai investor.',t:'Aplikasi Pelaku Ekonomi',k:'Beli saham = investor asing portofolio.'},
+    {q:'Ibu Ani membeli buah apel impor dari Amerika di supermarket. Aktivitas ini menunjukkan keterlibatan pelaku ekonomi...',o:['Hanya RTK sebagai konsumen','RTK sebagai konsumen dan masyarakat luar negeri sebagai produsen','Hanya RTP sebagai distributor','Hanya pemerintah sebagai regulator'],c:1,e:'Keluarga yang membeli produk impor berperan sebagai RTK yang mengonsumsi barang, sekaligus menunjukkan keterlibatan luar negeri sebagai produsen barang impor.',t:'Aplikasi Pelaku Ekonomi',k:'Beli produk impor = RTK konsumen + LN produsen.'},
+    {q:'Perusahaan multinasional mengirim tim insinyur dari Jerman untuk membangun proyek MRT di Jakarta. Peran masyarakat luar negeri yang ditunjukkan adalah...',o:['Konsumen ekspor','Sumber tenaga ahli dan alih teknologi','Regulator proyek infrastruktur','Distributor bahan bangunan'],c:1,e:'Mengirim tenaga ahli ke Indonesia menunjukkan peran masyarakat luar negeri sebagai sumber tenaga ahli dan alih teknologi.',t:'Aplikasi Pelaku Ekonomi',k:'Tenaga ahli asing = sumber tenaga ahli & alih teknologi.'},
+    {q:'Keluarga Ahmad membeli rumah dengan KPR, lalu menyewakan satu lantainya kepada orang lain. Analisis peran ganda yang dijalankan keluarga ini adalah...',o:['Produsen sekaligus distributor','RTK (konsumen) sekaligus penyedia faktor produksi modal/tanah','Pemerintah sekaligus investor','Regulator sekaligus distributor'],c:1,e:'Keluarga ini berperan ganda: sebagai RTK (konsumen yang membeli rumah) sekaligus penyedia faktor produksi modal/tanah (menyewakan rumah) dan menerima balas jasa sewa.',t:'Aplikasi Pelaku Ekonomi',k:'Konsumsi + menyewakan = RTK berperan ganda.'}
   ]
 }
 ];
+/* ============================================================
+   AKHIR DATA SOAL YANG SUDAH DIPERBAIKI
+   ============================================================ */
 
 (function validateNoDuplicates(){
   LEVELS.forEach((lv,i)=>{
@@ -1598,7 +1590,6 @@ const LEVELS=[
   });
 })();
 
-/* ============ LEVEL MOTIVATION QUOTES ============ */
 const LEVEL_QUOTES = [
   "Setiap langkah kecil hari ini adalah awal dari pencapaian besar esok hari. Mulailah dengan berani!",
   "Belajar bukan tentang menjadi sempurna, tetapi tentang menjadi lebih baik setiap hari. Kamu pasti bisa!",
@@ -1637,9 +1628,6 @@ let shuffledQuestionsOrder=[];
 function QPL(){ return LEVELS[currentLevel].questions.length; }
 function TotalQ(){ return LEVELS.reduce((s,l)=>s+l.questions.length, 0); }
 
-/* ============ ORIENTATION HANDLING ============ */
-/* Overlay landscape hanya muncul saat gameplay (game-screen / level-intro).
-   Di menu / pilih level / hasil akhir, portrait diperbolehkan. */
 function isPortrait(){return window.innerHeight > window.innerWidth && window.innerWidth <= 900;}
 function handleOrientation(){
   const portrait = isPortrait();
@@ -1832,7 +1820,6 @@ function startCountdown(){
 }
 function stopCountdown(){clearInterval(countdownInterval);countdownInterval=null;}
 
-/* ============ SHOW LEVEL INTRO SCREEN ============ */
 function showLevelIntro(callback){
   setText('intro-level-num', currentLevel+1);
   setText('intro-level-name', LEVELS[currentLevel].name);
@@ -1870,7 +1857,6 @@ function showLevelIntro(callback){
   setTimeout(handleOrientation, 60);
 }
 
-/* ============ BEGIN PLAY AFTER INTRO ============ */
 function _beginLevelPlay(){
   applyTheme(currentLevel);
   setText('hud-level', currentLevel+1);
