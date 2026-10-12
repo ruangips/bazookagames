@@ -85,82 +85,129 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
   .timer-ring.danger .ring-text { color: var(--rose); animation: timerPulse 0.5s ease-in-out infinite; }
   @keyframes timerPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
 
-  /* ========== PRIZE MONEY SYSTEM ========== */
-  .money-pill {
-    display: inline-flex; align-items: center; gap: 4px;
-    padding: 6px 11px; border-radius: 99px;
-    background: linear-gradient(135deg, rgba(212,175,55,.28), rgba(240,216,120,.10));
-    border: 1.5px solid rgba(212,175,55,.75);
-    box-shadow: 0 0 14px rgba(212,175,55,.4), inset 0 1px 0 rgba(255,255,255,.15);
+  /* ========== STICKY MONEY TICKER (SELALU TERLIHAT) ========== */
+  .sticky-top-wrap { position: sticky; top: 0; z-index: 40; }
+  .money-ticker {
+    background: linear-gradient(135deg, rgba(212,175,55,.35) 0%, rgba(139,92,246,.20) 50%, rgba(212,175,55,.30) 100%);
+    border-bottom: 2px solid rgba(212,175,55,.8);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    padding: 8px 12px 6px;
+    box-shadow: 0 6px 24px rgba(0,0,0,.4), 0 0 30px rgba(212,175,55,.25) inset;
+    position: relative;
+  }
+  .money-ticker::before {
+    content:''; position: absolute; top:0; left:0; right:0; height:1px;
+    background: linear-gradient(90deg, transparent, rgba(255,215,0,.95), transparent);
+  }
+  .mt-inner {
+    max-width: 900px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px; flex-wrap: wrap;
+  }
+  .mt-icon { font-size: clamp(1.3rem, 4vw, 1.7rem); filter: drop-shadow(0 0 12px rgba(255,215,0,.9)); animation: mtIconFloat 2.4s ease-in-out infinite; }
+  @keyframes mtIconFloat { 0%,100%{transform:translateY(0) rotate(-4deg)} 50%{transform:translateY(-3px) rotate(4deg)} }
+  .mt-info { display: flex; flex-direction: column; align-items: center; line-height: 1; }
+  .mt-label {
+    font-family: 'Space Grotesk', sans-serif; font-size: clamp(8px, 2.2vw, 10px);
+    font-weight: 900; letter-spacing: 2.5px; text-transform: uppercase;
+    color: #f0d878; text-shadow: 0 0 10px rgba(240,216,120,.8);
+    margin-bottom: 2px;
+  }
+  .mt-value {
     font-family: 'Space Grotesk', sans-serif;
-    font-weight: 900; font-size: .72rem;
+    font-size: clamp(1.15rem, 5vw, 1.8rem);
+    font-weight: 900;
     color: #ffd700;
     font-variant-numeric: tabular-nums;
-    letter-spacing: .3px;
-    transition: all .3s ease;
+    letter-spacing: .5px;
+    text-shadow: 0 0 22px rgba(255,215,0,.95), 0 0 44px rgba(255,215,0,.55);
+    line-height: 1;
+    animation: mtValuePulse 2.6s ease-in-out infinite;
     white-space: nowrap;
   }
-  .money-pill .money-ico { font-size: .95em; filter: drop-shadow(0 0 6px rgba(255,215,0,.8)); }
-  .money-pill.flash-up { animation: moneyUp .7s ease-out; }
-  .money-pill.flash-down { animation: moneyDown .7s ease-out; }
-  @keyframes moneyUp {
-    0% { transform: scale(1); }
-    35% { transform: scale(1.15); box-shadow: 0 0 26px rgba(74,222,128,.9); border-color: #4ade80; color: #86efac; }
-    100% { transform: scale(1); }
+  @keyframes mtValuePulse {
+    0%,100% { text-shadow: 0 0 22px rgba(255,215,0,.95), 0 0 44px rgba(255,215,0,.55); }
+    50% { text-shadow: 0 0 34px rgba(255,215,0,1), 0 0 66px rgba(255,215,0,.75); }
   }
-  @keyframes moneyDown {
-    0% { transform: scale(1); }
-    35% { transform: scale(0.92); box-shadow: 0 0 26px rgba(239,68,68,.9); border-color: #f87171; color: #fca5a5; }
-    100% { transform: scale(1); }
+  .mt-divider {
+    width: 1px; height: 26px;
+    background: linear-gradient(180deg, transparent, rgba(212,175,55,.8), transparent);
+    margin: 0 4px;
+  }
+  .mt-target { display: flex; flex-direction: column; align-items: center; line-height: 1; }
+  .mt-target-label {
+    font-family: 'Space Grotesk', sans-serif; font-size: clamp(7px, 2vw, 9px);
+    font-weight: 900; letter-spacing: 2px; text-transform: uppercase;
+    color: #c4b5fd; margin-bottom: 2px;
+  }
+  .mt-target-val {
+    font-family: 'Space Grotesk', sans-serif; font-size: clamp(.85rem, 3.2vw, 1.05rem);
+    font-weight: 900; color: #c4b5fd;
+    text-shadow: 0 0 14px rgba(167,139,250,.8);
+  }
+  .mt-bar-wrap {
+    max-width: 900px; margin: 5px auto 0;
+    height: 5px; border-radius: 99px;
+    background: rgba(0,0,0,.45); overflow: hidden;
+    border: 1px solid rgba(212,175,55,.4);
+  }
+  .mt-bar-wrap > i {
+    display: block; height: 100%; width: 0%;
+    background: linear-gradient(90deg, #8b6914, #d4af37, #f0d878, #a78bfa);
+    border-radius: 99px;
+    box-shadow: 0 0 12px rgba(255,215,0,.85);
+    transition: width .9s cubic-bezier(.2,.9,.3,1.2);
   }
 
+  /* ========== MONEY BOARD (KARTU BESAR) ========== */
   .money-board {
     position: relative; overflow: hidden;
-    padding: 12px 16px; border-radius: 16px;
-    background: linear-gradient(135deg, rgba(212,175,55,.20), rgba(139,92,246,.10), rgba(212,175,55,.14));
-    border: 2px solid rgba(212,175,55,.7);
-    box-shadow: 0 0 32px rgba(212,175,55,.3), inset 0 1px 0 rgba(255,255,255,.15);
+    padding: 14px 18px; border-radius: 16px;
+    background: linear-gradient(135deg, rgba(212,175,55,.24), rgba(139,92,246,.14), rgba(212,175,55,.18));
+    border: 2px solid rgba(212,175,55,.75);
+    box-shadow: 0 0 32px rgba(212,175,55,.4), inset 0 1px 0 rgba(255,255,255,.18);
     text-align: center;
   }
   .money-board::before {
     content:''; position: absolute; top:0; left:10%; right:10%; height:1px;
-    background: linear-gradient(90deg, transparent, rgba(255,215,0,.8), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,215,0,.85), transparent);
   }
   .money-board .mb-label {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(8px, 2.3vw, 10px);
+    font-size: clamp(9px, 2.5vw, 11px);
     font-weight: 900; letter-spacing: 2.5px; text-transform: uppercase;
     color: #f0d878;
     text-shadow: 0 0 10px rgba(240,216,120,.7);
-    margin-bottom: 4px;
+    margin-bottom: 5px;
     display: flex; align-items: center; justify-content: center; gap: 6px;
   }
   .money-board .mb-value {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(1.4rem, 6vw, 2.2rem);
+    font-size: clamp(1.5rem, 7vw, 2.4rem);
     font-weight: 900;
     color: #ffd700;
     font-variant-numeric: tabular-nums;
     line-height: 1;
-    text-shadow: 0 0 22px rgba(255,215,0,.85), 0 0 44px rgba(255,215,0,.45);
+    text-shadow: 0 0 22px rgba(255,215,0,.9), 0 0 44px rgba(255,215,0,.5);
     animation: moneyPulse 2.8s ease-in-out infinite;
     letter-spacing: .5px;
     word-break: break-all;
   }
   @keyframes moneyPulse {
-    0%,100% { text-shadow: 0 0 22px rgba(255,215,0,.85), 0 0 44px rgba(255,215,0,.45); }
-    50% { text-shadow: 0 0 32px rgba(255,215,0,1), 0 0 62px rgba(255,215,0,.65); }
+    0%,100% { text-shadow: 0 0 22px rgba(255,215,0,.9), 0 0 44px rgba(255,215,0,.5); }
+    50% { text-shadow: 0 0 34px rgba(255,215,0,1), 0 0 62px rgba(255,215,0,.7); }
   }
   .money-board .mb-progress {
-    margin-top: 8px; height: 6px; border-radius: 99px;
-    background: rgba(0,0,0,.35); overflow: hidden;
-    border: 1px solid rgba(212,175,55,.35);
+    margin-top: 8px; height: 7px; border-radius: 99px;
+    background: rgba(0,0,0,.4); overflow: hidden;
+    border: 1px solid rgba(212,175,55,.4);
   }
   .money-board .mb-progress > i {
     display: block; height: 100%; width: 0%;
     background: linear-gradient(90deg, #8b6914, #d4af37, #f0d878, #a78bfa);
     border-radius: 99px;
-    box-shadow: 0 0 14px rgba(255,215,0,.7);
+    box-shadow: 0 0 14px rgba(255,215,0,.75);
     transition: width .9s cubic-bezier(.2,.9,.3,1.2);
   }
   .money-board .mb-target {
@@ -179,154 +226,38 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
     animation: deltaPop .5s cubic-bezier(.34,1.56,.64,1) both;
     letter-spacing: .5px;
   }
-  .money-delta.up {
-    color: #86efac;
-    background: rgba(22,101,52,.55);
-    border: 1.5px solid rgba(134,239,172,.8);
-    box-shadow: 0 0 18px rgba(34,197,94,.55);
-  }
-  .money-delta.down {
-    color: #fca5a5;
-    background: rgba(127,29,29,.55);
-    border: 1.5px solid rgba(252,165,165,.8);
-    box-shadow: 0 0 18px rgba(239,68,68,.55);
-  }
+  .money-delta.up { color: #86efac; background: rgba(22,101,52,.55); border: 1.5px solid rgba(134,239,172,.8); box-shadow: 0 0 18px rgba(34,197,94,.55); }
+  .money-delta.down { color: #fca5a5; background: rgba(127,29,29,.55); border: 1.5px solid rgba(252,165,165,.8); box-shadow: 0 0 18px rgba(239,68,68,.55); }
   @keyframes deltaPop { 0%{opacity:0;transform:translateY(8px) scale(.7)} 60%{transform:translateY(0) scale(1.08)} 100%{opacity:1;transform:scale(1)} }
 
   /* ========== REVEAL OVERLAY ========== */
   #revealOverlay{ position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; pointer-events: none; padding: 16px; }
   #revealOverlay.show{ display: flex; }
-  #revealOverlay.backdrop{
-    backdrop-filter: blur(12px) saturate(140%);
-    -webkit-backdrop-filter: blur(12px) saturate(140%);
-    background: radial-gradient(circle at 50% 50%, rgba(10,15,30,.55) 0%, rgba(10,15,30,.93) 75%);
-    pointer-events: auto;
-    animation: fadeInBackdrop .28s ease;
-  }
+  #revealOverlay.backdrop{ backdrop-filter: blur(12px) saturate(140%); -webkit-backdrop-filter: blur(12px) saturate(140%); background: radial-gradient(circle at 50% 50%, rgba(10,15,30,.55) 0%, rgba(10,15,30,.93) 75%); pointer-events: auto; animation: fadeInBackdrop .28s ease; }
   @keyframes fadeInBackdrop{ from{opacity:0} to{opacity:1} }
-
-  .reveal-badge{
-    position: relative;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 10px;
-    padding: 26px clamp(26px, 8vw, 52px) 22px;
-    border-radius: 34px;
-    min-width: min(84vw, 320px);
-    text-align: center;
-    border: 2px solid;
-    animation: revealPop .85s cubic-bezier(.34,1.56,.64,1) both;
-  }
-  @keyframes revealPop{
-    0%{ opacity:0; transform: scale(.35) rotate(-10deg); }
-    55%{ transform: scale(1.08) rotate(2deg); }
-    100%{ opacity:1; transform: scale(1) rotate(0); }
-  }
-  @keyframes salahShake{
-    0%,100%{transform:translateX(0) rotate(0)}
-    20%{transform:translateX(-9px) rotate(-1.5deg)}
-    40%{transform:translateX(9px) rotate(1.5deg)}
-    60%{transform:translateX(-6px) rotate(-.8deg)}
-    80%{transform:translateX(6px) rotate(.8deg)}
-  }
-
-  .reveal-badge.benar{
-    background: radial-gradient(circle at 50% 0%, rgba(74,222,128,.38), transparent 62%), linear-gradient(165deg, rgba(22,101,52,.96), rgba(6,45,32,.98));
-    border-color: rgba(134,239,172,.75);
-    box-shadow: 0 0 55px rgba(34,197,94,.55), 0 0 130px rgba(34,197,94,.28), 0 22px 60px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.25);
-    color: #86efac;
-  }
-  .reveal-badge.salah{
-    background: radial-gradient(circle at 50% 0%, rgba(248,113,113,.38), transparent 62%), linear-gradient(165deg, rgba(153,27,27,.96), rgba(60,8,8,.98));
-    border-color: rgba(252,165,165,.75);
-    box-shadow: 0 0 55px rgba(239,68,68,.55), 0 0 130px rgba(239,68,68,.28), 0 22px 60px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.22);
-    color: #fca5a5;
-    animation: revealPop .85s cubic-bezier(.34,1.56,.64,1) both, salahShake .6s .8s ease;
-  }
-  .reveal-badge.timeout{
-    background: radial-gradient(circle at 50% 0%, rgba(251,191,36,.38), transparent 62%), linear-gradient(165deg, rgba(146,64,14,.96), rgba(60,25,3,.98));
-    border-color: rgba(252,211,77,.75);
-    box-shadow: 0 0 55px rgba(245,158,11,.55), 0 0 130px rgba(245,158,11,.28), 0 22px 60px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.22);
-    color: #fcd34d;
-    animation: revealPop .85s cubic-bezier(.34,1.56,.64,1) both, salahShake .6s .8s ease;
-  }
-
-  .reveal-icon-wrap{
-    position: relative;
-    width: clamp(70px, 19vw, 94px);
-    height: clamp(70px, 19vw, 94px);
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 50%;
-    margin-bottom: 2px;
-  }
-  .reveal-icon-wrap .ring{
-    position: absolute; top: 50%; left: 50%;
-    width: 100%; height: 100%;
-    border-radius: 50%;
-    border: 2px solid currentColor;
-    transform: translate(-50%,-50%) scale(.9);
-    opacity: 0;
-    animation: ringExpand 2.2s ease-out infinite;
-    pointer-events: none;
-  }
+  .reveal-badge{ position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 26px clamp(26px, 8vw, 52px) 22px; border-radius: 34px; min-width: min(84vw, 320px); text-align: center; border: 2px solid; animation: revealPop .85s cubic-bezier(.34,1.56,.64,1) both; }
+  @keyframes revealPop{ 0%{ opacity:0; transform: scale(.35) rotate(-10deg); } 55%{ transform: scale(1.08) rotate(2deg); } 100%{ opacity:1; transform: scale(1) rotate(0); } }
+  @keyframes salahShake{ 0%,100%{transform:translateX(0) rotate(0)} 20%{transform:translateX(-9px) rotate(-1.5deg)} 40%{transform:translateX(9px) rotate(1.5deg)} 60%{transform:translateX(-6px) rotate(-.8deg)} 80%{transform:translateX(6px) rotate(.8deg)} }
+  .reveal-badge.benar{ background: radial-gradient(circle at 50% 0%, rgba(74,222,128,.38), transparent 62%), linear-gradient(165deg, rgba(22,101,52,.96), rgba(6,45,32,.98)); border-color: rgba(134,239,172,.75); box-shadow: 0 0 55px rgba(34,197,94,.55), 0 0 130px rgba(34,197,94,.28), 0 22px 60px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.25); color: #86efac; }
+  .reveal-badge.salah{ background: radial-gradient(circle at 50% 0%, rgba(248,113,113,.38), transparent 62%), linear-gradient(165deg, rgba(153,27,27,.96), rgba(60,8,8,.98)); border-color: rgba(252,165,165,.75); box-shadow: 0 0 55px rgba(239,68,68,.55), 0 0 130px rgba(239,68,68,.28), 0 22px 60px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.22); color: #fca5a5; animation: revealPop .85s cubic-bezier(.34,1.56,.64,1) both, salahShake .6s .8s ease; }
+  .reveal-badge.timeout{ background: radial-gradient(circle at 50% 0%, rgba(251,191,36,.38), transparent 62%), linear-gradient(165deg, rgba(146,64,14,.96), rgba(60,25,3,.98)); border-color: rgba(252,211,77,.75); box-shadow: 0 0 55px rgba(245,158,11,.55), 0 0 130px rgba(245,158,11,.28), 0 22px 60px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.22); color: #fcd34d; animation: revealPop .85s cubic-bezier(.34,1.56,.64,1) both, salahShake .6s .8s ease; }
+  .reveal-icon-wrap{ position: relative; width: clamp(70px, 19vw, 94px); height: clamp(70px, 19vw, 94px); display: flex; align-items: center; justify-content: center; border-radius: 50%; margin-bottom: 2px; }
+  .reveal-icon-wrap .ring{ position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; border-radius: 50%; border: 2px solid currentColor; transform: translate(-50%,-50%) scale(.9); opacity: 0; animation: ringExpand 2.2s ease-out infinite; pointer-events: none; }
   .reveal-icon-wrap .ring:nth-child(2){ animation-delay: .55s; }
   .reveal-icon-wrap .ring:nth-child(3){ animation-delay: 1.1s; }
-  @keyframes ringExpand{
-    0%{ transform: translate(-50%,-50%) scale(.9); opacity: .85; }
-    100%{ transform: translate(-50%,-50%) scale(2.15); opacity: 0; }
-  }
-  .reveal-icon{
-    position: relative;
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 50%;
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 900;
-    font-size: clamp(2rem, 7.5vw, 2.9rem);
-    color: #fff;
-    line-height: 1;
-    text-shadow: 0 3px 10px rgba(0,0,0,.45);
-    animation: iconPop .55s .18s cubic-bezier(.34,1.56,.64,1) both;
-  }
+  @keyframes ringExpand{ 0%{ transform: translate(-50%,-50%) scale(.9); opacity: .85; } 100%{ transform: translate(-50%,-50%) scale(2.15); opacity: 0; } }
+  .reveal-icon{ position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-family: 'Space Grotesk', sans-serif; font-weight: 900; font-size: clamp(2rem, 7.5vw, 2.9rem); color: #fff; line-height: 1; text-shadow: 0 3px 10px rgba(0,0,0,.45); animation: iconPop .55s .18s cubic-bezier(.34,1.56,.64,1) both; }
   @keyframes iconPop{ 0%{transform:scale(0) rotate(-40deg)} 70%{transform:scale(1.15) rotate(6deg)} 100%{transform:scale(1) rotate(0)} }
-
   .reveal-badge.benar .reveal-icon{ background: radial-gradient(circle at 34% 28%, #bbf7d0, #22c55e 55%, #15803d 100%); box-shadow: 0 0 0 5px rgba(74,222,128,.22), 0 0 40px rgba(34,197,94,.85), inset 0 -6px 14px rgba(0,0,0,.28), inset 0 3px 0 rgba(255,255,255,.4); }
   .reveal-badge.salah .reveal-icon{ background: radial-gradient(circle at 34% 28%, #fecaca, #ef4444 55%, #b91c1c 100%); box-shadow: 0 0 0 5px rgba(248,113,113,.22), 0 0 40px rgba(239,68,68,.85), inset 0 -6px 14px rgba(0,0,0,.28), inset 0 3px 0 rgba(255,255,255,.4); }
   .reveal-badge.timeout .reveal-icon{ background: radial-gradient(circle at 34% 28%, #fde68a, #f59e0b 55%, #b45309 100%); box-shadow: 0 0 0 5px rgba(251,191,36,.22), 0 0 40px rgba(245,158,11,.85), inset 0 -6px 14px rgba(0,0,0,.28), inset 0 3px 0 rgba(255,255,255,.4); font-size: clamp(1.7rem, 6.5vw, 2.5rem); }
-
-  .reveal-text{
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(1.9rem, 7.5vw, 3.1rem);
-    font-weight: 900;
-    letter-spacing: clamp(3px, 1.4vw, 8px);
-    line-height: 1;
-    text-transform: uppercase;
-    background-size: 220% auto;
-    -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-    animation: revealTextIn .6s .22s cubic-bezier(.22,1,.36,1) both, textShimmer 3.2s ease-in-out .9s infinite;
-  }
+  .reveal-text{ font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.9rem, 7.5vw, 3.1rem); font-weight: 900; letter-spacing: clamp(3px, 1.4vw, 8px); line-height: 1; text-transform: uppercase; background-size: 220% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; animation: revealTextIn .6s .22s cubic-bezier(.22,1,.36,1) both, textShimmer 3.2s ease-in-out .9s infinite; }
   @keyframes revealTextIn{ from{ opacity:0; transform: translateY(14px) scale(.85); } to{ opacity:1; transform: translateY(0) scale(1); } }
   @keyframes textShimmer{ 0%,100%{ background-position: 0% center; } 50%{ background-position: 100% center; } }
-
   .reveal-badge.benar .reveal-text{ background-image: linear-gradient(90deg, #ecfdf5 0%, #86efac 25%, #ffffff 50%, #4ade80 75%, #ecfdf5 100%); filter: drop-shadow(0 4px 16px rgba(34,197,94,.9)); }
   .reveal-badge.salah .reveal-text{ background-image: linear-gradient(90deg, #fef2f2 0%, #fca5a5 25%, #ffffff 50%, #f87171 75%, #fef2f2 100%); filter: drop-shadow(0 4px 16px rgba(239,68,68,.9)); }
   .reveal-badge.timeout .reveal-text{ background-image: linear-gradient(90deg, #fffbeb 0%, #fcd34d 25%, #ffffff 50%, #fbbf24 75%, #fffbeb 100%); filter: drop-shadow(0 4px 16px rgba(245,158,11,.9)); font-size: clamp(1.35rem, 5.6vw, 2.15rem); letter-spacing: clamp(2px, 1vw, 5px); }
-
-  .reveal-sub{
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(.68rem, 2.6vw, .85rem);
-    font-weight: 900;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #fff;
-    padding: 6px 18px;
-    border-radius: 99px;
-    background: rgba(0,0,0,.42);
-    border: 1.5px solid rgba(255,255,255,.3);
-    white-space: nowrap;
-    animation: revealTextIn .6s .38s cubic-bezier(.22,1,.36,1) both;
-  }
+  .reveal-sub{ font-family: 'Space Grotesk', sans-serif; font-size: clamp(.68rem, 2.6vw, .85rem); font-weight: 900; letter-spacing: 3px; text-transform: uppercase; color: #fff; padding: 6px 18px; border-radius: 99px; background: rgba(0,0,0,.42); border: 1.5px solid rgba(255,255,255,.3); white-space: nowrap; animation: revealTextIn .6s .38s cubic-bezier(.22,1,.36,1) both; }
 
   .burst-particle{ position: absolute; width: 10px; height: 10px; border-radius: 50%; pointer-events: none; animation: burstOut 1.1s cubic-bezier(.2,.9,.3,1) forwards; }
   @keyframes burstOut{ 0%{opacity:1;transform:translate(0,0) scale(1)} 100%{opacity:0;transform:translate(var(--tx),var(--ty)) scale(.2)} }
@@ -361,7 +292,6 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
   @media (max-width: 640px){
     .glass-panel{ padding: 14px; }
     main{ padding: 12px 10px 20px !important; }
-    header{ padding: 10px 12px !important; }
     .wheel-stage{ width: min(92vw, 380px); margin: 14px auto; }
     .wheel-pointer{ border-left-width:26px; border-right-width:26px; border-top-width:48px; top:-8px; }
     .opt-btn{ min-height: 48px; padding: 14px 16px; font-size: 0.9rem; }
@@ -377,17 +307,7 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
   .overflow-safe{ word-wrap: break-word; overflow-wrap: break-word; }
   .opt-btn:focus-visible, .btn-primary:focus-visible, .btn-home:focus-visible, .spin-btn:focus-visible, #spinBtn:focus-visible, #soundToggle:focus-visible{ outline: 3px solid var(--lvl-primary); outline-offset: 3px; }
 
-  /* ========== MGE 3D LOADING SCREEN ========== */
-  #loadingScreen {
-    position: fixed; inset: 0; z-index: 9999;
-    display: flex; align-items: center; justify-content: center;
-    background:
-      radial-gradient(circle at 18% 8%, rgba(167,139,250,.32) 0%, transparent 48%),
-      radial-gradient(circle at 82% 92%, rgba(212,175,55,.28) 0%, transparent 52%),
-      radial-gradient(circle at 50% 50%, #0a0f1e 0%, #14101f 55%, #0a0f1e 100%);
-    transition: opacity 0.7s ease, visibility 0.7s ease;
-    padding: 20px; flex-direction: column;
-  }
+  #loadingScreen { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 18% 8%, rgba(167,139,250,.32) 0%, transparent 48%), radial-gradient(circle at 82% 92%, rgba(212,175,55,.28) 0%, transparent 52%), radial-gradient(circle at 50% 50%, #0a0f1e 0%, #14101f 55%, #0a0f1e 100%); transition: opacity 0.7s ease, visibility 0.7s ease; padding: 20px; flex-direction: column; }
   #loadingScreen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
   .mge-loader-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; max-width: 480px; width: 100%; }
   .mge-loader-content::before { content: ''; position: absolute; inset: -40px; background-image: linear-gradient(rgba(212,175,55,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(167,139,250,0.07) 1px, transparent 1px); background-size: 44px 44px; mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%); animation: mgeGridMove 12s linear infinite; pointer-events: none; z-index: -1; }
@@ -463,81 +383,19 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
   @media (max-width: 640px) { .review-scroll { max-height: 360px; } }
   @keyframes shimmerText { 0%,100% { background-position: 0% center; } 50% { background-position: 100% center; } }
 
-  /* ========== GAME OVER OVERLAY ========== */
-  #gameOverOverlay {
-    position: fixed; inset: 0; z-index: 200;
-    display: none; align-items: center; justify-content: center;
-    padding: 20px;
-    background: radial-gradient(circle at 50% 50%, rgba(10,15,30,.82) 0%, rgba(10,15,30,.98) 80%);
-    backdrop-filter: blur(14px) saturate(140%);
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
-    pointer-events: auto;
-  }
+  #gameOverOverlay { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; background: radial-gradient(circle at 50% 50%, rgba(10,15,30,.82) 0%, rgba(10,15,30,.98) 80%); backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter: blur(14px) saturate(140%); pointer-events: auto; }
   #gameOverOverlay.show { display: flex; animation: fadeInBackdrop .35s ease; }
-  .gameover-card {
-    position: relative;
-    max-width: 420px; width: 100%;
-    padding: 30px 24px 24px;
-    border-radius: 28px;
-    text-align: center;
-    background: radial-gradient(circle at 50% 0%, rgba(239,68,68,.30), transparent 60%), linear-gradient(165deg, rgba(80,10,10,.96), rgba(20,3,3,.98));
-    border: 2px solid rgba(252,165,165,.75);
-    box-shadow: 0 0 55px rgba(239,68,68,.6), 0 0 130px rgba(239,68,68,.3), 0 26px 70px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.2);
-    animation: revealPop .9s cubic-bezier(.34,1.56,.64,1) both;
-    color: #fca5a5;
-  }
-  .gameover-card .go-icon {
-    font-size: clamp(3rem, 14vw, 4.5rem);
-    line-height: 1;
-    display: block;
-    margin-bottom: 8px;
-    filter: drop-shadow(0 0 26px rgba(239,68,68,.95));
-    animation: iconPop .6s .2s cubic-bezier(.34,1.56,.64,1) both;
-  }
-  .gameover-card .go-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(1.6rem, 7vw, 2.4rem);
-    font-weight: 900; letter-spacing: 4px; text-transform: uppercase;
-    background: linear-gradient(90deg, #fef2f2 0%, #fca5a5 25%, #ffffff 50%, #f87171 75%, #fef2f2 100%);
-    background-size: 220% auto;
-    -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 4px 16px rgba(239,68,68,.9));
-    animation: textShimmer 3.2s ease-in-out infinite;
-    line-height: 1; margin-bottom: 12px;
-  }
-  .gameover-card .go-desc {
-    font-size: .85rem; color: #fecaca; line-height: 1.65; margin-bottom: 14px;
-  }
-  .gameover-card .go-money-lost {
-    display: inline-block; padding: 8px 18px; border-radius: 12px;
-    background: rgba(0,0,0,.4); border: 1.5px solid rgba(252,165,165,.6);
-    font-family: 'Space Grotesk', sans-serif; font-weight: 900;
-    color: #fca5a5; font-size: .95rem; margin-bottom: 18px;
-    letter-spacing: .5px;
-  }
-  .gameover-card .go-btn {
-    display: block; width: 100%; padding: 16px 22px; border-radius: 14px;
-    background: linear-gradient(180deg, #f0d878, #8b6914);
-    color: #1a1204; font-family: 'Space Grotesk', sans-serif;
-    font-weight: 900; letter-spacing: 2.5px; text-transform: uppercase;
-    font-size: .95rem; cursor: pointer; border: 2px solid rgba(255,255,255,.35);
-    box-shadow: 0 10px 30px rgba(212,175,55,.55), inset 0 1px 0 rgba(255,255,255,.5);
-    transition: all .22s; margin-bottom: 10px;
-  }
+  .gameover-card { position: relative; max-width: 420px; width: 100%; padding: 30px 24px 24px; border-radius: 28px; text-align: center; background: radial-gradient(circle at 50% 0%, rgba(239,68,68,.30), transparent 60%), linear-gradient(165deg, rgba(80,10,10,.96), rgba(20,3,3,.98)); border: 2px solid rgba(252,165,165,.75); box-shadow: 0 0 55px rgba(239,68,68,.6), 0 0 130px rgba(239,68,68,.3), 0 26px 70px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.2); animation: revealPop .9s cubic-bezier(.34,1.56,.64,1) both; color: #fca5a5; }
+  .gameover-card .go-icon { font-size: clamp(3rem, 14vw, 4.5rem); line-height: 1; display: block; margin-bottom: 8px; filter: drop-shadow(0 0 26px rgba(239,68,68,.95)); animation: iconPop .6s .2s cubic-bezier(.34,1.56,.64,1) both; }
+  .gameover-card .go-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.6rem, 7vw, 2.4rem); font-weight: 900; letter-spacing: 4px; text-transform: uppercase; background: linear-gradient(90deg, #fef2f2 0%, #fca5a5 25%, #ffffff 50%, #f87171 75%, #fef2f2 100%); background-size: 220% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 16px rgba(239,68,68,.9)); animation: textShimmer 3.2s ease-in-out infinite; line-height: 1; margin-bottom: 12px; }
+  .gameover-card .go-desc { font-size: .85rem; color: #fecaca; line-height: 1.65; margin-bottom: 14px; }
+  .gameover-card .go-money-lost { display: inline-block; padding: 8px 18px; border-radius: 12px; background: rgba(0,0,0,.4); border: 1.5px solid rgba(252,165,165,.6); font-family: 'Space Grotesk', sans-serif; font-weight: 900; color: #fca5a5; font-size: .95rem; margin-bottom: 18px; letter-spacing: .5px; }
+  .gameover-card .go-btn { display: block; width: 100%; padding: 16px 22px; border-radius: 14px; background: linear-gradient(180deg, #f0d878, #8b6914); color: #1a1204; font-family: 'Space Grotesk', sans-serif; font-weight: 900; letter-spacing: 2.5px; text-transform: uppercase; font-size: .95rem; cursor: pointer; border: 2px solid rgba(255,255,255,.35); box-shadow: 0 10px 30px rgba(212,175,55,.55), inset 0 1px 0 rgba(255,255,255,.5); transition: all .22s; margin-bottom: 10px; }
   .gameover-card .go-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(212,175,55,.75); }
   .gameover-card .go-btn:active { transform: scale(.97); }
-  .gameover-card .go-btn-sec {
-    display: block; width: 100%; padding: 12px 22px; border-radius: 12px;
-    background: rgba(252,165,165,.12); color: #fecaca;
-    border: 1.5px solid rgba(252,165,165,.5);
-    font-family: 'Space Grotesk', sans-serif; font-weight: 900;
-    letter-spacing: 2px; text-transform: uppercase; font-size: .8rem;
-    cursor: pointer; transition: all .22s;
-  }
+  .gameover-card .go-btn-sec { display: block; width: 100%; padding: 12px 22px; border-radius: 12px; background: rgba(252,165,165,.12); color: #fecaca; border: 1.5px solid rgba(252,165,165,.5); font-family: 'Space Grotesk', sans-serif; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; font-size: .8rem; cursor: pointer; transition: all .22s; }
   .gameover-card .go-btn-sec:hover { background: rgba(252,165,165,.22); }
 
-  /* ========== PREMIUM HOME SCREEN ========== */
   .title-wrap{position:relative;text-align:center;margin-bottom:10px}
   .title-glow{ position:absolute;left:50%;top:55%;transform:translate(-50%,-50%); width:180%;height:300%; background:radial-gradient(ellipse at center,rgba(212,175,55,.5),rgba(167,139,250,.25) 40%,transparent 70%); filter:blur(30px);pointer-events:none;z-index:-1; animation:titleGlowPulse 4s ease-in-out infinite; }
   @keyframes titleGlowPulse{0%,100%{opacity:.7;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}}
@@ -592,7 +450,6 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
 <div class="orb orb-3"></div>
 <div id="screenTransition"></div>
 
-<!-- ========== MGE 3D LOADING SCREEN ========== -->
 <div id="loadingScreen">
   <div class="mge-loader-content">
     <div class="mge-logo-wrap">
@@ -613,29 +470,45 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
   </div>
 </div>
 
-<header class="w-full border-b backdrop-blur-xl sticky top-0 z-40 px-3 py-2.5" style="background: var(--bg-header); border-color: var(--border-light);">
-  <div class="max-w-6xl mx-auto flex items-center justify-between gap-2">
-    <div class="flex items-center gap-2 min-w-0 flex-1">
-      <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl flex items-center justify-center text-white font-black text-lg md:text-xl shrink-0"
-        id="headerIcon" style="background: var(--lvl-gradient); box-shadow: 0 4px 16px var(--lvl-primary);">🏪</div>
-      <div class="min-w-0 flex-1">
-        <h1 class="text-[11px] sm:text-sm md:text-lg font-black tracking-wide truncate glow-text"
-          style="font-family:'Space Grotesk',sans-serif; color: var(--text-dark);">KUIS RODA BERPUTAR</h1>
-        <p class="text-[9px] md:text-[11px] font-medium truncate" id="headerSubtitle">
-          <span style="color: var(--lvl-primary); font-weight: 700;">Ekonomi</span>
-          <span style="color: var(--text-muted);"> • Pasar & Terbentuknya Harga</span>
-        </p>
+<div class="sticky-top-wrap">
+  <header class="w-full border-b backdrop-blur-xl px-3 py-2.5" style="background: var(--bg-header); border-color: var(--border-light);">
+    <div class="max-w-6xl mx-auto flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2 min-w-0 flex-1">
+        <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl flex items-center justify-center text-white font-black text-lg md:text-xl shrink-0"
+          id="headerIcon" style="background: var(--lvl-gradient); box-shadow: 0 4px 16px var(--lvl-primary);">🏪</div>
+        <div class="min-w-0 flex-1">
+          <h1 class="text-[11px] sm:text-sm md:text-lg font-black tracking-wide truncate glow-text"
+            style="font-family:'Space Grotesk',sans-serif; color: var(--text-dark);">KUIS RODA BERPUTAR</h1>
+          <p class="text-[9px] md:text-[11px] font-medium truncate" id="headerSubtitle">
+            <span style="color: var(--lvl-primary); font-weight: 700;">Ekonomi</span>
+            <span style="color: var(--text-muted);"> • Pasar & Terbentuknya Harga</span>
+          </p>
+        </div>
+      </div>
+      <div class="flex items-center gap-1.5 shrink-0">
+        <button class="w-9 h-9 rounded-full flex items-center justify-center border cursor-pointer transition-all hover:scale-110"
+          style="background: var(--bg-card-solid); border-color: var(--border-light);" id="soundToggle" type="button" aria-label="Aktifkan atau matikan suara">🔊</button>
       </div>
     </div>
-    <div class="flex items-center gap-1.5 shrink-0">
-      <div class="money-pill" id="headerMoney" title="Hadiah Uang">
-        <span class="money-ico">💰</span><span id="headerMoneyVal">Rp 0</span>
+  </header>
+
+  <!-- ========== STICKY MONEY TICKER — SELALU TERLIHAT ========== -->
+  <div class="money-ticker" id="moneyTicker">
+    <div class="mt-inner">
+      <div class="mt-icon">💰</div>
+      <div class="mt-info">
+        <div class="mt-label">TOTAL HADIAH DIPEROLEH</div>
+        <div class="mt-value" id="mtValue">Rp 0</div>
       </div>
-      <button class="w-9 h-9 rounded-full flex items-center justify-center border cursor-pointer transition-all hover:scale-110"
-        style="background: var(--bg-card-solid); border-color: var(--border-light);" id="soundToggle" type="button" aria-label="Aktifkan atau matikan suara">🔊</button>
+      <div class="mt-divider"></div>
+      <div class="mt-target">
+        <div class="mt-target-label">🎯 TARGET</div>
+        <div class="mt-target-val">Rp 1 Miliar</div>
+      </div>
     </div>
+    <div class="mt-bar-wrap"><i id="mtBar"></i></div>
   </div>
-</header>
+</div>
 
 <main class="max-w-5xl mx-auto w-full px-3 py-4 md:px-4 md:py-6 flex-1 flex flex-col justify-center items-center relative z-10">
 
@@ -647,7 +520,7 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
       <p class="title-sub">Game Edukasi Ekonomi</p>
       <p class="title-sub2">Bab 3: Pasar & Terbentuknya Harga</p>
     </div>
-    <p class="home-sub">4 Level · 40+ Pertanyaan Epik · Hadiah s.d. Rp 1 Miliar</p>
+    <p class="home-sub">4 Level · 40 Pertanyaan SMP · Hadiah s.d. Rp 1 Miliar</p>
 
     <div class="prem-stat gold">
       <div class="stat-lbl">💰 HADIAH TERTINGGI</div>
@@ -717,7 +590,7 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
       <b>🎯 Langkah Bermain:</b><br>
       <b>1.</b> Pilih level yang ingin dimainkan<br>
       <b>2.</b> Tekan tombol <b>PUTAR</b> di tengah roda untuk memilih kategori soal<br>
-      <b>3.</b> Jawab <b>10 soal</b> per level dalam waktu <b>30 detik</b> per soal<br>
+      <b>3.</b> Jawab <b>10 soal</b> per level, waktu <b>30 detik</b> per soal<br>
       <b>4.</b> Pembahasan lengkap muncul di akhir level
     </div>
 
@@ -725,7 +598,7 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
       <b>💰 SISTEM HADIAH UANG:</b><br>
       • Jawaban benar pertama = <b>Rp 250.000</b><br>
       • Hadiah <b>terus meningkat</b> setiap jawaban benar<br>
-      • Selesaikan seluruh 4 level → hadiah hingga <b>Rp 1 Miliar!</b><br>
+      • Selesaikan 4 level → hadiah hingga <b>Rp 1 Miliar!</b><br>
       • <b>Jawaban salah = hadiah dipotong 15%</b><br>
       • Jika hadiah <b>habis</b> karena salah terus → <b>kembali ke Level 1!</b>
     </div>
@@ -733,13 +606,13 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
     <div class="info-block violet">
       <b>💡 Tips Skor Tinggi:</b><br>
       • Jawaban benar berturut-turut = <b>Streak Bonus</b> (+10% per streak)<br>
-      • Kategori berbeda memiliki poin berbeda (100–500 poin)<br>
-      • Semakin tinggi level, semakin tinggi poin & hadiahnya<br>
+      • Setiap kategori punya poin berbeda (100–500 poin)<br>
+      • Setiap <b>sesi baru</b>, urutan soal & posisi jawaban diacak ulang<br>
       • Jangan sampai salah berturut-turut — hadiah bisa habis!
     </div>
 
     <div class="info-block gold">
-      <b>📚 4 Level Materi Bab 3:</b><br>
+      <b>📚 4 Level Materi Bab 3 (SMP):</b><br>
       <b>1.</b> Konsep Dasar Pasar<br>
       <b>2.</b> Permintaan & Penawaran<br>
       <b>3.</b> Keseimbangan, Elastisitas & Struktur Pasar<br>
@@ -763,7 +636,7 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
         <p class="text-xs md:text-sm mt-1" style="color: var(--text-muted);">Selesaikan setiap level untuk membuka level berikutnya</p>
       </div>
       <div class="money-board" style="margin-bottom:12px">
-        <div class="mb-label">💰 HADIAH UANG SAAT INI</div>
+        <div class="mb-label">💰 TOTAL HADIAH SAAT INI</div>
         <div class="mb-value" id="levelMoneyVal">Rp 0</div>
         <div class="mb-progress"><i id="levelMoneyBar"></i></div>
         <div class="mb-target">🎯 Target: Rp 1.000.000.000</div>
@@ -785,7 +658,7 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
     <div class="glass-panel p-4 md:p-5 rounded-2xl">
       <div id="wheelLevelHero" class="level-hero"></div>
       <div class="money-board" style="margin-bottom:12px">
-        <div class="mb-label">💰 HADIAH UANG SAAT INI</div>
+        <div class="mb-label">💰 TOTAL HADIAH SAAT INI</div>
         <div class="mb-value" id="wheelMoneyVal">Rp 0</div>
         <div class="mb-progress"><i id="wheelMoneyBar"></i></div>
         <div class="mb-target">🎯 Target: Rp 1.000.000.000</div>
@@ -816,7 +689,7 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
     <div class="glass-panel p-4 md:p-6 rounded-2xl">
       <div id="questionLevelBar" class="level-hero" style="padding: 12px 14px; margin-bottom: 14px;"></div>
       <div class="money-board" style="margin-bottom:12px">
-        <div class="mb-label">💰 HADIAH UANG SAAT INI</div>
+        <div class="mb-label">💰 TOTAL HADIAH SAAT INI</div>
         <div class="mb-value" id="qMoneyVal">Rp 0</div>
         <div class="mb-progress"><i id="qMoneyBar"></i></div>
         <div class="mb-target">🎯 Target: Rp 1.000.000.000</div>
@@ -857,7 +730,7 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
         <p id="levelCompleteSub" class="text-sm mt-1" style="color: var(--text-muted);">Level 1 telah diselesaikan</p>
       </div>
       <div class="money-board" style="margin-bottom:14px">
-        <div class="mb-label">💰 HADIAH UANG TERKUMPUL</div>
+        <div class="mb-label">💰 TOTAL HADIAH TERKUMPUL</div>
         <div class="mb-value" id="lcMoneyVal">Rp 0</div>
         <div class="mb-progress"><i id="lcMoneyBar"></i></div>
         <div class="mb-target">🎯 Target: Rp 1.000.000.000</div>
@@ -900,7 +773,7 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
         <div class="text-xs md:text-sm font-bold mt-1" style="color: var(--text-muted);">Pasar & Terbentuknya Harga</div>
       </div>
       <div class="money-board" style="margin-bottom:16px">
-        <div class="mb-label">🏆 TOTAL HADIAH UANG DIDAPAT</div>
+        <div class="mb-label">🏆 TOTAL HADIAH UANG YANG DIPEROLEH</div>
         <div class="mb-value" id="totalMoneyDisplay" style="font-size:clamp(1.5rem,6.5vw,2.6rem)">Rp 0</div>
         <div class="mb-progress"><i id="resultMoneyBar"></i></div>
         <div class="mb-target">🎯 Target: Rp 1.000.000.000</div>
@@ -951,7 +824,6 @@ try { tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter','sans-
   <div class="reveal-badge" id="revealBadge">BENAR</div>
 </div>
 
-<!-- ========== GAME OVER OVERLAY ========== -->
 <div id="gameOverOverlay" aria-hidden="true">
   <div class="gameover-card">
     <span class="go-icon">💸</span>
@@ -985,14 +857,36 @@ function safeConfetti(o){
 }
 function escapeHtml(s){return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 
-/* ========== HADIAH UANG SYSTEM ========== */
-const PRIZE_TARGET = 1000000000;       // Rp 1 Miliar
-const PRIZE_FIRST  = 250000;           // Rp 250.000 untuk jawaban benar pertama
-const PENALTY_RATE = 0.15;             // -15% setiap jawaban salah
-const PRIZE_MIN_THRESHOLD = 10000;     // ambang batas: di bawah ini dianggap habis
+/* ========== SESSION SEED — setiap sesi/login baru dapat urutan berbeda ========== */
+const SESSION_SEED = Date.now() ^ (Math.floor(Math.random() * 0x7fffffff));
+let _rngState = SESSION_SEED >>> 0;
+function seededRandom() {
+  /* xorshift32 */
+  let x = _rngState;
+  x ^= x << 13; x >>>= 0;
+  x ^= x >> 17;
+  x ^= x << 5;  x >>>= 0;
+  _rngState = x;
+  return (x >>> 0) / 4294967296;
+}
+/* Fisher-Yates multi-pass shuffle — pastikan benar-benar acak */
+function shuffleArray(arr) {
+  const a = arr.slice();
+  for (let pass = 0; pass < 3; pass++) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(seededRandom() * (i + 1));
+      const t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+  }
+  return a;
+}
 
-/* Reward untuk soal ke-n (n = 1..40). Menggunakan rumus 250.000 × n^1.5
-   sehingga total bila semua benar mencapai ~Rp 1,04 Miliar (di-cap 1 M). */
+/* ========== HADIAH UANG SYSTEM ========== */
+const PRIZE_TARGET = 1000000000;
+const PRIZE_FIRST  = 250000;
+const PENALTY_RATE = 0.15;
+const PRIZE_MIN_THRESHOLD = 10000;
+
 function getRewardForQuestion(qNum) {
   const raw = PRIZE_FIRST * Math.pow(Math.max(1, qNum), 1.5);
   return Math.round(raw / 10000) * 10000;
@@ -1043,22 +937,10 @@ function sfx(type){
 }
 
 const LEVEL_THEMES = [
-  { primary:'#2563eb', accent:'#3b82f6', soft:'#1e3a8a',
-    gradient:'linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)',
-    heroGradient:'linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%)',
-    heroBorder:'#2563eb', heroText:'#dbeafe' },
-  { primary:'#0891b2', accent:'#06b6d4', soft:'#164e63',
-    gradient:'linear-gradient(135deg, #0891b2 0%, #06b6d4 100%)',
-    heroGradient:'linear-gradient(135deg, #164e63 0%, #0e7490 50%, #0891b2 100%)',
-    heroBorder:'#0891b2', heroText:'#cffafe' },
-  { primary:'#8b5cf6', accent:'#a855f7', soft:'#4c1d95',
-    gradient:'linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%)',
-    heroGradient:'linear-gradient(135deg, #4c1d95 0%, #6d28d9 50%, #8b5cf6 100%)',
-    heroBorder:'#8b5cf6', heroText:'#ede9fe' },
-  { primary:'#10b981', accent:'#22c55e', soft:'#064e3b',
-    gradient:'linear-gradient(135deg, #10b981 0%, #22c55e 100%)',
-    heroGradient:'linear-gradient(135deg, #064e3b 0%, #047857 50%, #10b981 100%)',
-    heroBorder:'#10b981', heroText:'#d1fae5' }
+  { primary:'#2563eb', accent:'#3b82f6', soft:'#1e3a8a', gradient:'linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)', heroGradient:'linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%)', heroBorder:'#2563eb', heroText:'#dbeafe' },
+  { primary:'#0891b2', accent:'#06b6d4', soft:'#164e63', gradient:'linear-gradient(135deg, #0891b2 0%, #06b6d4 100%)', heroGradient:'linear-gradient(135deg, #164e63 0%, #0e7490 50%, #0891b2 100%)', heroBorder:'#0891b2', heroText:'#cffafe' },
+  { primary:'#8b5cf6', accent:'#a855f7', soft:'#4c1d95', gradient:'linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%)', heroGradient:'linear-gradient(135deg, #4c1d95 0%, #6d28d9 50%, #8b5cf6 100%)', heroBorder:'#8b5cf6', heroText:'#ede9fe' },
+  { primary:'#10b981', accent:'#22c55e', soft:'#064e3b', gradient:'linear-gradient(135deg, #10b981 0%, #22c55e 100%)', heroGradient:'linear-gradient(135deg, #064e3b 0%, #047857 50%, #10b981 100%)', heroBorder:'#10b981', heroText:'#d1fae5' }
 ];
 function applyLevelTheme(levelIdx) {
   const t = LEVEL_THEMES[levelIdx] || LEVEL_THEMES[0];
@@ -1080,25 +962,28 @@ function renderLevelHero(containerId, levelIdx, compact) {
   if (!el) return;
   const t = LEVEL_THEMES[levelIdx];
   const lvl = LEVELS[levelIdx];
-  const bg = t.heroGradient;
-  const txt = t.heroText;
-  el.style.background = bg;
+  el.style.background = t.heroGradient;
   el.style.borderColor = t.heroBorder;
   el.style.boxShadow = `0 8px 30px ${t.primary}40`;
   if (compact) {
     el.innerHTML = `<div style="position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
         <span style="font-size:1.5rem;">${lvl.icon}</span>
-        <span style="font-family:'Space Grotesk',sans-serif;font-weight:900;font-size:.85rem;letter-spacing:1.5px;text-transform:uppercase;color:${txt};">${lvl.title} — ${lvl.name}</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:900;font-size:.85rem;letter-spacing:1.5px;text-transform:uppercase;color:${t.heroText};">${lvl.title} — ${lvl.name}</span>
       </div>`;
   } else {
     el.innerHTML = `
       <div class="level-hero-icon">${lvl.icon}</div>
-      <div class="level-hero-title" style="color:${txt};">${lvl.title} — ${lvl.name}</div>
-      <div class="level-hero-sub" style="color:${txt};">${lvl.subtitle}</div>
-      <div class="level-hero-tag" style="color:${txt};">LEVEL ${lvl.id} DARI 4</div>`;
+      <div class="level-hero-title" style="color:${t.heroText};">${lvl.title} — ${lvl.name}</div>
+      <div class="level-hero-sub" style="color:${t.heroText};">${lvl.subtitle}</div>
+      <div class="level-hero-tag" style="color:${t.heroText};">LEVEL ${lvl.id} DARI 4</div>`;
   }
 }
 
+/* =========================================================
+   LEVELS — SOAL SMP, VARIATIF, TIDAK ADA YANG GANDA
+   Pola soal dibuat bervariasi: definisi, contoh kasus,
+   analisis, "kecuali", dan penerapan sehari-hari.
+   ========================================================= */
 const LEVELS = [
   {
     id: 1, title: "Level 1", name: "Konsep Dasar Pasar", icon: "🏪", color: "#2563eb",
@@ -1112,18 +997,18 @@ const LEVELS = [
       { id:'l1_wilayah', name:'Wilayah Pasar', short:'Wilayah', icon:'🌍', color:'#8b5cf6', points:350 }
     ],
     questions: [
-      { cat:'l1_pengertian', q:"Pasar dalam arti luas adalah...", options:["Bangunan tempat penjual dan pembeli bertemu","Proses interaksi antara permintaan dan penawaran yang membentuk harga","Tempat berjualan yang dikelola pemerintah","Kumpulan toko yang menjual barang kebutuhan"], correct:1, explanation:"Dalam ilmu ekonomi, pasar adalah proses interaksi antara permintaan dan penawaran yang pada akhirnya membentuk harga.", keyPoint:"Pasar arti luas = proses interaksi permintaan & penawaran." },
-      { cat:'l1_pengertian', q:"Dalam ilmu ekonomi, inti dari pengertian pasar adalah...", options:["Adanya bangunan dan lapak dagang","Terjadinya interaksi permintaan dan penawaran yang membentuk harga","Banyaknya pedagang di satu lokasi","Adanya izin dari pemerintah"], correct:1, explanation:"Inti pasar adalah interaksi permintaan dan penawaran yang membentuk kesepakatan harga, bukan sekadar bangunan fisik.", keyPoint:"Inti pasar = interaksi permintaan & penawaran." },
-      { cat:'l1_unsur', q:"Berikut yang BUKAN termasuk unsur pasar adalah...", options:["Penjual","Pembeli","Barang atau jasa","Izin usaha dari pemerintah"], correct:3, explanation:"Unsur pasar meliputi penjual, pembeli, barang/jasa, dan kesepakatan harga. Izin usaha bukan unsur pasar.", keyPoint:"Unsur pasar: penjual, pembeli, barang/jasa, kesepakatan harga." },
-      { cat:'l1_unsur', q:"Syarat terjadinya pasar menurut ilmu ekonomi, kecuali...", options:["Adanya permintaan","Adanya penawaran","Adanya harga yang disepakati","Adanya gedung permanen"], correct:3, explanation:"Syarat pasar dalam ilmu ekonomi: ada permintaan, ada penawaran, dan ada harga. Gedung permanen bukan syarat mutlak.", keyPoint:"Syarat pasar: permintaan, penawaran, harga." },
+      { cat:'l1_pengertian', q:"Dalam ilmu ekonomi, pasar adalah tempat bertemunya...", options:["Penjual dan pembeli yang melakukan kesepakatan harga","Pemerintah dan pengusaha besar","Dua perusahaan yang saling bersaing","Bank dan nasabahnya"], correct:0, explanation:"Pasar dalam ilmu ekonomi adalah tempat bertemunya penjual dan pembeli untuk melakukan kesepakatan harga.", keyPoint:"Pasar = pertemuan penjual & pembeli." },
+      { cat:'l1_pengertian', q:"Pak Ali menjual sayur, Bu Sinta membelinya setelah tawar-menawar. Peristiwa ini menunjukkan bahwa pasar...", options:["Harus berupa bangunan permanen","Terjadi interaksi penjual dan pembeli yang menyepakati harga","Hanya ada di daerah pedesaan","Wajib dikelola oleh pemerintah"], correct:1, explanation:"Pasar terbentuk saat penjual dan pembeli berinteraksi sampai menyepakati harga — tidak harus di gedung permanen.", keyPoint:"Pasar terjadi saat penjual & pembeli sepakat harga." },
+      { cat:'l1_unsur', q:"Berikut yang BUKAN termasuk unsur pasar adalah...", options:["Penjual","Pembeli","Barang atau jasa yang diperjualbelikan","Izin usaha dari pemerintah"], correct:3, explanation:"Unsur pasar meliputi penjual, pembeli, barang/jasa, dan kesepakatan harga. Izin usaha bukan unsur pasar.", keyPoint:"Unsur pasar: penjual, pembeli, barang/jasa, kesepakatan harga." },
+      { cat:'l1_unsur', q:"Agar pasar dapat terbentuk, tiga syarat utama yang harus ada adalah...", options:["Gedung, modal, dan izin usaha","Permintaan, penawaran, dan harga yang disepakati","Pemerintah, pengusaha, dan konsumen","Lokasi strategis, iklan, dan karyawan"], correct:1, explanation:"Syarat pasar menurut ilmu ekonomi: adanya permintaan, penawaran, dan harga yang disepakati.", keyPoint:"Syarat pasar: permintaan, penawaran, harga." },
       { cat:'l1_fungsi', q:"Fungsi pasar yang berkaitan dengan menyalurkan barang dari produsen ke konsumen disebut fungsi...", options:["Promosi","Distribusi","Pembentukan harga","Konsumsi"], correct:1, explanation:"Fungsi distribusi adalah fungsi pasar dalam menyalurkan barang/jasa dari produsen kepada konsumen.", keyPoint:"Fungsi distribusi = penyaluran barang." },
-      { cat:'l1_fungsi', q:"Ketika harga cabai naik karena permintaan meningkat menjelang hari raya, hal ini menunjukkan fungsi pasar sebagai...", options:["Fungsi distribusi","Fungsi promosi","Fungsi pembentukan harga","Fungsi penyediaan kerja"], correct:2, explanation:"Kenaikan harga akibat interaksi permintaan dan penawaran merupakan fungsi pembentukan harga.", keyPoint:"Fungsi pembentukan harga = interaksi permintaan & penawaran." },
-      { cat:'l1_wujud', q:"Pasar di mana penjual dan pembeli tidak bertemu secara langsung dan transaksi dilakukan melalui internet disebut pasar...", options:["Konkret","Abstrak","Harian","Regional"], correct:1, explanation:"Pasar abstrak adalah pasar di mana penjual dan pembeli tidak bertemu langsung, transaksi melalui internet/telepon.", keyPoint:"Pasar abstrak = tidak bertemu langsung." },
+      { cat:'l1_fungsi', q:"Menjelang hari raya, harga cabai di pasar melonjak karena permintaan naik. Hal ini mencerminkan fungsi pasar sebagai...", options:["Fungsi distribusi","Fungsi promosi","Fungsi pembentukan harga","Fungsi penyediaan kerja"], correct:2, explanation:"Kenaikan harga akibat interaksi permintaan dan penawaran merupakan fungsi pembentukan harga.", keyPoint:"Fungsi pembentukan harga = interaksi permintaan & penawaran." },
+      { cat:'l1_wujud', q:"Penjual dan pembeli tidak bertemu langsung — transaksi dilakukan lewat internet. Pasar ini disebut pasar...", options:["Konkret","Abstrak","Harian","Regional"], correct:1, explanation:"Pasar abstrak adalah pasar di mana penjual dan pembeli tidak bertemu langsung, misalnya transaksi online.", keyPoint:"Pasar abstrak = tidak bertemu langsung." },
       { cat:'l1_wujud', q:"Pasar tradisional, supermarket, dan mal termasuk jenis pasar...", options:["Abstrak","Konkret","Internasional","Tahunan"], correct:1, explanation:"Pasar konkret (nyata) adalah pasar di mana penjual dan pembeli bertemu langsung dan barang tersedia di tempat.", keyPoint:"Pasar konkret = bertemu langsung, barang tersedia." },
-      { cat:'l1_waktu', q:"Pasar yang hanya diselenggarakan satu kali dalam seminggu disebut pasar...", options:["Harian","Mingguan","Bulanan","Tahunan"], correct:1, explanation:"Pasar mingguan hanya buka satu kali dalam seminggu, contohnya pasar kaget dan pasar hewan.", keyPoint:"Pasar mingguan = buka seminggu sekali." },
+      { cat:'l1_waktu', q:"Pasar yang hanya buka satu kali dalam seminggu, misalnya pasar hewan, disebut pasar...", options:["Harian","Mingguan","Bulanan","Tahunan"], correct:1, explanation:"Pasar mingguan hanya buka satu kali seminggu, contohnya pasar kaget dan pasar hewan.", keyPoint:"Pasar mingguan = buka seminggu sekali." },
       { cat:'l1_waktu', q:"Pasar malam menjelang tahun baru yang hanya ada sekali setahun termasuk pasar...", options:["Harian","Mingguan","Bulanan","Tahunan"], correct:3, explanation:"Pasar tahunan hanya diselenggarakan sekali dalam setahun, contohnya pasar malam tahun baru.", keyPoint:"Pasar tahunan = sekali setahun." },
-      { cat:'l1_wilayah', q:"Pasar yang melayani kebutuhan seluruh wilayah negara disebut pasar...", options:["Lokal","Daerah","Nasional","Internasional"], correct:2, explanation:"Pasar nasional melayani kebutuhan seluruh wilayah negara, contohnya pasar saham dan pasar uang nasional.", keyPoint:"Pasar nasional = seluruh wilayah negara." },
-      { cat:'l1_wilayah', q:"Pasar minyak dunia yang melibatkan banyak negara merupakan contoh pasar...", options:["Lokal","Regional","Nasional","Internasional"], correct:3, explanation:"Pasar internasional melibatkan banyak negara, contohnya pasar minyak dunia dan ekspor-impor antarnegara.", keyPoint:"Pasar internasional = melibatkan banyak negara." }
+      { cat:'l1_wilayah', q:"Pasar yang melayani kebutuhan seluruh wilayah negara, seperti pasar saham nasional, disebut pasar...", options:["Lokal","Daerah","Nasional","Internasional"], correct:2, explanation:"Pasar nasional melayani kebutuhan seluruh wilayah negara, contohnya pasar saham dan pasar uang nasional.", keyPoint:"Pasar nasional = seluruh wilayah negara." },
+      { cat:'l1_wilayah', q:"Pasar minyak dunia yang melibatkan banyak negara termasuk pasar...", options:["Lokal","Regional","Nasional","Internasional"], correct:3, explanation:"Pasar internasional melibatkan banyak negara, contohnya pasar minyak dunia dan ekspor-impor antarnegara.", keyPoint:"Pasar internasional = melibatkan banyak negara." }
     ]
   },
   {
@@ -1138,18 +1023,18 @@ const LEVELS = [
       { id:'l2_hukum_penawaran', name:'Hukum & Kurva Penawaran', short:'Hukum S', icon:'📈', color:'#84cc16', points:400 }
     ],
     questions: [
-      { cat:'l2_permintaan', q:"Permintaan adalah...", options:["Keinginan konsumen untuk membeli barang/jasa pada berbagai tingkat harga","Jumlah barang yang tersedia di pasar","Kemampuan produsen memproduksi barang","Jumlah uang yang beredar di masyarakat"], correct:0, explanation:"Permintaan adalah keinginan konsumen membeli barang/jasa pada berbagai tingkat harga dalam periode tertentu.", keyPoint:"Permintaan = keinginan membeli pada tingkat harga tertentu." },
-      { cat:'l2_permintaan', q:"Permintaan yang didukung oleh kemampuan membayar disebut permintaan...", options:["Absolut","Potensial","Efektif","Individu"], correct:2, explanation:"Permintaan efektif adalah keinginan membeli yang didukung kemampuan membayar. Permintaan absolut tidak didukung kemampuan membayar.", keyPoint:"Permintaan efektif = keinginan + kemampuan membayar." },
-      { cat:'l2_faktor_permintaan', q:"Berikut yang BUKAN faktor yang mempengaruhi permintaan adalah...", options:["Pendapatan konsumen","Selera konsumen","Harga barang itu sendiri","Jumlah barang yang diproduksi pabrik"], correct:3, explanation:"Jumlah barang yang diproduksi berkaitan dengan penawaran, bukan permintaan.", keyPoint:"Produksi = faktor penawaran, bukan permintaan." },
-      { cat:'l2_faktor_permintaan', q:"Ketika harga barang substitusi (pengganti) naik, maka permintaan barang utama akan...", options:["Turun","Naik","Tetap","Tidak terpengaruh"], correct:1, explanation:"Jika harga barang pengganti naik, konsumen beralih ke barang utama sehingga permintaannya meningkat.", keyPoint:"Harga substitusi naik → permintaan barang utama naik." },
-      { cat:'l2_hukum_permintaan', q:"Hukum permintaan menyatakan bahwa...", options:["Harga naik, jumlah yang diminta naik","Harga turun, jumlah yang diminta turun","Harga naik, jumlah yang diminta turun","Harga dan jumlah yang diminta tidak berhubungan"], correct:2, explanation:"Hukum permintaan: hubungan berbanding terbalik — jika harga naik, jumlah yang diminta turun; jika harga turun, jumlah yang diminta naik.", keyPoint:"Hukum permintaan = berbanding terbalik." },
-      { cat:'l2_hukum_permintaan', q:"Kurva permintaan miring dari...", options:["Kiri atas ke kanan bawah","Kiri bawah ke kanan atas","Kiri atas ke kiri bawah","Kanan atas ke kanan bawah"], correct:0, explanation:"Kurva permintaan miring dari kiri atas ke kanan bawah, menunjukkan hubungan negatif antara harga dan jumlah yang diminta.", keyPoint:"Kurva permintaan = kiri atas → kanan bawah." },
-      { cat:'l2_penawaran', q:"Penawaran adalah...", options:["Jumlah barang yang ingin dibeli konsumen","Jumlah barang yang bersedia dan mampu dijual produsen pada tingkat harga tertentu","Jumlah barang yang tersedia di gudang","Jumlah barang yang diproduksi pabrik"], correct:1, explanation:"Penawaran adalah kesediaan penjual menawarkan barang/jasa di pasar pada tingkat harga tertentu.", keyPoint:"Penawaran = kesediaan penjual menawarkan barang." },
-      { cat:'l2_penawaran', q:"Penawaran dari seluruh produsen di pasar disebut penawaran...", options:["Individu","Pasar","Kolektif","Nasional"], correct:1, explanation:"Penawaran pasar adalah total penawaran seluruh produsen di pasar.", keyPoint:"Penawaran pasar = total seluruh produsen." },
-      { cat:'l2_faktor_penawaran', q:"Berikut yang BUKAN faktor yang mempengaruhi penawaran adalah...", options:["Biaya produksi","Teknologi","Selera konsumen","Pajak dan subsidi"], correct:2, explanation:"Selera konsumen mempengaruhi permintaan, bukan penawaran. Penawaran dipengaruhi biaya produksi, teknologi, pajak/subsidi, dll.", keyPoint:"Selera = faktor permintaan, bukan penawaran." },
-      { cat:'l2_faktor_penawaran', q:"Ketika biaya produksi naik, maka penawaran barang tersebut akan...", options:["Naik","Turun","Tetap","Tidak terpengaruh"], correct:1, explanation:"Biaya produksi naik membuat produsen mengurangi produksi sehingga penawaran turun.", keyPoint:"Biaya produksi naik → penawaran turun." },
-      { cat:'l2_hukum_penawaran', q:"Hukum penawaran bersifat...", options:["Berbanding terbalik","Berbanding lurus","Tidak berhubungan","Acak"], correct:1, explanation:"Hukum penawaran: harga naik → penawaran naik; harga turun → penawaran turun (berbanding lurus).", keyPoint:"Hukum penawaran = berbanding lurus." },
-      { cat:'l2_hukum_penawaran', q:"Kurva penawaran miring dari...", options:["Kiri atas ke kanan bawah","Kiri bawah ke kanan atas","Kiri atas ke kiri bawah","Kanan atas ke kanan bawah"], correct:1, explanation:"Kurva penawaran miring dari kiri bawah ke kanan atas, menunjukkan hubungan positif antara harga dan jumlah yang ditawarkan.", keyPoint:"Kurva penawaran = kiri bawah → kanan atas." }
+      { cat:'l2_permintaan', q:"Permintaan adalah...", options:["Keinginan konsumen membeli barang/jasa pada berbagai tingkat harga","Jumlah barang yang tersedia di pasar","Kemampuan produsen memproduksi barang","Jumlah uang yang beredar di masyarakat"], correct:0, explanation:"Permintaan adalah keinginan konsumen membeli barang/jasa pada berbagai tingkat harga dalam periode tertentu.", keyPoint:"Permintaan = keinginan membeli pada tingkat harga tertentu." },
+      { cat:'l2_permintaan', q:"Permintaan yang disertai kemampuan membayar disebut permintaan...", options:["Absolut","Potensial","Efektif","Individu"], correct:2, explanation:"Permintaan efektif adalah keinginan membeli yang didukung kemampuan membayar. Permintaan absolut tidak didukung kemampuan membayar.", keyPoint:"Permintaan efektif = keinginan + kemampuan membayar." },
+      { cat:'l2_faktor_permintaan', q:"Faktor-faktor berikut mempengaruhi permintaan, KECUALI...", options:["Pendapatan konsumen","Selera konsumen","Harga barang itu sendiri","Jumlah barang yang diproduksi pabrik"], correct:3, explanation:"Jumlah barang yang diproduksi pabrik berkaitan dengan penawaran, bukan permintaan.", keyPoint:"Produksi = faktor penawaran, bukan permintaan." },
+      { cat:'l2_faktor_permintaan', q:"Jika harga barang pengganti (substitusi) naik, permintaan barang utama akan...", options:["Turun","Naik","Tetap","Tidak terpengaruh"], correct:1, explanation:"Jika harga barang pengganti naik, konsumen beralih ke barang utama sehingga permintaannya meningkat.", keyPoint:"Harga substitusi naik → permintaan barang utama naik." },
+      { cat:'l2_hukum_permintaan', q:"Menurut hukum permintaan, jika harga suatu barang naik maka jumlah yang diminta akan...", options:["Naik","Turun","Tetap","Tidak terpengaruh"], correct:1, explanation:"Hukum permintaan: hubungan berbanding terbalik — harga naik, jumlah yang diminta turun; harga turun, jumlah yang diminta naik.", keyPoint:"Hukum permintaan = berbanding terbalik." },
+      { cat:'l2_hukum_permintaan', q:"Kurva permintaan digambarkan miring dari...", options:["Kiri atas ke kanan bawah","Kiri bawah ke kanan atas","Kiri atas ke kiri bawah","Kanan atas ke kanan bawah"], correct:0, explanation:"Kurva permintaan miring dari kiri atas ke kanan bawah, menunjukkan hubungan negatif antara harga dan jumlah yang diminta.", keyPoint:"Kurva permintaan = kiri atas → kanan bawah." },
+      { cat:'l2_penawaran', q:"Penawaran adalah...", options:["Jumlah barang yang ingin dibeli konsumen","Kesediaan produsen menjual barang pada tingkat harga tertentu","Jumlah barang yang tersedia di gudang","Jumlah barang yang diproduksi pabrik"], correct:1, explanation:"Penawaran adalah kesediaan penjual menawarkan barang/jasa di pasar pada tingkat harga tertentu.", keyPoint:"Penawaran = kesediaan penjual menawarkan barang." },
+      { cat:'l2_penawaran', q:"Total penawaran dari seluruh produsen di pasar disebut penawaran...", options:["Individu","Pasar","Kolektif","Nasional"], correct:1, explanation:"Penawaran pasar adalah total penawaran seluruh produsen di pasar.", keyPoint:"Penawaran pasar = total seluruh produsen." },
+      { cat:'l2_faktor_penawaran', q:"Faktor-faktor berikut mempengaruhi penawaran, KECUALI...", options:["Biaya produksi","Teknologi","Selera konsumen","Pajak dan subsidi"], correct:2, explanation:"Selera konsumen mempengaruhi permintaan, bukan penawaran. Penawaran dipengaruhi biaya produksi, teknologi, pajak/subsidi, dll.", keyPoint:"Selera = faktor permintaan, bukan penawaran." },
+      { cat:'l2_faktor_penawaran', q:"Jika biaya produksi naik, penawaran barang tersebut akan...", options:["Naik","Turun","Tetap","Tidak terpengaruh"], correct:1, explanation:"Biaya produksi naik membuat produsen mengurangi produksi sehingga penawaran turun.", keyPoint:"Biaya produksi naik → penawaran turun." },
+      { cat:'l2_hukum_penawaran', q:"Hukum penawaran menyatakan bahwa hubungan antara harga dan jumlah yang ditawarkan bersifat...", options:["Berbanding terbalik","Berbanding lurus","Tidak berhubungan","Acak"], correct:1, explanation:"Hukum penawaran: harga naik → penawaran naik; harga turun → penawaran turun (berbanding lurus).", keyPoint:"Hukum penawaran = berbanding lurus." },
+      { cat:'l2_hukum_penawaran', q:"Kurva penawaran digambarkan miring dari...", options:["Kiri atas ke kanan bawah","Kiri bawah ke kanan atas","Kiri atas ke kiri bawah","Kanan atas ke kanan bawah"], correct:1, explanation:"Kurva penawaran miring dari kiri bawah ke kanan atas, menunjukkan hubungan positif antara harga dan jumlah yang ditawarkan.", keyPoint:"Kurva penawaran = kiri bawah → kanan atas." }
     ]
   },
   {
@@ -1165,21 +1050,21 @@ const LEVELS = [
     ],
     questions: [
       { cat:'l3_keseimbangan', q:"Harga keseimbangan pasar terjadi apabila...", options:["Jumlah yang diminta lebih besar daripada yang ditawarkan","Jumlah yang ditawarkan lebih besar daripada yang diminta","Jumlah yang diminta sama dengan jumlah yang ditawarkan","Harga ditentukan sepenuhnya oleh pemerintah"], correct:2, explanation:"Harga keseimbangan terbentuk ketika Qd = Qs, yaitu jumlah barang yang diminta sama dengan jumlah barang yang ditawarkan.", keyPoint:"Keseimbangan: Qd = Qs." },
-      { cat:'l3_keseimbangan', q:"Rumus harga keseimbangan pasar adalah...", options:["Qd > Qs","Qd < Qs","Qd = Qs","Qd ≠ Qs"], correct:2, explanation:"Harga keseimbangan terjadi ketika jumlah yang diminta sama dengan jumlah yang ditawarkan (Qd = Qs).", keyPoint:"Qd = Qs → keseimbangan." },
+      { cat:'l3_keseimbangan', q:"Rumus yang menyatakan harga keseimbangan pasar adalah...", options:["Qd > Qs","Qd < Qs","Qd = Qs","Qd ≠ Qs"], correct:2, explanation:"Harga keseimbangan terjadi ketika jumlah yang diminta sama dengan jumlah yang ditawarkan (Qd = Qs).", keyPoint:"Qd = Qs → keseimbangan." },
       { cat:'l3_surplus', q:"Kelebihan penawaran (surplus) terjadi ketika...", options:["Jumlah yang diminta lebih besar dari yang ditawarkan","Jumlah yang ditawarkan lebih besar dari yang diminta","Jumlah yang diminta sama dengan yang ditawarkan","Harga terlalu rendah"], correct:1, explanation:"Surplus terjadi ketika jumlah yang ditawarkan lebih besar daripada yang diminta, biasanya karena harga terlalu tinggi.", keyPoint:"Surplus = penawaran > permintaan." },
       { cat:'l3_surplus', q:"Kelebihan permintaan (shortage) terjadi ketika...", options:["Jumlah yang ditawarkan lebih besar dari yang diminta","Jumlah yang diminta lebih besar dari yang ditawarkan","Jumlah yang diminta sama dengan yang ditawarkan","Harga terlalu tinggi"], correct:1, explanation:"Shortage terjadi ketika jumlah yang diminta lebih besar daripada yang ditawarkan, biasanya karena harga terlalu rendah.", keyPoint:"Shortage = permintaan > penawaran." },
       { cat:'l3_struktur', q:"Pasar yang dikuasai oleh satu penjual tunggal tanpa barang pengganti disebut pasar...", options:["Oligopoli","Monopoli","Monopolistik","Persaingan sempurna"], correct:1, explanation:"Pasar monopoli dikuasai satu penjual tunggal tanpa barang pengganti, contohnya PLN untuk listrik rumah tangga.", keyPoint:"Monopoli = satu penjual, tanpa pengganti." },
       { cat:'l3_struktur', q:"Pasar yang dikuasai oleh beberapa penjual besar sehingga kebijakan harga satu perusahaan memengaruhi yang lain disebut pasar...", options:["Monopoli","Oligopoli","Monopolistik","Persaingan sempurna"], correct:1, explanation:"Pasar oligopoli dikuasai beberapa penjual besar, contohnya industri operator seluler dan otomotif.", keyPoint:"Oligopoli = beberapa penjual besar." },
-      { cat:'l3_struktur', q:"Ciri pasar persaingan sempurna adalah...", options:["Hanya ada satu penjual","Barang yang dijual sejenis dan jumlah penjual banyak","Produk memiliki merek yang berbeda-beda","Harga ditentukan oleh satu perusahaan besar"], correct:1, explanation:"Ciri pasar persaingan sempurna: jumlah penjual dan pembeli banyak, barang sejenis (homogen), dan harga ditentukan pasar.", keyPoint:"Persaingan sempurna = banyak penjual, barang homogen." },
+      { cat:'l3_struktur', q:"Ciri khas pasar persaingan sempurna adalah...", options:["Hanya ada satu penjual","Barang yang dijual sejenis dan jumlah penjual banyak","Produk memiliki merek yang berbeda-beda","Harga ditentukan oleh satu perusahaan besar"], correct:1, explanation:"Ciri pasar persaingan sempurna: jumlah penjual dan pembeli banyak, barang sejenis (homogen), dan harga ditentukan pasar.", keyPoint:"Persaingan sempurna = banyak penjual, barang homogen." },
       { cat:'l3_struktur', q:"Pasar dengan banyak penjual yang menjual produk sejenis namun berbeda merek disebut pasar...", options:["Monopoli","Oligopoli","Monopolistik","Persaingan sempurna"], correct:2, explanation:"Pasar monopolistik memiliki banyak penjual dengan produk sejenis tetapi berbeda merek, contohnya restoran dan salon.", keyPoint:"Monopolistik = banyak penjual, produk berbeda merek." },
       { cat:'l3_elastisitas_d', q:"Elastisitas permintaan mengukur...", options:["Seberapa peka permintaan terhadap perubahan harga","Seberapa besar keuntungan produsen","Seberapa banyak barang yang diproduksi","Seberapa cepat barang terjual"], correct:0, explanation:"Elastisitas permintaan mengukur seberapa peka/sensitif jumlah yang diminta terhadap perubahan harga.", keyPoint:"Elastisitas = kepekaan terhadap perubahan harga." },
-      { cat:'l3_elastisitas_d', q:"Jika Ed > 1, permintaan bersifat...", options:["Inelastis","Elastis","Unit elastis","Inelastis sempurna"], correct:1, explanation:"Jika Ed > 1, permintaan bersifat elastis, artinya perubahan harga menyebabkan perubahan besar pada jumlah yang diminta.", keyPoint:"Ed > 1 = elastis." },
-      { cat:'l3_elastisitas_d', q:"Barang kebutuhan pokok seperti beras dan obat cenderung memiliki permintaan yang...", options:["Elastis","Inelastis","Unit elastis","Elastis sempurna"], correct:1, explanation:"Barang kebutuhan pokok bersifat inelastis karena konsumen tetap membelinya meskipun harga naik.", keyPoint:"Kebutuhan pokok = inelastis." },
-      { cat:'l3_elastisitas_d', q:"Jika harga kopi naik 10% dan permintaan turun 20%, maka elastisitas permintaannya adalah...", options:["0,5 (inelastis)","2 (elastis)","1 (unit elastis)","0 (inelastis sempurna)"], correct:1, explanation:"Ed = 20% ÷ 10% = 2. Karena Ed > 1, permintaan kopi bersifat elastis.", keyPoint:"Ed = %ΔQ ÷ %ΔP." },
+      { cat:'l3_elastisitas_d', q:"Jika nilai Ed > 1, permintaan terhadap barang tersebut bersifat...", options:["Inelastis","Elastis","Unit elastis","Inelastis sempurna"], correct:1, explanation:"Jika Ed > 1, permintaan bersifat elastis, artinya perubahan harga menyebabkan perubahan besar pada jumlah yang diminta.", keyPoint:"Ed > 1 = elastis." },
+      { cat:'l3_elastisitas_d', q:"Beras dan obat-obatan sebagai kebutuhan pokok cenderung memiliki permintaan yang...", options:["Elastis","Inelastis","Unit elastis","Elastis sempurna"], correct:1, explanation:"Barang kebutuhan pokok bersifat inelastis karena konsumen tetap membelinya meskipun harga naik.", keyPoint:"Kebutuhan pokok = inelastis." },
+      { cat:'l3_elastisitas_d', q:"Harga kopi naik 10%, permintaan turun 20%. Elastisitas permintaannya adalah...", options:["0,5 (inelastis)","2 (elastis)","1 (unit elastis)","0 (inelastis sempurna)"], correct:1, explanation:"Ed = 20% ÷ 10% = 2. Karena Ed > 1, permintaan kopi bersifat elastis.", keyPoint:"Ed = %ΔQ ÷ %ΔP." },
       { cat:'l3_elastisitas_s', q:"Penawaran cenderung lebih elastis dalam jangka panjang karena...", options:["Konsumen lebih kaya","Produsen punya lebih banyak waktu menyesuaikan kapasitas produksi","Harga selalu naik","Pemerintah memberi subsidi"], correct:1, explanation:"Dalam jangka panjang, produsen memiliki lebih banyak waktu untuk menyesuaikan kapasitas produksinya sehingga penawaran lebih elastis.", keyPoint:"Jangka panjang → penawaran lebih elastis." },
-      { cat:'l3_elastisitas_s', q:"Faktor yang membuat permintaan suatu barang menjadi lebih elastis adalah...", options:["Barang tersebut kebutuhan pokok","Banyak barang substitusi tersedia","Barang tersebut sangat penting","Tidak ada barang pengganti"], correct:1, explanation:"Semakin banyak barang substitusi tersedia, semakin elastis permintaan karena konsumen mudah beralih ke produk lain.", keyPoint:"Banyak substitusi → permintaan elastis." },
-      { cat:'l3_penerapan', q:"Ketika harga cabai naik, petani terdorong menanam lebih banyak cabai pada musim berikutnya. Peristiwa ini mencerminkan...", options:["Hukum permintaan","Hukum penawaran","Hukum keseimbangan","Hukum konsumsi"], correct:1, explanation:"Kenaikan harga mendorong produsen menambah jumlah yang ditawarkan — sesuai hukum penawaran (berbanding lurus).", keyPoint:"Harga naik → produsen tambah produksi." },
-      { cat:'l3_penerapan', q:"Pada harga Rp9.000, jumlah yang diminta 60 unit dan jumlah yang ditawarkan 60 unit. Maka harga Rp9.000 merupakan...", options:["Harga tertinggi","Harga terendah","Harga keseimbangan","Harga monopoli"], correct:2, explanation:"Karena Qd = Qs = 60 pada harga Rp9.000, maka harga tersebut adalah harga keseimbangan pasar.", keyPoint:"Qd = Qs → harga keseimbangan." }
+      { cat:'l3_elastisitas_s', q:"Permintaan suatu barang menjadi lebih elastis apabila...", options:["Barang tersebut kebutuhan pokok","Banyak barang substitusi tersedia","Barang tersebut sangat penting","Tidak ada barang pengganti"], correct:1, explanation:"Semakin banyak barang substitusi tersedia, semakin elastis permintaan karena konsumen mudah beralih ke produk lain.", keyPoint:"Banyak substitusi → permintaan elastis." },
+      { cat:'l3_penerapan', q:"Harga cabai naik, petani terdorong menanam lebih banyak cabai musim berikutnya. Peristiwa ini mencerminkan berlakunya...", options:["Hukum permintaan","Hukum penawaran","Hukum keseimbangan","Hukum konsumsi"], correct:1, explanation:"Kenaikan harga mendorong produsen menambah jumlah yang ditawarkan — sesuai hukum penawaran (berbanding lurus).", keyPoint:"Harga naik → produsen tambah produksi." },
+      { cat:'l3_penerapan', q:"Pada harga Rp9.000, jumlah yang diminta 60 unit dan jumlah yang ditawarkan 60 unit. Harga Rp9.000 disebut...", options:["Harga tertinggi","Harga terendah","Harga keseimbangan","Harga monopoli"], correct:2, explanation:"Karena Qd = Qs = 60 pada harga Rp9.000, maka harga tersebut adalah harga keseimbangan pasar.", keyPoint:"Qd = Qs → harga keseimbangan." }
     ]
   },
   {
@@ -1194,30 +1079,39 @@ const LEVELS = [
       { id:'l4_penerapan', name:'Penerapan Sehari-hari', short:'Penerapan', icon:'🌰', color:'#f97316', points:500 }
     ],
     questions: [
-      { cat:'l4_ecommerce', q:"E-commerce adalah...", options:["Aktivitas jual beli barang dan jasa yang dilakukan secara online melalui internet","Sistem pembayaran tunai di toko","Kegiatan promosi di media cetak","Pasar tradisional yang dikelola pemerintah"], correct:0, explanation:"E-commerce adalah aktivitas jual beli barang dan jasa yang dilakukan secara online melalui internet.", keyPoint:"E-commerce = jual beli online." },
+      { cat:'l4_ecommerce', q:"E-commerce adalah...", options:["Jual beli barang dan jasa yang dilakukan secara online melalui internet","Sistem pembayaran tunai di toko","Kegiatan promosi di media cetak","Pasar tradisional yang dikelola pemerintah"], correct:0, explanation:"E-commerce adalah aktivitas jual beli barang dan jasa yang dilakukan secara online melalui internet.", keyPoint:"E-commerce = jual beli online." },
       { cat:'l4_ecommerce', q:"Contoh platform e-commerce di Indonesia adalah...", options:["PLN","Shopee dan Tokopedia","PT KAI","Bank Indonesia"], correct:1, explanation:"Shopee dan Tokopedia adalah contoh platform e-commerce di Indonesia.", keyPoint:"Shopee, Tokopedia = e-commerce." },
       { cat:'l4_marketplace', q:"Marketplace adalah...", options:["Toko fisik yang menjual barang","Platform digital yang mempertemukan penjual dan pembeli","Alat pembayaran digital","Perusahaan ekspedisi"], correct:1, explanation:"Marketplace adalah platform digital yang mempertemukan penjual dan pembeli secara online.", keyPoint:"Marketplace = platform pertemuan penjual & pembeli." },
-      { cat:'l4_marketplace', q:"Platform seperti Shopee, Tokopedia, dan Grab dapat dikategorikan sebagai...", options:["Pasar konkret","Pasar abstrak / pasar digital","Pasar tradisional","Pasar monopoli"], correct:1, explanation:"Platform tersebut adalah pasar abstrak atau pasar digital karena mempertemukan penjual dan pembeli secara online tanpa tatap muka langsung.", keyPoint:"Platform digital = pasar abstrak." },
+      { cat:'l4_marketplace', q:"Shopee, Tokopedia, dan Grab dapat dikategorikan sebagai...", options:["Pasar konkret","Pasar abstrak / pasar digital","Pasar tradisional","Pasar monopoli"], correct:1, explanation:"Platform tersebut adalah pasar abstrak atau pasar digital karena mempertemukan penjual dan pembeli secara online tanpa tatap muka langsung.", keyPoint:"Platform digital = pasar abstrak." },
       { cat:'l4_perubahan', q:"Perubahan perilaku belanja masyarakat di era digital adalah...", options:["Harus datang ke toko fisik","Belanja online via aplikasi dari rumah","Hanya bisa bayar tunai","Hanya bisa belanja siang hari"], correct:1, explanation:"Di era digital, masyarakat bisa belanja online via aplikasi dari rumah tanpa harus datang ke toko fisik.", keyPoint:"Era digital = belanja online dari rumah." },
       { cat:'l4_perubahan', q:"Alat pembayaran digital yang menggantikan uang tunai di Indonesia contohnya...", options:["Cek","GoPay, OVO, Dana, QRIS","Kartu kredit","Wesel"], correct:1, explanation:"GoPay, OVO, Dana, dan QRIS adalah contoh dompet digital/alat pembayaran digital di Indonesia.", keyPoint:"Dompet digital: GoPay, OVO, Dana, QRIS." },
       { cat:'l4_dampak', q:"Dampak positif pasar digital bagi UMKM adalah...", options:["UMKM kesulitan bersaing","UMKM dapat menjangkau pasar lebih luas","UMKM harus tutup","UMKM tidak bisa berjualan"], correct:1, explanation:"Pasar digital membuka peluang UMKM menjangkau pasar lebih luas tanpa batasan wilayah.", keyPoint:"Pasar digital = jangkauan UMKM lebih luas." },
       { cat:'l4_dampak', q:"Dampak negatif pasar digital bagi pasar tradisional adalah...", options:["Pasar tradisional semakin ramai","Pasar tradisional mengalami penurunan jumlah pembeli dan omzet","Pasar tradisional semakin modern","Pasar tradisional mendapat subsidi"], correct:1, explanation:"Pasar tradisional mengalami penurunan jumlah pembeli dan omzet karena peralihan ke belanja online.", keyPoint:"Pasar tradisional turun omzet." },
       { cat:'l4_dampak', q:"Tantangan utama pasar digital adalah...", options:["Terlalu banyak pembeli","Keamanan data dan penipuan online","Harga terlalu murah","Tidak ada tantangan"], correct:1, explanation:"Tantangan pasar digital antara lain keamanan data, penipuan online, dan kesenjangan digital.", keyPoint:"Tantangan digital = keamanan data & penipuan." },
       { cat:'l4_dampak', q:"Kesenjangan digital dalam pasar era digital berarti...", options:["Semua orang punya akses internet","Ada kesenjangan akses dan literasi teknologi bagi sebagian pedagang","Harga barang seragam","Tidak ada perbedaan"], correct:1, explanation:"Kesenjangan digital adalah perbedaan akses dan kemampuan literasi teknologi, yang membuat sebagian pedagang tertinggal.", keyPoint:"Kesenjangan digital = beda akses & literasi." },
-      { cat:'l4_glosarium', q:"Ceteris paribus berarti...", options:["Faktor lain berubah-ubah","Faktor-faktor lain dianggap tetap","Semua faktor berubah","Tidak ada faktor"], correct:1, explanation:"Ceteris paribus adalah asumsi bahwa faktor-faktor lain dianggap tetap atau tidak berubah.", keyPoint:"Ceteris paribus = faktor lain tetap." },
+      { cat:'l4_glosarium', q:"Istilah ceteris paribus berarti...", options:["Faktor lain berubah-ubah","Faktor-faktor lain dianggap tetap","Semua faktor berubah","Tidak ada faktor"], correct:1, explanation:"Ceteris paribus adalah asumsi bahwa faktor-faktor lain dianggap tetap atau tidak berubah.", keyPoint:"Ceteris paribus = faktor lain tetap." },
       { cat:'l4_glosarium', q:"Barang substitusi adalah...", options:["Barang pelengkap","Barang pengganti yang dapat menggantikan fungsi barang lain","Barang mewah","Barang bekas"], correct:1, explanation:"Barang substitusi adalah barang pengganti, contohnya teh dan kopi.", keyPoint:"Substitusi = barang pengganti." },
       { cat:'l4_glosarium', q:"Barang komplementer adalah...", options:["Barang pengganti","Barang pelengkap yang penggunaannya saling melengkapi","Barang tiruan","Barang impor"], correct:1, explanation:"Barang komplementer adalah barang pelengkap, contohnya motor dan bensin.", keyPoint:"Komplementer = barang pelengkap." },
-      { cat:'l4_penerapan', q:"Seorang siswa membuka usaha kue secara online melalui Instagram dan menerima pembayaran via QRIS. Ini adalah contoh...", options:["Pasar konkret","Pasar digital / e-commerce","Pasar tradisional","Pasar monopoli"], correct:1, explanation:"Berjualan online melalui Instagram dan menerima QRIS adalah contoh penerapan pasar digital/e-commerce.", keyPoint:"Jualan online + QRIS = pasar digital." },
-      { cat:'l4_penerapan', q:"Pedagang pasar tradisional mulai berjualan melalui marketplace untuk memperluas jangkauan pembeli. Ini menunjukkan...", options:["Pasar tradisional akan hilang","Adaptasi pedagang terhadap era digital","Pasar tradisional lebih baik","Marketplace tidak berguna"], correct:1, explanation:"Pedagang pasar tradisional yang mulai berjualan online menunjukkan adaptasi terhadap era digital untuk memperluas jangkauan.", keyPoint:"Adaptasi digital pedagang tradisional." }
+      { cat:'l4_penerapan', q:"Seorang siswa membuka usaha kue online lewat Instagram dan menerima pembayaran via QRIS. Ini adalah contoh...", options:["Pasar konkret","Pasar digital / e-commerce","Pasar tradisional","Pasar monopoli"], correct:1, explanation:"Berjualan online melalui Instagram dan menerima QRIS adalah contoh penerapan pasar digital/e-commerce.", keyPoint:"Jualan online + QRIS = pasar digital." },
+      { cat:'l4_penerapan', q:"Pedagang pasar tradisional mulai berjualan di marketplace untuk memperluas jangkauan pembeli. Ini menunjukkan...", options:["Pasar tradisional akan hilang","Adaptasi pedagang terhadap era digital","Pasar tradisional lebih baik","Marketplace tidak berguna"], correct:1, explanation:"Pedagang pasar tradisional yang mulai berjualan online menunjukkan adaptasi terhadap era digital untuk memperluas jangkauan.", keyPoint:"Adaptasi digital pedagang tradisional." }
     ]
   }
 ];
+
+/* Validasi: pastikan tidak ada soal duplikat */
+(function validateUniqueness(){
+  const seen = new Set();
+  LEVELS.forEach(lv => lv.questions.forEach(q => {
+    if (seen.has(q.q)) console.warn('[DUPLIKAT SOAL]', q.q);
+    seen.add(q.q);
+  }));
+})();
 
 const TOTAL_LEVELS = LEVELS.length;
 const ROUNDS_PER_LEVEL = 10;
 const TIMER_SECONDS = 30;
 const CIRCUMFERENCE = 2 * Math.PI * 26;
-const STORAGE_PREFIX = 'kuis_roda_ekonomi_bab3_v5_';
+const STORAGE_PREFIX = 'kuis_roda_ekonomi_bab3_v6_';
 
 const state = {
   currentLevelIndex: 0, currentRound: 0, totalScore: 0,
@@ -1227,9 +1121,10 @@ const state = {
   selectedAnswerIndex: null, usedQuestions: new Set(), history: [],
   catStats: {}, levelStats: [], unlockedLevels: 1,
   confettiEnabled: true,
-  /* PRIZE MONEY */
   prizeMoney: 0, bestPrize: 0, gameOver: false, hasEarned: false,
-  lastMoneyDelta: 0
+  lastMoneyDelta: 0,
+  /* Pre-shuffled questions per level per session — agar urutan berbeda setiap sesi */
+  sessionOrder: []
 };
 let kuisAktif = false;
 let timerInterval = null;
@@ -1270,14 +1165,29 @@ function switchScreen(fromId, toId, direction) {
   }, 300);
 }
 
-/* ================= MONEY DISPLAY HELPERS ================= */
+/* ========== SESSION ORDER — urutan soal baru per sesi ========== */
+function initSessionOrder() {
+  state.sessionOrder = LEVELS.map(lv => {
+    /* Kumpulkan semua soal per kategori lalu acak posisinya */
+    const grouped = {};
+    lv.categories.forEach(c => grouped[c.id] = []);
+    lv.questions.forEach(q => { if (grouped[q.cat]) grouped[q.cat].push(q); });
+    Object.keys(grouped).forEach(k => { grouped[k] = shuffleArray(grouped[k]); });
+    return grouped;
+  });
+}
+
+/* ========== MONEY DISPLAY ========== */
 function updateAllMoneyDisplays() {
   const m = state.prizeMoney;
   const full = formatRupiah(m);
-  const short = formatRupiahShort(m);
   const pct = Math.min(100, (m / PRIZE_TARGET) * 100);
 
-  setText('headerMoneyVal', short);
+  /* Sticky ticker */
+  setText('mtValue', full);
+  const mtBar = $('mtBar'); if (mtBar) mtBar.style.width = pct.toFixed(2) + '%';
+
+  /* Kartu besar di tiap layar */
   ['levelMoneyVal','wheelMoneyVal','qMoneyVal','lcMoneyVal'].forEach(id => {
     const el = $(id); if (el) el.textContent = full;
   });
@@ -1285,17 +1195,8 @@ function updateAllMoneyDisplays() {
     const el = $(id); if (el) el.style.width = pct.toFixed(2) + '%';
   });
 }
-function flashHeaderMoney(direction) {
-  const el = $('headerMoney');
-  if (!el) return;
-  el.classList.remove('flash-up','flash-down');
-  void el.offsetWidth;
-  el.classList.add(direction === 'up' ? 'flash-up' : 'flash-down');
-  setTimeout(() => el.classList.remove('flash-up','flash-down'), 750);
-}
-function flashMoneyBoard(delta) {
-  const boards = ['wheelMoneyVal','qMoneyVal','levelMoneyVal','lcMoneyVal'];
-  boards.forEach(id => {
+function flashMoneyBoard() {
+  ['wheelMoneyVal','qMoneyVal','levelMoneyVal','lcMoneyVal','mtValue'].forEach(id => {
     const el = $(id);
     if (!el) return;
     el.style.transform = 'scale(1.12)';
@@ -1304,7 +1205,7 @@ function flashMoneyBoard(delta) {
   });
 }
 
-/* ================= TIMER ================= */
+/* ========== TIMER ========== */
 function startTimer() {
   clearInterval(timerInterval);
   timeLeft = TIMER_SECONDS; lastBeepSecond = -1;
@@ -1331,7 +1232,6 @@ function updateTimerDisplay() {
 }
 function stopTimer() { clearInterval(timerInterval); timerInterval = null; }
 
-/* ================= PENALTI HADIAH ================= */
 function applyWrongPenalty() {
   const before = state.prizeMoney;
   let after = before;
@@ -1351,20 +1251,6 @@ function triggerGameOver() {
   const card = document.querySelector('#gameOverOverlay .go-money-lost');
   if (card) card.textContent = '💰 Hadiah Terakhir: ' + formatRupiah(0);
   show('gameOverOverlay');
-  safeConfetti({ particleCount: 0 });
-  // Simpan best prize
-  saveBestPrize();
-}
-function saveBestPrize() {
-  try {
-    const prev = parseInt(localStorage.getItem(STORAGE_PREFIX + 'best_money') || '0', 10) || 0;
-    if (state.prizeMoney > prev) {
-      // bestPrize is running best - but here prize = 0. Don't overwrite.
-    }
-    if (state.bestPrize > prev) {
-      localStorage.setItem(STORAGE_PREFIX + 'best_money', state.bestPrize);
-    }
-  } catch(e){}
 }
 
 function onTimerEnd() {
@@ -1377,10 +1263,8 @@ function onTimerEnd() {
   btns.forEach(b => { b.disabled = true; b.setAttribute('aria-checked', 'false'); });
   btns[q.correct].classList.add('opt-correct');
 
-  // Penalti 15%
   const delta = applyWrongPenalty();
-  flashHeaderMoney('down');
-  flashMoneyBoard(delta);
+  flashMoneyBoard();
 
   showRevealOverlay('WAKTU HABIS', 'timeout', 0, 0, delta);
   state.wrongCount++; state.streak = 0;
@@ -1401,7 +1285,7 @@ function onTimerEnd() {
   setTimeout(() => { hideRevealOverlay(); showFeedback(false, 0, cat, true); }, 1500);
 }
 
-/* ================= WHEEL BUILD ================= */
+/* ========== WHEEL BUILD ========== */
 function buildWheel() {
   const svg = $('wheelSvg'); if (!svg) return;
   const level = LEVELS[state.currentLevelIndex];
@@ -1509,21 +1393,32 @@ function pickQuestion(level, catId) {
   const pool = level.questions.filter(q => q.cat === catId);
   const unused = pool.filter(q => !state.usedQuestions.has(q.q));
   const source = unused.length > 0 ? unused : pool;
-  const chosen = source[Math.floor(Math.random() * source.length)];
+  /* Ambil acak dari sumber dengan RNG sesi */
+  const idx = Math.floor(seededRandom() * source.length);
+  const chosen = source[idx];
   state.usedQuestions.add(chosen.q);
   return chosen;
 }
+/* Shuffle opsi jawaban + posisi jawaban benar benar-benar acak */
 function shuffleOptions(q) {
-  const arr = q.options.slice();
-  const correctText = arr[q.correct];
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+  /* Susun pasangan {text, isCorrect} */
+  const pairs = q.options.map((text, i) => ({ text, isCorrect: i === q.correct }));
+  /* Fisher-Yates multi-pass pakai seeded RNG sesi */
+  for (let pass = 0; pass < 3; pass++) {
+    for (let i = pairs.length - 1; i > 0; i--) {
+      const j = Math.floor(seededRandom() * (i + 1));
+      const t = pairs[i]; pairs[i] = pairs[j]; pairs[j] = t;
+    }
   }
-  return { cat: q.cat, q: q.q, options: arr, correct: arr.indexOf(correctText), explanation: q.explanation, keyPoint: q.keyPoint };
+  const newOptions = pairs.map(p => p.text);
+  const newCorrect = pairs.findIndex(p => p.isCorrect);
+  return {
+    cat: q.cat, q: q.q,
+    options: newOptions, correct: newCorrect,
+    explanation: q.explanation, keyPoint: q.keyPoint
+  };
 }
 
-/* ================= SPIN ================= */
 function spin() {
   if (state.gameFinished || state.levelFinished || state.spinning || state.gameOver) return;
   const level = LEVELS[state.currentLevelIndex];
@@ -1534,11 +1429,11 @@ function spin() {
   hide('categoryResult'); hide('wheelInstruction');
   sfx('spin');
 
-  const targetCat = availableCats[Math.floor(Math.random() * availableCats.length)];
+  const targetCat = availableCats[Math.floor(seededRandom() * availableCats.length)];
   const targetIdx = level.categories.findIndex(c => c.id === targetCat.id);
   const segAngle = 360 / level.categories.length;
-  const extraSpins = 5 + Math.floor(Math.random() * 3);
-  const jitter = (Math.random() - 0.5) * (segAngle * 0.6);
+  const extraSpins = 5 + Math.floor(seededRandom() * 3);
+  const jitter = (seededRandom() - 0.5) * (segAngle * 0.6);
   const baseTarget = -targetIdx * segAngle + jitter;
   const currentMod = ((state.currentRotation % 360) + 360) % 360;
   const targetMod = ((baseTarget % 360) + 360) % 360;
@@ -1642,8 +1537,6 @@ function selectAnswer(idx) {
   let earnedPoints = 0;
   let moneyDelta = 0;
   let reward = 0;
-
-  // Nomor soal global (1..40)
   const qNum = state.currentLevelIndex * ROUNDS_PER_LEVEL + state.currentRound + 1;
 
   if (isCorrect) {
@@ -1655,7 +1548,6 @@ function selectAnswer(idx) {
     state.catStats[cat.id].correct++;
     state.catStats[cat.id].points += earnedPoints;
 
-    // ====== TAMBAH HADIAH UANG ======
     reward = getRewardForQuestion(qNum);
     const before = state.prizeMoney;
     state.prizeMoney = Math.min(PRIZE_TARGET, state.prizeMoney + reward);
@@ -1663,15 +1555,12 @@ function selectAnswer(idx) {
     state.hasEarned = true;
     if (state.prizeMoney > state.bestPrize) state.bestPrize = state.prizeMoney;
     sfx('cash');
-    flashHeaderMoney('up');
-    flashMoneyBoard(moneyDelta);
+    flashMoneyBoard();
     safeConfetti({ particleCount: 30, spread: 70, origin: { y: .55 }, colors: ['#ffd700','#f0d878','#d4af37','#a78bfa'] });
   } else {
     sfx('wrong'); state.wrongCount++; state.streak = 0;
-    // ====== PENALTI 15% ======
     moneyDelta = applyWrongPenalty();
-    flashHeaderMoney('down');
-    flashMoneyBoard(moneyDelta);
+    flashMoneyBoard();
   }
 
   showRevealOverlay(
@@ -1720,7 +1609,7 @@ function showFeedback(isCorrect, earnedPoints, cat, timeout) {
       <div class="font-bold text-xs md:text-sm overflow-safe" style="color: var(--green);">${escapeHtml(q.options[state.selectedAnswerIndex])}</div>
       <div class="text-[11px] mt-2 font-black" style="color: var(--green);">+${earnedPoints} poin${state.streak >= 2 ? ` · 🔥 Streak x${state.streak}` : ''}</div>
       <div><span class="money-delta ${deltaClass}">💰 ${deltaStr}</span></div>
-      <div class="text-[11px] mt-1.5 font-bold" style="color: #f0d878;">Total hadiah: ${formatRupiah(state.prizeMoney)}</div>
+      <div class="text-[11px] mt-1.5 font-bold" style="color: #f0d878;">💰 Total hadiah: ${formatRupiah(state.prizeMoney)}</div>
     </div>`;
   } else {
     html = `<div class="p-3.5 rounded-xl mb-2" style="background: var(--rose-soft); border: 1.5px solid var(--rose); box-shadow: 0 0 26px rgba(239,68,68,.25);">
@@ -1731,7 +1620,7 @@ function showFeedback(isCorrect, earnedPoints, cat, timeout) {
       <div class="font-semibold text-xs md:text-sm overflow-safe mb-1.5" style="color: var(--rose);">Jawabanmu: ${timeout ? '(Tidak dijawab — waktu habis)' : escapeHtml(q.options[state.selectedAnswerIndex])}</div>
       <div class="font-bold text-xs md:text-sm overflow-safe" style="color: var(--green);">Jawaban benar: ${escapeHtml(q.options[q.correct])}</div>
       <div><span class="money-delta ${deltaClass}">📉 ${deltaStr} (−15%)</span></div>
-      <div class="text-[11px] mt-1.5 font-bold" style="color: #f0d878;">Total hadiah: ${formatRupiah(state.prizeMoney)}</div>
+      <div class="text-[11px] mt-1.5 font-bold" style="color: #f0d878;">💰 Total hadiah: ${formatRupiah(state.prizeMoney)}</div>
     </div>`;
   }
 
@@ -1901,7 +1790,6 @@ function endGame() {
           <div class="text-[11px] md:text-xs mt-1.5 leading-snug" style="color: var(--text-muted);">${ach.desc}</div></div></div></div>`;
   setText('rCorrect', correct); setText('rWrong', wrong); setText('rAcc', accuracy + '%'); setText('rStreak', state.maxStreak + '🔥');
 
-  // Animate money counter
   const moneyEl = $('totalMoneyDisplay');
   const finalMoney = state.prizeMoney;
   let mCounter = 0;
@@ -1931,7 +1819,6 @@ function endGame() {
     });
   });
 
-  // Save best money
   let prevMoney = 0;
   try { prevMoney = parseInt(localStorage.getItem(STORAGE_PREFIX + 'best_money') || '0', 10) || 0; } catch(e){}
   const isNewMoneyRecord = state.prizeMoney > prevMoney;
@@ -2140,6 +2027,8 @@ function resetGameStateFull() {
     prizeMoney: 0, bestPrize: 0, gameOver: false, hasEarned: false, lastMoneyDelta: 0
   });
   state.usedQuestions.clear(); state.history = []; state.levelStats = [];
+  /* Sesi baru: acak ulang urutan soal */
+  initSessionOrder();
 }
 
 function returnToMainScreen() {
@@ -2196,6 +2085,7 @@ function goToLevelSelect(){
 
 function init() {
   loadProgress();
+  initSessionOrder();
   applyLevelTheme(0);
   renderLevelList();
   buildWheel();
@@ -2214,7 +2104,6 @@ function init() {
     if (!soundMuted) sfx('click');
   });
 
-  // ===== HOME SCREEN BUTTONS =====
   $('bStart').addEventListener('click', () => {
     sfx('click');
     resetGameStateFull();
@@ -2274,7 +2163,6 @@ function init() {
     updateHomeStats();
   });
 
-  // ===== GAME OVER BUTTONS =====
   $('goRestart').addEventListener('click', () => {
     sfx('click');
     hide('gameOverOverlay');
