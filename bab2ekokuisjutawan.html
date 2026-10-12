@@ -496,7 +496,6 @@
   .bk-title-sub2{font-size:clamp(9.5px,2.4vw,13px);font-weight:700;letter-spacing:clamp(1.5px,0.6vw,3px);color:var(--primary-light);text-transform:uppercase;text-shadow:0 0 12px rgba(196,181,253,.9),0 0 28px rgba(139,92,246,.6)}
   .bk-sub{font-size:clamp(9.5px,2.4vw,12px);color:var(--primary-light);opacity:.95;letter-spacing:clamp(1.2px,0.5vw,2.4px);text-transform:uppercase;margin:16px 0 4px;line-height:1.5;font-weight:700}
 
-  /* ===== GRID SERAGAM UNTUK 2 KOTAK STATISTIK ===== */
   .bk-stats-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -556,6 +555,8 @@
   .bk-btn-p:hover{background-position:100% center}
   .bk-btn-s{background:rgba(139,92,246,.10);color:var(--primary-bright);border:1px solid var(--glass-border)}
   .bk-btn-gold{background:linear-gradient(180deg,#c4b5fd,#8b5cf6);color:#f5f3ff;box-shadow:0 6px 24px rgba(196,181,253,.55),inset 0 1px 0 rgba(255,255,255,.35)}
+  .bk-btn-danger{background:linear-gradient(180deg,rgba(220,38,38,.22),rgba(127,29,29,.35));color:#fca5a5;border:1px solid rgba(220,38,38,.55);box-shadow:0 6px 24px rgba(220,38,38,.25),inset 0 1px 0 rgba(255,255,255,.08)}
+  .bk-btn-danger:hover{background:linear-gradient(180deg,rgba(220,38,38,.30),rgba(127,29,29,.45));border-color:rgba(239,68,68,.75);color:#fecaca}
   .bk-btn-sm{padding:11px 16px;font-size:clamp(11px,2.6vw,13px);min-height:42px}
   .bk-progress-panel{margin-top:14px;padding:12px 14px;border-radius:12px;background:linear-gradient(135deg,rgba(196,181,253,.18),rgba(45,30,80,.85));border:1px solid rgba(196,181,253,.55);box-shadow:0 0 30px rgba(196,181,253,.3);text-align:left}
   .bk-progress-label{font-size:10px;font-weight:900;letter-spacing:2.5px;color:var(--primary-bright);text-transform:uppercase;margin-bottom:6px}
@@ -836,7 +837,6 @@
     #answers-container{grid-template-columns:repeat(2,1fr)}
   }
 
-  /* ===== PORTRAIT HP OPTIMIZATION ===== */
   @media (max-width:640px) and (orientation:portrait){
     main{padding:10px 10px 20px !important;justify-content:flex-start !important}
     #game-screen{max-width:100% !important;gap:12px !important}
@@ -972,6 +972,7 @@
         <button id="btn-start" class="bk-btn bk-btn-p">▶ MULAI PETUALANGAN</button>
         <button id="btn-levels" class="bk-btn bk-btn-gold">🗺️ PILIH LEVEL</button>
         <button id="btn-howto" class="bk-btn bk-btn-s">? CARA MAIN</button>
+        <button id="btn-reset-menu" class="bk-btn bk-btn-danger">🗑️ RESET PROGRES</button>
       </div>
 
       <div id="progress-panel" class="bk-progress-panel is-hidden">
@@ -1131,7 +1132,10 @@
         <div class="text-xs font-bold" style="color:var(--text-soft)">📍 Kamu akan mengulang <b style="color:var(--primary-bright)" id="fail-level-name">Level 1</b> — <b style="color:var(--primary-bright)">bukan</b> dari level pertama.</div>
         <div class="text-xs font-bold mt-2" style="color:var(--text-soft)">💰 Uangmu akan dikembalikan ke posisi awal level ini.</div>
       </div>
-      <button type="button" id="btn-retry-level" class="btn-gold">🔄 ULANGI LEVEL INI</button>
+      <div class="space-y-3">
+        <button type="button" id="btn-retry-level" class="btn-gold">🔄 ULANGI LEVEL INI</button>
+        <button type="button" id="btn-fail-home" class="btn-outline-gold w-full text-sm" style="border-color:var(--glass-border);color:var(--primary-bright)">🏠 KEMBALI KE HALAMAN DEPAN</button>
+      </div>
       <div class="mgde-footer-dark"><span class="mgde-label">MAEDA GAMES EDU</span></div>
     </div>
   </div>
@@ -1150,6 +1154,7 @@
       <div class="space-y-3">
         <button type="button" id="btn-view-summary" class="btn-outline-gold w-full text-sm" style="border-color:var(--glass-border);color:var(--primary-bright)">📖 LIHAT PEMBAHASAN LEVEL INI</button>
         <button type="button" id="btn-next-level" class="btn-gold">➡ LANJUT KE LEVEL BERIKUTNYA</button>
+        <button type="button" id="btn-complete-home" class="btn-outline-gold w-full text-sm is-hidden" style="border-color:var(--glass-border);color:var(--primary-bright)">🏠 KEMBALI KE HALAMAN DEPAN</button>
       </div>
       <div class="mgde-footer-dark"><span class="mgde-label">MAEDA GAMES EDU</span></div>
     </div>
@@ -2061,6 +2066,9 @@ function showLevelCompleteModal(){
   }
   if(btn)btn.textContent = isLast ? '📊 LIHAT HASIL AKHIR' : '➡ LANJUT KE LEVEL BERIKUTNYA';
 
+  const homeBtn = $('btn-complete-home');
+  if(homeBtn) homeBtn.classList.toggle('is-hidden', !isLast);
+
   const moneyEl = $('complete-money');
   if(moneyEl) moneyEl.textContent = formatRupiah(prizeMoney);
 
@@ -2278,9 +2286,21 @@ function restartGame(){
 function returnToMenu(){
   sfx('click');stopCountdown();
   hide('result-screen');hide('game-screen');hide('level-intro-screen');
+  hide('level-complete-modal');hide('fail-modal');hide('skip-modal');hide('summary-modal');
   renderLevelsList();
   renderProgressPanel();
   show('start-screen');
+}
+function confirmResetFromMenu(){
+  sfx('click');
+  if(confirm('Yakin ingin mereset semua progres? Semua level, uang, dan riwayat jawaban akan dihapus.')){
+    resetProgress();
+    renderLevelsList();
+    renderProgressPanel();
+    applyTheme(0);
+    showToast('🗑️ Progres berhasil direset — mulai dari Level 1');
+    haptic([40,60,40]);
+  }
 }
 function initGoldParticles(){
   const layer=$('gold-particles');if(!layer)return;
@@ -2414,6 +2434,7 @@ window.addEventListener('DOMContentLoaded',()=>{
       showToast('🗑️ Progres dihapus — mulai dari Level 1');
     }
   });
+  bind('btn-reset-menu', confirmResetFromMenu);
   bind('btn-levels',()=>{
     sfx('click');
     const w=$('level-list-wrap');
@@ -2443,7 +2464,9 @@ window.addEventListener('DOMContentLoaded',()=>{
   bind('btn-skip-cancel',()=>hide('skip-modal'));
   bind('btn-skip-confirm',confirmSkip);
   bind('btn-retry-level',retryLevel);
+  bind('btn-fail-home',returnToMenu);
   bind('btn-next-level',goToNextLevel);
+  bind('btn-complete-home',returnToMenu);
   bind('btn-view-summary',showSummaryModal);
   bind('btn-close-summary',closeSummaryModal);
 
