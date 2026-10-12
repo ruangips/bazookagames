@@ -142,59 +142,61 @@ h1{
 .shield .val{color:#a78bfa;text-shadow:0 0 10px rgba(167,139,250,.65)}
 .shield .val.low{color:#f43f5e;text-shadow:0 0 10px rgba(244,63,94,.6)}
 
-/* ========== QUESTION BOX — DIPINDAH KE BAWAH, z-index RENDAH ========== */
+/* ========== QUESTION BOX — COMPACT ========== */
 .qbox{
   position:absolute;
   left:50%;
-  bottom:calc(env(safe-area-inset-bottom) + clamp(28px, 6vw, 42px));
+  bottom:calc(env(safe-area-inset-bottom) + clamp(14px, 2.4vw, 20px));
   transform:translateX(-50%);
-  width:min(780px, 94%);
+  width:min(520px, 66%);
   background:
-    linear-gradient(180deg, rgba(12,16,30,.97) 0%, rgba(8,11,22,.97) 100%);
-  border:1.5px solid rgba(212,175,55,.6);
-  border-radius:clamp(11px, 2.6vw, 16px);
-  padding:clamp(9px,2vw,14px) clamp(14px,3vw,24px) clamp(8px,1.8vw,12px);
+    linear-gradient(180deg, rgba(12,16,30,.96) 0%, rgba(8,11,22,.96) 100%);
+  border:1.5px solid rgba(212,175,55,.55);
+  border-radius:clamp(9px, 2vw, 12px);
+  padding:clamp(5px,1.1vw,7px) clamp(10px,2vw,14px) clamp(5px,1vw,7px);
   text-align:center;
   box-shadow:
-    0 10px 40px rgba(0,0,0,.85),
-    0 0 60px rgba(212,175,55,.28),
-    0 0 1px 1px rgba(167,139,250,.15),
+    0 8px 28px rgba(0,0,0,.8),
+    0 0 40px rgba(212,175,55,.22),
     inset 0 1px 0 rgba(255,255,255,.08);
   z-index:4;
   pointer-events:none;
 }
 .qbox *{pointer-events:none !important;}
+
+/* Di HP sentuh, qbox lebih ramping lagi */
 @media (pointer:coarse){
   .qbox{
-    width:min(680px, calc(100% - clamp(200px, 26vw, 280px)));
-    min-width:min(340px, 82%);
+    width:min(440px, calc(100% - 220px));
+    min-width:min(300px, 66%);
   }
 }
+
 .q-l{
-  font-size:clamp(7.5px,2vw,10px);
-  letter-spacing:1.6px;
+  font-size:clamp(6px,1.5vw,7.5px);
+  letter-spacing:1.3px;
   color:#f0d878;
   opacity:.95;
-  margin-bottom:3px;
+  margin-bottom:2px;
   font-weight:700;
-  text-shadow:0 0 8px rgba(212,175,55,.5);
+  text-shadow:0 0 6px rgba(212,175,55,.5);
 }
 .q-t{
-  font-size:clamp(13px,3.4vw,20px);
+  font-size:clamp(10px,2.1vw,13px);
   font-weight:700;
-  line-height:1.32;
+  line-height:1.28;
   color:#ffffff;
   letter-spacing:.2px;
   text-shadow:
     0 1px 3px rgba(0,0,0,.95),
-    0 0 24px rgba(240,216,120,.18);
-  padding:2px 0 4px;
+    0 0 16px rgba(240,216,120,.18);
+  padding:1px 0 2px;
   word-wrap:break-word;
   overflow-wrap:break-word;
 }
 .q-bar{
-  margin-top:clamp(4px,1.2vw,6px);
-  height:4px;
+  margin-top:3px;
+  height:2.5px;
   background:rgba(212,175,55,.18);
   border-radius:2px;
   overflow:hidden;
@@ -204,44 +206,44 @@ h1{
   height:100%;width:100%;
   background:linear-gradient(90deg,#d4af37,#a78bfa,#f43f5e);
   transition:width .1s linear;
-  box-shadow:0 0 10px rgba(212,175,55,.75);
+  box-shadow:0 0 8px rgba(212,175,55,.7);
   border-radius:2px;
 }
 .q-meta{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:8px;
-  margin-top:5px;
+  gap:6px;
+  margin-top:3px;
   flex-wrap:wrap;
 }
 .progress-info{
-  font-size:clamp(8px,2vw,10px);
+  font-size:clamp(6px,1.5vw,7.5px);
   color:#f0d878;
   opacity:.9;
-  letter-spacing:1px;
+  letter-spacing:.9px;
   font-weight:600;
 }
 .wind-inline{
   display:inline-flex;
   align-items:center;
-  gap:4px;
-  font-size:clamp(8px,2vw,10px);
-  padding:2px 8px;
+  gap:3px;
+  font-size:clamp(6px,1.5vw,7.5px);
+  padding:1px 6px;
   background:rgba(12,16,30,.7);
   border:1px solid rgba(212,175,55,.4);
-  border-radius:8px;
+  border-radius:6px;
   color:#f0d878;
   font-weight:600;
 }
 .wind-inline .wind-lbl{
-  font-size:clamp(6.5px,1.7vw,8.5px);
-  letter-spacing:1.2px;
+  font-size:clamp(5.5px,1.3vw,6.5px);
+  letter-spacing:1px;
   opacity:.9;
   color:#f0d878;
 }
 .wind-inline .wind-a{
-  font-size:clamp(11px,3vw,14px);
+  font-size:clamp(9px,2.2vw,11px);
   color:#ffd700;
   display:inline-block;
   transition:transform .3s;
@@ -249,7 +251,7 @@ h1{
 }
 .wind-inline .wind-s{
   font-weight:700;
-  min-width:18px;
+  min-width:14px;
   color:#ffffff;
   text-align:center;
 }
@@ -442,8 +444,8 @@ h1{
 .touch-reload:active,.touch-reload.pressed{transform:scale(.94);background:rgba(196,181,253,1)}
 
 /* ========== LEVEL PROGRESS DOTS ========== */
-.level-progress{display:flex;gap:3px;justify-content:center;margin-top:4px;flex-wrap:wrap}
-.lp-dot{width:clamp(4px,1.2vw,5px);height:clamp(4px,1.2vw,5px);border-radius:50%;background:rgba(212,175,55,.32);transition:all .3s}
+.level-progress{display:flex;gap:2px;justify-content:center;margin-top:3px;flex-wrap:wrap}
+.lp-dot{width:clamp(3.5px,1vw,4.5px);height:clamp(3.5px,1vw,4.5px);border-radius:50%;background:rgba(212,175,55,.32);transition:all .3s}
 .lp-dot.done{background:#f0d878;box-shadow:0 0 6px rgba(240,216,120,.85)}
 .lp-dot.current{background:#a78bfa;box-shadow:0 0 8px rgba(167,139,250,1);transform:scale(1.3)}
 
@@ -922,9 +924,9 @@ h1.title-main{
   .box{min-width:44px;padding:2px 5px;border-radius:6px}
   .val{font-size:10px}
   .lbl{font-size:6px;letter-spacing:0.8px}
-  .q-t{font-size:11px}
-  .q-l{font-size:6.5px}
-  .progress-info{font-size:6.5px}
+  .q-t{font-size:10px}
+  .q-l{font-size:6px}
+  .progress-info{font-size:6px}
   .btn{font-size:11px;padding:9px 12px;min-height:40px}
   h1.title-main{font-size:22px;letter-spacing:2px}
   .title-sub{font-size:8px;letter-spacing:1.2px}
@@ -961,7 +963,7 @@ h1.title-main{
   .panel{padding:14px 12px 9px}
   .box{min-width:50px;padding:3px 6px}
   .val{font-size:11px}
-  .q-t{font-size:13px}
+  .q-t{font-size:11px}
   .level-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media (min-width:480px) and (max-width:767px){
@@ -983,21 +985,25 @@ h1.title-main{
   .val{font-size:11px}
 
   .qbox{
-    bottom:calc(env(safe-area-inset-bottom) + clamp(22px, 5vw, 32px));
-    padding:7px 12px 6px;
-    border-radius:11px;
+    bottom:calc(env(safe-area-inset-bottom) + clamp(10px, 2vw, 14px));
+    padding:5px 10px 4px;
+    border-radius:9px;
+    width:min(460px, 60%);
   }
-  .q-t{font-size:13px;line-height:1.28}
-  .q-l{font-size:7.5px;letter-spacing:1.4px;margin-bottom:2px}
-  .q-bar{height:3px;margin-top:3px}
-  .q-meta{margin-top:3px;gap:6px}
-  .progress-info{font-size:7.5px}
-  .wind-inline{padding:1px 6px;font-size:7.5px;gap:3px;border-radius:6px}
-  .wind-inline .wind-lbl{font-size:6.5px;letter-spacing:1px}
-  .wind-inline .wind-a{font-size:11px}
-  .wind-inline .wind-s{font-size:8px;min-width:14px}
-  .level-progress{gap:2px;margin-top:3px}
-  .lp-dot{width:3.5px;height:3.5px}
+  @media (pointer:coarse){
+    .qbox{width:min(400px, calc(100% - 200px));}
+  }
+  .q-t{font-size:11px;line-height:1.25}
+  .q-l{font-size:6.5px;letter-spacing:1.2px;margin-bottom:1.5px}
+  .q-bar{height:2px;margin-top:2px}
+  .q-meta{margin-top:2px;gap:5px}
+  .progress-info{font-size:6.5px}
+  .wind-inline{padding:1px 5px;font-size:6.5px;gap:2px;border-radius:5px}
+  .wind-inline .wind-lbl{font-size:5.5px;letter-spacing:0.8px}
+  .wind-inline .wind-a{font-size:9px}
+  .wind-inline .wind-s{font-size:7px;min-width:12px}
+  .level-progress{gap:1.5px;margin-top:2px}
+  .lp-dot{width:3px;height:3px}
 
   .msg{top:22%}
 
@@ -1063,25 +1069,25 @@ h1.title-main{
   .val{font-size:10px}
 
   .qbox{
-    bottom:calc(env(safe-area-inset-bottom) + clamp(16px, 4vw, 24px));
-    padding:5px 10px 5px;
-    border-radius:9px;
-    width:min(720px, 94%);
+    bottom:calc(env(safe-area-inset-bottom) + clamp(8px, 1.5vw, 12px));
+    padding:4px 9px 4px;
+    border-radius:8px;
+    width:min(420px, 56%);
   }
   @media (pointer:coarse){
-    .qbox{width:min(620px, calc(100% - 190px));}
+    .qbox{width:min(380px, calc(100% - 190px));}
   }
-  .q-t{font-size:11.5px;line-height:1.25;padding:1px 0 2px}
-  .q-l{font-size:6.5px;letter-spacing:1.2px;margin-bottom:1px}
-  .q-bar{height:2.5px;margin-top:2px}
-  .q-meta{margin-top:2px;gap:5px}
-  .progress-info{font-size:6.5px}
-  .wind-inline{padding:1px 5px;font-size:6.5px;gap:2px;border-radius:5px}
-  .wind-inline .wind-lbl{font-size:5.5px}
-  .wind-inline .wind-a{font-size:10px}
-  .wind-inline .wind-s{font-size:7px;min-width:12px}
-  .level-progress{gap:1.5px;margin-top:2px}
-  .lp-dot{width:3px;height:3px}
+  .q-t{font-size:10px;line-height:1.22;padding:0 0 1px}
+  .q-l{font-size:5.5px;letter-spacing:1px;margin-bottom:1px}
+  .q-bar{height:2px;margin-top:2px}
+  .q-meta{margin-top:1.5px;gap:4px}
+  .progress-info{font-size:5.5px}
+  .wind-inline{padding:1px 4px;font-size:5.5px;gap:2px;border-radius:4px}
+  .wind-inline .wind-lbl{font-size:5px}
+  .wind-inline .wind-a{font-size:8px}
+  .wind-inline .wind-s{font-size:6.5px;min-width:10px}
+  .level-progress{gap:1px;margin-top:1.5px}
+  .lp-dot{width:2.5px;height:2.5px}
 
   .msg{top:20%;font-size:clamp(16px,4.5vw,30px)}
 
@@ -1793,9 +1799,46 @@ function spawnParticle(opts){if(state.particles.length>2500)state.particles.shif
 function updateParticles(dt){for(let i=state.particles.length-1;i>=0;i--){const p=state.particles[i];p.vy+=(p.grav||420)*dt;p.vx*=0.985;p.x+=p.vx*dt;p.y+=p.vy*dt;p.life-=dt;if(p.life<=0)state.particles.splice(i,1);}}
 function drawParticles(){for(const p of state.particles){const a=Math.max(0,p.life/p.maxLife);if(p.glow&&settings.bloom){ctx.globalAlpha=a*0.5;const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.size*3);g.addColorStop(0,p.color);g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,p.size*3,0,TAU);ctx.fill();}if(p.smoke){ctx.globalAlpha=a*0.5;ctx.fillStyle=p.color||FX.smoke;ctx.beginPath();ctx.arc(p.x,p.y,p.size*(1.6-a*0.6),0,TAU);ctx.fill();}else{ctx.globalAlpha=a;ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,TAU);ctx.fill();}}ctx.globalAlpha=1;}
 
+/* ============================================================
+   ENEMY — Speed -40%, lane di kanan player, baseGy disimpan
+   ============================================================ */
 function makeEnemies(options){
-  const configs=[{gy:170,s:0.52,xMin:180,xMax:260,offset:820},{gy:235,s:0.62,xMin:460,xMax:540,offset:890},{gy:290,s:0.70,xMin:760,xMax:840,offset:960}];
-  return configs.map((c,i)=>{const s=c.s+rnd(-0.008,0.008);const targetX=rnd(c.xMin,c.xMax);return{x:targetX+c.offset,targetX,gy:c.gy,s,value:options[i],alive:true,fade:1,labelLift:rnd(8,18)*s,entrySpeed:rnd(170,210),cruiseSpeed:rnd(26,36),hoverPhase:Math.random()*TAU,hoverAmp:rnd(6,12),hoverSpd:rnd(0.4,0.75),trailTimer:0,recoil:0,shotCooldown:9+i*1.5,entering:true,fleeing:false,fleeVx:0,fleeVy:0,laneMinX:c.xMin,laneMaxX:c.xMax};});
+  // Lane diatur supaya target selalu di sebelah KANAN player (x >= ~420)
+  const configs=[
+    {gy:170, s:0.52, xMin:420, xMax:500, offset:820},
+    {gy:235, s:0.62, xMin:560, xMax:660, offset:890},
+    {gy:290, s:0.70, xMin:740, xMax:840, offset:960}
+  ];
+  return configs.map((c,i)=>{
+    const s=c.s+rnd(-0.008,0.008);
+    const targetX=rnd(c.xMin,c.xMax);
+    return {
+      x: targetX+c.offset,
+      targetX,
+      gy: c.gy,
+      baseGy: c.gy,                       // ← posisi Y asli untuk reset
+      s,
+      value: options[i],
+      alive: true,
+      fade: 1,
+      labelLift: rnd(8,18)*s,
+      entrySpeed: rnd(100, 126),          // ← -40% dari 170-210
+      cruiseSpeed: rnd(15, 21),           // ← -40% dari 26-36
+      hoverPhase: Math.random()*TAU,
+      hoverAmp: rnd(6,12),
+      hoverSpd: rnd(0.4,0.75),
+      trailTimer: 0,
+      recoil: 0,
+      shotCooldown: 9+i*1.5,
+      entering: true,
+      fleeing: false,
+      fastReturn: false,                  // ← BARU: state kabur cepat ke kanan
+      fleeVx: 0,
+      fleeVy: 0,
+      laneMinX: c.xMin,
+      laneMaxX: c.xMax
+    };
+  });
 }
 
 function loadQuestion(){
@@ -2033,24 +2076,81 @@ function update(dt){
   updateParticles(dt);
   for(let i=state.casings.length-1;i>=0;i--){const c=state.casings[i];c.vy+=480*dt;c.vx*=0.99;c.x+=c.vx*dt;c.y+=c.vy*dt;c.rot+=c.rotSpd*dt;c.life-=dt;if(c.y>player.gy-2){c.y=player.gy-2;c.vy*=-0.35;c.vx*=0.6;c.rotSpd*=0.5;}if(c.life<=0)state.casings.splice(i,1);}
   for(let i=state.shockwaves.length-1;i>=0;i--){state.shockwaves[i].life-=dt;if(state.shockwaves[i].life<=0)state.shockwaves.splice(i,1);}
+
+  /* ============================================================
+     ENEMY UPDATE — dengan FAST RETURN
+     ============================================================ */
   for(const e of state.enemies){
     if(e.recoil>0)e.recoil=Math.max(0,e.recoil-dt*60);
     if(!e.alive){if(e.fade>0)e.fade=Math.max(0,e.fade-dt*2);continue;}
+
+    // ==== FAST RETURN: kabur cepat ke kanan ====
+    if(e.fastReturn){
+      e.x += 720*dt;                  // terbang cepat ke kanan
+      e.gy -= 40*dt;                  // sedikit naik
+      e.trailTimer-=dt;
+      if(e.trailTimer<=0){
+        e.trailTimer=0.02;
+        spawnParticle({x:e.x-88*e.s,y:e.gy+rnd(-5,5),vx:rnd(180,380),vy:rnd(-20,20),life:rnd(0.5,1.2),size:rnd(4,10)*e.s,color:Math.random()<0.5?FX.goldLight:FX.cream,grav:-8,smoke:true});
+      }
+      if(e.x > W + 160){
+        // Reset: muncul lagi dari sisi kanan
+        e.x = W + 80;
+        e.gy = e.baseGy;
+        e.targetX = rnd(e.laneMinX, e.laneMaxX);
+        e.entering = true;
+        e.entrySpeed = rnd(100,126);
+        e.fastReturn = false;
+        e.shotCooldown = Math.max(e.shotCooldown, 3.5);
+      }
+      continue;
+    }
+
     if(e.fleeing){e.x+=e.fleeVx*dt;e.gy+=e.fleeVy*dt;e.trailTimer-=dt;
       if(e.trailTimer<=0){e.trailTimer=0.025;spawnParticle({x:e.x-88*e.s,y:e.gy+rnd(-4,4),vx:rnd(-30,30)+e.fleeVx*0.2,vy:rnd(-15,15)+e.fleeVy*0.2,life:rnd(0.5,1.2),size:rnd(3,8)*e.s,color:Math.random()<0.5?FX.goldLight:FX.cream,grav:-8,smoke:true});}
       if(e.x>W+400||e.gy<-120){e.fade=Math.max(0,e.fade-dt*2);if(e.fade<=0){e.alive=false;e.fade=0;}}
       continue;}
-    if(e.entering){e.x-=e.entrySpeed*dt;e.hoverPhase+=dt*0.6;e.gy+=Math.sin(e.hoverPhase)*6*dt;
+
+    if(e.entering){
+      e.x-=e.entrySpeed*dt;
+      e.hoverPhase+=dt*0.6;
+      e.gy+=Math.sin(e.hoverPhase)*6*dt;
       if(e.x<=e.targetX){e.entering=false;e.shotCooldown=rnd(5.0,7.5);}
       e.trailTimer-=dt;
       if(e.trailTimer<=0){e.trailTimer=0.03;spawnParticle({x:e.x+92*e.s,y:e.gy+rnd(-5,5),vx:rnd(60,140),vy:rnd(-12,12),life:rnd(0.35,0.85),size:rnd(4,9)*e.s,color:'rgba(240,216,120,.75)',grav:-3,smoke:true});}
     } else {
-      e.x-=e.cruiseSpeed*dt;e.hoverPhase+=dt*e.hoverSpd;e.gy+=Math.sin(e.hoverPhase)*3*dt;
-      if(e.x<-200){e.x=W+500;e.targetX=rnd(e.laneMinX,e.laneMaxX);e.entering=true;e.entrySpeed=rnd(170,210);e.shotCooldown=Math.max(e.shotCooldown,4.5);}
+      // ==== CRUISE: bergerak lambat ke kiri ====
+      e.x -= e.cruiseSpeed*dt;
+      e.hoverPhase += dt*e.hoverSpd;
+      e.gy += Math.sin(e.hoverPhase)*3*dt;
+
+      // ==== Cek apakah sudah melewati player ====
+      const passThreshold = player.x + 30;
+      if(e.x < passThreshold){
+        e.fastReturn = true;
+        continue;
+      }
+
+      // Safety: kalau terlalu jauh ke kiri (harusnya tidak terjadi)
+      if(e.x < -200){
+        e.x = W+500;
+        e.targetX = rnd(e.laneMinX, e.laneMaxX);
+        e.entering = true;
+        e.entrySpeed = rnd(100,126);
+        e.shotCooldown = Math.max(e.shotCooldown, 4.5);
+      }
       e.trailTimer-=dt;
       if(e.trailTimer<=0){e.trailTimer=0.055;spawnParticle({x:e.x+88*e.s,y:e.gy+rnd(-3,3),vx:rnd(-20,20),vy:rnd(-6,6),life:rnd(0.5,1.2),size:rnd(3,6)*e.s,color:Math.random()<0.5?FX.goldLight:FX.cream,grav:-5,smoke:true});}
     }
-    if(!e.entering&&!state.gameOver&&!state.roundLock&&state.lives>0){e.shotCooldown-=dt;if(e.shotCooldown<=0){const base=Math.max(2.4,4.5-state.levelIndex*0.2);e.shotCooldown=rnd(base,base+2.6);enemyFire(e);}}
+
+    if(!e.entering && !e.fastReturn && !state.gameOver && !state.roundLock && state.lives>0){
+      e.shotCooldown -= dt;
+      if(e.shotCooldown <= 0){
+        const base = Math.max(2.4, 4.5-state.levelIndex*0.2);
+        e.shotCooldown = rnd(base, base+2.6);
+        enemyFire(e);
+      }
+    }
   }
   if(state.gameOver)return;
   const MOVE_SPEED=120,ACCEL=620;let moving=0;
@@ -2185,7 +2285,7 @@ function drawArmsAndBazooka(S,B,bodyAng){const aimLocal=player.angle-bodyAng;con
 function drawBazookaTube(B){const tubeG=ctx.createLinearGradient(0,-12,0,12);tubeG.addColorStop(0,B.tubeDark);tubeG.addColorStop(0.15,B.tube);tubeG.addColorStop(0.5,B.tubeLight);tubeG.addColorStop(0.85,B.tube);tubeG.addColorStop(1,B.tubeDark);ctx.fillStyle=tubeG;rrect(ctx,-32,-11,118,22,5);ctx.fill();ctx.strokeStyle='rgba(253,246,227,.95)';ctx.lineWidth=1.8;rrect(ctx,-32,-11,118,22,5);ctx.stroke();ctx.fillStyle=B.metalDark;ctx.fillRect(-6,-12,3,24);ctx.fillRect(20,-12,3,24);ctx.fillStyle=B.metalHi;ctx.fillRect(-6,-12,3,2);ctx.fillRect(20,-12,3,2);ctx.fillStyle=B.grip;rrect(ctx,34,10,10,12,3);ctx.fill();ctx.fillStyle='#000';ctx.beginPath();ctx.ellipse(86,0,2.8,8,0,0,TAU);ctx.fill();ctx.fillStyle=B.sight;rrect(ctx,30,-18,10,7,1.5);ctx.fill();}
 function drawArm(S,start,end,width,colTop,colBot){const dx=end.x-start.x,dy=end.y-start.y;const len=Math.hypot(dx,dy)||1;const ux=dx/len,uy=dy/len;const perpX=-uy,perpY=ux;const bend=5+len*0.05;const elbow={x:start.x+ux*len*0.55+perpX*bend,y:start.y+uy*len*0.55+perpY*bend};ctx.save();ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle='rgba(0,0,0,.55)';ctx.lineWidth=width+3;ctx.beginPath();ctx.moveTo(start.x,start.y);ctx.quadraticCurveTo(elbow.x,elbow.y,end.x,end.y);ctx.stroke();const g=ctx.createLinearGradient(start.x,start.y,end.x,end.y);g.addColorStop(0,colTop);g.addColorStop(0.5,colBot);g.addColorStop(1,colTop);ctx.strokeStyle=g;ctx.lineWidth=width;ctx.beginPath();ctx.moveTo(start.x,start.y);ctx.quadraticCurveTo(elbow.x,elbow.y,end.x,end.y);ctx.stroke();ctx.restore();void S;}
 function drawHand(S,x,y,rot,rx,ry){ctx.save();ctx.translate(x,y);ctx.rotate(rot);const g=ctx.createRadialGradient(-1,-1,1,0,0,rx*1.4);g.addColorStop(0,S.skinLight);g.addColorStop(0.7,S.skin);g.addColorStop(1,S.skinShadow);ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(0,0,rx,ry,0,0,TAU);ctx.fill();ctx.restore();}
-function drawJet(e){const J=PAL.jet;const s=e.s;ctx.save();ctx.translate(e.x,e.gy);if(e.fleeing)ctx.scale(-s,s);else ctx.scale(s,s);const flameLen=34+Math.sin(state.time*26+e.x*0.05)*6;const flameG=ctx.createLinearGradient(78,0,78+flameLen,0);flameG.addColorStop(0,'rgba(253,246,227,.95)');flameG.addColorStop(0.35,'rgba(240,216,120,.9)');flameG.addColorStop(0.75,'rgba(212,175,55,.6)');flameG.addColorStop(1,'rgba(139,105,20,0)');ctx.fillStyle=flameG;ctx.beginPath();ctx.moveTo(78,-9);ctx.quadraticCurveTo(78+flameLen*0.6,-3,78+flameLen,0);ctx.quadraticCurveTo(78+flameLen*0.6,3,78,9);ctx.closePath();ctx.fill();ctx.beginPath();ctx.moveTo(-92,0);ctx.lineTo(-72,-7);ctx.lineTo(-38,-11);ctx.lineTo(8,-13);ctx.lineTo(48,-11);ctx.lineTo(72,-9);ctx.lineTo(72,9);ctx.lineTo(48,11);ctx.lineTo(8,13);ctx.lineTo(-38,11);ctx.lineTo(-72,7);ctx.closePath();const fg=ctx.createLinearGradient(0,-13,0,13);fg.addColorStop(0,J.bodyLight);fg.addColorStop(0.35,J.bodyMid);fg.addColorStop(0.7,J.bodyMid);fg.addColorStop(1,J.bodyDark);ctx.fillStyle=fg;ctx.fill();ctx.strokeStyle='rgba(251,191,36,.85)';ctx.lineWidth=1.8;ctx.stroke();ctx.beginPath();ctx.moveTo(-15,6);ctx.lineTo(45,52);ctx.lineTo(58,44);ctx.lineTo(15,6);ctx.closePath();const wingG=ctx.createLinearGradient(-15,6,45,52);wingG.addColorStop(0,J.bodyMid);wingG.addColorStop(0.6,J.camoGray);wingG.addColorStop(1,J.bodyDark);ctx.fillStyle=wingG;ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(-15,-4);ctx.lineTo(40,-30);ctx.lineTo(52,-24);ctx.lineTo(10,-4);ctx.closePath();const wingG2=ctx.createLinearGradient(-15,-4,40,-30);wingG2.addColorStop(0,J.bodyLight);wingG2.addColorStop(0.6,J.camoBlue);wingG2.addColorStop(1,J.bodyMid);ctx.fillStyle=wingG2;ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(-58,-9);ctx.quadraticCurveTo(-52,-24,-32,-25);ctx.quadraticCurveTo(-15,-25,-8,-13);ctx.closePath();const cg=ctx.createLinearGradient(-55,-25,-10,-8);cg.addColorStop(0,J.canopyHi);cg.addColorStop(0.5,J.canopy);cg.addColorStop(1,'rgba(46,16,101,0.95)');ctx.fillStyle=cg;ctx.fill();ctx.strokeStyle='rgba(196,181,253,.9)';ctx.lineWidth=1.4;ctx.stroke();ctx.restore();}
+function drawJet(e){const J=PAL.jet;const s=e.s;ctx.save();ctx.translate(e.x,e.gy);if(e.fleeing||e.fastReturn)ctx.scale(-s,s);else ctx.scale(s,s);const flameLen=34+Math.sin(state.time*26+e.x*0.05)*6;const flameG=ctx.createLinearGradient(78,0,78+flameLen,0);flameG.addColorStop(0,'rgba(253,246,227,.95)');flameG.addColorStop(0.35,'rgba(240,216,120,.9)');flameG.addColorStop(0.75,'rgba(212,175,55,.6)');flameG.addColorStop(1,'rgba(139,105,20,0)');ctx.fillStyle=flameG;ctx.beginPath();ctx.moveTo(78,-9);ctx.quadraticCurveTo(78+flameLen*0.6,-3,78+flameLen,0);ctx.quadraticCurveTo(78+flameLen*0.6,3,78,9);ctx.closePath();ctx.fill();ctx.beginPath();ctx.moveTo(-92,0);ctx.lineTo(-72,-7);ctx.lineTo(-38,-11);ctx.lineTo(8,-13);ctx.lineTo(48,-11);ctx.lineTo(72,-9);ctx.lineTo(72,9);ctx.lineTo(48,11);ctx.lineTo(8,13);ctx.lineTo(-38,11);ctx.lineTo(-72,7);ctx.closePath();const fg=ctx.createLinearGradient(0,-13,0,13);fg.addColorStop(0,J.bodyLight);fg.addColorStop(0.35,J.bodyMid);fg.addColorStop(0.7,J.bodyMid);fg.addColorStop(1,J.bodyDark);ctx.fillStyle=fg;ctx.fill();ctx.strokeStyle='rgba(251,191,36,.85)';ctx.lineWidth=1.8;ctx.stroke();ctx.beginPath();ctx.moveTo(-15,6);ctx.lineTo(45,52);ctx.lineTo(58,44);ctx.lineTo(15,6);ctx.closePath();const wingG=ctx.createLinearGradient(-15,6,45,52);wingG.addColorStop(0,J.bodyMid);wingG.addColorStop(0.6,J.camoGray);wingG.addColorStop(1,J.bodyDark);ctx.fillStyle=wingG;ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(-15,-4);ctx.lineTo(40,-30);ctx.lineTo(52,-24);ctx.lineTo(10,-4);ctx.closePath();const wingG2=ctx.createLinearGradient(-15,-4,40,-30);wingG2.addColorStop(0,J.bodyLight);wingG2.addColorStop(0.6,J.camoBlue);wingG2.addColorStop(1,J.bodyMid);ctx.fillStyle=wingG2;ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(-58,-9);ctx.quadraticCurveTo(-52,-24,-32,-25);ctx.quadraticCurveTo(-15,-25,-8,-13);ctx.closePath();const cg=ctx.createLinearGradient(-55,-25,-10,-8);cg.addColorStop(0,J.canopyHi);cg.addColorStop(0.5,J.canopy);cg.addColorStop(1,'rgba(46,16,101,0.95)');ctx.fillStyle=cg;ctx.fill();ctx.strokeStyle='rgba(196,181,253,.9)';ctx.lineWidth=1.4;ctx.stroke();ctx.restore();}
 function drawPlacard(e){const r=placardRect(e);const s=e.s;const{baseFont,lines,lineH}=computePlacardSize(e);const poleX=r.x-6*s;const poleTopY=r.y-8*s;const poleBotY=r.y+r.h+4*s;const poleG=ctx.createLinearGradient(poleX-2*s,0,poleX+2*s,0);poleG.addColorStop(0,'#3a2a08');poleG.addColorStop(0.4,'#f0d878');poleG.addColorStop(0.6,'#d4af37');poleG.addColorStop(1,'#8b6914');ctx.strokeStyle=poleG;ctx.lineWidth=4*s;ctx.beginPath();ctx.moveTo(poleX,poleTopY);ctx.lineTo(poleX,poleBotY);ctx.stroke();const flagW=r.w;const flagH=r.h;const waveFreq=clamp(flagW/(95*s),1.4,3.2);const segs=32;const waveTime=state.time*3+e.x*0.02;const waveAmp=flagH*(flagW>150*s?0.05:0.035);function waveY(t){return Math.sin(t*Math.PI*2*waveFreq+waveTime)*waveAmp*t;}ctx.beginPath();for(let i=0;i<=segs;i++){const t=i/segs;const x=poleX+t*flagW;const y=r.y+waveY(t);if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);}ctx.lineTo(poleX+flagW,r.y+flagH+waveY(1));for(let i=segs;i>=0;i--){const t=i/segs;const x=poleX+t*flagW;const y=r.y+flagH+waveY(t);ctx.lineTo(x,y);}ctx.closePath();const flagG=ctx.createLinearGradient(poleX,r.y,poleX+flagW,r.y+flagH);flagG.addColorStop(0,'#fdf6e3');flagG.addColorStop(0.5,'#f0d878');flagG.addColorStop(1,'#d4af37');ctx.fillStyle=flagG;ctx.fill();ctx.strokeStyle='rgba(167,139,250,.9)';ctx.lineWidth=1.8*s;ctx.stroke();const fontSize=baseFont*s;ctx.font='900 '+fontSize+'px "Arial Black","Impact","Segoe UI",system-ui,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineJoin='round';const lh=lineH*s;const totalTextH=lines.length*lh;const textTx=0.5;const textCx=poleX+textTx*flagW;const startY=r.y+r.h*0.5-totalTextH*0.5+lh*0.5;const strokeW=Math.max(2.2,fontSize*0.17);for(let i=0;i<lines.length;i++){const line=lines[i];const lineY=startY+i*lh;const wv=waveY(textTx)*0.5;ctx.strokeStyle='rgba(255,255,255,.98)';ctx.lineWidth=strokeW;ctx.strokeText(line,textCx,lineY+wv);ctx.fillStyle='#0a0e1f';ctx.fillText(line,textCx,lineY+wv);}}
 function drawBullets(){for(const b of state.bullets){for(const t of b.trail){const a=t.life/t.maxLife;ctx.globalAlpha=a*0.6;ctx.fillStyle=b.enemyBullet?FX.cream:FX.goldLight;ctx.beginPath();ctx.arc(t.x,t.y,(1-a)*8+2,0,TAU);ctx.fill();}ctx.globalAlpha=1;const ang=Math.atan2(b.vy,b.vx);const g=ctx.createRadialGradient(b.x,b.y,0,b.x,b.y,24);g.addColorStop(0,'rgba(253,246,227,.95)');g.addColorStop(0.35,b.enemyBullet?'rgba(244,63,94,.7)':'rgba(212,175,55,.7)');g.addColorStop(1,'rgba(139,105,20,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(b.x,b.y,24,0,TAU);ctx.fill();ctx.save();ctx.translate(b.x,b.y);ctx.rotate(ang);if(b.enemyBullet){ctx.fillStyle='#3a0a1a';rrect(ctx,-14,-3.5,26,7,2);ctx.fill();ctx.fillStyle=FX.rose;ctx.beginPath();ctx.moveTo(12,0);ctx.lineTo(2,-4.5);ctx.lineTo(2,4.5);ctx.closePath();ctx.fill();}else{ctx.fillStyle='#3a2a08';rrect(ctx,-10,-3,18,6,2);ctx.fill();ctx.fillStyle=FX.gold;ctx.beginPath();ctx.moveTo(10,0);ctx.lineTo(6,-3);ctx.lineTo(6,3);ctx.closePath();ctx.fill();}ctx.restore();}}
 function drawCasings(){for(const c of state.casings){ctx.save();ctx.translate(c.x,c.y);ctx.rotate(c.rot);ctx.globalAlpha=Math.min(1,c.life/1.0);ctx.fillStyle='#d4af37';rrect(ctx,-3,-1.2,6,2.4,0.6);ctx.fill();ctx.restore();}ctx.globalAlpha=1;}
@@ -2202,10 +2302,9 @@ function drawAimGuide(){
   const t = state.lockTarget;
   const pulse = 0.5 + 0.5*Math.sin(state.time*8);
 
-  if(t && t.alive && !t.fleeing){
+  if(t && t.alive && !t.fleeing && !t.fastReturn){
     const pr = placardRect(t);
 
-    // 1) Garis laser dari bazooka ke target
     ctx.save();
     ctx.globalCompositeOperation = 'lighter';
 
@@ -2233,11 +2332,9 @@ function drawAimGuide(){
 
     ctx.restore();
 
-    // 2) Reticle besar di sekitar target
     drawTargetReticle(pr.cx, pr.cy, pr, pulse);
   }
   else {
-    // Tidak ada target → garis bidik pendek menunjukkan arah tembakan
     const len = 130;
     const ex = origin.x + Math.cos(player.angle)*len;
     const ey = origin.y + Math.sin(player.angle)*len;
@@ -2263,14 +2360,12 @@ function drawTargetReticle(cx, cy, pr, pulse){
   ctx.save();
   ctx.globalCompositeOperation = 'lighter';
 
-  // Lingkaran luar solid
   ctx.strokeStyle = 'rgba(167,139,250,'+(0.55+pulse*0.35)+')';
   ctx.lineWidth = 2.5;
   ctx.beginPath();
   ctx.arc(cx, cy, r, 0, TAU);
   ctx.stroke();
 
-  // Lingkaran luar putus-putus berputar
   ctx.save();
   ctx.translate(cx, cy);
   ctx.rotate(state.time*2.5);
@@ -2283,7 +2378,6 @@ function drawTargetReticle(cx, cy, pr, pulse){
   ctx.setLineDash([]);
   ctx.restore();
 
-  // 4 bracket sudut tebal
   const pad = 8;
   const bx1 = pr.x - pad,           by1 = pr.y - pad;
   const bx2 = pr.x + pr.w + pad,    by2 = pr.y + pr.h + pad;
@@ -2298,13 +2392,11 @@ function drawTargetReticle(cx, cy, pr, pulse){
   ctx.moveTo(bx1+cLen, by2); ctx.lineTo(bx1, by2); ctx.lineTo(bx1, by2-cLen);
   ctx.stroke();
 
-  // Titik tengah merah
   ctx.fillStyle = 'rgba(244,63,94,'+(0.75+pulse*0.25)+')';
   ctx.beginPath();
   ctx.arc(cx, cy, 4+pulse*2, 0, TAU);
   ctx.fill();
 
-  // Arrow segitiga di atas target
   const arrowY = by1 - 18;
   ctx.fillStyle = 'rgba(240,216,120,'+(0.85+pulse*0.15)+')';
   ctx.beginPath();
@@ -2348,8 +2440,7 @@ function render(){
     ctx.save();
     ctx.globalAlpha=e.fade;
     drawJet(e);
-    // ==== GLOW HIGHLIGHT di belakang placard target ====
-    if(state.lockTarget===e) drawTargetGlow(e);
+    if(state.lockTarget===e && !e.fastReturn) drawTargetGlow(e);
     drawPlacard(e);
     ctx.restore();
   }
@@ -2365,8 +2456,8 @@ function render(){
   drawVignette();
   ctx.restore();
   if(!state.gameOver&&!state.paused){
-    drawAimGuide();     // ← BARU: garis laser + reticle besar
-    drawLockOn();       // bracket kecil (tetap)
+    drawAimGuide();
+    drawLockOn();
     drawCrosshair();
   }
 }
@@ -2380,9 +2471,6 @@ window.addEventListener('keydown',ev=>{const k=ev.key;if(['ArrowLeft','ArrowRigh
 window.addEventListener('keyup',ev=>{keys[ev.key]=false;});
 window.addEventListener('blur',()=>{for(const k in keys)keys[k]=false;touchState.left=false;touchState.right=false;});
 
-/* ============================================================
-   BIND TOUCH BUTTON — dengan debounce anti-dobel (pointer + touch)
-   ============================================================ */
 function bindTouchButton(el,onDown,onUp){
   if(!el)return;
   let lastDown=0;
@@ -2421,17 +2509,15 @@ function bindTouchControls(){
     ()=>{touchState.right=true;},
     ()=>{touchState.right=false;});
 
-  // 🔥 TOMBOL TEMBAK — cari musuh berdasarkan sudut bidikan
   bindTouchButton(document.getElementById('tFire'),()=>{
     if(state.gameOver||state.paused)return;
     if(state.roundLock||state.reloading>0)return;
 
-    // Cari musuh yang paling dekat dengan sudut bidikan, fallback ke terdekat
     let e = null;
     let bestDiff = 0.9;
     const p = PIVOT();
     for(const en of state.enemies){
-      if(!en.alive||en.fleeing) continue;
+      if(!en.alive||en.fleeing||en.fastReturn) continue;
       const pr = placardRect(en);
       const ang = Math.atan2(pr.cy-p.y, pr.cx-p.x);
       let d = Math.abs(ang - player.angle);
@@ -2457,7 +2543,6 @@ function bindTouchControls(){
     }
   },null);
 
-  // 🔄 TOMBOL RELOAD
   bindTouchButton(document.getElementById('tReload'),()=>{
     if(!state.gameOver&&!state.paused) startReload();
   },null);
