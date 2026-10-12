@@ -28,7 +28,7 @@ body{
   padding:max(env(safe-area-inset-top),0px) max(env(safe-area-inset-right),0px) max(env(safe-area-inset-bottom),0px) max(env(safe-area-inset-left),0px);
 }
 .screen.active{display:flex}
-#loading,#menu,#settings,#howto,#levelselect{
+#loading,#welcome,#menu,#settings,#howto,#levelselect{
   background:
     radial-gradient(circle at 20% 10%,#1a1145 0%,transparent 45%),
     radial-gradient(circle at 80% 90%,#3a2a08 0%,transparent 50%),
@@ -228,15 +228,28 @@ h1{
 .level-intro.active{display:flex;animation:li 0.6s ease}
 @keyframes li{from{opacity:0}to{opacity:1}}
 .li-content{
-  max-width:min(560px,94vw);width:100%;
+  max-width:min(620px,96vw);width:100%;
   max-height:calc(100dvh - 24px);max-height:calc(100vh - 24px);
   overflow-y:auto;-webkit-overflow-scrolling:touch;
-  background:rgba(13,17,32,.78);
-  border:1px solid rgba(212,175,55,.35);
-  border-radius:clamp(12px,3vw,18px);
-  padding:clamp(14px,3.5vw,22px) clamp(12px,3.5vw,18px) clamp(10px,2.5vw,12px);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  box-shadow:0 20px 60px rgba(0,0,0,.7),0 0 60px rgba(212,175,55,.22);
+  background:
+    radial-gradient(circle at 20% 0%,rgba(212,175,55,.22),transparent 55%),
+    radial-gradient(circle at 85% 100%,rgba(167,139,250,.20),transparent 55%),
+    rgba(13,17,32,.94);
+  border:1px solid rgba(212,175,55,.5);
+  border-radius:clamp(12px,3vw,20px);
+  padding:clamp(14px,3.5vw,26px) clamp(12px,3.5vw,22px) clamp(10px,2.5vw,16px);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  box-shadow:0 30px 100px rgba(0,0,0,.85),0 0 120px rgba(212,175,55,.4),inset 0 1px 0 rgba(255,255,255,.08);
+}
+.li-biglevel{
+  font-family:'Arial Black','Segoe UI',Impact,sans-serif;
+  font-size:clamp(34px,10vw,80px);font-weight:900;
+  letter-spacing:clamp(3px,1.2vw,6px);line-height:1;
+  background:linear-gradient(180deg,#ffffff 0%,#fef3c7 25%,#f0d878 55%,#d4af37 80%,#8b6914 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 4px 24px rgba(212,175,55,1)) drop-shadow(0 0 60px rgba(167,139,250,.75));
+  margin-bottom:6px;
+  animation:titleShimmer 4.5s ease-in-out infinite;
 }
 .li-num{font-size:clamp(10px,2.8vw,17px);color:#f0d878;letter-spacing:clamp(3px,1vw,6px);text-transform:uppercase;margin-bottom:6px;opacity:.9}
 .li-loc{
@@ -247,18 +260,38 @@ h1{
   filter:drop-shadow(0 0 30px rgba(212,175,55,.85));
 }
 .li-year{font-size:clamp(11px,3vw,18px);color:#ffd700;font-weight:700;letter-spacing:2px;margin-bottom:clamp(8px,2vw,14px);text-shadow:0 0 16px rgba(255,215,0,.6)}
-.li-desc{font-size:clamp(10px,2.7vw,15px);color:#fdf6e3;line-height:1.6;opacity:.92;margin-bottom:clamp(12px,3vw,22px)}
+.li-desc{font-size:clamp(10px,2.7vw,15px);color:#fdf6e3;line-height:1.6;opacity:.92;margin-bottom:clamp(10px,2.5vw,18px)}
 .li-tag{
   display:inline-block;padding:clamp(3px,1vw,4px) clamp(8px,2.5vw,12px);
   background:rgba(212,175,55,.14);border:1px solid rgba(212,175,55,.5);
   border-radius:20px;font-size:clamp(8px,2.3vw,12px);color:#f0d878;
-  letter-spacing:1.8px;text-transform:uppercase;margin-bottom:clamp(8px,2vw,16px);
+  letter-spacing:1.8px;text-transform:uppercase;margin-bottom:clamp(6px,1.5vw,10px);
 }
 .li-lokasi{
   display:inline-block;padding:clamp(2px,0.8vw,3px) clamp(8px,2.5vw,12px);
   background:rgba(167,139,250,.14);border:1px solid rgba(167,139,250,.5);
   border-radius:20px;font-size:clamp(8px,2.3vw,12px);color:#c4b5fd;
-  letter-spacing:1.8px;text-transform:uppercase;margin-bottom:8px;margin-left:6px;
+  letter-spacing:1.8px;text-transform:uppercase;margin-bottom:10px;margin-left:6px;
+}
+.li-motivation{
+  position:relative;
+  padding:clamp(10px,2.5vw,14px) clamp(14px,3.5vw,20px);
+  margin:clamp(8px,2vw,12px) 0 clamp(8px,2vw,12px);
+  background:linear-gradient(135deg,rgba(167,139,250,.15),rgba(212,175,55,.08));
+  border:1px solid rgba(167,139,250,.5);
+  border-radius:clamp(10px,2.5vw,14px);
+  font-size:clamp(10px,2.7vw,14px);
+  font-style:italic;
+  color:#fdf6e3;
+  line-height:1.6;
+  text-align:center;
+  box-shadow:0 0 30px rgba(167,139,250,.22),inset 0 1px 0 rgba(255,255,255,.06);
+}
+.li-motivation .li-mot-star{
+  display:block;margin-bottom:4px;
+  font-size:clamp(14px,3.5vw,20px);
+  filter:drop-shadow(0 0 10px rgba(212,175,55,.9));
+  font-style:normal;
 }
 
 /* ========== TOUCH CONTROLS ========== */
@@ -604,6 +637,108 @@ h1.title-main{
 .level-card.current .lv-status{color:#c4b5fd}
 .level-card.done .lv-status{color:#f0d878}
 
+/* ========== WELCOME SCREEN ========== */
+.welcome-content{
+  width:min(700px,94vw);
+  max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 16px);
+  max-height:calc(100vh - 16px);
+  overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;
+  background:
+    radial-gradient(circle at 20% 0%,rgba(212,175,55,.20),transparent 55%),
+    radial-gradient(circle at 85% 100%,rgba(167,139,250,.18),transparent 55%),
+    rgba(13,17,32,.94);
+  border:1px solid rgba(212,175,55,.5);
+  border-radius:clamp(12px,3vw,20px);
+  padding:clamp(16px,4vw,30px) clamp(14px,3.5vw,26px) clamp(12px,3vw,18px);
+  text-align:center;
+  box-shadow:0 30px 100px rgba(0,0,0,.9),0 0 160px rgba(212,175,55,.4),inset 0 1px 0 rgba(255,255,255,.08);
+  animation:panelIn .9s cubic-bezier(.2,.9,.3,1.05);
+  position:relative;
+}
+.welcome-content::-webkit-scrollbar{width:5px}
+.welcome-content::-webkit-scrollbar-thumb{background:rgba(212,175,55,.4);border-radius:3px}
+.welcome-badge{
+  display:inline-block;
+  padding:5px 14px;
+  background:linear-gradient(90deg,rgba(212,175,55,.15),rgba(167,139,250,.15));
+  border:1px solid rgba(212,175,55,.5);
+  border-radius:20px;
+  font-size:clamp(8px,2.2vw,11px);
+  font-weight:800;letter-spacing:clamp(2px,0.8vw,3.5px);
+  color:#f0d878;text-transform:uppercase;
+  margin-bottom:12px;
+  text-shadow:0 0 12px rgba(212,175,55,.7);
+}
+.welcome-title{
+  font-family:'Arial Black','Segoe UI',Impact,system-ui,sans-serif;
+  font-size:clamp(26px,7vw,52px);font-weight:900;
+  letter-spacing:clamp(2px,1vw,4px);line-height:1;
+  background:linear-gradient(180deg,#ffffff 0%,#fef3c7 25%,#f0d878 55%,#d4af37 80%,#8b6914 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 3px 18px rgba(212,175,55,1)) drop-shadow(0 0 40px rgba(167,139,250,.7));
+  margin-bottom:6px;
+  animation:titleShimmer 4.5s ease-in-out infinite;
+}
+.welcome-sub{
+  font-size:clamp(10px,2.6vw,14px);font-weight:700;
+  letter-spacing:clamp(1.5px,0.6vw,3px);
+  color:#c4b5fd;text-transform:uppercase;
+  margin-bottom:14px;
+  text-shadow:0 0 12px rgba(167,139,250,.7);
+}
+.welcome-rotate{
+  display:flex;align-items:center;gap:12px;
+  padding:clamp(10px,2.5vw,14px) clamp(12px,3vw,18px);
+  background:linear-gradient(135deg,rgba(167,139,250,.15),rgba(212,175,55,.10));
+  border:1px solid rgba(167,139,250,.55);
+  border-radius:clamp(10px,2.5vw,14px);
+  margin-bottom:14px;
+  text-align:left;
+  box-shadow:0 0 30px rgba(167,139,250,.25),inset 0 1px 0 rgba(255,255,255,.06);
+}
+.welcome-rotate .wr-icon{
+  font-size:clamp(26px,6.5vw,36px);
+  animation:rotArrow 2s ease-in-out infinite;
+  display:inline-block;flex-shrink:0;
+  filter:drop-shadow(0 0 12px rgba(240,216,120,.85));
+}
+.welcome-rotate .wr-text{
+  font-size:clamp(10px,2.5vw,13px);
+  line-height:1.5;color:#fdf6e3;font-weight:600;
+}
+.welcome-rotate .wr-text b{color:#f0d878;text-shadow:0 0 8px rgba(212,175,55,.8)}
+.welcome-features{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:clamp(6px,1.8vw,10px);
+  margin-bottom:16px;
+  text-align:left;
+}
+.wf-item{
+  display:flex;gap:10px;align-items:flex-start;
+  padding:clamp(8px,2vw,12px) clamp(10px,2.5vw,14px);
+  background:linear-gradient(135deg,rgba(18,24,45,.92),rgba(45,30,80,.72));
+  border:1px solid rgba(212,175,55,.32);
+  border-radius:clamp(8px,2vw,12px);
+  transition:all .25s;
+}
+.wf-item:hover{border-color:rgba(212,175,55,.65);transform:translateY(-2px)}
+.wf-item .wf-icon{
+  font-size:clamp(18px,4.5vw,24px);
+  line-height:1;flex-shrink:0;
+  filter:drop-shadow(0 0 8px rgba(212,175,55,.6));
+}
+.wf-item .wf-title{
+  font-size:clamp(10px,2.5vw,12px);
+  font-weight:800;color:#f0d878;
+  letter-spacing:0.5px;margin-bottom:2px;
+}
+.wf-item .wf-desc{
+  font-size:clamp(8px,2.1vw,10px);
+  color:rgba(253,246,227,.78);
+  line-height:1.4;
+}
+
 /* ============================================================
    ROTATE OVERLAY (PORTRAIT WARNING)
    ============================================================ */
@@ -702,6 +837,7 @@ h1.title-main{
   .mgde-footer .mgde-label{font-size:8px;letter-spacing:1.4px}
   .li-loc{font-size:19px}
   .li-desc{font-size:10px}
+  .li-biglevel{font-size:34px;letter-spacing:2px}
   .level-grid{grid-template-columns:1fr}
   .level-card{padding:6px}
   .level-card .lv-name{font-size:9px}
@@ -720,6 +856,9 @@ h1.title-main{
   .wind{padding:3px 6px;font-size:8px}
   .wind-a{font-size:11px}
   .mgde-badge{font-size:5.5px;padding:2px 6px;letter-spacing:0.5px}
+  .welcome-features{grid-template-columns:1fr}
+  .wf-item .wf-title{font-size:10px}
+  .wf-item .wf-desc{font-size:8px}
 }
 @media (min-width:360px) and (max-width:479px){
   .panel{padding:14px 12px 9px}
@@ -776,11 +915,14 @@ h1.title-main{
   .go-stat span{font-size:8px}
   .go-stat strong{font-size:13px}
   .li-content{padding:12px 14px 8px}
+  .li-biglevel{font-size:clamp(28px,7vw,48px)}
   .li-loc{font-size:clamp(18px,5vw,28px);margin-bottom:4px}
   .li-year{font-size:clamp(10px,2.6vw,14px);margin-bottom:6px}
-  .li-desc{font-size:clamp(9px,2.4vw,12px);margin-bottom:10px;line-height:1.5}
+  .li-desc{font-size:clamp(9px,2.4vw,12px);margin-bottom:8px;line-height:1.5}
   .li-tag,.li-lokasi{font-size:8.5px;padding:2px 8px;margin-bottom:5px}
   .li-num{font-size:9px;letter-spacing:3px;margin-bottom:4px}
+  .li-motivation{padding:7px 12px;font-size:9px;margin:7px 0}
+  .li-motivation .li-mot-star{font-size:12px;margin-bottom:2px}
   .level-intro .mgde-footer{margin-top:6px;padding:6px 8px}
   .level-intro .mgde-footer .mgde-label{font-size:7.5px;letter-spacing:1.4px}
   .mgde-badge{font-size:5.5px;padding:2px 7px;letter-spacing:0.6px}
@@ -788,6 +930,18 @@ h1.title-main{
   .q-bar{height:2.5px}
   .level-progress{gap:2px}
   .lp-dot{width:4px;height:4px}
+  .welcome-content{padding:10px 14px 8px}
+  .welcome-badge{padding:3px 10px;font-size:8px;margin-bottom:6px}
+  .welcome-title{font-size:clamp(20px,5vw,32px);margin-bottom:3px}
+  .welcome-sub{font-size:9px;margin-bottom:8px}
+  .welcome-rotate{padding:7px 10px;margin-bottom:8px}
+  .welcome-rotate .wr-icon{font-size:22px}
+  .welcome-rotate .wr-text{font-size:9px}
+  .welcome-features{margin-bottom:10px;gap:5px}
+  .wf-item{padding:5px 8px}
+  .wf-item .wf-icon{font-size:15px}
+  .wf-item .wf-title{font-size:9px}
+  .wf-item .wf-desc{font-size:7.5px}
 }
 @media (max-height:380px) and (orientation:landscape){
   .hud-top{gap:3px}
@@ -827,13 +981,28 @@ h1.title-main{
   .go-stat span{font-size:7px}
   .go-stat strong{font-size:12px}
   .li-content{padding:10px 12px 6px;border-radius:12px}
+  .li-biglevel{font-size:clamp(24px,6.5vw,40px)}
   .li-loc{font-size:clamp(16px,4.5vw,24px)}
   .li-year{font-size:10px;margin-bottom:5px}
-  .li-desc{font-size:9px;margin-bottom:8px}
+  .li-desc{font-size:9px;margin-bottom:6px}
   .li-tag,.li-lokasi{font-size:8px;padding:2px 7px;margin-bottom:4px}
   .li-num{font-size:8px;letter-spacing:2.5px;margin-bottom:3px}
+  .li-motivation{padding:5px 10px;font-size:8.5px;margin:5px 0}
+  .li-motivation .li-mot-star{font-size:11px;margin-bottom:1px}
   .mgde-badge{font-size:5px;padding:1.5px 6px;letter-spacing:0.5px}
   .lbl{letter-spacing:0.8px}
+  .welcome-content{padding:8px 12px 6px;border-radius:12px}
+  .welcome-badge{padding:2px 8px;font-size:7px;margin-bottom:4px}
+  .welcome-title{font-size:clamp(18px,4.5vw,26px)}
+  .welcome-sub{font-size:8px;margin-bottom:5px}
+  .welcome-rotate{padding:5px 8px;margin-bottom:5px;gap:8px}
+  .welcome-rotate .wr-icon{font-size:18px}
+  .welcome-rotate .wr-text{font-size:8px}
+  .welcome-features{margin-bottom:6px;gap:4px}
+  .wf-item{padding:4px 6px;gap:6px}
+  .wf-item .wf-icon{font-size:13px}
+  .wf-item .wf-title{font-size:8px}
+  .wf-item .wf-desc{font-size:7px}
 }
 @media (orientation: landscape) and (min-aspect-ratio: 2/1){
   .box{min-width:clamp(56px,10vw,80px)}
@@ -890,6 +1059,73 @@ h1.title-main{
     <div class="mge-loader-title">Memuat Game</div>
     <div class="mge-loader-bar"><div class="mge-loader-bar-fill"></div></div>
     <div class="mge-loader-sub">BAZOOKA GAME · Ekonomi Bab 1</div>
+  </div>
+</div>
+
+<!-- WELCOME -->
+<div id="welcome" class="screen">
+  <div class="welcome-content">
+    <div class="welcome-badge">MAEDA GAMES EDU · PRESENTS</div>
+    <h1 class="welcome-title">BAZOOKA GAME</h1>
+    <p class="welcome-sub">Ekonomi Bab 1 · Edisi Premium</p>
+
+    <div class="welcome-rotate">
+      <span class="wr-icon">📱</span>
+      <div class="wr-text">
+        Putar perangkat ke <b>MODE LANDSCAPE</b> (mendatar) untuk membuka pengalaman <b>premium</b> terbaik — grafik jernih, kontrol nyaman, dan misi tanpa hambatan.
+      </div>
+    </div>
+
+    <div class="welcome-features">
+      <div class="wf-item">
+        <span class="wf-icon">✨</span>
+        <div>
+          <div class="wf-title">Grafik Premium</div>
+          <div class="wf-desc">Bloom, aura, partikel, dan pencahayaan dinamis.</div>
+        </div>
+      </div>
+      <div class="wf-item">
+        <span class="wf-icon">🎯</span>
+        <div>
+          <div class="wf-title">7 Level Epik</div>
+          <div class="wf-desc">70 pertanyaan ekonomi interaktif dari mudah ke sulit.</div>
+        </div>
+      </div>
+      <div class="wf-item">
+        <span class="wf-icon">🛡️</span>
+        <div>
+          <div class="wf-title">Perisai & Combo</div>
+          <div class="wf-desc">Mekanik tempur seru dengan bonus combo beruntun.</div>
+        </div>
+      </div>
+      <div class="wf-item">
+        <span class="wf-icon">📐</span>
+        <div>
+          <div class="wf-title">Responsif Semua Layar</div>
+          <div class="wf-desc">Nyaman dimainkan di HP kecil, tablet, hingga desktop.</div>
+        </div>
+      </div>
+      <div class="wf-item">
+        <span class="wf-icon">💾</span>
+        <div>
+          <div class="wf-title">Progres Tersimpan</div>
+          <div class="wf-desc">Lanjutkan misi kapan saja tanpa kehilangan skor.</div>
+        </div>
+      </div>
+      <div class="wf-item">
+        <span class="wf-icon">🎵</span>
+        <div>
+          <div class="wf-title">Audio Sinematik</div>
+          <div class="wf-desc">Efek suara ledakan, tembakan, dan perisai memukau.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="btns">
+      <button class="btn btn-p btn-prem" id="bWelcome">▶ MULAI SEKARANG</button>
+    </div>
+
+    <div class="mgde-footer"><span class="mgde-label">MAEDA GAMES EDU</span></div>
   </div>
 </div>
 
@@ -1025,14 +1261,19 @@ h1.title-main{
   <div class="mgde-badge">MAEDA GAMES EDU</div>
   <div class="level-intro" id="levelIntro">
     <div class="li-content">
+      <div class="li-biglevel" id="liBigLevel">LEVEL 1</div>
       <div class="li-tag" id="liTag">MISI 1 DARI 7</div>
       <div class="li-lokasi" id="liLokasi">🏔️ GUNUNG SENJA</div>
       <div class="li-num">TOPIK PEMBELAJARAN</div>
       <div class="li-loc" id="liLoc">KELANGKAAN</div>
       <div class="li-year" id="liYear">Materi 1 dari 7</div>
+      <div class="li-motivation" id="liMotivation">
+        <span class="li-mot-star">★</span>
+        —
+      </div>
       <div class="li-desc" id="liDesc">—</div>
       <div class="level-progress" id="liDots"></div>
-      <button class="btn btn-p btn-prem" id="liStart" style="width:min(260px,80vw);margin:0 auto;display:block">⚔ MULAI PERTEMPURAN</button>
+      <button class="btn btn-p btn-prem" id="liStart" style="width:min(280px,84vw);margin:6px auto 0;display:block">⚔ MULAI PERTEMPURAN</button>
       <div class="mgde-footer"><span class="mgde-label">MAEDA GAMES EDU</span></div>
     </div>
   </div>
@@ -1145,6 +1386,7 @@ const LEVELS = [
     id:1, name:"KELANGKAAN & KEBUTUHAN", year:"Materi 1 — Masalah Pokok Ekonomi",
     tag:"MISI 1 DARI 7", location:"mountain", locationName:"🏔️ GUNUNG SENJA",
     desc:"Kelangkaan terjadi karena kebutuhan manusia tidak terbatas, sedangkan alat pemuas kebutuhan terbatas.",
+    motivation:"Kelangkaan bukan penghalang, tapi pemicu kreativitas. Pahami, maka kau kan menang!",
     theme: TEMA_MOUNTAIN,
     questions:[
       {q:"Kelangkaan (scarcity) terjadi karena...",a:"Kebutuhan tidak terbatas, alat pemuas terbatas",w:["Kebutuhan terbatas, alat pemuas banyak","Semua kebutuhan dapat dipenuhi","Alat pemuas tidak terbatas"]},
@@ -1163,6 +1405,7 @@ const LEVELS = [
     id:2, name:"MACAM KEBUTUHAN & ALAT PEMUAS", year:"Materi 2 — Klasifikasi & Barang/Jasa",
     tag:"MISI 2 DARI 7", location:"river", locationName:"🌅 DELTA EMAS",
     desc:"Kebutuhan dibagi menurut intensitas, sifat, waktu, subjek. Alat pemuasnya berupa barang dan jasa.",
+    motivation:"Kenali kebutuhanmu, maka kau kan bijak memilih. Maju pantang mundur!",
     theme: TEMA_RIVER,
     questions:[
       {q:"Kebutuhan pokok yang wajib dipenuhi disebut...",a:"Primer",w:["Sekunder","Tersier","Rohani"]},
@@ -1181,6 +1424,7 @@ const LEVELS = [
     id:3, name:"SKALA PRIORITAS & MOTIF PRINSIP", year:"Materi 3 — Urutan Kebutuhan & Dorongan Ekonomi",
     tag:"MISI 3 DARI 7", location:"forest", locationName:"🌿 KUIL ZAMRUD",
     desc:"Skala prioritas = urutan kebutuhan. Motif = alasan, prinsip = pedoman, tindakan = perbuatan ekonomi.",
+    motivation:"Prioritas adalah kunci kesuksesan. Susun strategimu, raih kemenangan!",
     theme: TEMA_FOREST,
     questions:[
       {q:"Skala prioritas artinya...",a:"Urutan kebutuhan berdasarkan kepentingan",w:["Daftar semua keinginan","Jumlah uang yang dimiliki","Daftar belanja bulanan"]},
@@ -1199,6 +1443,7 @@ const LEVELS = [
     id:4, name:"BIAYA PELUANG & ILMU EKONOMI", year:"Materi 4 — Pilihan & Ruang Lingkup",
     tag:"MISI 4 DARI 7", location:"sea", locationName:"🌊 LAUT AZURE",
     desc:"Biaya peluang muncul karena pilihan. Ilmu ekonomi dibagi menjadi mikro, makro, positif, dan normatif.",
+    motivation:"Setiap pilihan ada harganya. Pilih dengan cerdas, bertarung dengan gagah!",
     theme: TEMA_SEA,
     questions:[
       {q:"Biaya peluang (opportunity cost) artinya...",a:"Nilai yang dikorbankan karena memilih",w:["Harga barang di pasar","Biaya produksi pabrik","Ongkos transportasi"]},
@@ -1217,6 +1462,7 @@ const LEVELS = [
     id:5, name:"KEGIATAN EKONOMI", year:"Materi 5 — Produksi, Distribusi, Konsumsi",
     tag:"MISI 5 DARI 7", location:"snow", locationName:"❄️ AURORA ROSE",
     desc:"Kegiatan ekonomi meliputi produksi (menghasilkan), distribusi (menyalurkan), dan konsumsi (menghabiskan).",
+    motivation:"Produksi, distribusi, konsumsi — rantai ekonomi yang menggerakkan dunia!",
     theme: TEMA_SNOW,
     questions:[
       {q:"Kegiatan menghasilkan barang/jasa disebut...",a:"Produksi",w:["Distribusi","Konsumsi","Investasi"]},
@@ -1235,6 +1481,7 @@ const LEVELS = [
     id:6, name:"FAKTOR PRODUKSI & PELAKU EKONOMI", year:"Materi 6 — Balas Jasa & Circular Flow",
     tag:"MISI 6 DARI 7", location:"mountain", locationName:"🏔️ GUNUNG SENJA",
     desc:"Empat faktor produksi & balas jasanya, plus pelaku ekonomi dalam circular flow diagram.",
+    motivation:"Faktor produksi & pelaku ekonomi — pilar kekuatan bangsa. Taklukkan!",
     theme: TEMA_MOUNTAIN,
     questions:[
       {q:"Faktor produksi alam mendapat balas jasa berupa...",a:"Sewa",w:["Upah","Bunga","Laba"]},
@@ -1253,6 +1500,7 @@ const LEVELS = [
     id:7, name:"EKONOMI INDONESIA", year:"Materi 7 — Sistem Ekonomi Pancasila",
     tag:"MISI 7 DARI 7", location:"snow", locationName:"❄️ AURORA ROSE",
     desc:"Sistem ekonomi Indonesia berlandaskan Pancasila dan UUD 1945 Pasal 33, mengutamakan koperasi & gotong royong.",
+    motivation:"Ekonomi Pancasila, jiwa gotong royong. Akhiri misi ini dengan kejayaan!",
     theme: TEMA_SNOW,
     questions:[
       {q:"Sistem ekonomi Indonesia berdasarkan...",a:"Pancasila",w:["Kapitalisme","Sosialisme murni","Liberalisme"]},
@@ -1447,6 +1695,8 @@ function startLevel(idx){
   document.getElementById('liLoc').textContent=level.name;
   document.getElementById('liYear').textContent=level.year;
   document.getElementById('liDesc').textContent=level.desc;
+  document.getElementById('liBigLevel').textContent='LEVEL '+(idx+1);
+  document.getElementById('liMotivation').innerHTML='<span class="li-mot-star">★</span>'+level.motivation;
   document.getElementById('levelIntro').classList.add('active');
   document.getElementById('hLevel').textContent=(idx+1)+'/'+TOTAL_LEVELS;
   updateHudAll();
@@ -1827,7 +2077,7 @@ function bindTouchButton(el,onDown,onUp){const down=(ev)=>{ev.preventDefault();e
 function bindTouchControls(){bindTouchButton(document.getElementById('tLeft'),()=>{touchState.left=true;},()=>{touchState.left=false;});bindTouchButton(document.getElementById('tRight'),()=>{touchState.right=true;},()=>{touchState.right=false;});bindTouchButton(document.getElementById('tFire'),()=>{if(state.gameOver||state.paused)return;if(state.roundLock||state.reloading>0)return;aimNearestEnemy();state.pendingTarget=findNearestEnemy();state.pendingFire=true;},null);bindTouchButton(document.getElementById('tReload'),()=>{if(!state.gameOver&&!state.paused)startReload();},null);}
 function updateTouchControlsVisibility(){const ctrls=document.getElementById('touchCtrls');const portrait=isPortrait();const on=IS_TOUCH&&settings.touch&&!portrait;ctrls.classList.toggle('on',on);}
 
-function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='menu')document.title='BAZOOKA GAME — Ekonomi Bab 1 | MGE';else if(id==='howto')document.title='BAZOOKA GAME — Cara Main | MGE';else if(id==='settings')document.title='BAZOOKA GAME — Pengaturan | MGE';else if(id==='levelselect')document.title='BAZOOKA GAME — Pilih Level | MGE';}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='menu')document.title='BAZOOKA GAME — Ekonomi Bab 1 | MGE';else if(id==='howto')document.title='BAZOOKA GAME — Cara Main | MGE';else if(id==='settings')document.title='BAZOOKA GAME — Pengaturan | MGE';else if(id==='levelselect')document.title='BAZOOKA GAME — Pilih Level | MGE';else if(id==='welcome')document.title='BAZOOKA GAME — Selamat Datang | MGE';}
 function togglePause(){if(state.gameOver)return;if(isPortrait())return;state.paused=!state.paused;document.getElementById('pauseOv').classList.toggle('active',state.paused);}
 function updateMenuProgress(){const idx=getUnlockedLevel();document.getElementById('progressVal').textContent='LEVEL '+(idx+1)+'/'+TOTAL_LEVELS;}
 
@@ -1837,6 +2087,7 @@ function doRestart(){document.getElementById('goOv').classList.remove('active');
 function quitToMenu(){state.running=false;document.getElementById('levelIntro').classList.remove('active');showScreen('menu');document.getElementById('hsVal').textContent=getHighscore();updateMenuProgress();}
 
 function bindUI(){
+  document.getElementById('bWelcome').addEventListener('click',()=>{SFX.click();showScreen('menu');});
   document.getElementById('bStart').addEventListener('click',()=>{SFX.click();startGame();});
   document.getElementById('bLevels').addEventListener('click',()=>{SFX.click();renderLevelGrid();showScreen('levelselect');});
   document.getElementById('bLevelsBack').addEventListener('click',()=>{SFX.click();showScreen('menu');});
@@ -1863,16 +2114,16 @@ loadSettings();bindUI();
 document.getElementById('hsVal').textContent=getHighscore();
 updateMenuProgress();
 
-document.addEventListener('touchmove',e=>{if(e.target.closest('.panel')||e.target.closest('.o-panel')||e.target.closest('.level-intro'))return;e.preventDefault();},{passive:false});
+document.addEventListener('touchmove',e=>{if(e.target.closest('.panel')||e.target.closest('.o-panel')||e.target.closest('.level-intro')||e.target.closest('.welcome-content'))return;e.preventDefault();},{passive:false});
 document.addEventListener('gesturestart',e=>e.preventDefault());
 document.addEventListener('dblclick',e=>e.preventDefault());
 
 setTimeout(()=>{
   document.getElementById('hsVal').textContent=getHighscore();
   updateMenuProgress();
-  document.title='BAZOOKA GAME — Ekonomi Bab 1 | MGE';
+  document.title='BAZOOKA GAME — Selamat Datang | MGE';
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('menu').classList.add('active');
+  document.getElementById('welcome').classList.add('active');
 },3000);
 
 requestAnimationFrame(loop);
@@ -1890,7 +2141,7 @@ setInterval(updateHudWind,100);
   function spawnSpark(){sparks.push({x:Math.random()*MW,y:MH+20,vx:(Math.random()-.5)*30,vy:-40-Math.random()*90,life:3+Math.random()*3,maxLife:6,r:1.2+Math.random()*2.5,hue:40+Math.random()*40});}
   for(let i=0;i<10;i++)spawnSpark();
   let lastT=performance.now();
-  function loop(now){const dt=Math.min(.05,(now-lastT)/1000);lastT=now;const menuActive=document.getElementById('menu').classList.contains('active')||document.getElementById('levelselect').classList.contains('active');c2.clearRect(0,0,MW,MH);if(menuActive){const g1=c2.createRadialGradient(MW*.28,MH*.2,0,MW*.28,MH*.2,MH*.95);g1.addColorStop(0,'rgba(212,175,55,0.22)');g1.addColorStop(1,'rgba(212,175,55,0)');c2.fillStyle=g1;c2.fillRect(0,0,MW,MH);const g2=c2.createRadialGradient(MW*.78,MH*.85,0,MW*.78,MH*.85,MH*.85);g2.addColorStop(0,'rgba(167,139,250,0.18)');g2.addColorStop(1,'rgba(167,139,250,0)');c2.fillStyle=g2;c2.fillRect(0,0,MW,MH);c2.strokeStyle='rgba(212,175,55,.09)';c2.lineWidth=.5;for(let x=0;x<MW;x+=60){c2.beginPath();c2.moveTo(x,0);c2.lineTo(x,MH);c2.stroke();}for(let y=0;y<MH;y+=60){c2.beginPath();c2.moveTo(0,y);c2.lineTo(MW,y);c2.stroke();}for(const p of pts){p.x+=p.vx*dt;p.y+=p.vy*dt;if(p.x<-10)p.x=MW+10;if(p.x>MW+10)p.x=-10;if(p.y<-10)p.y=MH+10;if(p.y>MH+10)p.y=-10;p.phase+=dt*2;const tw=.5+.5*Math.sin(p.phase);c2.fillStyle='hsla('+p.hue+',85%,72%,'+(.4+tw*.5)+')';c2.shadowBlur=8;c2.shadowColor='hsla('+p.hue+',85%,60%,.6)';c2.beginPath();c2.arc(p.x,p.y,p.r*(.8+tw*.5),0,Math.PI*2);c2.fill();c2.shadowBlur=0;}c2.lineWidth=.7;for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y;const d2=dx*dx+dy*dy;if(d2<130*130){const a=(1-Math.sqrt(d2)/130)*.22;const hue=(pts[i].hue+pts[j].hue)/2;c2.strokeStyle='hsla('+hue+',80%,70%,'+a+')';c2.beginPath();c2.moveTo(pts[i].x,pts[i].y);c2.lineTo(pts[j].x,pts[j].y);c2.stroke();}}for(let i=sparks.length-1;i>=0;i--){const s=sparks[i];s.x+=s.vx*dt;s.y+=s.vy*dt;s.vy+=8*dt;s.life-=dt;if(s.life<=0||s.y<-20){sparks.splice(i,1);spawnSpark();continue;}const a=Math.min(1,s.life/s.maxLife);c2.fillStyle='hsla('+s.hue+',95%,72%,'+a+')';c2.shadowBlur=14;c2.shadowColor='hsla('+s.hue+',95%,65%,'+a+')';c2.beginPath();c2.arc(s.x,s.y,s.r,0,Math.PI*2);c2.fill();c2.shadowBlur=0;}}requestAnimationFrame(loop);}
+  function loop(now){const dt=Math.min(.05,(now-lastT)/1000);lastT=now;const menuActive=document.getElementById('menu').classList.contains('active')||document.getElementById('levelselect').classList.contains('active')||document.getElementById('welcome').classList.contains('active');c2.clearRect(0,0,MW,MH);if(menuActive){const g1=c2.createRadialGradient(MW*.28,MH*.2,0,MW*.28,MH*.2,MH*.95);g1.addColorStop(0,'rgba(212,175,55,0.22)');g1.addColorStop(1,'rgba(212,175,55,0)');c2.fillStyle=g1;c2.fillRect(0,0,MW,MH);const g2=c2.createRadialGradient(MW*.78,MH*.85,0,MW*.78,MH*.85,MH*.85);g2.addColorStop(0,'rgba(167,139,250,0.18)');g2.addColorStop(1,'rgba(167,139,250,0)');c2.fillStyle=g2;c2.fillRect(0,0,MW,MH);c2.strokeStyle='rgba(212,175,55,.09)';c2.lineWidth=.5;for(let x=0;x<MW;x+=60){c2.beginPath();c2.moveTo(x,0);c2.lineTo(x,MH);c2.stroke();}for(let y=0;y<MH;y+=60){c2.beginPath();c2.moveTo(0,y);c2.lineTo(MW,y);c2.stroke();}for(const p of pts){p.x+=p.vx*dt;p.y+=p.vy*dt;if(p.x<-10)p.x=MW+10;if(p.x>MW+10)p.x=-10;if(p.y<-10)p.y=MH+10;if(p.y>MH+10)p.y=-10;p.phase+=dt*2;const tw=.5+.5*Math.sin(p.phase);c2.fillStyle='hsla('+p.hue+',85%,72%,'+(.4+tw*.5)+')';c2.shadowBlur=8;c2.shadowColor='hsla('+p.hue+',85%,60%,.6)';c2.beginPath();c2.arc(p.x,p.y,p.r*(.8+tw*.5),0,Math.PI*2);c2.fill();c2.shadowBlur=0;}c2.lineWidth=.7;for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y;const d2=dx*dx+dy*dy;if(d2<130*130){const a=(1-Math.sqrt(d2)/130)*.22;const hue=(pts[i].hue+pts[j].hue)/2;c2.strokeStyle='hsla('+hue+',80%,70%,'+a+')';c2.beginPath();c2.moveTo(pts[i].x,pts[i].y);c2.lineTo(pts[j].x,pts[j].y);c2.stroke();}}for(let i=sparks.length-1;i>=0;i--){const s=sparks[i];s.x+=s.vx*dt;s.y+=s.vy*dt;s.vy+=8*dt;s.life-=dt;if(s.life<=0||s.y<-20){sparks.splice(i,1);spawnSpark();continue;}const a=Math.min(1,s.life/s.maxLife);c2.fillStyle='hsla('+s.hue+',95%,72%,'+a+')';c2.shadowBlur=14;c2.shadowColor='hsla('+s.hue+',95%,65%,'+a+')';c2.beginPath();c2.arc(s.x,s.y,s.r,0,Math.PI*2);c2.fill();c2.shadowBlur=0;}}requestAnimationFrame(loop);}
   requestAnimationFrame(loop);
 })();
 
