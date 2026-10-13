@@ -2,7 +2,8 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0A0E1A">
   <title>Bazooka Games — Game Edukasi IPS</title>
 
   <style>
@@ -10,16 +11,29 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
       font-family: Arial, sans-serif;
     }
 
     html {
       scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
     }
 
     body {
       background: #0A0E1A;
       color: white;
+      overflow-x: hidden;
+    }
+
+    img, svg { max-width: 100%; height: auto; display: block; }
+
+    :root {
+      --pad-x: clamp(16px, 5vw, 8%);
+      --gold: #F5C518;
+      --gold-2: #E8A317;
+      --gold-3: #FFD84D;
     }
 
     /* ========== LOADING SCREEN ========== */
@@ -32,7 +46,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 24px;
+      gap: clamp(16px, 4vw, 24px);
+      padding: 20px;
       transition: opacity .7s ease, visibility .7s ease;
     }
     #loader.hide {
@@ -62,8 +77,8 @@
     #loader::after {
       content: '';
       position: absolute;
-      width: 520px;
-      height: 520px;
+      width: min(520px, 90vw);
+      height: min(520px, 90vw);
       border-radius: 50%;
       background: radial-gradient(circle, rgba(245,197,24,0.35), transparent 65%);
       filter: blur(90px);
@@ -144,7 +159,7 @@
     .mge-text {
       position: relative;
       font-family: 'Space Grotesk', Arial, sans-serif;
-      font-size: 44px;
+      font-size: clamp(30px, 8.5vw, 44px);
       font-weight: 900;
       letter-spacing: 2px;
       line-height: 1;
@@ -194,17 +209,19 @@
       gap: 10px;
       margin-top: 4px;
       animation: fadeInUp .9s ease .2s both;
+      max-width: 100%;
     }
     .brand-text .brand-line {
-      width: 26px;
+      width: clamp(14px, 4vw, 26px);
       height: 1px;
       background: linear-gradient(90deg, transparent, #F5C518, transparent);
+      flex: 0 0 auto;
     }
     .brand-text .brand-label {
       font-family: 'Space Grotesk', Arial, sans-serif;
-      font-size: 13px;
+      font-size: clamp(9.5px, 2.8vw, 13px);
       font-weight: 700;
-      letter-spacing: 5px;
+      letter-spacing: clamp(2px, 1vw, 5px);
       text-transform: uppercase;
       background: linear-gradient(90deg, #E8A317 0%, #F5C518 50%, #E8A317 100%);
       background-size: 200% 100%;
@@ -222,9 +239,9 @@
     .loader-title {
       position: relative;
       z-index: 1;
-      font-size: 15px;
+      font-size: clamp(12px, 3.2vw, 15px);
       font-weight: bold;
-      letter-spacing: 4px;
+      letter-spacing: clamp(2px, 1vw, 4px);
       text-transform: uppercase;
       color: #F5F1E8;
       animation: fadeInUp .8s ease .3s both;
@@ -233,8 +250,8 @@
       position: relative;
       z-index: 1;
       color: #A8A29A;
-      font-size: 11px;
-      letter-spacing: 2px;
+      font-size: clamp(9.5px, 2.6vw, 11px);
+      letter-spacing: clamp(1px, .6vw, 2px);
       text-transform: uppercase;
       animation: fadeInUp .8s ease .4s both;
     }
@@ -246,7 +263,7 @@
     .loader-bar {
       position: relative;
       z-index: 1;
-      width: 240px;
+      width: min(240px, 70vw);
       height: 4px;
       background: #141B2D;
       border-radius: 4px;
@@ -271,10 +288,11 @@
 
     /* ========== HEADER ========== */
     header {
-      padding: 20px 8%;
+      padding: clamp(12px, 3vw, 20px) var(--pad-x);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 10px;
       background: #141B2D;
       position: sticky;
       top: 0;
@@ -283,35 +301,40 @@
     }
 
     .logo {
-      font-size: 24px;
+      font-size: clamp(14px, 4vw, 22px);
       font-weight: bold;
       color: #F5C518;
+      white-space: nowrap;
+      flex: 1 1 auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     nav {
       display: flex;
       align-items: center;
-      gap: 25px;
+      gap: clamp(12px, 2vw, 25px);
+      flex: 0 0 auto;
     }
 
     nav a {
       color: #F5F1E8;
       text-decoration: none;
-      font-size: 15px;
+      font-size: clamp(12px, 3.2vw, 15px);
       transition: color .3s ease;
+      white-space: nowrap;
     }
 
-    nav a:hover {
-      color: #F5C518;
-    }
+    nav a:hover { color: #F5C518; }
 
     nav a.materi-link {
       background: linear-gradient(135deg, #E8A317, #F5C518);
-      padding: 9px 20px;
+      padding: clamp(7px, 1.8vw, 9px) clamp(12px, 3vw, 20px);
       border-radius: 8px;
       font-weight: bold;
       box-shadow: 0 4px 14px rgba(245,197,24,0.35);
       color: #0A0E1A;
+      transition: all .3s ease;
     }
 
     nav a.materi-link:hover {
@@ -324,39 +347,43 @@
     /* ========== HERO ========== */
     .hero {
       min-height: 85vh;
+      min-height: 85dvh;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 40px;
-      padding: 60px 8%;
+      gap: clamp(24px, 5vw, 40px);
+      padding: clamp(40px, 8vw, 60px) var(--pad-x);
       background: linear-gradient(135deg, #0A0E1A, #1F2942);
     }
 
     .hero-text {
       max-width: 550px;
+      flex: 1 1 320px;
+      min-width: 0;
     }
 
     .hero-text h1 {
-      font-size: 55px;
-      margin-bottom: 20px;
+      font-size: clamp(28px, 7.5vw, 55px);
+      margin-bottom: clamp(14px, 3vw, 20px);
       line-height: 1.15;
+      letter-spacing: -0.5px;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
 
-    .hero-text h1 span {
-      color: #F5C518;
-    }
+    .hero-text h1 span { color: #F5C518; }
 
     .hero-text p {
-      font-size: 18px;
+      font-size: clamp(14px, 3.6vw, 18px);
       line-height: 1.6;
       color: #D8D3C4;
-      margin-bottom: 30px;
+      margin-bottom: clamp(22px, 5vw, 30px);
     }
 
     .btn {
       display: inline-block;
-      padding: 14px 28px;
+      padding: clamp(12px, 3vw, 14px) clamp(22px, 5vw, 28px);
       background: linear-gradient(135deg, #E8A317, #F5C518);
       color: #0A0E1A;
       text-decoration: none;
@@ -365,20 +392,22 @@
       transition: 0.3s;
       cursor: pointer;
       border: none;
-      font-size: 16px;
+      font-size: clamp(14px, 3.6vw, 16px);
       box-shadow: 0 4px 16px rgba(245,197,24,0.35);
     }
 
-    .btn:hover {
+    .btn:hover, .btn:active {
       background: linear-gradient(135deg, #D4900F, #E8A317);
       transform: scale(1.05);
       box-shadow: 0 8px 24px rgba(245,197,24,0.6);
     }
 
     .plane {
-      font-size: 180px;
+      font-size: clamp(80px, 22vw, 180px);
+      line-height: 1;
       animation: terbang 3s infinite ease-in-out;
       filter: drop-shadow(0 0 30px rgba(245,197,24,0.5));
+      flex: 0 0 auto;
     }
 
     @keyframes terbang {
@@ -388,34 +417,35 @@
 
     /* ========== SECTION ========== */
     .subjects {
-      padding: 70px 8%;
+      padding: clamp(46px, 9vw, 70px) var(--pad-x);
       text-align: center;
       background: #141B2D;
       position: relative;
     }
 
     .subjects h2 {
-      font-size: 35px;
-      margin-bottom: 15px;
+      font-size: clamp(22px, 6vw, 35px);
+      margin-bottom: clamp(10px, 2.5vw, 15px);
       color: #F5F1E8;
+      line-height: 1.25;
     }
 
     .subjects .section-desc {
       color: #A8A29A;
-      font-size: 16px;
+      font-size: clamp(13.5px, 3.5vw, 16px);
       max-width: 680px;
-      margin: 0 auto 40px;
+      margin: 0 auto clamp(26px, 6vw, 40px);
       line-height: 1.6;
     }
 
     .cards {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      gap: clamp(14px, 2.5vw, 20px);
     }
 
     .card {
-      padding: 30px 20px;
+      padding: clamp(22px, 5vw, 30px) clamp(16px, 4vw, 20px);
       background: #1C2540;
       border-radius: 15px;
       transition: 0.3s;
@@ -424,9 +454,10 @@
       display: block;
       cursor: pointer;
       border: 2px solid transparent;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .card:hover {
+    .card:hover, .card:active {
       transform: translateY(-8px);
       background: #232E4D;
       border-color: #F5C518;
@@ -434,23 +465,27 @@
     }
 
     .card .icon {
-      font-size: 45px;
-      margin-bottom: 15px;
+      font-size: clamp(36px, 9vw, 45px);
+      margin-bottom: clamp(10px, 2.5vw, 15px);
+      line-height: 1;
     }
 
     .card h3 {
       margin-bottom: 10px;
       color: #F5C518;
+      font-size: clamp(16px, 4.2vw, 19px);
     }
 
     .card p {
       color: #A8A29A;
+      font-size: clamp(13px, 3.4vw, 15px);
+      line-height: 1.55;
     }
 
     /* ========== BRAND FOOTER PER SECTION ========== */
     .section-brand {
-      margin-top: 50px;
-      padding-top: 24px;
+      margin-top: clamp(34px, 7vw, 50px);
+      padding-top: clamp(18px, 4vw, 24px);
       border-top: 1px solid rgba(245,197,24,0.15);
       display: flex;
       align-items: center;
@@ -460,15 +495,16 @@
       flex-basis: 100%;
     }
     .section-brand .brand-line {
-      width: 36px;
+      width: clamp(20px, 6vw, 36px);
       height: 1px;
       background: linear-gradient(90deg, transparent, #F5C518, transparent);
+      flex: 0 0 auto;
     }
     .section-brand .brand-name {
       font-family: 'Space Grotesk', Arial, sans-serif;
-      font-size: 12px;
+      font-size: clamp(10px, 2.8vw, 12px);
       font-weight: 700;
-      letter-spacing: 5px;
+      letter-spacing: clamp(2px, 1vw, 5px);
       text-transform: uppercase;
       background: linear-gradient(90deg, #E8A317 0%, #F5C518 50%, #E8A317 100%);
       background-size: 200% 100%;
@@ -482,9 +518,10 @@
     /* ========== FOOTER ========== */
     footer {
       text-align: center;
-      padding: 25px;
+      padding: clamp(20px, 5vw, 25px) var(--pad-x);
       background: #05080F;
       color: #A8A29A;
+      font-size: clamp(12px, 3.2vw, 14px);
     }
     footer .footer-brand {
       display: flex;
@@ -494,17 +531,18 @@
       margin-bottom: 12px;
       padding-bottom: 14px;
       border-bottom: 1px solid rgba(245,197,24,0.15);
+      flex-wrap: wrap;
     }
     footer .footer-brand .brand-line {
-      width: 36px;
+      width: clamp(20px, 6vw, 36px);
       height: 1px;
       background: linear-gradient(90deg, transparent, #F5C518, transparent);
     }
     footer .footer-brand .brand-name {
       font-family: 'Space Grotesk', Arial, sans-serif;
-      font-size: 12px;
+      font-size: clamp(10px, 2.8vw, 12px);
       font-weight: 700;
-      letter-spacing: 5px;
+      letter-spacing: clamp(2px, 1vw, 5px);
       text-transform: uppercase;
       background: linear-gradient(90deg, #E8A317 0%, #F5C518 50%, #E8A317 100%);
       background-size: 200% 100%;
@@ -512,28 +550,171 @@
       background-clip: text;
       -webkit-text-fill-color: transparent;
       animation: brandShine 3.5s linear infinite;
+      white-space: nowrap;
     }
 
-    /* ========== RESPONSIVE ========== */
-    @media (max-width: 800px) {
+    /* ============================================================
+       RESPONSIVE — SEMUA LAYAR HP
+       ============================================================ */
+
+    /* Tablet & HP besar */
+    @media (max-width: 900px) {
+      .cards { grid-template-columns: repeat(2, 1fr); }
+      nav a:not(.materi-link) { display: none; } /* sembunyikan link teks */
+    }
+
+    /* HP standar */
+    @media (max-width: 720px) {
       .hero {
         flex-direction: column;
         text-align: center;
-        gap: 40px;
+        gap: clamp(24px, 6vw, 36px);
+        min-height: auto;
       }
-      .hero-text h1 { font-size: 40px; }
-      .plane { font-size: 100px; }
-      .cards { grid-template-columns: 1fr 1fr; }
-      nav { display: none; }
-      .mge-logo-wrap { width: 120px; height: 120px; }
-      .mge-text { font-size: 34px; }
-      .brand-text .brand-label { font-size: 11px; letter-spacing: 4px; }
-      .brand-text .brand-line { width: 18px; }
+      .hero-text { max-width: 100%; }
+      .plane { font-size: clamp(80px, 26vw, 130px); }
     }
 
-    @media (max-width: 500px) {
-      .cards { grid-template-columns: 1fr; }
-      .logo { font-size: 18px; }
+    /* HP 5.5" & HP modern (≤ 480px) */
+    @media (max-width: 480px) {
+      header {
+        padding: 12px var(--pad-x);
+      }
+      .logo { font-size: 14px; }
+      nav a.materi-link {
+        padding: 7px 12px;
+        font-size: 12px;
+      }
+
+      .hero {
+        padding: 36px var(--pad-x) 44px;
+      }
+      .hero-text h1 {
+        font-size: clamp(26px, 8vw, 34px);
+      }
+      .hero-text p {
+        font-size: 14px;
+      }
+
+      .subjects {
+        padding: 44px var(--pad-x);
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .card {
+        padding: 22px 18px;
+      }
+
+      .section-brand { gap: 8px; }
+      .section-brand .brand-name,
+      footer .footer-brand .brand-name {
+        letter-spacing: 3px;
+      }
+    }
+
+    /* HP 5.5" kecil (≈ 360px) */
+    @media (max-width: 400px) {
+      :root { --pad-x: 16px; }
+
+      header { padding: 10px 16px; }
+      .logo { font-size: 13px; }
+      nav a.materi-link {
+        padding: 6px 10px;
+        font-size: 11px;
+        border-radius: 7px;
+      }
+
+      .hero {
+        padding: 30px 16px 40px;
+        gap: 22px;
+      }
+      .hero-text h1 {
+        font-size: 25px;
+        letter-spacing: -0.3px;
+      }
+      .hero-text p { font-size: 13.5px; }
+      .plane { font-size: 88px; }
+
+      .subjects { padding: 38px 16px; }
+      .subjects h2 { font-size: 21px; }
+      .subjects .section-desc { font-size: 13px; }
+
+      .card { padding: 20px 16px; border-radius: 13px; }
+      .card .icon { font-size: 34px; }
+      .card h3 { font-size: 16px; }
+      .card p { font-size: 12.5px; }
+
+      .btn {
+        padding: 11px 22px;
+        font-size: 13.5px;
+        border-radius: 9px;
+      }
+
+      .mge-logo-wrap { width: 110px; height: 110px; }
+      .mge-text { font-size: 30px; }
+      .brand-text .brand-label { font-size: 10px; letter-spacing: 2.5px; }
+      .loader-title { font-size: 12px; }
+    }
+
+    /* HP kecil (≤ 340px) — iPhone SE, HP 4.7" */
+    @media (max-width: 340px) {
+      :root { --pad-x: 14px; }
+
+      header { padding: 9px 14px; }
+      .logo { font-size: 12px; }
+      nav a.materi-link {
+        padding: 5px 9px;
+        font-size: 10.5px;
+      }
+
+      .hero { padding: 26px 14px 34px; }
+      .hero-text h1 { font-size: 22px; }
+      .hero-text p { font-size: 13px; }
+      .plane { font-size: 76px; }
+
+      .subjects { padding: 34px 14px; }
+      .subjects h2 { font-size: 19px; }
+
+      .card { padding: 18px 14px; }
+      .card .icon { font-size: 30px; }
+      .card h3 { font-size: 15px; }
+      .card p { font-size: 12px; }
+
+      .btn { padding: 10px 18px; font-size: 13px; }
+
+      .mge-logo-wrap { width: 96px; height: 96px; }
+      .mge-text { font-size: 26px; }
+    }
+
+    /* HP landscape pendek */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .hero {
+        min-height: auto;
+        padding: 28px var(--pad-x);
+      }
+      .mge-logo-wrap { width: 90px; height: 90px; }
+      .mge-text { font-size: 24px; }
+      .loader-bar { margin-top: 0; }
+    }
+
+    /* Safe area untuk HP notch (iPhone X+) */
+    @supports (padding: env(safe-area-inset-top)) {
+      header {
+        padding-top: calc(clamp(12px, 3vw, 20px) + env(safe-area-inset-top));
+      }
+      footer {
+        padding-bottom: calc(clamp(20px, 5vw, 25px) + env(safe-area-inset-bottom));
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
     }
   </style>
 </head>
