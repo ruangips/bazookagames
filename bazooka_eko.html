@@ -501,6 +501,11 @@
       color: var(--purple);
       border-color: rgba(217,70,239,.3);
     }
+    .game-badge.green {
+      background: rgba(34,197,94,.12);
+      color: #22c55e;
+      border-color: rgba(34,197,94,.3);
+    }
     .game-badge.soon {
       background: rgba(148,163,184,.08);
       color: #93a4b8;
@@ -530,6 +535,19 @@
       height: 2px;
       border-radius: 0 0 4px 4px;
       background: linear-gradient(90deg, transparent, var(--purple), transparent);
+      opacity: .7;
+    }
+
+    .bab-card.lembaga { border-color: rgba(34,197,94,.22); }
+    .bab-card.lembaga:hover,
+    .bab-card.lembaga:active { border-color: rgba(34,197,94,.65); }
+    .bab-card.lembaga::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 24px; right: 24px;
+      height: 2px;
+      border-radius: 0 0 4px 4px;
+      background: linear-gradient(90deg, transparent, #22c55e, transparent);
       opacity: .7;
     }
 
@@ -848,12 +866,12 @@
         <span class="game-badge purple">🎡 Roda Putar</span>
       </a>
 
-      <a href="ekonomi-bab4.html"
-         class="bab-card" target="_blank" rel="noopener noreferrer">
+      <a href="https://ruangips.github.io/bazookagames/bab4lembagakeuangan.html"
+         class="bab-card lembaga" target="_blank" rel="noopener noreferrer">
         <div class="icon">🏦</div>
         <h3>Bab 4 — Lembaga Keuangan</h3>
         <p>Mengenal bank, koperasi, dan lembaga keuangan non-bank di Indonesia.</p>
-        <span class="game-badge soon">⏳ Segera Hadir</span>
+        <span class="game-badge green">🏦 Bank Game</span>
       </a>
 
       <a href="ekonomi-bab5.html"
