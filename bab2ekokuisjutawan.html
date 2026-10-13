@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#0c0820">
+<meta name="screen-orientation" content="portrait">
+<meta name="x5-orientation" content="portrait">
+<meta name="full-screen" content="yes">
+<meta name="x5-fullscreen" content="true">
+<meta name="browsermode" content="application">
+<meta name="x5-page-mode" content="app">
 <title>Kuis Milioner — Bab 2 Pelaku Ekonomi | MGE</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -48,10 +54,6 @@
     0%,100%{text-shadow:0 0 14px rgba(236,72,153,.9),0 0 32px rgba(139,92,246,.7)}
     50%{text-shadow:0 0 26px rgba(244,114,182,1),0 0 55px rgba(236,72,153,.95)}
   }
-  @keyframes bkValPulse{
-    0%,100%{text-shadow:0 0 22px rgba(196,181,253,.8),0 0 44px rgba(196,181,253,.5)}
-    50%{text-shadow:0 0 36px rgba(233,213,255,1),0 0 68px rgba(196,181,253,.7)}
-  }
   @keyframes bkBtnShine{0%{left:-80%}40%,100%{left:130%}}
   @keyframes lockBurst{
     0%{transform:scale(1);box-shadow:0 0 0 0 rgba(196,181,253,.9)}
@@ -91,84 +93,14 @@
     82%{opacity:1;transform:translate(-50%,0) scale(1)}
     100%{opacity:0;transform:translate(-50%,-40px) scale(.9)}
   }
-
-  .money-toast{
-    position:fixed;top:16%;left:50%;transform:translate(-50%,0);
-    padding:18px 34px;border-radius:22px;
-    font-family:'Space Grotesk',system-ui,sans-serif;font-weight:900;
-    text-align:center;z-index:200;pointer-events:none;
-    min-width:250px;max-width:92vw;
-    animation:moneyPop 2.6s cubic-bezier(.2,.9,.3,1.2) forwards;
-    letter-spacing:.02em;
+  @keyframes rotatePhone{
+    0%,40%,100%{transform:rotate(0deg)}
+    50%,90%{transform:rotate(90deg)}
   }
-  .money-toast.correct{
-    background:linear-gradient(135deg,#065f46 0%,#10b981 50%,#34d399 100%);
-    color:#fff;border:2px solid #6ee7b7;
-    box-shadow:0 20px 60px rgba(16,185,129,.55),0 0 90px rgba(52,211,153,.45),inset 0 1px 0 rgba(255,255,255,.45);
+  @keyframes rotateGlow{
+    0%,100%{filter:drop-shadow(0 0 20px rgba(196,181,253,.8))}
+    50%{filter:drop-shadow(0 0 40px rgba(233,213,255,1))}
   }
-  .money-toast.wrong{
-    background:linear-gradient(135deg,#7f1d1d 0%,#dc2626 50%,#ef4444 100%);
-    color:#fff;border:2px solid #fca5a5;
-    box-shadow:0 20px 60px rgba(220,38,38,.55),0 0 90px rgba(239,68,68,.45),inset 0 1px 0 rgba(255,255,255,.45);
-  }
-  .money-toast .mt-head{font-size:1.3rem;margin-bottom:6px;letter-spacing:.05em}
-  .money-toast .mt-sub{font-size:.78rem;opacity:.92;margin-bottom:4px;letter-spacing:.08em;text-transform:uppercase}
-  .money-toast .mt-amount{font-size:1.85rem;letter-spacing:.5px;line-height:1.1;font-family:'Space Grotesk',monospace}
-  .money-toast .mt-total{font-size:.75rem;opacity:.9;margin-top:8px;padding-top:6px;border-top:1px solid rgba(255,255,255,.28)}
-
-  @keyframes nextQPop{
-    0%{opacity:0;transform:translate(-50%,22px) scale(.85)}
-    18%{opacity:1;transform:translate(-50%,0) scale(1)}
-    82%{opacity:1;transform:translate(-50%,0) scale(1)}
-    100%{opacity:0;transform:translate(-50%,-12px) scale(.95)}
-  }
-  .next-q-toast{
-    position:fixed;bottom:14%;left:50%;transform:translate(-50%,0);
-    padding:16px 34px;border-radius:18px;
-    font-family:'Space Grotesk',system-ui,sans-serif;font-weight:900;
-    font-size:clamp(.9rem,2.8vw,1.15rem);letter-spacing:.12em;
-    text-align:center;white-space:nowrap;
-    color:#FFD700;background:#000000;border:3px solid #FFD700;
-    box-shadow:0 20px 55px rgba(0,0,0,.95),0 0 0 2px rgba(0,0,0,.9),0 0 70px rgba(255,215,0,.55),inset 0 0 24px rgba(255,215,0,.15);
-    z-index:210;pointer-events:none;
-    text-shadow:0 0 10px rgba(255,215,0,.9),0 0 22px rgba(255,215,0,.6),0 2px 4px rgba(0,0,0,1);
-    animation:nextQPop 2.2s cubic-bezier(.2,.9,.3,1.2) forwards;
-  }
-  .next-q-toast .nq-num{
-    display:inline-block;font-size:1.55em;margin:0 8px;padding:2px 14px;
-    border-radius:10px;color:#000000;background:#FFD700;border:2px solid #FFFFFF;
-    text-shadow:none;box-shadow:0 0 18px rgba(255,215,0,.9);vertical-align:middle;font-weight:900;
-  }
-  .next-q-toast.nq-finish{
-    color:#00FF7F;background:#000000;border-color:#00FF7F;
-    box-shadow:0 20px 55px rgba(0,0,0,.95),0 0 0 2px rgba(0,0,0,.9),0 0 70px rgba(0,255,127,.55),inset 0 0 24px rgba(0,255,127,.15);
-    text-shadow:0 0 10px rgba(0,255,127,.9),0 0 22px rgba(0,255,127,.6),0 2px 4px rgba(0,0,0,1);
-  }
-  @media (max-width:640px){
-    .next-q-toast{padding:12px 22px;bottom:12%;letter-spacing:.08em;border-width:2px}
-    .next-q-toast .nq-num{font-size:1.35em;padding:2px 10px;margin:0 5px}
-  }
-
-  .prize-chip{
-    background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(30,20,55,.8))!important;
-    border-color:rgba(52,211,153,.45)!important;
-    color:#6ee7b7!important;
-  }
-  .prize-chip.prize-flash{animation:correctPulse .5s ease}
-
-  @keyframes mgeLogoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-  @keyframes mgeSpinRing{to{transform:rotate(360deg)}}
-  @keyframes mgeSpinRingReverse{to{transform:rotate(-360deg)}}
-  @keyframes mgeShimmer{to{transform:rotate(360deg)}}
-  @keyframes mgeTextPulse{
-    0%,100%{filter:drop-shadow(0 0 12px rgba(139,92,246,.9));transform:perspective(500px) rotateX(6deg) scale(1)}
-    50%{filter:drop-shadow(0 0 22px rgba(196,181,253,1));transform:perspective(500px) rotateX(6deg) scale(1.05)}
-  }
-  @keyframes mgeBrandShine{0%{background-position:0% 50%}100%{background-position:200% 50%}}
-  @keyframes mgeFadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes mgeLoadFill{0%{width:0%}40%{width:45%}70%{width:75%}100%{width:100%}}
-  @keyframes mgeGridMove{from{background-position:0 0}to{background-position:44px 44px}}
-  @keyframes mgeOrbPulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.15);opacity:1}}
 
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   html{scroll-behavior:smooth;height:auto}
@@ -226,6 +158,69 @@
   .premium-panel > *{position:relative;z-index:1}
   .is-hidden{display:none!important}
 
+  /* ============================================================
+     ROTATE NOTICE — khusus tampilan portrait
+     Muncul hanya saat perangkat dalam posisi landscape.
+     ============================================================ */
+  #rotate-notice{
+    display:none;
+    position:fixed;inset:0;z-index:99999;
+    background:
+      radial-gradient(circle at 30% 20%, #1e0b3d 0%, transparent 50%),
+      radial-gradient(circle at 70% 80%, #2a1040 0%, transparent 55%),
+      linear-gradient(180deg,#0c0820,#05030f);
+    align-items:center;justify-content:center;
+    padding:24px;text-align:center;
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--text);
+  }
+  .rotate-inner{
+    max-width:420px;width:100%;
+    display:flex;flex-direction:column;align-items:center;gap:16px;
+  }
+  .rotate-icon{
+    font-size:clamp(56px,14vw,90px);line-height:1;
+    animation:rotatePhone 2.4s ease-in-out infinite, rotateGlow 2.4s ease-in-out infinite;
+    display:inline-block;
+  }
+  .rotate-title{
+    font-family:'Arial Black','Segoe UI',Impact,sans-serif;
+    font-size:clamp(20px,5vw,30px);font-weight:900;
+    letter-spacing:2px;text-transform:uppercase;
+    background:linear-gradient(180deg,#ffffff 0%,#e9d5ff 30%,#c4b5fd 60%,#8b5cf6 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 3px 18px rgba(196,181,253,.9)) drop-shadow(0 0 40px rgba(139,92,246,.6));
+  }
+  .rotate-sub{
+    font-size:clamp(13px,3.4vw,16px);font-weight:600;
+    color:var(--text-soft);line-height:1.6;
+    text-shadow:0 0 12px rgba(196,181,253,.4);
+  }
+  .rotate-sub b{color:var(--primary-bright);font-weight:900}
+  .rotate-hint{
+    font-size:clamp(11px,2.8vw,13px);font-weight:800;
+    color:#c4b5fd;letter-spacing:2px;text-transform:uppercase;
+    padding:8px 18px;border-radius:99px;
+    background:rgba(139,92,246,.15);
+    border:1px solid rgba(196,181,253,.5);
+    box-shadow:0 0 22px rgba(139,92,246,.35);
+    animation:bkSubPulse 3s ease-in-out infinite;
+  }
+  .rotate-brand{
+    margin-top:8px;
+    font-family:'Arial Black','Segoe UI',Impact,sans-serif;
+    font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;
+    background:linear-gradient(90deg, #c4b5fd 0%, #ec4899 50%, #c4b5fd 100%);
+    background-size:200% 100%;-webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:shimmerGold 3.5s linear infinite;
+  }
+
+  /* Overlay hanya muncul kalau LANDSCAPE */
+  @media (orientation: landscape) and (max-width:1024px){
+    #rotate-notice{display:flex !important}
+  }
+
   #loader{
     position:fixed;inset:0;z-index:9999;
     background:
@@ -257,14 +252,6 @@
     filter:blur(90px);
     animation:mgeOrbPulse 3s ease-in-out infinite;
     pointer-events:none;
-  }
-  @media (max-height:480px){
-    #loader{justify-content:flex-start;padding-top:14px;gap:8px}
-    .mge-logo-wrap{width:70px;height:70px}
-    .mge-text{font-size:20px}
-    .mge-loader-title{font-size:11px}
-    .mge-loader-sub{font-size:8px}
-    .mge-loader-bar{width:140px;height:3px}
   }
 
   .mge-logo-wrap{
@@ -341,6 +328,84 @@
     border-radius:4px;box-shadow:0 0 12px rgba(196,181,253,0.8);
     animation:mgeLoadFill 1.8s cubic-bezier(.65,.05,.36,1) forwards;
   }
+
+  @keyframes mgeLogoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  @keyframes mgeSpinRing{to{transform:rotate(360deg)}}
+  @keyframes mgeSpinRingReverse{to{transform:rotate(-360deg)}}
+  @keyframes mgeShimmer{to{transform:rotate(360deg)}}
+  @keyframes mgeTextPulse{
+    0%,100%{filter:drop-shadow(0 0 12px rgba(139,92,246,.9));transform:perspective(500px) rotateX(6deg) scale(1)}
+    50%{filter:drop-shadow(0 0 22px rgba(196,181,253,1));transform:perspective(500px) rotateX(6deg) scale(1.05)}
+  }
+  @keyframes mgeBrandShine{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+  @keyframes mgeFadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes mgeLoadFill{0%{width:0%}40%{width:45%}70%{width:75%}100%{width:100%}}
+  @keyframes mgeGridMove{from{background-position:0 0}to{background-position:44px 44px}}
+  @keyframes mgeOrbPulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.15);opacity:1}}
+
+  .money-toast{
+    position:fixed;top:16%;left:50%;transform:translate(-50%,0);
+    padding:18px 34px;border-radius:22px;
+    font-family:'Space Grotesk',system-ui,sans-serif;font-weight:900;
+    text-align:center;z-index:200;pointer-events:none;
+    min-width:250px;max-width:92vw;
+    animation:moneyPop 2.6s cubic-bezier(.2,.9,.3,1.2) forwards;
+    letter-spacing:.02em;
+  }
+  .money-toast.correct{
+    background:linear-gradient(135deg,#065f46 0%,#10b981 50%,#34d399 100%);
+    color:#fff;border:2px solid #6ee7b7;
+    box-shadow:0 20px 60px rgba(16,185,129,.55),0 0 90px rgba(52,211,153,.45),inset 0 1px 0 rgba(255,255,255,.45);
+  }
+  .money-toast.wrong{
+    background:linear-gradient(135deg,#7f1d1d 0%,#dc2626 50%,#ef4444 100%);
+    color:#fff;border:2px solid #fca5a5;
+    box-shadow:0 20px 60px rgba(220,38,38,.55),0 0 90px rgba(239,68,68,.45),inset 0 1px 0 rgba(255,255,255,.45);
+  }
+  .money-toast .mt-head{font-size:1.3rem;margin-bottom:6px;letter-spacing:.05em}
+  .money-toast .mt-sub{font-size:.78rem;opacity:.92;margin-bottom:4px;letter-spacing:.08em;text-transform:uppercase}
+  .money-toast .mt-amount{font-size:1.85rem;letter-spacing:.5px;line-height:1.1;font-family:'Space Grotesk',monospace}
+  .money-toast .mt-total{font-size:.75rem;opacity:.9;margin-top:8px;padding-top:6px;border-top:1px solid rgba(255,255,255,.28)}
+
+  @keyframes nextQPop{
+    0%{opacity:0;transform:translate(-50%,22px) scale(.85)}
+    18%{opacity:1;transform:translate(-50%,0) scale(1)}
+    82%{opacity:1;transform:translate(-50%,0) scale(1)}
+    100%{opacity:0;transform:translate(-50%,-12px) scale(.95)}
+  }
+  .next-q-toast{
+    position:fixed;bottom:14%;left:50%;transform:translate(-50%,0);
+    padding:16px 34px;border-radius:18px;
+    font-family:'Space Grotesk',system-ui,sans-serif;font-weight:900;
+    font-size:clamp(.9rem,2.8vw,1.15rem);letter-spacing:.12em;
+    text-align:center;white-space:nowrap;
+    color:#FFD700;background:#000000;border:3px solid #FFD700;
+    box-shadow:0 20px 55px rgba(0,0,0,.95),0 0 0 2px rgba(0,0,0,.9),0 0 70px rgba(255,215,0,.55),inset 0 0 24px rgba(255,215,0,.15);
+    z-index:210;pointer-events:none;
+    text-shadow:0 0 10px rgba(255,215,0,.9),0 0 22px rgba(255,215,0,.6),0 2px 4px rgba(0,0,0,1);
+    animation:nextQPop 2.2s cubic-bezier(.2,.9,.3,1.2) forwards;
+  }
+  .next-q-toast .nq-num{
+    display:inline-block;font-size:1.55em;margin:0 8px;padding:2px 14px;
+    border-radius:10px;color:#000000;background:#FFD700;border:2px solid #FFFFFF;
+    text-shadow:none;box-shadow:0 0 18px rgba(255,215,0,.9);vertical-align:middle;font-weight:900;
+  }
+  .next-q-toast.nq-finish{
+    color:#00FF7F;background:#000000;border-color:#00FF7F;
+    box-shadow:0 20px 55px rgba(0,0,0,.95),0 0 0 2px rgba(0,0,0,.9),0 0 70px rgba(0,255,127,.55),inset 0 0 24px rgba(0,255,127,.15);
+    text-shadow:0 0 10px rgba(0,255,127,.9),0 0 22px rgba(0,255,127,.6),0 2px 4px rgba(0,0,0,1);
+  }
+  @media (max-width:640px){
+    .next-q-toast{padding:12px 22px;bottom:12%;letter-spacing:.08em;border-width:2px}
+    .next-q-toast .nq-num{font-size:1.35em;padding:2px 10px;margin:0 5px}
+  }
+
+  .prize-chip{
+    background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(30,20,55,.8))!important;
+    border-color:rgba(52,211,153,.45)!important;
+    color:#6ee7b7!important;
+  }
+  .prize-chip.prize-flash{animation:correctPulse .5s ease}
 
   .btn-gold{position:relative;overflow:hidden;padding:18px 40px;border-radius:60px;border:none;font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#f5f3ff;cursor:pointer;background:var(--gold-grad);background-size:200% auto;box-shadow:0 12px 36px -8px rgba(139,92,246,.6),inset 0 1px 0 rgba(255,255,255,.35);transition:all .35s cubic-bezier(.2,.9,.3,1.2);width:100%;max-width:100%;white-space:normal;overflow-wrap:anywhere}
   .btn-gold::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);animation:shineBtn 3s ease-in-out infinite}
@@ -686,12 +751,12 @@
   .level-intro-btn{position:relative;z-index:1;max-width:320px;margin:0 auto;display:block}
 
   /* ===================================================================
-     FIX MOBILE — semua teks/tombol/gambar terlihat & bisa di-scroll
+     PORTRAIT OPTIMIZATION — semua halaman optimal di mode tegak
      =================================================================== */
   @media (max-width:1024px){
     main{
       justify-content:flex-start !important;
-      padding:10px 12px 28px !important;
+      padding:12px 14px 30px !important;
       min-height:0 !important;
     }
     #start-screen,
@@ -737,7 +802,8 @@
     word-break:break-word;
   }
 
-  @media (max-width:420px){
+  /* Jawaban: 1 kolom di HP kecil supaya tidak sempit */
+  @media (max-width:520px){
     #answers-container{
       grid-template-columns:1fr !important;
       gap:10px !important;
@@ -763,216 +829,42 @@
     .hud-chip{padding:8px 12px;font-size:.75rem}
   }
 
+  /* Result: tombol 1 kolom di HP sempit */
   @media (max-width:520px){
     #result-screen .grid.grid-cols-2{
       grid-template-columns:1fr !important;
     }
   }
 
-  ::-webkit-scrollbar{width:8px;height:8px}
-  ::-webkit-scrollbar-track{background:rgba(255,255,255,.03)}
-  ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--primary),var(--primary-light));border-radius:4px}
-  ::-webkit-scrollbar-thumb:hover{background:var(--primary-bright)}
-
-  /* Media queries khusus landscape HP */
-  @media (orientation: landscape) and (max-height: 520px) and (max-width: 950px){
-    body{font-size:13px;line-height:1.45}
-    header{padding:5px 10px !important}
-    header > div{gap:8px !important}
-    #header-icon{width:34px !important;height:34px !important;font-size:1.1rem !important;border-radius:10px !important}
-    header h1{font-size:11px !important;letter-spacing:.1em !important}
-    header p{font-size:9px !important}
-    header .hidden.md\:flex{display:none !important}
-    #sound-toggle{width:34px !important;height:34px !important;font-size:.9rem !important}
-    main{padding:6px 10px !important;min-height:calc(100vh - 44px)}
-    .bk-panel{padding:12px 16px 10px !important;border-radius:14px !important;max-height:none !important}
-    .bk-title-main{font-size:clamp(22px,4.6vw,32px) !important;letter-spacing:2px !important}
-    .bk-title-sub{font-size:10px !important}
-    .bk-title-sub2{font-size:10px !important}
-    .bk-sub{font-size:9px !important;margin:7px 0 4px !important}
-    .bk-stats-grid{gap:8px !important;margin:8px 0 4px !important}
-    .bk-stats-grid .bk-prem-stat{padding:6px 10px !important;min-height:56px !important;border-radius:10px !important}
-    .bk-stats-grid .bk-stat-lbl{font-size:8px !important;letter-spacing:1.4px !important;margin-bottom:3px !important}
-    .bk-stats-grid .bk-stat-val{font-size:14px !important}
-    .bk-prem-stat{padding:6px 10px !important;margin-bottom:6px !important;border-radius:10px !important}
-    .bk-stat-val{font-size:16px !important}
-    .bk-stat-lbl{font-size:8px !important;letter-spacing:1.6px !important;margin-bottom:2px !important}
-    .bk-btns{gap:6px !important;margin-top:8px !important}
-    .bk-btn{padding:9px 14px !important;font-size:11px !important;min-height:36px !important;border-radius:9px !important;letter-spacing:1.2px !important}
-    .bk-progress-panel{padding:8px 10px !important;margin-top:8px !important}
-    .bk-progress-label{font-size:8.5px !important;margin-bottom:4px !important}
-    .bk-progress-text{font-size:10px !important;margin-bottom:6px !important;line-height:1.4 !important}
-    .bk-btns-row .bk-btn{min-height:34px !important;padding:7px 12px !important;font-size:10.5px !important}
-    #howto-panel{font-size:10.5px !important;padding:9px 11px !important;line-height:1.55 !important;margin-top:8px !important}
-    .mgde-footer{padding:6px 10px !important;margin-top:8px !important;border-radius:8px !important}
-    .mgde-footer .mgde-label{font-size:8px !important;letter-spacing:1.4px !important}
-    .mgde-footer-dark{margin-top:9px !important;padding:5px 8px !important}
-    .mgde-footer-dark .mgde-label{font-size:7.5px !important;letter-spacing:1.2px !important}
-
-    #game-screen{max-width:100% !important;gap:6px !important}
-    #game-screen > .premium-panel{padding:8px 10px !important;border-radius:12px !important}
-    .hud-chip{padding:5px 10px !important;font-size:10px !important;border-radius:9px !important;gap:5px !important}
-    .hearts-container{padding:4px 9px !important;border-radius:9px !important}
-    .heart-icon{font-size:.85rem !important}
-    .q-progress{height:4px !important;margin-bottom:8px !important}
-    .waypoint-trail{margin-top:4px !important;gap:1.5px !important}
-    .waypoint-dot{width:4px !important;height:4px !important}
-    .waypoint-dot.active{width:7px !important;height:7px !important}
-    .waypoint-line{height:1px !important}
-    #question-panel{padding:11px 13px !important;border-radius:14px !important}
-    #question-text{font-size:13px !important;line-height:1.4 !important;margin-bottom:2px !important}
-    .diff-badge{font-size:8px !important;padding:3px 9px !important;letter-spacing:1px !important}
-    #reward-tag{font-size:9.5px !important;padding:3px 9px !important}
-    .hint-panel{padding:9px 11px !important;margin-top:8px !important;border-radius:11px !important}
-    #hint-text{font-size:10.5px !important}
-
-    #answers-container{grid-template-columns:repeat(2,1fr) !important;gap:6px !important}
-    .opt-btn{padding:9px 11px !important;font-size:11px !important;line-height:1.35 !important;border-radius:11px !important}
-    .opt-btn::before{width:2px !important}
-    .answer-label{font-size:1rem !important;right:7px !important}
-
-    .lifeline-item{padding:7px 4px !important;font-size:10px !important;border-radius:9px !important}
-    #lock-btn-container{margin-top:8px !important}
-    .lock-btn-gold{padding:11px 32px !important;font-size:.78rem !important;letter-spacing:.1em !important;border-radius:40px !important}
-
-    .premium-modal{padding:6px !important}
-    .premium-modal-inner{padding:14px 16px !important;max-height:96vh !important;border-radius:14px !important}
-    .premium-modal-inner .text-5xl{font-size:2.2rem !important;margin-bottom:6px !important}
-    .premium-modal-inner .text-6xl{font-size:2.6rem !important;margin-bottom:6px !important}
-    .premium-modal-inner h3{font-size:1.1rem !important;margin-bottom:8px !important}
-    .premium-modal-inner p{font-size:11px !important;line-height:1.45 !important;margin-bottom:10px !important}
-    .btn-gold{padding:11px 24px !important;font-size:.82rem !important}
-    .btn-outline-gold{padding:10px 20px !important;font-size:.8rem !important}
-    #summary-modal .premium-modal-inner{max-height:95vh !important}
-    #summary-content{max-height:48vh !important}
-    .summary-item{padding:9px 11px !important;margin-bottom:6px !important;border-radius:11px !important}
-    .summary-q{font-size:11px !important;margin-bottom:4px !important}
-    .summary-a{font-size:10px !important}
-    .summary-exp{font-size:9.5px !important;padding:6px 8px !important;margin-top:4px !important}
-    .summary-key{font-size:9px !important}
-    .summary-money{font-size:9.5px !important}
-
-    #result-screen{max-width:100% !important;gap:6px !important}
-    #result-screen > .premium-panel{padding:12px 16px !important;border-radius:14px !important}
-    .score-circle{width:90px !important;height:90px !important}
-    .score-circle .num{font-size:1.8rem !important}
-    .grade-badge-big{width:66px !important;height:66px !important;font-size:2rem !important;border-radius:16px !important}
-    #card-score{font-size:1rem !important}
-    #card-prize{font-size:1rem !important}
-    #result-screen .grid{grid-template-columns:repeat(3,1fr) !important;gap:6px !important}
-    #result-screen .grid button{padding:10px 12px !important;font-size:.7rem !important}
-
-    .money-toast{padding:11px 20px !important;min-width:200px !important;border-radius:16px !important;top:12% !important}
-    .money-toast .mt-head{font-size:1rem !important;margin-bottom:3px !important}
-    .money-toast .mt-sub{font-size:.68rem !important}
-    .money-toast .mt-amount{font-size:1.35rem !important}
-    .money-toast .mt-total{font-size:.65rem !important;margin-top:5px !important;padding-top:4px !important}
-
-    .next-q-toast{padding:10px 18px !important;bottom:9% !important;font-size:.78rem !important;border-width:2px !important}
-    .next-q-toast .nq-num{font-size:1.25em !important;padding:2px 8px !important;margin:0 4px !important}
-
-    #level-intro-screen{max-width:100% !important}
-    .level-intro-panel{
-      display:flex;flex-wrap:wrap;align-items:center;
-      gap:6px 16px;padding:10px 18px 8px !important;text-align:left;
-    }
-    .level-intro-glow{opacity:.55;filter:blur(35px)}
-    .level-intro-badge{flex-basis:100%;margin-bottom:0 !important;padding:3px 10px !important;font-size:8px !important;letter-spacing:2px !important}
-    .level-intro-number{font-size:clamp(60px,14vw,90px) !important;flex:0 0 auto;align-self:center;line-height:1}
-    .level-intro-label{font-size:11px !important;letter-spacing:6px !important;margin:-6px 0 6px !important;align-self:center;flex:0 0 auto}
-    .level-intro-icon{font-size:22px !important;margin-bottom:0 !important}
-    .level-intro-name{font-size:13px !important;margin-bottom:2px !important}
-    .level-intro-meta{justify-content:flex-start;margin-bottom:4px !important;gap:4px !important}
-    .level-intro-meta > span:not(.diff-badge){font-size:9px !important;padding:2px 8px !important}
-    .level-intro-quote{padding:7px 10px 7px 28px !important;margin-bottom:6px !important;border-radius:9px !important;max-width:100%}
-    .quote-mark{font-size:22px !important;top:0 !important;left:6px !important}
-    .quote-text{font-size:10.5px !important;line-height:1.4 !important}
-    .level-intro-btn{padding:9px 22px !important;font-size:.72rem !important;max-width:100% !important;width:auto !important;margin:0 !important;align-self:center}
-    .level-intro-icon,
-    .level-intro-name,
-    .level-intro-meta,
-    .level-intro-quote,
-    .level-intro-btn{
-      flex-basis:calc(100% - 140px);max-width:calc(100% - 140px);
-    }
-    .level-intro-panel > .mgde-footer{flex-basis:100% !important;margin-top:4px !important;padding:5px 10px !important}
-    .level-intro-panel > .mgde-footer .mgde-label{font-size:7.5px !important;letter-spacing:1.4px !important}
-  }
-
-  @media (orientation: landscape) and (max-height: 400px) and (max-width: 950px){
-    header{padding:4px 8px !important}
-    #header-icon{width:30px !important;height:30px !important;font-size:1rem !important}
-    header h1{font-size:10px !important}
-    header p{font-size:8px !important}
-    #sound-toggle{width:30px !important;height:30px !important;font-size:.8rem !important}
-    main{padding:4px 8px !important}
-    .bk-title-main{font-size:clamp(18px,4vw,26px) !important}
-    .bk-title-sub{font-size:9px !important}
-    .bk-title-sub2{font-size:9px !important}
-    .bk-sub{font-size:8px !important;margin:5px 0 3px !important}
-    .bk-stats-grid .bk-prem-stat{padding:5px 9px !important;min-height:48px !important}
-    .bk-stats-grid .bk-stat-val{font-size:12.5px !important}
-    .bk-btns{gap:5px !important;margin-top:6px !important}
-    .bk-btn{padding:8px 12px !important;font-size:10px !important;min-height:32px !important}
-    .bk-panel{padding:10px 14px 8px !important}
-    #question-text{font-size:12px !important}
-    .opt-btn{padding:7px 9px !important;font-size:10.5px !important}
-    .lifeline-item{padding:6px 3px !important;font-size:9.5px !important}
-    #reward-tag{font-size:9px !important}
-    .score-circle{width:76px !important;height:76px !important}
-    .score-circle .num{font-size:1.5rem !important}
-    .grade-badge-big{width:56px !important;height:56px !important;font-size:1.7rem !important}
-
-    .next-q-toast{padding:8px 16px !important;bottom:7% !important;font-size:.72rem !important}
-    .next-q-toast .nq-num{font-size:1.2em !important;padding:2px 6px !important;margin:0 3px !important}
-
-    .level-intro-number{font-size:clamp(50px,12vw,72px) !important}
-    .level-intro-panel{padding:6px 14px 4px !important}
-    .level-intro-name{font-size:12px !important}
-    .level-intro-icon{font-size:18px !important}
-    .quote-text{font-size:9.5px !important}
-    .level-intro-btn{padding:7px 16px !important;font-size:.66rem !important}
-    .level-intro-icon,
-    .level-intro-name,
-    .level-intro-meta,
-    .level-intro-quote,
-    .level-intro-btn{
-      flex-basis:calc(100% - 110px);max-width:calc(100% - 110px);
-    }
-  }
-
-  @media (orientation: landscape) and (min-height: 700px){
-    .bk-title-main{font-size:clamp(32px,4vw,56px)}
-    #answers-container{grid-template-columns:repeat(2,1fr)}
-  }
-
-  @media (max-width:640px) and (orientation:portrait){
-    main{padding:10px 10px 20px !important;justify-content:flex-start !important}
+  /* Portrait HP: semua disesuaikan agar nyaman */
+  @media (orientation:portrait) and (max-width:640px){
+    main{padding:10px 10px 24px !important;justify-content:flex-start !important}
     #game-screen{max-width:100% !important;gap:12px !important}
     #game-screen > .premium-panel{padding:12px 14px !important;border-radius:16px !important}
     .hud-chip{padding:8px 12px !important;font-size:.76rem !important;gap:6px !important}
     .hearts-container{padding:6px 10px !important}
     .heart-icon{font-size:.95rem !important}
     #question-panel{padding:16px 16px !important;border-radius:18px !important}
-    #question-text{font-size:1.02rem !important;line-height:1.5 !important}
-    .opt-btn{padding:14px 14px !important;font-size:.88rem !important;border-radius:14px !important}
-    .lifeline-item{padding:10px 4px !important;font-size:.72rem !important}
-    .lock-btn-gold{padding:14px 32px !important;font-size:.82rem !important}
+    #question-text{font-size:1.05rem !important;line-height:1.5 !important}
+    .opt-btn{padding:14px 16px !important;font-size:.92rem !important;border-radius:14px !important}
+    .lifeline-item{padding:11px 4px !important;font-size:.75rem !important}
+    .lock-btn-gold{padding:15px 32px !important;font-size:.85rem !important}
     #answers-container{gap:10px !important}
     .answer-label{font-size:1.15rem !important;right:10px !important}
     #level-intro-screen{max-width:100% !important}
     .level-intro-quote{padding:14px 16px 14px 38px !important}
     .quote-mark{font-size:34px !important;left:8px !important}
     .quote-text{font-size:13.5px !important}
-    .level-intro-number{font-size:clamp(70px,22vw,100px) !important}
+    .level-intro-number{font-size:clamp(80px,26vw,110px) !important}
     .mgde-footer{margin-top:12px !important;padding:8px 12px !important}
   }
+
   @media (max-width:640px){
     .premium-panel{padding:16px!important}
     .premium-modal-inner{padding:22px}
-    .lock-btn-gold{padding:16px 32px;font-size:.82rem;letter-spacing:.1em}
-    .btn-gold{padding:16px 28px;font-size:.88rem}
-    .opt-btn{padding:13px 16px;font-size:.86rem}
+    .lock-btn-gold{padding:16px 32px;font-size:.85rem;letter-spacing:.1em}
+    .btn-gold{padding:16px 28px;font-size:.9rem}
+    .opt-btn{padding:14px 16px;font-size:.9rem}
     .level-number{width:42px;height:42px;font-size:1rem}
     .level-card{padding:13px 14px;gap:11px}
     #start-screen{max-width:100%!important}
@@ -982,6 +874,11 @@
     .money-toast .mt-head{font-size:1.1rem}
     .money-toast .mt-amount{font-size:1.5rem}
   }
+
+  ::-webkit-scrollbar{width:8px;height:8px}
+  ::-webkit-scrollbar-track{background:rgba(255,255,255,.03)}
+  ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--primary),var(--primary-light));border-radius:4px}
+  ::-webkit-scrollbar-thumb:hover{background:var(--primary-bright)}
 
   @media (prefers-reduced-motion: reduce){
     *,*::before,*::after{
@@ -993,6 +890,22 @@
 </style>
 </head>
 <body>
+
+<!-- ============================================================
+     ROTATE NOTICE — muncul saat perangkat di-putar ke landscape
+     ============================================================ -->
+<div id="rotate-notice" role="alert" aria-live="polite">
+  <div class="rotate-inner">
+    <div class="rotate-icon">📱</div>
+    <div class="rotate-title">Putar Perangkat</div>
+    <p class="rotate-sub">
+      Game ini dirancang khusus untuk mode <b>portrait</b> (tegak).<br>
+      Mohon putar perangkat Anda kembali ke posisi <b>tegak</b> untuk melanjutkan.
+    </p>
+    <div class="rotate-hint">↻ &nbsp;Putar ke Portrait&nbsp; ↻</div>
+    <div class="rotate-brand">MAEDA GAMES EDU</div>
+  </div>
+</div>
 
 <!-- MGE 3D LOADER -->
 <div id="loader">
@@ -1037,9 +950,6 @@
       </div>
     </div>
     <div class="flex items-center gap-2 shrink-0">
-      <div class="hidden md:flex items-center gap-1.5 px-4 py-2 rounded-full" style="background:linear-gradient(135deg,rgba(16,185,129,.16),rgba(45,30,80,.5));border:1px solid rgba(52,211,153,.4)">
-        <span class="text-[10px] font-black tracking-widest" style="color:#6ee7b7">🎯 4 LEVEL · 60 SOAL · 💰 Rp 1 MILIAR</span>
-      </div>
       <button class="w-11 h-11 rounded-full flex items-center justify-center text-lg cursor-pointer transition" id="sound-toggle" style="background:linear-gradient(135deg,rgba(139,92,246,.16),rgba(45,30,80,.6));border:1px solid var(--glass-border);color:var(--primary-bright)">🔊</button>
     </div>
   </div>
@@ -1093,6 +1003,7 @@
         <p><b>💰 Hadiah Uang:</b> Benar = dapat uang (mulai Rp 250.000 di soal 1, naik terus hingga total Rp 1.000.000.000). Salah = uangmu <b>berkurang 20%</b>.</p>
         <p><b>🔀 Soal & jawaban diacak</b> — tidak ada soal yang terulang di level yang sama.</p>
         <p><b>💾 Progres tersimpan otomatis</b> — bisa lanjut dari level terakhir.</p>
+        <p><b>📱 Mainkan dalam posisi portrait</b> (tegak) untuk pengalaman terbaik.</p>
       </div>
 
       <div id="level-list-wrap" class="is-hidden">
@@ -1199,7 +1110,7 @@
       </div>
     </div>
 
-    <div id="answers-container" class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4"></div>
+    <div id="answers-container" class="grid grid-cols-1 gap-3 md:gap-4"></div>
     <div id="lock-btn-container" class="is-hidden flex justify-center mt-5">
       <button id="btn-lock-answer" type="button" class="lock-btn-gold">🔒 KUNCI JAWABAN</button>
     </div>
@@ -1315,10 +1226,10 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-2 gap-3 md:grid-cols-3">
-      <button type="button" id="btn-restart" class="btn-gold" style="padding:16px 20px;font-size:.82rem">🔄 MAIN LAGI</button>
-      <button type="button" id="btn-copy" class="btn-outline-gold text-xs">📋 <span id="copy-btn-text">SALIN</span></button>
-      <button type="button" id="btn-menu" class="btn-outline-gold text-xs">🏠 MENU</button>
+    <div class="grid grid-cols-1 gap-3">
+      <button type="button" id="btn-restart" class="btn-gold" style="padding:16px 20px;font-size:.85rem">🔄 MAIN LAGI</button>
+      <button type="button" id="btn-copy" class="btn-outline-gold text-sm" style="padding:14px 20px">📋 <span id="copy-btn-text">SALIN HASIL</span></button>
+      <button type="button" id="btn-menu" class="btn-outline-gold text-sm" style="padding:14px 20px">🏠 KEMBALI KE MENU</button>
     </div>
 
     <div class="mgde-footer"><span class="mgde-label">MAEDA GAMES EDU</span></div>
@@ -2370,7 +2281,7 @@ function copyFormattedResult(){
   const earnedTitle=calculateTitle(score);const grade=calculateGrade(score);
   const durasi=Math.floor(totalElapsed/60)+'m '+(totalElapsed%60)+'s';
   const txt='HASIL KUIS MILIONER — BAB 2 PELAKU EKONOMI\nRuang IPS × MGE\n━━━━━━━━━━━━━━━━━━━━\nMateri: Pelaku Ekonomi\nLevel Selesai: '+completedLevels.length+'/'+LEVELS.length+'\nJawaban Benar: '+correctAnswersTotal+'/'+totalQ+'\nJawaban Salah: '+wrongAnswersTotal+'\nDilewati: '+skippedTotal+'\nSkor: '+score+'\nGrade: '+grade+'\n💰 HADIAH AKHIR: '+formatRupiah(prizeMoney)+'\nDurasi: '+durasi+'\nGelar: '+earnedTitle+'\n━━━━━━━━━━━━━━━━━━━━\nMAEDA GAMES EDU';
-  const onSuccess=()=>{const cbt=$('copy-btn-text');if(cbt){cbt.textContent='TERSALIN! ✓';setTimeout(()=>cbt.textContent='SALIN',2000);}};
+  const onSuccess=()=>{const cbt=$('copy-btn-text');if(cbt){cbt.textContent='TERSALIN! ✓';setTimeout(()=>cbt.textContent='SALIN HASIL',2000);}};
   const onFail=()=>{try{const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);onSuccess();}catch(err){alert('Gagal menyalin.');}};
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(onSuccess).catch(onFail);}
   else onFail();
@@ -2507,6 +2418,22 @@ function initMenuCanvas(){
   }
   requestAnimationFrame(loop);
 }
+
+/* ============================================================
+   ORIENTATION LOCK — paksa portrait
+   ============================================================ */
+function tryLockPortrait(){
+  try{
+    if(screen.orientation && typeof screen.orientation.lock === 'function'){
+      screen.orientation.lock('portrait').catch(()=>{});
+    }
+  }catch(e){}
+}
+tryLockPortrait();
+window.addEventListener('orientationchange',()=>{tryLockPortrait();});
+document.addEventListener('visibilitychange',()=>{
+  if(!document.hidden)tryLockPortrait();
+});
 
 setTimeout(()=>{
   const l=$('loader');
