@@ -36,17 +36,39 @@
   .screen { position:fixed; inset:0; display:none; flex-direction:column; z-index:10; background:#07111f; }
   .screen.active { display:flex; }
 
-  #startScreen { align-items:center; justify-content:center; padding:20px; text-align:center; background:radial-gradient(ellipse at 50% 0%, rgba(14,165,233,0.15), transparent 60%), #07111f; overflow-y:auto; }
-  .start-content { max-width:640px; width:100%; padding:20px 0; }
-  .start-title { font-size:34px; font-weight:900; margin-bottom:12px; background:linear-gradient(135deg, #e0f2fe, #38bdf8, #a78bfa); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; filter:drop-shadow(0 0 20px rgba(56,189,248,0.5)); line-height:1.2; }
-  .start-sub { color:#94a3b8; font-size:14px; margin-bottom:20px; }
-  .start-preview-3d { width:280px; height:200px; margin:0 auto 12px; border-radius:16px; overflow:hidden; background:linear-gradient(135deg,#0a1428,#1a2e4a); box-shadow:0 0 40px rgba(56,189,248,0.3); position:relative; display:flex; align-items:center; justify-content:center; }
-  .start-preview-3d .cube { font-size:70px; animation:spinCube 4s linear infinite; filter:drop-shadow(0 0 20px rgba(56,189,248,0.8)); }
-  @keyframes spinCube { 0% { transform:rotateY(0); } 100% { transform:rotateY(360deg); } }
-  .instructions { background:#0b1b30; border:1px solid #1b3b5d; border-radius:15px; padding:20px; margin-bottom:22px; text-align:left; }
-  .instructions h3 { color:#38bdf8; font-size:14px; margin-bottom:12px; letter-spacing:1px; }
+  #startScreen { align-items:center; justify-content:flex-start; padding:20px; text-align:center; background:radial-gradient(ellipse at 50% 0%, rgba(14,165,233,0.15), transparent 60%), #07111f; overflow-y:auto; }
+  #startScreen::-webkit-scrollbar { width:8px; }
+  #startScreen::-webkit-scrollbar-thumb { background:#1b3b5d; border-radius:4px; }
+  .start-content { max-width:720px; width:100%; margin:auto; padding:8px 0; }
+  .start-title { font-size:32px; font-weight:900; margin-bottom:8px; background:linear-gradient(135deg, #e0f2fe, #38bdf8, #a78bfa); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; filter:drop-shadow(0 0 20px rgba(56,189,248,0.5)); line-height:1.2; }
+  .start-sub { color:#94a3b8; font-size:13.5px; margin-bottom:16px; }
+
+  .goal-panel { background:linear-gradient(180deg, rgba(11,27,48,0.9), rgba(9,20,36,0.9)); border:1px solid #1b3b5d; border-radius:18px; padding:14px 14px 16px; margin-bottom:16px; box-shadow:0 0 40px rgba(14,165,233,0.12); }
+  .goal-head { display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+  .goal-badge { background:linear-gradient(135deg,#f59e0b,#ef4444); color:white; font-size:10.5px; font-weight:900; letter-spacing:2px; padding:5px 13px; border-radius:20px; box-shadow:0 0 18px rgba(245,158,11,0.5); animation:goalPulse 2s ease-in-out infinite; }
+  @keyframes goalPulse { 0%,100% { box-shadow:0 0 14px rgba(245,158,11,0.45); } 50% { box-shadow:0 0 26px rgba(245,158,11,0.85); } }
+  .goal-note { font-size:12px; color:#7dd3fc; letter-spacing:1px; font-weight:600; }
+
+  .start-preview-3d { width:100%; height:330px; margin:0 auto 12px; border-radius:16px; overflow:hidden; position:relative; background:linear-gradient(135deg,#0a1428,#132a45); box-shadow:0 0 46px rgba(56,189,248,0.32), inset 0 0 0 1px rgba(56,189,248,0.28); }
+  .start-preview-3d canvas { width:100%; height:100%; display:block; }
+  .preview-tag { position:absolute; bottom:10px; left:50%; transform:translateX(-50%); background:rgba(11,27,48,0.88); border:1px solid #1b3b5d; color:#7dd3fc; font-size:10px; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; padding:5px 15px; border-radius:20px; white-space:nowrap; pointer-events:none; }
+  .preview-corner { position:absolute; top:10px; right:12px; font-size:9.5px; letter-spacing:1.5px; color:#94a3b8; background:rgba(11,27,48,0.8); border:1px solid #1b3b5d; padding:4px 10px; border-radius:14px; pointer-events:none; }
+
+  .goal-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(118px, 1fr)); gap:7px; margin-bottom:11px; }
+  .goal-item { background:#0b1b30; border:1px solid #1b3b5d; border-radius:11px; padding:9px 6px; display:flex; flex-direction:column; align-items:center; gap:3px; transition:.25s; }
+  .goal-item:hover { border-color:#38bdf8; transform:translateY(-3px); box-shadow:0 6px 18px rgba(14,165,233,0.25); }
+  .goal-item .gi-icon { font-size:19px; line-height:1; }
+  .goal-item .gi-lv { font-size:8.5px; font-weight:900; letter-spacing:1.5px; color:#38bdf8; }
+  .goal-item .gi-name { font-size:10px; color:#cbd5e1; line-height:1.3; }
+  .goal-item .gi-count { font-size:8.5px; color:#64748b; letter-spacing:.5px; }
+
+  .goal-warning { background:rgba(239,68,68,0.09); border-left:3px solid #ef4444; border-radius:8px; padding:10px 13px; font-size:11.5px; color:#fecaca; line-height:1.6; text-align:left; }
+  .goal-warning b { color:#fca5a5; }
+
+  .instructions { background:#0b1b30; border:1px solid #1b3b5d; border-radius:15px; padding:18px; margin-bottom:20px; text-align:left; }
+  .instructions h3 { color:#38bdf8; font-size:13.5px; margin-bottom:11px; letter-spacing:1px; }
   .instructions ul { list-style:none; }
-  .instructions li { color:#cbd5e1; font-size:13px; padding:6px 0; display:flex; gap:10px; align-items:flex-start; line-height:1.5; }
+  .instructions li { color:#cbd5e1; font-size:12.5px; padding:6px 0; display:flex; gap:10px; align-items:flex-start; line-height:1.5; }
   .instructions li .ico { flex-shrink:0; font-size:15px; }
   .start-btn { background:linear-gradient(135deg,#0ea5e9,#0284c7); color:white; border:none; padding:16px 48px; border-radius:14px; font-size:17px; font-weight:bold; cursor:pointer; letter-spacing:1px; box-shadow:0 8px 25px rgba(14,165,233,0.4); transition:.3s; }
   .start-btn:hover { transform:translateY(-3px); box-shadow:0 12px 35px rgba(14,165,233,0.6); }
@@ -68,7 +90,7 @@
 
   .game-body { flex:1; display:flex; overflow:hidden; }
 
-  .house-panel { width:58%; min-width:400px; position:relative; background:linear-gradient(180deg,#0a1428 0%,#0f1f33 100%); border-right:1px solid #1b3b5d; overflow:hidden; }
+  .house-panel { width:48%; min-width:320px; position:relative; background:linear-gradient(180deg,#0a1428 0%,#0f1f33 100%); border-right:1px solid #1b3b5d; overflow:hidden; }
   #three-canvas { width:100%; height:100%; display:block; cursor:grab; touch-action:none; }
   #three-canvas:active { cursor:grabbing; }
 
@@ -85,11 +107,11 @@
   .q-meta { display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap; align-self:flex-start; }
   .q-number { background:#132941; color:#38bdf8; padding:4px 12px; border-radius:20px; font-size:11px; font-weight:bold; border:1px solid #2a4a6a; }
   .q-type { background:linear-gradient(135deg,#6366f1,#a855f7); color:white; padding:4px 12px; border-radius:20px; font-size:10px; font-weight:bold; letter-spacing:0.5px; }
-  .q-text { font-size:14.5px; line-height:1.65; color:#e0f2fe; margin-bottom:18px; font-weight:500; }
+  .q-text { font-size:15px; line-height:1.65; color:#e0f2fe; margin-bottom:18px; font-weight:500; }
   .options { display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
-  .option { background:#132941; border:2px solid #1b3b5d; padding:11px 14px; border-radius:11px; color:#cbd5e1; font-size:12.5px; line-height:1.55; cursor:pointer; transition:.2s; display:flex; align-items:flex-start; gap:10px; text-align:left; }
+  .option { background:#132941; border:2px solid #1b3b5d; padding:12px 15px; border-radius:11px; color:#cbd5e1; font-size:13px; line-height:1.55; cursor:pointer; transition:.2s; display:flex; align-items:flex-start; gap:11px; text-align:left; }
   .option:hover:not(.disabled) { border-color:#38bdf8; background:#1a3a5c; transform:translateX(5px); }
-  .option .opt-letter { width:23px; height:23px; border-radius:50%; background:#1b3b5d; color:#94a3b8; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:11px; flex-shrink:0; transition:.2s; margin-top:1px; }
+  .option .opt-letter { width:24px; height:24px; border-radius:50%; background:#1b3b5d; color:#94a3b8; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:11px; flex-shrink:0; transition:.2s; margin-top:1px; }
   .option:hover:not(.disabled) .opt-letter { background:#38bdf8; color:white; }
   .option.disabled { cursor:not-allowed; }
   .option.correct { background:#0f2a1a; border-color:#10b981; color:#d1fae5; }
@@ -97,12 +119,12 @@
   .option.wrong { background:#2a0f0f; border-color:#ef4444; color:#fecaca; }
   .option.wrong .opt-letter { background:#ef4444; color:white; }
 
-  .feedback-box { display:none; padding:12px 16px; border-radius:11px; margin-top:8px; animation:slideIn .3s ease; }
+  .feedback-box { display:none; padding:13px 17px; border-radius:11px; margin-top:8px; animation:slideIn .3s ease; }
   .feedback-box.show { display:block; }
   .feedback-box.correct { background:#0f2a1a; border-left:4px solid #10b981; color:#d1fae5; }
   .feedback-box.wrong { background:#2a0f0f; border-left:4px solid #ef4444; color:#fecaca; }
-  .feedback-title { font-weight:bold; font-size:13px; margin-bottom:5px; }
-  .feedback-explain { font-size:11.5px; line-height:1.6; opacity:0.92; }
+  .feedback-title { font-weight:bold; font-size:13.5px; margin-bottom:5px; }
+  .feedback-explain { font-size:12px; line-height:1.6; opacity:0.92; }
   @keyframes slideIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
 
   .next-btn { background:linear-gradient(135deg,#0ea5e9,#0284c7); color:white; border:none; padding:11px 26px; border-radius:10px; font-size:13px; font-weight:bold; cursor:pointer; margin-top:12px; align-self:flex-end; transition:.3s; display:none; box-shadow:0 4px 15px rgba(14,165,233,0.3); }
@@ -120,26 +142,33 @@
   .stat-card .lbl { font-size:10px; color:#64748b; letter-spacing:1px; text-transform:uppercase; }
   .result-btn { background:linear-gradient(135deg,#0ea5e9,#0284c7); color:white; border:none; padding:14px 38px; border-radius:12px; font-size:15px; font-weight:bold; cursor:pointer; transition:.3s; margin:5px; box-shadow:0 6px 20px rgba(14,165,233,0.4); }
   .result-btn:hover { transform:translateY(-3px); box-shadow:0 10px 30px rgba(14,165,233,0.6); }
-  .mini-house-canvas { width:320px; height:220px; margin:0 auto 15px; border-radius:12px; overflow:hidden; background:#0a1428; }
+  .mini-house-canvas { width:260px; height:200px; margin:0 auto 15px; border-radius:12px; overflow:hidden; background:#0a1428; }
 
   @media (max-width: 900px) {
     .game-header { padding:8px 10px; gap:8px; }
     .level-badge { font-size:10px; padding:5px 10px; }
     .game-body { flex-direction:column; }
-    .house-panel { width:100%; min-width:0; height:300px; border-right:none; border-bottom:1px solid #1b3b5d; }
+    .house-panel { width:100%; min-width:0; height:240px; border-right:none; border-bottom:1px solid #1b3b5d; }
     .question-panel { padding:16px 5%; }
-    .q-text { font-size:13px; }
+    .q-text { font-size:13.5px; }
     .option { font-size:12px; padding:10px 12px; }
-    .start-title { font-size:24px; }
+    .start-title { font-size:22px; }
+    .start-sub { font-size:12px; }
+    .start-preview-3d { height:230px; }
+    .goal-panel { padding:11px 10px 13px; border-radius:15px; }
+    .goal-grid { grid-template-columns:repeat(auto-fit, minmax(96px, 1fr)); gap:6px; }
+    .goal-item .gi-name { font-size:9px; }
+    .instructions li { font-size:11.5px; }
+    .start-btn { padding:14px 34px; font-size:15px; }
     .result-title { font-size:22px; }
     .result-icon { font-size:50px; }
-    .mini-house-canvas { width:240px; height:180px; }
+    .mini-house-canvas { width:200px; height:160px; }
     .stat-card { padding:10px 14px; min-width:80px; }
     .stat-card .val { font-size:17px; }
     .lives-display { font-size:15px; }
     .score-display { padding:5px 10px; font-size:11px; }
   }
-  @media (max-width: 400px) { .header-progress { display:none; } }
+  @media (max-width: 400px) { .header-progress { display:none; } .start-preview-3d { height:190px; } }
 </style>
 </head>
 <body>
@@ -161,20 +190,46 @@
 
 <div id="startScreen" class="screen active">
   <div class="start-content">
-    <div class="start-preview-3d">
-      <div class="cube">🏔️</div>
-    </div>
     <h1 class="start-title">Bangun Rumah Masa Depan 3D</h1>
-    <p class="start-sub">Game Edukasi Ekonomi 3D — Bab 4: Uang & Lembaga Keuangan</p>
+    <p class="start-sub">Game Edukasi Ekonomi 3D — Bab 4: Uang &amp; Lembaga Keuangan</p>
+
+    <div class="goal-panel">
+      <div class="goal-head">
+        <span class="goal-badge">🎯 TARGET AKHIR</span>
+        <span class="goal-note">Inilah rumah yang akan kamu bangun</span>
+      </div>
+
+      <div class="start-preview-3d">
+        <canvas id="preview-canvas"></canvas>
+        <div class="preview-corner">🔭 LIVE 3D PREVIEW</div>
+        <div class="preview-tag">✨ 45 Bagian · 5 Level · 1 Rumah Impian</div>
+      </div>
+
+      <div class="goal-grid">
+        <div class="goal-item"><span class="gi-icon">🏗️</span><span class="gi-lv">LEVEL 1</span><span class="gi-name">Fondasi &amp; Teras</span><span class="gi-count">9 bagian</span></div>
+        <div class="goal-item"><span class="gi-icon">🧱</span><span class="gi-lv">LEVEL 2</span><span class="gi-name">Dinding, Pintu &amp; Jendela</span><span class="gi-count">9 bagian</span></div>
+        <div class="goal-item"><span class="gi-icon">🏠</span><span class="gi-lv">LEVEL 3</span><span class="gi-name">Atap, Cerobong &amp; Panel Surya</span><span class="gi-count">9 bagian</span></div>
+        <div class="goal-item"><span class="gi-icon">🏊</span><span class="gi-lv">LEVEL 4</span><span class="gi-name">Kolam, Pagar, Gerbang &amp; Pos Satpam</span><span class="gi-count">9 bagian</span></div>
+        <div class="goal-item"><span class="gi-icon">🌳</span><span class="gi-lv">LEVEL 5</span><span class="gi-name">Taman, Pohon &amp; Taman Bermain</span><span class="gi-count">9 bagian</span></div>
+      </div>
+
+      <p class="goal-warning">
+        ⚠️ <b>Setiap 1 jawaban BENAR = 1 bagian rumah terpasang.</b> Jawaban <b>salah</b> mengurangi 1 nyawa.
+        Jika nyawamu habis sebelum rumah selesai, rumah masa depan ini <b>tidak akan pernah berdiri</b>.
+        Jawab dengan serius dan sungguh-sungguh!
+      </p>
+    </div>
+
     <div class="instructions">
       <h3>🎮 CARA BERMAIN</h3>
       <ul>
-        <li><span class="ico">🏔️</span><span>Rumah mewah besar 3D dibangun di tengah <b>hutan, pegunungan, dan aliran sungai</b> yang indah.</span></li>
-        <li><span class="ico">🎨</span><span>Rumah bisa diputar, di-zoom, dan dilihat dari segala sudut.</span></li>
-        <li><span class="ico">🖱️</span><span>Drag untuk memutar · scroll untuk zoom · drag kanan untuk geser.</span></li>
-        <li><span class="ico">📚</span><span>5 level × 9 pertanyaan = 45 soal variatif. 5 nyawa, skor +100 per jawaban benar.</span></li>
+        <li><span class="ico">🎨</span><span>Rumah dan seluruh fasilitas dibangun secara <b>3D</b> — bisa diputar, di-zoom, dan dilihat dari berbagai sudut.</span></li>
+        <li><span class="ico">🏗️</span><span>Bangun rumah mewah lengkap: fondasi, dinding, atap, kolam renang, pagar, pos satpam, taman bermain, dan pepohonan rindang.</span></li>
+        <li><span class="ico">🖱️</span><span>Drag untuk memutar, scroll untuk zoom, klik kanan untuk menggeser.</span></li>
+        <li><span class="ico">📚</span><span>5 level × 9 pertanyaan = 45 soal variatif. 5 nyawa, skor +100 per jawaban benar (+bonus streak hingga +100).</span></li>
       </ul>
     </div>
+
     <button class="start-btn" onclick="startGame()">🚀 Mulai Membangun 3D</button>
   </div>
 </div>
@@ -195,7 +250,7 @@
   <div class="game-body">
     <div class="house-panel">
       <canvas id="three-canvas"></canvas>
-      <div class="view-hint">🖱️ Drag putar · Scroll zoom · Klik kanan geser</div>
+      <div class="view-hint">🖱️ Drag untuk memutar · Scroll untuk zoom</div>
       <div class="view-controls">
         <button class="view-btn" title="Reset kamera" onclick="resetCamera()">🎯</button>
         <button class="view-btn" title="Tampak depan" onclick="setCameraView('front')">👁️</button>
@@ -266,70 +321,66 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script>
-/* ============================================================
-   DATA SOAL
-   ============================================================ */
+/* DATA SOAL */
 const LEVELS = [
-  { name:"Fondasi", icon:"🏗️", questions:[
+  { name: "Fondasi", icon: "🏗️", questions: [
     { type:"📖 Skenario", q:"Di sebuah desa, Pak Budi ingin menukar hasil panen jagungnya dengan beras milik Bu Sari. Namun, Bu Sari ternyata tidak membutuhkan jagung — ia justru sedang mencari ikan. Akibatnya pertukaran tersebut tidak terjadi meskipun kedua pihak punya barang berlebih. Situasi ini menunjukkan kelemahan sistem barter, yaitu...", options:["Barang mudah rusak sebelum sempat ditukar","Sulit menemukan orang yang mau menukar barang yang dibutuhkan (double coincidence of wants)","Nilai barang tidak dapat diukur sama sekali","Barang tidak bisa disimpan dalam jangka waktu lama"], answer:1, explain:"Kelemahan utama barter adalah double coincidence of wants — kedua pihak harus sama-sama membutuhkan barang yang dimiliki." },
     { type:"🔍 Analisis", q:"Perhatikan pernyataan berikut: (1) Barang mudah dibagi menjadi satuan kecil; (2) Sulit menentukan nilai barang yang ditukar; (3) Kedua pihak harus sama-sama membutuhkan barang; (4) Barang tidak tahan lama. Pernyataan yang termasuk kelemahan sistem barter ditunjukkan oleh nomor...", options:["(1) dan (2)","(1) dan (3)","(2), (3), dan (4)","(1), (2), dan (4)"], answer:2, explain:"Kelemahan barter: sulit menentukan nilai (2), kedua pihak harus saling membutuhkan (3), dan barang tidak tahan lama (4)." },
     { type:"💡 Penerapan", q:"Seorang siswa ingin membeli buku seharga Rp75.000. Ia menyerahkan uang kertas Rp100.000 kepada kasir dan menerima kembalian Rp25.000. Berdasarkan peristiwa ini, fungsi asli uang yang sedang digunakan adalah...", options:["Sebagai alat pembayaran utang","Sebagai satuan hitung dan alat tukar","Sebagai penyimpan kekayaan jangka panjang","Sebagai alat pengalih kekayaan antar daerah"], answer:1, explain:"Uang Rp100.000 digunakan sebagai alat tukar dan satuan hitung. Keduanya termasuk fungsi asli uang." },
-    { type:"📚 Definisi", q:"Edward Shapiro mendefinisikan uang sebagai benda yang secara umum diterima untuk membayar pembelian barang, jasa, aset berharga, serta melunasi utang. Kata kunci paling penting dalam memahami hakikat uang adalah...", options:["Benda yang terbuat dari bahan berharga","Diterima secara umum oleh masyarakat","Dikeluarkan oleh pemerintah pusat","Memiliki nilai intrinsik yang tinggi"], answer:1, explain:"Kata kunci terpenting adalah 'diterima secara umum'." },
+    { type:"📚 Definisi", q:"Edward Shapiro mendefinisikan uang sebagai benda yang secara umum diterima untuk membayar pembelian barang, jasa, aset berharga, serta melunasi utang. Kata kunci paling penting dalam memahami hakikat uang adalah...", options:["Benda yang terbuat dari bahan berharga","Diterima secara umum oleh masyarakat","Dikeluarkan oleh pemerintah pusat","Memiliki nilai intrinsik yang tinggi"], answer:1, explain:"Kata kunci terpenting adalah 'diterima secara umum'. Yang penting diterima semua orang sebagai alat pembayaran." },
     { type:"⚖️ Perbandingan", q:"Perhatikan dua pernyataan berikut: (A) Pak Rudi menabung uang di bank untuk biaya kuliah anaknya tahun depan. (B) Bu Ani membayar utangnya di warung dengan uang tunai. Fungsi uang yang ditunjukkan pernyataan A dan B secara berturut-turut adalah...", options:["Alat tukar dan satuan hitung","Penyimpan kekayaan dan alat pembayaran","Satuan hitung dan pengalih nilai","Standar pembayaran ditunda dan alat tukar"], answer:1, explain:"A menunjukkan fungsi penyimpan kekayaan. B menunjukkan fungsi alat pembayaran." },
-    { type:"🔍 Analisis", q:"Sebuah komunitas di pulau terpencil menggunakan batu besar sebagai alat tukar. Namun batu tersebut sangat berat sehingga sangat sulit dibawa ketika mereka ingin berdagang ke pulau seberang. Syarat uang yang TIDAK terpenuhi adalah...", options:["Durability (tahan lama)","Divisibility (dapat dibagi)","Portability (mudah dibawa)","Acceptability (diterima umum)"], answer:2, explain:"Portability artinya uang harus ringan dan praktis dibawa." },
+    { type:"🔍 Analisis", q:"Sebuah komunitas di pulau terpencil menggunakan batu besar sebagai alat tukar. Namun batu tersebut sangat berat sehingga sangat sulit dibawa ketika mereka ingin berdagang ke pulau seberang. Syarat uang yang TIDAK terpenuhi adalah...", options:["Durability (tahan lama)","Divisibility (dapat dibagi)","Portability (mudah dibawa)","Acceptability (diterima umum)"], answer:2, explain:"Portability artinya uang harus ringan dan praktis dibawa ke mana-mana. Batu besar tidak memenuhi syarat ini." },
     { type:"🧠 Penalaran", q:"Mengapa uang kertas lebih praktis digunakan sebagai alat tukar dibandingkan uang barang seperti kerang, garam, atau ternak? Alasan paling tepat adalah...", options:["Uang kertas memiliki nilai intrinsik sangat tinggi","Uang kertas ringan, mudah dibawa, dapat dibagi, dan tahan lama","Uang kertas tidak dapat dipalsukan oleh siapa pun","Uang kertas jumlahnya tidak terbatas dan bisa dicetak kapan saja"], answer:1, explain:"Uang kertas memenuhi syarat uang: ringan dibawa, dapat dibagi, tahan lama, dan diterima umum." },
-    { type:"📖 Skenario", q:"Ketika harga beras naik dari Rp12.000 menjadi Rp14.000 per kilogram, Bu Sinta merasakan uang Rp100.000 miliknya kini hanya bisa membeli sekitar 7 kilogram beras. Peristiwa ini berkaitan erat dengan...", options:["Nilai eksternal uang yang menurun terhadap mata uang asing","Nilai nominal uang yang berubah karena kebijakan pemerintah","Nilai internal uang (daya beli) yang menurun akibat kenaikan harga","Nilai intrinsik uang yang berkurang karena biaya cetak naik"], answer:2, explain:"Nilai internal (daya beli) uang menurun ketika harga barang naik." },
-    { type:"✅ Evaluasi", q:"Di zaman modern, banyak orang lebih memilih menyimpan uangnya di bank daripada menyimpannya di rumah. Jika dikaitkan dengan fungsi turunan uang, tindakan tersebut paling tepat mencerminkan fungsi uang sebagai...", options:["Alat tukar dalam transaksi sehari-hari","Satuan hitung untuk menyatakan nilai barang","Penyimpan kekayaan yang aman dari risiko kehilangan","Alat pembayaran utang kepada pihak lain"], answer:2, explain:"Menyimpan uang di bank mencerminkan fungsi turunan uang sebagai penyimpan kekayaan." }
+    { type:"📖 Skenario", q:"Ketika harga beras naik dari Rp12.000 menjadi Rp14.000 per kilogram, Bu Sinta merasakan uang Rp100.000 miliknya kini hanya bisa membeli sekitar 7 kilogram beras, padahal sebelumnya bisa lebih dari 8 kilogram. Peristiwa ini berkaitan erat dengan...", options:["Nilai eksternal uang yang menurun terhadap mata uang asing","Nilai nominal uang yang berubah karena kebijakan pemerintah","Nilai internal uang (daya beli) yang menurun akibat kenaikan harga","Nilai intrinsik uang yang berkurang karena biaya cetak naik"], answer:2, explain:"Nilai internal (daya beli) uang menurun ketika harga barang naik — inilah inflasi." },
+    { type:"✅ Evaluasi", q:"Di zaman modern, banyak orang lebih memilih menyimpan uangnya di bank daripada menyimpannya di rumah. Jika dikaitkan dengan fungsi turunan uang, tindakan tersebut paling tepat mencerminkan fungsi uang sebagai...", options:["Alat tukar dalam transaksi sehari-hari","Satuan hitung untuk menyatakan nilai barang","Penyimpan kekayaan yang aman dari risiko kehilangan","Alat pembayaran utang kepada pihak lain"], answer:2, explain:"Menyimpan uang di bank mencerminkan fungsi turunan uang sebagai penyimpan kekayaan (store of value)." }
   ]},
-  { name:"Dinding", icon:"🧱", questions:[
+  { name: "Dinding", icon: "🧱", questions: [
     { type:"⚖️ Perbandingan", q:"Perhatikan ciri-ciri berikut: (1) Dikeluarkan oleh Bank Indonesia; (2) Berupa cek dan giro; (3) Berlaku sebagai alat pembayaran sah untuk semua orang; (4) Hanya berlaku bagi nasabah bank penerbitnya. Ciri-ciri yang menunjukkan uang kartal adalah...", options:["(1) dan (3)","(1) dan (2)","(2) dan (4)","(3) dan (4)"], answer:0, explain:"Uang kartal dikeluarkan Bank Indonesia (1) dan berlaku sebagai alat pembayaran sah untuk semua orang (3)." },
-    { type:"📖 Skenario", q:"Ketika Rina ingin membayar SPP sekolah, ibunya mentransfer dana langsung ke rekening sekolah melalui aplikasi mobile banking. Uang yang digunakan dalam transaksi tersebut termasuk jenis...", options:["Uang kartal karena diterima sekolah sebagai pembayaran resmi","Uang giral karena berupa saldo rekening yang dipindahkan antar bank","Uang logam karena nilainya dijamin oleh bank penerbit","Uang barang karena berbentuk digital dan tidak berwujud fisik"], answer:1, explain:"Uang giral adalah uang yang dikeluarkan bank umum berupa saldo rekening." },
-    { type:"🔍 Analisis", q:"Sebuah uang kertas Rp100.000 membutuhkan biaya cetak sekitar Rp3.000 per lembar. Namun uang tersebut tetap bernilai Rp100.000 ketika digunakan berbelanja. Uang kertas tersebut termasuk kategori...", options:["Uang bernilai penuh, karena nilai nominalnya sama dengan biaya produksi","Uang tidak bernilai penuh, karena nilai nominal lebih besar daripada nilai intrinsiknya","Uang logam mulia, karena dijamin oleh cadangan emas pemerintah","Uang giral, karena nilainya tercatat dalam sistem perbankan"], answer:1, explain:"Uang tidak bernilai penuh adalah uang yang nilai nominalnya lebih besar daripada nilai intrinsiknya." },
-    { type:"📖 Skenario", q:"Setahun yang lalu, uang Rp10.000 milik Rani bisa digunakan untuk membeli 5 butir telur. Namun saat ini, dengan uang Rp10.000 yang sama, Rani hanya bisa membeli 3 butir telur. Perubahan ini menunjukkan bahwa...", options:["Nilai nominal uang Rp10.000 telah berubah menjadi Rp6.000","Nilai intrinsik uang kertas Rp10.000 menurun drastis","Nilai internal uang Rupiah menurun karena kenaikan harga barang","Nilai eksternal uang Rupiah menguat terhadap Dolar AS"], answer:2, explain:"Nilai internal (daya beli) uang menurun ketika harga barang naik." },
-    { type:"🧮 Hitungan", q:"Diketahui kurs beli USD 1 = Rp15.400 dan kurs jual USD 1 = Rp15.600. Pak Andi memiliki USD 200 dan ingin menukarnya menjadi Rupiah. Berapakah uang Rupiah yang akan diterima Pak Andi?", options:["Rp3.080.000","Rp3.120.000","Rp3.100.000","Rp3.060.000"], answer:0, explain:"Karena menukar USD ke Rupiah, bank membeli USD menggunakan kurs beli. USD 200 × Rp15.400 = Rp3.080.000." },
+    { type:"📖 Skenario", q:"Ketika Rina ingin membayar SPP sekolah, ibunya mentransfer dana langsung ke rekening sekolah melalui aplikasi mobile banking. Uang yang digunakan dalam transaksi tersebut termasuk jenis...", options:["Uang kartal karena diterima sekolah sebagai pembayaran resmi","Uang giral karena berupa saldo rekening yang dipindahkan antar bank","Uang logam karena nilainya dijamin oleh bank penerbit","Uang barang karena berbentuk digital dan tidak berwujud fisik"], answer:1, explain:"Uang giral adalah uang yang dikeluarkan bank umum berupa surat berharga atau saldo rekening." },
+    { type:"🔍 Analisis", q:"Sebuah uang kertas Rp100.000 membutuhkan biaya cetak sekitar Rp3.000 per lembar. Namun uang tersebut tetap bernilai Rp100.000 ketika digunakan berbelanja. Uang kertas tersebut termasuk kategori...", options:["Uang bernilai penuh","Uang tidak bernilai penuh","Uang logam mulia","Uang giral"], answer:1, explain:"Uang tidak bernilai penuh adalah uang yang nilai nominalnya lebih besar daripada nilai intrinsiknya." },
+    { type:"📖 Skenario", q:"Setahun yang lalu, uang Rp10.000 milik Rani bisa digunakan untuk membeli 5 butir telur di pasar. Namun saat ini, dengan uang Rp10.000 yang sama, Rani hanya bisa membeli 3 butir telur. Perubahan kondisi ini menunjukkan bahwa...", options:["Nilai nominal uang telah berubah","Nilai intrinsik uang menurun","Nilai internal uang Rupiah menurun","Nilai eksternal uang Rupiah menguat"], answer:2, explain:"Nilai internal (daya beli) uang menurun ketika harga barang naik." },
+    { type:"🧮 Hitungan", q:"Diketahui kurs beli USD 1 = Rp15.400 dan kurs jual USD 1 = Rp15.600 di sebuah bank. Pak Andi memiliki USD 200 dan ingin menukarnya menjadi Rupiah. Berapakah uang Rupiah yang akan diterima Pak Andi?", options:["Rp3.080.000","Rp3.120.000","Rp3.100.000","Rp3.060.000"], answer:0, explain:"Karena Pak Andi menukar USD ke Rupiah, bank membeli USD menggunakan kurs beli. USD 200 × Rp15.400 = Rp3.080.000." },
     { type:"🔍 Analisis", q:"Perhatikan jenis-jenis nilai uang berikut: (1) Nilai intrinsik; (2) Nilai nominal; (3) Nilai internal; (4) Nilai eksternal. Nilai yang berkaitan langsung dengan kemampuan uang membeli barang atau jasa di dalam negeri ditunjukkan oleh nomor...", options:["(1)","(2)","(3)","(4)"], answer:2, explain:"Nilai internal (nilai riil) adalah kemampuan uang membeli barang/jasa di dalam negeri." },
-    { type:"🧠 Penalaran", q:"Mengapa nilai nominal uang kertas selalu lebih besar daripada nilai intrinsiknya? Alasan paling tepat adalah...", options:["Karena pemerintah ingin mendapatkan keuntungan besar dari pencetakan uang","Karena bahan kertas jauh lebih murah daripada logam mulia, sehingga efisiensi biaya tercapai","Karena masyarakat tidak mau menggunakan uang kertas jika nilainya kecil","Karena uang kertas tidak dijamin oleh cadangan emas negara"], answer:1, explain:"Uang kertas sengaja dibuat dengan biaya produksi rendah agar efisien dan mudah diedarkan." },
-    { type:"📖 Skenario", q:"Bu Sinta menerima uang logam Rp500 yang terbuat dari aluminium. Nilai logam aluminium pada uang tersebut jauh lebih kecil daripada angka Rp500 yang tertera. Uang logam tersebut termasuk kategori...", options:["Uang bernilai penuh karena terbuat dari logam","Uang tidak bernilai penuh karena nilai nominal > nilai intrinsik","Uang giral karena diterbitkan oleh bank umum","Uang kartal bernilai penuh karena diterbitkan Bank Indonesia"], answer:1, explain:"Uang logam Rp500 dari aluminium memiliki nilai intrinsik jauh lebih kecil daripada nilai nominalnya." },
-    { type:"🧮 Hitungan", q:"Di sebuah money changer terpampang kurs beli USD 1 = Rp15.400 dan kurs jual USD 1 = Rp15.600. Seorang turis asing menukar USD 100 ke Rupiah, sementara turis Indonesia ingin membeli USD 100. Berapa selisih Rupiah kedua orang tersebut?", options:["Rp20.000","Rp25.000","Rp30.000","Rp15.000"], answer:0, explain:"Turis asing: USD 100 × Rp15.400 = Rp1.540.000. Turis Indonesia: USD 100 × Rp15.600 = Rp1.560.000. Selisih = Rp20.000 (spread)." }
+    { type:"🧠 Penalaran", q:"Mengapa nilai nominal uang kertas selalu lebih besar daripada nilai intrinsiknya? Alasan paling tepat adalah...", options:["Karena pemerintah ingin mendapatkan keuntungan besar","Karena bahan kertas jauh lebih murah daripada logam mulia, sehingga efisiensi biaya tercapai","Karena masyarakat tidak mau menggunakan uang kertas","Karena uang kertas tidak dijamin oleh cadangan emas"], answer:1, explain:"Uang kertas sengaja dibuat dengan biaya produksi rendah agar efisien dan mudah diedarkan." },
+    { type:"📖 Skenario", q:"Bu Sinta menerima uang logam Rp500 yang terbuat dari aluminium. Nilai logam aluminium pada uang tersebut jauh lebih kecil daripada angka Rp500 yang tertera. Uang logam tersebut termasuk kategori...", options:["Uang bernilai penuh","Uang tidak bernilai penuh","Uang giral","Uang kartal bernilai penuh"], answer:1, explain:"Uang logam Rp500 dari aluminium memiliki nilai intrinsik jauh lebih kecil daripada nilai nominalnya — token money." },
+    { type:"🧮 Hitungan", q:"Di sebuah money changer terpampang kurs beli USD 1 = Rp15.400 dan kurs jual USD 1 = Rp15.600. Seorang turis asing menukar USD 100 ke Rupiah, sementara turis Indonesia ingin membeli USD 100 untuk bepergian. Berapa selisih Rupiah yang diterima/dibayarkan kedua orang tersebut?", options:["Rp20.000","Rp25.000","Rp30.000","Rp15.000"], answer:0, explain:"Turis asing: USD 100 × Rp15.400 = Rp1.540.000. Turis Indonesia: USD 100 × Rp15.600 = Rp1.560.000. Selisih = Rp20.000 (spread)." }
   ]},
-  { name:"Atap", icon:"🏠", questions:[
-    { type:"🧮 Hitungan", q:"Rina memiliki tabungan USD 50. Ia ingin menukarkannya ke Rupiah dengan kurs beli USD 1 = Rp15.300. Setelah ditukar, ia ingin membeli sepatu seharga Rp700.000. Berapa sisa uang Rina?", options:["Rp65.000","Rp75.000","Rp55.000","Rp85.000"], answer:0, explain:"USD 50 × Rp15.300 = Rp765.000. Sisa = Rp765.000 − Rp700.000 = Rp65.000." },
-    { type:"🔍 Analisis", q:"Perhatikan kegiatan lembaga keuangan: (1) Menerbitkan uang Rupiah; (2) Menghimpun dana dari masyarakat; (3) Mengatur kebijakan moneter negara; (4) Menyalurkan kredit ke masyarakat. Kegiatan yang dilakukan Bank Indonesia sebagai bank sentral ditunjukkan oleh nomor...", options:["(1) dan (2)","(1) dan (3)","(2) dan (4)","(3) dan (4)"], answer:1, explain:"Bank Indonesia bertugas menerbitkan uang Rupiah (1) dan mengatur kebijakan moneter (3)." },
-    { type:"🧠 Penalaran", q:"Mengapa kurs jual selalu lebih tinggi daripada kurs beli pada setiap bank atau money changer? Alasan utama adalah...", options:["Karena bank ingin merugikan nasabah yang menukar uang","Karena selisih (spread) antara kurs jual dan kurs beli merupakan sumber keuntungan bank","Karena pemerintah mewajibkan bank menaikkan kurs jual setiap hari","Karena nilai mata uang asing selalu naik terhadap Rupiah"], answer:1, explain:"Selisih kurs jual dan kurs beli (spread) adalah salah satu sumber keuntungan bank." },
+  { name: "Atap", icon: "🏠", questions: [
+    { type:"🧮 Hitungan", q:"Rina memiliki tabungan USD 50 dari hadiah lomba. Ia ingin menukarkannya ke Rupiah di sebuah bank dengan kurs beli USD 1 = Rp15.300. Setelah ditukar, Rina ingin membeli sepatu seharga Rp700.000. Berapa sisa uang Rina?", options:["Rp65.000","Rp75.000","Rp55.000","Rp85.000"], answer:0, explain:"USD 50 × Rp15.300 = Rp765.000. Sisa = Rp765.000 − Rp700.000 = Rp65.000." },
+    { type:"🔍 Analisis", q:"Perhatikan kegiatan lembaga keuangan berikut: (1) Menerbitkan uang Rupiah; (2) Menghimpun dana dari masyarakat; (3) Mengatur kebijakan moneter negara; (4) Menyalurkan kredit ke masyarakat. Kegiatan yang dilakukan Bank Indonesia sebagai bank sentral ditunjukkan oleh nomor...", options:["(1) dan (2)","(1) dan (3)","(2) dan (4)","(3) dan (4)"], answer:1, explain:"Bank Indonesia bertugas menerbitkan uang Rupiah (1) dan mengatur kebijakan moneter (3)." },
+    { type:"🧠 Penalaran", q:"Mengapa kurs jual selalu lebih tinggi daripada kurs beli pada setiap bank atau money changer? Alasan utama adalah...", options:["Karena bank ingin merugikan nasabah","Karena selisih (spread) antara kurs jual dan kurs beli merupakan sumber keuntungan bank","Karena pemerintah mewajibkan bank menaikkan kurs jual","Karena nilai mata uang asing selalu naik"], answer:1, explain:"Selisih kurs jual dan kurs beli (spread) adalah salah satu sumber keuntungan bank." },
     { type:"🧮 Hitungan", q:"Rani berencana berlibur ke Singapura dan memperkirakan membutuhkan SGD 500. Di bank terpampang kurs jual SGD 1 = Rp11.500 dan kurs beli SGD 1 = Rp11.300. Berapa uang Rupiah yang harus Rani siapkan untuk membeli SGD 500 tersebut?", options:["Rp5.650.000","Rp5.750.000","Rp5.700.000","Rp5.800.000"], answer:1, explain:"Karena Rani membeli SGD dari bank, berlaku kurs jual. SGD 500 × Rp11.500 = Rp5.750.000." },
-    { type:"📚 Definisi", q:"Berdasarkan UU No. 10 Tahun 1998, bank didefinisikan sebagai badan usaha yang menghimpun dana dari masyarakat dalam bentuk simpanan dan menyalurkannya kepada masyarakat dalam bentuk kredit. Fungsi utama bank dapat disimpulkan sebagai...", options:["Lembaga yang mencetak uang untuk pemerintah","Perantara keuangan antara pihak kelebihan dana dan pihak membutuhkan dana","Lembaga yang mengatur kebijakan fiskal negara","Perusahaan yang menjual barang dan jasa secara langsung"], answer:1, explain:"Fungsi utama bank adalah sebagai perantara keuangan (financial intermediary)." },
+    { type:"📚 Definisi", q:"Berdasarkan UU No. 10 Tahun 1998, bank didefinisikan sebagai badan usaha yang menghimpun dana dari masyarakat dalam bentuk simpanan dan menyalurkannya kepada masyarakat dalam bentuk kredit. Fungsi utama bank dapat disimpulkan sebagai...", options:["Lembaga yang mencetak uang","Perantara keuangan antara pihak kelebihan dana dan pihak membutuhkan dana","Lembaga yang mengatur kebijakan fiskal negara","Perusahaan yang menjual barang dan jasa"], answer:1, explain:"Fungsi utama bank adalah sebagai perantara keuangan (financial intermediary)." },
     { type:"📚 Definisi", q:"Bank Indonesia merupakan hasil nasionalisasi dari sebuah bank yang didirikan pada zaman kolonial Belanda. Bank tersebut bernama...", options:["De Nederlandsche Bank","De Javasche Bank","Bank van Leening","Nederlandsch Indische Handelsbank"], answer:1, explain:"De Javasche Bank didirikan tahun 1828 dan setelah kemerdekaan menjadi Bank Indonesia." },
     { type:"🔍 Analisis", q:"Perhatikan faktor-faktor berikut: (1) Tingkat inflasi suatu negara; (2) Jumlah penduduk negara; (3) Tingkat suku bunga bank; (4) Warna dan gambar pada uang. Faktor yang mempengaruhi naik-turunnya nilai kurs ditunjukkan oleh nomor...", options:["(1) dan (3)","(1) dan (2)","(2) dan (4)","(3) dan (4)"], answer:0, explain:"Kurs dipengaruhi inflasi (1) dan suku bunga (3), serta permintaan-penawaran valas." },
     { type:"🧮 Hitungan", q:"Pak Budi mendapat kiriman uang dari kerabatnya di luar negeri sebesar USD 300 dan ingin menukarkannya ke Rupiah. Kurs beli yang berlaku Rp15.400 per USD. Berapa Rupiah yang diterima Pak Budi, dan apa fungsi uang dalam transaksi tersebut?", options:["Rp4.620.000 dan fungsi uang sebagai pengalih nilai","Rp4.620.000 dan fungsi uang sebagai penyimpan kekayaan","Rp4.500.000 dan fungsi uang sebagai alat tukar","Rp4.700.000 dan fungsi uang sebagai satuan hitung"], answer:0, explain:"USD 300 × Rp15.400 = Rp4.620.000. Ini mencerminkan fungsi uang sebagai pengalih nilai." },
     { type:"✅ Evaluasi", q:"Dalam menjalankan kegiatan usahanya, sebuah bank harus mengelola risiko dengan hati-hati agar dana masyarakat yang disimpan tetap aman. Prinsip ini dalam dunia perbankan Indonesia dikenal dengan istilah...", options:["Prinsip demokrasi ekonomi","Prinsip kehati-hatian (prudential banking)","Prinsip syariah","Prinsip spread keuntungan"], answer:1, explain:"Prinsip kehati-hatian (prudential banking) mengharuskan bank mengelola risiko dengan hati-hati." }
   ]},
-  { name:"Kolam & Pagar", icon:"🏊", questions:[
+  { name: "Kolam & Pagar", icon: "🏊", questions: [
     { type:"⚖️ Perbandingan", q:"Perhatikan perbandingan Bank Umum dan BPR berikut: (1) Melayani jasa transfer antar bank; (2) Menghimpun dana dari masyarakat; (3) Melayani transaksi valuta asing; (4) Menyalurkan kredit. Kegiatan yang HANYA dapat dilakukan Bank Umum tetapi TIDAK dapat dilakukan BPR ditunjukkan oleh nomor...", options:["(1) dan (3)","(1) dan (2)","(2) dan (4)","(3) dan (4)"], answer:0, explain:"BPR tidak melayani jasa lalu lintas pembayaran seperti transfer (1) dan valuta asing (3)." },
-    { type:"📖 Skenario", q:"Bu Ani memiliki uang Rp20.000.000 yang tidak akan ia gunakan dalam waktu 6 bulan. Ia ingin menyimpan uangnya dengan bunga lebih tinggi daripada tabungan biasa, dan bersedia tidak menariknya sebelum jatuh tempo. Produk bank paling sesuai adalah...", options:["Tabungan biasa","Giro","Deposito berjangka","Kartu kredit"], answer:2, explain:"Deposito berjangka adalah simpanan yang hanya dapat diambil dalam jangka waktu tertentu dengan bunga lebih tinggi." },
-    { type:"📖 Skenario", q:"Pak Hasan ingin membeli rumah untuk keluarganya, tetapi ia belum memiliki cukup uang tunai. Ia mengajukan pinjaman kepada bank dan akan melunasinya secara bertahap setiap bulan selama 15 tahun. Jenis kredit ini termasuk...", options:["Kredit investasi, karena digunakan untuk jangka panjang","Kredit modal kerja, karena untuk memenuhi kebutuhan usaha","Kredit konsumsi, karena digunakan untuk memenuhi kebutuhan pribadi/keluarga","Kredit produksi, karena menghasilkan barang baru"], answer:2, explain:"Kredit konsumsi digunakan untuk memenuhi kebutuhan konsumsi pribadi/keluarga seperti KPR." },
+    { type:"📖 Skenario", q:"Bu Ani memiliki uang Rp20.000.000 yang tidak akan ia gunakan dalam waktu 6 bulan ke depan. Ia ingin menyimpan uangnya dengan bunga lebih tinggi daripada tabungan biasa, dan bersedia tidak menariknya sebelum jatuh tempo. Produk bank paling sesuai adalah...", options:["Tabungan biasa","Giro","Deposito berjangka","Kartu kredit"], answer:2, explain:"Deposito berjangka adalah simpanan yang hanya dapat diambil dalam jangka waktu tertentu dengan bunga lebih tinggi." },
+    { type:"📖 Skenario", q:"Pak Hasan ingin membeli rumah untuk keluarganya, tetapi ia belum memiliki cukup uang tunai. Ia mengajukan pinjaman kepada bank dan akan melunasinya secara bertahap setiap bulan selama 15 tahun. Jenis kredit ini termasuk...", options:["Kredit investasi","Kredit modal kerja","Kredit konsumsi","Kredit produksi"], answer:2, explain:"Kredit konsumsi digunakan untuk memenuhi kebutuhan konsumsi pribadi/keluarga seperti KPR." },
     { type:"🔍 Analisis", q:"Perhatikan kegiatan perbankan berikut: (1) Menerbitkan uang Rupiah; (2) Menyalurkan kredit ke masyarakat; (3) Mengatur kebijakan moneter; (4) Melayani tabungan nasabah; (5) Melayani jasa transfer antar bank. Kegiatan yang termasuk fungsi BANK UMUM ditunjukkan oleh nomor...", options:["(1), (3), dan (5)","(2), (4), dan (5)","(1), (2), dan (4)","(3), (4), dan (5)"], answer:1, explain:"Bank umum bertugas menyalurkan kredit (2), melayani tabungan (4), dan melayani transfer (5)." },
     { type:"📖 Skenario", q:"Bu Tuti adalah pedagang kecil di pasar yang membutuhkan modal untuk membeli bahan dagangan. Ia meminjam uang di bank yang hanya melayani tabungan, deposito, dan kredit — tidak ada layanan transfer maupun valuta asing. Bank yang dimaksud adalah...", options:["Bank Indonesia","Bank Umum Devisa","Bank Perkreditan Rakyat (BPR)","Bank Sentral"], answer:2, explain:"BPR melayani tabungan, deposito, dan kredit, tetapi tidak melayani jasa lalu lintas pembayaran." },
-    { type:"📖 Skenario", q:"Rudi membuka rekening di bank dan setiap bulan ia dapat menyetor uang jajannya, lalu mengambilnya kapan saja tanpa terikat waktu. Bunga yang diberikan bank relatif kecil, tetapi Rudi merasa nyaman karena uangnya aman. Produk bank yang digunakan Rudi adalah...", options:["Deposito berjangka, karena dapat diambil kapan saja","Giro, karena menggunakan cek dan bilyet","Tabungan, karena fleksibel dan dapat diambil sewaktu-waktu","Kredit konsumsi, karena digunakan untuk kebutuhan pribadi"], answer:2, explain:"Tabungan adalah produk bank berupa simpanan yang dapat diambil kapan saja." },
+    { type:"📖 Skenario", q:"Rudi membuka rekening di bank dan setiap bulan ia dapat menyetor uang jajannya, lalu mengambilnya kapan saja tanpa terikat waktu. Bunga yang diberikan bank relatif kecil, tetapi Rudi merasa nyaman karena uangnya aman. Produk bank yang digunakan Rudi adalah...", options:["Deposito berjangka","Giro","Tabungan","Kredit konsumsi"], answer:2, explain:"Tabungan adalah produk bank berupa simpanan yang dapat diambil kapan saja." },
     { type:"🧠 Penalaran", q:"Mengapa bunga tabungan yang diterima nasabah biasanya lebih kecil dibandingkan bunga pinjaman yang harus dibayar nasabah peminjam?", options:["Karena bank ingin menipu nasabahnya sendiri","Karena selisih bunga (spread) merupakan salah satu sumber pendapatan utama bank","Karena pemerintah mewajibkan bunga tabungan lebih kecil","Karena tabungan tidak dijamin oleh Lembaga Penjamin Simpanan"], answer:1, explain:"Bank memperoleh keuntungan dari selisih antara bunga pinjaman dan bunga tabungan (spread)." },
-    { type:"💡 Penerapan", q:"Pak Andi memiliki uang Rp10.000.000 dan ingin menyimpannya dengan bunga lebih tinggi daripada tabungan biasa. Ia berkomitmen tidak akan mengambil uangnya selama 12 bulan. Produk bank paling tepat adalah...", options:["Tabungan biasa, karena paling fleksibel","Giro, karena menggunakan cek","Deposito berjangka 12 bulan, karena bunganya lebih tinggi","Kartu kredit, karena bisa dipakai kapan saja"], answer:2, explain:"Deposito berjangka 12 bulan memberikan bunga lebih tinggi karena komitmen tidak menarik dana." },
+    { type:"💡 Penerapan", q:"Pak Andi memiliki uang Rp10.000.000 dan ingin menyimpannya dengan bunga lebih tinggi daripada tabungan biasa. Ia berkomitmen tidak akan mengambil uangnya selama 12 bulan. Produk bank paling tepat adalah...", options:["Tabungan biasa","Giro","Deposito berjangka 12 bulan","Kartu kredit"], answer:2, explain:"Deposito berjangka 12 bulan memberikan bunga lebih tinggi karena komitmen tidak menarik dana." },
     { type:"✅ Evaluasi", q:"Perhatikan karakteristik dari tiga jenis bank: (A) Menerbitkan uang Rupiah dan mengatur kebijakan moneter; (B) Melayani transfer, kliring, dan valuta asing; (C) Hanya melayani tabungan, deposito, dan kredit masyarakat kecil. Urutan jenis bank yang tepat untuk A, B, C adalah...", options:["Bank Umum — Bank Indonesia — BPR","Bank Indonesia — Bank Umum — BPR","BPR — Bank Indonesia — Bank Umum","Bank Indonesia — BPR — Bank Umum"], answer:1, explain:"A = Bank Indonesia. B = Bank Umum. C = BPR." }
   ]},
-  { name:"Taman & Fitur", icon:"🌳", questions:[
+  { name: "Taman & Fitur", icon: "🌳", questions: [
     { type:"📖 Skenario", q:"Pak Anto mengalami kecelakaan lalu lintas yang membutuhkan biaya pengobatan cukup besar. Untungnya ia rutin membayar sejumlah uang setiap bulan kepada sebuah lembaga keuangan, sehingga biaya pengobatannya dapat diganti. Lembaga yang dimaksud adalah...", options:["Bank umum","Pegadaian","Asuransi","Koperasi simpan pinjam"], answer:2, explain:"Asuransi adalah lembaga keuangan non-bank yang memberikan perlindungan atas risiko kerugian." },
     { type:"📖 Skenario", q:"Bu Siti membutuhkan uang darurat Rp2.000.000 untuk biaya rumah sakit anaknya. Ia menyerahkan perhiasan emasnya sebagai jaminan, dan berjanji akan menebusnya setelah pinjaman dilunasi. Lembaga yang dimaksud adalah...", options:["Bank umum","Pegadaian","Asuransi","Pasar modal"], answer:1, explain:"Pegadaian memberikan pinjaman uang dengan jaminan barang berharga yang bisa ditebus kembali." },
-    { type:"⚖️ Perbandingan", q:"Perhatikan lembaga keuangan berikut: (1) Bank Mandiri; (2) Asuransi; (3) Pegadaian; (4) BCA; (5) Koperasi Simpan Pinjam. Lembaga yang termasuk LKBB ditunjukkan oleh nomor...", options:["(1) dan (4)","(2), (3), dan (5)","(1), (2), dan (3)","(3), (4), dan (5)"], answer:1, explain:"LKBB meliputi asuransi (2), pegadaian (3), dan koperasi (5)." },
-    { type:"📖 Skenario", q:"Rina membeli jajan di kantin sekolah. Ia tidak membawa uang tunai, melainkan memindai kode QR yang tertempel di meja kasir menggunakan aplikasi dompet digital. Sistem pembayaran yang digunakan termasuk...", options:["Uang kartal karena pembayaran dilakukan secara langsung","Alat pembayaran non-tunai berupa QRIS","Uang giral karena menggunakan cek dan giro","Uang logam karena nilainya kecil"], answer:1, explain:"QRIS adalah kode QR standar nasional untuk pembayaran digital yang dikembangkan Bank Indonesia." },
+    { type:"⚖️ Perbandingan", q:"Perhatikan lembaga keuangan berikut: (1) Bank Mandiri; (2) Asuransi; (3) Pegadaian; (4) BCA; (5) Koperasi Simpan Pinjam. Lembaga yang termasuk LKBB ditunjukkan oleh nomor...", options:["(1) dan (4)","(2), (3), dan (5)","(1), (2), dan (3)","(3), (4), dan (5)"], answer:1, explain:"LKBB meliputi asuransi (2), pegadaian (3), dan koperasi (5). Bank Mandiri & BCA adalah bank umum." },
+    { type:"📖 Skenario", q:"Rina membeli jajan di kantin sekolah. Ia tidak membawa uang tunai, melainkan memindai kode QR yang tertempel di meja kasir menggunakan aplikasi dompet digital. Sistem pembayaran yang digunakan termasuk...", options:["Uang kartal","Alat pembayaran non-tunai berupa QRIS","Uang giral","Uang logam"], answer:1, explain:"QRIS adalah kode QR standar nasional untuk pembayaran digital yang dikembangkan Bank Indonesia." },
     { type:"🔍 Analisis", q:"Perhatikan alat pembayaran berikut: (1) Kartu debit; (2) Uang kertas Rp50.000; (3) QRIS; (4) Kartu kredit; (5) Uang logam Rp1.000. Alat pembayaran non-tunai ditunjukkan oleh nomor...", options:["(1), (3), dan (4)","(2) dan (5)","(1), (2), dan (3)","(3), (4), dan (5)"], answer:0, explain:"Alat pembayaran non-tunai meliputi kartu debit (1), QRIS (3), dan kartu kredit (4)." },
-    { type:"🧠 Penalaran", q:"Mengapa alat pembayaran non-tunai seperti QRIS, e-money, dan mobile banking semakin banyak digunakan masyarakat? Alasan paling tepat adalah...", options:["Karena alat pembayaran non-tunai tidak memerlukan saldo sama sekali","Karena lebih praktis, cepat, aman, dan setiap transaksi tercatat dengan baik","Karena uang tunai sudah dilarang oleh pemerintah Indonesia","Karena alat non-tunai memberikan uang gratis kepada pengguna"], answer:1, explain:"Alat pembayaran non-tunai lebih praktis, cepat, aman (PIN/OTP), dan tercatat sehingga mudah dilacak." },
+    { type:"🧠 Penalaran", q:"Mengapa alat pembayaran non-tunai seperti QRIS, e-money, dan mobile banking semakin banyak digunakan masyarakat? Alasan paling tepat adalah...", options:["Karena alat pembayaran non-tunai tidak memerlukan saldo","Karena lebih praktis, cepat, aman, dan setiap transaksi tercatat dengan baik","Karena uang tunai sudah dilarang pemerintah","Karena alat non-tunai memberikan uang gratis"], answer:1, explain:"Alat pembayaran non-tunai lebih praktis, cepat, aman (PIN/OTP), dan tercatat sehingga mudah dilacak." },
     { type:"💡 Penerapan", q:"Orang tua Rina mengirim uang bulanan melalui aplikasi BRImo. Beberapa detik kemudian, Rina menerima notifikasi dana masuk di rekeningnya. Jasa perbankan yang dimanfaatkan adalah...", options:["Safe deposit box","Kliring","Mobile banking untuk transfer dana","Kredit investasi"], answer:2, explain:"Mobile banking adalah layanan transaksi bank melalui aplikasi ponsel, termasuk transfer dana." },
     { type:"🔍 Analisis", q:"Perhatikan manfaat lembaga keuangan berikut: (1) Menyediakan layanan penyimpanan uang yang aman; (2) Mempermudah akses modal usaha bagi UMKM; (3) Menaikkan harga barang di pasar; (4) Memperlancar transaksi pembayaran. Manfaat lembaga keuangan yang benar ditunjukkan oleh nomor...", options:["(1), (2), dan (4)","(1) dan (3)","(2) dan (3)","(1), (3), dan (4)"], answer:0, explain:"Manfaat lembaga keuangan: penyimpanan aman (1), akses modal (2), dan transaksi lancar (4)." },
-    { type:"✅ Evaluasi", q:"Seorang siswa menerima pesan WhatsApp dari nomor tidak dikenal yang mengaku pihak bank, meminta kode OTP dengan alasan verifikasi akun agar tidak diblokir. Tindakan paling tepat adalah...", options:["Segera memberikan kode OTP agar akunnya tidak diblokir","Membalas pesan dan meminta bukti identitas pengirim","Mengabaikan, tidak membalas, dan tidak membagikan OTP kepada siapa pun","Mengklik tautan yang mungkin dikirim menyusul pesan tersebut"], answer:2, explain:"Modus penipuan seperti ini disebut phishing. Kode OTP bersifat sangat rahasia." }
+    { type:"✅ Evaluasi", q:"Seorang siswa menerima pesan WhatsApp dari nomor tidak dikenal yang mengaku pihak bank, meminta kode OTP dengan alasan verifikasi akun agar tidak diblokir. Tindakan paling tepat adalah...", options:["Segera memberikan kode OTP","Membalas pesan dan meminta bukti identitas","Mengabaikan, tidak membalas, dan tidak membagikan OTP","Mengklik tautan yang mungkin dikirim"], answer:2, explain:"Modus penipuan seperti ini disebut phishing. Kode OTP bersifat sangat rahasia — jangan pernah dibagikan." }
   ]}
 ];
 
-/* ============================================================
-   THREE.JS HELPERS
-   ============================================================ */
+/* THREE.JS HELPERS */
 function mat(color, opts = {}) {
   return new THREE.MeshStandardMaterial({
     color,
@@ -339,8 +390,7 @@ function mat(color, opts = {}) {
     emissiveIntensity: opts.emissiveIntensity !== undefined ? opts.emissiveIntensity : 0,
     transparent: opts.transparent || false,
     opacity: opts.opacity !== undefined ? opts.opacity : 1,
-    flatShading: opts.flat || false,
-    side: opts.side !== undefined ? opts.side : THREE.FrontSide
+    flatShading: opts.flat || false
   });
 }
 function box(w, h, d, color, o={}) { const m = new THREE.Mesh(new THREE.BoxGeometry(w,h,d), mat(color,o)); m.castShadow=true; m.receiveShadow=true; return m; }
@@ -349,12 +399,10 @@ function sph(r, color, o={}) { const m = new THREE.Mesh(new THREE.SphereGeometry
 function cone(r, h, color, o={}) { const m = new THREE.Mesh(new THREE.ConeGeometry(r,h,o.seg||16), mat(color,o)); m.castShadow=true; m.receiveShadow=true; return m; }
 function pyr(r, h, color, o={}) { const m = cone(r,h,color,{...o,seg:4}); m.rotation.y = Math.PI/4; return m; }
 
-/* ============================================================
-   DEFINISI 45 BAGIAN RUMAH MEWAH
-   ============================================================ */
+/* DEFINISI 45 BAGIAN RUMAH */
 const houseParts = { 1: [], 2: [], 3: [], 4: [], 5: [] };
 
-/* LEVEL 1 — FONDASI */
+/* ===== LEVEL 1: FONDASI (9 bagian) ===== */
 houseParts[1].push(() => { const m = box(7, 0.3, 7, 0x475569, { roughness: 0.9 }); m.position.set(0, 0.15, 0); return m; });
 houseParts[1].push(() => { const m = box(7.15, 0.07, 7.15, 0x94a3b8, { metalness: 0.4, roughness: 0.4 }); m.position.set(0, 0.33, 0); return m; });
 houseParts[1].push(() => { const m = box(7.25, 0.06, 7.25, 0x1e293b, { roughness: 0.95 }); m.position.set(0, 0.025, 0); return m; });
@@ -362,21 +410,75 @@ houseParts[1].push(() => { const m = box(0.6, 0.6, 0.6, 0x64748b, { metalness: 0
 houseParts[1].push(() => { const m = box(0.6, 0.6, 0.6, 0x64748b, { metalness: 0.5, roughness: 0.4 }); m.position.set(3, 0.5, -3); return m; });
 houseParts[1].push(() => { const m = box(0.6, 0.6, 0.6, 0x64748b, { metalness: 0.5, roughness: 0.4 }); m.position.set(-3, 0.5, 3); return m; });
 houseParts[1].push(() => { const m = box(0.6, 0.6, 0.6, 0x64748b, { metalness: 0.5, roughness: 0.4 }); m.position.set(3, 0.5, 3); return m; });
+
+/* FIXED #8: Tangga depan — sebelumnya terkubur di dalam fondasi */
 houseParts[1].push(() => {
   const g = new THREE.Group();
-  const s1 = box(2.6, 0.12, 0.6, 0xe2e8f0, { roughness: 0.5 }); s1.position.set(0, 0.06, 4.1);
-  const s2 = box(2.2, 0.12, 0.4, 0xcbd5e1, { roughness: 0.5 }); s2.position.set(0, 0.18, 3.9);
-  g.add(s1, s2); return g;
+  // Step 1 (paling depan, paling rendah)
+  const s1 = box(2.6, 0.24, 0.55, 0xe2e8f0, { roughness: 0.55 });
+  s1.position.set(0, 0.12, 4.85);
+  g.add(s1);
+  // Step 2 (lebih tinggi, menyambung ke teras)
+  const s2 = box(2.6, 0.48, 0.55, 0xcbd5e1, { roughness: 0.55 });
+  s2.position.set(0, 0.24, 4.32);
+  g.add(s2);
+  // Rail samping kiri & kanan
+  const rL = box(0.12, 0.55, 0.55, 0x94a3b8, { metalness: 0.5, roughness: 0.35 });
+  rL.position.set(-1.36, 0.275, 4.32); g.add(rL);
+  const rR = box(0.12, 0.55, 0.55, 0x94a3b8, { metalness: 0.5, roughness: 0.35 });
+  rR.position.set(1.36, 0.275, 4.32); g.add(rR);
+  return g;
 });
+
 houseParts[1].push(() => { const m = box(3.2, 0.2, 1.4, 0x94a3b8, { metalness: 0.3, roughness: 0.5 }); m.position.set(0, 0.4, 3.6); return m; });
 
-/* LEVEL 2 — DINDING */
+/* ===== LEVEL 2: DINDING (9 bagian) ===== */
 houseParts[2].push(() => { const m = box(2.75, 3, 0.25, 0xf5e6d3, { roughness: 0.85 }); m.position.set(-1.87, 1.8, 3); return m; });
 houseParts[2].push(() => { const m = box(2.75, 3, 0.25, 0xf5e6d3, { roughness: 0.85 }); m.position.set(1.87, 1.8, 3); return m; });
 houseParts[2].push(() => { const m = box(1, 0.85, 0.25, 0xf5e6d3, { roughness: 0.85 }); m.position.set(0, 2.87, 3); return m; });
-houseParts[2].push(() => { const m = box(6, 3, 0.25, 0xf5e6d3, { roughness: 0.85 }); m.position.set(0, 1.8, -3); return m; });
-houseParts[2].push(() => { const m = box(0.25, 3, 6, 0xf5e6d3, { roughness: 0.85 }); m.position.set(-3, 1.8, 0); return m; });
-houseParts[2].push(() => { const m = box(0.25, 3, 6, 0xf5e6d3, { roughness: 0.85 }); m.position.set(3, 1.8, 0); return m; });
+
+/* FIXED #4: Dinding belakang + jendela di sisi luar */
+houseParts[2].push(() => {
+  const g = new THREE.Group();
+  const wall = box(6, 3, 0.25, 0xf5e6d3, { roughness: 0.85 });
+  wall.position.set(0, 1.8, -3);
+  g.add(wall);
+  const win = box(1.4, 1.1, 0.16, 0x7dd3fc, { roughness: 0.15, metalness: 0.3, emissive: 0x38bdf8, emissiveIntensity: 0.55, transparent: true, opacity: 0.85 });
+  win.position.set(0, 2.0, -3.17); g.add(win);
+  const fH = box(1.55, 0.1, 0.2, 0x8b5a2b); fH.position.set(0, 2.6, -3.17); g.add(fH);
+  const fH2 = box(1.55, 0.1, 0.2, 0x8b5a2b); fH2.position.set(0, 1.4, -3.17); g.add(fH2);
+  const fV = box(0.1, 1.1, 0.2, 0x8b5a2b); fV.position.set(0, 2.0, -3.17); g.add(fV);
+  return g;
+});
+
+/* FIXED #5: Dinding kiri + jendela */
+houseParts[2].push(() => {
+  const g = new THREE.Group();
+  const wall = box(0.25, 3, 6, 0xf5e6d3, { roughness: 0.85 });
+  wall.position.set(-3, 1.8, 0);
+  g.add(wall);
+  const win = box(0.16, 1.1, 1.4, 0x7dd3fc, { roughness: 0.15, metalness: 0.3, emissive: 0x38bdf8, emissiveIntensity: 0.55, transparent: true, opacity: 0.85 });
+  win.position.set(-3.17, 2.0, 0); g.add(win);
+  const fH = box(0.2, 0.1, 1.55, 0x8b5a2b); fH.position.set(-3.17, 2.6, 0); g.add(fH);
+  const fH2 = box(0.2, 0.1, 1.55, 0x8b5a2b); fH2.position.set(-3.17, 1.4, 0); g.add(fH2);
+  const fV = box(0.2, 1.1, 0.1, 0x8b5a2b); fV.position.set(-3.17, 2.0, 0); g.add(fV);
+  return g;
+});
+
+/* FIXED #6: Dinding kanan + jendela */
+houseParts[2].push(() => {
+  const g = new THREE.Group();
+  const wall = box(0.25, 3, 6, 0xf5e6d3, { roughness: 0.85 });
+  wall.position.set(3, 1.8, 0);
+  g.add(wall);
+  const win = box(0.16, 1.1, 1.4, 0x7dd3fc, { roughness: 0.15, metalness: 0.3, emissive: 0x38bdf8, emissiveIntensity: 0.55, transparent: true, opacity: 0.85 });
+  win.position.set(3.17, 2.0, 0); g.add(win);
+  const fH = box(0.2, 0.1, 1.55, 0x8b5a2b); fH.position.set(3.17, 2.6, 0); g.add(fH);
+  const fH2 = box(0.2, 0.1, 1.55, 0x8b5a2b); fH2.position.set(3.17, 1.4, 0); g.add(fH2);
+  const fV = box(0.2, 1.1, 0.1, 0x8b5a2b); fV.position.set(3.17, 2.0, 0); g.add(fV);
+  return g;
+});
+
 houseParts[2].push(() => {
   const g = new THREE.Group();
   const door = box(0.95, 2.25, 0.15, 0x6b3410, { roughness: 0.7, metalness: 0.2 });
@@ -405,33 +507,62 @@ houseParts[2].push(() => {
   return g;
 });
 
-/* LEVEL 3 — ATAP MEWAH */
+/* ===== LEVEL 3: ATAP MEWAH (9 bagian) ===== */
 houseParts[3].push(() => { const m = box(7.6, 0.16, 7.6, 0x5b21b6, { roughness: 0.6 }); m.position.set(0, 3.4, 0); return m; });
 houseParts[3].push(() => { const m = pyr(5.35, 2.3, 0x7c3aed, { flat: true, roughness: 0.55, metalness: 0.15 }); m.position.set(0, 4.65, 0); return m; });
+
+/* FIXED #3: Cerobong asap dibuat lebih tinggi agar jelas terlihat di atas atap */
 houseParts[3].push(() => {
   const g = new THREE.Group();
-  const body = box(0.55, 1.5, 0.55, 0x78350f, { roughness: 0.85 }); body.position.set(2, 4.1, 0.5); g.add(body);
-  const cap = box(0.75, 0.18, 0.75, 0xa16207, { metalness: 0.5, roughness: 0.4 }); cap.position.set(2, 4.94, 0.5); g.add(cap);
-  const smoke1 = sph(0.15, 0x64748b, { transparent: true, opacity: 0.35 }); smoke1.position.set(2, 5.2, 0.5); g.add(smoke1);
-  const smoke2 = sph(0.22, 0x94a3b8, { transparent: true, opacity: 0.25 }); smoke2.position.set(2.1, 5.5, 0.55); g.add(smoke2);
+  const body = box(0.65, 2.4, 0.65, 0x78350f, { roughness: 0.85 });
+  body.position.set(1.9, 5.15, 0.9); g.add(body);
+  const cap = box(0.85, 0.22, 0.85, 0xa16207, { metalness: 0.5, roughness: 0.4 });
+  cap.position.set(1.9, 6.4, 0.9); g.add(cap);
+  const smoke1 = sph(0.22, 0xb0bec5, { transparent: true, opacity: 0.55 });
+  smoke1.position.set(1.9, 6.85, 0.9); g.add(smoke1);
+  const smoke2 = sph(0.32, 0xcbd5e1, { transparent: true, opacity: 0.4 });
+  smoke2.position.set(2.05, 7.35, 0.95); g.add(smoke2);
+  const smoke3 = sph(0.42, 0xe2e8f0, { transparent: true, opacity: 0.25 });
+  smoke3.position.set(2.2, 7.9, 1.05); g.add(smoke3);
   return g;
 });
+
+/* FIXED #4: Panel surya kiri — sekarang MENEMPEL pada kemiringan atap piramida */
 houseParts[3].push(() => {
   const g = new THREE.Group();
-  const p = box(1.5, 0.06, 0.9, 0x1e293b, { metalness: 0.6, roughness: 0.3, emissive: 0x38bdf8, emissiveIntensity: 0.15 });
-  p.position.set(-1.5, 4.35, -0.3); p.rotation.x = -0.5; p.rotation.z = 0.15; g.add(p);
-  const frame = box(1.55, 0.08, 0.1, 0x0ea5e9, { metalness: 0.8, emissive: 0x0ea5e9, emissiveIntensity: 0.3 });
-  frame.position.set(-1.5, 4.32, 0.15); frame.rotation.x = -0.5; frame.rotation.z = 0.15; g.add(frame);
+  const pg = new THREE.Group();
+  const panel = box(1.3, 0.06, 0.9, 0x0f172a, { metalness: 0.7, roughness: 0.25 });
+  pg.add(panel);
+  for (let i = -1; i <= 1; i++) {
+    const line = box(0.04, 0.08, 0.9, 0x38bdf8, { emissive: 0x38bdf8, emissiveIntensity: 0.85, metalness: 0.5 });
+    line.position.x = i * 0.45; pg.add(line);
+  }
+  const frame = box(1.36, 0.03, 0.96, 0x0ea5e9, { metalness: 0.9, emissive: 0x0ea5e9, emissiveIntensity: 0.35 });
+  frame.position.y = -0.045; pg.add(frame);
+  pg.position.set(-1.3, 5.06, 0.6);
+  pg.rotation.z = 0.547;
+  g.add(pg);
   return g;
 });
+
+/* FIXED #5: Panel surya kanan */
 houseParts[3].push(() => {
   const g = new THREE.Group();
-  const p = box(1.5, 0.06, 0.9, 0x1e293b, { metalness: 0.6, roughness: 0.3, emissive: 0x38bdf8, emissiveIntensity: 0.15 });
-  p.position.set(1.5, 4.35, -0.3); p.rotation.x = -0.5; p.rotation.z = -0.15; g.add(p);
-  const frame = box(1.55, 0.08, 0.1, 0x0ea5e9, { metalness: 0.8, emissive: 0x0ea5e9, emissiveIntensity: 0.3 });
-  frame.position.set(1.5, 4.32, 0.15); frame.rotation.x = -0.5; frame.rotation.z = -0.15; g.add(frame);
+  const pg = new THREE.Group();
+  const panel = box(1.3, 0.06, 0.9, 0x0f172a, { metalness: 0.7, roughness: 0.25 });
+  pg.add(panel);
+  for (let i = -1; i <= 1; i++) {
+    const line = box(0.04, 0.08, 0.9, 0x38bdf8, { emissive: 0x38bdf8, emissiveIntensity: 0.85, metalness: 0.5 });
+    line.position.x = i * 0.45; pg.add(line);
+  }
+  const frame = box(1.36, 0.03, 0.96, 0x0ea5e9, { metalness: 0.9, emissive: 0x0ea5e9, emissiveIntensity: 0.35 });
+  frame.position.y = -0.045; pg.add(frame);
+  pg.position.set(1.3, 5.06, -0.6);
+  pg.rotation.z = -0.547;
+  g.add(pg);
   return g;
 });
+
 houseParts[3].push(() => {
   const g = new THREE.Group();
   const glass = box(0.8, 0.12, 0.8, 0x7dd3fc, { emissive: 0x38bdf8, emissiveIntensity: 0.6, transparent: true, opacity: 0.85 });
@@ -439,7 +570,12 @@ houseParts[3].push(() => {
   const frame = box(0.9, 0.08, 0.9, 0x0ea5e9, { metalness: 0.7 }); frame.position.set(0, 3.48, 1.3); frame.rotation.y = Math.PI/4; g.add(frame);
   return g;
 });
-houseParts[3].push(() => { const g = new THREE.Group(); const pole = cyl(0.035, 0.035, 1.6, 0xcbd5e1, { metalness: 0.85, roughness: 0.2 }); pole.position.set(0, 6.5, 0); g.add(pole); return g; });
+houseParts[3].push(() => {
+  const g = new THREE.Group();
+  const pole = cyl(0.035, 0.035, 1.6, 0xcbd5e1, { metalness: 0.85, roughness: 0.2 });
+  pole.position.set(0, 6.5, 0); g.add(pole);
+  return g;
+});
 houseParts[3].push(() => {
   const g = new THREE.Group();
   const l = sph(0.13, 0xef4444, { emissive: 0xef4444, emissiveIntensity: 1.5 });
@@ -455,9 +591,20 @@ houseParts[3].push(() => {
   return g;
 });
 
-/* LEVEL 4 — KOLAM, PAGAR, GATE, POS SATPAM */
+/* ===== LEVEL 4: KOLAM, PAGAR, GATE, POS SATPAM (9 bagian) ===== */
 houseParts[4].push(() => { const m = box(4.6, 0.5, 3.2, 0x0c4a6e, { roughness: 0.9 }); m.position.set(-7.5, 0.25, 3); return m; });
-houseParts[4].push(() => { const m = box(4.2, 0.35, 2.8, 0x22d3ee, { roughness: 0.05, metalness: 0.5, emissive: 0x22d3ee, emissiveIntensity: 0.35, transparent: true, opacity: 0.85 }); m.position.set(-7.5, 0.55, 3); return m; });
+
+/* FIXED #2: Air kolam diturunkan agar tepat di dalam dinding kolam (tidak melayang) */
+houseParts[4].push(() => {
+  const m = box(4.35, 0.18, 2.95, 0x22d3ee, {
+    roughness: 0.05, metalness: 0.5,
+    emissive: 0x22d3ee, emissiveIntensity: 0.45,
+    transparent: true, opacity: 0.88
+  });
+  m.position.set(-7.5, 0.41, 3);
+  return m;
+});
+
 houseParts[4].push(() => {
   const g = new THREE.Group();
   const deck = box(5.2, 0.12, 3.8, 0xe2e8f0, { roughness: 0.7 }); deck.position.set(-7.5, 0.06, 3); g.add(deck);
@@ -470,22 +617,26 @@ houseParts[4].push(() => {
 });
 houseParts[4].push(() => {
   const g = new THREE.Group();
-  const fenceX = -10;
-  for (let z = -10; z <= 10; z += 1.3) {
+  const fenceX = -10, zStart = -10, zEnd = 10;
+  for (let z = zStart; z <= zEnd; z += 1.3) {
     const post = box(0.12, 1.3, 0.12, 0x334155, { metalness: 0.6 }); post.position.set(fenceX, 0.65, z); g.add(post);
     const t = sph(0.09, 0x38bdf8, { emissive: 0x38bdf8, emissiveIntensity: 0.85, metalness: 0.3 }); t.position.set(fenceX, 1.35, z); g.add(t);
   }
-  [0.35, 0.95].forEach(y => { const rail = box(0.1, 0.1, 20, 0x1e293b, { metalness: 0.5 }); rail.position.set(fenceX, y, 0); g.add(rail); });
+  [0.35, 0.95].forEach(y => {
+    const rail = box(0.1, 0.1, zEnd - zStart, 0x1e293b, { metalness: 0.5 }); rail.position.set(fenceX, y, (zStart + zEnd) / 2); g.add(rail);
+  });
   return g;
 });
 houseParts[4].push(() => {
   const g = new THREE.Group();
-  const fenceX = 10;
-  for (let z = -10; z <= 10; z += 1.3) {
+  const fenceX = 10, zStart = -10, zEnd = 10;
+  for (let z = zStart; z <= zEnd; z += 1.3) {
     const post = box(0.12, 1.3, 0.12, 0x334155, { metalness: 0.6 }); post.position.set(fenceX, 0.65, z); g.add(post);
     const t = sph(0.09, 0x38bdf8, { emissive: 0x38bdf8, emissiveIntensity: 0.85, metalness: 0.3 }); t.position.set(fenceX, 1.35, z); g.add(t);
   }
-  [0.35, 0.95].forEach(y => { const rail = box(0.1, 0.1, 20, 0x1e293b, { metalness: 0.5 }); rail.position.set(fenceX, y, 0); g.add(rail); });
+  [0.35, 0.95].forEach(y => {
+    const rail = box(0.1, 0.1, zEnd - zStart, 0x1e293b, { metalness: 0.5 }); rail.position.set(fenceX, y, (zStart + zEnd) / 2); g.add(rail);
+  });
   return g;
 });
 houseParts[4].push(() => {
@@ -539,7 +690,7 @@ houseParts[4].push(() => {
   return g;
 });
 
-/* LEVEL 5 — TAMAN, POHON, TAMAN BERMAIN */
+/* ===== LEVEL 5: TAMAN, POHON, TAMAN BERMAIN (9 bagian) ===== */
 houseParts[5].push(() => {
   const g = new THREE.Group();
   const trunk = cyl(0.28, 0.4, 3, 0x5c3a1a, { roughness: 0.95 }); trunk.position.set(-8, 1.5, -8); g.add(trunk);
@@ -569,7 +720,8 @@ houseParts[5].push(() => {
 });
 houseParts[5].push(() => {
   const g = new THREE.Group();
-  [[-5, 0.3, 4.5], [5, 0.3, 4.5], [-5.5, 0.3, -5], [5.5, 0.3, -5]].forEach(([x, y, z]) => {
+  const positions = [[-5, 0.3, 4.5], [5, 0.3, 4.5], [-5.5, 0.3, -5], [5.5, 0.3, -5]];
+  positions.forEach(([x, y, z]) => {
     const bush = sph(0.55, 0x10b981, { roughness: 0.9, flat: true }); bush.position.set(x, y, z); bush.scale.set(1, 0.8, 1); g.add(bush);
     const bush2 = sph(0.35, 0x059669, { roughness: 0.9, flat: true }); bush2.position.set(x + 0.4, y - 0.05, z + 0.3); g.add(bush2);
   });
@@ -618,7 +770,8 @@ houseParts[5].push(() => {
 houseParts[5].push(() => {
   const g = new THREE.Group();
   const path = box(3, 0.06, 6, 0x94a3b8, { roughness: 0.85 }); path.position.set(0, 0.04, 6.7); g.add(path);
-  [[-1.6, 4.5], [1.6, 4.5], [-1.6, 7.5], [1.6, 7.5]].forEach(([x, z]) => {
+  const lightPositions = [[-1.6, 4.5], [1.6, 4.5], [-1.6, 7.5], [1.6, 7.5]];
+  lightPositions.forEach(([x, z]) => {
     const pole = cyl(0.03, 0.03, 0.9, 0x1e293b, { metalness: 0.8 }); pole.position.set(x, 0.45, z); g.add(pole);
     const lamp = sph(0.12, 0xfbbf24, { emissive: 0xfbbf24, emissiveIntensity: 1.2, transparent: true, opacity: 0.9 });
     lamp.position.set(x, 0.95, z); g.add(lamp);
@@ -628,216 +781,130 @@ houseParts[5].push(() => {
   return g;
 });
 
-/* ============================================================
-   SCENE STATE
-   ============================================================ */
+/* PREVIEW 3D DI HALAMAN AWAL */
+let previewRenderer = null;
+let previewScene = null;
+let previewCamera = null;
+let previewGroup = null;
+let previewRAF = null;
+let previewAngle = 0.6;
+
+function initPreview() {
+  const canvas = document.getElementById('preview-canvas');
+  if (!canvas || previewRenderer || typeof THREE === 'undefined') return;
+
+  const parent = canvas.parentElement;
+  const w = parent.clientWidth || 520;
+  const h = parent.clientHeight || 330;
+
+  previewScene = new THREE.Scene();
+  previewScene.background = new THREE.Color(0x0a1428);
+  previewScene.fog = new THREE.Fog(0x0a1428, 42, 95);
+
+  previewCamera = new THREE.PerspectiveCamera(42, w / h, 0.1, 300);
+
+  previewRenderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  previewRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  previewRenderer.setSize(w, h, false);
+  previewRenderer.shadowMap.enabled = true;
+  previewRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  previewRenderer.outputEncoding = THREE.sRGBEncoding;
+  previewRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+  previewRenderer.toneMappingExposure = 1.12;
+
+  previewScene.add(new THREE.AmbientLight(0xffffff, 0.6));
+  previewScene.add(new THREE.HemisphereLight(0x38bdf8, 0x166534, 0.5));
+
+  const sun = new THREE.DirectionalLight(0xfff5e0, 1.35);
+  sun.position.set(20, 30, 18);
+  sun.castShadow = true;
+  sun.shadow.mapSize.set(1024, 1024);
+  sun.shadow.camera.left = -28;
+  sun.shadow.camera.right = 28;
+  sun.shadow.camera.top = 28;
+  sun.shadow.camera.bottom = -28;
+  sun.shadow.camera.near = 1;
+  sun.shadow.camera.far = 90;
+  sun.shadow.bias = -0.0006;
+  previewScene.add(sun);
+
+  const rim = new THREE.DirectionalLight(0x38bdf8, 0.55);
+  rim.position.set(-18, 16, -14);
+  previewScene.add(rim);
+
+  const ground = new THREE.Mesh(
+    new THREE.PlaneGeometry(80, 80),
+    new THREE.MeshStandardMaterial({ color: 0x166534, roughness: 0.95 })
+  );
+  ground.rotation.x = -Math.PI / 2;
+  ground.receiveShadow = true;
+  previewScene.add(ground);
+
+  const grid = new THREE.GridHelper(80, 80, 0x22c55e, 0x15803d);
+  grid.material.opacity = 0.12;
+  grid.material.transparent = true;
+  grid.position.y = 0.01;
+  previewScene.add(grid);
+
+  previewGroup = new THREE.Group();
+  for (let lvl = 1; lvl <= 5; lvl++) {
+    for (let idx = 0; idx < 9; idx++) {
+      const obj = houseParts[lvl][idx]();
+      obj.scale.setScalar(1);
+      previewGroup.add(obj);
+    }
+  }
+  previewScene.add(previewGroup);
+
+  animatePreview();
+}
+
+function animatePreview() {
+  if (!previewRenderer) return;
+  previewRAF = requestAnimationFrame(animatePreview);
+
+  previewAngle += 0.0032;
+  const radius = 27;
+  previewCamera.position.set(Math.sin(previewAngle) * radius, 15.5, Math.cos(previewAngle) * radius);
+  previewCamera.lookAt(0, 3.2, 0);
+
+  previewRenderer.render(previewScene, previewCamera);
+}
+
+function resizePreview() {
+  if (!previewRenderer || !previewCamera) return;
+  const canvas = document.getElementById('preview-canvas');
+  if (!canvas) return;
+  const parent = canvas.parentElement;
+  const w = parent.clientWidth;
+  const h = parent.clientHeight;
+  if (!w || !h) return;
+  previewCamera.aspect = w / h;
+  previewCamera.updateProjectionMatrix();
+  previewRenderer.setSize(w, h, false);
+}
+
+function disposePreview() {
+  if (previewRAF) { cancelAnimationFrame(previewRAF); previewRAF = null; }
+  if (previewRenderer) {
+    try { previewRenderer.dispose(); } catch (e) {}
+    previewRenderer = null;
+  }
+  previewScene = null;
+  previewCamera = null;
+  previewGroup = null;
+}
+
+window.addEventListener('resize', resizePreview);
+window.addEventListener('orientationchange', () => setTimeout(resizePreview, 250));
+
+/* THREE.JS 3D SCENE (GAME) */
 let scene, camera, renderer, controls;
 let partsGroup;
 const partObjects = [[], [], [], [], []];
 let threeInitialized = false;
 let autoRotateActive = true;
-let waterMaterials = [];
 
-/* ============================================================
-   BACKGROUND
-   ============================================================ */
-function createSkyDome() {
-  const skyGeo = new THREE.SphereGeometry(500, 32, 20);
-  const skyMat = new THREE.ShaderMaterial({
-    uniforms: {
-      topColor: { value: new THREE.Color(0x1e3a8a) },
-      midColor: { value: new THREE.Color(0x38bdf8) },
-      bottomColor: { value: new THREE.Color(0xbae6fd) },
-      offset: { value: 50 },
-      exponent: { value: 0.75 }
-    },
-    vertexShader: `varying vec3 vWorldPosition;
-      void main() {
-        vec4 wp = modelMatrix * vec4(position, 1.0);
-        vWorldPosition = wp.xyz;
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-      }`,
-    fragmentShader: `uniform vec3 topColor; uniform vec3 midColor; uniform vec3 bottomColor;
-      uniform float offset; uniform float exponent; varying vec3 vWorldPosition;
-      void main() {
-        float h = normalize(vWorldPosition + vec3(0.0, offset, 0.0)).y;
-        vec3 col;
-        if (h > 0.15) { col = mix(midColor, topColor, pow((h - 0.15) / 0.85, exponent)); }
-        else { col = mix(bottomColor, midColor, pow(max(h + 0.1, 0.0) / 0.25, 0.7)); }
-        gl_FragColor = vec4(col, 1.0);
-      }`,
-    side: THREE.BackSide, depthWrite: false, fog: false
-  });
-  const sky = new THREE.Mesh(skyGeo, skyMat);
-  scene.add(sky);
-}
-
-function createSun() {
-  const g = new THREE.Group();
-  const sun = new THREE.Mesh(new THREE.SphereGeometry(18, 24, 24), new THREE.MeshBasicMaterial({ color: 0xfff7e0, fog: false }));
-  sun.position.set(180, 200, 220); g.add(sun);
-  const glow = new THREE.Mesh(new THREE.SphereGeometry(40, 24, 24), new THREE.MeshBasicMaterial({ color: 0xfef3c7, transparent: true, opacity: 0.22, fog: false }));
-  glow.position.copy(sun.position); g.add(glow);
-  return g;
-}
-
-function createMountains() {
-  const g = new THREE.Group();
-  const snowMat = mat(0xf1f5f9, { roughness: 0.7, flat: true });
-  const rockColors = [0x334155, 0x475569, 0x4b5563, 0x3f4a5c, 0x2d3748];
-  for (let i = 0; i < 14; i++) {
-    const x = -420 + i * 60 + (Math.random() - 0.5) * 25;
-    const height = 90 + Math.random() * 70;
-    const radius = 45 + Math.random() * 25;
-    const z = -320 - Math.random() * 40;
-    const rockCol = rockColors[Math.floor(Math.random() * rockColors.length)];
-    const mtn = new THREE.Mesh(new THREE.ConeGeometry(radius, height, 6), mat(rockCol, { roughness: 0.95, flat: true }));
-    mtn.position.set(x, height / 2 - 4, z);
-    mtn.rotation.y = Math.random() * Math.PI;
-    g.add(mtn);
-    const snowHeight = height * 0.32;
-    const snow = new THREE.Mesh(new THREE.ConeGeometry(radius * 0.38, snowHeight, 6), snowMat);
-    snow.position.set(x, height - snowHeight / 2 - 4, z);
-    snow.rotation.y = mtn.rotation.y;
-    g.add(snow);
-  }
-  for (let i = 0; i < 10; i++) {
-    const x = -250 + i * 55 + (Math.random() - 0.5) * 30;
-    const height = 40 + Math.random() * 40;
-    const radius = 40 + Math.random() * 20;
-    const z = -160 - Math.random() * 40;
-    const hill = new THREE.Mesh(new THREE.ConeGeometry(radius, height, 7), mat(0x1e3a2f, { roughness: 1, flat: true }));
-    hill.position.set(x, height / 2 - 3, z);
-    hill.rotation.y = Math.random() * Math.PI;
-    g.add(hill);
-  }
-  return g;
-}
-
-function createRiver() {
-  const g = new THREE.Group();
-  const curve = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(-90, 0, -260),
-    new THREE.Vector3(-70, 0, -180),
-    new THREE.Vector3(-55, 0, -110),
-    new THREE.Vector3(-60, 0, -45),
-    new THREE.Vector3(-45, 0, 25),
-    new THREE.Vector3(-55, 0, 100),
-    new THREE.Vector3(-75, 0, 180),
-    new THREE.Vector3(-95, 0, 260)
-  ]);
-  const bedGeo = new THREE.TubeGeometry(curve, 100, 12, 8, false);
-  const bed = new THREE.Mesh(bedGeo, mat(0x0c2a45, { roughness: 0.9 }));
-  bed.scale.y = 0.015;
-  bed.position.y = 0.02;
-  bed.receiveShadow = true;
-  g.add(bed);
-  const waterGeo = new THREE.TubeGeometry(curve, 100, 10, 8, false);
-  const waterMat = new THREE.MeshStandardMaterial({
-    color: 0x38bdf8, emissive: 0x22d3ee, emissiveIntensity: 0.55,
-    roughness: 0.05, metalness: 0.6, transparent: true, opacity: 0.9
-  });
-  const water = new THREE.Mesh(waterGeo, waterMat);
-  water.scale.y = 0.02;
-  water.position.y = 0.09;
-  g.add(water);
-  waterMaterials.push(waterMat);
-  const stoneMat = mat(0x94a3b8, { roughness: 0.9 });
-  for (let i = 0; i < 80; i++) {
-    const t = i / 80;
-    const pt = curve.getPointAt(t);
-    const tangent = curve.getTangentAt(t);
-    const normal = new THREE.Vector3(-tangent.z, 0, tangent.x).normalize();
-    for (const side of [-1, 1]) {
-      if (Math.random() < 0.55) {
-        const offset = side * (12 + Math.random() * 3);
-        const stone = new THREE.Mesh(new THREE.DodecahedronGeometry(0.6 + Math.random() * 0.9, 0), stoneMat);
-        stone.position.set(pt.x + normal.x * offset, 0.2 + Math.random() * 0.2, pt.z + normal.z * offset);
-        stone.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
-        stone.castShadow = true; stone.receiveShadow = true;
-        g.add(stone);
-      }
-    }
-  }
-  return g;
-}
-
-function createTree(x, z, scaleFactor) {
-  const g = new THREE.Group();
-  const s = scaleFactor || (0.7 + Math.random() * 1.1);
-  const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.28 * s, 0.42 * s, 3 * s, 6), mat(0x5c3a1a, { roughness: 0.95, flat: true }));
-  trunk.position.y = 1.5 * s;
-  trunk.castShadow = true;
-  g.add(trunk);
-  const foliageColors = [0x047857, 0x059669, 0x10b981, 0x065f46, 0x16a34a];
-  for (let i = 0; i < 3; i++) {
-    const r = (1.2 + Math.random() * 0.7) * s;
-    const foliage = new THREE.Mesh(new THREE.SphereGeometry(r, 6, 5), mat(foliageColors[Math.floor(Math.random() * foliageColors.length)], { roughness: 0.9, flat: true }));
-    foliage.position.set((Math.random() - 0.5) * 1.2 * s, (2.4 + i * 0.75 + Math.random() * 0.5) * s, (Math.random() - 0.5) * 1.2 * s);
-    foliage.castShadow = true;
-    g.add(foliage);
-  }
-  g.position.set(x, 0, z);
-  return g;
-}
-
-function createForest() {
-  const g = new THREE.Group();
-  const innerRadius = 42;
-  const outerRadius = 150;
-  const treeCount = 160;
-  for (let i = 0; i < treeCount; i++) {
-    const angle = Math.random() * Math.PI * 2;
-    const dist = innerRadius + Math.pow(Math.random(), 0.7) * (outerRadius - innerRadius);
-    const x = Math.cos(angle) * dist;
-    const z = Math.sin(angle) * dist;
-    if (Math.abs(x) < 36 && Math.abs(z) < 36) continue;
-    if (x < -30 && x > -100) continue;
-    g.add(createTree(x, z));
-  }
-  return g;
-}
-
-function createClouds() {
-  const g = new THREE.Group();
-  const cloudMat = new THREE.MeshStandardMaterial({ color: 0xffffff, transparent: true, opacity: 0.72, roughness: 1, fog: false });
-  for (let i = 0; i < 12; i++) {
-    const cloud = new THREE.Group();
-    const x = (Math.random() - 0.5) * 700;
-    const y = 100 + Math.random() * 90;
-    const z = -150 - Math.random() * 350;
-    for (let j = 0; j < 5; j++) {
-      const r = 9 + Math.random() * 12;
-      const puff = new THREE.Mesh(new THREE.SphereGeometry(r, 8, 6), cloudMat);
-      puff.position.set((Math.random() - 0.5) * 28, (Math.random() - 0.5) * 4, (Math.random() - 0.5) * 14);
-      cloud.add(puff);
-    }
-    cloud.position.set(x, y, z);
-    g.add(cloud);
-  }
-  return g;
-}
-
-function createGrassPatches() {
-  const g = new THREE.Group();
-  const colors = [0x15803d, 0x166534, 0x1a5f3a, 0x0f5132];
-  for (let i = 0; i < 120; i++) {
-    const x = (Math.random() - 0.5) * 500;
-    const z = (Math.random() - 0.5) * 500;
-    if (Math.abs(x) < 35 && Math.abs(z) < 35) continue;
-    if (x < -30 && x > -100) continue;
-    const r = 1.5 + Math.random() * 3;
-    const patch = new THREE.Mesh(new THREE.CircleGeometry(r, 6), mat(colors[Math.floor(Math.random() * colors.length)], { roughness: 0.95 }));
-    patch.rotation.x = -Math.PI / 2;
-    patch.position.set(x, 0.02, z);
-    g.add(patch);
-  }
-  return g;
-}
-
-/* ============================================================
-   THREE.JS INIT — RUMAH DIPERBESAR
-   ============================================================ */
 function initThree() {
   const canvas = document.getElementById('three-canvas');
   const parent = canvas.parentElement;
@@ -845,12 +912,12 @@ function initThree() {
   const h = parent.clientHeight;
 
   scene = new THREE.Scene();
-  scene.fog = new THREE.Fog(0xbae6fd, 220, 700);
+  scene.background = new THREE.Color(0x0a1428);
+  scene.fog = new THREE.Fog(0x0a1428, 30, 75);
 
-  camera = new THREE.PerspectiveCamera(42, w / h, 0.1, 2000);
-  // Kamera lebih dekat & rendah agar rumah tampak besar
-  camera.position.set(32, 22, 38);
-  camera.lookAt(0, 6, 0);
+  camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 200);
+  camera.position.set(16, 13, 18);
+  camera.lookAt(0, 2, 0);
 
   renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -859,61 +926,60 @@ function initThree() {
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.05;
+  renderer.toneMappingExposure = 1.1;
 
   controls = new THREE.OrbitControls(camera, canvas);
   controls.enableDamping = true;
   controls.dampingFactor = 0.08;
-  controls.target.set(0, 6, 0);
+  controls.target.set(0, 2, 0);
   controls.maxPolarAngle = Math.PI / 2.05;
-  controls.minDistance = 12;  // bisa zoom lebih dekat
-  controls.maxDistance = 150;
+  controls.minDistance = 8;
+  controls.maxDistance = 45;
   controls.autoRotate = true;
-  controls.autoRotateSpeed = 0.5;
+  controls.autoRotateSpeed = 0.6;
 
   canvas.addEventListener('pointerdown', () => {
-    if (autoRotateActive) { controls.autoRotate = false; autoRotateActive = false; }
+    if (autoRotateActive) {
+      controls.autoRotate = false;
+      autoRotateActive = false;
+    }
   });
 
   scene.add(new THREE.AmbientLight(0xffffff, 0.55));
-  scene.add(new THREE.HemisphereLight(0xbae6fd, 0x166534, 0.55));
+  const hemi = new THREE.HemisphereLight(0x38bdf8, 0x166534, 0.45);
+  scene.add(hemi);
 
-  const sun = new THREE.DirectionalLight(0xfff5e0, 1.35);
-  sun.position.set(90, 140, 80);
+  const sun = new THREE.DirectionalLight(0xfff5e0, 1.3);
+  sun.position.set(18, 28, 16);
   sun.castShadow = true;
   sun.shadow.mapSize.set(2048, 2048);
-  sun.shadow.camera.left = -100;
-  sun.shadow.camera.right = 100;
-  sun.shadow.camera.top = 100;
-  sun.shadow.camera.bottom = -100;
+  sun.shadow.camera.left = -30;
+  sun.shadow.camera.right = 30;
+  sun.shadow.camera.top = 30;
+  sun.shadow.camera.bottom = -30;
   sun.shadow.camera.near = 1;
-  sun.shadow.camera.far = 400;
-  sun.shadow.bias = -0.0004;
+  sun.shadow.camera.far = 80;
+  sun.shadow.bias = -0.0005;
   scene.add(sun);
 
-  const fill = new THREE.DirectionalLight(0xbae6fd, 0.35);
-  fill.position.set(-80, 40, -60);
-  scene.add(fill);
+  const moon = new THREE.DirectionalLight(0x38bdf8, 0.45);
+  moon.position.set(-16, 16, -12);
+  scene.add(moon);
 
-  createSkyDome();
-  scene.add(createSun());
-
-  const groundGeo = new THREE.PlaneGeometry(700, 700, 1, 1);
+  const groundGeo = new THREE.PlaneGeometry(60, 60);
   const groundMat = new THREE.MeshStandardMaterial({ color: 0x166534, roughness: 0.95 });
   const ground = new THREE.Mesh(groundGeo, groundMat);
   ground.rotation.x = -Math.PI / 2;
   ground.receiveShadow = true;
   scene.add(ground);
 
-  scene.add(createGrassPatches());
-  scene.add(createMountains());
-  scene.add(createRiver());
-  scene.add(createForest());
-  scene.add(createClouds());
+  const grid = new THREE.GridHelper(60, 60, 0x22c55e, 0x15803d);
+  grid.material.opacity = 0.12;
+  grid.material.transparent = true;
+  grid.position.y = 0.01;
+  scene.add(grid);
 
-  // ⭐ RUMAH DIPERBESAR: scale 4.2 (sebelumnya 2.4)
   partsGroup = new THREE.Group();
-  partsGroup.scale.set(4.2, 4.2, 4.2);
   scene.add(partsGroup);
 
   buildAllParts();
@@ -971,9 +1037,6 @@ function animate() {
     }
   }
 
-  const pulse = 0.45 + Math.sin(now / 500) * 0.15;
-  for (const m of waterMaterials) m.emissiveIntensity = pulse;
-
   controls.update();
   renderer.render(scene, camera);
 }
@@ -998,8 +1061,8 @@ function resetHouseParts() {
 
 function resetCamera() {
   if (!camera || !controls) return;
-  camera.position.set(32, 22, 38);
-  controls.target.set(0, 6, 0);
+  camera.position.set(16, 13, 18);
+  controls.target.set(0, 2, 0);
   controls.autoRotate = true;
   autoRotateActive = true;
   controls.update();
@@ -1010,18 +1073,16 @@ function setCameraView(view) {
   controls.autoRotate = false;
   autoRotateActive = false;
   if (view === 'front') {
-    camera.position.set(0, 15, 60);
-    controls.target.set(0, 7, 0);
+    camera.position.set(0, 8, 28);
+    controls.target.set(0, 2, 0);
   } else if (view === 'top') {
-    camera.position.set(0.1, 80, 0.1);
-    controls.target.set(0, 5, 0);
+    camera.position.set(0.1, 32, 0.1);
+    controls.target.set(0, 2, 0);
   }
   controls.update();
 }
 
-/* ============================================================
-   GAME LOGIC
-   ============================================================ */
+/* GAME LOGIC */
 let currentLevel = 0;
 let currentQuestion = 0;
 let lives = 5;
@@ -1047,7 +1108,10 @@ function startGame() {
   partRevealed = [0, 0, 0, 0, 0];
   streak = 0;
   answered = false;
+
+  disposePreview();
   showScreen('gameScreen');
+
   requestAnimationFrame(() => {
     if (!threeInitialized) {
       threeInitialized = true;
@@ -1153,34 +1217,35 @@ function nextQuestion() {
   loadQuestion();
 }
 
-let miniRenderer = null;
 function completeLevel() {
   document.getElementById('levelCompleteTitle').textContent = `Level ${currentLevel + 1} Selesai!`;
   document.getElementById('levelCompleteSub').textContent = `Bagian "${LEVELS[currentLevel].name}" berhasil dibangun!`;
   document.getElementById('levelCorrect').textContent = levelCorrect;
   document.getElementById('levelScore').textContent = score;
   document.getElementById('levelLives').textContent = lives;
+
   renderMiniPreview();
+
   const btn = document.getElementById('levelCompleteBtn');
   btn.textContent = currentLevel >= LEVELS.length - 1 ? 'Lihat Hasil Akhir 🏆' : 'Level Berikutnya →';
   showScreen('levelCompleteScreen');
-  setTimeout(renderMiniPreview, 100);
 }
 
+let miniRenderer = null;
 function renderMiniPreview() {
   const canvas = document.getElementById('levelCompleteCanvas');
-  if (!canvas || !scene) return;
-  const w = canvas.clientWidth || 320;
-  const h = canvas.clientHeight || 220;
+  if (!canvas) return;
   if (!miniRenderer) {
     miniRenderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
     miniRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     miniRenderer.outputEncoding = THREE.sRGBEncoding;
   }
+  const w = canvas.clientWidth || 260;
+  const h = canvas.clientHeight || 200;
   miniRenderer.setSize(w, h, false);
-  const mCam = new THREE.PerspectiveCamera(42, w/h, 0.1, 2000);
-  mCam.position.set(38, 28, 48);
-  mCam.lookAt(0, 10, 0);
+  const mCam = new THREE.PerspectiveCamera(40, w/h, 0.1, 200);
+  mCam.position.set(14, 12, 16);
+  mCam.lookAt(0, 2, 0);
   miniRenderer.render(scene, mCam);
 }
 
@@ -1224,6 +1289,11 @@ setTimeout(() => {
     setTimeout(() => loader.remove(), 800);
   }
 }, 4500);
+
+window.addEventListener('load', () => {
+  setTimeout(initPreview, 120);
+});
+setTimeout(() => { if (!previewRenderer) initPreview(); }, 600);
 
 document.addEventListener('keydown', (e) => {
   const gameScreen = document.getElementById('gameScreen');
