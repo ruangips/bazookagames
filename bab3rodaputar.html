@@ -200,9 +200,7 @@
   .gameover-card .go-desc{font-size:.85rem;color:#fecaca;line-height:1.65;margin-bottom:14px}
   .gameover-card .go-money-lost{display:inline-block;padding:8px 18px;border-radius:12px;background:rgba(0,0,0,.4);border:1.5px solid rgba(252,165,165,.6);font-family:'Space Grotesk',sans-serif;font-weight:900;color:#fca5a5;font-size:.95rem;margin-bottom:18px}
   .gameover-card .go-btn{display:block;width:100%;padding:16px 22px;border-radius:14px;background:linear-gradient(180deg,#f0d878,#8b6914);color:#1a1204;font-family:'Space Grotesk',sans-serif;font-weight:900;letter-spacing:2.5px;text-transform:uppercase;font-size:.95rem;cursor:pointer;border:2px solid rgba(255,255,255,.35);box-shadow:0 10px 30px rgba(212,175,55,.55);transition:all .22s;margin-bottom:10px}
-  .gameover-card .go-btn:hover{transform:translateY(-2px)}
   .gameover-card .go-btn-sec{display:block;width:100%;padding:12px 22px;border-radius:12px;background:rgba(252,165,165,.12);color:#fecaca;border:1.5px solid rgba(252,165,165,.5);font-family:'Space Grotesk',sans-serif;font-weight:900;letter-spacing:2px;text-transform:uppercase;font-size:.8rem;cursor:pointer;transition:all .22s}
-  .gameover-card .go-btn-sec:hover{background:rgba(252,165,165,.22)}
   .title-wrap{position:relative;text-align:center;margin-bottom:10px}
   .title-glow{position:absolute;left:50%;top:55%;transform:translate(-50%,-50%);width:180%;height:300%;background:radial-gradient(ellipse at center,rgba(212,175,55,.5),rgba(167,139,250,.25) 40%,transparent 70%);filter:blur(30px);pointer-events:none;z-index:-1;animation:titleGlowPulse 4s ease-in-out infinite}
   @keyframes titleGlowPulse{0%,100%{opacity:.7;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}}
@@ -343,7 +341,7 @@
       <p class="title-sub">Game Edukasi Ekonomi</p>
       <p class="title-sub2">Bab 3: Pasar & Terbentuknya Harga</p>
     </div>
-    <p class="home-sub">11 Level · 142 Bank Soal SMP · Hadiah s.d. Rp 1 Miliar</p>
+    <p class="home-sub">11 Level · 8 Kategori/Level · Hadiah s.d. Rp 1 Miliar</p>
     <div class="stats-grid">
       <div class="prem-stat gold">
         <div class="stat-lbl">💰 HADIAH TERTINGGI</div>
@@ -393,14 +391,14 @@
     <div class="info-block gold">
       <b>🎯 Langkah Bermain:</b><br>
       <b>1.</b> Pilih level (semua level terbuka!)<br>
-      <b>2.</b> Tekan <b>PUTAR</b> di roda untuk memilih kategori soal<br>
+      <b>2.</b> Tekan <b>PUTAR</b> di roda (8 kategori) untuk memilih soal<br>
       <b>3.</b> Jawab <b>10 soal</b> per level, waktu <b>30 detik</b> per soal<br>
       <b>4.</b> Pembahasan lengkap muncul di akhir level<br>
-      <b>5.</b> Tombol <b>🏠 Kembali ke Halaman Awal</b> tersedia di setiap level
+      <b>5.</b> Tombol <b>🏠 Kembali ke Halaman Awal</b> ada di setiap level
     </div>
     <div class="info-block gold">
       <b>💰 SISTEM HADIAH (Per Soal Benar):</b><br>
-      • Setiap jawaban benar = hadiah uang naik <b>progresif</b><br>
+      • Setiap jawaban benar = hadiah naik <b>progresif</b><br>
       • Soal ke-1 benar = <b>Rp 500.000</b><br>
       • Soal ke-10 benar = ± Rp 5 Juta<br>
       • Soal ke-50 benar = ± Rp 26 Juta<br>
@@ -711,268 +709,336 @@ const LEVEL_THEMES=[
 ];
 
 /* ============ 11 LEVEL BAB 3 — PASAR & TERBENTUKNYA HARGA ============ */
+/* Setiap level memiliki 8 kategori untuk roda berputar */
 const LEVELS=[
+/* ==== LEVEL 1 — Pengertian Pasar ==== */
 {
   id:1,title:"Level 1",name:"Pengertian Pasar",icon:"🏪",color:"#2563eb",
   subtitle:"Definisi, unsur, dan syarat terjadinya pasar",
   categories:[
     {id:'l1_definisi',name:'Definisi Pasar',short:'Definisi',icon:'📖',color:'#2563eb',points:100},
-    {id:'l1_unsur',name:'Unsur Pasar',short:'Unsur',icon:'🔗',color:'#0ea5e9',points:150},
-    {id:'l1_syarat',name:'Syarat Pasar',short:'Syarat',icon:'✅',color:'#14b8a6',points:200}
+    {id:'l1_luas',name:'Pasar Arti Luas',short:'Arti Luas',icon:'🌐',color:'#0ea5e9',points:120},
+    {id:'l1_tanpa_tempat',name:'Pasar Tanpa Tempat',short:'Tanpa Tempat',icon:'📱',color:'#06b6d4',points:140},
+    {id:'l1_penjual',name:'Unsur Penjual',short:'Penjual',icon:'🧑‍💼',color:'#14b8a6',points:160},
+    {id:'l1_pembeli',name:'Unsur Pembeli',short:'Pembeli',icon:'🛒',color:'#10b981',points:180},
+    {id:'l1_barang',name:'Barang & Jasa',short:'Barang',icon:'📦',color:'#22c55e',points:200},
+    {id:'l1_harga',name:'Kesepakatan Harga',short:'Harga',icon:'💰',color:'#84cc16',points:220},
+    {id:'l1_syarat',name:'Syarat Pasar',short:'Syarat',icon:'✅',color:'#eab308',points:240}
   ],
   questions:[
     {cat:'l1_definisi',q:"Dalam ilmu ekonomi, pengertian pasar yang paling tepat adalah...",options:["Tempat atau proses bertemunya permintaan dan penawaran yang membentuk kesepakatan harga","Bangunan permanen tempat jual beli","Kumpulan toko yang dikelola pemerintah","Tempat berjualan yang hanya buka pagi hari"],correct:0,explanation:"Pasar dalam ilmu ekonomi adalah tempat atau proses bertemunya permintaan dan penawaran yang membentuk harga.",keyPoint:"Pasar = pertemuan permintaan & penawaran."},
     {cat:'l1_definisi',q:"Pak Budi menjual mangga di pinggir jalan, Bu Ani membelinya setelah tawar-menawar. Peristiwa ini menunjukkan bahwa pasar...",options:["Harus berbentuk bangunan permanen","Terjadi interaksi penjual dan pembeli yang menyepakati harga","Hanya ada di kota besar","Harus dikelola pemerintah"],correct:1,explanation:"Pasar terbentuk saat penjual dan pembeli berinteraksi sampai menyepakati harga — tidak harus di gedung permanen.",keyPoint:"Pasar terjadi saat penjual & pembeli sepakat harga."},
-    {cat:'l1_definisi',q:"Pasar dalam arti luas adalah...",options:["Proses interaksi antara permintaan dan penawaran yang membentuk harga","Bangunan tempat penjual dan pembeli bertemu","Tempat berjualan yang dikelola pemerintah","Kumpulan toko yang menjual barang kebutuhan"],correct:0,explanation:"Dalam arti luas, pasar adalah proses interaksi antara permintaan dan penawaran yang membentuk harga.",keyPoint:"Pasar luas = proses interaksi D & S."},
-    {cat:'l1_definisi',q:"Pernyataan yang BENAR tentang pasar adalah...",options:["Pasar selalu berupa tempat fisik","Pasar hanya terjadi di negara maju","Pasar bisa terjadi tanpa tempat fisik, misalnya online","Pasar hanya ada saat jam kerja"],correct:2,explanation:"Pasar bisa terjadi tanpa tempat fisik, misalnya marketplace online atau pasar saham.",keyPoint:"Pasar bisa tanpa tempat fisik."},
-    {cat:'l1_unsur',q:"Berikut yang BUKAN termasuk unsur pasar adalah...",options:["Penjual","Pembeli","Izin usaha dari pemerintah","Kesepakatan harga"],correct:2,explanation:"Unsur pasar: penjual, pembeli, barang/jasa, dan kesepakatan harga. Izin usaha bukan unsur pasar.",keyPoint:"Unsur pasar: penjual, pembeli, barang/jasa, kesepakatan harga."},
-    {cat:'l1_unsur',q:"Unsur pasar yang berupa objek yang diperjualbelikan adalah...",options:["Penjual","Pembeli","Barang atau jasa","Kesepakatan harga"],correct:2,explanation:"Barang atau jasa adalah objek yang diperjualbelikan di pasar.",keyPoint:"Barang/jasa = objek transaksi."},
-    {cat:'l1_unsur',q:"Kesepakatan harga antara penjual dan pembeli terjadi melalui proses...",options:["Tawar-menawar","Undian","Pemungutan suara","Lelang wajib"],correct:0,explanation:"Kesepakatan harga terjadi melalui tawar-menawar antara penjual dan pembeli.",keyPoint:"Kesepakatan harga = tawar-menawar."},
-    {cat:'l1_unsur',q:"Yang dimaksud penjual dalam unsur pasar adalah...",options:["Pihak yang menawarkan barang atau jasa","Pihak yang membutuhkan barang","Pemerintah yang mengatur pasar","Bank yang memberi pinjaman"],correct:0,explanation:"Penjual adalah pihak yang menawarkan barang/jasa di pasar.",keyPoint:"Penjual = penawar barang/jasa."},
+    {cat:'l1_luas',q:"Pasar dalam arti luas adalah...",options:["Proses interaksi antara permintaan dan penawaran yang membentuk harga","Bangunan tempat penjual dan pembeli bertemu","Tempat berjualan yang dikelola pemerintah","Kumpulan toko yang menjual barang kebutuhan"],correct:0,explanation:"Dalam arti luas, pasar adalah proses interaksi antara permintaan dan penawaran yang membentuk harga.",keyPoint:"Pasar luas = proses interaksi D & S."},
+    {cat:'l1_tanpa_tempat',q:"Pernyataan yang BENAR tentang pasar adalah...",options:["Pasar selalu berupa tempat fisik","Pasar hanya terjadi di negara maju","Pasar bisa terjadi tanpa tempat fisik, misalnya online","Pasar hanya ada saat jam kerja"],correct:2,explanation:"Pasar bisa terjadi tanpa tempat fisik, misalnya marketplace online atau pasar saham.",keyPoint:"Pasar bisa tanpa tempat fisik."},
+    {cat:'l1_penjual',q:"Yang dimaksud penjual dalam unsur pasar adalah...",options:["Pihak yang menawarkan barang atau jasa","Pihak yang membutuhkan barang","Pemerintah yang mengatur pasar","Bank yang memberi pinjaman"],correct:0,explanation:"Penjual adalah pihak yang menawarkan barang/jasa di pasar.",keyPoint:"Penjual = penawar barang/jasa."},
+    {cat:'l1_barang',q:"Unsur pasar yang berupa objek yang diperjualbelikan adalah...",options:["Penjual","Pembeli","Barang atau jasa","Kesepakatan harga"],correct:2,explanation:"Barang atau jasa adalah objek yang diperjualbelikan di pasar.",keyPoint:"Barang/jasa = objek transaksi."},
+    {cat:'l1_harga',q:"Kesepakatan harga antara penjual dan pembeli terjadi melalui proses...",options:["Tawar-menawar","Undian","Pemungutan suara","Lelang wajib"],correct:0,explanation:"Kesepakatan harga terjadi melalui tawar-menawar antara penjual dan pembeli.",keyPoint:"Kesepakatan harga = tawar-menawar."},
+    {cat:'l1_pembeli',q:"Berikut yang BUKAN termasuk unsur pasar adalah...",options:["Penjual","Pembeli","Izin usaha dari pemerintah","Kesepakatan harga"],correct:2,explanation:"Unsur pasar: penjual, pembeli, barang/jasa, dan kesepakatan harga. Izin usaha bukan unsur pasar.",keyPoint:"Unsur pasar: penjual, pembeli, barang/jasa, kesepakatan harga."},
     {cat:'l1_syarat',q:"Menurut ilmu ekonomi, pasar terjadi apabila memenuhi tiga syarat utama, yaitu...",options:["Gedung, modal, dan izin usaha","Ada permintaan, ada penawaran, dan ada harga yang disepakati","Pemerintah, pengusaha, dan konsumen","Lokasi strategis, iklan, dan karyawan"],correct:1,explanation:"Syarat pasar menurut ilmu ekonomi: ada permintaan, ada penawaran, dan ada harga yang disepakati.",keyPoint:"Syarat pasar: permintaan, penawaran, harga."},
     {cat:'l1_syarat',q:"Jika hanya ada penjual tetapi tidak ada pembeli, maka...",options:["Pasar tetap terjadi","Pasar tidak terjadi karena tidak ada permintaan","Pasar terjadi karena ada barang","Pasar terjadi karena ada penjual"],correct:1,explanation:"Pasar tidak terjadi jika tidak ada permintaan (pembeli). Syarat pasar harus ada permintaan dan penawaran.",keyPoint:"Tanpa permintaan, pasar tidak terjadi."},
     {cat:'l1_syarat',q:"Syarat pasar dalam kehidupan sehari-hari mencakup...",options:["Adanya barang yang diperjualbelikan, penjual & pembeli yang saling membutuhkan, dan tempat untuk bertemu","Harus ada izin dari presiden","Harus ada bank di dekat pasar","Harus ada papan nama resmi"],correct:0,explanation:"Syarat pasar sehari-hari: barang yang diperjualbelikan, penjual & pembeli saling membutuhkan, serta tempat bertemu.",keyPoint:"Syarat praktis: barang, penjual, pembeli, tempat."},
     {cat:'l1_syarat',q:"Contoh pasar abstrak yang memenuhi syarat pasar tanpa tempat fisik adalah...",options:["Pasar tradisional","Marketplace online","Warung kelontong","Minimarket"],correct:1,explanation:"Marketplace online adalah pasar abstrak — penjual dan pembeli tidak bertemu langsung, tetapi tetap terjadi kesepakatan harga.",keyPoint:"Marketplace = pasar abstrak."}
   ]
 },
+/* ==== LEVEL 2 — Fungsi & Peran Pasar ==== */
 {
   id:2,title:"Level 2",name:"Fungsi & Peran Pasar",icon:"⚙️",color:"#0891b2",
   subtitle:"Distribusi, pembentukan harga, promosi, dan kesempatan kerja",
   categories:[
-    {id:'l2_distribusi',name:'Fungsi Distribusi',short:'Distribusi',icon:'🚚',color:'#0891b2',points:150},
-    {id:'l2_harga',name:'Fungsi Pembentukan Harga',short:'Harga',icon:'💰',color:'#06b6d4',points:200},
-    {id:'l2_promosi',name:'Fungsi Promosi',short:'Promosi',icon:'📢',color:'#14b8a6',points:250},
-    {id:'l2_kerja',name:'Fungsi Kesempatan Kerja',short:'Kerja',icon:'👷',color:'#10b981',points:300}
+    {id:'l2_distribusi',name:'Fungsi Distribusi',short:'Distribusi',icon:'🚚',color:'#0891b2',points:100},
+    {id:'l2_contoh_dist',name:'Contoh Distribusi',short:'Cth Distribusi',icon:'📦',color:'#06b6d4',points:120},
+    {id:'l2_harga',name:'Fungsi Harga',short:'Harga',icon:'💰',color:'#14b8a6',points:140},
+    {id:'l2_tawar',name:'Tawar-menawar',short:'Tawar',icon:'🤝',color:'#10b981',points:160},
+    {id:'l2_promosi',name:'Fungsi Promosi',short:'Promosi',icon:'📢',color:'#22c55e',points:180},
+    {id:'l2_cth_promosi',name:'Contoh Promosi',short:'Cth Promosi',icon:'🎪',color:'#84cc16',points:200},
+    {id:'l2_kerja',name:'Kesempatan Kerja',short:'Kerja',icon:'👷',color:'#eab308',points:220},
+    {id:'l2_bangun',name:'Pasar & Pembangunan',short:'Bangun',icon:'🏗️',color:'#f59e0b',points:240}
   ],
   questions:[
     {cat:'l2_distribusi',q:"Fungsi pasar yang berkaitan dengan menyalurkan barang dari produsen ke konsumen disebut fungsi...",options:["Promosi","Distribusi","Pembentukan harga","Konsumsi"],correct:1,explanation:"Fungsi distribusi adalah fungsi pasar dalam menyalurkan barang/jasa dari produsen kepada konsumen.",keyPoint:"Distribusi = penyaluran barang."},
-    {cat:'l2_distribusi',q:"Contoh fungsi distribusi pasar adalah...",options:["Petani menjual hasil panen ke pasar, lalu pedagang menyalurkannya ke kota","Harga cabai naik saat permintaan tinggi","Pameran produk UMKM","Kasir bekerja di supermarket"],correct:0,explanation:"Menyalurkan hasil panen dari petani ke konsumen melalui pasar adalah fungsi distribusi.",keyPoint:"Distribusi = penyaluran dari produsen ke konsumen."},
     {cat:'l2_distribusi',q:"Jika pasar tidak berfungsi sebagai distribusi, maka...",options:["Barang dari produsen tidak sampai ke konsumen","Harga akan stabil","Promosi meningkat","Pekerja bertambah"],correct:0,explanation:"Tanpa fungsi distribusi, barang dari produsen tidak akan sampai ke tangan konsumen.",keyPoint:"Tanpa distribusi, barang tidak sampai."},
+    {cat:'l2_contoh_dist',q:"Contoh fungsi distribusi pasar adalah...",options:["Petani menjual hasil panen ke pasar, lalu pedagang menyalurkannya ke kota","Harga cabai naik saat permintaan tinggi","Pameran produk UMKM","Kasir bekerja di supermarket"],correct:0,explanation:"Menyalurkan hasil panen dari petani ke konsumen melalui pasar adalah fungsi distribusi.",keyPoint:"Distribusi = penyaluran dari produsen ke konsumen."},
     {cat:'l2_harga',q:"Fungsi pasar yang berkaitan dengan terbentuknya harga melalui tawar-menawar adalah...",options:["Distribusi","Pembentukan harga","Promosi","Kesempatan kerja"],correct:1,explanation:"Fungsi pembentukan harga: harga terbentuk melalui interaksi permintaan dan penawaran (tawar-menawar).",keyPoint:"Pembentukan harga = tawar-menawar."},
     {cat:'l2_harga',q:"Menjelang hari raya, harga cabai melonjak karena permintaan naik. Hal ini mencerminkan fungsi pasar sebagai...",options:["Distribusi","Promosi","Pembentukan harga","Penyediaan kerja"],correct:2,explanation:"Kenaikan harga akibat interaksi permintaan dan penawaran adalah fungsi pembentukan harga.",keyPoint:"Pembentukan harga = interaksi D & S."},
-    {cat:'l2_harga',q:"Proses tawar-menawar di pasar terjadi karena...",options:["Pembeli menghitung manfaat barang, penjual menghitung keuntungan","Pembeli ingin menipu penjual","Penjual ingin merugikan pembeli","Pemerintah memaksa"],correct:0,explanation:"Tawar-menawar terjadi karena pembeli menghitung manfaat barang dan penjual menghitung keuntungan.",keyPoint:"Tawar-menawar = manfaat vs keuntungan."},
+    {cat:'l2_tawar',q:"Proses tawar-menawar di pasar terjadi karena...",options:["Pembeli menghitung manfaat barang, penjual menghitung keuntungan","Pembeli ingin menipu penjual","Penjual ingin merugikan pembeli","Pemerintah memaksa"],correct:0,explanation:"Tawar-menawar terjadi karena pembeli menghitung manfaat barang dan penjual menghitung keuntungan.",keyPoint:"Tawar-menawar = manfaat vs keuntungan."},
     {cat:'l2_promosi',q:"Fungsi pasar yang berkaitan dengan memperkenalkan produk kepada calon pembeli adalah...",options:["Distribusi","Pembentukan harga","Promosi","Kesempatan kerja"],correct:2,explanation:"Fungsi promosi adalah pasar menjadi tempat produsen memperkenalkan dan menawarkan produknya.",keyPoint:"Promosi = memperkenalkan produk."},
-    {cat:'l2_promosi',q:"Contoh fungsi promosi pasar adalah...",options:["Pameran produk UMKM di bazar sekolah","Petani menjual hasil panen ke pasar","Harga tomat naik saat panen gagal","Kurir mengantar paket"],correct:0,explanation:"Pameran produk UMKM adalah contoh promosi — produsen memperkenalkan produk kepada calon pembeli.",keyPoint:"Pameran = promosi."},
-    {cat:'l2_promosi',q:"Semakin banyak orang yang melihat produk, maka...",options:["Semakin besar peluang produk terjual","Semakin kecil peluang terjual","Harga otomatis naik","Distribusi terhambat"],correct:0,explanation:"Semakin banyak orang melihat produk, semakin besar peluang produk terjual.",keyPoint:"Promosi = peluang terjual lebih besar."},
+    {cat:'l2_cth_promosi',q:"Contoh fungsi promosi pasar adalah...",options:["Pameran produk UMKM di bazar sekolah","Petani menjual hasil panen ke pasar","Harga tomat naik saat panen gagal","Kurir mengantar paket"],correct:0,explanation:"Pameran produk UMKM adalah contoh promosi — produsen memperkenalkan produk kepada calon pembeli.",keyPoint:"Pameran = promosi."},
+    {cat:'l2_cth_promosi',q:"Semakin banyak orang yang melihat produk, maka...",options:["Semakin besar peluang produk terjual","Semakin kecil peluang terjual","Harga otomatis naik","Distribusi terhambat"],correct:0,explanation:"Semakin banyak orang melihat produk, semakin besar peluang produk terjual.",keyPoint:"Promosi = peluang terjual lebih besar."},
     {cat:'l2_kerja',q:"Fungsi pasar yang berkaitan dengan terciptanya lapangan pekerjaan adalah...",options:["Distribusi","Pembentukan harga","Promosi","Penyediaan kesempatan kerja"],correct:3,explanation:"Fungsi penyediaan kesempatan kerja: pasar menciptakan lapangan pekerjaan bagi banyak orang.",keyPoint:"Pasar = pencipta lapangan kerja."},
     {cat:'l2_kerja',q:"Contoh pekerjaan yang tercipta karena adanya pasar adalah...",options:["Pedagang, kasir, kurir pengiriman","Hanya presiden","Hanya menteri","Hanya gubernur"],correct:0,explanation:"Pasar menciptakan pekerjaan seperti pedagang, kasir, dan kurir pengiriman.",keyPoint:"Pasar = sumber pekerjaan."},
-    {cat:'l2_kerja',q:"Manfaat pasar bagi pembangunan adalah...",options:["Tempat memperoleh bahan kebutuhan pembangunan dan pemacu IPTEK","Tempat menimbun barang","Tempat menaikkan pajak","Tempat mengurangi produksi"],correct:0,explanation:"Bagi pembangunan, pasar menjadi tempat memperoleh bahan kebutuhan pembangunan dan pemacu pengembangan IPTEK.",keyPoint:"Pasar = pemacu pembangunan & IPTEK."}
+    {cat:'l2_bangun',q:"Manfaat pasar bagi pembangunan adalah...",options:["Tempat memperoleh bahan kebutuhan pembangunan dan pemacu IPTEK","Tempat menimbun barang","Tempat menaikkan pajak","Tempat mengurangi produksi"],correct:0,explanation:"Bagi pembangunan, pasar menjadi tempat memperoleh bahan kebutuhan pembangunan dan pemacu pengembangan IPTEK.",keyPoint:"Pasar = pemacu pembangunan & IPTEK."}
   ]
 },
+/* ==== LEVEL 3 — Wujud & Waktu ==== */
 {
   id:3,title:"Level 3",name:"Jenis Pasar: Wujud & Waktu",icon:"🕐",color:"#8b5cf6",
   subtitle:"Pasar konkret, abstrak, harian, mingguan, bulanan, tahunan",
   categories:[
-    {id:'l3_wujud',name:'Wujud Pasar',short:'Wujud',icon:'🏬',color:'#8b5cf6',points:200},
-    {id:'l3_waktu',name:'Waktu Pasar',short:'Waktu',icon:'🕐',color:'#a855f7',points:250},
-    {id:'l3_contoh',name:'Contoh Pasar',short:'Contoh',icon:'🌰',color:'#d946ef',points:300}
+    {id:'l3_abstrak',name:'Pasar Abstrak',short:'Abstrak',icon:'📱',color:'#8b5cf6',points:100},
+    {id:'l3_konkret',name:'Pasar Konkret',short:'Konkret',icon:'🏬',color:'#a855f7',points:120},
+    {id:'l3_ciri_konkret',name:'Ciri Konkret',short:'Ciri',icon:'✅',color:'#d946ef',points:140},
+    {id:'l3_cth_abstrak',name:'Contoh Abstrak',short:'Cth Abstrak',icon:'🛒',color:'#ec4899',points:160},
+    {id:'l3_harian',name:'Pasar Harian',short:'Harian',icon:'🌅',color:'#f43f5e',points:180},
+    {id:'l3_mingguan',name:'Pasar Mingguan',short:'Mingguan',icon:'📅',color:'#f97316',points:200},
+    {id:'l3_bulanan',name:'Pasar Bulanan',short:'Bulanan',icon:'🗓️',color:'#fb923c',points:220},
+    {id:'l3_tahunan',name:'Pasar Tahunan',short:'Tahunan',icon:'🎉',color:'#fbbf24',points:240}
   ],
   questions:[
-    {cat:'l3_wujud',q:"Penjual dan pembeli tidak bertemu langsung — transaksi dilakukan lewat internet. Pasar ini disebut pasar...",options:["Konkret","Abstrak","Harian","Regional"],correct:1,explanation:"Pasar abstrak adalah pasar di mana penjual dan pembeli tidak bertemu langsung, misalnya transaksi online.",keyPoint:"Pasar abstrak = tidak bertemu langsung."},
-    {cat:'l3_wujud',q:"Pasar tradisional, supermarket, dan mal termasuk jenis pasar...",options:["Abstrak","Konkret","Internasional","Tahunan"],correct:1,explanation:"Pasar konkret (nyata) adalah pasar di mana penjual dan pembeli bertemu langsung dan barang tersedia di tempat.",keyPoint:"Pasar konkret = bertemu langsung."},
-    {cat:'l3_wujud',q:"Ciri pasar konkret adalah...",options:["Barang tersedia di tempat dan penjual-pembeli bertemu langsung","Transaksi lewat telepon","Barang hanya berupa gambar","Penjual dan pembeli tidak bertemu"],correct:0,explanation:"Pasar konkret: barang tersedia di tempat dan penjual-pembeli bertemu langsung.",keyPoint:"Konkret = barang ada & bertemu."},
-    {cat:'l3_wujud',q:"Contoh pasar abstrak adalah...",options:["Pasar pagi","Shopee, Tokopedia, pasar saham","Warung kelontong","Minimarket"],correct:1,explanation:"Shopee, Tokopedia, dan pasar saham adalah contoh pasar abstrak — transaksi tanpa tatap muka langsung.",keyPoint:"Marketplace & saham = abstrak."},
-    {cat:'l3_waktu',q:"Pasar yang hanya buka satu kali dalam seminggu, misalnya pasar hewan, disebut pasar...",options:["Harian","Mingguan","Bulanan","Tahunan"],correct:1,explanation:"Pasar mingguan hanya buka satu kali seminggu, contohnya pasar kaget dan pasar hewan.",keyPoint:"Pasar mingguan = seminggu sekali."},
-    {cat:'l3_waktu',q:"Pasar malam menjelang tahun baru yang hanya ada sekali setahun termasuk pasar...",options:["Harian","Mingguan","Bulanan","Tahunan"],correct:3,explanation:"Pasar tahunan hanya diselenggarakan sekali dalam setahun, contohnya pasar malam tahun baru.",keyPoint:"Pasar tahunan = sekali setahun."},
-    {cat:'l3_waktu',q:"Pasar yang terjadi setiap hari dan menjual kebutuhan sehari-hari disebut pasar...",options:["Harian","Mingguan","Bulanan","Tahunan"],correct:0,explanation:"Pasar harian terjadi setiap hari dan menjual kebutuhan sehari-hari, seperti pasar pagi dan minimarket.",keyPoint:"Pasar harian = setiap hari."},
-    {cat:'l3_waktu',q:"Pasar murah bulanan yang diselenggarakan setiap bulan termasuk pasar...",options:["Harian","Mingguan","Bulanan","Tahunan"],correct:2,explanation:"Pasar bulanan diselenggarakan setiap bulan pada waktu tertentu, contohnya pasar murah bulanan.",keyPoint:"Pasar bulanan = sebulan sekali."},
-    {cat:'l3_contoh',q:"Pasar pagi di dekat sekolahmu termasuk jenis pasar...",options:["Pasar harian, konkret, lokal","Pasar tahunan, abstrak, nasional","Pasar mingguan, abstrak, internasional","Pasar bulanan, konkret, daerah"],correct:0,explanation:"Pasar pagi adalah pasar harian (setiap hari), konkret (bertemu langsung), dan lokal (penduduk setempat).",keyPoint:"Pasar pagi = harian + konkret + lokal."},
-    {cat:'l3_contoh',q:"Pasar saham Indonesia termasuk jenis pasar...",options:["Pasar harian dan konkret","Pasar abstrak dan nasional","Pasar mingguan dan lokal","Pasar tahunan dan regional"],correct:1,explanation:"Pasar saham adalah pasar abstrak (transaksi digital) dan nasional (melayani seluruh wilayah negara).",keyPoint:"Pasar saham = abstrak + nasional."},
-    {cat:'l3_contoh',q:"Pasar malam tahun baru termasuk contoh pasar...",options:["Harian","Mingguan","Bulanan","Tahunan"],correct:3,explanation:"Pasar malam tahun baru hanya ada sekali setahun — pasar tahunan.",keyPoint:"Pasar malam tahun baru = tahunan."},
-    {cat:'l3_contoh',q:"Pasar kaget yang hanya buka pada hari tertentu dalam seminggu termasuk pasar...",options:["Harian","Mingguan","Bulanan","Tahunan"],correct:1,explanation:"Pasar kaget buka pada hari tertentu seminggu sekali — pasar mingguan.",keyPoint:"Pasar kaget = mingguan."},
-    {cat:'l3_contoh',q:"Minimarket yang buka setiap hari termasuk pasar...",options:["Harian","Mingguan","Bulanan","Tahunan"],correct:0,explanation:"Minimarket buka setiap hari — pasar harian.",keyPoint:"Minimarket = pasar harian."},
-    {cat:'l3_contoh',q:"Yang membedakan pasar konkret dan pasar abstrak adalah...",options:["Ada tidaknya pertemuan langsung antara penjual dan pembeli","Besar kecilnya modal","Jumlah karyawan","Warna bangunan"],correct:0,explanation:"Perbedaan utama: pasar konkret = bertemu langsung; pasar abstrak = tidak bertemu langsung.",keyPoint:"Konkret vs abstrak = pertemuan langsung."}
+    {cat:'l3_abstrak',q:"Penjual dan pembeli tidak bertemu langsung — transaksi dilakukan lewat internet. Pasar ini disebut pasar...",options:["Konkret","Abstrak","Harian","Regional"],correct:1,explanation:"Pasar abstrak adalah pasar di mana penjual dan pembeli tidak bertemu langsung, misalnya transaksi online.",keyPoint:"Pasar abstrak = tidak bertemu langsung."},
+    {cat:'l3_konkret',q:"Pasar tradisional, supermarket, dan mal termasuk jenis pasar...",options:["Abstrak","Konkret","Internasional","Tahunan"],correct:1,explanation:"Pasar konkret (nyata) adalah pasar di mana penjual dan pembeli bertemu langsung dan barang tersedia di tempat.",keyPoint:"Pasar konkret = bertemu langsung."},
+    {cat:'l3_ciri_konkret',q:"Ciri pasar konkret adalah...",options:["Barang tersedia di tempat dan penjual-pembeli bertemu langsung","Transaksi lewat telepon","Barang hanya berupa gambar","Penjual dan pembeli tidak bertemu"],correct:0,explanation:"Pasar konkret: barang tersedia di tempat dan penjual-pembeli bertemu langsung.",keyPoint:"Konkret = barang ada & bertemu."},
+    {cat:'l3_cth_abstrak',q:"Contoh pasar abstrak adalah...",options:["Pasar pagi","Shopee, Tokopedia, pasar saham","Warung kelontong","Minimarket"],correct:1,explanation:"Shopee, Tokopedia, dan pasar saham adalah contoh pasar abstrak — transaksi tanpa tatap muka langsung.",keyPoint:"Marketplace & saham = abstrak."},
+    {cat:'l3_mingguan',q:"Pasar yang hanya buka satu kali dalam seminggu, misalnya pasar hewan, disebut pasar...",options:["Harian","Mingguan","Bulanan","Tahunan"],correct:1,explanation:"Pasar mingguan hanya buka satu kali seminggu, contohnya pasar kaget dan pasar hewan.",keyPoint:"Pasar mingguan = seminggu sekali."},
+    {cat:'l3_tahunan',q:"Pasar malam menjelang tahun baru yang hanya ada sekali setahun termasuk pasar...",options:["Harian","Mingguan","Bulanan","Tahunan"],correct:3,explanation:"Pasar tahunan hanya diselenggarakan sekali dalam setahun, contohnya pasar malam tahun baru.",keyPoint:"Pasar tahunan = sekali setahun."},
+    {cat:'l3_harian',q:"Pasar yang terjadi setiap hari dan menjual kebutuhan sehari-hari disebut pasar...",options:["Harian","Mingguan","Bulanan","Tahunan"],correct:0,explanation:"Pasar harian terjadi setiap hari dan menjual kebutuhan sehari-hari, seperti pasar pagi dan minimarket.",keyPoint:"Pasar harian = setiap hari."},
+    {cat:'l3_bulanan',q:"Pasar murah bulanan yang diselenggarakan setiap bulan termasuk pasar...",options:["Harian","Mingguan","Bulanan","Tahunan"],correct:2,explanation:"Pasar bulanan diselenggarakan setiap bulan pada waktu tertentu, contohnya pasar murah bulanan.",keyPoint:"Pasar bulanan = sebulan sekali."},
+    {cat:'l3_harian',q:"Pasar pagi di dekat sekolahmu termasuk jenis pasar...",options:["Pasar harian, konkret, lokal","Pasar tahunan, abstrak, nasional","Pasar mingguan, abstrak, internasional","Pasar bulanan, konkret, daerah"],correct:0,explanation:"Pasar pagi adalah pasar harian (setiap hari), konkret (bertemu langsung), dan lokal (penduduk setempat).",keyPoint:"Pasar pagi = harian + konkret + lokal."},
+    {cat:'l3_abstrak',q:"Pasar saham Indonesia termasuk jenis pasar...",options:["Pasar harian dan konkret","Pasar abstrak dan nasional","Pasar mingguan dan lokal","Pasar tahunan dan regional"],correct:1,explanation:"Pasar saham adalah pasar abstrak (transaksi digital) dan nasional (melayani seluruh wilayah negara).",keyPoint:"Pasar saham = abstrak + nasional."},
+    {cat:'l3_tahunan',q:"Pasar malam tahun baru termasuk contoh pasar...",options:["Harian","Mingguan","Bulanan","Tahunan"],correct:3,explanation:"Pasar malam tahun baru hanya ada sekali setahun — pasar tahunan.",keyPoint:"Pasar malam tahun baru = tahunan."},
+    {cat:'l3_mingguan',q:"Pasar kaget yang hanya buka pada hari tertentu dalam seminggu termasuk pasar...",options:["Harian","Mingguan","Bulanan","Tahunan"],correct:1,explanation:"Pasar kaget buka pada hari tertentu seminggu sekali — pasar mingguan.",keyPoint:"Pasar kaget = mingguan."},
+    {cat:'l3_harian',q:"Minimarket yang buka setiap hari termasuk pasar...",options:["Harian","Mingguan","Bulanan","Tahunan"],correct:0,explanation:"Minimarket buka setiap hari — pasar harian.",keyPoint:"Minimarket = pasar harian."},
+    {cat:'l3_konkret',q:"Yang membedakan pasar konkret dan pasar abstrak adalah...",options:["Ada tidaknya pertemuan langsung antara penjual dan pembeli","Besar kecilnya modal","Jumlah karyawan","Warna bangunan"],correct:0,explanation:"Perbedaan utama: pasar konkret = bertemu langsung; pasar abstrak = tidak bertemu langsung.",keyPoint:"Konkret vs abstrak = pertemuan langsung."}
   ]
 },
+/* ==== LEVEL 4 — Wilayah & Barang ==== */
 {
   id:4,title:"Level 4",name:"Jenis Pasar: Wilayah & Barang",icon:"🌍",color:"#f59e0b",
   subtitle:"Pasar lokal, daerah, nasional, internasional, konsumsi, produksi",
   categories:[
-    {id:'l4_wilayah',name:'Wilayah Pasar',short:'Wilayah',icon:'🌍',color:'#f59e0b',points:250},
-    {id:'l4_barang',name:'Jenis Barang',short:'Barang',icon:'📦',color:'#fbbf24',points:300},
-    {id:'l4_contoh',name:'Contoh Pasar',short:'Contoh',icon:'🌰',color:'#f97316',points:350}
+    {id:'l4_lokal',name:'Pasar Lokal',short:'Lokal',icon:'🏘️',color:'#f59e0b',points:100},
+    {id:'l4_daerah',name:'Pasar Daerah',short:'Daerah',icon:'🚚',color:'#fbbf24',points:120},
+    {id:'l4_nasional',name:'Pasar Nasional',short:'Nasional',icon:'🇮🇩',color:'#f97316',points:140},
+    {id:'l4_internasional',name:'Pasar Internasional',short:'Internasional',icon:'🌏',color:'#ea580c',points:160},
+    {id:'l4_konsumsi',name:'Pasar Konsumsi',short:'Konsumsi',icon:'🛍️',color:'#dc2626',points:180},
+    {id:'l4_produksi',name:'Pasar Produksi',short:'Produksi',icon:'🏭',color:'#ef4444',points:200},
+    {id:'l4_cth_konsumsi',name:'Contoh Konsumsi',short:'Cth Konsumsi',icon:'🌰',color:'#f87171',points:220},
+    {id:'l4_cth_intl',name:'Contoh Internasional',short:'Cth Intl',icon:'🛢️',color:'#fb7185',points:240}
   ],
   questions:[
-    {cat:'l4_wilayah',q:"Pasar yang melayani kebutuhan seluruh wilayah negara, seperti pasar saham nasional, disebut pasar...",options:["Lokal","Daerah","Nasional","Internasional"],correct:2,explanation:"Pasar nasional melayani kebutuhan seluruh wilayah negara, contohnya pasar saham dan pasar uang nasional.",keyPoint:"Pasar nasional = seluruh negara."},
-    {cat:'l4_wilayah',q:"Pasar minyak dunia yang melibatkan banyak negara termasuk pasar...",options:["Lokal","Regional","Nasional","Internasional"],correct:3,explanation:"Pasar internasional melibatkan banyak negara, contohnya pasar minyak dunia dan ekspor-impor antarnegara.",keyPoint:"Pasar internasional = banyak negara."},
-    {cat:'l4_wilayah',q:"Pasar yang penjual dan pembelinya hanya dari penduduk setempat disebut pasar...",options:["Lokal","Daerah","Nasional","Internasional"],correct:0,explanation:"Pasar lokal adalah pasar yang penjual dan pembelinya dari penduduk setempat, seperti pasar ikan di desa.",keyPoint:"Pasar lokal = penduduk setempat."},
-    {cat:'l4_wilayah',q:"Pasar induk yang memasok kebutuhan beberapa kota termasuk pasar...",options:["Lokal","Daerah/regional","Nasional","Internasional"],correct:1,explanation:"Pasar daerah/regional melayani beberapa daerah dalam satu kawasan, contohnya pasar induk.",keyPoint:"Pasar daerah = beberapa kota."},
-    {cat:'l4_wilayah',q:"Contoh pasar internasional adalah...",options:["Pasar sayur di desa","Pasar minyak dunia dan ekspor-impor antarnegara","Pasar induk yang memasok beberapa kota","Pasar saham nasional"],correct:1,explanation:"Pasar minyak dunia dan ekspor-impor antarnegara adalah contoh pasar internasional.",keyPoint:"Pasar internasional = lintas negara."},
-    {cat:'l4_barang',q:"Pasar yang menjual barang-barang konsumsi untuk memenuhi kebutuhan manusia disebut pasar...",options:["Pasar konsumsi","Pasar produksi","Pasar abstrak","Pasar tahunan"],correct:0,explanation:"Pasar konsumsi menjual barang-barang konsumsi, seperti pasar tradisional dan supermarket.",keyPoint:"Pasar konsumsi = barang konsumsi."},
-    {cat:'l4_barang',q:"Pasar yang memperjualbelikan faktor-faktor produksi seperti tenaga kerja, bahan baku, dan mesin disebut pasar...",options:["Pasar konsumsi","Pasar produksi","Pasar abstrak","Pasar harian"],correct:1,explanation:"Pasar produksi memperjualbelikan faktor produksi seperti tenaga kerja, bahan baku, dan mesin.",keyPoint:"Pasar produksi = faktor produksi."},
-    {cat:'l4_barang',q:"Contoh pasar produksi adalah...",options:["Bursa kerja, pasar bahan baku, pasar modal","Supermarket","Pasar tradisional","Minimarket"],correct:0,explanation:"Bursa kerja, pasar bahan baku, dan pasar modal adalah contoh pasar produksi.",keyPoint:"Bursa kerja & pasar modal = produksi."},
-    {cat:'l4_contoh',q:"Pasar tradisional yang menjual sembako termasuk pasar...",options:["Pasar konsumsi","Pasar produksi","Pasar internasional","Pasar tahunan"],correct:0,explanation:"Pasar tradisional yang menjual sembako termasuk pasar konsumsi.",keyPoint:"Sembako = pasar konsumsi."},
-    {cat:'l4_contoh',q:"Pasar saham Indonesia termasuk jenis pasar...",options:["Pasar lokal","Pasar daerah","Pasar nasional","Pasar konsumsi"],correct:2,explanation:"Pasar saham Indonesia melayani seluruh wilayah negara — pasar nasional.",keyPoint:"Pasar saham = nasional."},
-    {cat:'l4_contoh',q:"Pasar ikan di desa nelayan termasuk pasar...",options:["Pasar lokal","Pasar nasional","Pasar internasional","Pasar produksi"],correct:0,explanation:"Pasar ikan di desa nelayan penjual dan pembelinya penduduk setempat — pasar lokal.",keyPoint:"Pasar ikan desa = lokal."},
-    {cat:'l4_contoh',q:"Harga minyak dunia yang memengaruhi harga BBM di Indonesia termasuk contoh pasar...",options:["Pasar lokal","Pasar nasional","Pasar internasional","Pasar konsumsi"],correct:2,explanation:"Harga minyak dunia ditentukan pasar internasional yang melibatkan banyak negara.",keyPoint:"Minyak dunia = internasional."}
+    {cat:'l4_nasional',q:"Pasar yang melayani kebutuhan seluruh wilayah negara, seperti pasar saham nasional, disebut pasar...",options:["Lokal","Daerah","Nasional","Internasional"],correct:2,explanation:"Pasar nasional melayani kebutuhan seluruh wilayah negara, contohnya pasar saham dan pasar uang nasional.",keyPoint:"Pasar nasional = seluruh negara."},
+    {cat:'l4_internasional',q:"Pasar minyak dunia yang melibatkan banyak negara termasuk pasar...",options:["Lokal","Regional","Nasional","Internasional"],correct:3,explanation:"Pasar internasional melibatkan banyak negara, contohnya pasar minyak dunia dan ekspor-impor antarnegara.",keyPoint:"Pasar internasional = banyak negara."},
+    {cat:'l4_lokal',q:"Pasar yang penjual dan pembelinya hanya dari penduduk setempat disebut pasar...",options:["Lokal","Daerah","Nasional","Internasional"],correct:0,explanation:"Pasar lokal adalah pasar yang penjual dan pembelinya dari penduduk setempat, seperti pasar ikan di desa.",keyPoint:"Pasar lokal = penduduk setempat."},
+    {cat:'l4_daerah',q:"Pasar induk yang memasok kebutuhan beberapa kota termasuk pasar...",options:["Lokal","Daerah/regional","Nasional","Internasional"],correct:1,explanation:"Pasar daerah/regional melayani beberapa daerah dalam satu kawasan, contohnya pasar induk.",keyPoint:"Pasar daerah = beberapa kota."},
+    {cat:'l4_cth_intl',q:"Contoh pasar internasional adalah...",options:["Pasar sayur di desa","Pasar minyak dunia dan ekspor-impor antarnegara","Pasar induk yang memasok beberapa kota","Pasar saham nasional"],correct:1,explanation:"Pasar minyak dunia dan ekspor-impor antarnegara adalah contoh pasar internasional.",keyPoint:"Pasar internasional = lintas negara."},
+    {cat:'l4_konsumsi',q:"Pasar yang menjual barang-barang konsumsi untuk memenuhi kebutuhan manusia disebut pasar...",options:["Pasar konsumsi","Pasar produksi","Pasar abstrak","Pasar tahunan"],correct:0,explanation:"Pasar konsumsi menjual barang-barang konsumsi, seperti pasar tradisional dan supermarket.",keyPoint:"Pasar konsumsi = barang konsumsi."},
+    {cat:'l4_produksi',q:"Pasar yang memperjualbelikan faktor-faktor produksi seperti tenaga kerja, bahan baku, dan mesin disebut pasar...",options:["Pasar konsumsi","Pasar produksi","Pasar abstrak","Pasar harian"],correct:1,explanation:"Pasar produksi memperjualbelikan faktor produksi seperti tenaga kerja, bahan baku, dan mesin.",keyPoint:"Pasar produksi = faktor produksi."},
+    {cat:'l4_produksi',q:"Contoh pasar produksi adalah...",options:["Bursa kerja, pasar bahan baku, pasar modal","Supermarket","Pasar tradisional","Minimarket"],correct:0,explanation:"Bursa kerja, pasar bahan baku, dan pasar modal adalah contoh pasar produksi.",keyPoint:"Bursa kerja & pasar modal = produksi."},
+    {cat:'l4_cth_konsumsi',q:"Pasar tradisional yang menjual sembako termasuk pasar...",options:["Pasar konsumsi","Pasar produksi","Pasar internasional","Pasar tahunan"],correct:0,explanation:"Pasar tradisional yang menjual sembako termasuk pasar konsumsi.",keyPoint:"Sembako = pasar konsumsi."},
+    {cat:'l4_nasional',q:"Pasar saham Indonesia termasuk jenis pasar...",options:["Pasar lokal","Pasar daerah","Pasar nasional","Pasar konsumsi"],correct:2,explanation:"Pasar saham Indonesia melayani seluruh wilayah negara — pasar nasional.",keyPoint:"Pasar saham = nasional."},
+    {cat:'l4_lokal',q:"Pasar ikan di desa nelayan termasuk pasar...",options:["Pasar lokal","Pasar nasional","Pasar internasional","Pasar produksi"],correct:0,explanation:"Pasar ikan di desa nelayan penjual dan pembelinya penduduk setempat — pasar lokal.",keyPoint:"Pasar ikan desa = lokal."},
+    {cat:'l4_cth_intl',q:"Harga minyak dunia yang memengaruhi harga BBM di Indonesia termasuk contoh pasar...",options:["Pasar lokal","Pasar nasional","Pasar internasional","Pasar konsumsi"],correct:2,explanation:"Harga minyak dunia ditentukan pasar internasional yang melibatkan banyak negara.",keyPoint:"Minyak dunia = internasional."}
   ]
-},
+}
+// ====== LEVEL 5-11 DILANJUTKAN DI PESAN BERIKUTNYA ======
+];
+  ,
+/* ==== LEVEL 5 — Struktur Persaingan Pasar ==== */
 {
   id:5,title:"Level 5",name:"Struktur Persaingan Pasar",icon:"⚖️",color:"#10b981",
   subtitle:"Persaingan sempurna, monopoli, oligopoli, monopolistik",
   categories:[
-    {id:'l5_sempurna',name:'Persaingan Sempurna',short:'Sempurna',icon:'✅',color:'#10b981',points:300},
-    {id:'l5_monopoli',name:'Monopoli',short:'Monopoli',icon:'👑',color:'#22c55e',points:350},
-    {id:'l5_oligopoli',name:'Oligopoli',short:'Oligopoli',icon:'🏢',color:'#84cc16',points:400},
-    {id:'l5_monopolistik',name:'Monopolistik',short:'Monopolistik',icon:'🏬',color:'#eab308',points:450}
+    {id:'l5_sempurna',name:'Persaingan Sempurna',short:'Sempurna',icon:'✅',color:'#10b981',points:100},
+    {id:'l5_ciri_sempurna',name:'Ciri Sempurna',short:'Ciri',icon:'⚖️',color:'#22c55e',points:120},
+    {id:'l5_monopoli',name:'Monopoli',short:'Monopoli',icon:'👑',color:'#84cc16',points:140},
+    {id:'l5_cth_monopoli',name:'Contoh Monopoli',short:'Cth Monopoli',icon:'⚡',color:'#eab308',points:160},
+    {id:'l5_oligopoli',name:'Oligopoli',short:'Oligopoli',icon:'🏢',color:'#f59e0b',points:180},
+    {id:'l5_cth_oligopoli',name:'Contoh Oligopoli',short:'Cth Oligopoli',icon:'📱',color:'#f97316',points:200},
+    {id:'l5_monopolistik',name:'Monopolistik',short:'Monopolistik',icon:'🏬',color:'#dc2626',points:220},
+    {id:'l5_cth_monopolistik',name:'Contoh Monopolistik',short:'Cth Monopolistik',icon:'☕',color:'#ef4444',points:240}
   ],
   questions:[
     {cat:'l5_sempurna',q:"Ciri khas pasar persaingan sempurna adalah...",options:["Hanya ada satu penjual","Barang yang dijual sejenis dan jumlah penjual banyak","Produk memiliki merek yang berbeda-beda","Harga ditentukan oleh satu perusahaan besar"],correct:1,explanation:"Ciri pasar persaingan sempurna: jumlah penjual dan pembeli banyak, barang sejenis (homogen), harga ditentukan pasar.",keyPoint:"Persaingan sempurna = banyak penjual, barang homogen."},
     {cat:'l5_sempurna',q:"Contoh pasar persaingan sempurna adalah...",options:["Pasar beras, pasar sayur, pasar ikan","PLN sebagai penyedia listrik","Operator seluler","Restoran dengan merek berbeda"],correct:0,explanation:"Pasar beras, sayur, dan ikan adalah contoh persaingan sempurna.",keyPoint:"Beras, sayur, ikan = persaingan sempurna."},
     {cat:'l5_sempurna',q:"Di pasar persaingan sempurna, harga ditentukan oleh...",options:["Interaksi permintaan dan penawaran pasar","Satu perusahaan besar","Pemerintah saja","Pembeli terkaya"],correct:0,explanation:"Harga di pasar persaingan sempurna ditentukan oleh interaksi permintaan dan penawaran pasar.",keyPoint:"Harga = interaksi D & S."},
-    {cat:'l5_sempurna',q:"Ciri pasar persaingan sempurna antara lain...",options:["Tidak ada hambatan masuk-keluar pasar dan informasi sempurna","Hanya satu penjual","Produk berbeda merek","Harga ditentukan satu perusahaan"],correct:0,explanation:"Ciri: tidak ada hambatan masuk-keluar pasar dan penjual-pembeli punya informasi sempurna.",keyPoint:"Bebas masuk-keluar + informasi sempurna."},
+    {cat:'l5_ciri_sempurna',q:"Ciri pasar persaingan sempurna antara lain...",options:["Tidak ada hambatan masuk-keluar pasar dan informasi sempurna","Hanya satu penjual","Produk berbeda merek","Harga ditentukan satu perusahaan"],correct:0,explanation:"Ciri: tidak ada hambatan masuk-keluar pasar dan penjual-pembeli punya informasi sempurna.",keyPoint:"Bebas masuk-keluar + informasi sempurna."},
     {cat:'l5_monopoli',q:"Pasar yang dikuasai oleh satu penjual tunggal tanpa barang pengganti disebut pasar...",options:["Oligopoli","Monopoli","Monopolistik","Persaingan sempurna"],correct:1,explanation:"Pasar monopoli dikuasai satu penjual tunggal tanpa barang pengganti, contohnya PLN untuk listrik rumah tangga.",keyPoint:"Monopoli = satu penjual, tanpa pengganti."},
-    {cat:'l5_monopoli',q:"Contoh pasar monopoli di Indonesia adalah...",options:["PLN (listrik) dan PT KAI (kereta api)","Pasar beras","Pasar sayur","Restoran cepat saji"],correct:0,explanation:"PLN dan PT KAI adalah contoh monopoli di Indonesia (BUMN).",keyPoint:"PLN & KAI = monopoli."},
+    {cat:'l5_cth_monopoli',q:"Contoh pasar monopoli di Indonesia adalah...",options:["PLN (listrik) dan PT KAI (kereta api)","Pasar beras","Pasar sayur","Restoran cepat saji"],correct:0,explanation:"PLN dan PT KAI adalah contoh monopoli di Indonesia (BUMN).",keyPoint:"PLN & KAI = monopoli."},
     {cat:'l5_monopoli',q:"Di pasar monopoli, penjual memiliki kekuatan untuk...",options:["Menentukan harga","Mengikuti harga pasar","Menjadi pembeli","Menghapus pajak"],correct:0,explanation:"Di pasar monopoli, penjual memiliki kekuatan besar untuk menentukan harga.",keyPoint:"Monopoli = penentu harga."},
     {cat:'l5_oligopoli',q:"Pasar yang dikuasai oleh beberapa penjual besar sehingga kebijakan harga satu perusahaan memengaruhi yang lain disebut pasar...",options:["Monopoli","Oligopoli","Monopolistik","Persaingan sempurna"],correct:1,explanation:"Pasar oligopoli dikuasai beberapa penjual besar, contohnya industri operator seluler dan otomotif.",keyPoint:"Oligopoli = beberapa penjual besar."},
-    {cat:'l5_oligopoli',q:"Contoh pasar oligopoli adalah...",options:["Operator seluler dan industri otomotif","Pasar sayur","Pasar ikan","Warung kopi"],correct:0,explanation:"Operator seluler dan industri otomotif adalah contoh oligopoli.",keyPoint:"Seluler & otomotif = oligopoli."},
+    {cat:'l5_cth_oligopoli',q:"Contoh pasar oligopoli adalah...",options:["Operator seluler dan industri otomotif","Pasar sayur","Pasar ikan","Warung kopi"],correct:0,explanation:"Operator seluler dan industri otomotif adalah contoh oligopoli.",keyPoint:"Seluler & otomotif = oligopoli."},
     {cat:'l5_oligopoli',q:"Persaingan di pasar oligopoli biasanya terjadi melalui...",options:["Iklan, kualitas produk, dan layanan","Harga yang sangat berbeda","Pemberian hadiah langsung","Pemaksaan pembeli"],correct:0,explanation:"Persaingan oligopoli terjadi melalui iklan, kualitas produk, dan layanan.",keyPoint:"Oligopoli = iklan & kualitas."},
     {cat:'l5_monopolistik',q:"Pasar dengan banyak penjual yang menjual produk sejenis namun berbeda merek disebut pasar...",options:["Monopoli","Oligopoli","Monopolistik","Persaingan sempurna"],correct:2,explanation:"Pasar monopolistik memiliki banyak penjual dengan produk sejenis tetapi berbeda merek, contohnya restoran dan salon.",keyPoint:"Monopolistik = banyak penjual, beda merek."},
-    {cat:'l5_monopolistik',q:"Contoh pasar monopolistik adalah...",options:["Restoran, salon, merek pakaian","PLN listrik","Pasar beras","Operator seluler"],correct:0,explanation:"Restoran, salon, dan merek pakaian adalah contoh pasar monopolistik.",keyPoint:"Restoran & salon = monopolistik."},
+    {cat:'l5_cth_monopolistik',q:"Contoh pasar monopolistik adalah...",options:["Restoran, salon, merek pakaian","PLN listrik","Pasar beras","Operator seluler"],correct:0,explanation:"Restoran, salon, dan merek pakaian adalah contoh pasar monopolistik.",keyPoint:"Restoran & salon = monopolistik."},
     {cat:'l5_monopolistik',q:"Persaingan di pasar monopolistik terjadi melalui...",options:["Diferensiasi produk dan promosi","Harga yang sama","Pembatasan pembeli","Pajak tinggi"],correct:0,explanation:"Persaingan monopolistik terjadi melalui diferensiasi produk dan promosi.",keyPoint:"Monopolistik = diferensiasi & promosi."},
     {cat:'l5_monopolistik',q:"Perbedaan pasar monopolistik dan persaingan sempurna adalah...",options:["Monopolistik punya banyak merek berbeda, persaingan sempurna barangnya homogen","Monopolistik hanya satu penjual","Persaingan sempurna punya merek berbeda","Keduanya sama saja"],correct:0,explanation:"Monopolistik: banyak merek berbeda; persaingan sempurna: barang homogen (sejenis).",keyPoint:"Monopolistik = beda merek; sempurna = homogen."}
   ]
 },
+/* ==== LEVEL 6 — Permintaan (Demand) ==== */
 {
   id:6,title:"Level 6",name:"Permintaan (Demand)",icon:"🛒",color:"#ec4899",
   subtitle:"Definisi, jenis, dan faktor yang mempengaruhi permintaan",
   categories:[
-    {id:'l6_definisi',name:'Definisi Permintaan',short:'Definisi',icon:'📖',color:'#ec4899',points:350},
-    {id:'l6_jenis',name:'Jenis Permintaan',short:'Jenis',icon:'📋',color:'#f472b6',points:400},
-    {id:'l6_faktor',name:'Faktor Permintaan',short:'Faktor',icon:'🔍',color:'#f43f5e',points:450}
+    {id:'l6_definisi',name:'Definisi Permintaan',short:'Definisi',icon:'📖',color:'#ec4899',points:100},
+    {id:'l6_efektif',name:'Permintaan Efektif',short:'Efektif',icon:'💰',color:'#f472b6',points:120},
+    {id:'l6_absolut',name:'Permintaan Absolut',short:'Absolut',icon:'🤔',color:'#f43f5e',points:140},
+    {id:'l6_potensial',name:'Permintaan Potensial',short:'Potensial',icon:'⏳',color:'#e11d48',points:160},
+    {id:'l6_individu',name:'Individu & Pasar',short:'Individu',icon:'👤',color:'#be123c',points:180},
+    {id:'l6_pendapatan',name:'Faktor Pendapatan',short:'Pendapatan',icon:'💵',color:'#9f1239',points:200},
+    {id:'l6_substitusi',name:'Faktor Substitusi',short:'Substitusi',icon:'🔄',color:'#fb7185',points:220},
+    {id:'l6_lainnya',name:'Faktor Lainnya',short:'Lainnya',icon:'🔍',color:'#fda4af',points:240}
   ],
   questions:[
     {cat:'l6_definisi',q:"Permintaan adalah...",options:["Keinginan konsumen membeli barang/jasa pada berbagai tingkat harga","Jumlah barang yang tersedia di pasar","Kemampuan produsen memproduksi barang","Jumlah uang yang beredar di masyarakat"],correct:0,explanation:"Permintaan adalah keinginan konsumen membeli barang/jasa pada berbagai tingkat harga dalam periode tertentu.",keyPoint:"Permintaan = keinginan membeli pada tingkat harga."},
-    {cat:'l6_definisi',q:"Permintaan yang disertai kemampuan membayar disebut permintaan...",options:["Absolut","Potensial","Efektif","Individu"],correct:2,explanation:"Permintaan efektif adalah keinginan membeli yang didukung kemampuan membayar.",keyPoint:"Permintaan efektif = keinginan + kemampuan bayar."},
-    {cat:'l6_definisi',q:"Permintaan absolut adalah...",options:["Keinginan membeli tanpa didukung kemampuan membayar","Keinginan membeli yang didukung kemampuan membayar","Keinginan membeli yang ditunda","Permintaan dari satu orang"],correct:0,explanation:"Permintaan absolut adalah keinginan membeli tanpa didukung kemampuan membayar.",keyPoint:"Absolut = tanpa kemampuan bayar."},
-    {cat:'l6_definisi',q:"Permintaan potensial adalah...",options:["Keinginan membeli yang belum dilaksanakan meskipun mampu","Keinginan yang tidak mampu dibayar","Permintaan seluruh pasar","Permintaan satu orang"],correct:0,explanation:"Permintaan potensial: keinginan membeli yang belum dilaksanakan meskipun konsumen mampu.",keyPoint:"Potensial = mampu tapi belum beli."},
-    {cat:'l6_jenis',q:"Permintaan dari satu orang konsumen disebut permintaan...",options:["Individu","Pasar","Absolut","Potensial"],correct:0,explanation:"Permintaan individu adalah permintaan dari satu orang konsumen.",keyPoint:"Individu = satu orang."},
-    {cat:'l6_jenis',q:"Jumlah seluruh permintaan konsumen di pasar disebut permintaan...",options:["Individu","Pasar","Efektif","Absolut"],correct:1,explanation:"Permintaan pasar adalah total seluruh permintaan konsumen di pasar.",keyPoint:"Pasar = total semua konsumen."},
-    {cat:'l6_jenis',q:"Contoh permintaan efektif adalah...",options:["Ingin membeli mobil mewah tetapi uang tidak cukup","Membeli sepeda sesuai tabungan yang dimiliki","Ingin membeli HP, uang ada, tapi ditunda","Ingin membeli tas branded tanpa uang"],correct:1,explanation:"Membeli sepeda sesuai tabungan adalah permintaan efektif — ada keinginan & kemampuan membayar.",keyPoint:"Efektif = keinginan + uang cukup."},
-    {cat:'l6_faktor',q:"Faktor-faktor berikut mempengaruhi permintaan, KECUALI...",options:["Pendapatan konsumen","Selera konsumen","Harga barang itu sendiri","Jumlah barang yang diproduksi pabrik"],correct:3,explanation:"Jumlah barang yang diproduksi pabrik berkaitan dengan penawaran, bukan permintaan.",keyPoint:"Produksi = faktor penawaran."},
-    {cat:'l6_faktor',q:"Jika harga barang pengganti (substitusi) naik, permintaan barang utama akan...",options:["Turun","Naik","Tetap","Tidak terpengaruh"],correct:1,explanation:"Jika harga barang pengganti naik, konsumen beralih ke barang utama sehingga permintaannya meningkat.",keyPoint:"Harga substitusi naik → permintaan barang utama naik."},
-    {cat:'l6_faktor',q:"Jika harga barang komplementer naik, permintaan barang utama akan...",options:["Naik","Turun","Tetap","Tidak terpengaruh"],correct:1,explanation:"Harga barang pelengkap naik menurunkan permintaan barang utama, contohnya bensin naik → permintaan motor turun.",keyPoint:"Harga komplementer naik → permintaan turun."},
-    {cat:'l6_faktor',q:"Semakin banyak jumlah penduduk, maka permintaan terhadap barang...",options:["Semakin besar","Semakin kecil","Tidak berubah","Hilang"],correct:0,explanation:"Semakin banyak penduduk, semakin besar permintaan terhadap barang.",keyPoint:"Penduduk naik = permintaan naik."},
-    {cat:'l6_faktor',q:"Jika harga diperkirakan akan naik besok, konsumen cenderung...",options:["Membeli sekarang","Menunda pembelian","Tidak membeli","Menjual barang"],correct:0,explanation:"Jika harga diperkirakan naik, konsumen cenderung membeli sekarang untuk menghindari harga tinggi.",keyPoint:"Perkiraan harga naik = beli sekarang."},
-    {cat:'l6_faktor',q:"Barang yang sedang tren akan...",options:["Lebih banyak diminta","Kurang diminta","Tidak diminta","Dijual murah"],correct:0,explanation:"Barang yang sedang tren (selera konsumen) akan lebih banyak diminta.",keyPoint:"Selera/tren = permintaan naik."},
-    {cat:'l6_faktor',q:"Contoh barang substitusi adalah...",options:["Teh dan kopi","Motor dan bensin","Beras dan sayur","Sepatu dan kaos kaki"],correct:0,explanation:"Teh dan kopi adalah barang substitusi — saling menggantikan fungsi.",keyPoint:"Substitusi = saling menggantikan."}
+    {cat:'l6_efektif',q:"Permintaan yang disertai kemampuan membayar disebut permintaan...",options:["Absolut","Potensial","Efektif","Individu"],correct:2,explanation:"Permintaan efektif adalah keinginan membeli yang didukung kemampuan membayar.",keyPoint:"Permintaan efektif = keinginan + kemampuan bayar."},
+    {cat:'l6_absolut',q:"Permintaan absolut adalah...",options:["Keinginan membeli tanpa didukung kemampuan membayar","Keinginan membeli yang didukung kemampuan membayar","Keinginan membeli yang ditunda","Permintaan dari satu orang"],correct:0,explanation:"Permintaan absolut adalah keinginan membeli tanpa didukung kemampuan membayar.",keyPoint:"Absolut = tanpa kemampuan bayar."},
+    {cat:'l6_potensial',q:"Permintaan potensial adalah...",options:["Keinginan membeli yang belum dilaksanakan meskipun mampu","Keinginan yang tidak mampu dibayar","Permintaan seluruh pasar","Permintaan satu orang"],correct:0,explanation:"Permintaan potensial: keinginan membeli yang belum dilaksanakan meskipun konsumen mampu.",keyPoint:"Potensial = mampu tapi belum beli."},
+    {cat:'l6_individu',q:"Permintaan dari satu orang konsumen disebut permintaan...",options:["Individu","Pasar","Absolut","Potensial"],correct:0,explanation:"Permintaan individu adalah permintaan dari satu orang konsumen.",keyPoint:"Individu = satu orang."},
+    {cat:'l6_individu',q:"Jumlah seluruh permintaan konsumen di pasar disebut permintaan...",options:["Individu","Pasar","Efektif","Absolut"],correct:1,explanation:"Permintaan pasar adalah total seluruh permintaan konsumen di pasar.",keyPoint:"Pasar = total semua konsumen."},
+    {cat:'l6_efektif',q:"Contoh permintaan efektif adalah...",options:["Ingin membeli mobil mewah tetapi uang tidak cukup","Membeli sepeda sesuai tabungan yang dimiliki","Ingin membeli HP, uang ada, tapi ditunda","Ingin membeli tas branded tanpa uang"],correct:1,explanation:"Membeli sepeda sesuai tabungan adalah permintaan efektif — ada keinginan & kemampuan membayar.",keyPoint:"Efektif = keinginan + uang cukup."},
+    {cat:'l6_lainnya',q:"Faktor-faktor berikut mempengaruhi permintaan, KECUALI...",options:["Pendapatan konsumen","Selera konsumen","Harga barang itu sendiri","Jumlah barang yang diproduksi pabrik"],correct:3,explanation:"Jumlah barang yang diproduksi pabrik berkaitan dengan penawaran, bukan permintaan.",keyPoint:"Produksi = faktor penawaran."},
+    {cat:'l6_substitusi',q:"Jika harga barang pengganti (substitusi) naik, permintaan barang utama akan...",options:["Turun","Naik","Tetap","Tidak terpengaruh"],correct:1,explanation:"Jika harga barang pengganti naik, konsumen beralih ke barang utama sehingga permintaannya meningkat.",keyPoint:"Harga substitusi naik → permintaan barang utama naik."},
+    {cat:'l6_substitusi',q:"Jika harga barang komplementer naik, permintaan barang utama akan...",options:["Naik","Turun","Tetap","Tidak terpengaruh"],correct:1,explanation:"Harga barang pelengkap naik menurunkan permintaan barang utama, contohnya bensin naik → permintaan motor turun.",keyPoint:"Harga komplementer naik → permintaan turun."},
+    {cat:'l6_pendapatan',q:"Semakin banyak jumlah penduduk, maka permintaan terhadap barang...",options:["Semakin besar","Semakin kecil","Tidak berubah","Hilang"],correct:0,explanation:"Semakin banyak penduduk, semakin besar permintaan terhadap barang.",keyPoint:"Penduduk naik = permintaan naik."},
+    {cat:'l6_pendapatan',q:"Jika harga diperkirakan akan naik besok, konsumen cenderung...",options:["Membeli sekarang","Menunda pembelian","Tidak membeli","Menjual barang"],correct:0,explanation:"Jika harga diperkirakan naik, konsumen cenderung membeli sekarang untuk menghindari harga tinggi.",keyPoint:"Perkiraan harga naik = beli sekarang."},
+    {cat:'l6_lainnya',q:"Barang yang sedang tren akan...",options:["Lebih banyak diminta","Kurang diminta","Tidak diminta","Dijual murah"],correct:0,explanation:"Barang yang sedang tren (selera konsumen) akan lebih banyak diminta.",keyPoint:"Selera/tren = permintaan naik."},
+    {cat:'l6_substitusi',q:"Contoh barang substitusi adalah...",options:["Teh dan kopi","Motor dan bensin","Beras dan sayur","Sepatu dan kaos kaki"],correct:0,explanation:"Teh dan kopi adalah barang substitusi — saling menggantikan fungsi.",keyPoint:"Substitusi = saling menggantikan."}
   ]
 },
+/* ==== LEVEL 7 — Hukum & Kurva Permintaan ==== */
 {
   id:7,title:"Level 7",name:"Hukum & Kurva Permintaan",icon:"📉",color:"#ef4444",
   subtitle:"Hukum permintaan, kurva, dan pengecualiannya",
   categories:[
-    {id:'l7_hukum',name:'Hukum Permintaan',short:'Hukum',icon:'📉',color:'#ef4444',points:400},
-    {id:'l7_kurva',name:'Kurva Permintaan',short:'Kurva',icon:'📊',color:'#f87171',points:450},
-    {id:'l7_pengecualian',name:'Pengecualian',short:'Khusus',icon:'⚠️',color:'#fb7185',points:500}
+    {id:'l7_hukum',name:'Hukum Permintaan',short:'Hukum',icon:'📉',color:'#ef4444',points:100},
+    {id:'l7_ceteris',name:'Ceteris Paribus',short:'Ceteris',icon:'⚙️',color:'#f87171',points:120},
+    {id:'l7_alasan',name:'Alasan Terbalik',short:'Alasan',icon:'🤔',color:'#fb7185',points:140},
+    {id:'l7_kurva',name:'Kurva Permintaan',short:'Kurva',icon:'📊',color:'#f43f5e',points:160},
+    {id:'l7_gerak',name:'Pergerakan Kurva',short:'Gerak',icon:'➡️',color:'#e11d48',points:180},
+    {id:'l7_geser',name:'Pergeseran Kurva',short:'Geser',icon:'↔️',color:'#be123c',points:200},
+    {id:'l7_prestise',name:'Barang Prestise',short:'Prestise',icon:'💎',color:'#9f1239',points:220},
+    {id:'l7_spekulasi',name:'Spekulasi & Inferior',short:'Spekulasi',icon:'🏆',color:'#881337',points:240}
   ],
   questions:[
     {cat:'l7_hukum',q:"Menurut hukum permintaan, jika harga suatu barang naik maka jumlah yang diminta akan...",options:["Naik","Turun","Tetap","Tidak terpengaruh"],correct:1,explanation:"Hukum permintaan: hubungan berbanding terbalik — harga naik, jumlah yang diminta turun.",keyPoint:"Hukum permintaan = berbanding terbalik."},
     {cat:'l7_hukum',q:"Hukum permintaan menyatakan hubungan antara harga dan jumlah yang diminta bersifat...",options:["Berbanding terbalik","Berbanding lurus","Tidak berhubungan","Acak"],correct:0,explanation:"Hukum permintaan: hubungan berbanding terbalik (negatif) antara harga dan jumlah yang diminta.",keyPoint:"Permintaan = berbanding terbalik."},
-    {cat:'l7_hukum',q:"Asumsi ceteris paribus dalam hukum permintaan berarti...",options:["Faktor lain dianggap tetap","Semua faktor berubah","Tidak ada faktor","Faktor lain tidak penting"],correct:0,explanation:"Ceteris paribus = faktor-faktor lain dianggap tetap atau tidak berubah.",keyPoint:"Ceteris paribus = faktor lain tetap."},
-    {cat:'l7_hukum',q:"Mengapa hubungan harga dan permintaan berbanding terbalik? Karena...",options:["Efek pendapatan, efek substitusi, dan efek harapan","Harga selalu naik","Konsumen tidak rasional","Pemerintah memaksa"],correct:0,explanation:"Hubungan terbalik karena efek pendapatan, efek substitusi, dan efek harapan.",keyPoint:"3 efek: pendapatan, substitusi, harapan."},
+    {cat:'l7_ceteris',q:"Asumsi ceteris paribus dalam hukum permintaan berarti...",options:["Faktor lain dianggap tetap","Semua faktor berubah","Tidak ada faktor","Faktor lain tidak penting"],correct:0,explanation:"Ceteris paribus = faktor-faktor lain dianggap tetap atau tidak berubah.",keyPoint:"Ceteris paribus = faktor lain tetap."},
+    {cat:'l7_alasan',q:"Mengapa hubungan harga dan permintaan berbanding terbalik? Karena...",options:["Efek pendapatan, efek substitusi, dan efek harapan","Harga selalu naik","Konsumen tidak rasional","Pemerintah memaksa"],correct:0,explanation:"Hubungan terbalik karena efek pendapatan, efek substitusi, dan efek harapan.",keyPoint:"3 efek: pendapatan, substitusi, harapan."},
     {cat:'l7_kurva',q:"Kurva permintaan digambarkan miring dari...",options:["Kiri atas ke kanan bawah","Kiri bawah ke kanan atas","Kiri atas ke kiri bawah","Kanan atas ke kanan bawah"],correct:0,explanation:"Kurva permintaan miring dari kiri atas ke kanan bawah, menunjukkan hubungan negatif antara harga dan jumlah yang diminta.",keyPoint:"Kurva D = kiri atas → kanan bawah."},
     {cat:'l7_kurva',q:"Pada harga tinggi, jumlah barang yang diminta...",options:["Sedikit","Banyak","Tetap","Tidak terhingga"],correct:0,explanation:"Pada harga tinggi, jumlah barang yang diminta sedikit.",keyPoint:"Harga tinggi = permintaan sedikit."},
-    {cat:'l7_kurva',q:"Pergerakan sepanjang kurva permintaan terjadi karena perubahan...",options:["Harga barang itu sendiri","Pendapatan konsumen","Selera konsumen","Jumlah penduduk"],correct:0,explanation:"Pergerakan sepanjang kurva terjadi karena perubahan harga barang itu sendiri.",keyPoint:"Pergerakan = perubahan harga sendiri."},
-    {cat:'l7_kurva',q:"Jika pendapatan konsumen naik, kurva permintaan akan...",options:["Bergeser ke kanan","Bergeser ke kiri","Tidak bergeser","Tetap di posisi"],correct:0,explanation:"Jika pendapatan naik, kurva permintaan bergeser ke kanan (permintaan naik).",keyPoint:"Pendapatan naik = kurva geser kanan."},
-    {cat:'l7_pengecualian',q:"Barang prestise adalah pengecualian hukum permintaan karena...",options:["Harga naik justru menaikkan permintaan karena gengsi","Harga naik menurunkan permintaan","Harga tidak berpengaruh","Tidak ada pembeli"],correct:0,explanation:"Barang prestise: harga naik justru menaikkan permintaan karena gengsi, contohnya mobil mewah dan tas branded.",keyPoint:"Prestise = harga naik, permintaan naik."},
-    {cat:'l7_pengecualian',q:"Contoh barang spekulasi adalah...",options:["Emas, tanah, saham","Beras, gula","Motor, bensin","Sepatu, kaos"],correct:0,explanation:"Emas, tanah, dan saham adalah barang spekulasi — harga naik membuat orang memburu.",keyPoint:"Spekulasi = emas, tanah, saham."},
-    {cat:'l7_pengecualian',q:"Barang inferior adalah barang yang...",options:["Harga turun justru menurunkan permintaan karena mutu dianggap rendah","Harga naik menaikkan permintaan","Selalu dibeli konsumen","Tidak pernah dibeli"],correct:0,explanation:"Barang inferior: harga turun justru menurunkan permintaan karena mutu dianggap rendah.",keyPoint:"Inferior = harga turun, permintaan turun."},
-    {cat:'l7_pengecualian',q:"Pengecualian hukum permintaan jarang terjadi dan hanya berlaku...",options:["Pada kondisi tertentu","Setiap saat","Di semua barang","Di semua negara"],correct:0,explanation:"Pengecualian hukum permintaan jarang terjadi dan hanya berlaku pada kondisi tertentu.",keyPoint:"Pengecualian = kondisi khusus."}
+    {cat:'l7_gerak',q:"Pergerakan sepanjang kurva permintaan terjadi karena perubahan...",options:["Harga barang itu sendiri","Pendapatan konsumen","Selera konsumen","Jumlah penduduk"],correct:0,explanation:"Pergerakan sepanjang kurva terjadi karena perubahan harga barang itu sendiri.",keyPoint:"Pergerakan = perubahan harga sendiri."},
+    {cat:'l7_geser',q:"Jika pendapatan konsumen naik, kurva permintaan akan...",options:["Bergeser ke kanan","Bergeser ke kiri","Tidak bergeser","Tetap di posisi"],correct:0,explanation:"Jika pendapatan naik, kurva permintaan bergeser ke kanan (permintaan naik).",keyPoint:"Pendapatan naik = kurva geser kanan."},
+    {cat:'l7_prestise',q:"Barang prestise adalah pengecualian hukum permintaan karena...",options:["Harga naik justru menaikkan permintaan karena gengsi","Harga naik menurunkan permintaan","Harga tidak berpengaruh","Tidak ada pembeli"],correct:0,explanation:"Barang prestise: harga naik justru menaikkan permintaan karena gengsi, contohnya mobil mewah dan tas branded.",keyPoint:"Prestise = harga naik, permintaan naik."},
+    {cat:'l7_spekulasi',q:"Contoh barang spekulasi adalah...",options:["Emas, tanah, saham","Beras, gula","Motor, bensin","Sepatu, kaos"],correct:0,explanation:"Emas, tanah, dan saham adalah barang spekulasi — harga naik membuat orang memburu.",keyPoint:"Spekulasi = emas, tanah, saham."},
+    {cat:'l7_spekulasi',q:"Barang inferior adalah barang yang...",options:["Harga turun justru menurunkan permintaan karena mutu dianggap rendah","Harga naik menaikkan permintaan","Selalu dibeli konsumen","Tidak pernah dibeli"],correct:0,explanation:"Barang inferior: harga turun justru menurunkan permintaan karena mutu dianggap rendah.",keyPoint:"Inferior = harga turun, permintaan turun."},
+    {cat:'l7_prestise',q:"Pengecualian hukum permintaan jarang terjadi dan hanya berlaku...",options:["Pada kondisi tertentu","Setiap saat","Di semua barang","Di semua negara"],correct:0,explanation:"Pengecualian hukum permintaan jarang terjadi dan hanya berlaku pada kondisi tertentu.",keyPoint:"Pengecualian = kondisi khusus."}
   ]
 },
+/* ==== LEVEL 8 — Penawaran (Supply) ==== */
 {
   id:8,title:"Level 8",name:"Penawaran (Supply)",icon:"📦",color:"#14b8a6",
   subtitle:"Definisi, jenis, dan faktor yang mempengaruhi penawaran",
   categories:[
-    {id:'l8_definisi',name:'Definisi Penawaran',short:'Definisi',icon:'📖',color:'#14b8a6',points:450},
-    {id:'l8_jenis',name:'Jenis Penawaran',short:'Jenis',icon:'📋',color:'#2dd4bf',points:500},
-    {id:'l8_faktor',name:'Faktor Penawaran',short:'Faktor',icon:'🔍',color:'#5eead4',points:550}
+    {id:'l8_definisi',name:'Definisi Penawaran',short:'Definisi',icon:'📖',color:'#14b8a6',points:100},
+    {id:'l8_harga',name:'Penawaran & Harga',short:'Harga',icon:'💰',color:'#2dd4bf',points:120},
+    {id:'l8_pasar',name:'Penawaran Pasar',short:'Pasar',icon:'🏪',color:'#5eead4',points:140},
+    {id:'l8_individu',name:'Penawaran Individu',short:'Individu',icon:'🧑‍🌾',color:'#0d9488',points:160},
+    {id:'l8_biaya',name:'Faktor Biaya Produksi',short:'Biaya',icon:'💸',color:'#0f766e',points:180},
+    {id:'l8_teknologi',name:'Faktor Teknologi',short:'Teknologi',icon:'⚙️',color:'#115e59',points:200},
+    {id:'l8_pajak',name:'Pajak & Subsidi',short:'Pajak',icon:'🏛️',color:'#134e4a',points:220},
+    {id:'l8_cuaca',name:'Cuaca & Perkiraan',short:'Cuaca',icon:'🌦️',color:'#0f172a',points:240}
   ],
   questions:[
     {cat:'l8_definisi',q:"Penawaran adalah...",options:["Kesediaan produsen menjual barang pada tingkat harga tertentu","Jumlah barang yang ingin dibeli konsumen","Jumlah barang yang tersedia di gudang","Jumlah barang yang diproduksi pabrik"],correct:0,explanation:"Penawaran adalah kesediaan penjual menawarkan barang/jasa di pasar pada tingkat harga tertentu.",keyPoint:"Penawaran = kesediaan penjual menawarkan."},
-    {cat:'l8_definisi',q:"Penawaran berbeda dengan jumlah barang yang tersedia karena penawaran selalu dikaitkan dengan...",options:["Harga","Warna barang","Berat barang","Merek"],correct:0,explanation:"Penawaran selalu dikaitkan dengan harga — berapa banyak yang mau dijual penjual pada harga tertentu.",keyPoint:"Penawaran = terkait harga."},
-    {cat:'l8_definisi',q:"Penawaran pasar adalah...",options:["Total penawaran seluruh produsen di pasar","Penawaran satu produsen","Penawaran satu konsumen","Penawaran pemerintah"],correct:0,explanation:"Penawaran pasar adalah total penawaran seluruh produsen di pasar.",keyPoint:"Penawaran pasar = total produsen."},
-    {cat:'l8_jenis',q:"Penawaran dari satu produsen disebut penawaran...",options:["Individu","Pasar","Kolektif","Nasional"],correct:0,explanation:"Penawaran individu adalah penawaran dari satu produsen.",keyPoint:"Individu = satu produsen."},
-    {cat:'l8_jenis',q:"Contoh penawaran individu adalah...",options:["Seorang petani menawarkan 100 kg cabai","Seluruh petani menawarkan 5 ton cabai","Pemerintah menawarkan beras","Konsumen membeli cabai"],correct:0,explanation:"Seorang petani menawarkan 100 kg cabai = penawaran individu.",keyPoint:"Individu = satu petani."},
-    {cat:'l8_faktor',q:"Faktor-faktor berikut mempengaruhi penawaran, KECUALI...",options:["Biaya produksi","Teknologi","Selera konsumen","Pajak dan subsidi"],correct:2,explanation:"Selera konsumen mempengaruhi permintaan, bukan penawaran.",keyPoint:"Selera = faktor permintaan."},
-    {cat:'l8_faktor',q:"Jika biaya produksi naik, penawaran barang tersebut akan...",options:["Naik","Turun","Tetap","Tidak terpengaruh"],correct:1,explanation:"Biaya produksi naik membuat produsen mengurangi produksi sehingga penawaran turun.",keyPoint:"Biaya produksi naik → penawaran turun."},
-    {cat:'l8_faktor',q:"Teknologi yang lebih maju akan...",options:["Meningkatkan efisiensi dan jumlah produksi","Menurunkan penawaran","Membuat harga naik","Menghilangkan pasar"],correct:0,explanation:"Teknologi maju meningkatkan efisiensi dan jumlah produksi, sehingga penawaran naik.",keyPoint:"Teknologi maju = penawaran naik."},
-    {cat:'l8_faktor',q:"Pajak tinggi akan...",options:["Menekan penawaran","Mendorong penawaran","Tidak berpengaruh","Menaikkan penawaran"],correct:0,explanation:"Pajak tinggi menekan penawaran karena menambah beban biaya produsen.",keyPoint:"Pajak tinggi = penawaran turun."},
-    {cat:'l8_faktor',q:"Subsidi pemerintah akan...",options:["Mendorong penawaran","Menekan penawaran","Tidak berpengaruh","Menghilangkan penawaran"],correct:0,explanation:"Subsidi mendorong penawaran karena meringankan biaya produsen.",keyPoint:"Subsidi = penawaran naik."},
-    {cat:'l8_faktor',q:"Jika harga diperkirakan naik besok, penjual cenderung...",options:["Menahan barang dahulu","Menjual semua barang sekarang","Menurunkan harga","Menutup usaha"],correct:0,explanation:"Jika harga diperkirakan naik, penjual menahan barang dahulu untuk dijual saat harga tinggi.",keyPoint:"Perkiraan harga naik = tahan barang."},
-    {cat:'l8_faktor',q:"Kondisi cuaca dan alam sangat berpengaruh pada penawaran...",options:["Hasil pertanian dan perikanan","Barang elektronik","Kendaraan bermotor","Pakaian"],correct:0,explanation:"Cuaca dan alam sangat berpengaruh pada penawaran hasil pertanian dan perikanan.",keyPoint:"Cuaca = pengaruh pertanian/perikanan."}
+    {cat:'l8_harga',q:"Penawaran berbeda dengan jumlah barang yang tersedia karena penawaran selalu dikaitkan dengan...",options:["Harga","Warna barang","Berat barang","Merek"],correct:0,explanation:"Penawaran selalu dikaitkan dengan harga — berapa banyak yang mau dijual penjual pada harga tertentu.",keyPoint:"Penawaran = terkait harga."},
+    {cat:'l8_pasar',q:"Penawaran pasar adalah...",options:["Total penawaran seluruh produsen di pasar","Penawaran satu produsen","Penawaran satu konsumen","Penawaran pemerintah"],correct:0,explanation:"Penawaran pasar adalah total penawaran seluruh produsen di pasar.",keyPoint:"Penawaran pasar = total produsen."},
+    {cat:'l8_individu',q:"Penawaran dari satu produsen disebut penawaran...",options:["Individu","Pasar","Kolektif","Nasional"],correct:0,explanation:"Penawaran individu adalah penawaran dari satu produsen.",keyPoint:"Individu = satu produsen."},
+    {cat:'l8_individu',q:"Contoh penawaran individu adalah...",options:["Seorang petani menawarkan 100 kg cabai","Seluruh petani menawarkan 5 ton cabai","Pemerintah menawarkan beras","Konsumen membeli cabai"],correct:0,explanation:"Seorang petani menawarkan 100 kg cabai = penawaran individu.",keyPoint:"Individu = satu petani."},
+    {cat:'l8_teknologi',q:"Faktor-faktor berikut mempengaruhi penawaran, KECUALI...",options:["Biaya produksi","Teknologi","Selera konsumen","Pajak dan subsidi"],correct:2,explanation:"Selera konsumen mempengaruhi permintaan, bukan penawaran.",keyPoint:"Selera = faktor permintaan."},
+    {cat:'l8_biaya',q:"Jika biaya produksi naik, penawaran barang tersebut akan...",options:["Naik","Turun","Tetap","Tidak terpengaruh"],correct:1,explanation:"Biaya produksi naik membuat produsen mengurangi produksi sehingga penawaran turun.",keyPoint:"Biaya produksi naik → penawaran turun."},
+    {cat:'l8_teknologi',q:"Teknologi yang lebih maju akan...",options:["Meningkatkan efisiensi dan jumlah produksi","Menurunkan penawaran","Membuat harga naik","Menghilangkan pasar"],correct:0,explanation:"Teknologi maju meningkatkan efisiensi dan jumlah produksi, sehingga penawaran naik.",keyPoint:"Teknologi maju = penawaran naik."},
+    {cat:'l8_pajak',q:"Pajak tinggi akan...",options:["Menekan penawaran","Mendorong penawaran","Tidak berpengaruh","Menaikkan penawaran"],correct:0,explanation:"Pajak tinggi menekan penawaran karena menambah beban biaya produsen.",keyPoint:"Pajak tinggi = penawaran turun."},
+    {cat:'l8_pajak',q:"Subsidi pemerintah akan...",options:["Mendorong penawaran","Menekan penawaran","Tidak berpengaruh","Menghilangkan penawaran"],correct:0,explanation:"Subsidi mendorong penawaran karena meringankan biaya produsen.",keyPoint:"Subsidi = penawaran naik."},
+    {cat:'l8_cuaca',q:"Jika harga diperkirakan naik besok, penjual cenderung...",options:["Menahan barang dahulu","Menjual semua barang sekarang","Menurunkan harga","Menutup usaha"],correct:0,explanation:"Jika harga diperkirakan naik, penjual menahan barang dahulu untuk dijual saat harga tinggi.",keyPoint:"Perkiraan harga naik = tahan barang."},
+    {cat:'l8_cuaca',q:"Kondisi cuaca dan alam sangat berpengaruh pada penawaran...",options:["Hasil pertanian dan perikanan","Barang elektronik","Kendaraan bermotor","Pakaian"],correct:0,explanation:"Cuaca dan alam sangat berpengaruh pada penawaran hasil pertanian dan perikanan.",keyPoint:"Cuaca = pengaruh pertanian/perikanan."}
   ]
 },
+/* ==== LEVEL 9 — Hukum & Kurva Penawaran ==== */
 {
   id:9,title:"Level 9",name:"Hukum & Kurva Penawaran",icon:"📈",color:"#a855f7",
   subtitle:"Hukum penawaran, kurva, dan pengecualiannya",
   categories:[
-    {id:'l9_hukum',name:'Hukum Penawaran',short:'Hukum',icon:'📈',color:'#a855f7',points:500},
-    {id:'l9_kurva',name:'Kurva Penawaran',short:'Kurva',icon:'📊',color:'#c084fc',points:550},
-    {id:'l9_pengecualian',name:'Pengecualian',short:'Khusus',icon:'⚠️',color:'#e879f9',points:600}
+    {id:'l9_hukum',name:'Hukum Penawaran',short:'Hukum',icon:'📈',color:'#a855f7',points:100},
+    {id:'l9_alasan',name:'Alasan Lurus',short:'Alasan',icon:'💡',color:'#c084fc',points:120},
+    {id:'l9_produsen_baru',name:'Produsen Baru',short:'Produsen',icon:'🏭',color:'#d8b4fe',points:140},
+    {id:'l9_kurva',name:'Kurva Penawaran',short:'Kurva',icon:'📊',color:'#9333ea',points:160},
+    {id:'l9_gerak',name:'Pergerakan Kurva',short:'Gerak',icon:'➡️',color:'#7e22ce',points:180},
+    {id:'l9_geser',name:'Pergeseran Kurva',short:'Geser',icon:'↔️',color:'#6b21a8',points:200},
+    {id:'l9_antik',name:'Barang Antik',short:'Antik',icon:'🏺',color:'#581c87',points:220},
+    {id:'l9_tenaga',name:'Tenaga Kerja & Kapasitas',short:'Tenaga',icon:'👷',color:'#4c1d95',points:240}
   ],
   questions:[
     {cat:'l9_hukum',q:"Hukum penawaran menyatakan bahwa hubungan antara harga dan jumlah yang ditawarkan bersifat...",options:["Berbanding terbalik","Berbanding lurus","Tidak berhubungan","Acak"],correct:1,explanation:"Hukum penawaran: harga naik → penawaran naik; harga turun → penawaran turun (berbanding lurus).",keyPoint:"Hukum penawaran = berbanding lurus."},
     {cat:'l9_hukum',q:"Menurut hukum penawaran, jika harga suatu barang naik maka jumlah yang ditawarkan akan...",options:["Naik","Turun","Tetap","Tidak terpengaruh"],correct:0,explanation:"Hukum penawaran: harga naik → jumlah yang ditawarkan naik.",keyPoint:"Harga naik = penawaran naik."},
-    {cat:'l9_hukum',q:"Mengapa hubungan harga dan penawaran berbanding lurus? Karena...",options:["Harga tinggi memberi keuntungan lebih besar bagi produsen","Konsumen dipaksa membeli","Pemerintah memaksa produsen","Pajak turun"],correct:0,explanation:"Harga tinggi memberi keuntungan lebih besar bagi produsen sehingga mereka terdorong memproduksi lebih banyak.",keyPoint:"Harga tinggi = untung besar = produksi naik."},
-    {cat:'l9_hukum',q:"Produsen baru akan masuk ke pasar ketika...",options:["Harga dianggap menguntungkan","Harga sangat rendah","Tidak ada pembeli","Pajak tinggi"],correct:0,explanation:"Produsen baru akan masuk ke pasar ketika harga dianggap menguntungkan.",keyPoint:"Harga menguntungkan = produsen baru masuk."},
+    {cat:'l9_alasan',q:"Mengapa hubungan harga dan penawaran berbanding lurus? Karena...",options:["Harga tinggi memberi keuntungan lebih besar bagi produsen","Konsumen dipaksa membeli","Pemerintah memaksa produsen","Pajak turun"],correct:0,explanation:"Harga tinggi memberi keuntungan lebih besar bagi produsen sehingga mereka terdorong memproduksi lebih banyak.",keyPoint:"Harga tinggi = untung besar = produksi naik."},
+    {cat:'l9_produsen_baru',q:"Produsen baru akan masuk ke pasar ketika...",options:["Harga dianggap menguntungkan","Harga sangat rendah","Tidak ada pembeli","Pajak tinggi"],correct:0,explanation:"Produsen baru akan masuk ke pasar ketika harga dianggap menguntungkan.",keyPoint:"Harga menguntungkan = produsen baru masuk."},
     {cat:'l9_kurva',q:"Kurva penawaran digambarkan miring dari...",options:["Kiri atas ke kanan bawah","Kiri bawah ke kanan atas","Kiri atas ke kiri bawah","Kanan atas ke kanan bawah"],correct:1,explanation:"Kurva penawaran miring dari kiri bawah ke kanan atas, menunjukkan hubungan positif antara harga dan jumlah yang ditawarkan.",keyPoint:"Kurva S = kiri bawah → kanan atas."},
     {cat:'l9_kurva',q:"Pada harga rendah, penjual menawarkan barang...",options:["Sedikit","Banyak","Tetap","Tidak terhingga"],correct:0,explanation:"Pada harga rendah, penjual menawarkan barang lebih sedikit.",keyPoint:"Harga rendah = penawaran sedikit."},
-    {cat:'l9_kurva',q:"Pergerakan sepanjang kurva penawaran terjadi karena perubahan...",options:["Harga barang itu sendiri","Biaya produksi","Teknologi","Pajak"],correct:0,explanation:"Pergerakan sepanjang kurva penawaran terjadi karena perubahan harga barang itu sendiri.",keyPoint:"Pergerakan = perubahan harga sendiri."},
-    {cat:'l9_kurva',q:"Jika biaya produksi turun, kurva penawaran akan...",options:["Bergeser ke kanan","Bergeser ke kiri","Tidak bergeser","Tetap di posisi"],correct:0,explanation:"Jika biaya produksi turun, kurva penawaran bergeser ke kanan (penawaran naik).",keyPoint:"Biaya turun = kurva geser kanan."},
-    {cat:'l9_pengecualian',q:"Pengecualian hukum penawaran pada barang antik terjadi karena...",options:["Harga naik justru membuat pemilik enggan menjual","Harga naik membuat pemilik menjual banyak","Harga tidak berpengaruh","Tidak ada pembeli"],correct:0,explanation:"Barang antik: harga naik justru membuat pemilik enggan menjual karena nilai sejarah/sentimental.",keyPoint:"Barang antik = harga naik, enggan jual."},
-    {cat:'l9_pengecualian',q:"Pengecualian hukum penawaran pada tenaga kerja terjadi karena...",options:["Upah tinggi membuat pekerja mengurangi jam kerja karena sudah cukup penghasilan","Upah tinggi membuat pekerja menambah jam kerja","Pekerja tidak butuh uang","Pekerja tidak mau bekerja"],correct:0,explanation:"Pada tenaga kerja: upah tinggi bisa membuat pekerja mengurangi jam kerja karena penghasilan sudah cukup.",keyPoint:"Tenaga kerja = upah tinggi, jam kerja turun."},
-    {cat:'l9_pengecualian',q:"Pengecualian hukum penawaran pada kapasitas produksi terbatas terjadi karena...",options:["Harga naik, tetapi produksi tidak bisa ditambah","Harga naik membuat produksi bertambah","Harga turun membuat produksi bertambah","Tidak ada penawaran"],correct:0,explanation:"Kapasitas produksi terbatas: harga naik, tetapi produksi tidak bisa ditambah, contohnya hasil panen musiman.",keyPoint:"Kapasitas terbatas = produksi tidak bisa ditambah."},
-    {cat:'l9_pengecualian',q:"Contoh pengecualian hukum penawaran adalah...",options:["Lukisan klasik, benda pusaka","Beras, gula","Motor, bensin","Sepatu, kaos"],correct:0,explanation:"Lukisan klasik dan benda pusaka adalah contoh pengecualian hukum penawaran.",keyPoint:"Lukisan klasik = pengecualian."}
+    {cat:'l9_gerak',q:"Pergerakan sepanjang kurva penawaran terjadi karena perubahan...",options:["Harga barang itu sendiri","Biaya produksi","Teknologi","Pajak"],correct:0,explanation:"Pergerakan sepanjang kurva penawaran terjadi karena perubahan harga barang itu sendiri.",keyPoint:"Pergerakan = perubahan harga sendiri."},
+    {cat:'l9_geser',q:"Jika biaya produksi turun, kurva penawaran akan...",options:["Bergeser ke kanan","Bergeser ke kiri","Tidak bergeser","Tetap di posisi"],correct:0,explanation:"Jika biaya produksi turun, kurva penawaran bergeser ke kanan (penawaran naik).",keyPoint:"Biaya turun = kurva geser kanan."},
+    {cat:'l9_antik',q:"Pengecualian hukum penawaran pada barang antik terjadi karena...",options:["Harga naik justru membuat pemilik enggan menjual","Harga naik membuat pemilik menjual banyak","Harga tidak berpengaruh","Tidak ada pembeli"],correct:0,explanation:"Barang antik: harga naik justru membuat pemilik enggan menjual karena nilai sejarah/sentimental.",keyPoint:"Barang antik = harga naik, enggan jual."},
+    {cat:'l9_tenaga',q:"Pengecualian hukum penawaran pada tenaga kerja terjadi karena...",options:["Upah tinggi membuat pekerja mengurangi jam kerja karena sudah cukup penghasilan","Upah tinggi membuat pekerja menambah jam kerja","Pekerja tidak butuh uang","Pekerja tidak mau bekerja"],correct:0,explanation:"Pada tenaga kerja: upah tinggi bisa membuat pekerja mengurangi jam kerja karena penghasilan sudah cukup.",keyPoint:"Tenaga kerja = upah tinggi, jam kerja turun."},
+    {cat:'l9_tenaga',q:"Pengecualian hukum penawaran pada kapasitas produksi terbatas terjadi karena...",options:["Harga naik, tetapi produksi tidak bisa ditambah","Harga naik membuat produksi bertambah","Harga turun membuat produksi bertambah","Tidak ada penawaran"],correct:0,explanation:"Kapasitas produksi terbatas: harga naik, tetapi produksi tidak bisa ditambah, contohnya hasil panen musiman.",keyPoint:"Kapasitas terbatas = produksi tidak bisa ditambah."},
+    {cat:'l9_antik',q:"Contoh pengecualian hukum penawaran adalah...",options:["Lukisan klasik, benda pusaka","Beras, gula","Motor, bensin","Sepatu, kaos"],correct:0,explanation:"Lukisan klasik dan benda pusaka adalah contoh pengecualian hukum penawaran.",keyPoint:"Lukisan klasik = pengecualian."}
   ]
 },
+/* ==== LEVEL 10 — Harga Keseimbangan ==== */
 {
   id:10,title:"Level 10",name:"Harga Keseimbangan",icon:"⚖️",color:"#f97316",
   subtitle:"Equilibrium, surplus, shortage, dan pergeseran titik keseimbangan",
   categories:[
-    {id:'l10_keseimbangan',name:'Harga Keseimbangan',short:'Seimbang',icon:'⚖️',color:'#f97316',points:550},
-    {id:'l10_surplus',name:'Surplus & Shortage',short:'Surplus',icon:'📊',color:'#fb923c',points:600},
-    {id:'l10_pergeseran',name:'Pergeseran Keseimbangan',short:'Geser',icon:'🔄',color:'#fbbf24',points:650}
+    {id:'l10_def',name:'Definisi Keseimbangan',short:'Definisi',icon:'⚖️',color:'#f97316',points:100},
+    {id:'l10_rumus',name:'Rumus Qd=Qs',short:'Rumus',icon:'📐',color:'#fb923c',points:120},
+    {id:'l10_pasar',name:'Harga Pasar',short:'Harga Pasar',icon:'🏷️',color:'#fbbf24',points:140},
+    {id:'l10_surplus',name:'Surplus',short:'Surplus',icon:'📈',color:'#f59e0b',points:160},
+    {id:'l10_shortage',name:'Shortage',short:'Shortage',icon:'📉',color:'#d97706',points:180},
+    {id:'l10_tinggi',name:'Harga Terlalu Tinggi',short:'Harga Tinggi',icon:'⬆️',color:'#b45309',points:200},
+    {id:'l10_rendah',name:'Harga Terlalu Rendah',short:'Harga Rendah',icon:'⬇️',color:'#92400e',points:220},
+    {id:'l10_geser',name:'Pergeseran Keseimbangan',short:'Geser',icon:'🔄',color:'#78350f',points:240}
   ],
   questions:[
-    {cat:'l10_keseimbangan',q:"Harga keseimbangan pasar terjadi apabila...",options:["Jumlah yang diminta lebih besar daripada yang ditawarkan","Jumlah yang ditawarkan lebih besar daripada yang diminta","Jumlah yang diminta sama dengan jumlah yang ditawarkan","Harga ditentukan sepenuhnya oleh pemerintah"],correct:2,explanation:"Harga keseimbangan terbentuk ketika Qd = Qs, yaitu jumlah barang yang diminta sama dengan jumlah barang yang ditawarkan.",keyPoint:"Keseimbangan: Qd = Qs."},
-    {cat:'l10_keseimbangan',q:"Rumus yang menyatakan harga keseimbangan pasar adalah...",options:["Qd > Qs","Qd < Qs","Qd = Qs","Qd ≠ Qs"],correct:2,explanation:"Harga keseimbangan terjadi ketika jumlah yang diminta sama dengan jumlah yang ditawarkan (Qd = Qs).",keyPoint:"Qd = Qs → keseimbangan."},
-    {cat:'l10_keseimbangan',q:"Harga keseimbangan disebut juga...",options:["Harga pasar atau titik equilibrium","Harga monopoli","Harga pemerintah","Harga diskon"],correct:0,explanation:"Harga keseimbangan disebut juga harga pasar atau titik equilibrium.",keyPoint:"Harga keseimbangan = harga pasar."},
-    {cat:'l10_keseimbangan',q:"Pada harga keseimbangan, produsen bersedia melepas barangnya dan konsumen...",options:["Bersedia membayarnya","Menolak membeli","Menurunkan harga","Menaikkan pajak"],correct:0,explanation:"Pada harga keseimbangan, produsen bersedia melepas barang dan konsumen bersedia membayarnya.",keyPoint:"Keseimbangan = produsen & konsumen setuju."},
+    {cat:'l10_def',q:"Harga keseimbangan pasar terjadi apabila...",options:["Jumlah yang diminta lebih besar daripada yang ditawarkan","Jumlah yang ditawarkan lebih besar daripada yang diminta","Jumlah yang diminta sama dengan jumlah yang ditawarkan","Harga ditentukan sepenuhnya oleh pemerintah"],correct:2,explanation:"Harga keseimbangan terbentuk ketika Qd = Qs, yaitu jumlah barang yang diminta sama dengan jumlah barang yang ditawarkan.",keyPoint:"Keseimbangan: Qd = Qs."},
+    {cat:'l10_rumus',q:"Rumus yang menyatakan harga keseimbangan pasar adalah...",options:["Qd > Qs","Qd < Qs","Qd = Qs","Qd ≠ Qs"],correct:2,explanation:"Harga keseimbangan terjadi ketika jumlah yang diminta sama dengan jumlah yang ditawarkan (Qd = Qs).",keyPoint:"Qd = Qs → keseimbangan."},
+    {cat:'l10_pasar',q:"Harga keseimbangan disebut juga...",options:["Harga pasar atau titik equilibrium","Harga monopoli","Harga pemerintah","Harga diskon"],correct:0,explanation:"Harga keseimbangan disebut juga harga pasar atau titik equilibrium.",keyPoint:"Harga keseimbangan = harga pasar."},
+    {cat:'l10_def',q:"Pada harga keseimbangan, produsen bersedia melepas barangnya dan konsumen...",options:["Bersedia membayarnya","Menolak membeli","Menurunkan harga","Menaikkan pajak"],correct:0,explanation:"Pada harga keseimbangan, produsen bersedia melepas barang dan konsumen bersedia membayarnya.",keyPoint:"Keseimbangan = produsen & konsumen setuju."},
     {cat:'l10_surplus',q:"Kelebihan penawaran (surplus) terjadi ketika...",options:["Jumlah yang diminta lebih besar dari yang ditawarkan","Jumlah yang ditawarkan lebih besar dari yang diminta","Jumlah yang diminta sama dengan yang ditawarkan","Harga terlalu rendah"],correct:1,explanation:"Surplus terjadi ketika jumlah yang ditawarkan lebih besar daripada yang diminta, biasanya karena harga terlalu tinggi.",keyPoint:"Surplus = penawaran > permintaan."},
-    {cat:'l10_surplus',q:"Kelebihan permintaan (shortage) terjadi ketika...",options:["Jumlah yang ditawarkan lebih besar dari yang diminta","Jumlah yang diminta lebih besar dari yang ditawarkan","Jumlah yang diminta sama dengan yang ditawarkan","Harga terlalu tinggi"],correct:1,explanation:"Shortage terjadi ketika jumlah yang diminta lebih besar daripada yang ditawarkan, biasanya karena harga terlalu rendah.",keyPoint:"Shortage = permintaan > penawaran."},
-    {cat:'l10_surplus',q:"Jika harga terlalu tinggi, yang terjadi adalah...",options:["Surplus penawaran","Shortage permintaan","Keseimbangan","Harga turun otomatis"],correct:0,explanation:"Jika harga terlalu tinggi, jumlah yang ditawarkan melebihi yang diminta → surplus penawaran.",keyPoint:"Harga tinggi = surplus."},
-    {cat:'l10_surplus',q:"Jika harga terlalu rendah, yang terjadi adalah...",options:["Surplus penawaran","Shortage permintaan","Keseimbangan","Harga naik otomatis"],correct:1,explanation:"Jika harga terlalu rendah, jumlah yang diminta melebihi yang ditawarkan → shortage permintaan.",keyPoint:"Harga rendah = shortage."},
-    {cat:'l10_pergeseran',q:"Jika permintaan bertambah sedangkan penawaran tetap, maka harga keseimbangan akan...",options:["Naik","Turun","Tetap","Tidak terpengaruh"],correct:0,explanation:"Jika permintaan bertambah (kurva D bergeser ke kanan) sedangkan penawaran tetap, harga keseimbangan naik.",keyPoint:"Permintaan naik = harga keseimbangan naik."},
-    {cat:'l10_pergeseran',q:"Jika penawaran bertambah sedangkan permintaan tetap, maka harga keseimbangan akan...",options:["Naik","Turun","Tetap","Tidak terpengaruh"],correct:1,explanation:"Jika penawaran bertambah (kurva S bergeser ke kanan) sedangkan permintaan tetap, harga keseimbangan turun.",keyPoint:"Penawaran naik = harga keseimbangan turun."},
-    {cat:'l10_pergeseran',q:"Jika penawaran berkurang, maka harga keseimbangan akan...",options:["Naik","Turun","Tetap","Tidak terpengaruh"],correct:0,explanation:"Jika penawaran berkurang (kurva S bergeser ke kiri), harga keseimbangan naik.",keyPoint:"Penawaran turun = harga keseimbangan naik."},
-    {cat:'l10_pergeseran',q:"Pada harga Rp9.000, jumlah yang diminta 60 unit dan jumlah yang ditawarkan 60 unit. Harga Rp9.000 disebut...",options:["Harga tertinggi","Harga terendah","Harga keseimbangan","Harga monopoli"],correct:2,explanation:"Karena Qd = Qs = 60 pada harga Rp9.000, maka harga tersebut adalah harga keseimbangan pasar.",keyPoint:"Qd = Qs → harga keseimbangan."},
-    {cat:'l10_pergeseran',q:"Saat permintaan masker melonjak, harga naik. Ketika pasokan melimpah, harga kembali turun. Ini menunjukkan...",options:["Pergerakan harga keseimbangan","Harga tetap","Harga monopoli","Harga pemerintah"],correct:0,explanation:"Perubahan permintaan dan penawaran menggeser harga keseimbangan.",keyPoint:"D & S berubah = keseimbangan bergeser."},
-    {cat:'l10_pergeseran',q:"Contoh terbentuknya harga keseimbangan di pasar adalah...",options:["Tawar-menawar antara petani dan pembeli cabai","Penetapan harga oleh presiden","Penetapan harga oleh satu perusahaan","Pemberian diskon"],correct:0,explanation:"Harga keseimbangan terbentuk dari tawar-menawar antara penjual dan pembeli di pasar.",keyPoint:"Keseimbangan = tawar-menawar pasar."}
+    {cat:'l10_shortage',q:"Kelebihan permintaan (shortage) terjadi ketika...",options:["Jumlah yang ditawarkan lebih besar dari yang diminta","Jumlah yang diminta lebih besar dari yang ditawarkan","Jumlah yang diminta sama dengan yang ditawarkan","Harga terlalu tinggi"],correct:1,explanation:"Shortage terjadi ketika jumlah yang diminta lebih besar daripada yang ditawarkan, biasanya karena harga terlalu rendah.",keyPoint:"Shortage = permintaan > penawaran."},
+    {cat:'l10_tinggi',q:"Jika harga terlalu tinggi, yang terjadi adalah...",options:["Surplus penawaran","Shortage permintaan","Keseimbangan","Harga turun otomatis"],correct:0,explanation:"Jika harga terlalu tinggi, jumlah yang ditawarkan melebihi yang diminta → surplus penawaran.",keyPoint:"Harga tinggi = surplus."},
+    {cat:'l10_rendah',q:"Jika harga terlalu rendah, yang terjadi adalah...",options:["Surplus penawaran","Shortage permintaan","Keseimbangan","Harga naik otomatis"],correct:1,explanation:"Jika harga terlalu rendah, jumlah yang diminta melebihi yang ditawarkan → shortage permintaan.",keyPoint:"Harga rendah = shortage."},
+    {cat:'l10_geser',q:"Jika permintaan bertambah sedangkan penawaran tetap, maka harga keseimbangan akan...",options:["Naik","Turun","Tetap","Tidak terpengaruh"],correct:0,explanation:"Jika permintaan bertambah (kurva D bergeser ke kanan) sedangkan penawaran tetap, harga keseimbangan naik.",keyPoint:"Permintaan naik = harga keseimbangan naik."},
+    {cat:'l10_geser',q:"Jika penawaran bertambah sedangkan permintaan tetap, maka harga keseimbangan akan...",options:["Naik","Turun","Tetap","Tidak terpengaruh"],correct:1,explanation:"Jika penawaran bertambah (kurva S bergeser ke kanan) sedangkan permintaan tetap, harga keseimbangan turun.",keyPoint:"Penawaran naik = harga keseimbangan turun."},
+    {cat:'l10_geser',q:"Jika penawaran berkurang, maka harga keseimbangan akan...",options:["Naik","Turun","Tetap","Tidak terpengaruh"],correct:0,explanation:"Jika penawaran berkurang (kurva S bergeser ke kiri), harga keseimbangan naik.",keyPoint:"Penawaran turun = harga keseimbangan naik."},
+    {cat:'l10_rumus',q:"Pada harga Rp9.000, jumlah yang diminta 60 unit dan jumlah yang ditawarkan 60 unit. Harga Rp9.000 disebut...",options:["Harga tertinggi","Harga terendah","Harga keseimbangan","Harga monopoli"],correct:2,explanation:"Karena Qd = Qs = 60 pada harga Rp9.000, maka harga tersebut adalah harga keseimbangan pasar.",keyPoint:"Qd = Qs → harga keseimbangan."},
+    {cat:'l10_geser',q:"Saat permintaan masker melonjak, harga naik. Ketika pasokan melimpah, harga kembali turun. Ini menunjukkan...",options:["Pergerakan harga keseimbangan","Harga tetap","Harga monopoli","Harga pemerintah"],correct:0,explanation:"Perubahan permintaan dan penawaran menggeser harga keseimbangan.",keyPoint:"D & S berubah = keseimbangan bergeser."},
+    {cat:'l10_geser',q:"Contoh terbentuknya harga keseimbangan di pasar adalah...",options:["Tawar-menawar antara petani dan pembeli cabai","Penetapan harga oleh presiden","Penetapan harga oleh satu perusahaan","Pemberian diskon"],correct:0,explanation:"Harga keseimbangan terbentuk dari tawar-menawar antara penjual dan pembeli di pasar.",keyPoint:"Keseimbangan = tawar-menawar pasar."}
   ]
 },
+/* ==== LEVEL 11 — Elastisitas & Pasar Digital ==== */
 {
   id:11,title:"Level 11",name:"Elastisitas & Pasar Digital",icon:"💻",color:"#06b6d4",
   subtitle:"Elastisitas permintaan/penawaran & transformasi pasar era digital",
   categories:[
-    {id:'l11_elastis',name:'Elastisitas',short:'Elastis',icon:'📐',color:'#06b6d4',points:600},
-    {id:'l11_digital',name:'Pasar Digital',short:'Digital',icon:'💻',color:'#22d3ee',points:650},
-    {id:'l11_dampak',name:'Dampak Pasar Digital',short:'Dampak',icon:'⚡',color:'#67e8f9',points:700}
+    {id:'l11_def',name:'Definisi Elastisitas',short:'Definisi',icon:'📐',color:'#06b6d4',points:100},
+    {id:'l11_elastis',name:'Ed > 1 (Elastis)',short:'Elastis',icon:'📈',color:'#22d3ee',points:120},
+    {id:'l11_inelastis',name:'Ed < 1 (Inelastis)',short:'Inelastis',icon:'📉',color:'#67e8f9',points:140},
+    {id:'l11_hitung',name:'Hitung Elastisitas',short:'Hitung',icon:'🧮',color:'#a5f3fc',points:160},
+    {id:'l11_ecom',name:'E-commerce',short:'E-commerce',icon:'🛒',color:'#0891b2',points:180},
+    {id:'l11_marketplace',name:'Marketplace',short:'Marketplace',icon:'📱',color:'#0e7490',points:200},
+    {id:'l11_ewallet',name:'Dompet Digital',short:'E-wallet',icon:'💳',color:'#155e75',points:220},
+    {id:'l11_dampak',name:'Dampak Pasar Digital',short:'Dampak',icon:'⚡',color:'#164e63',points:240}
   ],
   questions:[
-    {cat:'l11_elastis',q:"Elastisitas permintaan mengukur...",options:["Seberapa peka permintaan terhadap perubahan harga","Seberapa besar keuntungan produsen","Seberapa banyak barang yang diproduksi","Seberapa cepat barang terjual"],correct:0,explanation:"Elastisitas permintaan mengukur seberapa peka/sensitif jumlah yang diminta terhadap perubahan harga.",keyPoint:"Elastisitas = kepekaan terhadap harga."},
+    {cat:'l11_def',q:"Elastisitas permintaan mengukur...",options:["Seberapa peka permintaan terhadap perubahan harga","Seberapa besar keuntungan produsen","Seberapa banyak barang yang diproduksi","Seberapa cepat barang terjual"],correct:0,explanation:"Elastisitas permintaan mengukur seberapa peka/sensitif jumlah yang diminta terhadap perubahan harga.",keyPoint:"Elastisitas = kepekaan terhadap harga."},
     {cat:'l11_elastis',q:"Jika nilai Ed > 1, permintaan terhadap barang tersebut bersifat...",options:["Inelastis","Elastis","Unit elastis","Inelastis sempurna"],correct:1,explanation:"Jika Ed > 1, permintaan bersifat elastis, artinya perubahan harga menyebabkan perubahan besar pada jumlah yang diminta.",keyPoint:"Ed > 1 = elastis."},
-    {cat:'l11_elastis',q:"Beras dan obat-obatan sebagai kebutuhan pokok cenderung memiliki permintaan yang...",options:["Elastis","Inelastis","Unit elastis","Elastis sempurna"],correct:1,explanation:"Barang kebutuhan pokok bersifat inelastis karena konsumen tetap membelinya meskipun harga naik.",keyPoint:"Kebutuhan pokok = inelastis."},
-    {cat:'l11_elastis',q:"Harga kopi naik 10%, permintaan turun 20%. Elastisitas permintaannya adalah...",options:["0,5 (inelastis)","2 (elastis)","1 (unit elastis)","0 (inelastis sempurna)"],correct:1,explanation:"Ed = 20% ÷ 10% = 2. Karena Ed > 1, permintaan kopi bersifat elastis.",keyPoint:"Ed = %ΔQ ÷ %ΔP."},
+    {cat:'l11_inelastis',q:"Beras dan obat-obatan sebagai kebutuhan pokok cenderung memiliki permintaan yang...",options:["Elastis","Inelastis","Unit elastis","Elastis sempurna"],correct:1,explanation:"Barang kebutuhan pokok bersifat inelastis karena konsumen tetap membelinya meskipun harga naik.",keyPoint:"Kebutuhan pokok = inelastis."},
+    {cat:'l11_hitung',q:"Harga kopi naik 10%, permintaan turun 20%. Elastisitas permintaannya adalah...",options:["0,5 (inelastis)","2 (elastis)","1 (unit elastis)","0 (inelastis sempurna)"],correct:1,explanation:"Ed = 20% ÷ 10% = 2. Karena Ed > 1, permintaan kopi bersifat elastis.",keyPoint:"Ed = %ΔQ ÷ %ΔP."},
     {cat:'l11_elastis',q:"Faktor yang membuat permintaan semakin elastis adalah...",options:["Banyak barang substitusi tersedia","Barang kebutuhan pokok","Tidak ada barang pengganti","Barang sangat penting"],correct:0,explanation:"Semakin banyak barang substitusi tersedia, semakin elastis permintaan karena konsumen mudah beralih.",keyPoint:"Banyak substitusi = elastis."},
     {cat:'l11_elastis',q:"Dalam jangka panjang, penawaran cenderung lebih elastis karena...",options:["Produsen punya lebih banyak waktu menyesuaikan kapasitas produksi","Konsumen lebih kaya","Harga selalu naik","Pemerintah memberi subsidi"],correct:0,explanation:"Dalam jangka panjang, produsen memiliki lebih banyak waktu untuk menyesuaikan kapasitas produksinya sehingga penawaran lebih elastis.",keyPoint:"Jangka panjang = penawaran lebih elastis."},
-    {cat:'l11_digital',q:"E-commerce adalah...",options:["Jual beli barang dan jasa yang dilakukan secara online melalui internet","Sistem pembayaran tunai di toko","Kegiatan promosi di media cetak","Pasar tradisional yang dikelola pemerintah"],correct:0,explanation:"E-commerce adalah aktivitas jual beli barang dan jasa yang dilakukan secara online melalui internet.",keyPoint:"E-commerce = jual beli online."},
-    {cat:'l11_digital',q:"Contoh platform e-commerce di Indonesia adalah...",options:["PLN","Shopee dan Tokopedia","PT KAI","Bank Indonesia"],correct:1,explanation:"Shopee dan Tokopedia adalah contoh platform e-commerce di Indonesia.",keyPoint:"Shopee, Tokopedia = e-commerce."},
-    {cat:'l11_digital',q:"Marketplace adalah...",options:["Toko fisik yang menjual barang","Platform digital yang mempertemukan penjual dan pembeli","Alat pembayaran digital","Perusahaan ekspedisi"],correct:1,explanation:"Marketplace adalah platform digital yang mempertemukan penjual dan pembeli secara online.",keyPoint:"Marketplace = platform pertemuan penjual & pembeli."},
-    {cat:'l11_digital',q:"Shopee, Tokopedia, dan Grab dapat dikategorikan sebagai...",options:["Pasar konkret","Pasar abstrak / pasar digital","Pasar tradisional","Pasar monopoli"],correct:1,explanation:"Platform tersebut adalah pasar abstrak atau pasar digital karena mempertemukan penjual dan pembeli secara online tanpa tatap muka langsung.",keyPoint:"Platform digital = pasar abstrak."},
+    {cat:'l11_ecom',q:"E-commerce adalah...",options:["Jual beli barang dan jasa yang dilakukan secara online melalui internet","Sistem pembayaran tunai di toko","Kegiatan promosi di media cetak","Pasar tradisional yang dikelola pemerintah"],correct:0,explanation:"E-commerce adalah aktivitas jual beli barang dan jasa yang dilakukan secara online melalui internet.",keyPoint:"E-commerce = jual beli online."},
+    {cat:'l11_ecom',q:"Contoh platform e-commerce di Indonesia adalah...",options:["PLN","Shopee dan Tokopedia","PT KAI","Bank Indonesia"],correct:1,explanation:"Shopee dan Tokopedia adalah contoh platform e-commerce di Indonesia.",keyPoint:"Shopee, Tokopedia = e-commerce."},
+    {cat:'l11_marketplace',q:"Marketplace adalah...",options:["Toko fisik yang menjual barang","Platform digital yang mempertemukan penjual dan pembeli","Alat pembayaran digital","Perusahaan ekspedisi"],correct:1,explanation:"Marketplace adalah platform digital yang mempertemukan penjual dan pembeli secara online.",keyPoint:"Marketplace = platform pertemuan penjual & pembeli."},
+    {cat:'l11_marketplace',q:"Shopee, Tokopedia, dan Grab dapat dikategorikan sebagai...",options:["Pasar konkret","Pasar abstrak / pasar digital","Pasar tradisional","Pasar monopoli"],correct:1,explanation:"Platform tersebut adalah pasar abstrak atau pasar digital karena mempertemukan penjual dan pembeli secara online tanpa tatap muka langsung.",keyPoint:"Platform digital = pasar abstrak."},
     {cat:'l11_dampak',q:"Perubahan perilaku belanja masyarakat di era digital adalah...",options:["Harus datang ke toko fisik","Belanja online via aplikasi dari rumah","Hanya bisa bayar tunai","Hanya bisa belanja siang hari"],correct:1,explanation:"Di era digital, masyarakat bisa belanja online via aplikasi dari rumah tanpa harus datang ke toko fisik.",keyPoint:"Era digital = belanja online dari rumah."},
-    {cat:'l11_dampak',q:"Alat pembayaran digital yang menggantikan uang tunai di Indonesia contohnya...",options:["Cek","GoPay, OVO, Dana, QRIS","Kartu kredit","Wesel"],correct:1,explanation:"GoPay, OVO, Dana, dan QRIS adalah contoh dompet digital/alat pembayaran digital di Indonesia.",keyPoint:"Dompet digital: GoPay, OVO, Dana, QRIS."},
+    {cat:'l11_ewallet',q:"Alat pembayaran digital yang menggantikan uang tunai di Indonesia contohnya...",options:["Cek","GoPay, OVO, Dana, QRIS","Kartu kredit","Wesel"],correct:1,explanation:"GoPay, OVO, Dana, dan QRIS adalah contoh dompet digital/alat pembayaran digital di Indonesia.",keyPoint:"Dompet digital: GoPay, OVO, Dana, QRIS."},
     {cat:'l11_dampak',q:"Dampak positif pasar digital bagi UMKM adalah...",options:["UMKM kesulitan bersaing","UMKM dapat menjangkau pasar lebih luas","UMKM harus tutup","UMKM tidak bisa berjualan"],correct:1,explanation:"Pasar digital membuka peluang UMKM menjangkau pasar lebih luas tanpa batasan wilayah.",keyPoint:"Pasar digital = jangkauan UMKM lebih luas."},
     {cat:'l11_dampak',q:"Dampak negatif pasar digital bagi pasar tradisional adalah...",options:["Pasar tradisional semakin ramai","Pasar tradisional mengalami penurunan jumlah pembeli dan omzet","Pasar tradisional semakin modern","Pasar tradisional mendapat subsidi"],correct:1,explanation:"Pasar tradisional mengalami penurunan jumlah pembeli dan omzet karena peralihan ke belanja online.",keyPoint:"Pasar tradisional turun omzet."}
   ]
@@ -981,7 +1047,7 @@ const LEVELS=[
 
 const TOTAL_LEVELS=LEVELS.length,ROUNDS_PER_LEVEL=10,TIMER_SECONDS=30;
 const CIRCUMFERENCE=2*Math.PI*26;
-const STORAGE_PREFIX='kuis_roda_ekonomi_bab3_v2_';
+const STORAGE_PREFIX='kuis_roda_ekonomi_bab3_v3_';
 
 const state={
   currentLevelIndex:0,currentRound:0,totalScore:0,
@@ -1080,11 +1146,12 @@ function onTimerEnd(){
   setTimeout(()=>{hideRevealOverlay();advanceToNextRound();},1700);
 }
 
+/* ========== BUILD WHEEL — 8 SEKTOR, LABEL JELAS ========== */
 function buildWheel(){
   const svg=$('wheelSvg');if(!svg)return;
   const level=LEVELS[state.currentLevelIndex],categories=level.categories;
   const cx=100,cy=100,r=94,total=categories.length,segAngle=360/total,half=segAngle/2,strokeCol='#0f172a';
-  let defsHtml=`<radialGradient id="wheelInner" cx="50%" cy="50%"><stop offset="0%" stop-color="#0a0f1e" stop-opacity="0.75"/><stop offset="62%" stop-color="#0a0f1e" stop-opacity="0.22"/><stop offset="100%" stop-color="#0a0f1e" stop-opacity="0"/></radialGradient>`;
+  let defsHtml=`<radialGradient id="wheelInner" cx="50%" cy="50%"><stop offset="0%" stop-color="#0a0f1e" stop-opacity="0.65"/><stop offset="65%" stop-color="#0a0f1e" stop-opacity="0.18"/><stop offset="100%" stop-color="#0a0f1e" stop-opacity="0"/></radialGradient>`;
   let segHtml='';labelGroups=[];
   const labelData=[];
   for(let i=0;i<total;i++){
@@ -1096,14 +1163,19 @@ function buildWheel(){
     segHtml+=`<path d="${wedge}" fill="url(#wheelInner)" fill-opacity="0.1"/>`;
     labelData.push({cat,rad});
   }
+  /* Label: kotak putih solid, teks warna kategori, font lebih besar & jelas */
   labelData.forEach(({cat,rad})=>{
     const label=cat.short.toUpperCase();
-    let fontSize;if(label.length<=5)fontSize=11.5;else if(label.length<=7)fontSize=10.2;else if(label.length<=9)fontSize=9.2;else fontSize=8.2;
-    const labelR=r*0.66,lx=cx+labelR*Math.cos(rad),ly=cy+labelR*Math.sin(rad);
-    const charW=fontSize*0.66,textW=label.length*charW+8,textH=fontSize+6,padX=textW/2,padY=textH/2;
+    let fontSize;
+    if(label.length<=6)fontSize=8.4;
+    else if(label.length<=9)fontSize=7.2;
+    else if(label.length<=12)fontSize=6.2;
+    else fontSize=5.4;
+    const labelR=r*0.62,lx=cx+labelR*Math.cos(rad),ly=cy+labelR*Math.sin(rad);
+    const charW=fontSize*0.62,textW=label.length*charW+6,textH=fontSize+4.5,padX=textW/2,padY=textH/2;
     segHtml+=`<g class="wheel-label" data-lx="${lx.toFixed(2)}" data-ly="${ly.toFixed(2)}" transform="rotate(0 ${lx.toFixed(2)} ${ly.toFixed(2)})">
-      <rect x="${(lx-padX).toFixed(2)}" y="${(ly-padY).toFixed(2)}" width="${textW.toFixed(2)}" height="${textH.toFixed(2)}" rx="${(textH/2).toFixed(2)}" ry="${(textH/2).toFixed(2)}" fill="#ffffff" stroke="${cat.color}" stroke-width="1.6" filter="drop-shadow(0 2px 3px rgba(0,0,0,0.45))"/>
-      <text x="${lx.toFixed(2)}" y="${ly.toFixed(2)}" font-size="${fontSize}" font-weight="900" fill="${cat.color}" text-anchor="middle" dominant-baseline="central" font-family="'Space Grotesk','Inter',sans-serif">${label}</text></g>`;
+      <rect x="${(lx-padX).toFixed(2)}" y="${(ly-padY).toFixed(2)}" width="${textW.toFixed(2)}" height="${textH.toFixed(2)}" rx="1.6" ry="1.6" fill="#ffffff" stroke="${cat.color}" stroke-width="1.4" filter="drop-shadow(0 1px 2px rgba(0,0,0,0.55))"/>
+      <text x="${lx.toFixed(2)}" y="${ly.toFixed(2)}" font-size="${fontSize}" font-weight="900" fill="${cat.color}" text-anchor="middle" dominant-baseline="central" font-family="'Space Grotesk','Inter',sans-serif" letter-spacing="0.1">${label}</text></g>`;
   });
   let html=`<defs>${defsHtml}</defs>`;
   html+=`<circle cx="${cx}" cy="${cy}" r="${r+4}" fill="#111827" stroke="var(--lvl-primary)" stroke-width="2" opacity="0.5"/>`;
@@ -1145,7 +1217,7 @@ function spin(){
   const targetIdx=level.categories.findIndex(c=>c.id===targetCat.id);
   const segAngle=360/level.categories.length;
   const extraSpins=5+Math.floor(seededRandom()*3);
-  const jitter=(seededRandom()-0.5)*(segAngle*0.6);
+  const jitter=(seededRandom()-0.5)*(segAngle*0.55);
   const baseTarget=-targetIdx*segAngle+jitter;
   const currentMod=((state.currentRotation%360)+360)%360;
   const targetMod=((baseTarget%360)+360)%360;
@@ -1528,7 +1600,6 @@ function resetGameStateFull(){
     gameOver:false,hasEarned:false
   });
   state.usedQuestions.clear();state.history=[];
-  // Hadiah dan skor terbaik tetap tersimpan.
 }
 function returnToMainScreen(){
   sfx('click');kuisAktif=false;stopTimer();resetGameStateFull();applyLevelTheme(0);
@@ -1629,7 +1700,6 @@ function init(){
   $('btnCopy').addEventListener('click',copyResult);
   $('btnResetProgress').addEventListener('click',()=>{resetProgress();});
   $('btnBackHome').addEventListener('click',()=>{sfx('click');switchScreen('levelScreen','startScreen','back');updateHomeStats();});
-  // Tombol Kembali ke Halaman Awal baru
   $('btnWheelHome').addEventListener('click',()=>{
     if(confirm('Kembali ke halaman awal? Progres level saat ini akan hilang (hadiah & skor tersimpan).'))returnToMainScreen();
   });
