@@ -3,17 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ular Tangga Ekonomi — MGE · 4 Level Premium</title>
+<title>Ular Tangga Ekonomi — Perdagangan Internasional · 7 Level · 210 Soal</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,Arial,sans-serif;}
 html,body{height:100%;overflow:hidden;}
 body{background:#050b16;color:#e2e8f0;display:flex;flex-direction:column;user-select:none;-webkit-tap-highlight-color:transparent;font-size:14px;transition:background .6s;}
 
-/* ===== TEMA LEVEL ===== */
 body[data-level="1"]{--c1:#0ea5e9;--c2:#0284c7;--accent:#38bdf8;--glow:rgba(56,189,248,.5);--board-bg:rgba(5,15,30,.7);--cell-bg:rgba(19,41,65,.6);--cell-border:rgba(56,189,248,.35);}
 body[data-level="2"]{--c1:#10b981;--c2:#047857;--accent:#34d399;--glow:rgba(52,211,153,.5);--board-bg:rgba(5,25,18,.7);--cell-bg:rgba(16,50,40,.6);--cell-border:rgba(52,211,153,.4);}
 body[data-level="3"]{--c1:#f59e0b;--c2:#b45309;--accent:#fbbf24;--glow:rgba(251,191,36,.5);--board-bg:rgba(30,18,5,.7);--cell-bg:rgba(60,40,15,.6);--cell-border:rgba(251,191,36,.4);}
 body[data-level="4"]{--c1:#a855f7;--c2:#6d28d9;--accent:#c084fc;--glow:rgba(192,132,252,.5);--board-bg:rgba(20,8,35,.75);--cell-bg:rgba(45,25,70,.6);--cell-border:rgba(192,132,252,.4);}
+body[data-level="5"]{--c1:#ec4899;--c2:#be185d;--accent:#f472b6;--glow:rgba(244,114,182,.5);--board-bg:rgba(30,5,20,.75);--cell-bg:rgba(60,15,45,.6);--cell-border:rgba(244,114,182,.4);}
+body[data-level="6"]{--c1:#06b6d4;--c2:#0e7490;--accent:#22d3ee;--glow:rgba(34,211,238,.5);--board-bg:rgba(5,25,30,.72);--cell-bg:rgba(15,50,60,.6);--cell-border:rgba(34,211,238,.4);}
+body[data-level="7"]{--c1:#ef4444;--c2:#b91c1c;--accent:#f87171;--glow:rgba(248,113,113,.5);--board-bg:rgba(30,8,8,.75);--cell-bg:rgba(60,15,15,.6);--cell-border:rgba(248,113,113,.4);}
 
 .bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
   background-image:linear-gradient(var(--cell-border) 1px,transparent 1px),linear-gradient(90deg,var(--cell-border) 1px,transparent 1px);
@@ -28,311 +30,209 @@ body[data-level="4"]{--c1:#a855f7;--c2:#6d28d9;--accent:#c084fc;--glow:rgba(192,
 @keyframes f1{0%,100%{transform:translate(0,0)}50%{transform:translate(70px,90px)}}
 @keyframes f2{0%,100%{transform:translate(0,0)}50%{transform:translate(-90px,-70px)}}
 
-/* ============================================================
-   LOADING SCREEN — MGE 3D CIRCLE
-   ============================================================ */
+.ambient-particles{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;}
+.ambient-particles span{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--accent);opacity:.55;box-shadow:0 0 8px var(--accent);animation:floatUp linear infinite;}
+@keyframes floatUp{0%{transform:translateY(105vh) scale(.4);opacity:0;}10%{opacity:.7;}90%{opacity:.7;}100%{transform:translateY(-10vh) scale(1.1);opacity:0;}}
+
 #loader{position:fixed;inset:0;z-index:9999;background:radial-gradient(circle at center,#0a1830 0%,#050b16 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;transition:opacity .8s,visibility .8s;overflow:hidden;}
 #loader.hide{opacity:0;visibility:hidden;pointer-events:none;}
-
-/* Grid + glow belakang */
-#loader::before{content:'';position:absolute;inset:0;
-  background-image:linear-gradient(rgba(56,189,248,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,0.06) 1px,transparent 1px);
-  background-size:44px 44px;
-  mask-image:radial-gradient(ellipse at center,#000 25%,transparent 75%);
-  -webkit-mask-image:radial-gradient(ellipse at center,#000 25%,transparent 75%);
-  animation:gridShift 14s linear infinite;pointer-events:none;}
-#loader::after{content:'';position:absolute;width:600px;height:600px;border-radius:50%;
-  background:radial-gradient(circle,rgba(14,165,233,.35),transparent 65%);
-  filter:blur(90px);animation:orbPulse 3s ease-in-out infinite;pointer-events:none;}
+#loader::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(56,189,248,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,0.06) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(ellipse at center,#000 25%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at center,#000 25%,transparent 75%);animation:gridShift 14s linear infinite;pointer-events:none;}
+#loader::after{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(14,165,233,.35),transparent 65%);filter:blur(90px);animation:orbPulse 3s ease-in-out infinite;pointer-events:none;}
 @keyframes orbPulse{0%,100%{transform:scale(1);opacity:.6;}50%{transform:scale(1.15);opacity:1;}}
-
-/* Logo MGE 3D */
 .mge-logo-wrap{position:relative;z-index:1;width:170px;height:170px;display:flex;align-items:center;justify-content:center;animation:logoFloat 3s ease-in-out infinite;}
 @keyframes logoFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
-
-.mge-ring-outer{position:absolute;inset:0;border-radius:50%;border:3px solid transparent;
-  border-top-color:#38bdf8;border-right-color:#818cf8;border-bottom-color:transparent;border-left-color:#a78bfa;
-  animation:spinRing 1.6s linear infinite;filter:drop-shadow(0 0 12px rgba(56,189,248,0.9));}
-.mge-ring-mid{position:absolute;inset:8px;border-radius:50%;border:2px solid transparent;
-  border-top-color:transparent;border-right-color:#22d3ee;border-bottom-color:#c084fc;border-left-color:transparent;
-  animation:spinRingReverse 2.2s linear infinite;filter:drop-shadow(0 0 8px rgba(34,211,238,.8));}
+.mge-ring-outer{position:absolute;inset:0;border-radius:50%;border:3px solid transparent;border-top-color:#38bdf8;border-right-color:#818cf8;border-bottom-color:transparent;border-left-color:#a78bfa;animation:spinRing 1.6s linear infinite;filter:drop-shadow(0 0 12px rgba(56,189,248,0.9));}
+.mge-ring-mid{position:absolute;inset:8px;border-radius:50%;border:2px solid transparent;border-top-color:transparent;border-right-color:#22d3ee;border-bottom-color:#c084fc;border-left-color:transparent;animation:spinRingReverse 2.2s linear infinite;filter:drop-shadow(0 0 8px rgba(34,211,238,.8));}
 .mge-ring-inner{position:absolute;inset:18px;border-radius:50%;border:1.5px dashed rgba(56,189,248,0.55);animation:spinRing 4s linear infinite;}
-
 @keyframes spinRing{to{transform:rotate(360deg);}}
 @keyframes spinRingReverse{to{transform:rotate(-360deg);}}
-
-.mge-circle{position:absolute;inset:26px;border-radius:50%;
-  background:radial-gradient(circle at 30% 25%,#1e3a5f 0%,#0b1b30 55%,#050d18 100%);
-  box-shadow:
-    0 0 0 1px rgba(56,189,248,0.4) inset,
-    0 0 30px rgba(14,165,233,0.7),
-    0 0 80px rgba(56,189,248,0.45),
-    inset 0 -10px 24px rgba(0,0,0,0.7),
-    inset 0 10px 20px rgba(56,189,248,0.15);
-  display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.mge-circle::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
-  background:conic-gradient(from 0deg,transparent 0%,rgba(56,189,248,0.3) 20%,transparent 40%);
-  animation:shimmer 3s linear infinite;pointer-events:none;}
+.mge-circle{position:absolute;inset:26px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#1e3a5f 0%,#0b1b30 55%,#050d18 100%);box-shadow:0 0 0 1px rgba(56,189,248,0.4) inset,0 0 30px rgba(14,165,233,0.7),0 0 80px rgba(56,189,248,0.45),inset 0 -10px 24px rgba(0,0,0,0.7),inset 0 10px 20px rgba(56,189,248,0.15);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.mge-circle::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent 0%,rgba(56,189,248,0.3) 20%,transparent 40%);animation:shimmer 3s linear infinite;pointer-events:none;}
 @keyframes shimmer{to{transform:rotate(360deg);}}
-
-.mge-text{position:relative;font-size:52px;font-weight:900;letter-spacing:3px;line-height:1;
-  background:linear-gradient(180deg,#e0f2fe 0%,#38bdf8 45%,#6366f1 100%);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  text-shadow:
-    0 1px 0 rgba(56,189,248,0.4),
-    0 2px 0 rgba(56,189,248,0.3),
-    0 3px 0 rgba(99,102,241,0.3),
-    0 4px 10px rgba(0,0,0,0.7),
-    0 0 26px rgba(56,189,248,0.9);
-  filter:drop-shadow(0 0 14px rgba(56,189,248,1));
-  animation:textPulse 2.4s ease-in-out infinite;z-index:2;
-  transform:perspective(600px) rotateX(8deg);}
+.mge-text{position:relative;font-size:52px;font-weight:900;letter-spacing:3px;line-height:1;background:linear-gradient(180deg,#e0f2fe 0%,#38bdf8 45%,#6366f1 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 14px rgba(56,189,248,1));animation:textPulse 2.4s ease-in-out infinite;z-index:2;transform:perspective(600px) rotateX(8deg);}
 @keyframes textPulse{0%,100%{filter:drop-shadow(0 0 14px rgba(56,189,248,1));transform:perspective(600px) rotateX(8deg) scale(1);}50%{filter:drop-shadow(0 0 26px rgba(56,189,248,1));transform:perspective(600px) rotateX(8deg) scale(1.06);}}
-.mge-text::after{content:'MGE';position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(255,255,255,0.9) 0%,transparent 55%);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  pointer-events:none;z-index:3;}
-
-/* Brand text */
+.mge-text::after{content:'MGE';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0.9) 0%,transparent 55%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;pointer-events:none;z-index:3;}
 .brand-text{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:12px;margin-top:6px;animation:fadeInUp .9s ease .2s both;}
 .brand-text .brand-line{width:32px;height:1px;background:linear-gradient(90deg,transparent,#38bdf8,transparent);}
-.brand-text .brand-label{font-size:14px;font-weight:800;letter-spacing:6px;text-transform:uppercase;
-  background:linear-gradient(90deg,#38bdf8 0%,#a78bfa 50%,#38bdf8 100%);background-size:200% 100%;
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  animation:brandShine 3.5s linear infinite;white-space:nowrap;}
+.brand-text .brand-label{font-size:14px;font-weight:800;letter-spacing:6px;text-transform:uppercase;background:linear-gradient(90deg,#38bdf8 0%,#a78bfa 50%,#38bdf8 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:brandShine 3.5s linear infinite;white-space:nowrap;}
 @keyframes brandShine{0%{background-position:0% 50%;}100%{background-position:200% 50%;}}
-
 .loader-title{position:relative;z-index:1;font-size:15px;font-weight:bold;letter-spacing:4px;text-transform:uppercase;color:#cbd5e1;animation:fadeInUp .8s ease .3s both;}
 .loader-sub{position:relative;z-index:1;color:#64748b;font-size:11px;letter-spacing:2px;text-transform:uppercase;animation:fadeInUp .8s ease .4s both;}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-
 .loader-bar{position:relative;z-index:1;width:260px;height:4px;background:#132941;border-radius:4px;overflow:hidden;margin-top:4px;animation:fadeInUp .8s ease .5s both;}
 .loader-bar-fill{height:100%;width:0%;background:linear-gradient(90deg,#0ea5e9,#38bdf8,#818cf8);border-radius:4px;box-shadow:0 0 12px rgba(56,189,248,0.7);animation:loadFill 2s cubic-bezier(.65,.05,.36,1) forwards;}
 @keyframes loadFill{0%{width:0%;}40%{width:45%;}70%{width:78%;}100%{width:100%;}}
 
-/* ============================================================
-   SCREEN
-   ============================================================ */
 .screen{position:fixed;inset:0;z-index:10;display:none;flex-direction:column;opacity:0;transition:opacity .4s;}
 .screen.active{display:flex;opacity:1;}
 
-/* ============================================================
-   BERANDA PREMIUM
-   ============================================================ */
 #screen-menu{overflow-y:auto;padding:0;align-items:stretch;}
+#screen-menu::-webkit-scrollbar{width:8px;}
+#screen-menu::-webkit-scrollbar-track{background:transparent;}
+#screen-menu::-webkit-scrollbar-thumb{background:rgba(56,189,248,.25);border-radius:8px;}
 .menu-bg-deco{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
 .menu-bg-deco .glow{position:absolute;border-radius:50%;filter:blur(120px);opacity:.5;}
 .menu-bg-deco .glow.g1{width:500px;height:500px;background:#0ea5e9;top:-150px;left:-100px;}
 .menu-bg-deco .glow.g2{width:600px;height:600px;background:#a855f7;bottom:-250px;right:-180px;}
 .menu-bg-deco .glow.g3{width:400px;height:400px;background:#10b981;top:40%;left:50%;transform:translate(-50%,-50%);opacity:.15;}
-
 .menu-inner{position:relative;z-index:1;max-width:1200px;margin:0 auto;width:100%;padding:26px 28px 60px;}
 
-/* Top bar */
-.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:36px;}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:14px;}
 .topbar .brand{display:flex;align-items:center;gap:12px;}
-.topbar .brand .mini-mge{width:38px;height:38px;border-radius:50%;
-  background:radial-gradient(circle at 30% 25%,#1e3a5f 0%,#0b1b30 60%,#050d18 100%);
-  box-shadow:0 0 0 1.5px rgba(56,189,248,0.6),0 0 20px rgba(56,189,248,0.5),inset 0 -4px 8px rgba(0,0,0,.6);
-  display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;
-  background-clip:padding-box;color:#7dd3fc;text-shadow:0 0 10px rgba(56,189,248,0.9);}
-.topbar .brand .name{font-size:14px;font-weight:800;letter-spacing:2px;color:#e0f2fe;}
+.topbar .brand .mini-mge{width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#1e3a5f 0%,#0b1b30 60%,#050d18 100%);box-shadow:0 0 0 1.5px rgba(56,189,248,0.6),0 0 20px rgba(56,189,248,0.5),inset 0 -4px 8px rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#7dd3fc;}
+.topbar .brand .name{font-size:15px;font-weight:800;letter-spacing:2px;color:#e0f2fe;}
 .topbar .brand .name small{display:block;font-size:9px;letter-spacing:3px;color:#64748b;font-weight:600;margin-top:1px;}
-.topbar .pills{display:flex;gap:8px;}
-.pill{padding:7px 14px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;
-  background:rgba(19,41,65,.7);border:1px solid rgba(56,189,248,.3);color:#7dd3fc;backdrop-filter:blur(10px);}
+.topbar .pills{display:flex;gap:8px;flex-wrap:wrap;}
+.pill{padding:7px 14px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;background:rgba(19,41,65,.7);border:1px solid rgba(56,189,248,.3);color:#7dd3fc;}
 
-/* Hero */
-.hero{display:grid;grid-template-columns:1.4fr 1fr;gap:36px;align-items:center;margin-bottom:46px;}
-@media(max-width:900px){.hero{grid-template-columns:1fr;gap:26px;text-align:center;}}
-.hero-left .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:20px;
-  background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.4);
-  font-size:11px;font-weight:800;letter-spacing:2.5px;color:#7dd3fc;text-transform:uppercase;margin-bottom:16px;}
-.hero-left .eyebrow .dot-live{width:6px;height:6px;border-radius:50%;background:#10b981;box-shadow:0 0 8px #10b981;animation:blink 1.5s ease-in-out infinite;}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+.page-hero{text-align:center;margin-bottom:26px;}
+.page-hero h1{font-size:42px;font-weight:900;letter-spacing:-1.5px;line-height:1.05;margin-bottom:10px;background:linear-gradient(135deg,#e0f2fe 0%,#38bdf8 40%,#a78bfa 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+@media(max-width:700px){.page-hero h1{font-size:30px;}}
+.page-hero p{color:#94a3b8;font-size:13px;line-height:1.6;max-width:640px;margin:0 auto;}
+.page-hero p b{color:#7dd3fc;}
 
-.hero-title{font-size:56px;font-weight:900;letter-spacing:-2px;line-height:1.02;margin-bottom:14px;
-  background:linear-gradient(135deg,#e0f2fe 0%,#38bdf8 40%,#a78bfa 100%);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
-@media(max-width:900px){.hero-title{font-size:40px;}}
-.hero-title .line2{display:block;background:linear-gradient(135deg,#a78bfa 0%,#38bdf8 60%,#e0f2fe 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
-.hero-sub{color:#94a3b8;font-size:14px;line-height:1.7;margin-bottom:22px;max-width:520px;}
-@media(max-width:900px){.hero-sub{margin:0 auto 22px;}}
-.hero-sub b{color:#7dd3fc;}
+.player-picker{position:relative;max-width:780px;margin:0 auto 28px;padding:20px 22px 18px;border-radius:20px;background:linear-gradient(150deg,rgba(15,35,58,.88),rgba(8,20,36,.88));border:1px solid rgba(56,189,248,.28);box-shadow:0 26px 60px -30px rgba(0,0,0,.95),0 0 0 1px rgba(255,255,255,.04),inset 0 1px 0 rgba(255,255,255,.07);}
+.player-picker::before{content:'';position:absolute;inset:0;border-radius:20px;pointer-events:none;background:radial-gradient(circle at 12% 0%,rgba(56,189,248,.18),transparent 55%);}
+.pp-head{position:relative;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:16px;}
+.pp-head .label{font-size:11px;font-weight:800;letter-spacing:2.5px;color:#94a3b8;text-transform:uppercase;}
+.pc-group{display:flex;gap:8px;}
+.pc-btn{padding:10px 16px;border-radius:12px;border:1.5px solid rgba(148,163,184,.22);background:rgba(19,41,65,.7);color:#cbd5e1;font-family:inherit;font-weight:800;font-size:12px;letter-spacing:1px;cursor:pointer;transition:.25s;display:inline-flex;align-items:center;gap:8px;}
+.pc-btn:hover{border-color:#38bdf8;background:rgba(56,189,248,.15);color:#e0f2fe;transform:translateY(-2px);}
+.pc-btn.active{background:linear-gradient(135deg,#0ea5e9,#0284c7);border-color:#7dd3fc;color:white;box-shadow:0 10px 24px -8px rgba(14,165,233,.9),inset 0 1px 0 rgba(255,255,255,.3);}
+.pc-btn .pc-icons{font-size:14px;letter-spacing:-2px;}
 
-.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:26px;}
-@media(max-width:900px){.hero-cta{justify-content:center;}}
-.cta{padding:14px 24px;border:none;border-radius:12px;font-weight:800;font-size:13px;letter-spacing:.5px;cursor:pointer;transition:.28s cubic-bezier(.34,1.56,.64,1);font-family:inherit;display:inline-flex;align-items:center;gap:10px;}
-.cta.primary{background:linear-gradient(135deg,#0ea5e9,#0284c7);color:white;box-shadow:0 10px 26px -8px rgba(14,165,233,.8);}
-.cta.primary:hover{transform:translateY(-3px);box-shadow:0 14px 32px -8px rgba(14,165,233,1);}
-.cta.ghost{background:rgba(19,41,65,.6);color:#e0f2fe;border:1px solid rgba(56,189,248,.35);backdrop-filter:blur(10px);}
-.cta.ghost:hover{background:rgba(56,189,248,.15);border-color:#38bdf8;transform:translateY(-3px);}
-.cta .ic{font-size:18px;}
+.name-fields{position:relative;display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+@media(max-width:620px){.name-fields{grid-template-columns:1fr;}}
+.name-field{display:flex;align-items:center;gap:10px;padding:7px 12px;border-radius:13px;background:rgba(6,16,30,.85);border:1.5px solid rgba(148,163,184,.18);transition:.25s;}
+.name-field:hover{border-color:rgba(148,163,184,.35);}
+.name-field:focus-within{transform:translateY(-2px);}
+.nf-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;box-shadow:0 0 0 2px rgba(255,255,255,.12);}
+.name-field.p1 .nf-icon{background:linear-gradient(135deg,#3b82f6,#1e40af);box-shadow:0 0 0 2px rgba(255,255,255,.12),0 0 14px rgba(59,130,246,.65);}
+.name-field.p2 .nf-icon{background:linear-gradient(135deg,#f97316,#c2410c);box-shadow:0 0 0 2px rgba(255,255,255,.12),0 0 14px rgba(249,115,22,.65);}
+.name-field.p3 .nf-icon{background:linear-gradient(135deg,#a855f7,#6d28d9);box-shadow:0 0 0 2px rgba(255,255,255,.12),0 0 14px rgba(168,85,247,.65);}
+.name-field.p4 .nf-icon{background:linear-gradient(135deg,#10b981,#047857);box-shadow:0 0 0 2px rgba(255,255,255,.12),0 0 14px rgba(16,185,129,.65);}
+.name-field.p1:focus-within{border-color:#3b82f6;box-shadow:0 8px 22px -12px #3b82f6,0 0 0 3px rgba(59,130,246,.16);}
+.name-field.p2:focus-within{border-color:#f97316;box-shadow:0 8px 22px -12px #f97316,0 0 0 3px rgba(249,115,22,.16);}
+.name-field.p3:focus-within{border-color:#a855f7;box-shadow:0 8px 22px -12px #a855f7,0 0 0 3px rgba(168,85,247,.16);}
+.name-field.p4:focus-within{border-color:#10b981;box-shadow:0 8px 22px -12px #10b981,0 0 0 3px rgba(16,185,129,.16);}
+.nf-input{flex:1;min-width:0;background:transparent;border:none;outline:none;color:#e0f2fe;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.3px;padding:8px 2px;}
+.nf-input::placeholder{color:#475569;font-weight:600;}
+.nf-role{font-size:9px;font-weight:800;letter-spacing:1px;color:#64748b;background:rgba(0,0,0,.4);padding:3px 8px;border-radius:20px;border:1px solid rgba(148,163,184,.15);flex-shrink:0;}
 
-.hero-stats{display:flex;gap:24px;flex-wrap:wrap;}
-@media(max-width:900px){.hero-stats{justify-content:center;}}
-.hstat .num{font-size:22px;font-weight:900;background:linear-gradient(135deg,#38bdf8,#a78bfa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
-.hstat .lbl{font-size:10px;letter-spacing:2px;color:#64748b;font-weight:700;text-transform:uppercase;margin-top:2px;}
-
-/* Hero right — kartu preview papan */
-.hero-right{position:relative;}
-.preview-board{position:relative;aspect-ratio:1/1;max-width:360px;margin:0 auto;padding:14px;border-radius:22px;
-  background:linear-gradient(135deg,rgba(14,165,233,.35),rgba(168,85,247,.35),rgba(16,185,129,.35));
-  box-shadow:0 30px 80px -20px rgba(0,0,0,.9),0 0 80px -20px rgba(56,189,248,.6);
-  animation:boardFloat 4s ease-in-out infinite;}
-@keyframes boardFloat{0%,100%{transform:translateY(0) rotate(-1deg);}50%{transform:translateY(-10px) rotate(1deg);}}
-.preview-grid{position:relative;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(6,1fr);gap:4px;width:100%;height:100%;background:rgba(5,15,30,.75);border-radius:14px;padding:8px;}
-.preview-cell{background:rgba(19,41,65,.7);border-radius:5px;border:1.5px solid rgba(56,189,248,.25);}
-.preview-cell.hot{border-color:#fbbf24;background:rgba(245,158,11,.35);box-shadow:0 0 8px rgba(251,191,36,.6);}
-.preview-cell.danger{border-color:#f87171;background:rgba(239,68,68,.35);box-shadow:0 0 8px rgba(248,113,113,.6);}
-.preview-cell.q{border-color:#c084fc;background:rgba(168,85,247,.35);}
-.preview-cell.e{border-color:#7dd3fc;background:rgba(56,189,248,.35);}
-.preview-cell.goal{border-color:#fbbf24;background:rgba(251,191,36,.5);box-shadow:0 0 12px rgba(251,191,36,.9);animation:previewGlow 1.6s infinite;}
-@keyframes previewGlow{0%,100%{box-shadow:0 0 12px rgba(251,191,36,.9);}50%{box-shadow:0 0 24px rgba(251,191,36,1);}}
-.preview-badge{position:absolute;top:-14px;right:-14px;padding:6px 12px;border-radius:20px;
-  background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#0b1b30;font-size:10px;font-weight:900;letter-spacing:1.5px;
-  box-shadow:0 8px 20px -6px rgba(251,191,36,.8);text-transform:uppercase;}
-.preview-caption{position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);
-  padding:6px 14px;border-radius:20px;background:rgba(11,27,48,.95);border:1px solid rgba(56,189,248,.4);
-  font-size:10px;font-weight:800;letter-spacing:2px;color:#7dd3fc;text-transform:uppercase;white-space:nowrap;}
-
-/* Section title */
-.section-title{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+.section-title{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap;}
 .section-title .bar{width:4px;height:26px;border-radius:2px;background:linear-gradient(180deg,#38bdf8,#a855f7);}
 .section-title h3{font-size:16px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#e0f2fe;}
 .section-title .sub{font-size:11px;color:#64748b;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-left:auto;}
 
-/* Level cards grid */
-.level-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:40px;}
-@media(max-width:1000px){.level-cards{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:560px){.level-cards{grid-template-columns:1fr;}}
-
-.lvl-card{position:relative;border-radius:18px;padding:20px 18px;cursor:pointer;overflow:hidden;
-  border:1.5px solid rgba(148,163,184,.2);
-  background:linear-gradient(160deg,rgba(19,41,65,.85),rgba(11,27,48,.85));
-  backdrop-filter:blur(14px);
-  transition:.35s cubic-bezier(.34,1.56,.64,1);
-  display:flex;flex-direction:column;gap:10px;}
+.level-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:36px;}
+.lvl-card{position:relative;border-radius:18px;padding:20px 18px;cursor:pointer;overflow:hidden;border:1.5px solid rgba(148,163,184,.2);background:linear-gradient(160deg,rgba(19,41,65,.85),rgba(11,27,48,.85));backdrop-filter:blur(14px);transition:.35s cubic-bezier(.34,1.56,.64,1);display:flex;flex-direction:column;gap:10px;}
 .lvl-card::before{content:'';position:absolute;inset:0;opacity:.18;transition:.35s;pointer-events:none;}
 .lvl-card.lv1::before{background:radial-gradient(circle at 20% 0%,#0ea5e9,transparent 70%);}
 .lvl-card.lv2::before{background:radial-gradient(circle at 20% 0%,#10b981,transparent 70%);}
 .lvl-card.lv3::before{background:radial-gradient(circle at 20% 0%,#f59e0b,transparent 70%);}
 .lvl-card.lv4::before{background:radial-gradient(circle at 20% 0%,#a855f7,transparent 70%);}
+.lvl-card.lv5::before{background:radial-gradient(circle at 20% 0%,#ec4899,transparent 70%);}
+.lvl-card.lv6::before{background:radial-gradient(circle at 20% 0%,#06b6d4,transparent 70%);}
+.lvl-card.lv7::before{background:radial-gradient(circle at 20% 0%,#ef4444,transparent 70%);}
 .lvl-card:hover{transform:translateY(-6px);}
 .lvl-card.lv1{border-color:rgba(56,189,248,.5);} .lvl-card.lv1:hover{box-shadow:0 20px 40px -14px rgba(56,189,248,.7);border-color:#38bdf8;}
 .lvl-card.lv2{border-color:rgba(52,211,153,.5);} .lvl-card.lv2:hover{box-shadow:0 20px 40px -14px rgba(52,211,153,.7);border-color:#34d399;}
 .lvl-card.lv3{border-color:rgba(251,191,36,.5);} .lvl-card.lv3:hover{box-shadow:0 20px 40px -14px rgba(251,191,36,.7);border-color:#fbbf24;}
 .lvl-card.lv4{border-color:rgba(192,132,252,.5);} .lvl-card.lv4:hover{box-shadow:0 20px 40px -14px rgba(192,132,252,.7);border-color:#c084fc;}
-
+.lvl-card.lv5{border-color:rgba(244,114,182,.5);} .lvl-card.lv5:hover{box-shadow:0 20px 40px -14px rgba(244,114,182,.7);border-color:#f472b6;}
+.lvl-card.lv6{border-color:rgba(34,211,238,.5);} .lvl-card.lv6:hover{box-shadow:0 20px 40px -14px rgba(34,211,238,.7);border-color:#22d3ee;}
+.lvl-card.lv7{border-color:rgba(248,113,113,.5);} .lvl-card.lv7:hover{box-shadow:0 20px 40px -14px rgba(248,113,113,.7);border-color:#f87171;}
 .lvl-card .card-top{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1;}
-.lvl-card .lvl-num{font-size:11px;font-weight:900;letter-spacing:2px;padding:4px 10px;border-radius:20px;
-  background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.15);}
-.lvl-card.lv1 .lvl-num{color:#7dd3fc;}
-.lvl-card.lv2 .lvl-num{color:#6ee7b7;}
-.lvl-card.lv3 .lvl-num{color:#fcd34d;}
-.lvl-card.lv4 .lvl-num{color:#d8b4fe;}
+.lvl-card .lvl-num{font-size:11px;font-weight:900;letter-spacing:2px;padding:4px 10px;border-radius:20px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.15);}
+.lvl-card.lv1 .lvl-num{color:#7dd3fc;} .lvl-card.lv2 .lvl-num{color:#6ee7b7;} .lvl-card.lv3 .lvl-num{color:#fcd34d;}
+.lvl-card.lv4 .lvl-num{color:#d8b4fe;} .lvl-card.lv5 .lvl-num{color:#f9a8d4;} .lvl-card.lv6 .lvl-num{color:#67e8f9;} .lvl-card.lv7 .lvl-num{color:#fca5a5;}
 .lvl-card .lvl-icon{font-size:32px;filter:drop-shadow(0 6px 12px rgba(0,0,0,.6));}
-.lvl-card .lvl-name{position:relative;z-index:1;font-size:20px;font-weight:900;color:#e0f2fe;letter-spacing:-.4px;margin-top:4px;}
-.lvl-card .lvl-desc{position:relative;z-index:1;font-size:12px;color:#94a3b8;line-height:1.55;min-height:38px;}
+.lvl-card .lvl-name{position:relative;z-index:1;font-size:19px;font-weight:900;color:#e0f2fe;letter-spacing:-.4px;margin-top:4px;}
+.lvl-card .lvl-desc{position:relative;z-index:1;font-size:12px;color:#94a3b8;line-height:1.55;min-height:56px;}
 .lvl-card .lvl-meta{position:relative;z-index:1;display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;}
 .lvl-card .tag{font-size:9px;font-weight:800;letter-spacing:1px;padding:4px 9px;border-radius:20px;background:rgba(0,0,0,.4);color:#cbd5e1;border:1px solid rgba(255,255,255,.1);text-transform:uppercase;}
-.lvl-card.lv1 .tag{border-color:rgba(56,189,248,.5);color:#7dd3fc;}
-.lvl-card.lv2 .tag{border-color:rgba(52,211,153,.5);color:#6ee7b7;}
-.lvl-card.lv3 .tag{border-color:rgba(251,191,36,.5);color:#fcd34d;}
-.lvl-card.lv4 .tag{border-color:rgba(192,132,252,.5);color:#d8b4fe;}
+.lvl-card.lv1 .tag{border-color:rgba(56,189,248,.5);color:#7dd3fc;} .lvl-card.lv2 .tag{border-color:rgba(52,211,153,.5);color:#6ee7b7;}
+.lvl-card.lv3 .tag{border-color:rgba(251,191,36,.5);color:#fcd34d;} .lvl-card.lv4 .tag{border-color:rgba(192,132,252,.5);color:#d8b4fe;}
+.lvl-card.lv5 .tag{border-color:rgba(244,114,182,.5);color:#f9a8d4;} .lvl-card.lv6 .tag{border-color:rgba(34,211,238,.5);color:#67e8f9;}
+.lvl-card.lv7 .tag{border-color:rgba(248,113,113,.5);color:#fca5a5;}
+.lvl-card .play-btn{position:relative;z-index:1;margin-top:8px;padding:11px 14px;border-radius:10px;font-size:12px;font-weight:900;letter-spacing:1px;display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.1);color:#e0f2fe;transition:.25s;}
+.lvl-card:hover .play-btn{background:rgba(255,255,255,.1);}
 
-.lvl-card .play-btn{position:relative;z-index:1;margin-top:8px;padding:10px 14px;border-radius:10px;font-size:12px;font-weight:800;letter-spacing:1px;
-  display:flex;align-items:center;justify-content:space-between;
-  background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.1);color:#e0f2fe;
-  transition:.25s;}
-.lvl-card:hover .play-btn{background:rgba(255,255,255,.08);}
-.lvl-card.lv1:hover .play-btn{background:rgba(56,189,248,.2);border-color:#38bdf8;color:#e0f2fe;}
-.lvl-card.lv2:hover .play-btn{background:rgba(52,211,153,.2);border-color:#34d399;}
-.lvl-card.lv3:hover .play-btn{background:rgba(251,191,36,.2);border-color:#fbbf24;}
-.lvl-card.lv4:hover .play-btn{background:rgba(192,132,252,.2);border-color:#c084fc;}
-.lvl-card.selected{transform:translateY(-6px);}
-.lvl-card.selected .play-btn::after{content:'✓ DIPILIH';font-weight:900;color:#fbbf24;}
+.bottom-info{text-align:center;color:#64748b;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;padding-top:22px;border-top:1px solid rgba(56,189,248,.15);display:flex;justify-content:center;gap:20px;flex-wrap:wrap;align-items:center;}
+.bottom-info .rules-btn{padding:10px 20px;border-radius:10px;background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.4);color:#7dd3fc;font-family:inherit;font-weight:800;letter-spacing:1px;cursor:pointer;font-size:11px;transition:.25s;}
+.bottom-info .rules-btn:hover{background:rgba(56,189,248,.25);transform:translateY(-2px);}
 
-/* Quick actions */
-.quick-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:36px;}
-@media(max-width:780px){.quick-actions{grid-template-columns:1fr;}}
-.action-card{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:14px;cursor:pointer;
-  background:rgba(19,41,65,.6);border:1.5px solid rgba(148,163,184,.15);backdrop-filter:blur(10px);transition:.3s;font-family:inherit;text-align:left;color:#e0f2fe;}
-.action-card:hover{border-color:#38bdf8;background:rgba(56,189,248,.1);transform:translateY(-3px);}
-.action-card .aic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;
-  background:linear-gradient(135deg,rgba(56,189,248,.2),rgba(168,85,247,.2));border:1px solid rgba(56,189,248,.35);}
-.action-card .atxt{flex:1;min-width:0;}
-.action-card .atxt b{font-size:13px;font-weight:800;color:#e0f2fe;display:block;margin-bottom:2px;}
-.action-card .atxt small{font-size:11px;color:#94a3b8;line-height:1.4;display:block;}
-.action-card .arr{color:#64748b;font-size:18px;transition:.3s;}
-.action-card:hover .arr{color:#38bdf8;transform:translateX(4px);}
-
-/* Footer */
-.menu-foot{display:flex;justify-content:space-between;align-items:center;padding-top:22px;border-top:1px solid rgba(56,189,248,.15);
-  font-size:11px;color:#475569;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;flex-wrap:wrap;gap:10px;}
-.menu-foot .right{display:flex;gap:16px;}
-.menu-foot .right span{display:inline-flex;align-items:center;gap:6px;}
-
-/* ============================================================
-   GAME SCREEN (tetap)
-   ============================================================ */
 #screen-game{padding:0;}
-.game-head{flex-shrink:0;padding:10px 18px;background:rgba(11,27,48,.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--cell-border);display:flex;justify-content:space-between;align-items:center;transition:.6s;}
-.game-head .logo{font-size:14px;font-weight:800;letter-spacing:1px;color:var(--accent);display:flex;gap:8px;align-items:center;transition:.6s;}
-.game-head .logo .lvlbadge{font-size:10px;background:var(--c1);color:#fff;padding:2px 8px;border-radius:10px;letter-spacing:1px;font-weight:800;}
-.game-head .btn-sm{padding:8px 14px;background:transparent;color:#94a3b8;border:1px solid rgba(148,163,184,.3);border-radius:8px;font-size:12px;cursor:pointer;transition:.25s;font-family:inherit;font-weight:600;}
-.game-head .btn-sm:hover{background:rgba(148,163,184,.1);color:white;}
+.game-head{flex-shrink:0;padding:10px 18px;background:rgba(8,20,36,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--cell-border);display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;box-shadow:0 10px 30px -18px rgba(0,0,0,.9);}
+.game-head .logo{font-size:13px;font-weight:800;letter-spacing:1px;color:var(--accent);display:flex;gap:8px;align-items:center;flex-wrap:wrap;text-shadow:0 0 18px var(--glow);}
+.game-head .logo .lvlbadge{font-size:10px;background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;padding:3px 10px;border-radius:10px;letter-spacing:1px;font-weight:800;box-shadow:0 0 16px -2px var(--glow);}
+.game-head .btn-sm{padding:8px 14px;background:rgba(148,163,184,.06);color:#94a3b8;border:1px solid rgba(148,163,184,.3);border-radius:8px;font-size:12px;cursor:pointer;transition:.25s;font-family:inherit;font-weight:700;}
+.game-head .btn-sm:hover{background:rgba(148,163,184,.14);color:white;border-color:rgba(148,163,184,.55);}
 
 .game-body{flex:1;display:flex;overflow:hidden;padding:14px;gap:14px;position:relative;z-index:1;}
 @media(max-width:900px){.game-body{flex-direction:column;padding:10px;gap:10px;overflow-y:auto;}}
-
 .board-wrap{flex:1;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;position:relative;}
-.board-frame{position:relative;width:min(100%,calc(100vh - 140px));aspect-ratio:1/1;max-width:680px;padding:10px;border-radius:20px;
-  background:linear-gradient(135deg,var(--c1),var(--c2));
-  box-shadow:0 30px 80px -20px rgba(0,0,0,.9),0 0 80px -20px var(--glow),inset 0 0 30px rgba(0,0,0,.5);transition:.6s;}
 
-.board{position:relative;display:grid;grid-template-columns:repeat(10,1fr);grid-template-rows:repeat(10,1fr);gap:3px;width:100%;height:100%;background:var(--board-bg);border-radius:12px;padding:6px;transition:.6s;}
+.board-frame{position:relative;width:min(100%,calc(100vh - 150px));aspect-ratio:1/1;max-width:700px;padding:12px;border-radius:26px;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 44px 90px -32px rgba(0,0,0,1),0 0 90px -22px var(--glow),inset 0 0 32px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.35);transition:.6s;}
+.board-frame::before{content:'';position:absolute;inset:-7px;border-radius:34px;z-index:-1;background:conic-gradient(from 0deg,transparent 0%,var(--accent) 10%,transparent 25%,transparent 50%,var(--accent) 60%,transparent 75%);filter:blur(12px);opacity:.75;animation:frameSpin 9s linear infinite;}
+@keyframes frameSpin{to{transform:rotate(360deg);}}
+.board{position:relative;display:grid;grid-template-columns:repeat(10,1fr);grid-template-rows:repeat(10,1fr);gap:4px;width:100%;height:100%;background:var(--board-bg);border-radius:16px;padding:8px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),inset 0 0 50px rgba(0,0,0,.75);transition:.6s;}
+.board-connections{position:absolute;inset:8px;width:calc(100% - 16px);height:calc(100% - 16px);pointer-events:none;z-index:5;overflow:visible;}
 
-.board-connections{position:absolute;inset:6px;width:calc(100% - 12px);height:calc(100% - 12px);pointer-events:none;z-index:5;overflow:visible;}
-
-.cell{background:var(--cell-bg);border-radius:6px;display:flex;align-items:flex-start;justify-content:flex-start;padding:4px 5px;font-size:10px;font-weight:700;color:#cbd5e1;position:relative;overflow:hidden;transition:.3s;border:1.5px solid var(--cell-border);box-shadow:inset 0 0 0 1px rgba(0,0,0,.3);}
-.cell .num{position:relative;z-index:2;font-size:10px;letter-spacing:.3px;color:#e2e8f0;text-shadow:0 1px 2px #000;}
-.cell .icon{position:absolute;right:3px;bottom:2px;font-size:15px;opacity:.95;z-index:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,.7));}
-.cell.ladder{background:linear-gradient(135deg,rgba(245,158,11,.35),rgba(245,158,11,.1));border-color:#fbbf24;box-shadow:0 0 8px rgba(251,191,36,.4),inset 0 0 0 1px rgba(0,0,0,.3);}
-.cell.ladder .num{color:#fde68a;}
-.cell.snake{background:linear-gradient(135deg,rgba(239,68,68,.4),rgba(239,68,68,.1));border-color:#f87171;box-shadow:0 0 8px rgba(248,113,113,.4),inset 0 0 0 1px rgba(0,0,0,.3);}
-.cell.snake .num{color:#fecaca;}
-.cell.ladder-target{background:linear-gradient(135deg,rgba(245,158,11,.18),transparent);border-color:rgba(251,191,36,.5);}
+.cell{position:relative;border-radius:8px;overflow:hidden;display:flex;align-items:flex-start;justify-content:flex-start;padding:3px 4px;font-size:10px;font-weight:700;color:#cbd5e1;background:linear-gradient(155deg,rgba(255,255,255,.07),rgba(255,255,255,0) 45%),var(--cell-bg);border:1px solid var(--cell-border);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),inset 0 -3px 8px rgba(0,0,0,.5);transition:transform .25s,box-shadow .3s,border-color .3s,background .3s;}
+.cell::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 28% 18%,rgba(255,255,255,.13),transparent 58%);}
+.cell:hover{transform:scale(1.07);z-index:6;border-color:var(--accent);box-shadow:0 0 16px -2px var(--glow),inset 0 1px 0 rgba(255,255,255,.15);}
+.cell .num{position:relative;z-index:2;font-size:9.5px;font-weight:900;letter-spacing:.2px;color:#e2e8f0;background:rgba(0,0,0,.4);padding:1px 5px;border-radius:20px;border:1px solid rgba(255,255,255,.09);text-shadow:0 1px 2px #000;line-height:1.4;}
+.cell .icon{position:absolute;right:2px;bottom:1px;font-size:17px;z-index:1;filter:drop-shadow(0 2px 5px rgba(0,0,0,.85));}
+.cell.ladder{background:linear-gradient(150deg,rgba(253,224,71,.5),rgba(180,83,9,.15)),var(--cell-bg);border-color:#fbbf24;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 14px rgba(251,191,36,.5);}
+.cell.ladder .num{color:#fde68a;border-color:rgba(251,191,36,.4);}
+.cell.ladder-target{background:linear-gradient(150deg,rgba(245,158,11,.2),transparent),var(--cell-bg);border-color:rgba(251,191,36,.55);}
 .cell.ladder-target .num{color:#fcd34d;}
-.cell.snake-target{background:linear-gradient(135deg,rgba(239,68,68,.2),transparent);border-color:rgba(248,113,113,.5);}
+.cell.snake{background:linear-gradient(150deg,rgba(248,113,113,.5),rgba(127,29,29,.18)),var(--cell-bg);border-color:#f87171;box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 14px rgba(248,113,113,.5);}
+.cell.snake .num{color:#fecaca;border-color:rgba(248,113,113,.4);}
+.cell.snake-target{background:linear-gradient(150deg,rgba(239,68,68,.22),transparent),var(--cell-bg);border-color:rgba(248,113,113,.55);}
 .cell.snake-target .num{color:#fca5a5;}
-.cell.question{background:linear-gradient(135deg,rgba(168,85,247,.4),rgba(168,85,247,.1));border-color:#c084fc;box-shadow:0 0 8px rgba(192,132,252,.4);}
-.cell.question .num{color:#e9d5ff;}
-.cell.event{background:linear-gradient(135deg,rgba(56,189,248,.4),rgba(56,189,248,.1));border-color:#7dd3fc;box-shadow:0 0 8px rgba(125,211,252,.4);}
-.cell.event .num{color:#e0f2fe;}
-.cell.start{background:linear-gradient(135deg,rgba(16,185,129,.5),rgba(16,185,129,.2));border-color:#34d399;box-shadow:0 0 10px rgba(52,211,153,.5);}
-.cell.start .num{color:#d1fae5;}
-.cell.finish{background:linear-gradient(135deg,rgba(251,191,36,.6),rgba(251,191,36,.2));border-color:#fbbf24;animation:finishGlow 2s ease-in-out infinite;}
-@keyframes finishGlow{0%,100%{box-shadow:0 0 10px rgba(251,191,36,.6);}50%{box-shadow:0 0 26px rgba(251,191,36,1);}}
-.cell.finish .num{color:#fffbeb;font-size:11px;}
+.cell.question{background:linear-gradient(150deg,rgba(192,132,252,.5),rgba(107,33,168,.18)),var(--cell-bg);border-color:#c084fc;animation:qPulse 2.4s ease-in-out infinite;}
+@keyframes qPulse{0%,100%{box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 8px rgba(192,132,252,.35);}50%{box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 0 22px rgba(192,132,252,.85);}}
+.cell.question .num{color:#f3e8ff;border-color:rgba(192,132,252,.45);}
+.cell.event{background:linear-gradient(150deg,rgba(125,211,252,.5),rgba(3,105,161,.18)),var(--cell-bg);border-color:#7dd3fc;animation:ePulse 2.4s ease-in-out infinite;}
+@keyframes ePulse{0%,100%{box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 0 8px rgba(125,211,252,.35);}50%{box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 0 22px rgba(125,211,252,.85);}}
+.cell.event .num{color:#e0f2fe;border-color:rgba(125,211,252,.45);}
+.cell.start{background:linear-gradient(150deg,rgba(52,211,153,.6),rgba(6,95,70,.25)),var(--cell-bg);border-color:#34d399;box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 0 18px rgba(52,211,153,.6);}
+.cell.start .num{color:#d1fae5;border-color:rgba(52,211,153,.5);}
+.cell.finish{background:linear-gradient(150deg,rgba(251,191,36,.7),rgba(180,83,9,.3)),var(--cell-bg);border-color:#fbbf24;animation:finishGlow 2s ease-in-out infinite;}
+@keyframes finishGlow{0%,100%{box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 0 12px rgba(251,191,36,.6);}50%{box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 0 32px rgba(251,191,36,1);}}
+.cell.finish .num{color:#fffbeb;font-size:11px;border-color:rgba(251,191,36,.6);}
 
-.token{position:absolute;width:7%;aspect-ratio:1/1;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:10;transform:translate(-50%,-50%);transition:left .35s cubic-bezier(.5,0,.2,1),top .35s cubic-bezier(.5,0,.2,1);box-shadow:0 0 0 2.5px rgba(255,255,255,.95),0 4px 12px rgba(0,0,0,.7);pointer-events:none;}
-.token .ic{font-size:14px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.7));}
-.token.p1{background:linear-gradient(135deg,#3b82f6,#1e40af);}
-.token.p2{background:linear-gradient(135deg,#f97316,#c2410c);}
-.token.p3{background:linear-gradient(135deg,#a855f7,#6d28d9);}
-.token.p4{background:linear-gradient(135deg,#10b981,#047857);}
+.token{position:absolute;width:8%;aspect-ratio:1/1;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:10;transform:translate(-50%,-50%);transition:left .35s cubic-bezier(.5,0,.2,1),top .35s cubic-bezier(.5,0,.2,1);box-shadow:0 0 0 2px rgba(255,255,255,.95),0 0 0 4px rgba(0,0,0,.4),0 7px 16px rgba(0,0,0,.85);pointer-events:none;animation:tokenBob 2.6s ease-in-out infinite;}
+@keyframes tokenBob{0%,100%{transform:translate(-50%,-50%) scale(1);}50%{transform:translate(-50%,-60%) scale(1.05);}}
+.token::before{content:'';position:absolute;inset:3px;border-radius:50%;background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.9),rgba(255,255,255,0) 58%);pointer-events:none;}
+.token .ic{font-size:14px;position:relative;z-index:2;filter:drop-shadow(0 1px 2px rgba(0,0,0,.8));}
+.token.p1{background:radial-gradient(circle at 35% 28%,#93c5fd,#2563eb 62%,#1e3a8a);}
+.token.p2{background:radial-gradient(circle at 35% 28%,#fdba74,#ea580c 62%,#9a3412);}
+.token.p3{background:radial-gradient(circle at 35% 28%,#d8b4fe,#9333ea 62%,#581c87);}
+.token.p4{background:radial-gradient(circle at 35% 28%,#6ee7b7,#059669 62%,#065f46);}
+.token.active{z-index:14;}
+.token.active::after{content:'';position:absolute;inset:-7px;border-radius:50%;border:2px solid rgba(255,255,255,.9);animation:ringPulse 1.5s ease-out infinite;pointer-events:none;}
+@keyframes ringPulse{0%{transform:scale(.82);opacity:.95;}100%{transform:scale(1.55);opacity:0;}}
+.token.animating{animation:none !important;z-index:20;}
+.token.animating::after{content:'';position:absolute;inset:-10px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.55),transparent 65%);animation:trailPulse .6s ease-out infinite;pointer-events:none;}
+@keyframes trailPulse{0%{transform:scale(.8);opacity:.9;}100%{transform:scale(1.6);opacity:0;}}
 
-.panel{width:290px;flex-shrink:0;display:flex;flex-direction:column;gap:12px;overflow-y:auto;}
-@media(max-width:900px){.panel{width:100%;flex-direction:row;flex-wrap:wrap;overflow:visible;}}
-.panel-card{background:rgba(11,27,48,.72);backdrop-filter:blur(14px);border:1px solid var(--cell-border);border-radius:14px;padding:14px;transition:.6s;}
+.temp-anim{animation:tempFade .5s ease both;}
+@keyframes tempFade{from{opacity:0;}to{opacity:1;}}
+
+.panel{width:300px;flex-shrink:0;display:flex;flex-direction:column;gap:12px;overflow-y:auto;}
+.panel::-webkit-scrollbar{width:6px;}
+.panel::-webkit-scrollbar-thumb{background:rgba(56,189,248,.25);border-radius:4px;}
+@media(max-width:900px){.panel{width:100%;flex-direction:row;flex-wrap:wrap;overflow:visible;}.panel-card{flex:1 1 240px;}}
+.panel-card{background:linear-gradient(160deg,rgba(15,35,58,.8),rgba(8,20,36,.8));border:1px solid var(--cell-border);border-radius:16px;padding:14px;transition:.6s;box-shadow:0 18px 40px -26px rgba(0,0,0,.95),inset 0 1px 0 rgba(255,255,255,.05);}
 .panel-title{font-size:10px;letter-spacing:2px;color:#94a3b8;text-transform:uppercase;font-weight:800;margin-bottom:10px;}
-
 .dice-area{display:flex;align-items:center;gap:14px;}
-.dice{width:74px;height:74px;flex-shrink:0;border-radius:16px;background:linear-gradient(145deg,#ffffff,#e2e8f0);border:2px solid #cbd5e1;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);padding:10px;gap:3px;box-shadow:0 10px 26px -6px rgba(0,0,0,.8),inset 0 -4px 10px rgba(0,0,0,.15),inset 0 4px 10px rgba(255,255,255,.9);transition:.3s;}
+.dice{width:78px;height:78px;flex-shrink:0;border-radius:18px;background:linear-gradient(145deg,#ffffff,#d7dfe9);border:1px solid rgba(255,255,255,.9);display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);padding:11px;gap:3px;box-shadow:0 14px 30px -10px rgba(0,0,0,.95),0 0 0 1px rgba(0,0,0,.3),inset 0 -5px 12px rgba(100,116,139,.45),inset 0 4px 8px rgba(255,255,255,.95);transition:.3s;}
 .dice.rolling{animation:diceRoll .5s ease-in-out;}
 @keyframes diceRoll{0%{transform:rotate(0) scale(1)}25%{transform:rotate(90deg) scale(1.15)}50%{transform:rotate(180deg) scale(.9)}75%{transform:rotate(270deg) scale(1.1)}100%{transform:rotate(360deg) scale(1)}}
-.pip{width:100%;height:100%;border-radius:50%;background:#0f172a;box-shadow:inset 0 2px 3px rgba(0,0,0,.5);opacity:0;}
+.pip{width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 34% 28%,#475569,#0f172a 70%);box-shadow:inset 0 1px 2px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.55);opacity:0;transition:opacity .12s;}
 .pip.on{opacity:1;}
 .dice-info{flex:1;min-width:0;}
 .dice-info .label{font-size:10px;color:#94a3b8;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;}
@@ -342,86 +242,92 @@ body[data-level="4"]{--c1:#a855f7;--c2:#6d28d9;--accent:#c084fc;--glow:rgba(192,
 .dice-info .who.p2 .dot{background:#f97316;box-shadow:0 0 8px #f97316;}
 .dice-info .who.p3 .dot{background:#a855f7;box-shadow:0 0 8px #a855f7;}
 .dice-info .who.p4 .dot{background:#10b981;box-shadow:0 0 8px #10b981;}
-.dice-val{font-size:28px;font-weight:900;color:var(--accent);text-shadow:0 0 16px var(--glow);line-height:1;}
-
-.btn-roll{width:100%;padding:12px;border:none;border-radius:10px;background:linear-gradient(135deg,var(--c1),var(--c2));color:white;font-weight:800;font-size:13px;cursor:pointer;letter-spacing:.5px;box-shadow:0 6px 20px -6px var(--glow);transition:.25s;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;}
-.btn-roll:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 26px -6px var(--glow);}
-.btn-roll:disabled{opacity:.35;cursor:not-allowed;}
-
+.dice-val{font-size:30px;font-weight:900;color:var(--accent);line-height:1;text-shadow:0 0 22px var(--glow);}
+.btn-roll{width:100%;padding:13px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--c1),var(--c2));color:white;font-weight:800;font-size:13px;cursor:pointer;letter-spacing:.5px;transition:.25s;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 12px 26px -12px var(--glow),inset 0 1px 0 rgba(255,255,255,.28);}
+.btn-roll:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 18px 34px -12px var(--glow),inset 0 1px 0 rgba(255,255,255,.35);}
+.btn-roll:disabled{opacity:.35;cursor:not-allowed;transform:none;}
 .player-list{display:flex;flex-direction:column;gap:8px;}
-.player-item{display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(19,41,65,.5);border-radius:10px;border:1px solid transparent;transition:.3s;font-size:12px;}
-.player-item.turn{border-color:currentColor;background:rgba(19,41,65,.9);box-shadow:0 0 20px -4px currentColor;}
-.player-item .pic{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;box-shadow:0 0 0 2px rgba(255,255,255,.25);}
+.player-item{display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(19,41,65,.5);border-radius:12px;border:1px solid transparent;transition:.3s;font-size:12px;}
+.player-item.turn{border-color:currentColor;background:rgba(19,41,65,.92);box-shadow:0 0 18px -6px currentColor;}
+.player-item .pic{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;box-shadow:0 0 0 2px rgba(255,255,255,.25),0 3px 8px rgba(0,0,0,.6);}
 .player-item.p1 .pic{background:linear-gradient(135deg,#3b82f6,#1e40af);}
 .player-item.p2 .pic{background:linear-gradient(135deg,#f97316,#c2410c);}
 .player-item.p3 .pic{background:linear-gradient(135deg,#a855f7,#6d28d9);}
 .player-item.p4 .pic{background:linear-gradient(135deg,#10b981,#047857);}
-.player-item.p1.turn{color:#3b82f6;}
-.player-item.p2.turn{color:#f97316;}
-.player-item.p3.turn{color:#a855f7;}
-.player-item.p4.turn{color:#10b981;}
+.player-item.p1.turn{color:#3b82f6;} .player-item.p2.turn{color:#f97316;} .player-item.p3.turn{color:#a855f7;} .player-item.p4.turn{color:#10b981;}
 .player-item .info{flex:1;min-width:0;}
-.player-item .info .nm{font-weight:800;color:#e0f2fe;font-size:12px;}
+.player-item .info .nm{font-weight:800;color:#e0f2fe;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .player-item .info .pos{font-size:10px;color:#94a3b8;margin-top:1px;}
-.player-item .wins{font-size:11px;font-weight:800;color:#fbbf24;}
-
-.log-list{max-height:140px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;scrollbar-width:thin;}
+.player-item .wins{font-size:14px;}
+.log-list{max-height:150px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;scrollbar-width:thin;}
 .log-list::-webkit-scrollbar{width:4px;}
 .log-list::-webkit-scrollbar-thumb{background:#1b3b5d;border-radius:2px;}
-.log-item{font-size:11px;line-height:1.5;color:#cbd5e1;padding:6px 10px;border-radius:8px;background:rgba(19,41,65,.5);border-left:3px solid var(--accent);animation:slideIn .3s ease both;}
-@keyframes slideIn{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:translateX(0)}}
+.log-item{font-size:11px;line-height:1.5;color:#cbd5e1;padding:6px 10px;border-radius:8px;background:rgba(19,41,65,.5);border-left:3px solid var(--accent);}
 .log-item.pos{border-left-color:#10b981;color:#d1fae5;}
 .log-item.neg{border-left-color:#ef4444;color:#fecaca;}
 .log-item.warn{border-left-color:#fbbf24;color:#fef3c7;}
 
 .modal-back{position:fixed;inset:0;z-index:200;background:rgba(3,7,15,.9);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:.35s;}
 .modal-back.show{opacity:1;visibility:visible;}
-.modal{background:linear-gradient(160deg,#0f2337,#0a1828);border:1px solid var(--cell-border);border-radius:20px;max-width:540px;width:100%;padding:28px;box-shadow:0 30px 80px -20px rgba(0,0,0,.9),0 0 60px -20px var(--glow);transform:translateY(20px) scale(.96);transition:.4s cubic-bezier(.34,1.56,.64,1);max-height:90vh;overflow-y:auto;}
+.modal{background:linear-gradient(160deg,#0f2337,#0a1828);border:1px solid var(--cell-border);border-radius:22px;max-width:560px;width:100%;padding:28px;box-shadow:0 40px 90px -25px rgba(0,0,0,1),0 0 70px -30px var(--glow),inset 0 1px 0 rgba(255,255,255,.06);transform:translateY(20px) scale(.96);transition:.4s cubic-bezier(.34,1.56,.64,1);max-height:90vh;overflow-y:auto;}
 .modal-back.show .modal{transform:translateY(0) scale(1);}
 .modal .badge{display:inline-block;padding:5px 14px;font-size:10px;font-weight:800;letter-spacing:2px;border-radius:20px;margin-bottom:14px;text-transform:uppercase;}
 .modal .badge.q{background:rgba(168,85,247,.25);color:#e9d5ff;border:1px solid rgba(168,85,247,.5);}
 .modal .badge.ev{background:rgba(56,189,248,.25);color:#e0f2fe;border:1px solid rgba(56,189,248,.5);}
-.modal .badge.in{background:rgba(56,189,248,.25);color:#e0f2fe;border:1px solid rgba(56,189,248,.5);}
 .modal h2{font-size:20px;color:#e0f2fe;margin-bottom:10px;line-height:1.3;}
 .modal h2.big{font-size:26px;text-align:center;}
-.modal .emoji-big{font-size:60px;text-align:center;margin:6px 0 12px;filter:drop-shadow(0 0 22px var(--glow));animation:bounceIn .6s ease;}
+.modal .emoji-big{font-size:60px;text-align:center;margin:6px 0 12px;animation:bounceIn .6s ease;}
 @keyframes bounceIn{0%{transform:scale(.3);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
 .modal p{color:#cbd5e1;font-size:13px;line-height:1.7;margin-bottom:14px;}
 .modal .choices{display:flex;flex-direction:column;gap:8px;margin:16px 0;}
-.choice{padding:12px 16px;background:rgba(19,41,65,.7);border:1px solid var(--cell-border);border-radius:10px;color:#e0f2fe;font-size:13px;cursor:pointer;text-align:left;transition:.25s;font-family:inherit;font-weight:600;}
+.choice{padding:12px 16px;background:rgba(19,41,65,.7);border:1px solid var(--cell-border);border-radius:12px;color:#e0f2fe;font-size:13px;cursor:pointer;text-align:left;transition:.25s;font-family:inherit;font-weight:600;line-height:1.5;}
 .choice:hover:not(:disabled){background:rgba(56,189,248,.15);border-color:var(--accent);transform:translateX(3px);}
 .choice.correct{background:rgba(16,185,129,.3);border-color:#10b981;color:#d1fae5;}
 .choice.wrong{background:rgba(239,68,68,.3);border-color:#ef4444;color:#fecaca;}
 .choice:disabled{cursor:default;}
 .choice .key{display:inline-block;width:22px;height:22px;line-height:22px;text-align:center;border-radius:50%;background:#1b3b5d;color:var(--accent);font-size:11px;font-weight:800;margin-right:10px;vertical-align:middle;}
 .modal .row{display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap;}
-
 .btn{padding:11px 22px;border:none;border-radius:10px;font-weight:800;font-size:13px;cursor:pointer;letter-spacing:.5px;transition:.25s;font-family:inherit;display:inline-flex;align-items:center;gap:8px;}
-.btn.primary{background:linear-gradient(135deg,var(--c1),var(--c2));color:white;box-shadow:0 6px 20px -6px var(--glow);}
-.btn.primary:hover{transform:translateY(-2px);box-shadow:0 10px 26px -6px var(--glow);}
+.btn.primary{background:linear-gradient(135deg,var(--c1),var(--c2));color:white;box-shadow:0 12px 26px -12px var(--glow);}
+.btn.primary:hover{transform:translateY(-2px);}
 .btn.ghost{background:transparent;color:#94a3b8;border:1px solid rgba(148,163,184,.3);}
 .btn.ghost:hover{background:rgba(148,163,184,.1);color:white;}
 
+.result-banner{position:fixed;top:50%;left:50%;z-index:500;pointer-events:none;transform:translate(-50%,-50%) scale(.3);opacity:0;padding:32px 56px;border-radius:24px;text-align:center;animation:bannerPop 2.2s ease forwards;}
+.result-banner.correct{background:linear-gradient(135deg,#10b981,#047857);box-shadow:0 20px 60px rgba(16,185,129,.7),0 0 100px rgba(52,211,153,.8);border:3px solid #6ee7b7;}
+.result-banner.wrong{background:linear-gradient(135deg,#ef4444,#991b1b);box-shadow:0 20px 60px rgba(239,68,68,.7),0 0 100px rgba(248,113,113,.8);border:3px solid #fca5a5;}
+.result-banner .rb-icon{font-size:64px;margin-bottom:6px;filter:drop-shadow(0 6px 16px rgba(0,0,0,.6));}
+.result-banner .rb-text{font-size:54px;font-weight:900;letter-spacing:6px;color:white;text-shadow:0 4px 16px rgba(0,0,0,.5);line-height:1;}
+.result-banner .rb-sub{font-size:14px;font-weight:800;letter-spacing:3px;color:rgba(255,255,255,.95);margin-top:10px;text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,.5);}
+@keyframes bannerPop{0%{transform:translate(-50%,-50%) scale(.3);opacity:0;}15%{transform:translate(-50%,-50%) scale(1.18);opacity:1;}30%{transform:translate(-50%,-50%) scale(1);opacity:1;}75%{transform:translate(-50%,-50%) scale(1);opacity:1;}100%{transform:translate(-50%,-50%) scale(1.35);opacity:0;}}
+
+.screen-shake{animation:shake .55s cubic-bezier(.36,.07,.19,.97) both;}
+@keyframes shake{10%,90%{transform:translate3d(-2px,0,0);}20%,80%{transform:translate3d(4px,0,0);}30%,50%,70%{transform:translate3d(-8px,0,0);}40%,60%{transform:translate3d(8px,0,0);}}
+
 #screen-win{align-items:center;justify-content:center;padding:24px;overflow-y:auto;}
-.win-card{max-width:540px;width:100%;background:linear-gradient(160deg,rgba(15,35,55,.95),rgba(10,24,40,.95));border:1px solid rgba(251,191,36,.4);border-radius:22px;padding:36px 28px;text-align:center;box-shadow:0 30px 80px -20px rgba(0,0,0,.9),0 0 80px -20px rgba(251,191,36,.5);animation:fadeUp .6s ease both;}
-.win-card .crown{font-size:76px;filter:drop-shadow(0 0 30px rgba(251,191,36,.8));animation:crownBounce 1.5s ease-in-out infinite;}
+.win-card{max-width:560px;width:100%;background:linear-gradient(160deg,rgba(15,35,55,.96),rgba(10,24,40,.96));border:1px solid rgba(251,191,36,.4);border-radius:24px;padding:36px 28px;text-align:center;box-shadow:0 40px 90px -25px rgba(0,0,0,1),0 0 80px -35px rgba(251,191,36,.8);animation:fadeUp .6s ease both;position:relative;overflow:hidden;}
+.win-card::before{content:'';position:absolute;inset:-2px;border-radius:26px;pointer-events:none;background:conic-gradient(from 0deg,transparent,rgba(251,191,36,.8),transparent 40%,transparent 60%,rgba(251,191,36,.8),transparent);animation:frameSpin 7s linear infinite;z-index:-1;filter:blur(10px);}
+.win-card .crown{font-size:76px;animation:crownBounce 1.5s ease-in-out infinite;}
 @keyframes crownBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 .win-card h2{font-size:32px;font-weight:900;letter-spacing:-1px;background:linear-gradient(135deg,#fef3c7,#fbbf24,#f59e0b);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin:12px 0 6px;}
 .win-card .winner-name{font-size:16px;color:#e0f2fe;font-weight:800;margin-bottom:20px;}
 .win-card .winner-name .dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px;vertical-align:middle;}
-.win-card .rank-list{background:rgba(19,41,65,.5);border-radius:12px;padding:14px;margin:18px 0;display:flex;flex-direction:column;gap:8px;}
+.win-card .rank-list{background:rgba(19,41,65,.5);border-radius:14px;padding:14px;margin:18px 0;display:flex;flex-direction:column;gap:8px;}
 .win-card .rank-item{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#cbd5e1;padding:6px 8px;}
 .win-card .rank-item .name{display:flex;align-items:center;gap:8px;font-weight:700;}
 .win-card .rank-item .pos{color:var(--accent);font-weight:800;}
 
 .toast-wrap{position:fixed;top:70px;right:20px;z-index:300;display:flex;flex-direction:column;gap:8px;pointer-events:none;}
-.toast{background:rgba(19,41,65,.95);backdrop-filter:blur(10px);border:1px solid var(--cell-border);padding:10px 16px;border-radius:10px;font-size:12px;color:#e0f2fe;box-shadow:0 10px 30px -10px rgba(0,0,0,.8);animation:toastIn .3s ease both;display:flex;align-items:center;gap:10px;min-width:180px;transition:opacity .4s;}
+.toast{background:rgba(19,41,65,.96);border:1px solid var(--cell-border);padding:10px 16px;border-radius:12px;font-size:12px;color:#e0f2fe;box-shadow:0 16px 40px -12px rgba(0,0,0,.9);animation:toastIn .3s ease both;display:flex;align-items:center;gap:10px;min-width:180px;transition:opacity .4s;}
 .toast.pos{border-color:rgba(16,185,129,.6);}
 .toast.neg{border-color:rgba(239,68,68,.6);}
 .toast.fade{opacity:0;}
 @keyframes toastIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
-
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.confetti-layer{position:fixed;inset:0;z-index:600;pointer-events:none;overflow:hidden;}
+.confetti-piece{position:absolute;width:10px;height:14px;top:-20px;opacity:.95;animation:confettiFall linear forwards;}
+@keyframes confettiFall{0%{transform:translateY(-30px) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}
 </style>
 </head>
 <body data-level="1">
@@ -429,197 +335,73 @@ body[data-level="4"]{--c1:#a855f7;--c2:#6d28d9;--accent:#c084fc;--glow:rgba(192,
 <div class="bg-grid"></div>
 <div class="orb a"></div>
 <div class="orb b"></div>
+<div class="ambient-particles" id="ambientParticles"></div>
 
-<!-- ============================================================
-     LOADING SCREEN — MGE 3D
-     ============================================================ -->
 <div id="loader">
   <div class="mge-logo-wrap">
     <div class="mge-ring-outer"></div>
     <div class="mge-ring-mid"></div>
     <div class="mge-ring-inner"></div>
-    <div class="mge-circle">
-      <div class="mge-text">MGE</div>
-    </div>
+    <div class="mge-circle"><div class="mge-text">MGE</div></div>
   </div>
-
-  <div class="brand-text">
-    <span class="brand-line"></span>
-    <span class="brand-label">MAEDA GAMES EDU</span>
-    <span class="brand-line"></span>
-  </div>
-
+  <div class="brand-text"><span class="brand-line"></span><span class="brand-label">MAEDA GAMES EDU</span><span class="brand-line"></span></div>
   <div class="loader-title">Memuat Papan Permainan</div>
-
   <div class="loader-bar"><div class="loader-bar-fill"></div></div>
-
-  <div class="loader-sub">Ular Tangga Ekonomi · Bab 5 · Peran Pelaku Ekonomi</div>
+  <div class="loader-sub">Ular Tangga Ekonomi · 7 Level · 210 Soal</div>
 </div>
 
-<!-- ============================================================
-     BERANDA PREMIUM
-     ============================================================ -->
-<div class="screen" id="screen-menu">
-  <div class="menu-bg-deco">
-    <div class="glow g1"></div>
-    <div class="glow g2"></div>
-    <div class="glow g3"></div>
-  </div>
-
+<div class="screen active" id="screen-menu">
+  <div class="menu-bg-deco"><div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div></div>
   <div class="menu-inner">
-    <!-- Topbar -->
     <div class="topbar">
       <div class="brand">
         <div class="mini-mge">MGE</div>
-        <div class="name">ULAR TANGGA EKONOMI<small>Maeda Games Edu</small></div>
+        <div class="name">ULAR TANGGA EKONOMI<small>Maeda Games Edu · Bab 4</small></div>
       </div>
       <div class="pills">
-        <div class="pill">🎓 BAB 5 · PELAKU EKONOMI</div>
-        <div class="pill">🎲 100 SOAL</div>
+        <div class="pill">🌍 PERDAGANGAN INTERNASIONAL</div>
+        <div class="pill">🎲 210 SOAL UNIK</div>
       </div>
     </div>
 
-    <!-- Hero -->
-    <div class="hero">
-      <div class="hero-left">
-        <div class="eyebrow"><span class="dot-live"></span> GAME EDUKASI INTERAKTIF</div>
-        <h1 class="hero-title">
-          ULAR TANGGA
-          <span class="line2">EKONOMI</span>
-        </h1>
-        <p class="hero-sub">
-          Kuasai materi <b>Peran Pelaku Ekonomi</b> lewat permainan papan interaktif.
-          Pilih level, lempar dadu, naiki tangga, hindari ular, dan jawab pertanyaan
-          untuk menjadi juara ekonomi!
-        </p>
-
-        <div class="hero-cta">
-          <button class="cta primary" onclick="Game.start(2)"><span class="ic">🎮</span> Main Cepat (2 Pemain)</button>
-          <button class="cta ghost" onclick="Game.showRules()"><span class="ic">📘</span> Cara Bermain</button>
-        </div>
-
-        <div class="hero-stats">
-          <div class="hstat"><div class="num">4</div><div class="lbl">Level</div></div>
-          <div class="hstat"><div class="num">100</div><div class="lbl">Soal</div></div>
-          <div class="hstat"><div class="num">2–4</div><div class="lbl">Pemain</div></div>
-          <div class="hstat"><div class="num">10–20</div><div class="lbl">Menit</div></div>
-        </div>
-      </div>
-
-      <div class="hero-right">
-        <div class="preview-board">
-          <div class="preview-badge">PREVIEW</div>
-          <div class="preview-grid">
-            <div class="preview-cell"></div><div class="preview-cell"></div><div class="preview-cell q"></div><div class="preview-cell"></div><div class="preview-cell hot"></div><div class="preview-cell"></div>
-            <div class="preview-cell"></div><div class="preview-cell e"></div><div class="preview-cell"></div><div class="preview-cell"></div><div class="preview-cell"></div><div class="preview-cell danger"></div>
-            <div class="preview-cell hot"></div><div class="preview-cell"></div><div class="preview-cell"></div><div class="preview-cell q"></div><div class="preview-cell"></div><div class="preview-cell"></div>
-            <div class="preview-cell"></div><div class="preview-cell"></div><div class="preview-cell danger"></div><div class="preview-cell"></div><div class="preview-cell e"></div><div class="preview-cell"></div>
-            <div class="preview-cell q"></div><div class="preview-cell"></div><div class="preview-cell"></div><div class="preview-cell hot"></div><div class="preview-cell"></div><div class="preview-cell"></div>
-            <div class="preview-cell"></div><div class="preview-cell danger"></div><div class="preview-cell"></div><div class="preview-cell"></div><div class="preview-cell"></div><div class="preview-cell goal"></div>
-          </div>
-          <div class="preview-caption">PAPAN 10 × 10 · 100 KOTAK</div>
-        </div>
-      </div>
+    <div class="page-hero">
+      <h1>PILIH LEVELMU</h1>
+      <p>Tulis <b>nama pemain</b>, pilih level, lalu bertanding! <b>210 soal unik</b> siap diuji.</p>
     </div>
 
-    <!-- Level cards -->
+    <div class="player-picker">
+      <div class="pp-head">
+        <span class="label">👥 Jumlah Pemain &amp; Nama</span>
+        <div class="pc-group">
+          <button class="pc-btn active" data-count="2" onclick="Game.pickPlayerCount(2, this)"><span class="pc-icons">👤👤</span> 2</button>
+          <button class="pc-btn" data-count="3" onclick="Game.pickPlayerCount(3, this)"><span class="pc-icons">👤👤👤</span> 3</button>
+          <button class="pc-btn" data-count="4" onclick="Game.pickPlayerCount(4, this)"><span class="pc-icons">👤👤👤👤</span> 4</button>
+        </div>
+      </div>
+      <div class="name-fields" id="nameFields"></div>
+    </div>
+
     <div class="section-title">
       <div class="bar"></div>
-      <h3>Pilih Level</h3>
-      <div class="sub">25 SOAL / LEVEL · 100 SOAL TOTAL</div>
+      <h3>Daftar Level</h3>
+      <div class="sub">30 SOAL / LEVEL · KLIK UNTUK MULAI</div>
     </div>
 
     <div class="level-cards">
-      <div class="lvl-card lv1" data-level="1" onclick="Game.setLevel(1)">
-        <div class="card-top">
-          <span class="lvl-num">LEVEL 1</span>
-          <span class="lvl-icon">🌊</span>
-        </div>
-        <div class="lvl-name">Dasar</div>
-        <div class="lvl-desc">Pengertian pelaku ekonomi, rumah tangga konsumen, faktor produksi & balas jasa.</div>
-        <div class="lvl-meta">
-          <span class="tag">Mudah</span>
-          <span class="tag">25 Soal</span>
-        </div>
-        <div class="play-btn"><span>PILIH LEVEL</span><span>→</span></div>
-      </div>
-
-      <div class="lvl-card lv2" data-level="2" onclick="Game.setLevel(2)">
-        <div class="card-top">
-          <span class="lvl-num">LEVEL 2</span>
-          <span class="lvl-icon">🌿</span>
-        </div>
-        <div class="lvl-name">Menengah</div>
-        <div class="lvl-desc">RTP, RTN, RTMLN, BUMN/BUMS, ekspor-impor, devisa, dan peran ganda pemerintah.</div>
-        <div class="lvl-meta">
-          <span class="tag">Sedang</span>
-          <span class="tag">25 Soal</span>
-        </div>
-        <div class="play-btn"><span>PILIH LEVEL</span><span>→</span></div>
-      </div>
-
-      <div class="lvl-card lv3" data-level="3" onclick="Game.setLevel(3)">
-        <div class="card-top">
-          <span class="lvl-num">LEVEL 3</span>
-          <span class="lvl-icon">🔥</span>
-        </div>
-        <div class="lvl-name">Mahir</div>
-        <div class="lvl-desc">Koperasi (jenis, prinsip, SHU) dan circular flow diagram 2/3/4 sektor.</div>
-        <div class="lvl-meta">
-          <span class="tag">Sulit</span>
-          <span class="tag">25 Soal</span>
-        </div>
-        <div class="play-btn"><span>PILIH LEVEL</span><span>→</span></div>
-      </div>
-
-      <div class="lvl-card lv4" data-level="4" onclick="Game.setLevel(4)">
-        <div class="card-top">
-          <span class="lvl-num">LEVEL 4</span>
-          <span class="lvl-icon">💜</span>
-        </div>
-        <div class="lvl-name">Tantangan</div>
-        <div class="lvl-desc">Era digital, e-commerce, fintech, UMKM Go Digital, koperasi digital.</div>
-        <div class="lvl-meta">
-          <span class="tag">Expert</span>
-          <span class="tag">25 Soal</span>
-        </div>
-        <div class="play-btn"><span>PILIH LEVEL</span><span>→</span></div>
-      </div>
+      <div class="lvl-card lv1" onclick="Game.selectLevel(1)"><div class="card-top"><span class="lvl-num">LEVEL 1</span><span class="lvl-icon">🌊</span></div><div class="lvl-name">Dasar</div><div class="lvl-desc">Pengertian perdagangan internasional & faktor pendorong antarnegara.</div><div class="lvl-meta"><span class="tag">Mudah</span><span class="tag">30 Soal</span></div><div class="play-btn"><span>▶ MULAI</span><span>→</span></div></div>
+      <div class="lvl-card lv2" onclick="Game.selectLevel(2)"><div class="card-top"><span class="lvl-num">LEVEL 2</span><span class="lvl-icon">🌿</span></div><div class="lvl-name">Teori</div><div class="lvl-desc">Teori keunggulan mutlak & komparatif serta manfaat perdagangan.</div><div class="lvl-meta"><span class="tag">Sedang</span><span class="tag">30 Soal</span></div><div class="play-btn"><span>▶ MULAI</span><span>→</span></div></div>
+      <div class="lvl-card lv3" onclick="Game.selectLevel(3)"><div class="card-top"><span class="lvl-num">LEVEL 3</span><span class="lvl-icon">📦</span></div><div class="lvl-name">Transaksi</div><div class="lvl-desc">Ekspor-impor dan alat/cara pembayaran internasional (L/C, wesel).</div><div class="lvl-meta"><span class="tag">Sedang</span><span class="tag">30 Soal</span></div><div class="play-btn"><span>▶ MULAI</span><span>→</span></div></div>
+      <div class="lvl-card lv4" onclick="Game.selectLevel(4)"><div class="card-top"><span class="lvl-num">LEVEL 4</span><span class="lvl-icon">💱</span></div><div class="lvl-name">Keuangan</div><div class="lvl-desc">Neraca perdagangan-pembayaran serta devisa & kurs valuta asing.</div><div class="lvl-meta"><span class="tag">Sulit</span><span class="tag">30 Soal</span></div><div class="play-btn"><span>▶ MULAI</span><span>→</span></div></div>
+      <div class="lvl-card lv5" onclick="Game.selectLevel(5)"><div class="card-top"><span class="lvl-num">LEVEL 5</span><span class="lvl-icon">⚖️</span></div><div class="lvl-name">Kebijakan</div><div class="lvl-desc">Kebijakan perdagangan (proteksi/liberalisasi) & hambatan perdagangan.</div><div class="lvl-meta"><span class="tag">Sulit</span><span class="tag">30 Soal</span></div><div class="play-btn"><span>▶ MULAI</span><span>→</span></div></div>
+      <div class="lvl-card lv6" onclick="Game.selectLevel(6)"><div class="card-top"><span class="lvl-num">LEVEL 6</span><span class="lvl-icon">🇮🇩</span></div><div class="lvl-name">Indonesia</div><div class="lvl-desc">Dampak perdagangan internasional & peran Indonesia di kancah global.</div><div class="lvl-meta"><span class="tag">Mahir</span><span class="tag">30 Soal</span></div><div class="play-btn"><span>▶ MULAI</span><span>→</span></div></div>
+      <div class="lvl-card lv7" onclick="Game.selectLevel(7)"><div class="card-top"><span class="lvl-num">LEVEL 7</span><span class="lvl-icon">🤝</span></div><div class="lvl-name">Global</div><div class="lvl-desc">Kerja sama ekonomi internasional & organisasi ekonomi dunia.</div><div class="lvl-meta"><span class="tag">Expert</span><span class="tag">30 Soal</span></div><div class="play-btn"><span>▶ MULAI</span><span>→</span></div></div>
     </div>
 
-    <!-- Quick actions -->
-    <div class="section-title">
-      <div class="bar"></div>
-      <h3>Mulai Bermain</h3>
-      <div class="sub">PILIH JUMLAH PEMAIN</div>
-    </div>
-
-    <div class="quick-actions">
-      <button class="action-card" onclick="Game.start(2)">
-        <div class="aic">👥</div>
-        <div class="atxt"><b>2 Pemain — Duel Klasik</b><small>Durasi ± 10 menit · cocok untuk latihan cepat</small></div>
-        <div class="arr">→</div>
-      </button>
-      <button class="action-card" onclick="Game.start(3)">
-        <div class="aic">👥</div>
-        <div class="atxt"><b>3 Pemain — Bertiga Seru</b><small>Durasi ± 15 menit · kompetisi seimbang</small></div>
-        <div class="arr">→</div>
-      </button>
-      <button class="action-card" onclick="Game.start(4)">
-        <div class="aic">👥</div>
-        <div class="atxt"><b>4 Pemain — Rame-rame Kelas</b><small>Durasi ± 20 menit · seru untuk kelompok belajar</small></div>
-        <div class="arr">→</div>
-      </button>
-    </div>
-
-    <!-- Footer -->
-    <div class="menu-foot">
-      <div>© MGE · MAEDA GAMES EDU · BAB 5 — PERAN PELAKU EKONOMI</div>
-      <div class="right">
-        <span>🎲 4 Level</span>
-        <span>📚 100 Soal</span>
-        <span>🎯 Premium Edition</span>
-      </div>
+    <div class="bottom-info">
+      <span>© MGE · MAEDA GAMES EDU</span>
+      <span>🎲 7 Level</span>
+      <span>📚 210 Soal Unik</span>
+      <button class="rules-btn" onclick="Game.showRules()">📘 CARA BERMAIN</button>
     </div>
   </div>
 </div>
@@ -627,14 +409,10 @@ body[data-level="4"]{--c1:#a855f7;--c2:#6d28d9;--accent:#c084fc;--glow:rgba(192,
 <div class="screen" id="screen-game">
   <div class="game-head">
     <div class="logo">🎲 ULAR TANGGA EKONOMI <span class="lvlbadge" id="lvlBadge">LEVEL 1</span></div>
-    <button class="btn-sm" onclick="Game.backToMenu()">🏠 Menu</button>
+    <button class="btn-sm" onclick="Game.backToMenu()">🏠 Pilih Level</button>
   </div>
   <div class="game-body">
-    <div class="board-wrap">
-      <div class="board-frame">
-        <div class="board" id="board"></div>
-      </div>
-    </div>
+    <div class="board-wrap"><div class="board-frame"><div class="board" id="board"></div></div></div>
     <aside class="panel">
       <div class="panel-card">
         <div class="dice-area">
@@ -645,39 +423,28 @@ body[data-level="4"]{--c1:#a855f7;--c2:#6d28d9;--accent:#c084fc;--glow:rgba(192,
             <div class="dice-val" id="diceVal">–</div>
           </div>
         </div>
-        <div style="margin-top:12px;">
-          <button class="btn-roll" id="rollBtn" onclick="Game.roll()">🎲 Lempar Dadu</button>
-        </div>
+        <div style="margin-top:12px;"><button class="btn-roll" id="rollBtn" onclick="Game.roll()">🎲 Lempar Dadu</button></div>
       </div>
-      <div class="panel-card">
-        <div class="panel-title">👥 Pemain</div>
-        <div class="player-list" id="playerList"></div>
-      </div>
-      <div class="panel-card">
-        <div class="panel-title">📜 Log Permainan</div>
-        <div class="log-list" id="logList"></div>
-      </div>
+      <div class="panel-card"><div class="panel-title">👥 Pemain</div><div class="player-list" id="playerList"></div></div>
+      <div class="panel-card"><div class="panel-title">📜 Log Permainan</div><div class="log-list" id="logList"></div></div>
     </aside>
   </div>
 </div>
 
-<div class="screen" id="screen-win">
-  <div class="win-card" id="winCard"></div>
-</div>
-
-<div class="modal-back" id="modalBack">
-  <div class="modal" id="modalBox"></div>
-</div>
-
+<div class="screen" id="screen-win"><div class="win-card" id="winCard"></div></div>
+<div class="modal-back" id="modalBack"><div class="modal" id="modalBox"></div></div>
 <div class="toast-wrap" id="toastWrap"></div>
+<div class="confetti-layer" id="confettiLayer"></div>
 
 <script>
 /* ============================================================
-   ULAR TANGGA EKONOMI — Premium Edition
-   MGE · Bab 5 · Peran Pelaku Ekonomi
+   ULAR TANGGA EKONOMI v3.3 — NATURAL & VARIETY EDITION
+   - DiceBag: dadu natural (shuffle bag + anti-streak 3x)
+   - Tangga Ajaib: 6 palette warna acak + sparkles beragam
+   - Ular Ajaib: 5 palette warna acak + partikel beragam
+   - Soal anti-pengulangan per level
    ============================================================ */
 
-/* ---------- AUDIO ---------- */
 const Audio = (()=>{
   let ctx;
   const getCtx = ()=>{ if(!ctx) ctx = new (window.AudioContext||window.webkitAudioContext)(); return ctx; };
@@ -696,8 +463,8 @@ const Audio = (()=>{
     click(){ play(520,.06,'sine',.04); },
     dice(){ [0,80,160,240].forEach(d=>setTimeout(()=>play(400+Math.random()*300,.08,'square',.04),d)); },
     step(){ play(660,.05,'sine',.03); },
-    correct(){ play(700,.1); setTimeout(()=>play(1000,.15),90); setTimeout(()=>play(1300,.2),200); },
-    wrong(){ play(200,.25,'sawtooth',.06); },
+    correct(){ play(700,.1); setTimeout(()=>play(1000,.15),90); setTimeout(()=>play(1300,.22),200); },
+    wrong(){ play(240,.28,'sawtooth',.06); },
     ladder(){ [523,659,784,1047].forEach((f,i)=>setTimeout(()=>play(f,.15,'triangle',.05),i*70)); },
     snake(){ play(400,.15,'sawtooth',.05); setTimeout(()=>play(250,.25,'sawtooth',.05),120); },
     event(){ play(600,.12,'triangle',.05); },
@@ -705,7 +472,61 @@ const Audio = (()=>{
   };
 })();
 
-/* ---------- PLAYERS ---------- */
+/* =========== DICE BAG: shuffle bag + anti-streak =========== */
+const DiceBag = {
+  bag: [],
+  history: [],
+  refill(){
+    const vals = [1,2,3,4,5,6];
+    // Fisher-Yates shuffle
+    for(let i = vals.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [vals[i], vals[j]] = [vals[j], vals[i]];
+    }
+    this.bag = vals;
+  },
+  roll(){
+    if(this.bag.length === 0) this.refill();
+    let val = this.bag.pop();
+    // Anti-streak: kalau 2x terakhir sama dengan val, cari gantinya
+    const h = this.history;
+    if(h.length >= 2 && h[h.length-1] === val && h[h.length-2] === val){
+      const altIdx = this.bag.findIndex(v => v !== val);
+      if(altIdx !== -1){
+        const alt = this.bag[altIdx];
+        this.bag[altIdx] = val;
+        // re-shuffle sisa bag agar tidak terpola
+        for(let i = this.bag.length - 1; i > 0; i--){
+          const j = Math.floor(Math.random() * (i + 1));
+          [this.bag[i], this.bag[j]] = [this.bag[j], this.bag[i]];
+        }
+        val = alt;
+      }
+    }
+    h.push(val);
+    if(h.length > 5) h.shift();
+    return val;
+  },
+  reset(){ this.bag = []; this.history = []; }
+};
+
+/* =========== PALETTE VARIETY =========== */
+const MAGIC_LADDER_PALETTES = [
+  { rail:'#fbbf24', light:'#fde68a', dark:'#b45309', glow:'rgba(251,191,36,.95)',  particle:'#fbbf24', label:'Emas' },
+  { rail:'#22d3ee', light:'#a5f3fc', dark:'#0e7490', glow:'rgba(34,211,238,.95)',  particle:'#22d3ee', label:'Kristal' },
+  { rail:'#a855f7', light:'#e9d5ff', dark:'#6b21a8', glow:'rgba(168,85,247,.95)',  particle:'#c084fc', label:'Violet' },
+  { rail:'#10b981', light:'#a7f3d0', dark:'#065f46', glow:'rgba(16,185,129,.95)',  particle:'#34d399', label:'Zamrud' },
+  { rail:'#ec4899', light:'#fbcfe8', dark:'#9d174d', glow:'rgba(236,72,153,.95)',  particle:'#f472b6', label:'Fuchsia' },
+  { rail:'#f97316', light:'#fed7aa', dark:'#9a3412', glow:'rgba(249,115,22,.95)',  particle:'#fb923c', label:'Matahari' }
+];
+const MAGIC_SNAKE_PALETTES = [
+  { body:'#dc2626', light:'#f87171', dark:'#450a0a', glow:'rgba(248,113,113,.95)', particle:'#f87171' },
+  { body:'#ea580c', light:'#fb923c', dark:'#7c2d12', glow:'rgba(251,146,60,.95)',  particle:'#fb923c' },
+  { body:'#7c3aed', light:'#a78bfa', dark:'#4c1d95', glow:'rgba(139,92,246,.95)',  particle:'#a78bfa' },
+  { body:'#db2777', light:'#f472b6', dark:'#831843', glow:'rgba(236,72,153,.95)',  particle:'#f472b6' },
+  { body:'#16a34a', light:'#86efac', dark:'#14532d', glow:'rgba(22,163,74,.95)',   particle:'#4ade80' }
+];
+
 const PLAYERS = [
   { id:'p1', name:'Pemain 1', icon:'🏠', role:'RTK',   color:'#3b82f6' },
   { id:'p2', name:'Pemain 2', icon:'🏭', role:'RTP',   color:'#f97316' },
@@ -713,186 +534,329 @@ const PLAYERS = [
   { id:'p4', name:'Pemain 4', icon:'🌐', role:'RTMLN', color:'#10b981' }
 ];
 
-/* ---------- BOARD ---------- */
 const LADDERS = { 3:24, 11:30, 21:46, 37:57, 51:73, 70:90 };
 const SNAKES  = { 18:7, 35:14, 53:31, 67:44, 81:60, 94:76, 99:78 };
 
 const LADDER_PALETTE = [
-  { rail:'#f59e0b', light:'#fcd34d', dark:'#b45309' },
-  { rail:'#ef4444', light:'#fca5a5', dark:'#991b1b' },
-  { rail:'#10b981', light:'#6ee7b7', dark:'#065f46' },
-  { rail:'#3b82f6', light:'#93c5fd', dark:'#1e40af' },
-  { rail:'#a855f7', light:'#d8b4fe', dark:'#6b21a8' },
-  { rail:'#ec4899', light:'#f9a8d4', dark:'#9d174d' },
-  { rail:'#06b6d4', light:'#67e8f9', dark:'#155e75' },
-  { rail:'#84cc16', light:'#bef264', dark:'#3f6212' }
+  { rail:'#f59e0b', light:'#fcd34d', dark:'#b45309' }, { rail:'#ef4444', light:'#fca5a5', dark:'#991b1b' },
+  { rail:'#10b981', light:'#6ee7b7', dark:'#065f46' }, { rail:'#3b82f6', light:'#93c5fd', dark:'#1e40af' },
+  { rail:'#a855f7', light:'#d8b4fe', dark:'#6b21a8' }, { rail:'#ec4899', light:'#f9a8d4', dark:'#9d174d' },
+  { rail:'#06b6d4', light:'#67e8f9', dark:'#155e75' }, { rail:'#84cc16', light:'#bef264', dark:'#3f6212' }
 ];
-
 const SNAKE_PALETTE = [
-  { body:'#dc2626', light:'#f87171', dark:'#450a0a', belly:'#fca5a5' },
-  { body:'#f97316', light:'#fb923c', dark:'#7c2d12', belly:'#fdba74' },
-  { body:'#eab308', light:'#facc15', dark:'#713f12', belly:'#fde047' },
-  { body:'#22c55e', light:'#4ade80', dark:'#14532d', belly:'#86efac' },
-  { body:'#06b6d4', light:'#22d3ee', dark:'#164e63', belly:'#67e8f9' },
-  { body:'#8b5cf6', light:'#a78bfa', dark:'#4c1d95', belly:'#c4b5fd' },
+  { body:'#dc2626', light:'#f87171', dark:'#450a0a', belly:'#fca5a5' }, { body:'#f97316', light:'#fb923c', dark:'#7c2d12', belly:'#fdba74' },
+  { body:'#eab308', light:'#facc15', dark:'#713f12', belly:'#fde047' }, { body:'#22c55e', light:'#4ade80', dark:'#14532d', belly:'#86efac' },
+  { body:'#06b6d4', light:'#22d3ee', dark:'#164e63', belly:'#67e8f9' }, { body:'#8b5cf6', light:'#a78bfa', dark:'#4c1d95', belly:'#c4b5fd' },
   { body:'#ec4899', light:'#f472b6', dark:'#831843', belly:'#f9a8d4' }
 ];
 
-const Q_CELLS = [5,12,25,33,47,58,66,74,82,89,96];
-const E_CELLS = [8,15,29,42,55,69,78,85,92];
+const Q_CELLS = [
+  2,4,5,6,9,10,12,13,16,17,19,20,22,23,25,26,28,32,33,34,36,38,39,40,41,43,45,47,48,49,50,
+  52,54,56,58,59,61,62,63,64,65,66,68,71,72,74,75,77,79,80
+];
+const E_CELLS = [8,15,27,29,42,55,69,82,85,92];
 
-/* ============================================================
-   BANK SOAL — 25 SOAL / LEVEL (100 SOAL TOTAL)
-   Murni dari materi Bab 5 — Peran Pelaku Ekonomi
-   ============================================================ */
 const QUESTIONS_BY_LEVEL = {
-  1: [
-    { q:'Pelaku ekonomi yang mengonsumsi barang/jasa & menyediakan faktor produksi adalah...', a:['Rumah Tangga Produsen','Rumah Tangga Konsumen','Rumah Tangga Pemerintah','Masyarakat Luar Negeri'], c:1 },
-    { q:'Kegiatan manusia untuk memenuhi kebutuhan hidupnya meliputi tiga kegiatan pokok, yaitu...', a:['Produksi, distribusi, konsumsi','Produksi, investasi, konsumsi','Distribusi, tabungan, konsumsi','Produksi, konsumsi, menabung'], c:0 },
-    { q:'Manusia disebut sebagai makhluk ekonomi karena...', a:['Selalu menabung','Selalu berusaha memenuhi kebutuhan dengan cara rasional','Selalu berbelanja','Selalu bekerja keras'], c:1 },
-    { q:'Rumah tangga konsumen menyediakan faktor produksi berupa tenaga kerja. Balas jasanya adalah...', a:['Sewa','Upah','Bunga','Laba'], c:1 },
-    { q:'Rumah tangga konsumen menyediakan faktor produksi tanah. Balas jasanya adalah...', a:['Sewa','Upah','Bunga','Laba'], c:0 },
-    { q:'Rumah tangga konsumen menyediakan faktor produksi modal. Balas jasanya adalah...', a:['Sewa','Upah','Bunga','Laba'], c:2 },
-    { q:'Rumah tangga konsumen menyediakan faktor produksi keahlian. Balas jasanya adalah...', a:['Sewa','Upah','Bunga','Laba'], c:3 },
-    { q:'Berikut yang BUKAN pelaku ekonomi utama adalah...', a:['Rumah Tangga Konsumen','Rumah Tangga Produsen','Bank Indonesia','Masyarakat Luar Negeri'], c:2 },
-    { q:'Contoh rumah tangga konsumen adalah...', a:['Keluarga yang membeli kebutuhan di pasar','Pabrik sepatu','PT Pertamina','PLN'], c:0 },
-    { q:'Kegiatan konsumsi adalah...', a:['Menghasilkan barang/jasa','Menyalurkan barang/jasa','Mengurangi atau menghabiskan kegunaan barang/jasa','Menimbun barang'], c:2 },
-    { q:'Pelaku ekonomi adalah...', a:['Pihak yang terlibat dalam kegiatan produksi, distribusi, dan konsumsi','Pihak yang hanya mengonsumsi','Pihak yang hanya memproduksi','Pihak yang hanya mengatur'], c:0 },
-    { q:'Rumah tangga konsumen terdiri atas...', a:['Ayah, ibu, anak, dan anggota keluarga lain','Pemerintah dan swasta','Importir dan eksportir','Bank dan koperasi'], c:0 },
-    { q:'Faktor produksi tenaga kerja disebut juga...', a:['Land','Labor','Capital','Skill'], c:1 },
-    { q:'Faktor produksi tanah disebut juga...', a:['Land','Labor','Capital','Skill'], c:0 },
-    { q:'Faktor produksi modal disebut juga...', a:['Land','Labor','Capital','Skill'], c:2 },
-    { q:'Faktor produksi keahlian disebut juga...', a:['Land','Labor','Capital','Skill'], c:3 },
-    { q:'Contoh kegiatan konsumsi adalah...', a:['Membeli makanan dan pakaian','Menanam padi','Mengantar barang','Membuat roti'], c:0 },
-    { q:'Rumah tangga konsumen menerima pendapatan berupa...', a:['Upah, sewa, bunga, laba','Pajak dan subsidi','Ekspor dan impor','Devisa'], c:0 },
-    { q:'Yang dimaksud dengan pelaku ekonomi adalah...', a:['Semua pihak yang terlibat dalam kegiatan ekonomi','Hanya pemerintah','Hanya perusahaan','Hanya konsumen'], c:0 },
-    { q:'Kegiatan ekonomi yang dilakukan manusia bertujuan untuk...', a:['Memenuhi kebutuhan hidup','Mencari musuh','Bersenang-senang','Menghabiskan uang'], c:0 },
-    { q:'Salah satu contoh rumah tangga konsumen di sekitar kita adalah...', a:['Keluarga yang menyewakan kamar kos','Pabrik tekstil','PT KAI','Bank Indonesia'], c:0 },
-    { q:'Rumah tangga konsumen yang bekerja di kantor menerima...', a:['Gaji/upah','Sewa','Bunga','Laba'], c:0 },
-    { q:'Rumah tangga konsumen yang menabung di bank menerima...', a:['Bunga','Upah','Sewa','Laba'], c:0 },
-    { q:'Rumah tangga konsumen yang menyewakan lahan menerima...', a:['Sewa','Upah','Bunga','Laba'], c:0 },
-    { q:'Rumah tangga konsumen yang membuka usaha sendiri menerima...', a:['Laba','Upah','Sewa','Bunga'], c:0 }
+  1:[
+    { q:'Perdagangan internasional adalah...', a:['Kegiatan jual beli barang/jasa antarnegara','Kegiatan jual beli dalam satu negara','Kegiatan barter antarindividu','Kegiatan menabung di bank'], c:0 },
+    { q:'Kegiatan menjual barang/jasa dari dalam negeri ke luar negeri disebut...', a:['Impor','Ekspor','Distribusi','Konsumsi'], c:1 },
+    { q:'Kegiatan membeli barang/jasa dari luar negeri disebut...', a:['Ekspor','Impor','Produksi','Investasi'], c:1 },
+    { q:'Perdagangan internasional terjadi karena...', a:['Adanya perbedaan sumber daya & kebutuhan antarnegara','Semua negara punya SDA sama','Semua negara kaya','Tidak ada kebutuhan'], c:0 },
+    { q:'Indonesia kaya minyak kelapa sawit, Arab Saudi kaya minyak bumi. Faktor pendorongnya...', a:['Perbedaan iklim','Perbedaan sumber daya alam','Perbedaan teknologi','Perbedaan selera'], c:1 },
+    { q:'Indonesia tropis menghasilkan kopi, Jepang subtropis menghasilkan apel. Faktor pendorongnya...', a:['Perbedaan SDA','Perbedaan iklim','Perbedaan teknologi','Perbedaan budaya'], c:1 },
+    { q:'Jepang unggul elektronik, Indonesia unggul tekstil. Faktor pendorongnya...', a:['Perbedaan SDA','Perbedaan iklim','Perbedaan teknologi','Perbedaan selera'], c:2 },
+    { q:'Masyarakat Indonesia menyukai smartphone Korea. Faktor pendorongnya...', a:['Perbedaan SDA','Perbedaan iklim','Perbedaan teknologi','Perbedaan selera'], c:3 },
+    { q:'Kelebihan produksi dalam negeri dapat dijual ke luar negeri. Faktor pendorongnya...', a:['Kelebihan produksi','Perbedaan iklim','Perbedaan selera','Perbedaan teknologi'], c:0 },
+    { q:'Produsen ingin menjual produknya ke lebih banyak konsumen. Faktor pendorongnya...', a:['Memperluas pasar','Perbedaan iklim','Perbedaan SDA','Perbedaan budaya'], c:0 },
+    { q:'Berikut yang BUKAN faktor pendorong perdagangan internasional adalah...', a:['Perbedaan SDA','Perbedaan iklim','Kesamaan teknologi','Perbedaan selera'], c:2 },
+    { q:'Contoh komoditas ekspor unggulan Indonesia adalah...', a:['Minyak kelapa sawit','Gandum','Apel','Kurma'], c:0 },
+    { q:'Contoh komoditas impor utama Indonesia adalah...', a:['Minyak kelapa sawit','Batu bara','Gandum','Kopi'], c:2 },
+    { q:'Perbedaan mata uang dalam perdagangan dalam negeri vs internasional adalah...', a:['Sama-sama pakai rupiah','Dalam negeri rupiah, internasional valuta asing','Sama-sama pakai dolar','Tidak ada perbedaan'], c:1 },
+    { q:'Dokumen yang khas dalam perdagangan internasional adalah...', a:['Nota','Kwitansi','Letter of Credit','Struk belanja'], c:2 },
+    { q:'Manusia disebut sebagai makhluk ekonomi karena...', a:['Selalu menabung','Selalu berusaha memenuhi kebutuhan dengan cara rasional','Selalu berbelanja','Selalu bekerja'], c:1 },
+    { q:'Manfaat utama perdagangan internasional bagi konsumen adalah...', a:['Mendapat barang yang tidak diproduksi di dalam negeri','Membayar pajak lebih banyak','Membuka lapangan kerja','Menambah utang'], c:0 },
+    { q:'Kopi Gayo dari Aceh yang dijual ke mancanegara adalah contoh produk...', a:['Impor','Ekspor','Barter','Subsidi'], c:1 },
+    { q:'Apel Fuji dari Jepang yang dijual di Indonesia adalah contoh produk...', a:['Ekspor','Impor','Barter','Subsidi'], c:1 },
+    { q:'Berikut yang BUKAN kegiatan ekonomi adalah...', a:['Produksi','Distribusi','Konsumsi','Menonton TV'], c:3 },
+    { q:'Perdagangan internasional minimal melibatkan...', a:['Dua negara','Satu negara','Satu keluarga','Satu pulau'], c:0 },
+    { q:'Alat tukar utama dalam perdagangan internasional adalah...', a:['Valuta asing','Beras','Emas batangan','Kerang'], c:0 },
+    { q:'Contoh negara tujuan ekspor CPO Indonesia adalah...', a:['India','Brasil','Mesir','Kanada'], c:0 },
+    { q:'Contoh negara asal impor gandum Indonesia adalah...', a:['Australia','Vietnam','Filipina','Malaysia'], c:0 },
+    { q:'Keunggulan Indonesia dalam industri tekstil terutama karena...', a:['Tenaga kerja melimpah','Cuaca dingin','Bahan baku gandum','Teknologi tinggi'], c:0 },
+    { q:'Perbedaan pajak dalam negeri vs internasional adalah...', a:['Internasional ada bea masuk','Dalam negeri ada bea masuk','Tidak ada pajak','Sama saja'], c:0 },
+    { q:'Dokumen sederhana dalam perdagangan dalam negeri adalah...', a:['Nota/kwitansi','Letter of Credit','Bill of Lading','Faktur ekspor'], c:0 },
+    { q:'Tujuan utama ekspor adalah...', a:['Memperoleh devisa & memperluas pasar','Mengurangi produksi','Menambah utang','Menurunkan kualitas'], c:0 },
+    { q:'Contoh produk yang diimpor karena teknologi lebih maju adalah...', a:['Mesin pabrik dari Jerman','Beras dari Thailand','Batik dari Solo','Roti dari warung'], c:0 },
+    { q:'Setiap negara melakukan perdagangan internasional karena punya...', a:['Kelebihan & kekurangan masing-masing','Semua kelebihan','Semua kekurangan','Sumber daya tak terbatas'], c:0 }
   ],
-  2: [
-    { q:'PT Pertamina & PLN adalah contoh peran pemerintah sebagai...', a:['Regulator','Konsumen','Produsen','Distributor'], c:2 },
-    { q:'Berikut yang BUKAN peran masyarakat luar negeri adalah...', a:['Konsumen barang ekspor','Produsen barang impor','Penentu kebijakan moneter','Investor penanam modal'], c:2 },
-    { q:'Kegiatan menjual barang/jasa ke luar negeri disebut...', a:['Impor','Ekspor','Distribusi','Investasi'], c:1 },
-    { q:'Rumah tangga produsen yang dimiliki dan dikelola pemerintah disebut...', a:['BUMN','BUMS','Koperasi','UMKM'], c:0 },
-    { q:'Pemerintah menarik pajak dari RTK & RTP. Ini peran pemerintah sebagai...', a:['Konsumen','Produsen','Regulator','Distributor'], c:2 },
-    { q:'Kegiatan menyalurkan barang dari produsen ke konsumen disebut...', a:['Produksi','Konsumsi','Distribusi','Investasi'], c:2 },
-    { q:'Peran rumah tangga produsen sebagai agen pembangunan ditunjukkan oleh...', a:['Membeli barang dari konsumen','Membayar pajak','Membuka lapangan pekerjaan & inovasi','Mengonsumsi barang'], c:2 },
-    { q:'Masyarakat luar negeri yang menanamkan modalnya di Indonesia disebut...', a:['Konsumen','Produsen','Investor','Distributor'], c:2 },
-    { q:'Contoh peran pemerintah sebagai konsumen adalah...', a:['Membangun jalan & jembatan','Menarik pajak','Mengatur harga BBM','Menyediakan listrik'], c:0 },
-    { q:'Perusahaan asing yang membangun pabrik di Indonesia menciptakan...', a:['Lapangan kerja','Utang negara','Pajak baru','Kerusakan lingkungan'], c:0 },
-    { q:'Rumah tangga produsen yang dimiliki perorangan atau swasta disebut...', a:['BUMN','BUMS','Koperasi','RTN'], c:1 },
-    { q:'Contoh BUMN adalah...', a:['PT Pertamina','Warung makan','Pabrik tekstil swasta','Toko kelontong'], c:0 },
-    { q:'Kegiatan membeli barang/jasa dari luar negeri disebut...', a:['Impor','Ekspor','Distribusi','Investasi'], c:0 },
-    { q:'Pemerintah mengatur harga BBM. Ini peran pemerintah sebagai...', a:['Regulator','Konsumen','Produsen','Distributor'], c:0 },
-    { q:'Pemerintah membelanjakan anggaran untuk membeli alat kantor. Ini peran pemerintah sebagai...', a:['Regulator','Konsumen','Produsen','Distributor'], c:1 },
-    { q:'Contoh peran masyarakat luar negeri sebagai sumber tenaga ahli adalah...', a:['Insinyur asing yang bekerja di proyek infrastruktur','Membeli kopi Indonesia','Menjual mobil ke Indonesia','Menanamkan modal'], c:0 },
+  2:[
+    { q:'Teori keunggulan mutlak dikemukakan oleh...', a:['David Ricardo','Adam Smith','John Keynes','Karl Marx'], c:1 },
+    { q:'Teori keunggulan komparatif dikemukakan oleh...', a:['Adam Smith','David Ricardo','John Keynes','Karl Marx'], c:1 },
+    { q:'Buku Adam Smith yang membahas teori keunggulan mutlak berjudul...', a:['Das Kapital','The Wealth of Nations','The General Theory','The Prince'], c:1 },
+    { q:'Tahun dikemukakannya teori keunggulan mutlak adalah...', a:['1776','1817','1900','1945'], c:0 },
+    { q:'Tahun dikemukakannya teori keunggulan komparatif adalah...', a:['1776','1817','1900','1945'], c:1 },
+    { q:'Menurut teori keunggulan mutlak, setiap negara sebaiknya...', a:['Berspesialisasi pada barang yang paling efisien diproduksi','Memproduksi semua barang sendiri','Melarang impor','Menutup diri dari perdagangan'], c:0 },
+    { q:'Menurut teori keunggulan komparatif, spesialisasi dilakukan berdasarkan...', a:['Efisiensi absolut','Biaya peluang paling rendah','Kekuatan militer','Luas wilayah'], c:1 },
+    { q:'Inti teori keunggulan komparatif adalah...', a:['Negara tetap untung berdagang meski unggul di semua bidang','Negara harus menguasai semua pasar','Negara harus melarang impor','Negara harus menutup diri'], c:0 },
+    { q:'Manfaat perdagangan internasional bagi pemerintah adalah...', a:['Memperoleh devisa','Kehilangan pajak','Kehilangan tenaga kerja','Menutup industri'], c:0 },
+    { q:'Manfaat perdagangan internasional bagi produsen adalah...', a:['Memperluas pasar','Kehilangan pelanggan','Mengurangi produksi','Menutup usaha'], c:0 },
+    { q:'Manfaat perdagangan internasional bagi konsumen adalah...', a:['Pilihan lebih beragam','Harga barang naik','Barang langka','Kualitas menurun'], c:0 },
+    { q:'Contoh produk yang tidak bisa diproduksi optimal di Indonesia sehingga harus diimpor adalah...', a:['Beras','Gandum','Kelapa sawit','Kopi'], c:1 },
+    { q:'Transfer teknologi dari negara maju ke negara berkembang adalah manfaat bagi...', a:['Pemerintah','Produsen','Konsumen','Anak-anak'], c:1 },
+    { q:'Contoh nyata Indomie yang dijual di 100+ negara menunjukkan manfaat...', a:['Memperluas pasar','Meningkatkan impor','Mengurangi produksi','Menaikkan pajak'], c:0 },
+    { q:'Harga barang impor bisa lebih murah karena...', a:['Persaingan antarnegara','Subsidi pemerintah','Kenaikan pajak','Larangan impor'], c:0 },
+    { q:'Menurut teori keunggulan mutlak, jika Indonesia unggul kain & Jepang unggul elektronik, maka...', a:['Indonesia fokus kain, Jepang fokus elektronik','Keduanya fokus elektronik','Keduanya fokus kain','Keduanya berhenti produksi'], c:0 },
+    { q:'Kesimpulan utama dari kedua teori perdagangan adalah...', a:['Perdagangan internasional saling menguntungkan (win-win)','Perdagangan hanya menguntungkan negara kaya','Perdagangan merugikan semua pihak','Perdagangan harus dihindari'], c:0 },
+    { q:'Yang dimaksud biaya peluang (opportunity cost) adalah...', a:['Nilai alternatif terbaik yang dikorbankan','Biaya transportasi','Biaya produksi','Pajak impor'], c:0 },
+    { q:'Manfaat perdagangan internasional dalam meningkatkan kualitas produk disebabkan oleh...', a:['Persaingan global mendorong inovasi','Subsidi pemerintah','Kenaikan pajak','Larangan impor'], c:0 },
+    { q:'Manfaat perdagangan internasional dalam mempererat hubungan antarnegara adalah...', a:['Kerja sama ekonomi mempererat hubungan diplomatik','Menimbulkan perang','Meningkatkan persaingan militer','Menutup hubungan diplomatik'], c:0 },
+    { q:'Contoh manfaat transfer teknologi adalah...', a:['Pabrik mobil Indonesia belajar teknologi hybrid dari Jepang','Indonesia mengirim TKI ke Malaysia','Membeli beras dari Thailand','Menjual batik ke Eropa'], c:0 },
+    { q:'Manfaat perdagangan internasional dalam memperluas lapangan kerja terjadi karena...', a:['Industri ekspor butuh lebih banyak tenaga kerja','Pemerintah menambah pegawai','Impor berkurang','Pajak naik'], c:0 },
+    { q:'Contoh manfaat memperoleh devisa adalah...', a:['Ekspor CPO menghasilkan USD untuk negara','Membeli mobil dari Jepang','Membayar pajak','Menabung di bank'], c:0 },
+    { q:'Manfaat perdagangan internasional bagi konsumen berupa harga murah karena...', a:['Persaingan antarnegara','Subsidi ekspor','Kenaikan pajak','Larangan impor'], c:0 },
+    { q:'Contoh negara dengan teknologi unggul yang menjadi mitra dagang Indonesia adalah...', a:['Jepang & Jerman','Papua Nugini','Timor Leste','Bhutan'], c:0 },
+    { q:'Keunggulan komparatif menggunakan konsep...', a:['Biaya peluang relatif','Biaya absolut','Kekuatan militer','Luas wilayah'], c:0 },
+    { q:'Contoh keunggulan komparatif adalah negara fokus pada produk...', a:['Yang paling efisien relatif','Yang paling mahal','Yang paling sulit','Yang paling langka'], c:0 },
+    { q:'Perbedaan keunggulan mutlak vs komparatif adalah...', a:['Mutlak = absolut, komparatif = relatif','Sama saja','Keduanya absolut','Keduanya relatif'], c:0 },
+    { q:'Berikut yang BUKAN manfaat perdagangan internasional adalah...', a:['Menambah utang negara','Memperoleh devisa','Memperluas pasar','Transfer teknologi'], c:0 },
+    { q:'Contoh pilihan produk beragam bagi konsumen Indonesia adalah...', a:['Beras lokal, Thailand, Vietnam','Hanya beras lokal','Hanya beras impor','Tidak ada pilihan'], c:0 }
+  ],
+  3:[
+    { q:'Pelaku yang melakukan ekspor disebut...', a:['Importir','Eksportir','Distributor','Konsumen'], c:1 },
+    { q:'Pelaku yang melakukan impor disebut...', a:['Importir','Eksportir','Produsen','Pemasok'], c:0 },
+    { q:'Ekspor langsung adalah...', a:['Produsen menjual langsung ke pembeli di luar negeri','Produsen menjual melalui perantara','Produsen menjual ke pasar lokal','Produsen menimbun barang'], c:0 },
+    { q:'Ekspor tidak langsung adalah...', a:['Produsen menjual langsung ke pembeli luar negeri','Produsen menjual melalui perantara (eksportir)','Produsen menjual ke pasar lokal','Produsen menghancurkan barang'], c:1 },
+    { q:'Komoditas ekspor unggulan Indonesia yang menjadi yang terbesar di dunia adalah...', a:['Gandum','Minyak kelapa sawit (CPO)','Apel','Kurma'], c:1 },
+    { q:'Komoditas impor utama Indonesia untuk membuat tepung terigu adalah...', a:['Beras','Gandum','Jagung','Kedelai'], c:1 },
+    { q:'Impor barang konsumsi adalah...', a:['Barang yang langsung digunakan konsumen','Barang yang digunakan untuk produksi','Barang yang diolah jadi barang jadi','Barang yang dijual kembali'], c:0 },
+    { q:'Impor barang modal adalah...', a:['Barang yang langsung digunakan konsumen','Barang yang digunakan untuk produksi (mesin)','Barang yang diolah jadi barang jadi','Barang yang diimpor untuk dijual kembali'], c:1 },
+    { q:'Impor bahan baku adalah...', a:['Barang yang langsung digunakan konsumen','Barang yang digunakan untuk produksi','Bahan yang diolah menjadi barang jadi','Barang yang dijual kembali'], c:2 },
+    { q:'Alat pembayaran internasional yang berupa mata uang asing disebut...', a:['Valuta asing','Wesel','Cek','Bilyet giro'], c:0 },
+    { q:'Surat jaminan dari bank importir yang menjamin pembayaran kepada eksportir disebut...', a:['Wesel','Letter of Credit (L/C)','Cek','Bilyet giro'], c:1 },
+    { q:'Cara pembayaran internasional yang paling aman untuk kedua belah pihak adalah...', a:['Advance Payment','Open Account','Letter of Credit','Consignment'], c:2 },
+    { q:'Cara pembayaran di mana importir membayar dulu, baru barang dikirim disebut...', a:['Advance Payment','Open Account','L/C','Consignment'], c:0 },
+    { q:'Cara pembayaran di mana barang dikirim dulu, pembayaran kemudian (30-90 hari) disebut...', a:['Advance Payment','Open Account','L/C','Consignment'], c:1 },
+    { q:'Cara pembayaran yang paling berisiko bagi eksportir adalah...', a:['Advance Payment','Open Account','L/C','Consignment'], c:1 },
+    { q:'Surat perintah membayar sejumlah uang kepada pihak tertentu pada waktu tertentu disebut...', a:['Wesel','Cek','Bilyet giro','L/C'], c:0 },
+    { q:'Cara pembayaran melalui bank yang menagih pembayaran atas nama eksportir disebut...', a:['Advance Payment','Open Account','Collection (Wesel Inkaso)','Consignment'], c:2 },
+    { q:'Cara pembayaran di mana barang dikirim, dibayar setelah terjual disebut...', a:['Advance Payment','Open Account','L/C','Consignment'], c:3 },
+    { q:'Alat pembayaran yang berupa surat perintah pemindahbukuan sejumlah uang dari rekening disebut...', a:['Cek','Bilyet giro','Wesel','L/C'], c:1 },
+    { q:'Berikut yang BUKAN alat pembayaran internasional adalah...', a:['Valuta asing','Wesel','L/C','Kartu pelajar'], c:3 },
+    { q:'Contoh ekspor langsung adalah...', a:['PT Pertamina menjual minyak mentah langsung ke Jepang','Petani kopi via eksportir','Pabrik sepatu via distributor','Toko kelontong jual ke tetangga'], c:0 },
+    { q:'Contoh ekspor tidak langsung adalah...', a:['Petani kopi Gayo via eksportir di Medan','PT Pertamina ke Jepang','Pabrik langsung ekspor','BUMN jual langsung'], c:0 },
+    { q:'Contoh impor barang konsumsi adalah...', a:['Apel dari Amerika','Mesin dari Jerman','Kapas dari Amerika','Alat berat dari Jepang'], c:0 },
+    { q:'Contoh impor barang modal adalah...', a:['Apel dari Amerika','Mesin pabrik dari Jerman','Beras dari Thailand','Kopi dari Brasil'], c:1 },
+    { q:'Contoh impor bahan baku adalah...', a:['Apel dari Amerika','Mesin dari Jerman','Kapas dari Amerika','Pesawat dari Amerika'], c:2 },
+    { q:'Alat pembayaran yang bisa diperjualbelikan adalah...', a:['Wesel','Kartu pelajar','KTP','SIM'], c:0 },
+    { q:'Contoh pembayaran via SWIFT adalah...', a:['Transfer bank internasional','Transfer pulsa','Bayar parkir','Belanja di pasar'], c:0 },
+    { q:'Risiko open account bagi eksportir adalah...', a:['Barang dikirim tapi tidak dibayar','Barang tidak dikirim','Bank tidak menjamin','Pajak tinggi'], c:0 },
+    { q:'Contoh cara pembayaran consignment adalah...', a:['Barang dikirim, bayar setelah laku','Bayar dulu baru kirim','Bank menjamin','Tidak dibayar'], c:0 },
+    { q:'Pembayaran menggunakan QRIS termasuk...', a:['Pembayaran digital modern','Pembayaran tunai','Barter','Cek'], c:0 }
+  ],
+  4:[
+    { q:'Neraca perdagangan adalah...', a:['Selisih total nilai ekspor dan total nilai impor','Total nilai ekspor saja','Total nilai impor saja','Total nilai investasi'], c:0 },
+    { q:'Rumus neraca perdagangan adalah...', a:['Ekspor + Impor','Ekspor − Impor','Impor − Ekspor','Ekspor × Impor'], c:1 },
+    { q:'Jika nilai ekspor lebih besar daripada nilai impor, neraca perdagangan mengalami...', a:['Defisit','Surplus','Seimbang','Bangkrut'], c:1 },
+    { q:'Jika nilai impor lebih besar daripada nilai ekspor, neraca perdagangan mengalami...', a:['Defisit','Surplus','Seimbang','Bangkrut'], c:0 },
+    { q:'Jika ekspor = Rp 2.500 triliun dan impor = Rp 2.300 triliun, maka neraca perdagangan...', a:['Surplus Rp 200 triliun','Defisit Rp 200 triliun','Seimbang','Surplus Rp 4.800 triliun'], c:0 },
+    { q:'Jika ekspor = Rp 1.800 triliun dan impor = Rp 2.100 triliun, maka neraca perdagangan...', a:['Surplus Rp 300 triliun','Defisit Rp 300 triliun','Seimbang','Defisit Rp 3.900 triliun'], c:1 },
+    { q:'Neraca pembayaran lebih luas daripada neraca perdagangan karena mencakup...', a:['Hanya barang dan jasa','Barang, jasa, investasi, pinjaman, transfer','Hanya investasi','Hanya pajak'], c:1 },
+    { q:'Komponen neraca pembayaran yang mencakup ekspor-impor barang dan jasa adalah...', a:['Transaksi berjalan','Transaksi modal','Transaksi moneter','Transaksi fiskal'], c:0 },
+    { q:'Komponen neraca pembayaran yang mencakup investasi langsung dan portofolio adalah...', a:['Transaksi berjalan','Transaksi modal','Transaksi moneter','Transaksi fiskal'], c:1 },
+    { q:'Komponen neraca pembayaran yang mencakup perubahan cadangan devisa adalah...', a:['Transaksi berjalan','Transaksi modal','Transaksi moneter','Transaksi fiskal'], c:2 },
     { q:'Devisa adalah...', a:['Alat pembayaran luar negeri yang sah','Pajak dalam negeri','Subsidi pemerintah','Upah tenaga kerja'], c:0 },
-    { q:'PT KAI menyediakan jasa transportasi kereta api. Ini peran pemerintah sebagai...', a:['Regulator','Konsumen','Produsen','Distributor'], c:2 },
-    { q:'RTP sebagai distributor berarti...', a:['Menyalurkan barang/jasa ke konsumen','Memproduksi barang','Mengonsumsi barang','Membayar pajak'], c:0 },
-    { q:'Contoh produk impor yang dijual di Indonesia adalah...', a:['Buah-buahan dari Thailand','Kopi dari Indonesia','Batik dari Solo','Roti dari warung lokal'], c:0 },
-    { q:'Masyarakat luar negeri yang membeli kopi Indonesia berperan sebagai...', a:['Konsumen','Produsen','Investor','Regulator'], c:0 },
-    { q:'Contoh peran pemerintah dalam pembangunan infrastruktur adalah...', a:['Membangun jalan dan jembatan','Menjual barang','Membeli pakaian','Menabung di bank'], c:0 },
-    { q:'BUMN yang mengelola minyak bumi dan gas adalah...', a:['PT Pertamina','PT KAI','PLN','Bank Indonesia'], c:0 },
-    { q:'BUMN yang menyediakan listrik bagi masyarakat adalah...', a:['PLN','PT Pertamina','PT KAI','Koperasi'], c:0 },
-    { q:'Peran ganda pemerintah meliputi...', a:['Regulator, konsumen, produsen','Konsumen dan distributor saja','Produsen saja','Regulator saja'], c:0 }
+    { q:'Sumber devisa terbesar bagi Indonesia adalah...', a:['Ekspor barang dan jasa','Menabung di bank lokal','Membeli barang impor','Membayar pajak'], c:0 },
+    { q:'Contoh sumber devisa dari sektor pariwisata adalah...', a:['Wisatawan asing berlibur ke Bali','Warga lokal berlibur ke Bali','Warga Indonesia berbelanja di pasar','Ekspor tekstil'], c:0 },
+    { q:'Kiriman uang dari Tenaga Kerja Indonesia (TKI) di luar negeri merupakan sumber...', a:['Devisa','Pajak','Subsidi','Utang'], c:0 },
+    { q:'Kurs valuta asing adalah...', a:['Perbandingan nilai mata uang antarnegara','Pajak impor','Subsidi ekspor','Bunga bank'], c:0 },
+    { q:'Kurs yang digunakan bank ketika menjual mata uang asing kepada nasabah disebut...', a:['Kurs beli','Kurs jual','Kurs tengah','Kurs tetap'], c:1 },
+    { q:'Kurs yang digunakan bank ketika membeli mata uang asing dari nasabah disebut...', a:['Kurs beli','Kurs jual','Kurs tengah','Kurs tetap'], c:0 },
+    { q:'Jika kurs jual 1 USD = Rp 15.500 dan kamu menukar Rp 3.100.000, kamu akan dapat...', a:['100 USD','150 USD','200 USD','250 USD'], c:2 },
+    { q:'Jika kurs beli 1 USD = Rp 15.300 dan kamu menukar 100 USD, kamu akan dapat...', a:['Rp 1.530.000','Rp 1.550.000','Rp 15.300','Rp 153.000'], c:0 },
+    { q:'Sistem kurs yang ditentukan oleh permintaan dan penawaran pasar disebut...', a:['Kurs tetap','Kurs bebas (mengambang)','Kurs tengah','Kurs jual'], c:1 },
+    { q:'Sistem kurs yang ditetapkan oleh pemerintah disebut...', a:['Kurs tetap','Kurs bebas','Kurs jual','Kurs beli'], c:0 },
+    { q:'Faktor yang mempengaruhi kurs adalah...', a:['Permintaan & penawaran valas','Warna uang','Ukuran uang','Bahan uang'], c:0 },
+    { q:'Inflasi tinggi cenderung...', a:['Melemahkan mata uang','Menguatkan mata uang','Tidak berpengaruh','Menghilangkan uang'], c:0 },
+    { q:'Suku bunga tinggi cenderung...', a:['Menguatkan mata uang','Melemahkan mata uang','Tidak berpengaruh','Menghilangkan uang'], c:0 },
+    { q:'Neraca perdagangan surplus cenderung...', a:['Memperkuat mata uang','Melemahkan mata uang','Tidak berpengaruh','Membuat uang hilang'], c:0 },
+    { q:'Rumus kurs tengah adalah...', a:['(Kurs jual + Kurs beli) / 2','Kurs jual × Kurs beli','Kurs jual − Kurs beli','Kurs jual + Kurs beli'], c:0 },
+    { q:'Devisa digunakan untuk...', a:['Membiayai impor & membayar utang luar negeri','Membeli tanah','Membangun rumah pribadi','Membayar SPP'], c:0 },
+    { q:'Sumber devisa selain ekspor adalah...', a:['Pariwisata, investasi, TKI','Menonton TV','Bermain game','Tidur'], c:0 },
+    { q:'Defisit neraca perdagangan berkepanjangan mengakibatkan...', a:['Cadangan devisa menipis','Devisa bertambah','Rupiah menguat','Utang lunas'], c:0 },
+    { q:'Contoh negara tujuan ekspor Indonesia adalah...', a:['India','Brazil','Mesir','Nigeria'], c:0 }
   ],
-  3: [
-    { q:'Koperasi berdasarkan asas...', a:['Kekeluargaan','Kekuasaan','Keuntungan pribadi','Persaingan bebas'], c:0 },
-    { q:'Badan usaha milik negara disebut...', a:['BUMN','BUMS','Koperasi','UMKM'], c:0 },
-    { q:'Circular flow diagram 2 sektor melibatkan...', a:['RTK & RTP','RTK, RTP, Pemerintah','RTK, RTP, RTN, RTMLN','Hanya RTK'], c:0 },
-    { q:'Koperasi yang menyalurkan barang kebutuhan sehari-hari untuk anggota disebut...', a:['Koperasi Produksi','Koperasi Jasa','Koperasi Konsumsi','Koperasi Simpan Pinjam'], c:2 },
-    { q:'Sisa Hasil Usaha (SHU) koperasi dibagikan berdasarkan...', a:['Besarnya modal saja','Jasa usaha masing-masing anggota','Kekuasaan','Kesepakatan pengurus'], c:1 },
-    { q:'Perekonomian 3 sektor melibatkan...', a:['RTK & RTP','RTK, RTP, Pemerintah','RTK, RTP, RTN, RTMLN','Hanya RTK'], c:1 },
-    { q:'Perekonomian 4 sektor (terbuka) melibatkan...', a:['RTK & RTP','RTK, RTP, Pemerintah','RTK, RTP, RTN, RTMLN','Hanya RTK'], c:2 },
-    { q:'Dalam circular flow 2 sektor, arus dari RTK ke RTP melalui pasar faktor produksi adalah...', a:['Barang dan jasa','Uang pembayaran','Faktor produksi','Pajak'], c:2 },
-    { q:'Pasar tempat RTP menawarkan hasil produksi kepada RTK disebut...', a:['Pasar faktor produksi','Pasar barang & jasa','Pasar modal','Pasar tenaga kerja'], c:1 },
-    { q:'Koperasi yang menghimpun dan meminjamkan dana kepada anggota disebut...', a:['Koperasi Konsumsi','Koperasi Simpan Pinjam','Koperasi Produksi','Koperasi Jasa'], c:1 },
-    { q:'Kontribusi koperasi & UMKM terhadap PDB nasional sekitar...', a:['21%','41%','61%','81%'], c:2 },
-    { q:'Koperasi yang membantu anggota dalam kegiatan produksi dan pemasaran disebut...', a:['Koperasi Konsumsi','Koperasi Simpan Pinjam','Koperasi Produksi','Koperasi Jasa'], c:2 },
-    { q:'Koperasi yang menyediakan layanan jasa bagi anggota disebut...', a:['Koperasi Konsumsi','Koperasi Simpan Pinjam','Koperasi Produksi','Koperasi Jasa'], c:3 },
-    { q:'Prinsip koperasi antara lain...', a:['Keanggotaan sukarela dan terbuka','Keanggotaan wajib','Dikuasai satu orang','Mencari keuntungan pribadi'], c:0 },
-    { q:'Pengelolaan koperasi dilakukan secara...', a:['Demokratis','Otoriter','Bebas','Sembarangan'], c:0 },
-    { q:'Dalam circular flow 2 sektor, arus dari RTP ke RTK melalui pasar barang & jasa adalah...', a:['Barang dan jasa','Uang pembayaran','Faktor produksi','Pajak'], c:0 },
-    { q:'Pasar faktor produksi adalah tempat...', a:['RTK menawarkan faktor produksi kepada RTP','RTP menjual barang ke RTK','Pemerintah menarik pajak','Luar negeri mengekspor'], c:0 },
-    { q:'Dalam perekonomian 3 sektor, pemerintah menarik... dari RTK & RTP', a:['Pajak','Deviden','Sewa','Bunga'], c:0 },
-    { q:'Pemerintah memberikan subsidi dan transfer payment kepada...', a:['RTK & RTP','Hanya RTK','Hanya RTP','Luar negeri'], c:0 },
-    { q:'Contoh koperasi konsumsi adalah...', a:['Koperasi sekolah','Koperasi petani','Koperasi nelayan','Koperasi angkutan'], c:0 },
-    { q:'Contoh koperasi produksi adalah...', a:['Koperasi petani','Koperasi sekolah','Koperasi angkutan','Koperasi asuransi'], c:0 },
-    { q:'Contoh koperasi jasa adalah...', a:['Koperasi angkutan','Koperasi sekolah','Koperasi petani','Koperasi karyawan'], c:0 },
-    { q:'Koperasi bertujuan...', a:['Meningkatkan kesejahteraan anggota','Mencari laba sebesar-besarnya','Menguasai pasar','Menyaingi BUMN'], c:0 },
-    { q:'Koperasi di Indonesia berlandaskan...', a:['Asas kekeluargaan','Asas persaingan','Asas kekuasaan','Asas keuntungan pribadi'], c:0 },
-    { q:'Circular flow diagram menggambarkan...', a:['Arus uang dan barang antar pelaku ekonomi','Peta Indonesia','Struktur organisasi','Grafik pendapatan'], c:0 }
+  5:[
+    { q:'Kebijakan pemerintah untuk melindungi industri dalam negeri dari persaingan impor disebut...', a:['Proteksi','Liberalisasi','Globalisasi','Devaluasi'], c:0 },
+    { q:'Pajak atau bea yang dikenakan pada barang impor disebut...', a:['Tarif','Kuota','Subsidi','Dumping'], c:0 },
+    { q:'Pembatasan jumlah barang impor yang boleh masuk disebut...', a:['Tarif','Kuota impor','Subsidi','Dumping'], c:1 },
+    { q:'Bantuan pemerintah kepada produsen lokal agar harga jual lebih murah disebut...', a:['Tarif','Kuota','Subsidi','Dumping'], c:2 },
+    { q:'Menjual barang di luar negeri dengan harga lebih murah daripada di dalam negeri disebut...', a:['Tarif','Kuota','Subsidi','Dumping'], c:3 },
+    { q:'Menetapkan harga berbeda untuk pasar yang berbeda disebut...', a:['Diskriminasi harga','Dumping','Tarif','Subsidi'], c:0 },
+    { q:'Contoh kebijakan proteksi berupa larangan impor adalah...', a:['Larangan impor pakaian bekas','Membebaskan impor','Menurunkan tarif','Memberi subsidi'], c:0 },
+    { q:'Kebijakan yang membuka pasar seluas-luasnya bagi barang dari luar negeri disebut...', a:['Proteksi','Liberalisasi','Isolasi','Nasionalisasi'], c:1 },
+    { q:'Kawasan perdagangan bebas ASEAN disebut...', a:['AFTA','NAFTA','APEC','WTO'], c:0 },
+    { q:'Masyarakat Ekonomi ASEAN (MEA) bertujuan...', a:['Integrasi ekonomi ASEAN','Menutup perbatasan','Melarang investasi','Menghapus ASEAN'], c:0 },
+    { q:'Tujuan utama kebijakan proteksi adalah...', a:['Melindungi industri lokal','Meningkatkan impor','Menurunkan harga','Menghapus industri'], c:0 },
+    { q:'Tujuan utama kebijakan liberalisasi adalah...', a:['Meningkatkan efisiensi dan persaingan','Melindungi industri lokal','Melarang impor','Menutup pasar'], c:0 },
+    { q:'Hambatan perdagangan berupa standar kualitas contohnya...', a:['Produk elektronik impor harus memiliki sertifikasi SNI','Tarif 10%','Kuota impor','Larangan impor'], c:0 },
+    { q:'Hambatan perdagangan berupa biaya transportasi terjadi karena...', a:['Jarak jauh dan biaya pengiriman mahal','Persaingan bebas','Subsidi pemerintah','Kenaikan pajak'], c:0 },
+    { q:'Hambatan perdagangan berupa perbedaan bahasa dan budaya menyebabkan...', a:['Komunikasi dan negosiasi lebih sulit','Harga barang turun','Persaingan naik','Produksi naik'], c:0 },
+    { q:'Fluktuasi kurs valuta asing dapat menjadi hambatan karena...', a:['Membuat harga tidak pasti','Menurunkan pajak','Menaikkan subsidi','Menghapus tarif'], c:0 },
+    { q:'Ketegangan politik antarnegara dapat menghambat perdagangan melalui...', a:['Perang dagang & tarif naik drastis','Subsidi naik','Investasi naik','Ekspor naik'], c:0 },
+    { q:'Dampak hambatan tarif tinggi bagi konsumen adalah...', a:['Harga barang impor mahal','Harga barang impor murah','Pilihan bertambah','Kualitas naik'], c:0 },
+    { q:'Contoh nyata dumping adalah...', a:['Perusahaan asing menjual baja sangat murah di Indonesia untuk mematikan pesaing lokal','Indonesia menjual batik ke Malaysia','Pemerintah memberi subsidi petani','Bank menurunkan suku bunga'], c:0 },
+    { q:'Berikut yang BUKAN hambatan perdagangan berupa tarif adalah...', a:['Kuota impor','Tarif 10%','Bea masuk','Cukai'], c:0 },
+    { q:'Penurunan tarif barang antarnegara ASEAN dalam AFTA mencapai...', a:['0%','50%','100%','200%'], c:0 },
+    { q:'Contoh subsidi adalah...', a:['Subsidi pupuk untuk petani','Tarif impor','Kuota impor','Larangan impor'], c:0 },
+    { q:'Tujuan subsidi adalah...', a:['Harga produk lokal bersaing','Menaikkan harga','Menurunkan kualitas','Membatasi produksi'], c:0 },
+    { q:'Kuota impor beras contohnya...', a:['Batas maksimal impor beras','Bebas impor','Larangan impor','Subsidi impor'], c:0 },
+    { q:'Contoh proteksi non-tarif adalah...', a:['Standar kualitas','Tarif 10%','Bea masuk','Cukai'], c:0 },
+    { q:'Contoh liberalisasi adalah...', a:['Penurunan tarif','Kenaikan tarif','Larangan impor','Kuota impor'], c:0 },
+    { q:'Diskriminasi harga contohnya adalah...', a:['Obat lebih mahal di negara maju','Obat sama di mana-mana','Obat gratis','Obat dilarang'], c:0 },
+    { q:'Dampak hambatan bagi produsen lokal adalah...', a:['Terlindungi sementara','Langsung bangkrut','Tidak terpengaruh','Mendapat subsidi besar'], c:0 },
+    { q:'Ketegangan politik antarnegara contohnya...', a:['Perang dagang','Kerja sama','Investasi','Subsidi'], c:0 },
+    { q:'Standar kualitas internasional yang sering dipakai adalah...', a:['ISO','KTP','SIM','NPWP'], c:0 }
   ],
-  4: [
-    { q:'Kegiatan ekonomi yang memanfaatkan teknologi digital disebut...', a:['Ekonomi tradisional','Ekonomi digital','Ekonomi agraris','Ekonomi maritim'], c:1 },
-    { q:'Berikut yang merupakan transformasi pelaku ekonomi di era digital adalah...', a:['Membeli di pasar tradisional dengan uang tunai','Berjualan melalui marketplace dan menerima pembayaran digital','Menukar barang dengan barang (barter)','Menyimpan uang di bawah kasur'], c:1 },
-    { q:'Peran rumah tangga konsumen di era digital ditunjukkan oleh...', a:['Belanja online via e-commerce & dompet digital','Membeli di pasar tradisional','Membarter barang','Menabung di celengan'], c:0 },
-    { q:'Fenomena baru dalam ekonomi digital adalah...', a:['Marketplace & e-commerce','Barter','Pasar tradisional','Koperasi manual'], c:0 },
-    { q:'Contoh revitalisasi koperasi desa di era modern adalah...', a:['Koperasi Desa Merah Putih','Bank Indonesia','PT Pertamina','PLN'], c:0 },
-    { q:'Tantangan pelaku ekonomi di era digital adalah...', a:['Keamanan data & penipuan online','Kekurangan bahan baku','Kurangnya tenaga kerja','Harga barang murah'], c:0 },
-    { q:'Pemerintah di era digital dapat melayani masyarakat melalui...', a:['E-government & pajak online','Layanan manual','Surat pos','Antrean panjang'], c:0 },
-    { q:'Peran koperasi yang berkaitan dengan era digital adalah...', a:['Mengonsolidasikan kekuatan ekonomi rakyat dengan teknologi keuangan','Menutup usaha kecil','Menghapus UMKM','Melarang transaksi online'], c:0 },
-    { q:'Balas jasa atas faktor produksi modal adalah...', a:['Sewa','Upah','Bunga','Laba'], c:2 },
-    { q:'Investor asing yang menanamkan modal di Indonesia merupakan peran...', a:['RTK','RTP','RTN','RTMLN'], c:3 },
-    { q:'Contoh peran RTMLN sebagai sumber devisa negara adalah...', a:['Ekspor barang ke luar negeri','Impor barang dari luar negeri','Membayar pajak','Membeli di pasar lokal'], c:0 },
-    { q:'Contoh ekonomi kreator sebagai pelaku ekonomi baru adalah...', a:['Content creator di media sosial','Petani tradisional','Nelayan','Tukang parkir'], c:0 },
-    { q:'Dompet digital (e-wallet) berfungsi untuk...', a:['Menggantikan uang tunai dalam transaksi','Menyimpan barang','Membuat makanan','Mengantar barang'], c:0 },
-    { q:'Fintech adalah...', a:['Layanan keuangan berbasis teknologi','Pertanian modern','Industri tekstil','Pertambangan'], c:0 },
-    { q:'UMKM Go Digital bertujuan...', a:['Menjangkau pasar lebih luas','Menutup usaha','Mengurangi karyawan','Menghindari pajak'], c:0 },
-    { q:'Marketplace adalah...', a:['Platform online yang menghubungkan penjual dan pembeli','Toko fisik','Pasar tradisional','Gudang penyimpanan'], c:0 },
-    { q:'Peran RTK di era digital adalah...', a:['Belanja online via e-commerce','Bertani','Menambang','Membuat jalan'], c:0 },
-    { q:'Peran RTP di era digital adalah...', a:['Berjualan di marketplace & media sosial','Membeli di pasar','Menjadi pegawai negeri','Menjadi TNI'], c:0 },
-    { q:'Peran pemerintah di era digital adalah...', a:['Menyediakan layanan e-government','Menjual barang di pasar','Menjadi petani','Menjadi nelayan'], c:0 },
-    { q:'Peran RTMLN di era digital adalah...', a:['E-commerce lintas negara & transfer digital','Menjual di pasar tradisional','Bertani di sawah','Menambang emas'], c:0 },
-    { q:'Koperasi di era digital perlu didukung oleh...', a:['Teknologi keuangan & tata kelola modern','Kekuasaan','Persaingan bebas','Kekerasan'], c:0 },
-    { q:'QRIS adalah contoh...', a:['Pembayaran digital','Pajak','Subsidi','Upah'], c:0 },
-    { q:'E-commerce adalah...', a:['Perdagangan elektronik','Pertanian modern','Industri manufaktur','Pertambangan'], c:0 },
-    { q:'Kesenjangan digital adalah...', a:['Kesenjangan akses teknologi','Kesenjangan ekonomi','Kesenjangan sosial','Kesenjangan budaya'], c:0 },
-    { q:'Pelaku ekonomi era digital harus...', a:['Bijak dan literat secara digital','Menghindari teknologi','Menolak perubahan','Tidak peduli'], c:0 }
+  6:[
+    { q:'Dampak positif perdagangan internasional bagi devisa negara adalah...', a:['Devisa meningkat','Devisa menurun','Devisa habis','Devisa tidak berubah'], c:0 },
+    { q:'Dampak positif perdagangan internasional terhadap lapangan kerja adalah...', a:['Lapangan kerja bertambah','Lapangan kerja berkurang','Lapangan kerja tetap','Tidak ada pengaruh'], c:0 },
+    { q:'Contoh dampak positif transfer teknologi adalah...', a:['Pabrik mobil Indonesia belajar teknologi hybrid dari Jepang','Pajak naik','Harga barang naik','Upah turun'], c:0 },
+    { q:'Dampak positif perdagangan internasional bagi konsumen adalah...', a:['Harga barang lebih murah','Harga barang mahal','Barang langka','Kualitas menurun'], c:0 },
+    { q:'Dampak positif persaingan global terhadap kualitas produk adalah...', a:['Produsen berinovasi meningkatkan kualitas','Produsen menurunkan kualitas','Produsen berhenti produksi','Produsen menaikkan harga'], c:0 },
+    { q:'Dampak negatif perdagangan internasional berupa industri lokal terancam disebabkan oleh...', a:['Barang impor lebih murah','Subsidi pemerintah','Kenaikan pajak','Larangan impor'], c:0 },
+    { q:'Dampak negatif berupa ketergantungan pada negara lain terjadi karena...', a:['Negara terlalu bergantung pada impor','Negara terlalu banyak ekspor','Negara menutup diri','Negara menaikkan pajak'], c:0 },
+    { q:'Dampak negatif berupa kerusakan lingkungan contohnya...', a:['Deforestasi untuk lahan sawit','Reboisasi','Konservasi','Penghijauan'], c:0 },
+    { q:'Dampak negatif berupa budaya konsumtif adalah...', a:['Masyarakat membeli barang impor berlebihan','Masyarakat menabung','Masyarakat berinvestasi','Masyarakat berhemat'], c:0 },
+    { q:'Deindustrialisasi sebagai dampak negatif berarti...', a:['Industri dalam negeri tutup karena kalah bersaing','Industri dalam negeri tumbuh','Industri dalam negeri naik','Industri dalam negeri kuat'], c:0 },
+    { q:'Cara mengatasi dampak negatif perdagangan internasional adalah...', a:['Meningkatkan daya saing produsen lokal','Menutup semua impor','Melarang ekspor','Menutup diri dari dunia'], c:0 },
+    { q:'Posisi Indonesia sebagai eksportir minyak kelapa sawit (CPO) di dunia adalah...', a:['Terbesar dunia','Terkecil dunia','Tidak ada','Kedua terbesar'], c:0 },
+    { q:'Posisi Indonesia sebagai eksportir batu bara di dunia adalah...', a:['Terbesar dunia (bersama Australia)','Terkecil dunia','Tidak ada','Ketiga terbesar'], c:0 },
+    { q:'Indonesia pernah menjadi tuan rumah KTT G20 di...', a:['Bali tahun 2022','Jakarta 2018','Bandung 2015','Surabaya 2019'], c:0 },
+    { q:'Forum kerja sama ekonomi 20 negara terbesar dunia adalah...', a:['G20','WTO','IMF','ASEAN'], c:0 },
+    { q:'Hilirisasi adalah...', a:['Proses mengolah bahan mentah menjadi barang jadi','Proses menjual bahan mentah','Proses menimbun barang','Proses menghancurkan barang'], c:0 },
+    { q:'Ketergantungan pada komoditas mentah menjadi tantangan Indonesia karena...', a:['Nilai tambah lebih kecil dibanding barang jadi','Nilai tambah lebih besar','Tidak ada tantangan','Lebih menguntungkan'], c:0 },
+    { q:'Tantangan Indonesia dalam hal SDM adalah...', a:['Perlu peningkatan keterampilan tenaga kerja','Tenaga kerja terlalu banyak','Tenaga kerja terlalu pintar','Tidak ada tantangan'], c:0 },
+    { q:'Tantangan Indonesia dalam hal infrastruktur adalah...', a:['Biaya logistik masih tinggi','Biaya logistik murah','Infrastruktur sudah sempurna','Tidak ada masalah'], c:0 },
+    { q:'Contoh peran Indonesia dalam MEA adalah...', a:['Tenaga ahli Indonesia bisa bekerja di seluruh ASEAN','Indonesia keluar dari ASEAN','Indonesia menutup perbatasan','Indonesia melarang investasi'], c:0 },
+    { q:'Manfaat G20 bagi Indonesia adalah...', a:['Memperjuangkan kepentingan negara berkembang','Mendapat utang','Keluar dari ASEAN','Menutup perdagangan'], c:0 },
+    { q:'Posisi karet Indonesia di dunia adalah...', a:['Produsen terbesar kedua','Terbesar pertama','Tidak ada','Kelima'], c:0 },
+    { q:'Posisi kopi Indonesia di dunia adalah...', a:['Produsen keempat dunia','Terbesar pertama','Tidak ada','Kesepuluh'], c:0 },
+    { q:'Contoh keuntungan MEA bagi Indonesia adalah...', a:['Arus bebas barang & jasa antarnegara ASEAN','Menutup perbatasan','Melarang tenaga kerja asing','Membatasi investasi'], c:0 },
+    { q:'Jumlah anggota ASEAN saat ini adalah...', a:['10 negara','5 negara','20 negara','15 negara'], c:0 },
+    { q:'Jumlah anggota G20 adalah...', a:['20 negara + Uni Eropa','10 negara','50 negara','7 negara'], c:0 },
+    { q:'Contoh hilirisasi adalah...', a:['Bijih nikel diolah menjadi baterai listrik','Nikel dijual mentah','Nikel ditimbun','Nikel dihancurkan'], c:0 },
+    { q:'Contoh dampak kerusakan lingkungan adalah...', a:['Deforestasi di Kalimantan','Reboisasi hutan','Penanaman mangrove','Konservasi laut'], c:0 },
+    { q:'Contoh dampak konsumtif adalah...', a:['Beli gadget setiap tahun meski masih berfungsi','Berhemat','Menabung','Investasi'], c:0 },
+    { q:'Contoh peningkatan SDM adalah...', a:['Pelatihan keterampilan tenaga kerja','Menambah pajak','Mengurangi upah','Membatasi pendidikan'], c:0 }
+  ],
+  7:[
+    { q:'Kerja sama ekonomi antara dua negara disebut...', a:['Bilateral','Regional','Multilateral','Antarregional'], c:0 },
+    { q:'Kerja sama antarnegara di kawasan tertentu disebut...', a:['Bilateral','Regional','Multilateral','Antarregional'], c:1 },
+    { q:'Kerja sama yang melibatkan banyak negara di dunia disebut...', a:['Bilateral','Regional','Multilateral','Antarregional'], c:2 },
+    { q:'Kerja sama antarnegara dari kawasan berbeda disebut...', a:['Bilateral','Regional','Multilateral','Antarregional'], c:3 },
+    { q:'Contoh kerja sama bilateral adalah...', a:['Indonesia dengan Jepang','ASEAN','WTO','APEC'], c:0 },
+    { q:'Contoh kerja sama regional adalah...', a:['ASEAN','Indonesia-Jepang','WTO','APEC'], c:0 },
+    { q:'Contoh kerja sama multilateral adalah...', a:['WTO','ASEAN','AFTA','Indonesia-Jepang'], c:0 },
+    { q:'Contoh kerja sama antarregional adalah...', a:['APEC','ASEAN','WTO','Indonesia-Jepang'], c:0 },
+    { q:'Organisasi internasional yang mengatur perdagangan antarnegara adalah...', a:['WTO','IMF','Bank Dunia','WHO'], c:0 },
+    { q:'Kepanjangan WTO adalah...', a:['World Trade Organization','World Tourism Organization','World Technology Organization','World Transport Organization'], c:0 },
+    { q:'Organisasi yang menjaga stabilitas keuangan global dan memberi pinjaman kepada negara yang kesulitan neraca pembayaran adalah...', a:['IMF','WTO','ASEAN','APEC'], c:0 },
+    { q:'Kepanjangan IMF adalah...', a:['International Monetary Fund','International Military Force','International Market Fund','International Money Fund'], c:0 },
+    { q:'Lembaga yang memberikan bantuan keuangan dan teknis untuk pembangunan negara berkembang adalah...', a:['Bank Dunia','WTO','IMF','ASEAN'], c:0 },
+    { q:'ASEAN didirikan pada tanggal...', a:['8 Agustus 1967','17 Agustus 1945','1 Juni 1945','28 Oktober 1928'], c:0 },
+    { q:'Kepanjangan ASEAN adalah...', a:['Association of Southeast Asian Nations','Asian Southeast Nations','Association of South East Asian Countries','Asian South East Alliance'], c:0 },
+    { q:'Kawasan perdagangan bebas ASEAN dengan tarif rendah antarnegara anggota disebut...', a:['AFTA','NAFTA','APEC','WTO'], c:0 },
+    { q:'Kepanjangan AFTA adalah...', a:['ASEAN Free Trade Area','ASEAN Foreign Trade Agreement','Asian Free Trade Association','ASEAN Federation of Trade'], c:0 },
+    { q:'Integrasi ekonomi ASEAN yang memungkinkan arus bebas barang, jasa, investasi, dan tenaga kerja disebut...', a:['MEA','AFTA','APEC','WTO'], c:0 },
+    { q:'Perjanjian multilateral untuk mengurangi tarif dan hambatan perdagangan (pendahulu WTO) adalah...', a:['GATT','NAFTA','APEC','IMF'], c:0 },
+    { q:'Organisasi negara-negara pengekspor minyak bumi adalah...', a:['OPEC','APEC','ASEAN','WTO'], c:0 },
+    { q:'Tujuan kerja sama ekonomi internasional adalah...', a:['Meningkatkan kesejahteraan negara anggota','Menimbulkan perang','Mengurangi penduduk','Menutup perbatasan'], c:0 },
+    { q:'Manfaat kerja sama bagi Indonesia adalah...', a:['Akses pasar lebih luas','Kehilangan pasar','Kenaikan pajak','Penurunan devisa'], c:0 },
+    { q:'Contoh kerja sama multilateral selain WTO adalah...', a:['IMF','ASEAN','AFTA','Indonesia-Jepang'], c:0 },
+    { q:'Contoh kerja sama regional selain ASEAN adalah...', a:['AFTA','WTO','IMF','Indonesia-Jepang'], c:0 },
+    { q:'Indonesia menjadi anggota ASEAN sejak tahun...', a:['1967','1945','1990','2000'], c:0 },
+    { q:'Sekretariat ASEAN berada di kota...', a:['Jakarta','Bangkok','Manila','Hanoi'], c:0 },
+    { q:'KTT G20 di Bali diselenggarakan tahun...', a:['2022','2018','2015','2020'], c:0 },
+    { q:'Contoh manfaat investasi asing bagi Indonesia adalah...', a:['Lapangan kerja tercipta','Pajak naik','Harga naik','Utang naik'], c:0 },
+    { q:'Tujuan OPEC adalah...', a:['Mengatur produksi & harga minyak dunia','Menutup perdagangan','Melarang ekspor','Mengatur pangan'], c:0 },
+    { q:'Manfaat kerja sama SDM adalah...', a:['Pertukaran pelajar & pelatihan tenaga kerja','Menutup sekolah','Melarang pekerja asing','Membatasi pendidikan'], c:0 }
   ]
 };
 
-/* ---------- EVENTS ---------- */
 const EVENTS = [
-  { icon:'🌾', title:'Musim Panen Raya', desc:'Hasil pertanian melimpah.', move:+2, type:'pos' },
-  { icon:'💼', title:'Investor Asing Masuk', desc:'Modal asing mengalir (peran RTMLN).', move:+3, type:'pos' },
+  { icon:'🌾', title:'Musim Panen Raya', desc:'Hasil pertanian melimpah untuk ekspor.', move:+2, type:'pos' },
+  { icon:'💼', title:'Investor Asing Masuk', desc:'Modal asing mengalir ke Indonesia.', move:+3, type:'pos' },
   { icon:'✈️', title:'Wisatawan Mancanegara', desc:'Devisa pariwisata naik.', move:+3, type:'pos' },
-  { icon:'📚', title:'Literasi Ekonomi', desc:'Masyarakat makin cerdas.', move:+2, type:'pos' },
-  { icon:'🌍', title:'Krisis Global', desc:'Ekspor menurun.', move:-4, type:'neg' },
-  { icon:'🌊', title:'Bencana Alam', desc:'Infrastruktur rusak.', move:-3, type:'neg' },
-  { icon:'📈', title:'Inflasi Naik', desc:'Harga barang naik.', move:-2, type:'neg' },
-  { icon:'⚡', title:'Terobosan Teknologi', desc:'Inovasi digital (ekonomi digital).', move:+4, type:'pos' },
-  { icon:'🎁', title:'Bonus Ekonomi', desc:'Insentif untukmu.', move:+2, type:'pos' },
+  { icon:'📚', title:'Literasi Ekonomi', desc:'Masyarakat makin cerdas berdagang.', move:+2, type:'pos' },
+  { icon:'🌍', title:'Krisis Global', desc:'Ekspor menurun tajam.', move:-4, type:'neg' },
+  { icon:'🌊', title:'Bencana Alam', desc:'Infrastruktur pelabuhan rusak.', move:-3, type:'neg' },
+  { icon:'📈', title:'Inflasi Naik', desc:'Harga barang impor naik.', move:-2, type:'neg' },
+  { icon:'⚡', title:'Terobosan Teknologi', desc:'E-commerce & fintech berkembang.', move:+4, type:'pos' },
+  { icon:'🎁', title:'Bonus Ekspor', desc:'Insentif eksportir meningkat.', move:+2, type:'pos' },
   { icon:'🏭', title:'Pabrik Baru BUMN', desc:'Pemerintah sebagai produsen.', move:+3, type:'pos' },
-  { icon:'🤝', title:'Koperasi Berdaya', desc:'Kesejahteraan anggota naik.', move:+2, type:'pos' },
-  { icon:'📉', title:'UMKM Terdampak', desc:'Penjualan menurun.', move:-2, type:'neg' }
+  { icon:'🤝', title:'Kesepakatan Dagang', desc:'Kerja sama bilateral baru.', move:+2, type:'pos' },
+  { icon:'📉', title:'Dumping Produk Asing', desc:'Produk lokal terancam.', move:-2, type:'neg' }
 ];
 
-/* ============================================================
-   GAME
-   ============================================================ */
+/* Helper: pilih random dari array */
+function pick(arr){ return arr[Math.floor(Math.random() * arr.length)]; }
+
 const Game = {
   state: {
-    players: [], turnIdx: 0, phase: 'idle', totalPlayers: 2,
-    winner: null, mounted: false, level: 1
+    players: [], turnIdx: 0, phase: 'idle', totalPlayers: 2, winner: null,
+    mounted: false, level: 1, usedQ: {}, playerNames: ['','','',''],
+    lastEventIdx: -1, lastLadderIdx: -1, lastSnakeIdx: -1
   },
 
-  LEVEL_NAMES: { 1:'Dasar', 2:'Menengah', 3:'Mahir', 4:'Tantangan' },
+  LEVEL_NAMES: { 1:'Dasar', 2:'Teori', 3:'Transaksi', 4:'Keuangan', 5:'Kebijakan', 6:'Indonesia', 7:'Global' },
+  LEVEL_MATERI: {
+    1:'Pengertian & Faktor Pendorong', 2:'Teori & Manfaat', 3:'Ekspor-Impor & Alat Pembayaran',
+    4:'Neraca & Devisa-Kurs', 5:'Kebijakan & Hambatan', 6:'Dampak & Peran Indonesia', 7:'Kerja Sama & Organisasi'
+  },
+
+  renderNameFields(){
+    const wrap = document.getElementById('nameFields');
+    if(!wrap) return;
+    const n = this.state.totalPlayers;
+    wrap.innerHTML = '';
+    PLAYERS.slice(0, n).forEach((p, i)=>{
+      const d = document.createElement('div');
+      d.className = 'name-field ' + p.id;
+      d.innerHTML = `
+        <span class="nf-icon">${p.icon}</span>
+        <input type="text" class="nf-input" data-i="${i}" maxlength="16"
+               placeholder="Tulis nama Pemain ${i+1}..." value="${(this.state.playerNames[i]||'').replace(/"/g,'&quot;')}">
+        <span class="nf-role">${p.role}</span>
+      `;
+      wrap.appendChild(d);
+    });
+    wrap.querySelectorAll('.nf-input').forEach(inp=>{
+      inp.addEventListener('input', e=>{
+        this.state.playerNames[parseInt(e.target.dataset.i)] = e.target.value;
+      });
+      inp.addEventListener('keydown', e=>{
+        if(e.key === 'Enter'){ e.preventDefault(); inp.blur(); }
+        e.stopPropagation();
+      });
+    });
+  },
+
+  pickPlayerCount(n, btn){
+    Audio.click();
+    this.state.totalPlayers = n;
+    document.querySelectorAll('.pc-btn').forEach(b=>b.classList.remove('active'));
+    if(btn) btn.classList.add('active');
+    this.renderNameFields();
+    UI.toast(`👥 ${n} Pemain`, `Siap bertanding!`, 'pos');
+  },
+
+  selectLevel(lvl){ Audio.click(); this.setLevel(lvl); this.start(this.state.totalPlayers); },
 
   setLevel(lvl){
-    Audio.click();
     this.state.level = lvl;
     document.body.setAttribute('data-level', lvl);
-    document.getElementById('lvlBadge').textContent = 'LEVEL ' + lvl;
-    // Highlight kartu level
-    document.querySelectorAll('.lvl-card').forEach(c=>c.classList.remove('selected'));
-    const card = document.querySelector(`.lvl-card[data-level="${lvl}"]`);
-    if(card) card.classList.add('selected');
-    UI.toast(`🎯 Level ${lvl} — ${this.LEVEL_NAMES[lvl]}`, '25 soal · Siap dimainkan!', 'pos');
+    const badge = document.getElementById('lvlBadge');
+    if(badge) badge.textContent = 'LEVEL ' + lvl;
   },
 
   showScreen(name){
@@ -900,64 +864,66 @@ const Game = {
     const el = document.getElementById('screen-'+name);
     if(el) el.classList.add('active');
   },
-  backToMenu(){ Audio.click(); this.showScreen('menu'); },
+  backToMenu(){ Audio.click(); this.showScreen('menu'); this.renderNameFields(); },
 
   showRules(){
     Audio.click();
     UI.modal({
       badge:'📘 CARA BERMAIN',
-      title:'Aturan Ular Tangga Ekonomi — 4 Level',
+      title:'Aturan Ular Tangga Ekonomi — 7 Level',
       body:`
         <p><b>Tujuan:</b> Jadilah pemain pertama yang mencapai <b>kotak 100</b>.</p>
         <ul style="margin:12px 0 12px 18px;color:#cbd5e1;font-size:13px;line-height:1.8;">
-          <li>Pilih <b>level</b> di beranda (warna papan berubah).</li>
-          <li>Pilih <b>jumlah pemain</b> (2–4).</li>
+          <li><b>Tulis nama pemain</b> di kolom nama (Pemain 1–4).</li>
+          <li>Pilih <b>jumlah pemain</b> (2–4) di halaman awal.</li>
+          <li>Klik <b>kartu level</b> → permainan langsung dimulai.</li>
           <li>Klik <b>🎲 Lempar Dadu</b> di giliranmu.</li>
-          <li>Token bergerak maju sesuai angka dadu.</li>
-          <li>Jika mendarat di kotak khusus, ikuti efeknya:</li>
+          <li>Jika mendarat di kotak <b>❓ Pertanyaan</b>, kamu harus menjawab soal!</li>
         </ul>
         <div style="background:rgba(5,15,30,.5);border-radius:10px;padding:14px;margin-bottom:14px;">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:13px;">
-            <span style="font-size:20px;">🪜</span><b style="color:#fbbf24;min-width:90px;">Tangga</b><span style="color:#94a3b8;">Naik ke kotak lebih tinggi</span>
+          <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;font-size:13px;">
+            <span style="font-size:22px;">🪜✨</span>
+            <div><b style="color:#34d399;">BENAR — Tangga Ajaib</b><br><span style="color:#94a3b8;font-size:12px;">Tangga emas/kristal/violet muncul, token naik pelan <b>2 baris</b> (+20 kotak)!</span></div>
           </div>
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:13px;">
-            <span style="font-size:20px;">🐍</span><b style="color:#f87171;min-width:90px;">Ular</b><span style="color:#94a3b8;">Turun ke kotak lebih rendah</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:13px;">
-            <span style="font-size:20px;">❓</span><b style="color:#c084fc;min-width:90px;">Pertanyaan</b><span style="color:#94a3b8;">Benar = +3 langkah, salah = diam</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:13px;">
-            <span style="font-size:20px;">⚡</span><b style="color:#7dd3fc;min-width:90px;">Event</b><span style="color:#94a3b8;">Maju/mundur acak</span>
+          <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;font-size:13px;">
+            <span style="font-size:22px;">🐍💫</span>
+            <div><b style="color:#f87171;">SALAH — Ular Ajaib</b><br><span style="color:#94a3b8;font-size:12px;">Ular muncul, token meluncur turun pelan <b>1 baris</b> (−10 kotak)!</span></div>
           </div>
         </div>
-        <p style="color:#64748b;font-size:12px;">Materi soal sesuai Bab 5 — Peran Pelaku Ekonomi. Total 100 soal (25 soal/level).</p>
+        <p style="color:#64748b;font-size:12px;"><b>210 soal unik</b> (30 soal × 7 level). Soal tidak diulang sampai semua habis.</p>
       `,
       actions:[{label:'Tutup', style:'ghost'}]
     });
   },
 
   start(numPlayers){
-    Audio.click();
     this.state.totalPlayers = numPlayers;
+    const names = this.state.playerNames;
     this.state.players = PLAYERS.slice(0, numPlayers).map((p,i)=>({
-      ...p, index:i, pos:0, finished:false
+      ...p,
+      name: (names[i] && names[i].trim()) ? names[i].trim() : p.name,
+      index: i, pos: 0, finished: false
     }));
     this.state.turnIdx = 0;
     this.state.phase = 'idle';
     this.state.winner = null;
+    this.state.usedQ = {};
+    this.state.lastEventIdx = -1;
+    this.state.lastLadderIdx = -1;
+    this.state.lastSnakeIdx = -1;
+
+    DiceBag.reset(); // reset dadu tiap game baru
 
     this.showScreen('game');
     this.renderBoard();
-    requestAnimationFrame(()=>{
-      this.state.mounted = true;
-      this.renderTokens();
-    });
+    requestAnimationFrame(()=>{ this.state.mounted = true; this.renderTokens(); });
     this.renderPlayerList();
     this.updateTurnUI();
     document.getElementById('logList').innerHTML = '';
     document.getElementById('diceVal').textContent = '–';
     this.log(`Level ${this.state.level} — ${this.LEVEL_NAMES[this.state.level]} dimulai!`, '');
-    this.log(`Giliran ${this.state.players[0].name} — lempar dadu!`, 'warn');
+    this.log(`Materi: ${this.LEVEL_MATERI[this.state.level]}`, 'warn');
+    this.log(`Giliran <b>${this.state.players[0].name}</b> — lempar dadu!`, 'warn');
     document.getElementById('rollBtn').disabled = false;
   },
 
@@ -983,7 +949,6 @@ const Game = {
   renderBoard(){
     const board = document.getElementById('board');
     board.innerHTML = '<svg class="board-connections" id="boardSvg" xmlns="http://www.w3.org/2000/svg"></svg>';
-
     for(let n=1; n<=100; n++){
       const {row, col} = this.cellPos(n);
       const cell = document.createElement('div');
@@ -992,7 +957,6 @@ const Game = {
       cell.style.gridRow = (row+1);
       cell.style.gridColumn = (col+1);
       cell.dataset.n = n;
-
       let icon = '';
       if(type === 'ladder') icon = '🪜';
       else if(type === 'snake') icon = '🐍';
@@ -1000,11 +964,9 @@ const Game = {
       else if(type === 'event') icon = '⚡';
       else if(type === 'start') icon = '🏁';
       else if(type === 'finish') icon = '🏆';
-
       cell.innerHTML = `<span class="num">${n}</span>${icon ? `<span class="icon">${icon}</span>` : ''}`;
       board.appendChild(cell);
     }
-
     requestAnimationFrame(()=>this.drawConnections());
   },
 
@@ -1012,32 +974,21 @@ const Game = {
     const board = document.getElementById('board');
     const svg = document.getElementById('boardSvg');
     if(!board || !svg) return;
-
     const boardRect = board.getBoundingClientRect();
     svg.setAttribute('viewBox', `0 0 ${boardRect.width} ${boardRect.height}`);
     svg.setAttribute('preserveAspectRatio', 'none');
-
     const cellSize = boardRect.width / 10;
     let html = '';
-
     Object.entries(LADDERS).forEach(([from, to], idx)=>{
       const a = this.centerOf(board, from, boardRect);
       const b = this.centerOf(board, to, boardRect);
-      if(a && b){
-        const color = LADDER_PALETTE[idx % LADDER_PALETTE.length];
-        html += this.ladderSvg(a, b, cellSize, color);
-      }
+      if(a && b){ html += this.ladderSvg(a, b, cellSize, LADDER_PALETTE[idx % LADDER_PALETTE.length]); }
     });
-
     Object.entries(SNAKES).forEach(([from, to], idx)=>{
       const a = this.centerOf(board, from, boardRect);
       const b = this.centerOf(board, to, boardRect);
-      if(a && b){
-        const color = SNAKE_PALETTE[idx % SNAKE_PALETTE.length];
-        html += this.snakeSvg(a, b, cellSize, color);
-      }
+      if(a && b){ html += this.snakeSvg(a, b, cellSize, SNAKE_PALETTE[idx % SNAKE_PALETTE.length]); }
     });
-
     svg.innerHTML = html;
   },
 
@@ -1045,10 +996,7 @@ const Game = {
     const cell = board.querySelector(`.cell[data-n="${n}"]`);
     if(!cell) return null;
     const r = cell.getBoundingClientRect();
-    return {
-      x: r.left + r.width/2 - boardRect.left,
-      y: r.top + r.height/2 - boardRect.top
-    };
+    return { x: r.left + r.width/2 - boardRect.left, y: r.top + r.height/2 - boardRect.top };
   },
 
   ladderSvg(a, b, cellSize, color){
@@ -1057,36 +1005,27 @@ const Game = {
     if(len < 1) return '';
     const ux = dx/len, uy = dy/len;
     const px = -uy, py = ux;
-
     const railOff = cellSize * 0.13;
     const railW  = Math.max(2.5, cellSize * 0.05);
     const rungW  = Math.max(1.8, cellSize * 0.04);
-
     const a1 = { x: a.x + px*railOff, y: a.y + py*railOff };
     const a2 = { x: a.x - px*railOff, y: a.y - py*railOff };
     const b1 = { x: b.x + px*railOff, y: b.y + py*railOff };
     const b2 = { x: b.x - px*railOff, y: b.y - py*railOff };
-
-    let s = '<g class="ladder-conn">';
+    let s = '<g>';
     s += `<line x1="${a1.x+1.5}" y1="${a1.y+1.5}" x2="${b1.x+1.5}" y2="${b1.y+1.5}" stroke="rgba(0,0,0,.55)" stroke-width="${railW+1}" stroke-linecap="round"/>`;
     s += `<line x1="${a2.x+1.5}" y1="${a2.y+1.5}" x2="${b2.x+1.5}" y2="${b2.y+1.5}" stroke="rgba(0,0,0,.55)" stroke-width="${railW+1}" stroke-linecap="round"/>`;
     s += `<line x1="${a1.x}" y1="${a1.y}" x2="${b1.x}" y2="${b1.y}" stroke="${color.dark}" stroke-width="${railW+1.5}" stroke-linecap="round"/>`;
     s += `<line x1="${a2.x}" y1="${a2.y}" x2="${b2.x}" y2="${b2.y}" stroke="${color.dark}" stroke-width="${railW+1.5}" stroke-linecap="round"/>`;
     s += `<line x1="${a1.x}" y1="${a1.y}" x2="${b1.x}" y2="${b1.y}" stroke="${color.rail}" stroke-width="${railW}" stroke-linecap="round"/>`;
     s += `<line x1="${a2.x}" y1="${a2.y}" x2="${b2.x}" y2="${b2.y}" stroke="${color.rail}" stroke-width="${railW}" stroke-linecap="round"/>`;
-    s += `<line x1="${a1.x}" y1="${a1.y-0.6}" x2="${b1.x}" y2="${b1.y-0.6}" stroke="${color.light}" stroke-width="${railW*0.35}" stroke-linecap="round"/>`;
-    s += `<line x1="${a2.x}" y1="${a2.y-0.6}" x2="${b2.x}" y2="${b2.y-0.6}" stroke="${color.light}" stroke-width="${railW*0.35}" stroke-linecap="round"/>`;
-
     const rungCount = Math.max(3, Math.floor(len / (cellSize * 0.32)));
     for(let i=1; i<=rungCount; i++){
       const t = i / (rungCount + 1);
-      const x1 = a1.x + (b1.x - a1.x) * t;
-      const y1 = a1.y + (b1.y - a1.y) * t;
-      const x2 = a2.x + (b2.x - a2.x) * t;
-      const y2 = a2.y + (b2.y - a2.y) * t;
+      const x1 = a1.x + (b1.x - a1.x) * t, y1 = a1.y + (b1.y - a1.y) * t;
+      const x2 = a2.x + (b2.x - a2.x) * t, y2 = a2.y + (b2.y - a2.y) * t;
       s += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${color.dark}" stroke-width="${rungW+1.2}" stroke-linecap="round"/>`;
       s += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${color.rail}" stroke-width="${rungW}" stroke-linecap="round"/>`;
-      s += `<line x1="${x1}" y1="${y1-0.5}" x2="${x2}" y2="${y2-0.5}" stroke="${color.light}" stroke-width="${rungW*0.45}" stroke-linecap="round"/>`;
     }
     s += '</g>';
     return s;
@@ -1098,48 +1037,32 @@ const Game = {
     if(len < 1) return '';
     const ux = dx/len, uy = dy/len;
     const px = -uy, py = ux;
-
     const segments = Math.max(5, Math.round(len / (cellSize * 0.75)));
     const amplitude = Math.min(cellSize * 0.45, len / 7);
-
     let path = `M ${head.x.toFixed(1)} ${head.y.toFixed(1)}`;
     for(let i=0; i<segments; i++){
-      const t1 = (i + 0.5) / segments;
-      const t2 = (i + 1) / segments;
+      const t1 = (i + 0.5) / segments, t2 = (i + 1) / segments;
       const sign = (i % 2 === 0) ? 1 : -1;
       const mx = head.x + dx * t1 + px * amplitude * sign;
       const my = head.y + dy * t1 + py * amplitude * sign;
-      const ex = head.x + dx * t2;
-      const ey = head.y + dy * t2;
+      const ex = head.x + dx * t2, ey = head.y + dy * t2;
       path += ` Q ${mx.toFixed(1)} ${my.toFixed(1)} ${ex.toFixed(1)} ${ey.toFixed(1)}`;
     }
-
     const bodyW = Math.max(6, cellSize * 0.13);
     const headR = Math.max(9, cellSize * 0.22);
-
-    let s = '<g class="snake-conn">';
+    let s = '<g>';
     s += `<path d="${path}" fill="none" stroke="rgba(0,0,0,.55)" stroke-width="${bodyW+2}" stroke-linecap="round" stroke-linejoin="round" transform="translate(1.5,1.5)"/>`;
     s += `<path d="${path}" fill="none" stroke="${color.dark}" stroke-width="${bodyW+2.5}" stroke-linecap="round" stroke-linejoin="round"/>`;
     s += `<path d="${path}" fill="none" stroke="${color.body}" stroke-width="${bodyW}" stroke-linecap="round" stroke-linejoin="round"/>`;
     s += `<path d="${path}" fill="none" stroke="${color.light}" stroke-width="${bodyW*0.6}" stroke-linecap="round" stroke-linejoin="round"/>`;
-    s += `<path d="${path}" fill="none" stroke="${color.belly}" stroke-width="${bodyW*0.3}" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="${bodyW*0.55} ${bodyW*0.9}"/>`;
-    s += `<path d="${path}" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="${bodyW*0.18}" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 4"/>`;
-
-    s += `<circle cx="${head.x}" cy="${head.y}" r="${headR}" fill="${color.dark}" stroke="${color.dark}" stroke-width="1.5"/>`;
+    s += `<circle cx="${head.x}" cy="${head.y}" r="${headR}" fill="${color.dark}"/>`;
     s += `<circle cx="${head.x}" cy="${head.y}" r="${headR-1}" fill="${color.body}"/>`;
     s += `<circle cx="${head.x}" cy="${head.y}" r="${headR*0.7}" fill="${color.light}"/>`;
-    const eyeR = headR * 0.24;
-    const eyeOX = headR * 0.38;
-    const eyeOY = headR * 0.28;
+    const eyeR = headR * 0.24, eyeOX = headR * 0.38, eyeOY = headR * 0.28;
     s += `<circle cx="${head.x - eyeOX}" cy="${head.y - eyeOY}" r="${eyeR}" fill="#fff"/>`;
     s += `<circle cx="${head.x + eyeOX}" cy="${head.y - eyeOY}" r="${eyeR}" fill="#fff"/>`;
     s += `<circle cx="${head.x - eyeOX}" cy="${head.y - eyeOY}" r="${eyeR*0.55}" fill="#000"/>`;
     s += `<circle cx="${head.x + eyeOX}" cy="${head.y - eyeOY}" r="${eyeR*0.55}" fill="#000"/>`;
-    s += `<circle cx="${head.x - eyeOX - 0.6}" cy="${head.y - eyeOY - 0.6}" r="${eyeR*0.22}" fill="#fff"/>`;
-    s += `<circle cx="${head.x + eyeOX - 0.6}" cy="${head.y - eyeOY - 0.6}" r="${eyeR*0.22}" fill="#fff"/>`;
-    const tY = head.y - headR;
-    s += `<path d="M ${head.x} ${tY} L ${head.x} ${tY - headR*0.5} M ${head.x} ${tY - headR*0.5} L ${head.x - headR*0.3} ${tY - headR*0.9} M ${head.x} ${tY - headR*0.5} L ${head.x + headR*0.3} ${tY - headR*0.9}" stroke="${color.body}" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
-
     s += '</g>';
     return s;
   },
@@ -1148,21 +1071,19 @@ const Game = {
     document.querySelectorAll('.token').forEach(t=>t.remove());
     const board = document.getElementById('board');
     if(!board) return;
-
     const byPos = {};
     this.state.players.forEach(p=>{
       if(p.pos < 1) return;
       if(!byPos[p.pos]) byPos[p.pos] = [];
       byPos[p.pos].push(p);
     });
-
     Object.entries(byPos).forEach(([pos, players])=>{
       const n = parseInt(pos);
       const {row, col} = this.cellPos(n);
       const total = players.length;
       players.forEach((p, i)=>{
         const token = document.createElement('div');
-        token.className = 'token ' + p.id;
+        token.className = 'token ' + p.id + (p.index === this.state.turnIdx ? ' active' : '');
         token.innerHTML = `<span class="ic">${p.icon}</span>`;
         const baseX = col * 10 + 5;
         const baseY = row * 10 + 5;
@@ -1199,6 +1120,7 @@ const Game = {
     who.className = 'who ' + p.id;
     who.innerHTML = `<span class="dot"></span>${p.name} <span style="color:#64748b;font-weight:500;font-size:11px;">(${p.role})</span>`;
     this.renderPlayerList();
+    if(this.state.mounted) this.renderTokens();
   },
 
   log(html, cls=''){
@@ -1212,20 +1134,10 @@ const Game = {
 
   renderDice(value){
     const dice = document.getElementById('dice');
-    const pipCount = value;
-    const posMap = {
-      1: [4],
-      2: [0,8],
-      3: [0,4,8],
-      4: [0,2,6,8],
-      5: [0,2,4,6,8],
-      6: [0,2,3,5,6,8]
-    };
-    const on = posMap[pipCount] || [];
+    const posMap = {1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]};
+    const on = posMap[value] || [];
     let html = '';
-    for(let i=0;i<9;i++){
-      html += `<div class="pip${on.includes(i)?' on':''}"></div>`;
-    }
+    for(let i=0;i<9;i++) html += `<div class="pip${on.includes(i)?' on':''}"></div>`;
     dice.innerHTML = html;
     document.getElementById('diceVal').textContent = value || '–';
   },
@@ -1235,27 +1147,20 @@ const Game = {
     if(this.state.winner) return;
     this.state.phase = 'rolling';
     document.getElementById('rollBtn').disabled = true;
-
     const p = this.state.players[this.state.turnIdx];
     const dice = document.getElementById('dice');
     Audio.dice();
-
     dice.classList.add('rolling');
-    const rollInterval = setInterval(()=>{
-      const rv = 1 + Math.floor(Math.random() * 6);
-      this.renderDice(rv);
-    }, 80);
-
+    // Animasi rolling: nilai acak cepat selama 600ms
+    const rollInterval = setInterval(()=>{ this.renderDice(1 + Math.floor(Math.random() * 6)); }, 70);
     await this.sleep(600);
     clearInterval(rollInterval);
     dice.classList.remove('rolling');
-
-    const value = 1 + Math.floor(Math.random() * 6);
+    // Ambil nilai dari DiceBag (natural, anti-streak)
+    const value = DiceBag.roll();
     this.renderDice(value);
-
     this.log(`<b>${p.name}</b> melempar: <b style="color:var(--accent);">${value}</b>`, '');
     UI.toast(`🎲 ${value}`, `${p.name} jalan ${value} langkah`, 'pos');
-
     await this.sleep(400);
     await this.movePlayer(p, value);
     await this.resolveCell(p);
@@ -1271,85 +1176,261 @@ const Game = {
       Audio.step();
       await this.sleep(220);
     }
-    if(p.pos >= 100){
-      p.pos = 100;
-      p.finished = true;
-      this.renderTokens();
-      this.renderPlayerList();
+    if(p.pos >= 100){ p.pos = 100; p.finished = true; this.renderTokens(); this.renderPlayerList(); }
+  },
+
+  /* ====== ANIMASI TANGGA AJAIB: NAIK 2 BARIS (+20 kotak) ====== */
+  async animateLadder(p, fromPos, toPos){
+    if(fromPos === toPos) return;
+    const board = document.getElementById('board');
+    const boardRect = board.getBoundingClientRect();
+    const cellSize = boardRect.width / 10;
+    const svg = document.getElementById('boardSvg');
+    if(!svg) return;
+
+    const fromCenter = this.centerOf(board, fromPos, boardRect);
+    const toCenter   = this.centerOf(board, toPos, boardRect);
+    if(!fromCenter || !toCenter) return;
+
+    // === PILIH PALETTE ACAK agar tidak monoton ===
+    let paletteIdx;
+    do { paletteIdx = Math.floor(Math.random() * MAGIC_LADDER_PALETTES.length); }
+    while(paletteIdx === this.state.lastLadderIdx && MAGIC_LADDER_PALETTES.length > 1);
+    this.state.lastLadderIdx = paletteIdx;
+    const palette = MAGIC_LADDER_PALETTES[paletteIdx];
+
+    // Gambar tangga ajaib dengan warna acak
+    const ladderHtml = this.ladderSvg(fromCenter, toCenter, cellSize, palette);
+
+    const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+    g.setAttribute('class','temp-anim');
+    g.style.filter = `drop-shadow(0 0 22px ${palette.glow}) drop-shadow(0 0 10px ${palette.light})`;
+    g.innerHTML = ladderHtml;
+    svg.appendChild(g);
+
+    // Semburan partikel warna sesuai palette (random jumlah 18-26)
+    this.burstParticles(fromCenter, boardRect, palette.particle, 18 + Math.floor(Math.random()*9));
+    await this.sleep(420);
+
+    // Durasi animasi sedikit acak (2.4-2.8s) agar tidak monoton
+    const duration = 2.4 + Math.random() * 0.4;
+    const tokenEl = board.querySelector(`.token.${p.id}`);
+    if(tokenEl){
+      const { row:toRow, col:toCol } = this.cellPos(toPos);
+      const destLeft = (toCol * 10 + 5) + '%';
+      const destTop  = (toRow * 10 + 5) + '%';
+
+      tokenEl.classList.add('animating');
+      tokenEl.style.animation = 'none';
+      tokenEl.style.transition = `left ${duration}s cubic-bezier(.45,.05,.55,.95), top ${duration}s cubic-bezier(.45,.05,.55,.95)`;
+      void tokenEl.offsetWidth;
+      tokenEl.style.left = destLeft;
+      tokenEl.style.top  = destTop;
+
+      await this.sleep(duration * 1000 + 150);
+    }
+
+    // Partikel di titik akhir
+    this.burstParticles(toCenter, boardRect, palette.particle, 16 + Math.floor(Math.random()*9));
+
+    g.style.transition = 'opacity .5s ease';
+    g.style.opacity = '0';
+    await this.sleep(500);
+    g.remove();
+    p.pos = toPos;
+    this.renderTokens();
+    this.renderPlayerList();
+  },
+
+  /* ====== ANIMASI ULAR AJAIB: TURUN 1 BARIS (−10 kotak) ====== */
+  async animateSnake(p, fromPos, toPos){
+    if(fromPos === toPos) return;
+    const board = document.getElementById('board');
+    const boardRect = board.getBoundingClientRect();
+    const cellSize = boardRect.width / 10;
+    const svg = document.getElementById('boardSvg');
+    if(!svg) return;
+
+    const fromCenter = this.centerOf(board, fromPos, boardRect);
+    const toCenter   = this.centerOf(board, toPos, boardRect);
+    if(!fromCenter || !toCenter) return;
+
+    // Screen shake
+    document.body.classList.add('screen-shake');
+    setTimeout(()=>document.body.classList.remove('screen-shake'), 600);
+
+    // === PILIH PALETTE ULAR ACAK agar tidak monoton ===
+    let paletteIdx;
+    do { paletteIdx = Math.floor(Math.random() * MAGIC_SNAKE_PALETTES.length); }
+    while(paletteIdx === this.state.lastSnakeIdx && MAGIC_SNAKE_PALETTES.length > 1);
+    this.state.lastSnakeIdx = paletteIdx;
+    const palette = MAGIC_SNAKE_PALETTES[paletteIdx];
+
+    // 50% kemungkinan: kepala ular di atas (dari posisi sekarang) atau di bawah
+    // (visual variasi) — tetap logis karena ular membentang dari → ke
+    const headAtFrom = Math.random() < 0.5;
+    const headPt = headAtFrom ? fromCenter : toCenter;
+    const tailPt = headAtFrom ? toCenter : fromCenter;
+
+    const snakeHtml = this.snakeSvg(headPt, tailPt, cellSize, palette);
+
+    const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+    g.setAttribute('class','temp-anim');
+    g.style.filter = `drop-shadow(0 0 22px ${palette.glow}) drop-shadow(0 0 10px ${palette.light})`;
+    g.innerHTML = snakeHtml;
+    svg.appendChild(g);
+
+    this.burstParticles(headPt, boardRect, palette.particle, 20 + Math.floor(Math.random()*8));
+    await this.sleep(680);
+
+    // Durasi animasi acak (2.0-2.4s)
+    const duration = 2.0 + Math.random() * 0.4;
+    const tokenEl = board.querySelector(`.token.${p.id}`);
+    if(tokenEl){
+      const { row:toRow, col:toCol } = this.cellPos(toPos);
+      const destLeft = (toCol * 10 + 5) + '%';
+      const destTop  = (toRow * 10 + 5) + '%';
+
+      tokenEl.classList.add('animating');
+      tokenEl.style.animation = 'none';
+      tokenEl.style.transition = `left ${duration}s cubic-bezier(.45,.05,.55,.95), top ${duration}s cubic-bezier(.45,.05,.55,.95)`;
+      void tokenEl.offsetWidth;
+      tokenEl.style.left = destLeft;
+      tokenEl.style.top  = destTop;
+
+      await this.sleep(duration * 1000 + 150);
+    }
+
+    this.burstParticles(toCenter, boardRect, palette.particle, 16 + Math.floor(Math.random()*8));
+
+    g.style.transition = 'opacity .5s ease';
+    g.style.opacity = '0';
+    await this.sleep(500);
+    g.remove();
+    p.pos = toPos;
+    this.renderTokens();
+    this.renderPlayerList();
+  },
+
+  /* ====== BURST PARTIKEL ====== */
+  burstParticles(center, boardRect, color, count=18){
+    const layer = document.getElementById('confettiLayer');
+    if(!layer) return;
+    const bRect = document.getElementById('board').getBoundingClientRect();
+    const baseX = bRect.left + center.x;
+    const baseY = bRect.top + center.y;
+    for(let i=0; i<count; i++){
+      const p = document.createElement('div');
+      p.className = 'confetti-piece';
+      const angle = Math.random() * Math.PI * 2;
+      const dist = 40 + Math.random() * 100;
+      const dx = Math.cos(angle) * dist;
+      const dy = Math.sin(angle) * dist;
+      p.style.left = baseX + 'px';
+      p.style.top  = baseY + 'px';
+      p.style.background = color;
+      p.style.boxShadow = `0 0 12px ${color}`;
+      p.style.width = (4 + Math.random()*5) + 'px';
+      p.style.height = (6 + Math.random()*8) + 'px';
+      p.style.opacity = '.95';
+      p.style.animation = 'none';
+      p.style.transition = `transform ${0.7 + Math.random()*0.5}s cubic-bezier(.2,.6,.4,1), opacity ${0.7 + Math.random()*0.5}s ease`;
+      layer.appendChild(p);
+      void p.offsetWidth;
+      p.style.transform = `translate(${dx}px, ${dy}px) rotate(${Math.random()*720}deg)`;
+      p.style.opacity = '0';
+      setTimeout(()=>p.remove(), 1300);
     }
   },
 
   async resolveCell(p){
     this.state.phase = 'resolving';
-
     if(p.pos >= 100){
       this.state.winner = p;
       this.log(`🏆 <b style="color:#fbbf24;">${p.name} MENCAPAI FINISH!</b>`, 'pos');
       Audio.win();
+      this.launchConfetti();
       await this.sleep(900);
       this.showWin();
       return;
     }
-
     if(LADDERS[p.pos]){
       const target = LADDERS[p.pos];
       Audio.ladder();
       this.log(`🪜 <b>${p.name}</b> naik tangga: ${p.pos} → ${target}`, 'pos');
       UI.toast('🪜 Naik Tangga!', `${p.pos} → ${target}`, 'pos');
       await this.sleep(500);
-      p.pos = target;
-      this.renderTokens();
-      this.renderPlayerList();
+      p.pos = target; this.renderTokens(); this.renderPlayerList();
       await this.sleep(800);
-      this.endTurn();
-      return;
+      this.endTurn(); return;
     }
-
     if(SNAKES[p.pos]){
       const target = SNAKES[p.pos];
       Audio.snake();
       this.log(`🐍 <b>${p.name}</b> kena ular: ${p.pos} → ${target}`, 'neg');
       UI.toast('🐍 Kena Ular!', `${p.pos} → ${target}`, 'neg');
       await this.sleep(500);
-      p.pos = target;
-      this.renderTokens();
-      this.renderPlayerList();
+      p.pos = target; this.renderTokens(); this.renderPlayerList();
       await this.sleep(800);
-      this.endTurn();
-      return;
+      this.endTurn(); return;
     }
-
     if(Q_CELLS.includes(p.pos)){ await this.askQuestion(p); return; }
     if(E_CELLS.includes(p.pos)){ await this.triggerEvent(p); return; }
-
     this.endTurn();
   },
 
+  /* Ambil soal yang belum dipakai (anti-pengulangan per level) */
   getQuestion(){
     const pool = QUESTIONS_BY_LEVEL[this.state.level] || QUESTIONS_BY_LEVEL[1];
-    return pool[Math.floor(Math.random() * pool.length)];
+    const key = 'L' + this.state.level;
+    if(!this.state.usedQ[key]) this.state.usedQ[key] = new Set();
+    const used = this.state.usedQ[key];
+    let avail = pool.map((q,i)=>i).filter(i=>!used.has(i));
+    // Kalau sudah habis, reset setnya (mulai siklus baru)
+    if(avail.length === 0){ used.clear(); avail = pool.map((q,i)=>i); }
+    const idx = avail[Math.floor(Math.random() * avail.length)];
+    used.add(idx);
+    return pool[idx];
+  },
+
+  showResultBanner(type){
+    const banner = document.createElement('div');
+    banner.className = 'result-banner ' + type;
+    if(type === 'correct'){
+      banner.innerHTML = `
+        <div class="rb-icon">🪜✨</div>
+        <div class="rb-text">BENAR!</div>
+        <div class="rb-sub">Tangga Ajaib · Naik 2 Baris</div>
+      `;
+    } else {
+      banner.innerHTML = `
+        <div class="rb-icon">🐍💫</div>
+        <div class="rb-text">SALAH!</div>
+        <div class="rb-sub">Ular Ajaib · Turun 1 Baris</div>
+      `;
+    }
+    document.body.appendChild(banner);
+    setTimeout(()=>{ if(banner.parentNode) banner.remove(); }, 2300);
   },
 
   async askQuestion(p){
     const q = this.getQuestion();
     Audio.event();
-
-    const choiceHtml = q.a.map((txt, i)=>
-      `<button class="choice" data-i="${i}"><span class="key">${String.fromCharCode(65+i)}</span>${txt}</button>`
-    ).join('');
+    // Acak posisi pilihan? Tidak — jaga agar jawaban benar tetap di index semula,
+    // tapi buat tampilan opsi tetap konsisten. Yang penting soal tidak berulang.
+    const choiceHtml = q.a.map((txt, i)=>`<button class="choice" data-i="${i}"><span class="key">${String.fromCharCode(65+i)}</span>${txt}</button>`).join('');
 
     const correct = await new Promise(resolve=>{
       UI.modal({
         badge:'❓ PERTANYAAN · LEVEL ' + this.state.level,
         title:'',
         body:`
-          <p style="font-size:12px;color:#64748b;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-bottom:6px;">Kotak ${p.pos} · ${p.name}</p>
+          <p style="font-size:11px;color:#64748b;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-bottom:6px;">Kotak ${p.pos} · ${p.name} · ${this.LEVEL_MATERI[this.state.level]}</p>
           <h2 style="font-size:16px;color:#e0f2fe;line-height:1.5;margin-bottom:10px;">${q.q}</h2>
           <div class="choices">${choiceHtml}</div>
         `,
         actions:[], noClose:true
       });
-
       document.querySelectorAll('.choice').forEach(btn=>{
         btn.onclick = ()=>{
           const picked = parseInt(btn.dataset.i);
@@ -1361,18 +1442,25 @@ const Game = {
           });
           if(isCorrect){
             Audio.correct();
-            this.log(`✅ <b>${p.name}</b> BENAR! +3 langkah`, 'pos');
+            this.log(`✅ <b>${p.name}</b> BENAR! 🪜 Tangga Ajaib: naik 2 baris`, 'pos');
           } else {
             Audio.wrong();
-            this.log(`❌ <b>${p.name}</b> SALAH. Diam.`, 'neg');
+            this.log(`❌ <b>${p.name}</b> SALAH! 🐍 Ular Ajaib: turun 1 baris`, 'neg');
           }
-          setTimeout(()=>{ UI.closeModal(); resolve(isCorrect); }, 1500);
+          setTimeout(()=>{ UI.closeModal(); resolve(isCorrect); }, 1200);
         };
       });
     });
 
+    this.showResultBanner(correct ? 'correct' : 'wrong');
+    await this.sleep(900);
+
     if(correct){
-      await this.movePlayer(p, 3);
+      Audio.ladder();
+      UI.toast('🪜 Tangga Ajaib', `${p.name} naik 2 baris!`, 'pos');
+      await this.sleep(300);
+      const destUp = Math.min(100, p.pos + 20);
+      await this.animateLadder(p, p.pos, destUp);
       if(p.pos >= 100){
         p.finished = true;
         p.pos = 100;
@@ -1380,18 +1468,31 @@ const Game = {
         this.renderTokens();
         this.renderPlayerList();
         Audio.win();
+        this.launchConfetti();
         await this.sleep(700);
         this.showWin();
         return;
+      }
+    } else {
+      Audio.snake();
+      UI.toast('🐍 Ular Ajaib', `${p.name} turun 1 baris!`, 'neg');
+      await this.sleep(300);
+      const destDown = Math.max(1, p.pos - 10);
+      if(destDown !== p.pos){
+        await this.animateSnake(p, p.pos, destDown);
       }
     }
     this.endTurn();
   },
 
   async triggerEvent(p){
-    const ev = EVENTS[Math.floor(Math.random() * EVENTS.length)];
+    // Anti-ulang event yang baru muncul
+    let idx;
+    do { idx = Math.floor(Math.random() * EVENTS.length); }
+    while(idx === this.state.lastEventIdx && EVENTS.length > 1);
+    this.state.lastEventIdx = idx;
+    const ev = EVENTS[idx];
     Audio.event();
-
     await new Promise(resolve=>{
       UI.modal({
         badge:'⚡ EVENT EKONOMI · LEVEL ' + this.state.level,
@@ -1401,18 +1502,14 @@ const Game = {
             <div class="emoji-big">${ev.icon}</div>
             <h2 class="big" style="background:linear-gradient(135deg,#e0f2fe,var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">${ev.title}</h2>
             <p style="margin-top:8px;">${ev.desc}</p>
-            <div style="margin-top:16px;font-size:22px;font-weight:900;color:${ev.type==='pos'?'#34d399':'#f87171'};">
-              ${ev.move > 0 ? '▲' : '▼'} ${Math.abs(ev.move)} langkah
-            </div>
+            <div style="margin-top:16px;font-size:22px;font-weight:900;color:${ev.type==='pos'?'#34d399':'#f87171'};">${ev.move > 0 ? '▲' : '▼'} ${Math.abs(ev.move)} langkah</div>
           </div>
         `,
         actions:[{ label:'Lanjut →', onClick:()=>resolve() }],
         noClose:true
       });
       setTimeout(()=>{
-        if(document.getElementById('modalBack').classList.contains('show')){
-          UI.closeModal(); resolve();
-        }
+        if(document.getElementById('modalBack').classList.contains('show')){ UI.closeModal(); resolve(); }
       }, 4000);
     });
 
@@ -1421,26 +1518,18 @@ const Game = {
       await this.sleep(300);
       await this.movePlayer(p, ev.move);
       if(p.pos >= 100){
-        p.finished = true;
-        p.pos = 100;
-        this.state.winner = p;
-        this.renderTokens();
-        this.renderPlayerList();
-        Audio.win();
-        await this.sleep(700);
-        this.showWin();
-        return;
+        p.finished = true; p.pos = 100; this.state.winner = p;
+        this.renderTokens(); this.renderPlayerList();
+        Audio.win(); this.launchConfetti();
+        await this.sleep(700); this.showWin(); return;
       }
     } else {
       this.log(`⚡ <b>${p.name}</b>: ${ev.title} → mundur ${Math.abs(ev.move)}`, 'neg');
       await this.sleep(300);
       for(let i=0; i<Math.abs(ev.move); i++){
         if(p.pos <= 1) break;
-        p.pos -= 1;
-        this.renderTokens();
-        this.renderPlayerList();
-        Audio.step();
-        await this.sleep(200);
+        p.pos -= 1; this.renderTokens(); this.renderPlayerList();
+        Audio.step(); await this.sleep(200);
       }
     }
     this.endTurn();
@@ -1461,6 +1550,25 @@ const Game = {
     document.getElementById('rollBtn').disabled = false;
   },
 
+  launchConfetti(){
+    const layer = document.getElementById('confettiLayer');
+    if(!layer) return;
+    const colors = ['#fbbf24','#38bdf8','#a855f7','#10b981','#ec4899','#f97316','#34d399'];
+    for(let i=0; i<120; i++){
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.left = Math.random() * 100 + 'vw';
+      piece.style.background = colors[i % colors.length];
+      piece.style.width = (6 + Math.random()*8) + 'px';
+      piece.style.height = (10 + Math.random()*10) + 'px';
+      piece.style.animationDuration = (2.5 + Math.random()*2.5) + 's';
+      piece.style.animationDelay = (Math.random()*0.8) + 's';
+      piece.style.borderRadius = Math.random() > .6 ? '50%' : '2px';
+      layer.appendChild(piece);
+      setTimeout(()=>piece.remove(), 6000);
+    }
+  },
+
   showWin(){
     const p = this.state.winner;
     const sorted = [...this.state.players].sort((a,b)=>b.pos - a.pos);
@@ -1468,36 +1576,31 @@ const Game = {
     card.innerHTML = `
       <div class="crown">👑</div>
       <h2>SELAMAT!</h2>
-      <div class="winner-name">
-        <span class="dot" style="background:${p.color};box-shadow:0 0 12px ${p.color};"></span>
-        ${p.name} (${p.role}) Menang!
+      <div class="winner-name"><span class="dot" style="background:${p.color};box-shadow:0 0 12px ${p.color};"></span>${p.name} (${p.role}) Menang!</div>
+      <div style="font-size:12px;color:#94a3b8;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px;">
+        Level ${this.state.level} — ${this.LEVEL_NAMES[this.state.level]} · ${this.LEVEL_MATERI[this.state.level]}
       </div>
       <div class="rank-list">
         ${sorted.map((pl, i)=>{
           const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '🏅';
-          return `<div class="rank-item">
-            <span class="name">${medal} <span class="dot" style="background:${pl.color};box-shadow:0 0 8px ${pl.color};"></span>${pl.name}</span>
-            <span class="pos">Kotak ${pl.pos}</span>
-          </div>`;
+          return `<div class="rank-item"><span class="name">${medal} <span class="dot" style="background:${pl.color};box-shadow:0 0 8px ${pl.color};"></span>${pl.name}</span><span class="pos">Kotak ${pl.pos}</span></div>`;
         }).join('')}
       </div>
       <p style="color:#94a3b8;font-size:12px;line-height:1.7;margin-bottom:20px;">
-        🎓 <b style="color:var(--accent);">Refleksi:</b> Setiap pelaku ekonomi punya peran penting. Keberuntungan dadu dan pengetahuan ekonomi sama-sama menentukan kemenangan!
+        🌍 <b style="color:var(--accent);">Refleksi:</b> Perdagangan internasional membuat negara-negara saling bergantung dan saling menguntungkan. Setiap pelaku — eksportir, importir, pemerintah, dan masyarakat luar negeri — punya peran penting!
       </p>
       <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-        <button class="btn ghost" onclick="Game.backToMenu()">🏠 Menu</button>
+        <button class="btn ghost" onclick="Game.backToMenu()">🏠 Pilih Level</button>
         <button class="btn primary" onclick="Game.start(Game.state.totalPlayers)">🔄 Main Lagi</button>
       </div>
     `;
     this.showScreen('win');
+    this.launchConfetti();
   },
 
   sleep(ms){ return new Promise(r=>setTimeout(r, ms)); }
 };
 
-/* ============================================================
-   UI MODAL
-   ============================================================ */
 const UI = {
   modal({badge, title, body, actions=[], noClose=false}){
     const box = document.getElementById('modalBox');
@@ -1509,12 +1612,8 @@ const UI = {
     `;
     document.getElementById('modalBack').classList.add('show');
     if(!noClose){
-      document.getElementById('modalBack').onclick = (e)=>{
-        if(e.target.id === 'modalBack') UI.closeModal();
-      };
-    } else {
-      document.getElementById('modalBack').onclick = null;
-    }
+      document.getElementById('modalBack').onclick = (e)=>{ if(e.target.id === 'modalBack') UI.closeModal(); };
+    } else { document.getElementById('modalBack').onclick = null; }
     actions.forEach((a,i)=>{
       const btn = box.querySelector(`[data-a="${i}"]`);
       if(btn) btn.onclick = ()=>{ Audio.click(); UI.closeModal(); if(a.onClick) a.onClick(); };
@@ -1532,16 +1631,31 @@ const UI = {
   }
 };
 
-/* ============================================================
-   INIT
-   ============================================================ */
+function initAmbientParticles(){
+  const wrap = document.getElementById('ambientParticles');
+  if(!wrap) return;
+  for(let i=0; i<18; i++){
+    const s = document.createElement('span');
+    s.style.left = Math.random() * 100 + 'vw';
+    s.style.animationDuration = (14 + Math.random()*14) + 's';
+    s.style.animationDelay = (Math.random()*10) + 's';
+    s.style.opacity = 0.25 + Math.random()*0.5;
+    const size = 2 + Math.random()*3;
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    wrap.appendChild(s);
+  }
+}
+
 window.addEventListener('load', ()=>{
   Game.renderDice(1);
+  Game.renderNameFields();
+  initAmbientParticles();
   setTimeout(()=>{
     const ld = document.getElementById('loader');
     if(ld){ ld.classList.add('hide'); setTimeout(()=>ld.remove(), 800); }
     Game.showScreen('menu');
-    Game.setLevel(1); // Set default level 1
+    Game.setLevel(1);
   }, 2400);
 });
 setTimeout(()=>{
@@ -1555,6 +1669,8 @@ setTimeout(()=>{
 }, 5000);
 
 document.addEventListener('keydown', (e)=>{
+  const tag = (e.target && e.target.tagName) || '';
+  if(tag === 'INPUT') return;
   if(e.code === 'Space'){
     e.preventDefault();
     const btn = document.getElementById('rollBtn');
@@ -1567,10 +1683,7 @@ let resizeT;
 window.addEventListener('resize', ()=>{
   clearTimeout(resizeT);
   resizeT = setTimeout(()=>{
-    if(Game.state.mounted){
-      Game.drawConnections();
-      Game.renderTokens();
-    }
+    if(Game.state.mounted){ Game.drawConnections(); Game.renderTokens(); }
   }, 200);
 });
 </script>
