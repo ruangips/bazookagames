@@ -11,7 +11,6 @@
 <meta name="description" content="BAZOOKA GAME - Game Edukasi Ekonomi Bab 1 oleh MAEDA GAMES EDU">
 <title>BAZOOKA GAME — Ekonomi Bab 1 | MGE</title>
 <style>
-/* ========== RESET & GLOBAL ========== */
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{height:100%;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;text-size-adjust:100%;}
 body{
@@ -34,8 +33,6 @@ body{
     radial-gradient(circle at 80% 90%,#3a2a08 0%,transparent 50%),
     radial-gradient(circle at 50% 50%,#0a0e1f,#04060f 60%,#020308);
 }
-
-/* ========== PANEL ========== */
 .panel{
   width:min(560px,94vw);
   max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 16px);
@@ -52,7 +49,6 @@ body{
 }
 .panel::-webkit-scrollbar{width:5px}
 .panel::-webkit-scrollbar-thumb{background:rgba(212,175,55,.4);border-radius:3px}
-
 h1{
   font-size:clamp(18px,4.8vw,26px);
   background:linear-gradient(180deg,#fff,#f0d878);
@@ -75,7 +71,6 @@ h1{
 .btn-s{background:rgba(212,175,55,.10);color:#f0d878;border:1px solid rgba(212,175,55,.35)}
 .btn-d{background:linear-gradient(180deg,#f43f5e,#9f1239);color:#fff;box-shadow:0 6px 20px rgba(244,63,94,.4)}
 .btn-gold{background:linear-gradient(180deg,#fef3c7,#d4af37);color:#2a1a00;box-shadow:0 6px 24px rgba(212,175,55,.55),inset 0 1px 0 rgba(255,255,255,.5)}
-
 .set-row{
   display:grid;grid-template-columns:1fr auto clamp(36px,10vw,44px);
   gap:clamp(6px,2vw,10px);align-items:center;
@@ -87,8 +82,6 @@ h1{
 .set-row input[type=range]{width:clamp(70px,20vw,120px);accent-color:#d4af37;touch-action:manipulation}
 .set-row input[type=checkbox]{width:clamp(18px,5vw,22px);height:clamp(18px,5vw,22px);accent-color:#d4af37}
 .set-row span{font-size:clamp(10px,2.6vw,12px);opacity:.7;text-align:right}
-
-/* ========== MGE FOOTER ========== */
 .mgde-footer{
   margin-top:clamp(12px,3vw,18px);
   padding:clamp(9px,2.2vw,12px) clamp(10px,3vw,14px);
@@ -105,15 +98,11 @@ h1{
   color:#c4b5fd;text-transform:uppercase;line-height:1.4;
   text-shadow:0 0 10px rgba(167,139,250,.9),0 0 20px rgba(167,139,250,.5),1px 1px 0 rgba(0,0,0,.8);
 }
-
-/* ========== GAME CANVAS ========== */
 #game{background:#000;padding:0}
 #cvs{
   display:block;width:100vw;height:100vh;width:100dvw;height:100dvh;
   max-width:100%;max-height:100%;object-fit:contain;cursor:none;touch-action:none;
 }
-
-/* ========== HUD ========== */
 .hud{
   position:absolute;inset:0;pointer-events:none;
   padding:
@@ -141,8 +130,6 @@ h1{
 .level .val{color:#a78bfa;text-shadow:0 0 8px rgba(167,139,250,.55)}
 .shield .val{color:#a78bfa;text-shadow:0 0 10px rgba(167,139,250,.65)}
 .shield .val.low{color:#f43f5e;text-shadow:0 0 10px rgba(244,63,94,.6)}
-
-/* ========== QUESTION BOX — COMPACT ========== */
 .qbox{
   position:absolute;
   left:50%;
@@ -163,14 +150,12 @@ h1{
   pointer-events:none;
 }
 .qbox *{pointer-events:none !important;}
-
 @media (pointer:coarse){
   .qbox{
     width:min(440px, calc(100% - 220px));
     min-width:min(300px, 66%);
   }
 }
-
 .q-l{
   font-size:clamp(6px,1.5vw,7.5px);
   letter-spacing:1.3px;
@@ -254,7 +239,6 @@ h1{
   color:#ffffff;
   text-align:center;
 }
-
 .msg{
   position:absolute;top:25%;left:50%;
   transform:translate(-50%,-50%) scale(.7);
@@ -271,7 +255,6 @@ h1{
   80%{opacity:1}
   100%{opacity:0;transform:translate(-50%,-50%) scale(1)}
 }
-
 .overlay{
   position:absolute;inset:0;display:none;align-items:center;justify-content:center;
   background:rgba(4,6,15,.94);
@@ -299,8 +282,6 @@ h1{
 .rec{font-size:clamp(12px,3.2vw,15px);font-weight:700;color:#ffd700;margin-bottom:clamp(8px,2.5vw,14px);animation:rb .7s ease infinite alternate;text-shadow:0 0 20px rgba(255,215,0,.7)}
 @keyframes rb{from{opacity:.6}to{opacity:1;transform:scale(1.05)}}
 .o-panel .btn{width:min(260px,84vw);margin:clamp(4px,1vw,5px) auto;display:block}
-
-/* ========== LEVEL INTRO ========== */
 .level-intro{
   position:absolute;inset:0;display:none;align-items:center;justify-content:center;
   background:radial-gradient(circle at center,rgba(20,26,60,.94),rgba(4,6,15,.98));
@@ -376,8 +357,6 @@ h1{
   filter:drop-shadow(0 0 10px rgba(212,175,55,.9));
   font-style:normal;
 }
-
-/* ========== TOUCH CONTROLS — z-index TERTINGGI ========== */
 .touch-controls{
   position:absolute;inset:0;
   pointer-events:none;
@@ -441,17 +420,11 @@ h1{
   transition:transform .1s, background .1s;
 }
 .touch-reload:active,.touch-reload.pressed{transform:scale(.94);background:rgba(196,181,253,1)}
-
-/* ========== LEVEL PROGRESS DOTS ========== */
 .level-progress{display:flex;gap:2px;justify-content:center;margin-top:3px;flex-wrap:wrap}
 .lp-dot{width:clamp(3.5px,1vw,4.5px);height:clamp(3.5px,1vw,4.5px);border-radius:50%;background:rgba(212,175,55,.32);transition:all .3s}
 .lp-dot.done{background:#f0d878;box-shadow:0 0 6px rgba(240,216,120,.85)}
 .lp-dot.current{background:#a78bfa;box-shadow:0 0 8px rgba(167,139,250,1);transform:scale(1.3)}
-
-/* ========== MENU CANVAS ========== */
 #menuCanvas{position:fixed;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
-
-/* ========== TITLE ========== */
 .title-wrap{position:relative;margin-bottom:6px;text-align:center}
 .title-glow{
   position:absolute;left:50%;top:55%;transform:translate(-50%,-50%);
@@ -490,8 +463,6 @@ h1.title-main{
   letter-spacing:clamp(1.5px,0.6vw,3px);color:#f0d878;text-transform:uppercase;
   text-shadow:0 0 12px rgba(212,175,55,1),0 0 28px rgba(212,175,55,.7);
 }
-
-/* ========== PREMIUM STATS ========== */
 .prem-stat{
   position:relative;border-radius:clamp(10px,2.5vw,14px);
   padding:clamp(8px,2.2vw,12px) clamp(10px,3vw,14px);
@@ -527,7 +498,6 @@ h1.title-main{
   0%,100%{text-shadow:0 0 22px rgba(255,215,0,.8),0 0 44px rgba(255,215,0,.5)}
   50%{text-shadow:0 0 36px rgba(255,215,0,1),0 0 68px rgba(255,215,0,.7)}
 }
-
 .btn-prem{position:relative;overflow:hidden;isolation:isolate}
 .btn-prem::after{
   content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
@@ -536,7 +506,6 @@ h1.title-main{
   animation:btnShine 3.6s ease-in-out infinite;pointer-events:none;
 }
 @keyframes btnShine{0%{left:-80%}40%,100%{left:130%}}
-
 #menu .panel,#settings .panel,#howto .panel,#levelselect .panel{
   position:relative;z-index:2;
   background:
@@ -549,8 +518,6 @@ h1.title-main{
   animation:panelIn .9s cubic-bezier(.2,.9,.3,1.05);
 }
 @keyframes panelIn{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
-
-/* ========== MGE LOADING SCREEN ========== */
 #loading{padding:0 !important}
 #loading .panel{
   background:transparent !important;border:none !important;
@@ -692,8 +659,6 @@ h1.title-main{
   animation:mgeLoadFill 1.8s cubic-bezier(.65,.05,.36,1) forwards;
 }
 @keyframes mgeLoadFill{0%{width:0%}40%{width:45%}70%{width:75%}100%{width:100%}}
-
-/* ========== MGDE BADGE (in-game) ========== */
 .mgde-badge{
   position:absolute;left:50%;
   bottom:calc(env(safe-area-inset-bottom) + clamp(2px,1vw,5px));
@@ -711,8 +676,6 @@ h1.title-main{
   box-shadow:0 2px 12px rgba(0,0,0,.6),0 0 18px rgba(167,139,250,.28);
 }
 @media (max-width:400px){.mgde-badge{font-size:6px;letter-spacing:0.6px;padding:2px 8px}}
-
-/* ========== LEVEL GRID ========== */
 .level-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(clamp(120px,28vw,180px),1fr));
@@ -736,10 +699,6 @@ h1.title-main{
 .level-card.locked .lv-status{color:#f43f5e}
 .level-card.current .lv-status{color:#c4b5fd}
 .level-card.done .lv-status{color:#f0d878}
-
-/* ============================================================
-   WELCOME SCREEN — RAPI & JELAS
-   ============================================================ */
 .welcome-content{
   width:min(720px,94vw);
   max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 20px);
@@ -759,7 +718,6 @@ h1.title-main{
 }
 .welcome-content::-webkit-scrollbar{width:5px}
 .welcome-content::-webkit-scrollbar-thumb{background:rgba(212,175,55,.4);border-radius:3px}
-
 .welcome-badge{
   display:inline-block;
   padding:6px 20px;
@@ -774,7 +732,6 @@ h1.title-main{
   margin-bottom:16px;
   text-shadow:0 0 14px rgba(212,175,55,.85);
 }
-
 .welcome-title{
   font-family:'Arial Black','Segoe UI',Impact,system-ui,sans-serif;
   font-size:clamp(32px,8.5vw,60px);
@@ -787,7 +744,6 @@ h1.title-main{
   margin-bottom:10px;
   animation:titleShimmer 4.5s ease-in-out infinite;
 }
-
 .welcome-sub{
   font-size:clamp(12px,3.1vw,17px);
   font-weight:800;
@@ -797,7 +753,6 @@ h1.title-main{
   margin-bottom:20px;
   text-shadow:0 0 16px rgba(167,139,250,.85),0 0 32px rgba(167,139,250,.45);
 }
-
 .welcome-rotate{
   display:flex;align-items:center;gap:14px;
   padding:clamp(12px,2.8vw,16px) clamp(14px,3.2vw,20px);
@@ -828,7 +783,6 @@ h1.title-main{
   color:#f0d878;
   text-shadow:0 0 10px rgba(212,175,55,.85);
 }
-
 .welcome-features{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -863,10 +817,6 @@ h1.title-main{
   color:rgba(253,246,227,.9);
   line-height:1.5;
 }
-
-/* ============================================================
-   ROTATE BANNER — HANYA PEMBERITAHUAN (TIDAK DIKUNCI)
-   ============================================================ */
 #rotateOverlay{
   position:fixed;
   top:calc(env(safe-area-inset-top, 0px) + 8px);
@@ -919,17 +869,9 @@ h1.title-main{
   font-weight:600;
   letter-spacing:.2px;
 }
-
-/* ============================================================
-   PORTRAIT MODE — Banner notifikasi saja, tidak memblokir
-   ============================================================ */
 @media (orientation: portrait) and (max-width: 900px){
   #rotateOverlay{display:flex}
 }
-
-/* ============================================================
-   RESPONSIVE TIER 1: Ultra-small phones (<360px)
-   ============================================================ */
 @media (max-width:359px){
   .panel{padding:12px 10px 8px;border-radius:12px}
   .box{min-width:44px;padding:2px 5px;border-radius:6px}
@@ -996,14 +938,11 @@ h1.title-main{
   .level-card{padding:12px}
   .level-card .lv-name{font-size:12px}
 }
-
-/* ====== LANDSCAPE PENDEK (max-height: 520px) ====== */
 @media (max-height:520px) and (orientation:landscape){
   .hud-top{gap:4px}
   .box{padding:3px 6px;min-width:52px}
   .lbl{font-size:6.5px}
   .val{font-size:11px}
-
   .qbox{
     bottom:calc(env(safe-area-inset-bottom) + clamp(10px, 2vw, 14px));
     padding:5px 10px 4px;
@@ -1024,9 +963,7 @@ h1.title-main{
   .wind-inline .wind-s{font-size:7px;min-width:12px}
   .level-progress{gap:1.5px;margin-top:2px}
   .lp-dot{width:3px;height:3px}
-
   .msg{top:22%}
-
   .touch-btn{width:48px;height:48px;font-size:20px;border-width:1.5px}
   .touch-fire{width:58px;height:58px;font-size:22px;border-width:2px}
   .touch-reload{width:40px;height:40px;font-size:15px;border-width:1.5px}
@@ -1034,7 +971,6 @@ h1.title-main{
   .touch-btn.right{bottom:calc(env(safe-area-inset-bottom) + 46px)}
   .touch-fire{bottom:calc(env(safe-area-inset-bottom) + 46px)}
   .touch-reload{bottom:calc(env(safe-area-inset-bottom) + 46px + 58px + 8px)}
-
   .panel{padding:12px 14px 8px;max-height:calc(100dvh - 12px);max-height:calc(100vh - 12px)}
   .mgde-footer{padding:7px 10px;margin-top:8px}
   .mgde-footer .mgde-label{font-size:8px;letter-spacing:1.6px}
@@ -1080,14 +1016,11 @@ h1.title-main{
   .wf-item .wf-title{font-size:10px}
   .wf-item .wf-desc{font-size:9px}
 }
-
-/* ====== LANDSCAPE SANGAT PENDEK (max-height: 380px) ====== */
 @media (max-height:380px) and (orientation:landscape){
   .hud-top{gap:3px}
   .box{padding:2px 5px;min-width:44px;border-radius:5px}
   .lbl{font-size:5.5px;letter-spacing:0.8px}
   .val{font-size:10px}
-
   .qbox{
     bottom:calc(env(safe-area-inset-bottom) + clamp(8px, 1.5vw, 12px));
     padding:4px 9px 4px;
@@ -1108,9 +1041,7 @@ h1.title-main{
   .wind-inline .wind-s{font-size:6.5px;min-width:10px}
   .level-progress{gap:1px;margin-top:1.5px}
   .lp-dot{width:2.5px;height:2.5px}
-
   .msg{top:20%;font-size:clamp(16px,4.5vw,30px)}
-
   .touch-btn{width:42px;height:42px;font-size:17px;border-width:1.5px}
   .touch-fire{width:52px;height:52px;font-size:19px;border-width:2px}
   .touch-reload{width:34px;height:34px;font-size:13px;border-width:1.5px}
@@ -1118,7 +1049,6 @@ h1.title-main{
   .touch-btn.right{bottom:calc(env(safe-area-inset-bottom) + 40px);left:calc(env(safe-area-inset-left) + 6px + 42px + 6px)}
   .touch-fire{bottom:calc(env(safe-area-inset-bottom) + 40px);right:calc(env(safe-area-inset-right) + 6px)}
   .touch-reload{bottom:calc(env(safe-area-inset-bottom) + 40px + 52px + 6px);right:calc(env(safe-area-inset-right) + 6px)}
-
   .panel{padding:10px 12px 6px;border-radius:10px}
   .mgde-footer{padding:5px 8px;margin-top:6px;border-radius:6px}
   .mgde-footer .mgde-label{font-size:7px;letter-spacing:1.4px;line-height:1.3}
@@ -1184,7 +1114,6 @@ h1.title-main{
 </head>
 <body>
 
-<!-- ROTATE BANNER (hanya pemberitahuan, tidak mengunci) -->
 <div id="rotateOverlay">
   <span class="rot-icon">📱</span>
   <div class="rot-content">
@@ -1193,7 +1122,6 @@ h1.title-main{
   </div>
 </div>
 
-<!-- LOADING -->
 <div id="loading" class="screen active">
   <div class="mge-loader-wrap">
     <div class="mge-logo-wrap">
@@ -1214,20 +1142,17 @@ h1.title-main{
   </div>
 </div>
 
-<!-- WELCOME -->
 <div id="welcome" class="screen">
   <div class="welcome-content">
     <div class="welcome-badge">EDISI PREMIUM</div>
     <h1 class="welcome-title">BAZOOKA GAME</h1>
     <p class="welcome-sub">Ekonomi Bab 1 · Kegiatan Ekonomi</p>
-
     <div class="welcome-rotate">
       <span class="wr-icon">📱</span>
       <div class="wr-text">
         <b>Rekomendasi:</b> Putar perangkat ke <b>Mode Landscape</b> (mendatar) untuk pengalaman bermain terbaik — grafik lebih jernih dan kontrol lebih nyaman.
       </div>
     </div>
-
     <div class="welcome-features">
       <div class="wf-item">
         <span class="wf-icon">✨</span>
@@ -1240,7 +1165,7 @@ h1.title-main{
         <span class="wf-icon">🎯</span>
         <div>
           <div class="wf-title">7 Level Epik</div>
-          <div class="wf-desc">70 pertanyaan ekonomi interaktif dari mudah ke sulit.</div>
+          <div class="wf-desc">119 bank soal ekonomi interaktif dari mudah ke sulit.</div>
         </div>
       </div>
       <div class="wf-item">
@@ -1272,16 +1197,13 @@ h1.title-main{
         </div>
       </div>
     </div>
-
     <div class="btns">
       <button class="btn btn-p btn-prem" id="bWelcome">▶ MULAI SEKARANG</button>
     </div>
-
     <div class="mgde-footer"><span class="mgde-label">MAEDA GAMES EDU</span></div>
   </div>
 </div>
 
-<!-- MENU -->
 <div id="menu" class="screen">
   <canvas id="menuCanvas"></canvas>
   <div class="panel">
@@ -1291,7 +1213,7 @@ h1.title-main{
       <p class="title-sub">Game Edukasi Ekonomi</p>
       <p class="title-sub2">Bab 1: Kegiatan Ekonomi</p>
     </div>
-    <p class="sub" style="margin-top:12px;margin-bottom:12px">7 Level · 70 Pertanyaan Epik</p>
+    <p class="sub" style="margin-top:12px;margin-bottom:12px">7 Level · 119 Bank Soal Epik</p>
     <div class="prem-stat gold">
       <div class="stat-lbl">🏆 SKOR TERTINGGI</div>
       <div class="stat-val" id="hsVal">0</div>
@@ -1310,11 +1232,10 @@ h1.title-main{
   </div>
 </div>
 
-<!-- LEVEL SELECT -->
 <div id="levelselect" class="screen">
   <div class="panel">
     <h2 style="color:#f0d878;margin-bottom:6px;letter-spacing:2px">🗺️ PILIH LEVEL</h2>
-    <p style="font-size:clamp(9px,2.4vw,11px);color:rgba(240,216,120,.8);letter-spacing:1.5px;margin-bottom:12px">Pilih misi yang ingin dimainkan</p>
+    <p style="font-size:clamp(9px,2.4vw,11px);color:rgba(240,216,120,.8);letter-spacing:1.5px;margin-bottom:12px">Semua level terbuka — pilih misi yang ingin dimainkan</p>
     <div class="level-grid" id="levelGrid"></div>
     <div class="btns" style="margin-top:12px">
       <button class="btn btn-s" id="bLevelsBack">← KEMBALI KE MENU</button>
@@ -1323,7 +1244,6 @@ h1.title-main{
   </div>
 </div>
 
-<!-- SETTINGS -->
 <div id="settings" class="screen">
   <div class="panel">
     <h2 style="color:#f0d878;margin-bottom:14px">⚙ PENGATURAN</h2>
@@ -1340,7 +1260,6 @@ h1.title-main{
   </div>
 </div>
 
-<!-- HOW TO -->
 <div id="howto" class="screen">
   <div class="panel" style="text-align:left">
     <h2 style="color:#f0d878;margin-bottom:14px;text-align:center">📖 CARA MAIN</h2>
@@ -1360,10 +1279,11 @@ h1.title-main{
       <b>6.</b> Kegiatan Ekonomi & Faktor Produksi<br>
       <b>7.</b> Pelaku Ekonomi & Ekonomi Indonesia<br>
       <br>
-      Setiap level berisi <b>10 pertanyaan</b> dari mudah ke sulit.<br>
-      Pindah level otomatis jika lulus 7 dari 10.<br>
+      Setiap level berisi <b>11 pertanyaan</b> (diambil dari bank 17 soal).<br>
+      Kombinasi soal berbeda setiap sesi — tidak mudah dihafal!<br>
+      Pindah level otomatis jika lulus 8 dari 11.<br>
       <b>Nyawa 5</b> · dipulihkan penuh di setiap level baru.<br>
-      <b>Progres tersimpan</b> — gagal = ulangi level itu saja.
+      <b>Semua level terbuka</b> — main kapan saja!
     </p>
     <p style="line-height:1.7;font-size:clamp(10px,2.6vw,13px);background:rgba(167,139,250,.10);border-left:3px solid #a78bfa;border-radius:6px;padding:10px;margin-top:8px">
       <b>🎮 Di HP — Pilih target sendiri:</b><br>
@@ -1384,7 +1304,6 @@ h1.title-main{
   </div>
 </div>
 
-<!-- GAME -->
 <div id="game" class="screen">
   <canvas id="cvs" width="960" height="540"></canvas>
   <div class="touch-controls" id="touchCtrls">
@@ -1407,7 +1326,7 @@ h1.title-main{
       <div class="q-t" id="hQ">—</div>
       <div class="q-bar"><div class="q-fill" id="hQTimer"></div></div>
       <div class="q-meta">
-        <span class="progress-info" id="hProgress">Pertanyaan 1/10</span>
+        <span class="progress-info" id="hProgress">Pertanyaan 1/11</span>
         <span class="wind-inline">
           <span>💨</span>
           <span class="wind-lbl">ANGIN</span>
@@ -1473,9 +1392,6 @@ function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor
 function rrect(c,x,y,w,h,r){r=Math.min(r,Math.abs(w)/2,Math.abs(h)/2);c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
 const IS_TOUCH=('ontouchstart' in window)||(navigator.maxTouchPoints>0);
 
-/* ============================================================
-   ORIENTASI — HANYA MEMUNCULKAN BANNER, TIDAK MEMBLOKIR
-   ============================================================ */
 function isPortrait(){return window.innerHeight > window.innerWidth && window.innerWidth <= 900;}
 function handleOrientation(){
   const portrait = isPortrait();
@@ -1486,9 +1402,6 @@ function handleOrientation(){
   updateTouchControlsVisibility();
 }
 
-/* ============================================================
-   TEMA PREMIUM — Obsidian Navy + Champagne Gold + Royal Violet
-   ============================================================ */
 const TEMA_MOUNTAIN={
   skyTop:'#050718',skyMid:'#1e1b4b',skyBot:'#7c3aed',horizon:'#c4b5fd',
   groundTop:'#312e81',groundBot:'#0a0618',
@@ -1553,7 +1466,28 @@ const LEVELS = [
       {q:"Contoh sumber daya alam yang DAPAT diperbarui adalah...",a:"Air dan hutan",w:["Minyak bumi dan batu bara","Gas alam dan tambang emas","Bensin dan solar"]},
       {q:"Bencana alam dapat menyebabkan kelangkaan karena...",a:"Merusak sumber daya dan menghambat produksi",w:["Menambah jumlah barang di pasar","Meningkatkan hasil pertanian","Mempercepat distribusi barang"]},
       {q:"Contoh kelangkaan di kehidupan sehari-hari adalah...",a:"Air bersih saat musim kemarau",w:["Udara di pagi hari","Sinar matahari di siang hari","Angin sepoi-sepoi di pantai"]},
-      {q:"Akibat kelangkaan bagi konsumen adalah...",a:"Harga barang cenderung naik",w:["Harga barang cenderung turun","Barang menjadi melimpah","Pendapatan konsumen naik"]}
+      {q:"Akibat kelangkaan bagi konsumen adalah...",a:"Harga barang cenderung naik",w:["Harga barang cenderung turun","Barang menjadi melimpah","Pendapatan konsumen naik"]},
+      {q:"Kemampuan produksi yang terbatas dapat menyebabkan kelangkaan karena...",
+       a:"Jumlah barang yang dihasilkan tidak sebanding dengan kebutuhan masyarakat",
+       w:["Produsen sengaja menahan barang di gudang","Konsumen malas membeli barang","Pemerintah melarang produksi barang"]},
+      {q:"Ketidakmerataan distribusi dapat menyebabkan kelangkaan karena...",
+       a:"Barang tersedia di suatu daerah, tetapi tidak tersebar merata ke daerah lain",
+       w:["Barang benar-benar habis di seluruh dunia","Semua orang menolak membeli barang","Pabrik menghentikan produksi selamanya"]},
+      {q:"Udara di alam bebas TIDAK termasuk barang langka karena...",
+       a:"Tersedia melimpah di alam tanpa perlu pengorbanan",
+       w:["Harganya sangat mahal","Hanya bisa dibeli di toko","Jumlahnya tidak pernah cukup"]},
+      {q:"Inti dari ilmu ekonomi adalah...",
+       a:"Mengatasi kelangkaan melalui pilihan yang tepat",
+       w:["Menghabiskan uang sebanyak mungkin","Menghindari semua kebutuhan manusia","Memperbanyak alat pemuas tanpa batas"]},
+      {q:"Perhatikan pernyataan berikut! (1) Membeli mobil mewah (2) Minum saat haus (3) Membeli perhiasan (4) Makan saat lapar. Yang termasuk kebutuhan primer adalah...",
+       a:"(2) dan (4)",
+       w:["(1) dan (3)","(1) dan (2)","(3) dan (4)"]},
+      {q:"Ketika harga cabai naik drastis akibat gagal panen, sebagian ibu rumah tangga beralih ke cabai kering. Fenomena ini menunjukkan bahwa kelangkaan...",
+       a:"Mendorong manusia mencari alternatif pemenuhan kebutuhan",
+       w:["Membuat manusia berhenti memasak","Menghilangkan kebutuhan manusia","Membuat harga semua barang turun"]},
+      {q:"Perbedaan utama antara kebutuhan dan keinginan adalah...",
+       a:"Kebutuhan wajib dipenuhi untuk bertahan hidup, keinginan hanya menambah kepuasan",
+       w:["Kebutuhan selalu murah, keinginan selalu mahal","Kebutuhan hanya milik orang kaya","Keinginan tidak pernah bisa dipenuhi"]}
     ]
   },
   {
@@ -1572,7 +1506,28 @@ const LEVELS = [
       {q:"Tabungan dan asuransi pendidikan termasuk kebutuhan...",a:"Masa depan",w:["Sekarang","Jasmani","Rohani"]},
       {q:"Menurut subjeknya, kebutuhan dibedakan menjadi...",a:"Individu dan kolektif",w:["Primer dan sekunder","Jasmani dan rohani","Sekarang dan masa depan"]},
       {q:"Contoh kebutuhan kolektif adalah...",a:"Jalan raya dan jembatan",w:["Makanan pribadi","Pakaian pribadi","Sepatu pribadi"]},
-      {q:"Faktor yang mempengaruhi kebutuhan seseorang adalah...",a:"Pendapatan dan lingkungan",w:["Warna kulit dan tinggi badan","Golongan darah dan berat badan","Warna rambut dan jenis kelamin"]}
+      {q:"Faktor yang mempengaruhi kebutuhan seseorang adalah...",a:"Pendapatan dan lingkungan",w:["Warna kulit dan tinggi badan","Golongan darah dan berat badan","Warna rambut dan jenis kelamin"]},
+      {q:"Berikut yang TIDAK mempengaruhi kebutuhan seseorang adalah...",
+       a:"Golongan darah dan warna kulit",
+       w:["Pendapatan keluarga dan tingkat pendidikan","Selera pribadi dan lingkungan sosial","Kemajuan teknologi dan zaman"]},
+      {q:"Pak Budi bekerja keras untuk mencukupi makan keluarganya sehari-hari. Kebutuhan tersebut termasuk...",
+       a:"Primer jasmani",
+       w:["Tersier rohani","Sekunder jasmani","Masa depan rohani"]},
+      {q:"Perhatikan pernyataan berikut! (1) makan (2) membaca buku pelajaran (3) berolahraga (4) menonton konser musik. Yang termasuk kebutuhan rohani adalah...",
+       a:"(2) dan (4)",
+       w:["(1) dan (3)","(1) dan (2)","(3) dan (4)"]},
+      {q:"Setiap hari Minggu, warga desa Sukamaju bergotong royong membersihkan selokan. Kegiatan ini termasuk pemenuhan kebutuhan...",
+       a:"Kolektif",
+       w:["Individu","Rohani murni","Tersier"]},
+      {q:"Ketika seseorang menabung untuk membeli rumah 5 tahun ke depan, ia sedang memenuhi kebutuhan berdasarkan...",
+       a:"Waktu (masa depan)",
+       w:["Sifat (jasmani)","Subjek (individu)","Intensitas (tersier)"]},
+      {q:"Rina membeli tas sekolah baru karena tas lamanya sudah rusak dan tidak bisa dipakai. Kebutuhan Rina termasuk...",
+       a:"Primer, karena menunjang pendidikannya sebagai pelajar",
+       w:["Tersier, karena tas adalah barang mewah","Sekunder, karena hanya pelengkap","Rohani, karena tidak berhubungan dengan fisik"]},
+      {q:"Pendidikan dan kesehatan bagi anak-anak termasuk kebutuhan...",
+       a:"Primer, karena menunjang kualitas hidup jangka panjang",
+       w:["Tersier, karena hanya untuk orang kaya","Sekunder, karena hanya pelengkap","Hanya kebutuhan orang dewasa"]}
     ]
   },
   {
@@ -1591,7 +1546,28 @@ const LEVELS = [
       {q:"Contoh barang substitusi adalah...",a:"Nasi diganti dengan mie",w:["Motor dan bensin","Pena dan tinta","Beras dan air"]},
       {q:"Barang yang saling melengkapi satu sama lain disebut barang...",a:"Komplementer",w:["Substitusi","Bebas","Ekonomi"]},
       {q:"Contoh barang komplementer adalah...",a:"Motor dan bensin",w:["Nasi dan mie","Sepeda dan motor","Beras dan air"]},
-      {q:"Barang yang tersedia banyak di alam tanpa perlu pengorbanan disebut barang...",a:"Bebas",w:["Ekonomi","Produksi","Substitusi"]}
+      {q:"Barang yang tersedia banyak di alam tanpa perlu pengorbanan disebut barang...",a:"Bebas",w:["Ekonomi","Produksi","Substitusi"]},
+      {q:"Barang yang terbatas dan memerlukan pengorbanan untuk mendapatkannya disebut barang...",
+       a:"Ekonomi",
+       w:["Bebas","Substitusi","Komplementer"]},
+      {q:"Oksigen yang dijual dalam tabung untuk pasien rumah sakit termasuk barang...",
+       a:"Ekonomi, karena sudah dikemas dan perlu pengorbanan untuk mendapatkannya",
+       w:["Bebas, karena udara ada di mana-mana","Substitusi, karena bisa diganti","Produksi, karena dibuat pabrik"]},
+      {q:"Perhatikan pernyataan berikut! (1) motor (2) bensin (3) sepeda (4) tinta. Pasangan barang substitusi adalah...",
+       a:"(1) dan (3)",
+       w:["(1) dan (2)","(2) dan (4)","(3) dan (4)"]},
+      {q:"Contoh barang setengah jadi adalah...",
+       a:"Benang sebelum diolah menjadi kain",
+       w:["Sepatu siap dipakai","Gandum yang dijual di pasar","Mobil di ruang pamer"]},
+      {q:"Jasa guru mengajar TIDAK dapat disimpan karena...",
+       a:"Jasa bersifat tidak berwujud dan hanya bisa dirasakan saat digunakan",
+       w:["Guru tidak mau disimpan","Jasa harganya mahal","Jasa termasuk barang ekonomi"]},
+      {q:"Kelompok berikut yang SEMUANYA adalah barang ekonomi adalah...",
+       a:"Beras, air mineral kemasan, listrik",
+       w:["Udara, sinar matahari, angin","Air sungai, udara, hujan","Sinar matahari, angin, air laut"]},
+      {q:"Perhatikan pernyataan berikut! (1) Air mineral kemasan (2) Udara (3) Beras (4) Sinar matahari. Yang termasuk barang bebas adalah...",
+       a:"(2) dan (4)",
+       w:["(1) dan (3)","(1) dan (2)","(3) dan (4)"]}
     ]
   },
   {
@@ -1610,7 +1586,28 @@ const LEVELS = [
       {q:"Pedoman berusaha dengan pengorbanan sekecil mungkin untuk hasil maksimal disebut...",a:"Prinsip ekonomi",w:["Motif ekonomi","Biaya peluang","Tindakan ekonomi"]},
       {q:"Contoh motif berbuat sosial adalah...",a:"Menyumbang korban bencana",w:["Mencari laba besar","Mengejar jabatan tinggi","Membeli barang mewah"]},
       {q:"Contoh tindakan ekonomi rasional adalah...",a:"Membandingkan harga sebelum membeli",w:["Membeli barang tanpa berpikir","Ikut-ikutan teman berbelanja","Membeli karena gengsi semata"]},
-      {q:"Contoh tindakan ekonomi irasional adalah...",a:"Membeli barang tanpa pertimbangan",w:["Membandingkan harga di dua toko","Menabung secara rutin","Membuat anggaran belanja"]}
+      {q:"Contoh tindakan ekonomi irasional adalah...",a:"Membeli barang tanpa pertimbangan",w:["Membandingkan harga di dua toko","Menabung secara rutin","Membuat anggaran belanja"]},
+      {q:"Pak Rudi mendirikan perusahaan besar agar dapat menguasai industri tekstil nasional. Motif ekonomi Pak Rudi adalah...",
+       a:"Motif mendapat kekuasaan",
+       w:["Motif berbuat sosial","Motif memenuhi kebutuhan","Motif mendapat penghargaan"]},
+      {q:"Bu Ani menyumbang ke panti asuhan, tetapi ia juga berharap namanya diliput di surat kabar. Motif yang mendorong Bu Ani adalah...",
+       a:"Motif mendapat penghargaan",
+       w:["Motif berbuat sosial murni","Motif memperoleh laba","Motif memenuhi kebutuhan pokok"]},
+      {q:"Rina selalu membawa bekal dari rumah agar bisa menabung untuk membeli buku pelajaran. Tindakan Rina mencerminkan...",
+       a:"Tindakan ekonomi rasional yang dilandasi prinsip ekonomi",
+       w:["Tindakan ekonomi irasional karena tidak makan di kantin","Tindakan konsumtif berlebihan","Tindakan yang melanggar prinsip ekonomi"]},
+      {q:"Ilham ingin membeli sepatu baru, tetapi uangnya juga bisa dipakai untuk membayar SPP. Jika ia memilih SPP, ia telah...",
+       a:"Mengutamakan skala prioritas yang lebih penting",
+       w:["Melanggar prinsip ekonomi","Bertindak boros","Mengabaikan kewajibannya sebagai pelajar"]},
+      {q:"Penerapan prinsip ekonomi oleh produsen tampak pada tindakan...",
+       a:"Menggunakan bahan baku berkualitas dengan biaya seefisien mungkin",
+       w:["Menambah biaya produksi tanpa perhitungan","Menjual barang di bawah harga modal","Membeli bahan baku tanpa riset"]},
+      {q:"Perhatikan pernyataan berikut! (1) Petani memanen padi (2) Ibu memasak nasi (3) Pak Budi membandingkan harga sebelum membeli (4) Ani membeli semua mainan yang ia lihat. Yang termasuk tindakan ekonomi rasional adalah...",
+       a:"(1), (2), dan (3)",
+       w:["(4) saja","(1) dan (4)","(3) dan (4)"]},
+      {q:"Fungsi utama skala prioritas bagi pelajar adalah...",
+       a:"Membantu mengelola uang saku agar kebutuhan penting terpenuhi lebih dulu",
+       w:["Membolehkan membeli semua keinginan","Menghilangkan kewajiban menabung","Membuat utang di mana-mana"]}
     ]
   },
   {
@@ -1629,7 +1626,28 @@ const LEVELS = [
       {q:"Contoh kajian ekonomi mikro adalah...",a:"Harga pasar beras di pasar lokal",w:["Tingkat inflasi nasional","Tingkat pengangguran negara","Pertumbuhan ekonomi nasional"]},
       {q:"Contoh kajian ekonomi makro adalah...",a:"Tingkat inflasi dan pengangguran nasional",w:["Harga barang di warung","Keuntungan toko kelontong","Belanja bulanan keluarga"]},
       {q:"Ekonomi positif bersifat...",a:"Menggambarkan fakta apa adanya",w:["Memberi saran dan penilaian","Berisi opini pribadi tanpa data","Hanya berupa ramalan masa depan"]},
-      {q:"Ekonomi normatif bersifat...",a:"Memberi penilaian atau saran",w:["Fakta murni tanpa penilaian","Angka statistik semata","Data kuantitatif murni"]}
+      {q:"Ekonomi normatif bersifat...",a:"Memberi penilaian atau saran",w:["Fakta murni tanpa penilaian","Angka statistik semata","Data kuantitatif murni"]},
+      {q:"Seorang siswa memilih belajar untuk ujian daripada menonton film di bioskop. Biaya peluang dari pilihan tersebut adalah...",
+       a:"Waktu dan kesenangan menonton film yang dikorbankan",
+       w:["Nilai uang tiket bioskop yang tidak dibayar","Nilai buku pelajaran yang dibaca","Ongkos transportasi ke sekolah"]},
+      {q:"Pernyataan \"Pemerintah seharusnya menaikkan subsidi untuk petani kecil\" termasuk contoh ekonomi...",
+       a:"Normatif, karena mengandung saran/penilaian",
+       w:["Positif, karena berdasarkan fakta","Mikro, karena membahas petani","Deskriptif, karena tanpa penilaian"]},
+      {q:"Ibu Lina punya 2 pilihan: mengajar privat (Rp150.000) atau berdagang (Rp200.000). Jika ia memilih berdagang, biaya peluangnya adalah...",
+       a:"Rp150.000 dari mengajar privat yang tidak diambil",
+       w:["Rp200.000 dari berdagang","Rp350.000 total keduanya","Rp50.000 selisih pendapatan"]},
+      {q:"Pernyataan \"Tingkat pengangguran Indonesia tahun 2024 sebesar 4,8%\" termasuk contoh ekonomi...",
+       a:"Positif, karena menggambarkan fakta apa adanya",
+       w:["Normatif, karena memberi penilaian","Mikro, karena membahas individu","Deskriptif, karena berupa saran"]},
+      {q:"Biaya peluang dari keputusan tidak melanjutkan kuliah adalah...",
+       a:"Peluang pekerjaan dan penghasilan yang lebih tinggi di masa depan",
+       w:["Uang kuliah yang tidak dibayar","Nilai ijazah SMA","Waktu luang yang bertambah"]},
+      {q:"Ilmu ekonomi disebut ilmu pilihan karena...",
+       a:"Manusia harus memilih di antara kebutuhan tak terbatas dengan sumber daya terbatas",
+       w:["Semua pilihan selalu salah","Pilihan hanya milik orang kaya","Manusia bebas memilih tanpa batas"]},
+      {q:"Contoh analisis ekonomi makro adalah...",
+       a:"Kebijakan moneter Bank Indonesia untuk menekan inflasi",
+       w:["Harga cabai di pasar tradisional","Keuntungan warung Bu Tini","Belanja mingguan keluarga"]}
     ]
   },
   {
@@ -1648,7 +1666,28 @@ const LEVELS = [
       {q:"Guru mengajar dan dokter mengobati termasuk produksi...",a:"Jasa",w:["Ekstraktif","Agraris","Industri"]},
       {q:"Petani menjual langsung hasil panen ke pembeli termasuk distribusi...",a:"Langsung",w:["Tidak langsung","Semi langsung","Bertingkat"]},
       {q:"Faktor produksi alam mendapat balas jasa berupa...",a:"Sewa",w:["Upah","Bunga","Laba"]},
-      {q:"Faktor produksi kewirausahaan mendapat balas jasa berupa...",a:"Laba",w:["Sewa","Bunga","Upah"]}
+      {q:"Faktor produksi kewirausahaan mendapat balas jasa berupa...",a:"Laba",w:["Sewa","Bunga","Upah"]},
+      {q:"Faktor produksi tenaga kerja mendapat balas jasa berupa...",
+       a:"Upah",
+       w:["Sewa","Bunga","Laba"]},
+      {q:"Faktor produksi modal mendapat balas jasa berupa...",
+       a:"Bunga",
+       w:["Sewa","Upah","Laba"]},
+      {q:"Barang disalurkan dari pabrik → pedagang grosir → pedagang eceran → konsumen. Ini disebut distribusi...",
+       a:"Bertingkat (tidak langsung melalui beberapa perantara)",
+       w:["Langsung dari produsen ke konsumen","Semi langsung tanpa grosir","Distribusi tertutup"]},
+      {q:"Distribusi semi langsung adalah...",
+       a:"Produsen menyalurkan barang melalui perantara milik sendiri, misalnya toko sendiri",
+       w:["Produsen menjual langsung ke konsumen di jalan","Barang disalurkan lewat banyak grosir","Barang tidak sampai ke konsumen"]},
+      {q:"Faktor produksi yang paling menentukan keberhasilan usaha modern adalah...",
+       a:"Kewirausahaan, karena mengatur seluruh faktor produksi lainnya",
+       w:["Alam, karena tersedia melimpah","Tenaga kerja kasar, karena jumlahnya banyak","Modal pinjaman dari bank"]},
+      {q:"Pak Harto memiliki tanah yang disewakan ke pabrik tekstil. Balas jasa yang diterima Pak Harto adalah...",
+       a:"Sewa",
+       w:["Upah","Bunga","Laba"]},
+      {q:"Faktor yang TIDAK mempengaruhi tingkat konsumsi seseorang adalah...",
+       a:"Golongan darah dan warna rambut",
+       w:["Pendapatan dan harga barang","Selera dan jumlah keluarga","Lingkungan dan adat istiadat"]}
     ]
   },
   {
@@ -1667,7 +1706,28 @@ const LEVELS = [
       {q:"Dasar hukum ekonomi Indonesia adalah...",a:"Pasal 33 UUD 1945",w:["Pasal 30 UUD 1945","Pasal 31 UUD 1945","Pasal 32 UUD 1945"]},
       {q:"Soko guru perekonomian Indonesia adalah...",a:"Koperasi",w:["Perusahaan asing","Bank swasta","BUMN"]},
       {q:"Asas perekonomian Indonesia menurut Pasal 33 ayat (1) UUD 1945 adalah...",a:"Kekeluargaan",w:["Individualisme","Persaingan bebas","Liberalisme"]},
-      {q:"Tujuan akhir perekonomian Indonesia adalah...",a:"Kesejahteraan seluruh rakyat",w:["Kekayaan pengusaha besar","Menambah utang negara","Dominasi asing di Indonesia"]}
+      {q:"Tujuan akhir perekonomian Indonesia adalah...",a:"Kesejahteraan seluruh rakyat",w:["Kekayaan pengusaha besar","Menambah utang negara","Dominasi asing di Indonesia"]},
+      {q:"Peran utama koperasi dalam perekonomian Indonesia adalah...",
+       a:"Wadah ekonomi gotong royong yang membantu anggota yang lemah modal",
+       w:["Menyaingi perusahaan asing di pasar global","Menampung seluruh tenaga kerja Indonesia","Menggantikan fungsi pemerintah pusat"]},
+      {q:"Peran strategis UMKM dalam perekonomian Indonesia adalah...",
+       a:"Menyerap banyak tenaga kerja dan menjadi tulang punggung ekonomi rakyat",
+       w:["Menguasai seluruh ekspor nasional","Menggantikan peran BUMN besar","Mengatur kebijakan moneter negara"]},
+      {q:"Dalam circular flow diagram 3 sektor, aliran yang berasal dari pemerintah ke rumah tangga konsumen adalah...",
+       a:"Fasilitas publik dan subsidi",
+       w:["Pajak penghasilan","Pembelian barang konsumsi","Gaji karyawan swasta"]},
+      {q:"Berikut yang TERMASUK pelaku ekonomi 4 sektor adalah...",
+       a:"Rumah tangga konsumen, rumah tangga produsen, pemerintah, masyarakat luar negeri",
+       w:["Hanya rumah tangga dan pemerintah","Hanya perusahaan dan bank","Hanya pemerintah dan BUMN"]},
+      {q:"Dalam circular flow 4 sektor, kegiatan ekspor dan impor dilakukan oleh...",
+       a:"Masyarakat luar negeri bersama pelaku domestik",
+       w:["Hanya rumah tangga konsumen","Hanya koperasi","Hanya BUMN"]},
+      {q:"Peran BUMN dalam perekonomian Indonesia adalah...",
+       a:"Mengelola cabang produksi penting yang menguasai hajat hidup orang banyak sesuai Pasal 33",
+       w:["Menyaingi koperasi agar bangkrut","Mengambil alih seluruh UMKM","Menghilangkan peran swasta sepenuhnya"]},
+      {q:"Nilai-nilai yang SESUAI dengan Ekonomi Pancasila adalah...",
+       a:"Gotong royong, kekeluargaan, dan pemerataan kesejahteraan",
+       w:["Persaingan bebas tanpa aturan","Individualisme dan dominasi modal besar","Monopoli perusahaan asing"]}
     ]
   }
 ];
@@ -1680,24 +1740,24 @@ const COVERS=[
 {x:190,topY:365,w:280,type:'iceMound',playerMinX:210,playerMaxX:450}];
 
 const TOTAL_LEVELS=LEVELS.length;
-const QUESTIONS_PER_LEVEL=10;
-const PASS_THRESHOLD=7;
+const QUESTIONS_PER_LEVEL=11;
+const PASS_THRESHOLD=8;
 const MAX_LIVES=5;
 
 const PAL={
 soldier:{
-  uniform:'#1e3a8a',uniformDark:'#0c1e4a',uniformLight:'#3b82f6',uniformShadow:'#050f28',
-  camo1:'#1e3a8a',camo2:'#3b82f6',camo3:'#050f28',camo4:'#60a5fa',
-  helmet:'#0c1e4a',helmetDark:'#050f28',helmetLight:'#3b82f6',
-  skin:'#ffd0a8',skinDark:'#c89060',skinShadow:'#a07040',skinLight:'#ffe0c0',
-  vest:'#0a0f1e',vestDark:'#050814',pouch:'#d4af37',pouchDark:'#8b6914',
-  strap:'#0c1e4a',strapDark:'#050814',boot:'#050814',bootDark:'#020308',
-  face:'#ffd0a8',faceShadow:'#a07040'
+  uniform:'#3a4a2a',uniformDark:'#1a2410',uniformLight:'#5a6a3a',uniformShadow:'#0a1408',
+  camo1:'#2a3a1a',camo2:'#4a5a30',camo3:'#1a2410',camo4:'#6a7a4a',
+  helmet:'#1a2410',helmetDark:'#0a1408',helmetLight:'#3a4a2a',
+  skin:'#e8b890',skinDark:'#b08860',skinShadow:'#8a6040',skinLight:'#f5d0b0',
+  vest:'#1a1a1a',vestDark:'#0a0a0a',pouch:'#3a3a3a',pouchDark:'#1a1a1a',
+  strap:'#0a0a0a',strapDark:'#000000',boot:'#0a0a0a',bootDark:'#000000',
+  face:'#e8b890',faceShadow:'#8a6040'
 },
 bazooka:{
-  tube:'#d4af37',tubeLight:'#f0d878',tubeDark:'#3a2a08',
-  metal:'#f0d878',metalDark:'#8b6914',metalHi:'#fdf6e3',
-  grip:'#1e1b4b',gripDark:'#0a0820',sight:'#3a2a08',sightHi:'#f0d878'
+  tube:'#6a6a6a',tubeLight:'#b0b0b0',tubeDark:'#0f0f0f',
+  metal:'#8a8a8a',metalDark:'#1a1a1a',metalHi:'#d0d0d0',
+  grip:'#3a2210',gripDark:'#1a0e04',sight:'#0a0a0a',sightHi:'#2a2a2a'
 },
 jet:{
   bodyDark:'#450a0a',bodyMid:'#991b1b',bodyLight:'#dc2626',
@@ -1799,7 +1859,7 @@ function createAmbient(loc,initial){
   }
 }
 
-const state={score:0,lives:MAX_LIVES,correct:0,levelIndex:0,questionIndex:0,levelCorrect:0,combo:0,bestCombo:0,ammo:5,reloading:0,gameOver:false,roundLock:false,levelComplete:false,paused:false,pendingFire:false,pendingTarget:null,cooldown:0,recoil:0,flash:0,shake:0,heat:0,time:0,wind:0,question:null,qTimer:22,currentQuestions:[],enemies:[],bullets:[],particles:[],shockwaves:[],casings:[],mouse:{x:700,y:200},lockTarget:null,running:false,shield:5,shieldMax:5,shieldActive:false,shieldAlpha:0,shieldHitFlash:0,shieldRegen:0,shieldIdleTimer:0,sunX:790,sunY:150};
+const state={score:0,lives:MAX_LIVES,correct:0,levelIndex:0,questionIndex:0,levelCorrect:0,combo:0,bestCombo:0,ammo:5,reloading:0,gameOver:false,roundLock:false,levelComplete:false,paused:false,pendingFire:false,pendingTarget:null,cooldown:0,recoil:0,flash:0,shake:0,heat:0,time:0,wind:0,question:null,qTimer:22,currentQuestions:[],enemies:[],bullets:[],particles:[],shockwaves:[],casings:[],mouse:{x:700,y:200},lockTarget:null,running:false,shield:5,shieldMax:5,shieldActive:false,shieldAlpha:0,shieldHitFlash:0,shieldRegen:0,shieldIdleTimer:0,sunX:790,sunY:150,aimGuideTimer:0,_lastLock:null};
 const player={x:320,gy:WALL.baseY,s:1,angle:0,target:0,bodyAngle:0,headTurn:0,leanX:0,leanY:0,aimSwayPhase:0,aimSwayX:0,aimSwayY:0,breathPhase:0,vx:0,targetVx:0,minX:220,maxX:440,peek:0,bob:0,walkPhase:0};
 
 function applyCover(idx){const cov=COVERS[idx%COVERS.length];WALL.x=cov.x;WALL.topY=cov.topY;WALL.w=cov.w;WALL.type=cov.type;WALL.baseY=512;player.minX=cov.playerMinX;player.maxX=cov.playerMaxX;player.x=(cov.playerMinX+cov.playerMaxX)/2;if(LEVELS[idx].location==='river')player.gy=WALL.baseY-18;else player.gy=WALL.baseY;}
@@ -1859,6 +1919,7 @@ function loadQuestion(){
   state.roundLock=false;state.pendingFire=false;state.pendingTarget=null;state.lockTarget=null;
   state.bullets.length=0;state.ammo=5;state.reloading=0;
   state.qTimer=24+state.levelIndex*2;state.wind=rnd(-30,30);
+  state.aimGuideTimer=0;state._lastLock=null;
   document.getElementById('hQ').textContent=q.q;
   document.getElementById('hQLoc').textContent='LEVEL '+(state.levelIndex+1)+' — '+currentLevel().name;
   document.getElementById('hProgress').textContent='Pertanyaan '+(state.questionIndex+1)+'/'+QUESTIONS_PER_LEVEL;
@@ -1873,6 +1934,7 @@ function startLevel(idx){
   state.bullets.length=0;state.particles.length=0;state.shockwaves.length=0;state.casings.length=0;
   state.shield=state.shieldMax;state.shieldActive=false;state.shieldAlpha=0;
   state.lives=MAX_LIVES;
+  state.aimGuideTimer=0;state._lastLock=null;
   state.currentQuestions=shuffle(LEVELS[idx].questions).slice(0,QUESTIONS_PER_LEVEL);
   applyCover(idx);rebuildBackground(currentTheme());
   const level=currentLevel();
@@ -1899,6 +1961,7 @@ function reset(){
   state.bullets.length=0;state.shockwaves.length=0;state.casings.length=0;state.particles.length=0;
   state.shield=state.shieldMax;state.shieldActive=false;state.shieldAlpha=0;
   state.shieldHitFlash=0;state.shieldRegen=0;state.lockTarget=null;
+  state.aimGuideTimer=0;state._lastLock=null;
   player.angle=0;player.target=0;player.bodyAngle=0;player.headTurn=0;
   player.leanX=0;player.leanY=0;player.aimSwayPhase=0;player.aimSwayX=0;player.aimSwayY=0;
   player.vx=0;player.targetVx=0;player.peek=0;player.bob=0;player.walkPhase=0;
@@ -1942,6 +2005,7 @@ function triggerFlee(e){if(e.fleeing||!e.alive)return;e.fleeing=true;e.fleeVx=rn
 function onHitEnemy(e){
   e.alive=false;
   if(state.lockTarget===e)state.lockTarget=null;
+  if(state._lastLock===e)state._lastLock=null;
   explode(e.x,e.gy,e.s*1.2);
   setTimeout(()=>{if(!state.gameOver)explode(e.x+rnd(-40,40),e.gy+rnd(-20,20),e.s*0.7);},180);
   if(e.value===state.question.a){
@@ -2187,7 +2251,20 @@ function update(dt){
   const baseAmp=0.85+state.heat*1.6;
   player.aimSwayX=Math.sin(player.aimSwayPhase)*baseAmp+Math.sin(state.time*4.3)*0.25;
   player.aimSwayY=Math.cos(player.aimSwayPhase*1.27)*baseAmp*0.7+Math.sin(state.time*3.7)*0.22;
+
   state.lockTarget=findEnemyNearAngle(player.target,0.13);
+
+  if(state.lockTarget!==state._lastLock){
+    state._lastLock=state.lockTarget;
+    if(state.lockTarget&&state.lockTarget.alive&&!state.lockTarget.fleeing&&!state.lockTarget.fastReturn){
+      state.aimGuideTimer=0.85;
+    } else {
+      state.aimGuideTimer=0;
+    }
+  }
+  if(state.aimGuideTimer>0)state.aimGuideTimer-=dt;
+  if(state.aimGuideTimer<0)state.aimGuideTimer=0;
+
   if(state.pendingFire&&state.cooldown<=0&&!state.roundLock&&state.reloading<=0){if(Math.abs(player.target-player.angle)<0.10){state.pendingFire=false;fire();}}
   for(let i=state.bullets.length-1;i>=0;i--){
     const b=state.bullets[i];
@@ -2281,110 +2358,583 @@ function drawBoatCover(){const x=WALL.x,y=WALL.topY,w=WALL.w,b=WALL.baseY;const 
 function drawIceMound(){const x=WALL.x,y=WALL.topY,w=WALL.w,b=WALL.baseY;ctx.fillStyle='rgba(240,171,252,.4)';ctx.beginPath();ctx.ellipse(x+w/2,b+4,w*0.72,16,0,0,TAU);ctx.fill();const ig=ctx.createLinearGradient(0,y,0,b);ig.addColorStop(0,'#fce7f3');ig.addColorStop(0.4,'#e9d5ff');ig.addColorStop(0.8,'#a78bfa');ig.addColorStop(1,'#4c1d95');ctx.fillStyle=ig;ctx.beginPath();ctx.moveTo(x,y+20);ctx.quadraticCurveTo(x+5,y-8,x+w*0.3,y-12);ctx.quadraticCurveTo(x+w*0.5,y-22,x+w*0.7,y-12);ctx.quadraticCurveTo(x+w-5,y-8,x+w,y+20);ctx.quadraticCurveTo(x+w+5,b,x+w*0.5,b);ctx.lineTo(x+w*0.5,b);ctx.quadraticCurveTo(x-5,b,x,y+20);ctx.closePath();ctx.fill();ctx.strokeStyle='rgba(253,246,227,.8)';ctx.lineWidth=2;ctx.stroke();}
 function drawPlayerBoat(){const loc=currentLevel().location;if(loc!=='river')return;const px=player.x;const py=WALL.baseY+8;const boatW=130,boatH=42;const bob=Math.sin(state.time*1.6)*2.5;const tilt=Math.sin(state.time*0.9)*0.03;ctx.save();ctx.translate(px,py+bob);ctx.rotate(tilt);ctx.fillStyle='rgba(80,40,0,.5)';ctx.beginPath();ctx.ellipse(0,boatH*0.6,boatW*0.55,10,0,0,TAU);ctx.fill();const hullG=ctx.createLinearGradient(0,-boatH/2,0,boatH/2);hullG.addColorStop(0,'#f0d878');hullG.addColorStop(0.35,'#8b6914');hullG.addColorStop(0.75,'#3a2a08');hullG.addColorStop(1,'#1a1204');ctx.fillStyle=hullG;ctx.beginPath();ctx.moveTo(-boatW/2,-boatH/2+4);ctx.quadraticCurveTo(-boatW/2-12,0,-boatW/2+8,boatH/2-2);ctx.lineTo(boatW/2-8,boatH/2-2);ctx.quadraticCurveTo(boatW/2+12,0,boatW/2,-boatH/2+4);ctx.closePath();ctx.fill();ctx.strokeStyle='rgba(253,246,227,.7)';ctx.lineWidth=2;ctx.stroke();ctx.restore();}
 function drawShield(){if(state.shieldAlpha<0.01)return;const sc=shieldCenter();const alpha=state.shieldAlpha;const hpPct=state.shield/state.shieldMax;const pulse=0.5+0.5*Math.sin(state.time*5);const flash=state.shieldHitFlash;ctx.save();ctx.globalCompositeOperation='lighter';const g1=ctx.createRadialGradient(sc.x,sc.y,SHIELD_RADIUS*0.15,sc.x,sc.y,SHIELD_RADIUS);g1.addColorStop(0,'rgba(212,175,55,0)');g1.addColorStop(0.55,'rgba(212,175,55,'+(alpha*0.14*hpPct).toFixed(3)+')');g1.addColorStop(0.85,'rgba(240,216,120,'+(alpha*0.36*hpPct).toFixed(3)+')');g1.addColorStop(1,'rgba(167,139,250,'+(alpha*0.7*hpPct+flash*0.5).toFixed(3)+')');ctx.fillStyle=g1;ctx.beginPath();ctx.arc(sc.x,sc.y,SHIELD_RADIUS,0,TAU);ctx.fill();const rimAlpha=alpha*(0.75*hpPct+0.2)+flash*0.5;ctx.strokeStyle='rgba(167,139,250,'+rimAlpha.toFixed(3)+')';ctx.lineWidth=2+flash*3+pulse*0.6;ctx.beginPath();ctx.arc(sc.x,sc.y,SHIELD_RADIUS,0,TAU);ctx.stroke();ctx.restore();}
-function drawSoldier(){const S=PAL.soldier,B=PAL.bazooka,s=player.s;const rise=player.peek*24+player.bob;const baseX=player.x;const baseY=WALL.topY+40-rise;const swayX=player.aimSwayX,swayY=player.aimSwayY;ctx.save();ctx.globalAlpha=0.42;ctx.fillStyle='#000';ctx.beginPath();ctx.ellipse(baseX,WALL.topY+32,36,7,0,0,TAU);ctx.fill();ctx.restore();ctx.save();ctx.translate(baseX+swayX*0.35,baseY+swayY*0.25);ctx.scale(s,s);drawLegs(S);const bodyAng=player.bodyAngle;ctx.save();ctx.translate(0,-8);ctx.rotate(bodyAng);ctx.translate(0,8);drawTorso(S,swayX,swayY);drawHead(S,swayX*0.5);drawArmsAndBazooka(S,B,bodyAng);ctx.restore();ctx.restore();}
-function drawLegs(S){ctx.save();ctx.translate(-13,-6);ctx.rotate(-0.08);const bg1=ctx.createLinearGradient(-8,0,8,26);bg1.addColorStop(0,S.uniformShadow);bg1.addColorStop(0.5,S.uniformDark);bg1.addColorStop(1,S.uniformShadow);ctx.fillStyle=bg1;rrect(ctx,-8,0,15,24,4);ctx.fill();ctx.fillStyle=S.boot;rrect(ctx,-9,20,17,8,3);ctx.fill();ctx.restore();ctx.save();ctx.translate(7,-6);ctx.rotate(0.05);const bg2=ctx.createLinearGradient(-8,0,8,26);bg2.addColorStop(0,S.uniformDark);bg2.addColorStop(0.5,S.uniform);bg2.addColorStop(1,S.uniformShadow);ctx.fillStyle=bg2;rrect(ctx,-8,0,15,24,4);ctx.fill();ctx.fillStyle=S.boot;rrect(ctx,-9,20,17,8,3);ctx.fill();ctx.restore();}
-function drawTorso(S,swayX,swayY){const torsoX=-21,torsoY=-70,torsoW=42,torsoH=64;const torsoG=ctx.createLinearGradient(torsoX-6,torsoY,torsoX+torsoW+6,torsoY+torsoH);torsoG.addColorStop(0,S.uniformShadow);torsoG.addColorStop(0.15,S.uniformDark);torsoG.addColorStop(0.45,S.uniform);torsoG.addColorStop(0.75,S.uniformLight);torsoG.addColorStop(1,S.uniformShadow);ctx.fillStyle=torsoG;rrect(ctx,torsoX,torsoY,torsoW,torsoH,13);ctx.fill();ctx.strokeStyle='rgba(196,181,253,.8)';ctx.lineWidth=1.6;rrect(ctx,torsoX,torsoY,torsoW,torsoH,13);ctx.stroke();const vestX=torsoX+4,vestY=torsoY+12,vestW=torsoW-8,vestH=30;const vestG=ctx.createLinearGradient(vestX,vestY,vestX+vestW,vestY+vestH);vestG.addColorStop(0,S.vestDark);vestG.addColorStop(0.4,S.vest);vestG.addColorStop(1,S.vestDark);ctx.fillStyle=vestG;rrect(ctx,vestX,vestY,vestW,vestH,6);ctx.fill();ctx.strokeStyle='rgba(240,216,120,.8)';ctx.lineWidth=1.2;rrect(ctx,vestX,vestY,vestW,vestH,6);ctx.stroke();ctx.fillStyle=S.pouch;rrect(ctx,vestX+vestW-13,vestY+5,10,9,2);ctx.fill();ctx.strokeStyle=S.strap;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(torsoX+5,torsoY+5);ctx.lineTo(torsoX+torsoW-5,torsoY+torsoH-6);ctx.stroke();void swayX;void swayY;}
-function drawHead(S,swayExtra){const headTurn=player.headTurn;ctx.fillStyle=S.skinDark;rrect(ctx,-6,-80,12,12,3);ctx.fill();ctx.save();ctx.translate(0,-78);ctx.rotate(headTurn);ctx.translate(0,78);const headY=-92;const faceG=ctx.createRadialGradient(-3,headY-3,2,0,headY,14);faceG.addColorStop(0,S.skinLight);faceG.addColorStop(0.6,S.skin);faceG.addColorStop(1,S.skinShadow);ctx.fillStyle=faceG;ctx.beginPath();ctx.ellipse(0,headY,10.5,12.5,0,0,TAU);ctx.fill();const helmetG=ctx.createRadialGradient(-4,headY-14,3,0,headY-12,18);helmetG.addColorStop(0,S.helmetLight);helmetG.addColorStop(0.5,S.helmet);helmetG.addColorStop(1,S.helmetDark);ctx.fillStyle=helmetG;ctx.beginPath();ctx.moveTo(-14,headY-2);ctx.quadraticCurveTo(-15.5,headY-17,-8,headY-23);ctx.quadraticCurveTo(-2,headY-27,4,headY-26);ctx.quadraticCurveTo(11.5,headY-24,14.5,headY-17);ctx.quadraticCurveTo(15.5,headY-8,15,headY-2);ctx.closePath();ctx.fill();ctx.strokeStyle='rgba(240,216,120,.85)';ctx.lineWidth=1.3;ctx.stroke();const lookX=Math.cos(player.angle)*1.7+swayExtra*0.15,lookY=Math.sin(player.angle)*1.3;ctx.fillStyle='rgba(255,255,255,.9)';ctx.beginPath();ctx.ellipse(-4,headY+4,2.3,1.8,0,0,TAU);ctx.fill();ctx.beginPath();ctx.ellipse(4,headY+4,2.3,1.8,0,0,TAU);ctx.fill();ctx.fillStyle='#0a0e1f';ctx.beginPath();ctx.arc(-4+lookX*0.55,headY+4+lookY*0.35,1.4,0,TAU);ctx.fill();ctx.beginPath();ctx.arc(4+lookX*0.55,headY+4+lookY*0.35,1.4,0,TAU);ctx.fill();ctx.restore();}
-function drawArmsAndBazooka(S,B,bodyAng){const aimLocal=player.angle-bodyAng;const shoulderX=8,shoulderY=-46;const recoil=state.recoil*0.55;ctx.save();ctx.translate(shoulderX,shoulderY);ctx.rotate(aimLocal);ctx.translate(-recoil,0);drawBazookaTube(B);const rearGrip={x:-16,y:14},frontGrip={x:38,y:8};const cosA=Math.cos(aimLocal),sinA=Math.sin(aimLocal);const rearWorld={x:shoulderX+rearGrip.x*cosA-rearGrip.y*sinA-recoil*cosA,y:shoulderY+rearGrip.x*sinA+rearGrip.y*cosA-recoil*sinA};const frontWorld={x:shoulderX+frontGrip.x*cosA-frontGrip.y*sinA-recoil*cosA,y:shoulderY+frontGrip.x*sinA+frontGrip.y*cosA-recoil*sinA};ctx.restore();const rearStart={x:4,y:-48},frontStart={x:18,y:-48};drawArm(S,rearStart,rearWorld,11,S.uniformDark,S.uniformShadow);drawArm(S,frontStart,frontWorld,10,S.uniform,S.uniformDark);drawHand(S,rearWorld.x,rearWorld.y,aimLocal,6.8,5.6);drawHand(S,frontWorld.x,frontWorld.y,aimLocal,6.5,5.3);}
-function drawBazookaTube(B){const tubeG=ctx.createLinearGradient(0,-12,0,12);tubeG.addColorStop(0,B.tubeDark);tubeG.addColorStop(0.15,B.tube);tubeG.addColorStop(0.5,B.tubeLight);tubeG.addColorStop(0.85,B.tube);tubeG.addColorStop(1,B.tubeDark);ctx.fillStyle=tubeG;rrect(ctx,-32,-11,118,22,5);ctx.fill();ctx.strokeStyle='rgba(253,246,227,.95)';ctx.lineWidth=1.8;rrect(ctx,-32,-11,118,22,5);ctx.stroke();ctx.fillStyle=B.metalDark;ctx.fillRect(-6,-12,3,24);ctx.fillRect(20,-12,3,24);ctx.fillStyle=B.metalHi;ctx.fillRect(-6,-12,3,2);ctx.fillRect(20,-12,3,2);ctx.fillStyle=B.grip;rrect(ctx,34,10,10,12,3);ctx.fill();ctx.fillStyle='#000';ctx.beginPath();ctx.ellipse(86,0,2.8,8,0,0,TAU);ctx.fill();ctx.fillStyle=B.sight;rrect(ctx,30,-18,10,7,1.5);ctx.fill();}
-function drawArm(S,start,end,width,colTop,colBot){const dx=end.x-start.x,dy=end.y-start.y;const len=Math.hypot(dx,dy)||1;const ux=dx/len,uy=dy/len;const perpX=-uy,perpY=ux;const bend=5+len*0.05;const elbow={x:start.x+ux*len*0.55+perpX*bend,y:start.y+uy*len*0.55+perpY*bend};ctx.save();ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle='rgba(0,0,0,.55)';ctx.lineWidth=width+3;ctx.beginPath();ctx.moveTo(start.x,start.y);ctx.quadraticCurveTo(elbow.x,elbow.y,end.x,end.y);ctx.stroke();const g=ctx.createLinearGradient(start.x,start.y,end.x,end.y);g.addColorStop(0,colTop);g.addColorStop(0.5,colBot);g.addColorStop(1,colTop);ctx.strokeStyle=g;ctx.lineWidth=width;ctx.beginPath();ctx.moveTo(start.x,start.y);ctx.quadraticCurveTo(elbow.x,elbow.y,end.x,end.y);ctx.stroke();ctx.restore();void S;}
-function drawHand(S,x,y,rot,rx,ry){ctx.save();ctx.translate(x,y);ctx.rotate(rot);const g=ctx.createRadialGradient(-1,-1,1,0,0,rx*1.4);g.addColorStop(0,S.skinLight);g.addColorStop(0.7,S.skin);g.addColorStop(1,S.skinShadow);ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(0,0,rx,ry,0,0,TAU);ctx.fill();ctx.restore();}
+
+function drawBazookaTube(B){
+  const tubeStartX=-38, tubeEndX=64, tubeR=8.5;
+  const tubeW=tubeEndX-tubeStartX;
+  const exG=ctx.createLinearGradient(tubeStartX-16,0,tubeStartX,0);
+  exG.addColorStop(0,'#050505');
+  exG.addColorStop(0.4,'#2a2a2a');
+  exG.addColorStop(0.7,'#0f0f0f');
+  exG.addColorStop(1,'#1a1a1a');
+  ctx.fillStyle=exG;
+  ctx.beginPath();
+  ctx.moveTo(tubeStartX-16,-tubeR-3.5);
+  ctx.lineTo(tubeStartX,-tubeR);
+  ctx.lineTo(tubeStartX,tubeR);
+  ctx.lineTo(tubeStartX-16,tubeR+3.5);
+  ctx.closePath();
+  ctx.fill();
+  ctx.strokeStyle='#000';ctx.lineWidth=1;ctx.stroke();
+  ctx.fillStyle='#000';
+  ctx.beginPath();
+  ctx.ellipse(tubeStartX-15.5,0,1.2,tubeR+3,0,0,TAU);
+  ctx.fill();
+  const tubeG=ctx.createLinearGradient(0,-tubeR,0,tubeR);
+  tubeG.addColorStop(0,'#0f0f0f');
+  tubeG.addColorStop(0.1,'#2a2a2a');
+  tubeG.addColorStop(0.25,'#5a5a5a');
+  tubeG.addColorStop(0.4,'#7a7a7a');
+  tubeG.addColorStop(0.5,'#8a8a8a');
+  tubeG.addColorStop(0.6,'#6a6a6a');
+  tubeG.addColorStop(0.75,'#3a3a3a');
+  tubeG.addColorStop(0.9,'#1a1a1a');
+  tubeG.addColorStop(1,'#050505');
+  ctx.fillStyle=tubeG;
+  rrect(ctx,tubeStartX,-tubeR,tubeW,tubeR*2,1.5);
+  ctx.fill();
+  ctx.strokeStyle='rgba(220,220,220,0.35)';ctx.lineWidth=0.8;
+  ctx.beginPath();
+  ctx.moveTo(tubeStartX+2,-tubeR*0.35);
+  ctx.lineTo(tubeEndX-2,-tubeR*0.35);
+  ctx.stroke();
+  ctx.fillStyle='rgba(0,0,0,0.6)';
+  for(let i=0;i<12;i++){
+    const hx=tubeStartX+8+i*7.5;
+    ctx.beginPath();ctx.arc(hx,-tubeR*0.5,0.9,0,TAU);ctx.fill();
+    ctx.beginPath();ctx.arc(hx,tubeR*0.5,0.9,0,TAU);ctx.fill();
+  }
+  const woodX=tubeStartX+34, woodW=24;
+  const woodG=ctx.createLinearGradient(0,-tubeR-1.5,0,tubeR+1.5);
+  woodG.addColorStop(0,'#2a1808');
+  woodG.addColorStop(0.2,'#5a3a18');
+  woodG.addColorStop(0.4,'#7a5028');
+  woodG.addColorStop(0.5,'#8a5a30');
+  woodG.addColorStop(0.65,'#6a4420');
+  woodG.addColorStop(0.85,'#3a2410');
+  woodG.addColorStop(1,'#1a0e04');
+  ctx.fillStyle=woodG;
+  rrect(ctx,woodX,-tubeR-1.5,woodW,tubeR*2+3,2.5);
+  ctx.fill();
+  ctx.strokeStyle='rgba(0,0,0,0.7)';ctx.lineWidth=1;ctx.stroke();
+  ctx.strokeStyle='rgba(60,30,10,0.5)';ctx.lineWidth=0.5;
+  for(let i=0;i<4;i++){
+    ctx.beginPath();
+    ctx.moveTo(woodX+2,-tubeR+1+i*3.5);
+    ctx.bezierCurveTo(woodX+woodW*0.3,-tubeR+0.5+i*3.5,woodX+woodW*0.6,-tubeR+2+i*3.5,woodX+woodW-2,-tubeR+1+i*3.5);
+    ctx.stroke();
+  }
+  ctx.fillStyle='#0a0a0a';
+  ctx.fillRect(tubeEndX-20,-tubeR-11,3,11);
+  ctx.fillStyle='#2a2a2a';
+  ctx.fillRect(tubeEndX-21,-tubeR-12,5,2);
+  ctx.fillStyle='#0a0a0a';
+  rrect(ctx,tubeStartX+12,-tubeR-8,7,8,1);ctx.fill();
+  ctx.fillStyle='#2a2a2a';
+  ctx.fillRect(tubeStartX+13,-tubeR-9,5,1.5);
+  const gripX=tubeStartX+46, gripY=tubeR-2;
+  const gripG=ctx.createLinearGradient(gripX,0,gripX+14,0);
+  gripG.addColorStop(0,'#1a0e04');
+  gripG.addColorStop(0.3,'#3a2210');
+  gripG.addColorStop(0.6,'#5a3a18');
+  gripG.addColorStop(1,'#2a1808');
+  ctx.fillStyle=gripG;
+  ctx.beginPath();
+  ctx.moveTo(gripX,gripY);
+  ctx.lineTo(gripX+11,gripY);
+  ctx.quadraticCurveTo(gripX+14,gripY+8,gripX+11,gripY+16);
+  ctx.lineTo(gripX+4,gripY+17);
+  ctx.quadraticCurveTo(gripX+1,gripY+10,gripX,gripY);
+  ctx.closePath();
+  ctx.fill();
+  ctx.strokeStyle='#000';ctx.lineWidth=1;ctx.stroke();
+  ctx.strokeStyle='rgba(0,0,0,0.6)';ctx.lineWidth=0.7;
+  for(let i=1;i<5;i++){
+    ctx.beginPath();
+    ctx.moveTo(gripX+2,gripY+3+i*3);
+    ctx.lineTo(gripX+11,gripY+3+i*3);
+    ctx.stroke();
+  }
+  ctx.strokeStyle='#0a0a0a';ctx.lineWidth=2;
+  ctx.beginPath();
+  ctx.arc(gripX+3,gripY+8,5,0,Math.PI*1.1);
+  ctx.stroke();
+  ctx.strokeStyle='#1a1a1a';ctx.lineWidth=1.5;
+  ctx.beginPath();
+  ctx.moveTo(gripX+3,gripY+3);
+  ctx.quadraticCurveTo(gripX+2,gripY+6,gripX+3,gripY+9);
+  ctx.stroke();
+  ctx.strokeStyle='#0a0a0a';ctx.lineWidth=1.5;
+  ctx.beginPath();
+  ctx.moveTo(tubeEndX,-tubeR);
+  ctx.lineTo(tubeEndX,tubeR);
+  ctx.stroke();
+  const wX=tubeEndX;
+  const rkG=ctx.createLinearGradient(0,-tubeR+1,0,tubeR-1);
+  rkG.addColorStop(0,'#0a1408');
+  rkG.addColorStop(0.3,'#2a3a1a');
+  rkG.addColorStop(0.5,'#3a4a2a');
+  rkG.addColorStop(0.75,'#1a2a10');
+  rkG.addColorStop(1,'#050a04');
+  ctx.fillStyle=rkG;
+  ctx.beginPath();
+  ctx.moveTo(wX,-tubeR+1.5);
+  ctx.lineTo(wX+14,-tubeR+1.5);
+  ctx.lineTo(wX+14,tubeR-1.5);
+  ctx.lineTo(wX,tubeR-1.5);
+  ctx.closePath();
+  ctx.fill();
+  ctx.strokeStyle='rgba(0,0,0,0.7)';ctx.lineWidth=1;ctx.stroke();
+  const coneG=ctx.createLinearGradient(0,-tubeR+1,0,tubeR-1);
+  coneG.addColorStop(0,'#3a4a20');
+  coneG.addColorStop(0.35,'#5a6a35');
+  coneG.addColorStop(0.5,'#7a8a50');
+  coneG.addColorStop(0.65,'#4a5a28');
+  coneG.addColorStop(1,'#1a2a10');
+  ctx.fillStyle=coneG;
+  ctx.beginPath();
+  ctx.moveTo(wX+14,-tubeR+1.5);
+  ctx.lineTo(wX+22,-tubeR+2.5);
+  ctx.lineTo(wX+22,tubeR-2.5);
+  ctx.lineTo(wX+14,tubeR-1.5);
+  ctx.closePath();
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(wX+22,-tubeR+2.5);
+  ctx.lineTo(wX+22,tubeR-2.5);
+  ctx.quadraticCurveTo(wX+30,-1,wX+34,0);
+  ctx.quadraticCurveTo(wX+30,1,wX+22,tubeR-2.5);
+  ctx.closePath();
+  ctx.fill();
+  ctx.strokeStyle='rgba(0,0,0,0.6)';ctx.lineWidth=1;ctx.stroke();
+  ctx.strokeStyle='rgba(180,200,150,0.4)';ctx.lineWidth=0.8;
+  ctx.beginPath();
+  ctx.moveTo(wX+15,-tubeR+2.5);
+  ctx.lineTo(wX+32,-0.5);
+  ctx.stroke();
+  ctx.fillStyle='#1a2a10';
+  ctx.beginPath();
+  ctx.moveTo(wX+2,-tubeR+1.5);
+  ctx.lineTo(wX+8,-tubeR-2);
+  ctx.lineTo(wX+10,-tubeR-2);
+  ctx.lineTo(wX+10,-tubeR+1.5);
+  ctx.closePath();ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(wX+2,tubeR-1.5);
+  ctx.lineTo(wX+8,tubeR+2);
+  ctx.lineTo(wX+10,tubeR+2);
+  ctx.lineTo(wX+10,tubeR-1.5);
+  ctx.closePath();ctx.fill();
+  ctx.strokeStyle='rgba(0,0,0,0.85)';ctx.lineWidth=1.3;
+  rrect(ctx,tubeStartX,-tubeR,tubeW,tubeR*2,1.5);
+  ctx.stroke();
+}
+
+function drawSoldier(){
+  const S=PAL.soldier,B=PAL.bazooka,s=player.s;
+  const rise=player.peek*24+player.bob;
+  const baseX=player.x;
+  const baseY=WALL.topY+40-rise;
+  const swayX=player.aimSwayX,swayY=player.aimSwayY;
+  ctx.save();
+  ctx.globalAlpha=0.45;
+  const shG=ctx.createRadialGradient(baseX,WALL.topY+32,0,baseX,WALL.topY+32,42);
+  shG.addColorStop(0,'rgba(0,0,0,0.85)');
+  shG.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=shG;
+  ctx.beginPath();
+  ctx.ellipse(baseX,WALL.topY+32,42,9,0,0,TAU);
+  ctx.fill();
+  ctx.restore();
+  ctx.save();
+  ctx.translate(baseX+swayX*0.35,baseY+swayY*0.25);
+  ctx.scale(s,s);
+  drawLegs(S);
+  const bodyAng=player.bodyAngle;
+  ctx.save();
+  ctx.translate(0,-8);
+  ctx.rotate(bodyAng);
+  ctx.translate(0,8);
+  drawTorso(S,swayX,swayY);
+  drawHead(S,swayX*0.5);
+  drawArmsAndBazooka(S,B,bodyAng);
+  ctx.restore();
+  ctx.restore();
+}
+
+function drawLegs(S){
+  ctx.save();
+  ctx.translate(-12,-4);
+  ctx.rotate(-0.06);
+  const thighG=ctx.createLinearGradient(-8,0,8,18);
+  thighG.addColorStop(0,S.uniformShadow);
+  thighG.addColorStop(0.5,S.uniformDark);
+  thighG.addColorStop(1,S.uniformShadow);
+  ctx.fillStyle=thighG;
+  rrect(ctx,-8,0,15,18,3);ctx.fill();
+  ctx.fillStyle='#0a0a0a';
+  rrect(ctx,-9,14,17,6,2);ctx.fill();
+  ctx.strokeStyle='#2a2a2a';ctx.lineWidth=0.8;ctx.stroke();
+  const bg1=ctx.createLinearGradient(-9,20,9,30);
+  bg1.addColorStop(0,'#1a1a1a');
+  bg1.addColorStop(0.5,'#0a0a0a');
+  bg1.addColorStop(1,'#000');
+  ctx.fillStyle=bg1;
+  rrect(ctx,-9,20,18,10,3);ctx.fill();
+  ctx.fillStyle='#000';
+  ctx.fillRect(-9,28,18,2);
+  ctx.restore();
+  ctx.save();
+  ctx.translate(7,-4);
+  ctx.rotate(0.04);
+  const thighG2=ctx.createLinearGradient(-8,0,8,18);
+  thighG2.addColorStop(0,S.uniformDark);
+  thighG2.addColorStop(0.5,S.uniform);
+  thighG2.addColorStop(1,S.uniformShadow);
+  ctx.fillStyle=thighG2;
+  rrect(ctx,-8,0,15,18,3);ctx.fill();
+  ctx.fillStyle='#0a0a0a';
+  rrect(ctx,-9,14,17,6,2);ctx.fill();
+  ctx.strokeStyle='#2a2a2a';ctx.lineWidth=0.8;ctx.stroke();
+  const bg2=ctx.createLinearGradient(-9,20,9,30);
+  bg2.addColorStop(0,'#2a2a2a');
+  bg2.addColorStop(0.5,'#1a1a1a');
+  bg2.addColorStop(1,'#000');
+  ctx.fillStyle=bg2;
+  rrect(ctx,-9,20,18,10,3);ctx.fill();
+  ctx.fillStyle='#000';
+  ctx.fillRect(-9,28,18,2);
+  ctx.restore();
+}
+
+function drawTorso(S,swayX,swayY){
+  const tx=-21,ty=-70,tw=42,th=64;
+  const torsoG=ctx.createLinearGradient(tx-6,ty,tx+tw+6,ty+th);
+  torsoG.addColorStop(0,S.uniformShadow);
+  torsoG.addColorStop(0.15,S.uniformDark);
+  torsoG.addColorStop(0.45,S.uniform);
+  torsoG.addColorStop(0.75,S.uniformLight);
+  torsoG.addColorStop(1,S.uniformShadow);
+  ctx.fillStyle=torsoG;
+  rrect(ctx,tx,ty,tw,th,13);ctx.fill();
+  const camoPatches=[
+    [-14,12,7,5],[-2,25,9,6],[8,10,6,5],
+    [-8,38,8,4],[6,42,7,5],[-16,48,6,4]
+  ];
+  camoPatches.forEach((p,i)=>{
+    ctx.fillStyle=(i%2===0)?'rgba(0,0,0,0.30)':'rgba(120,140,80,0.45)';
+    ctx.beginPath();
+    ctx.ellipse(tx+13+p[0],ty+8+p[1],p[2],p[3],0,0,TAU);
+    ctx.fill();
+  });
+  ctx.strokeStyle='rgba(80,100,60,0.9)';ctx.lineWidth=1.6;
+  rrect(ctx,tx,ty,tw,th,13);ctx.stroke();
+  const vx=tx+3,vy=ty+10,vw=tw-6,vh=36;
+  const vestG=ctx.createLinearGradient(vx,vy,vx+vw,vy+vh);
+  vestG.addColorStop(0,'#050505');
+  vestG.addColorStop(0.4,'#1a1a1a');
+  vestG.addColorStop(0.7,'#0a0a0a');
+  vestG.addColorStop(1,'#000');
+  ctx.fillStyle=vestG;
+  rrect(ctx,vx,vy,vw,vh,5);ctx.fill();
+  ctx.strokeStyle='rgba(0,0,0,0.95)';ctx.lineWidth=1.2;
+  rrect(ctx,vx,vy,vw,vh,5);ctx.stroke();
+  ctx.strokeStyle='rgba(60,60,60,0.9)';ctx.lineWidth=1;
+  for(let i=0;i<3;i++){
+    ctx.beginPath();
+    ctx.moveTo(vx+3,vy+9+i*10);
+    ctx.lineTo(vx+vw-3,vy+9+i*10);
+    ctx.stroke();
+  }
+  ctx.fillStyle=S.pouch;
+  rrect(ctx,vx+3,vy+5,8,9,2);ctx.fill();
+  rrect(ctx,vx+vw-11,vy+5,8,9,2);ctx.fill();
+  rrect(ctx,vx+3,vy+vh-14,9,10,2);ctx.fill();
+  rrect(ctx,vx+vw-12,vy+vh-14,9,10,2);ctx.fill();
+  ctx.strokeStyle='rgba(0,0,0,0.9)';ctx.lineWidth=1;
+  rrect(ctx,vx+3,vy+5,8,9,2);ctx.stroke();
+  rrect(ctx,vx+vw-11,vy+5,8,9,2);ctx.stroke();
+  rrect(ctx,vx+3,vy+vh-14,9,10,2);ctx.stroke();
+  rrect(ctx,vx+vw-12,vy+vh-14,9,10,2);ctx.stroke();
+  ctx.fillStyle='#1a1a1a';
+  rrect(ctx,tx+4,ty+3,6,10,2);ctx.fill();
+  ctx.strokeStyle='#000';ctx.lineWidth=0.8;ctx.stroke();
+  ctx.strokeStyle='#3a3a3a';ctx.lineWidth=0.6;
+  ctx.beginPath();
+  ctx.moveTo(tx+7,ty+3);ctx.lineTo(tx+7,ty-4);
+  ctx.stroke();
+  ctx.strokeStyle=S.strapDark;ctx.lineWidth=3;
+  ctx.beginPath();
+  ctx.moveTo(tx+4,ty+5);
+  ctx.lineTo(tx+tw-4,ty+th-6);
+  ctx.stroke();
+  ctx.strokeStyle='rgba(90,90,90,0.7)';ctx.lineWidth=1;
+  ctx.beginPath();
+  ctx.moveTo(tx+4,ty+6);
+  ctx.lineTo(tx+tw-4,ty+th-5);
+  ctx.stroke();
+  void swayX;
+  void swayY;
+}
+
+function drawHead(S,swayExtra){
+  ctx.fillStyle=S.skinDark;
+  rrect(ctx,-6,-82,12,14,3);ctx.fill();
+  ctx.fillStyle='rgba(0,0,0,0.4)';
+  rrect(ctx,-6,-82,12,5,2);ctx.fill();
+  ctx.save();
+  ctx.translate(0,-78);
+  ctx.rotate(player.headTurn);
+  ctx.translate(0,78);
+  const hy=-92;
+  const faceG=ctx.createRadialGradient(-4,hy-4,2,-2,hy+2,14);
+  faceG.addColorStop(0,S.skinLight);
+  faceG.addColorStop(0.4,S.skin);
+  faceG.addColorStop(0.8,S.skinDark);
+  faceG.addColorStop(1,S.skinShadow);
+  ctx.fillStyle=faceG;
+  ctx.beginPath();
+  ctx.ellipse(0,hy,10.5,12.5,0,0,TAU);ctx.fill();
+  ctx.fillStyle='rgba(0,0,0,0.15)';
+  ctx.beginPath();ctx.ellipse(0,hy+9,8,3,0,0,TAU);ctx.fill();
+  const helG=ctx.createRadialGradient(-4,hy-15,3,0,hy-13,20);
+  helG.addColorStop(0,S.helmetLight);
+  helG.addColorStop(0.4,S.helmet);
+  helG.addColorStop(0.85,S.helmetDark);
+  helG.addColorStop(1,'#000');
+  ctx.fillStyle=helG;
+  ctx.beginPath();
+  ctx.moveTo(-14.5,hy-1);
+  ctx.quadraticCurveTo(-16,hy-14,-8,hy-22);
+  ctx.quadraticCurveTo(-2,hy-27,5,hy-26);
+  ctx.quadraticCurveTo(12.5,hy-24,15,hy-16);
+  ctx.quadraticCurveTo(16,hy-8,15.5,hy-1);
+  ctx.lineTo(13,hy-3);
+  ctx.quadraticCurveTo(6,hy-7,-2,hy-7);
+  ctx.quadraticCurveTo(-9,hy-6,-12,hy-3);
+  ctx.closePath();
+  ctx.fill();
+  ctx.strokeStyle='rgba(0,0,0,0.9)';ctx.lineWidth=1.3;ctx.stroke();
+  ctx.strokeStyle='rgba(120,130,90,0.9)';ctx.lineWidth=1.2;
+  ctx.beginPath();
+  ctx.moveTo(-14,hy-1);
+  ctx.quadraticCurveTo(-16,hy-14,-8,hy-22);
+  ctx.quadraticCurveTo(-2,hy-27,5,hy-26);
+  ctx.quadraticCurveTo(12.5,hy-24,15,hy-16);
+  ctx.quadraticCurveTo(16,hy-8,15.5,hy-1);
+  ctx.stroke();
+  ctx.fillStyle='rgba(0,0,0,0.35)';
+  ctx.beginPath();
+  ctx.moveTo(-10,hy-15);ctx.lineTo(-2,hy-16);ctx.lineTo(-4,hy-9);ctx.lineTo(-11,hy-8);ctx.closePath();ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(3,hy-19);ctx.lineTo(10,hy-18);ctx.lineTo(12,hy-12);ctx.lineTo(6,hy-11);ctx.closePath();ctx.fill();
+  ctx.fillStyle='rgba(255,255,255,0.10)';
+  ctx.beginPath();
+  ctx.moveTo(-6,hy-22);ctx.lineTo(2,hy-23);ctx.lineTo(0,hy-18);ctx.lineTo(-5,hy-17);ctx.closePath();ctx.fill();
+  ctx.strokeStyle='#0a0a0a';ctx.lineWidth=1.5;
+  ctx.beginPath();
+  ctx.moveTo(-13,hy-2);
+  ctx.quadraticCurveTo(-11,hy+7,-5,hy+11);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(13,hy-4);
+  ctx.quadraticCurveTo(10,hy+5,4,hy+10);
+  ctx.stroke();
+  ctx.fillStyle='#2a2a2a';
+  rrect(ctx,-7,hy+10,3,2,0.5);ctx.fill();
+  const lookX=Math.cos(player.angle)*1.8+swayExtra*0.15;
+  const lookY=Math.sin(player.angle)*1.4;
+  ctx.fillStyle='rgba(0,0,0,0.2)';
+  ctx.beginPath();ctx.ellipse(-4,hy+3,3.2,2.2,0,0,TAU);ctx.fill();
+  ctx.beginPath();ctx.ellipse(4.5,hy+3,3.2,2.2,0,0,TAU);ctx.fill();
+  ctx.fillStyle='#f5f0e0';
+  ctx.beginPath();ctx.ellipse(-4,hy+3.5,2.6,1.9,0,0,TAU);ctx.fill();
+  ctx.beginPath();ctx.ellipse(4.5,hy+3.5,2.6,1.9,0,0,TAU);ctx.fill();
+  ctx.fillStyle='#3a2a18';
+  ctx.beginPath();ctx.arc(-4+lookX*0.5,hy+3.7+lookY*0.3,1.4,0,TAU);ctx.fill();
+  ctx.beginPath();ctx.arc(4.5+lookX*0.5,hy+3.7+lookY*0.3,1.4,0,TAU);ctx.fill();
+  ctx.fillStyle='#000';
+  ctx.beginPath();ctx.arc(-4+lookX*0.5,hy+3.7+lookY*0.3,0.8,0,TAU);ctx.fill();
+  ctx.beginPath();ctx.arc(4.5+lookX*0.5,hy+3.7+lookY*0.3,0.8,0,TAU);ctx.fill();
+  ctx.fillStyle='rgba(255,255,255,0.9)';
+  ctx.beginPath();ctx.arc(-4.5+lookX*0.5,hy+3+lookY*0.3,0.4,0,TAU);ctx.fill();
+  ctx.beginPath();ctx.arc(4+lookX*0.5,hy+3+lookY*0.3,0.4,0,TAU);ctx.fill();
+  ctx.strokeStyle=S.skinShadow;ctx.lineWidth=1.2;
+  ctx.beginPath();ctx.moveTo(-6.5,hy+0.5);ctx.lineTo(-2,hy+1);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(2.5,hy+1);ctx.lineTo(7,hy+0.5);ctx.stroke();
+  ctx.strokeStyle=S.skinShadow;ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(0.5,hy+3);ctx.quadraticCurveTo(2.5,hy+7,1.5,hy+8);ctx.stroke();
+  ctx.fillStyle='rgba(0,0,0,0.2)';
+  ctx.beginPath();ctx.ellipse(1,hy+8,1.6,0.8,0,0,TAU);ctx.fill();
+  ctx.strokeStyle='rgba(80,40,30,0.85)';ctx.lineWidth=1.1;
+  ctx.beginPath();
+  ctx.moveTo(-3,hy+11);
+  ctx.quadraticCurveTo(0,hy+11.5,3,hy+10.5);
+  ctx.stroke();
+  ctx.fillStyle=S.skinDark;
+  ctx.beginPath();ctx.ellipse(-9.5,hy+2,1.8,3.2,0,0,TAU);ctx.fill();
+  ctx.strokeStyle=S.skinShadow;ctx.lineWidth=0.6;
+  ctx.beginPath();ctx.ellipse(-9.5,hy+2,1.1,2,0,0,TAU);ctx.stroke();
+  ctx.restore();
+}
+
+function drawArmsAndBazooka(S,B,bodyAng){
+  const aimLocal=player.angle-bodyAng;
+  const shoulderX=8,shoulderY=-46;
+  const recoil=state.recoil*0.55;
+  ctx.save();
+  ctx.translate(shoulderX,shoulderY);
+  ctx.rotate(aimLocal);
+  ctx.translate(-recoil,0);
+  drawBazookaTube(B);
+  const rearGrip={x:-16,y:14},frontGrip={x:38,y:8};
+  const cosA=Math.cos(aimLocal),sinA=Math.sin(aimLocal);
+  const rearWorld={x:shoulderX+rearGrip.x*cosA-rearGrip.y*sinA-recoil*cosA,y:shoulderY+rearGrip.x*sinA+rearGrip.y*cosA-recoil*sinA};
+  const frontWorld={x:shoulderX+frontGrip.x*cosA-frontGrip.y*sinA-recoil*cosA,y:shoulderY+frontGrip.x*sinA+frontGrip.y*cosA-recoil*sinA};
+  ctx.restore();
+  const rearStart={x:4,y:-48},frontStart={x:18,y:-48};
+  drawArm(S,rearStart,rearWorld,11,S.uniformDark,S.uniformShadow);
+  drawArm(S,frontStart,frontWorld,10,S.uniform,S.uniformDark);
+  drawHand(S,rearWorld.x,rearWorld.y,aimLocal,6.8,5.6);
+  drawHand(S,frontWorld.x,frontWorld.y,aimLocal,6.5,5.3);
+}
+
+function drawArm(S,start,end,width,colTop,colBot){
+  const dx=end.x-start.x,dy=end.y-start.y;
+  const len=Math.hypot(dx,dy)||1;
+  const ux=dx/len,uy=dy/len;
+  const perpX=-uy,perpY=ux;
+  const bend=5+len*0.05;
+  const elbow={x:start.x+ux*len*0.55+perpX*bend,y:start.y+uy*len*0.55+perpY*bend};
+  ctx.save();
+  ctx.lineCap='round';ctx.lineJoin='round';
+  ctx.strokeStyle='rgba(0,0,0,0.55)';ctx.lineWidth=width+3;
+  ctx.beginPath();
+  ctx.moveTo(start.x,start.y);
+  ctx.quadraticCurveTo(elbow.x,elbow.y,end.x,end.y);
+  ctx.stroke();
+  const g=ctx.createLinearGradient(start.x,start.y,end.x,end.y);
+  g.addColorStop(0,colTop);
+  g.addColorStop(0.5,colBot);
+  g.addColorStop(1,colTop);
+  ctx.strokeStyle=g;ctx.lineWidth=width;
+  ctx.beginPath();
+  ctx.moveTo(start.x,start.y);
+  ctx.quadraticCurveTo(elbow.x,elbow.y,end.x,end.y);
+  ctx.stroke();
+  ctx.strokeStyle='rgba(255,255,255,0.10)';ctx.lineWidth=width*0.35;
+  ctx.beginPath();
+  ctx.moveTo(start.x,start.y);
+  ctx.quadraticCurveTo(elbow.x,elbow.y,end.x,end.y);
+  ctx.stroke();
+  ctx.fillStyle='#0a0a0a';
+  ctx.beginPath();
+  ctx.arc(elbow.x,elbow.y,width*0.65,0,TAU);
+  ctx.fill();
+  ctx.strokeStyle='#2a2a2a';ctx.lineWidth=0.7;ctx.stroke();
+  ctx.restore();
+  void S;
+}
+
+function drawHand(S,x,y,rot,rx,ry){
+  ctx.save();
+  ctx.translate(x,y);
+  ctx.rotate(rot);
+  const g=ctx.createRadialGradient(-1,-1,1,0,0,rx*1.4);
+  g.addColorStop(0,'#3a3a3a');
+  g.addColorStop(0.5,'#1a1a1a');
+  g.addColorStop(1,'#050505');
+  ctx.fillStyle=g;
+  ctx.beginPath();
+  ctx.ellipse(0,0,rx,ry,0,0,TAU);
+  ctx.fill();
+  ctx.strokeStyle='rgba(0,0,0,0.8)';ctx.lineWidth=0.5;
+  for(let i=-1;i<=1;i++){
+    ctx.beginPath();
+    ctx.moveTo(i*rx*0.4,-ry*0.5);
+    ctx.lineTo(i*rx*0.4,ry*0.5);
+    ctx.stroke();
+  }
+  ctx.fillStyle='#1a1a1a';
+  ctx.beginPath();
+  ctx.ellipse(rx*0.5,-ry*0.3,rx*0.4,ry*0.35,rot,0,TAU);
+  ctx.fill();
+  ctx.restore();
+  void S;
+}
+
 function drawJet(e){const J=PAL.jet;const s=e.s;ctx.save();ctx.translate(e.x,e.gy);if(e.fleeing||e.fastReturn)ctx.scale(-s,s);else ctx.scale(s,s);const flameLen=34+Math.sin(state.time*26+e.x*0.05)*6;const flameG=ctx.createLinearGradient(78,0,78+flameLen,0);flameG.addColorStop(0,'rgba(253,246,227,.95)');flameG.addColorStop(0.35,'rgba(240,216,120,.9)');flameG.addColorStop(0.75,'rgba(212,175,55,.6)');flameG.addColorStop(1,'rgba(139,105,20,0)');ctx.fillStyle=flameG;ctx.beginPath();ctx.moveTo(78,-9);ctx.quadraticCurveTo(78+flameLen*0.6,-3,78+flameLen,0);ctx.quadraticCurveTo(78+flameLen*0.6,3,78,9);ctx.closePath();ctx.fill();ctx.beginPath();ctx.moveTo(-92,0);ctx.lineTo(-72,-7);ctx.lineTo(-38,-11);ctx.lineTo(8,-13);ctx.lineTo(48,-11);ctx.lineTo(72,-9);ctx.lineTo(72,9);ctx.lineTo(48,11);ctx.lineTo(8,13);ctx.lineTo(-38,11);ctx.lineTo(-72,7);ctx.closePath();const fg=ctx.createLinearGradient(0,-13,0,13);fg.addColorStop(0,J.bodyLight);fg.addColorStop(0.35,J.bodyMid);fg.addColorStop(0.7,J.bodyMid);fg.addColorStop(1,J.bodyDark);ctx.fillStyle=fg;ctx.fill();ctx.strokeStyle='rgba(251,191,36,.85)';ctx.lineWidth=1.8;ctx.stroke();ctx.beginPath();ctx.moveTo(-15,6);ctx.lineTo(45,52);ctx.lineTo(58,44);ctx.lineTo(15,6);ctx.closePath();const wingG=ctx.createLinearGradient(-15,6,45,52);wingG.addColorStop(0,J.bodyMid);wingG.addColorStop(0.6,J.camoGray);wingG.addColorStop(1,J.bodyDark);ctx.fillStyle=wingG;ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(-15,-4);ctx.lineTo(40,-30);ctx.lineTo(52,-24);ctx.lineTo(10,-4);ctx.closePath();const wingG2=ctx.createLinearGradient(-15,-4,40,-30);wingG2.addColorStop(0,J.bodyLight);wingG2.addColorStop(0.6,J.camoBlue);wingG2.addColorStop(1,J.bodyMid);ctx.fillStyle=wingG2;ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(-58,-9);ctx.quadraticCurveTo(-52,-24,-32,-25);ctx.quadraticCurveTo(-15,-25,-8,-13);ctx.closePath();const cg=ctx.createLinearGradient(-55,-25,-10,-8);cg.addColorStop(0,J.canopyHi);cg.addColorStop(0.5,J.canopy);cg.addColorStop(1,'rgba(46,16,101,0.95)');ctx.fillStyle=cg;ctx.fill();ctx.strokeStyle='rgba(196,181,253,.9)';ctx.lineWidth=1.4;ctx.stroke();ctx.restore();}
 function drawPlacard(e){const r=placardRect(e);const s=e.s;const{baseFont,lines,lineH}=computePlacardSize(e);const poleX=r.x-6*s;const poleTopY=r.y-8*s;const poleBotY=r.y+r.h+4*s;const poleG=ctx.createLinearGradient(poleX-2*s,0,poleX+2*s,0);poleG.addColorStop(0,'#3a2a08');poleG.addColorStop(0.4,'#f0d878');poleG.addColorStop(0.6,'#d4af37');poleG.addColorStop(1,'#8b6914');ctx.strokeStyle=poleG;ctx.lineWidth=4*s;ctx.beginPath();ctx.moveTo(poleX,poleTopY);ctx.lineTo(poleX,poleBotY);ctx.stroke();const flagW=r.w;const flagH=r.h;const waveFreq=clamp(flagW/(95*s),1.4,3.2);const segs=32;const waveTime=state.time*3+e.x*0.02;const waveAmp=flagH*(flagW>150*s?0.05:0.035);function waveY(t){return Math.sin(t*Math.PI*2*waveFreq+waveTime)*waveAmp*t;}ctx.beginPath();for(let i=0;i<=segs;i++){const t=i/segs;const x=poleX+t*flagW;const y=r.y+waveY(t);if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);}ctx.lineTo(poleX+flagW,r.y+flagH+waveY(1));for(let i=segs;i>=0;i--){const t=i/segs;const x=poleX+t*flagW;const y=r.y+flagH+waveY(t);ctx.lineTo(x,y);}ctx.closePath();const flagG=ctx.createLinearGradient(poleX,r.y,poleX+flagW,r.y+flagH);flagG.addColorStop(0,'#fdf6e3');flagG.addColorStop(0.5,'#f0d878');flagG.addColorStop(1,'#d4af37');ctx.fillStyle=flagG;ctx.fill();ctx.strokeStyle='rgba(167,139,250,.9)';ctx.lineWidth=1.8*s;ctx.stroke();const fontSize=baseFont*s;ctx.font='900 '+fontSize+'px "Arial Black","Impact","Segoe UI",system-ui,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineJoin='round';const lh=lineH*s;const totalTextH=lines.length*lh;const textTx=0.5;const textCx=poleX+textTx*flagW;const startY=r.y+r.h*0.5-totalTextH*0.5+lh*0.5;const strokeW=Math.max(2.2,fontSize*0.17);for(let i=0;i<lines.length;i++){const line=lines[i];const lineY=startY+i*lh;const wv=waveY(textTx)*0.5;ctx.strokeStyle='rgba(255,255,255,.98)';ctx.lineWidth=strokeW;ctx.strokeText(line,textCx,lineY+wv);ctx.fillStyle='#0a0e1f';ctx.fillText(line,textCx,lineY+wv);}}
 function drawBullets(){for(const b of state.bullets){for(const t of b.trail){const a=t.life/t.maxLife;ctx.globalAlpha=a*0.6;ctx.fillStyle=b.enemyBullet?FX.cream:FX.goldLight;ctx.beginPath();ctx.arc(t.x,t.y,(1-a)*8+2,0,TAU);ctx.fill();}ctx.globalAlpha=1;const ang=Math.atan2(b.vy,b.vx);const g=ctx.createRadialGradient(b.x,b.y,0,b.x,b.y,24);g.addColorStop(0,'rgba(253,246,227,.95)');g.addColorStop(0.35,b.enemyBullet?'rgba(244,63,94,.7)':'rgba(212,175,55,.7)');g.addColorStop(1,'rgba(139,105,20,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(b.x,b.y,24,0,TAU);ctx.fill();ctx.save();ctx.translate(b.x,b.y);ctx.rotate(ang);if(b.enemyBullet){ctx.fillStyle='#3a0a1a';rrect(ctx,-14,-3.5,26,7,2);ctx.fill();ctx.fillStyle=FX.rose;ctx.beginPath();ctx.moveTo(12,0);ctx.lineTo(2,-4.5);ctx.lineTo(2,4.5);ctx.closePath();ctx.fill();}else{ctx.fillStyle='#3a2a08';rrect(ctx,-10,-3,18,6,2);ctx.fill();ctx.fillStyle=FX.gold;ctx.beginPath();ctx.moveTo(10,0);ctx.lineTo(6,-3);ctx.lineTo(6,3);ctx.closePath();ctx.fill();}ctx.restore();}}
 function drawCasings(){for(const c of state.casings){ctx.save();ctx.translate(c.x,c.y);ctx.rotate(c.rot);ctx.globalAlpha=Math.min(1,c.life/1.0);ctx.fillStyle='#d4af37';rrect(ctx,-3,-1.2,6,2.4,0.6);ctx.fill();ctx.restore();}ctx.globalAlpha=1;}
 function drawShockwaves(){for(const w of state.shockwaves){const a=w.life/w.maxLife;ctx.strokeStyle='rgba(240,216,120,'+(a*0.75).toFixed(2)+')';ctx.lineWidth=3*a;ctx.beginPath();ctx.arc(w.x,w.y,w.r*(1-a),0,TAU);ctx.stroke();}}
 function drawCrosshair(){if(IS_TOUCH)return;const m=state.mouse;const target=findTargetAtMouse();const col=target?'#a78bfa':'rgba(255,255,255,.9)';ctx.strokeStyle=col;ctx.lineWidth=2;ctx.beginPath();ctx.arc(m.x,m.y,14,0,TAU);ctx.stroke();ctx.beginPath();ctx.moveTo(m.x-22,m.y);ctx.lineTo(m.x-7,m.y);ctx.moveTo(m.x+7,m.y);ctx.lineTo(m.x+22,m.y);ctx.moveTo(m.x,m.y-22);ctx.lineTo(m.x,m.y-7);ctx.moveTo(m.x,m.y+7);ctx.lineTo(m.x,m.y+22);ctx.stroke();ctx.fillStyle=col;ctx.beginPath();ctx.arc(m.x,m.y,2,0,TAU);ctx.fill();}
-function drawLockOn(){const t=state.lockTarget;if(!t||!t.alive||t.fleeing||t.fastReturn)return;const r=placardRect(t);const pad=12*t.s;const x=r.x-pad,y=r.y-pad,w=r.w+pad*2,h=r.h+pad*2;const pulse=0.5+0.5*Math.sin(state.time*7);const c=Math.min(w,h)*0.35;ctx.save();ctx.strokeStyle='rgba(167,139,250,'+(0.5+pulse*0.5).toFixed(2)+')';ctx.lineWidth=2.6;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(x,y+c);ctx.lineTo(x,y);ctx.lineTo(x+c,y);ctx.moveTo(x+w-c,y);ctx.lineTo(x+w,y);ctx.lineTo(x+w,y+c);ctx.moveTo(x+w,y+h-c);ctx.lineTo(x+w,y+h);ctx.lineTo(x+w-c,y+h);ctx.moveTo(x+c,y+h);ctx.lineTo(x,y+h);ctx.lineTo(x,y+h-c);ctx.stroke();ctx.restore();}
+function drawLockOn(){const t=state.lockTarget;if(!t||!t.alive||t.fleeing||t.fastReturn)return;const r=placardRect(t);const pad=8*t.s;const x=r.x-pad,y=r.y-pad,w=r.w+pad*2,h=r.h+pad*2;const pulse=0.5+0.5*Math.sin(state.time*7);const c=Math.min(w,h)*0.30;ctx.save();ctx.strokeStyle='rgba(167,139,250,'+(0.55+pulse*0.45).toFixed(2)+')';ctx.lineWidth=2.2;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(x,y+c);ctx.lineTo(x,y);ctx.lineTo(x+c,y);ctx.moveTo(x+w-c,y);ctx.lineTo(x+w,y);ctx.lineTo(x+w,y+c);ctx.moveTo(x+w,y+h-c);ctx.lineTo(x+w,y+h);ctx.lineTo(x+w-c,y+h);ctx.moveTo(x+c,y+h);ctx.lineTo(x,y+h);ctx.lineTo(x,y+h-c);ctx.stroke();ctx.restore();}
 
 function drawAimGuide(){
   if(state.gameOver||state.paused||state.roundLock) return;
-  const origin = bazookaTip();
   const t = state.lockTarget;
-  const pulse = 0.5 + 0.5*Math.sin(state.time*8);
-
-  if(t && t.alive && !t.fleeing && !t.fastReturn){
-    const pr = placardRect(t);
-
-    ctx.save();
-    ctx.globalCompositeOperation = 'lighter';
-
-    const grad = ctx.createLinearGradient(origin.x, origin.y, pr.cx, pr.cy);
-    grad.addColorStop(0,   'rgba(167,139,250,'+(0.55+pulse*0.25)+')');
-    grad.addColorStop(0.5, 'rgba(240,216,120,'+(0.35+pulse*0.15)+')');
-    grad.addColorStop(1,   'rgba(244,63,94,'  +(0.55+pulse*0.25)+')');
-
-    ctx.strokeStyle = grad;
-    ctx.lineWidth = 6;
-    ctx.setLineDash([14, 10]);
-    ctx.lineDashOffset = -state.time*60;
-    ctx.beginPath();
-    ctx.moveTo(origin.x, origin.y);
-    ctx.lineTo(pr.cx, pr.cy);
-    ctx.stroke();
-
-    ctx.setLineDash([]);
-    ctx.strokeStyle = 'rgba(255,255,255,'+(0.75+pulse*0.2)+')';
-    ctx.lineWidth = 1.8;
-    ctx.beginPath();
-    ctx.moveTo(origin.x, origin.y);
-    ctx.lineTo(pr.cx, pr.cy);
-    ctx.stroke();
-
-    ctx.restore();
-
-    drawTargetReticle(pr.cx, pr.cy, pr, pulse);
-  }
-  else {
-    const len = 130;
-    const ex = origin.x + Math.cos(player.angle)*len;
-    const ey = origin.y + Math.sin(player.angle)*len;
-    ctx.save();
-    ctx.globalCompositeOperation = 'lighter';
-    ctx.strokeStyle = 'rgba(167,139,250,.5)';
-    ctx.lineWidth = 2;
-    ctx.setLineDash([8, 6]);
-    ctx.lineDashOffset = -state.time*40;
-    ctx.beginPath();
-    ctx.moveTo(origin.x, origin.y);
-    ctx.lineTo(ex, ey);
-    ctx.stroke();
-    ctx.setLineDash([]);
-    ctx.restore();
-  }
-}
-
-function drawTargetReticle(cx, cy, pr, pulse){
-  const size = Math.max(pr.w, pr.h);
-  const r = size * 0.9 + pulse*6;
-
+  const hasTarget = t && t.alive && !t.fleeing && !t.fastReturn;
+  if(!hasTarget || state.aimGuideTimer <= 0) return;
+  const origin = bazookaTip();
+  const pr = placardRect(t);
+  const pulse = 0.5 + 0.5*Math.sin(state.time*18);
+  const fadeRatio = Math.min(1, state.aimGuideTimer / 0.85);
+  const alphaMul = fadeRatio * fadeRatio;
   ctx.save();
   ctx.globalCompositeOperation = 'lighter';
+  const grad = ctx.createLinearGradient(origin.x, origin.y, pr.cx, pr.cy);
+  grad.addColorStop(0,   'rgba(167,139,250,'+(0.75*alphaMul)+')');
+  grad.addColorStop(0.5, 'rgba(240,216,120,'+(0.55*alphaMul)+')');
+  grad.addColorStop(1,   'rgba(244,63,94,'  +(0.75*alphaMul)+')');
+  ctx.strokeStyle = grad;
+  ctx.lineWidth = 5;
+  ctx.setLineDash([12, 8]);
+  ctx.lineDashOffset = -state.time*120;
+  ctx.beginPath();
+  ctx.moveTo(origin.x, origin.y);
+  ctx.lineTo(pr.cx, pr.cy);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.strokeStyle = 'rgba(255,255,255,'+(0.9*alphaMul)+')';
+  ctx.lineWidth = 1.6;
+  ctx.beginPath();
+  ctx.moveTo(origin.x, origin.y);
+  ctx.lineTo(pr.cx, pr.cy);
+  ctx.stroke();
+  ctx.restore();
+  drawTargetReticle(pr.cx, pr.cy, pr, pulse, alphaMul);
+}
 
-  ctx.strokeStyle = 'rgba(167,139,250,'+(0.55+pulse*0.35)+')';
-  ctx.lineWidth = 2.5;
+function drawTargetReticle(cx, cy, pr, pulse, alphaMul){
+  if(alphaMul === undefined) alphaMul = 1;
+  const size = Math.max(pr.w, pr.h);
+  const r = size * 0.42 + pulse*3;
+  ctx.save();
+  ctx.globalCompositeOperation = 'lighter';
+  ctx.globalAlpha = alphaMul;
+  ctx.strokeStyle = 'rgba(167,139,250,'+(0.7+pulse*0.3)+')';
+  ctx.lineWidth = 1.8;
   ctx.beginPath();
   ctx.arc(cx, cy, r, 0, TAU);
   ctx.stroke();
-
   ctx.save();
   ctx.translate(cx, cy);
-  ctx.rotate(state.time*2.5);
-  ctx.strokeStyle = 'rgba(240,216,120,'+(0.6+pulse*0.3)+')';
-  ctx.lineWidth = 3;
-  ctx.setLineDash([12, 8]);
+  ctx.rotate(state.time*3);
+  ctx.strokeStyle = 'rgba(240,216,120,'+(0.75+pulse*0.25)+')';
+  ctx.lineWidth = 2.2;
+  ctx.setLineDash([8, 6]);
   ctx.beginPath();
-  ctx.arc(0, 0, r*1.15, 0, TAU);
+  ctx.arc(0, 0, r*1.18, 0, TAU);
   ctx.stroke();
   ctx.setLineDash([]);
   ctx.restore();
-
-  const pad = 8;
+  const pad = 5;
   const bx1 = pr.x - pad,           by1 = pr.y - pad;
   const bx2 = pr.x + pr.w + pad,    by2 = pr.y + pr.h + pad;
-  const cLen = Math.min(pr.w, pr.h) * 0.4;
-  ctx.strokeStyle = 'rgba(255,255,255,'+(0.85+pulse*0.15)+')';
-  ctx.lineWidth = 3.2;
+  const cLen = Math.min(pr.w, pr.h) * 0.28;
+  ctx.strokeStyle = 'rgba(255,255,255,0.95)';
+  ctx.lineWidth = 2.4;
   ctx.lineCap = 'round';
   ctx.beginPath();
   ctx.moveTo(bx1, by1+cLen); ctx.lineTo(bx1, by1); ctx.lineTo(bx1+cLen, by1);
@@ -2392,21 +2942,18 @@ function drawTargetReticle(cx, cy, pr, pulse){
   ctx.moveTo(bx2, by2-cLen); ctx.lineTo(bx2, by2); ctx.lineTo(bx2-cLen, by2);
   ctx.moveTo(bx1+cLen, by2); ctx.lineTo(bx1, by2); ctx.lineTo(bx1, by2-cLen);
   ctx.stroke();
-
-  ctx.fillStyle = 'rgba(244,63,94,'+(0.75+pulse*0.25)+')';
+  ctx.fillStyle = 'rgba(244,63,94,0.9)';
   ctx.beginPath();
-  ctx.arc(cx, cy, 4+pulse*2, 0, TAU);
+  ctx.arc(cx, cy, 2.5+pulse*1.2, 0, TAU);
   ctx.fill();
-
-  const arrowY = by1 - 18;
-  ctx.fillStyle = 'rgba(240,216,120,'+(0.85+pulse*0.15)+')';
+  const arrowY = by1 - 10;
+  ctx.fillStyle = 'rgba(240,216,120,0.95)';
   ctx.beginPath();
-  ctx.moveTo(cx, arrowY + 10);
-  ctx.lineTo(cx - 9, arrowY - 4);
-  ctx.lineTo(cx + 9, arrowY - 4);
+  ctx.moveTo(cx, arrowY + 6);
+  ctx.lineTo(cx - 6, arrowY - 3);
+  ctx.lineTo(cx + 6, arrowY - 3);
   ctx.closePath();
   ctx.fill();
-
   ctx.restore();
 }
 
@@ -2514,9 +3061,7 @@ function bindTouchControls(){
   bindTouchButton(document.getElementById('tFire'),()=>{
     if(state.gameOver||state.paused)return;
     if(state.roundLock||state.reloading>0)return;
-
     let e = state.lockTarget;
-
     if(!e || !e.alive || e.fleeing || e.fastReturn){
       let bestDiff = 0.9;
       const p = PIVOT();
@@ -2531,7 +3076,6 @@ function bindTouchControls(){
       }
     }
     if(!e) e = findNearestEnemy();
-
     if(e){
       const pr=placardRect(e);
       const p=PIVOT();
@@ -2558,13 +3102,11 @@ function bindTouchControls(){
 function setupTapToAim(){
   const el = document.getElementById('cvs');
   if(!el) return;
-
   let touchStartX = 0, touchStartY = 0;
   let touchStartTime = 0;
   let isDragging = false;
   const TAP_MAX_MOVE = 14;
   const TAP_MAX_TIME = 320;
-
   function toCanvas(clientX, clientY){
     const r = el.getBoundingClientRect();
     return {
@@ -2572,7 +3114,6 @@ function setupTapToAim(){
       y: (clientY - r.top)  * (H / r.height)
     };
   }
-
   function findEnemyAtPoint(px, py){
     for(let i = state.enemies.length-1; i >= 0; i--){
       const e = state.enemies[i];
@@ -2599,7 +3140,6 @@ function setupTapToAim(){
     }
     return best;
   }
-
   el.addEventListener('touchstart', (ev)=>{
     if(state.gameOver || state.paused) return;
     if(state.roundLock || state.reloading > 0) return;
@@ -2610,7 +3150,6 @@ function setupTapToAim(){
     touchStartTime = performance.now();
     isDragging = false;
   }, {passive:true});
-
   el.addEventListener('touchmove', (ev)=>{
     if(state.gameOver || state.paused) return;
     const t = ev.touches[0];
@@ -2623,18 +3162,15 @@ function setupTapToAim(){
       aimAt(p.x, p.y);
     }
   }, {passive:true});
-
   el.addEventListener('touchend', (ev)=>{
     if(state.gameOver || state.paused) return;
     if(state.roundLock || state.reloading > 0) return;
     const elapsed = performance.now() - touchStartTime;
-
     if(!isDragging && elapsed < TAP_MAX_TIME){
       const t = ev.changedTouches[0];
       if(!t) return;
       const p = toCanvas(t.clientX, t.clientY);
       const hit = findEnemyAtPoint(p.x, p.y);
-
       if(hit){
         const pr = placardRect(hit);
         const pivot = PIVOT();
@@ -2651,7 +3187,6 @@ function setupTapToAim(){
     }
     isDragging = false;
   }, {passive:true});
-
   el.addEventListener('touchcancel', ()=>{ isDragging = false; }, {passive:true});
 }
 
@@ -2661,7 +3196,38 @@ function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classL
 function togglePause(){if(state.gameOver)return;state.paused=!state.paused;document.getElementById('pauseOv').classList.toggle('active',state.paused);}
 function updateMenuProgress(){const idx=getUnlockedLevel();document.getElementById('progressVal').textContent='LEVEL '+(idx+1)+'/'+TOTAL_LEVELS;}
 
-function renderLevelGrid(){const grid=document.getElementById('levelGrid');const unlocked=getUnlockedLevel();let html='';for(let i=0;i<TOTAL_LEVELS;i++){const lv=LEVELS[i];let cls='level-card';let statusText='',icon='';if(i>unlocked){cls+=' locked';statusText='🔒 TERKUNCI';icon='🔒';}else if(i<unlocked){cls+=' done';statusText='✓ SELESAI';icon='✓';}else{cls+=' current';statusText='▶ MAIN SEKARANG';icon='▶';}html+='<div class="'+cls+'" data-idx="'+i+'"><div class="lv-num">LEVEL '+(i+1)+'</div><div class="lv-name">'+lv.name+'</div><div class="lv-status">'+statusText+'</div><div class="lv-icon">'+icon+'</div></div>';}grid.innerHTML=html;grid.querySelectorAll('.level-card').forEach(card=>{card.addEventListener('click',()=>{const idx=parseInt(card.dataset.idx,10);if(idx>getUnlockedLevel())return;SFX.click();showScreen('game');document.getElementById('goOv').classList.remove('active');document.getElementById('pauseOv').classList.remove('active');reset();startLevel(idx);state.running=true;updateTouchControlsVisibility();});});}
+function renderLevelGrid(){
+  const grid=document.getElementById('levelGrid');
+  const cur=getUnlockedLevel();
+  let html='';
+  for(let i=0;i<TOTAL_LEVELS;i++){
+    const lv=LEVELS[i];
+    let cls='level-card';
+    let statusText='▶ MAIN SEKARANG';
+    let icon='▶';
+    if(i===cur){cls+=' current';statusText='▶ MAIN SEKARANG';icon='▶';}
+    else{cls+=' done';statusText='✓ SIAP DIMAINKAN';icon='✓';}
+    html+='<div class="'+cls+'" data-idx="'+i+'">'+
+      '<div class="lv-num">LEVEL '+(i+1)+'</div>'+
+      '<div class="lv-name">'+lv.name+'</div>'+
+      '<div class="lv-status">'+statusText+'</div>'+
+      '<div class="lv-icon">'+icon+'</div></div>';
+  }
+  grid.innerHTML=html;
+  grid.querySelectorAll('.level-card').forEach(card=>{
+    card.addEventListener('click',()=>{
+      const idx=parseInt(card.dataset.idx,10);
+      SFX.click();
+      showScreen('game');
+      document.getElementById('goOv').classList.remove('active');
+      document.getElementById('pauseOv').classList.remove('active');
+      reset();
+      startLevel(idx);
+      state.running=true;
+      updateTouchControlsVisibility();
+    });
+  });
+}
 function startGame(){ensureAudio();showScreen('game');document.getElementById('goOv').classList.remove('active');document.getElementById('pauseOv').classList.remove('active');reset();const startIdx=getUnlockedLevel();startLevel(startIdx);state.running=true;updateTouchControlsVisibility();}
 function doRestart(){document.getElementById('goOv').classList.remove('active');showScreen('game');reset();startLevel(state.levelIndex);state.running=true;updateTouchControlsVisibility();}
 function quitToMenu(){state.running=false;document.getElementById('levelIntro').classList.remove('active');showScreen('menu');document.getElementById('hsVal').textContent=getHighscore();updateMenuProgress();}
