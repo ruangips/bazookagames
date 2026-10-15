@@ -199,7 +199,7 @@ h1.title-main{font-family:'Arial Black','Segoe UI',Impact,sans-serif;font-size:4
     <div class="welcome-features">
       <div class="wf-item"><span class="wf-icon">✨</span><div><div class="wf-title">Grafik Premium</div><div class="wf-desc">Bloom, aura, partikel, dan pencahayaan dinamis.</div></div></div>
       <div class="wf-item"><span class="wf-icon">🎯</span><div><div class="wf-title">7 Level Epik</div><div class="wf-desc">119 bank soal ekonomi interaktif.</div></div></div>
-      <div class="wf-item"><span class="wf-icon">🚀</span><div><div class="wf-title">Peluru Terkunci</div><div class="wf-desc">Kunci pesawat, luncurkan peluru otomatis.</div></div></div>
+      <div class="wf-item"><span class="wf-icon">🚀</span><div><div class="wf-title">Peluru Zigzag</div><div class="wf-desc">Roket menari sebelum tepat menghantam sasaran.</div></div></div>
       <div class="wf-item"><span class="wf-icon">🛡️</span><div><div class="wf-title">Perisai & Combo</div><div class="wf-desc">Mekanik tempur seru dengan bonus combo.</div></div></div>
     </div>
     <div class="btns">
@@ -559,9 +559,12 @@ var TOTAL_LEVELS = LEVELS.length;
 var QUESTIONS_PER_LEVEL = 11;
 var PASS_THRESHOLD = 8;
 var MAX_LIVES = 5;
-var ROCKET_SPEED = 380;
+/* === PELURU DIPERLAMBAT & ZIGZAG === */
+var ROCKET_SPEED = 250;          // sebelumnya 380 — lebih lambat agar zigzag terlihat
 var ROCKET_HOMING_STEER = 5;
-var ROCKET_THRUST = 600;
+var ROCKET_THRUST = 420;         // sebelumnya 600 — akselerasi disesuaikan
+var ROCKET_WOBBLE_AMP = 210;     // amplitudo osilasi tegak lurus (zigzag)
+var ROCKET_WOBBLE_FREQ = 20;     // kecepatan osilasi (rad/s)
 
 var PAL = {
   soldier:{uniform:'#3a4a2a',uniformDark:'#1a2410',uniformLight:'#5a6a3a',uniformShadow:'#0a1408',helmet:'#1a2410',skin:'#e8b890',skinDark:'#b08860',skinLight:'#f5d0b0',vest:'#1a1a1a',strap:'#0a0a0a',boot:'#0a0a0a'},
@@ -650,7 +653,6 @@ function rebuildBackground(theme){
   }
   if(loc==='river')for(var i=0;i<100;i++)riverRipples.push({x:Math.random()*W,y:HORIZON+60+Math.random()*140,w:rnd(20,90),h:rnd(1.5,3.5),phase:Math.random()*TAU,spd:rnd(0.8,2.0),alpha:rnd(0.2,0.5)});
   if(loc==='forest'){
-    // Disederhanakan: 2 layer saja
     for(var L=0;L<2;L++){var count=4+L*2;var layerTrees=[];
       for(var i=0;i<count;i++)layerTrees.push({x:(i+0.5)*W/count+rnd(-50,50),y:HORIZON-L*35+rnd(-15,15),h:110+L*50+rnd(-20,30),w:60+L*25+rnd(-10,15),trunkW:8+L*3+rnd(-1,2),trunkH:50+L*25+rnd(-8,15),phase:Math.random()*TAU,sway:rnd(0.3,0.6)+L*0.1,canopyBlobs:Array.from({length:5},function(){return{dx:rnd(-1,1),dy:rnd(-0.6,0.6),r:rnd(0.6,0.9)};})});
       forestLayers.push({trees:layerTrees,layer:L});}
@@ -793,11 +795,11 @@ function fire(){
   var t = bazookaTip();
   var target = state.pendingTarget;
   state.pendingTarget = null;
-  var initialSpeed = ROCKET_SPEED*0.72;
+  var initialSpeed = ROCKET_SPEED*0.7;
   var vx = Math.cos(player.angle)*initialSpeed;
   var vy = Math.sin(player.angle)*initialSpeed;
   if(target && target.alive && !target.fleeing){var c=bodyCenter(target);var dx=c.x-t.x,dy=c.y-t.y;var d=Math.hypot(dx,dy)||1;vx=(dx/d)*initialSpeed;vy=(dy/d)*initialSpeed;}
-  state.bullets.push({x:t.x,y:t.y,vx:vx,vy:vy,target:target,dead:false,trail:[],wind:state.wind,age:0,smokeTimer:0});
+  state.bullets.push({x:t.x,y:t.y,vx:vx,vy:vy,target:target,dead:false,trail:[],wind:state.wind,age:0,smokeTimer:0,wobblePhase:Math.random()*TAU});
   muzzleFlash(t.x,t.y);
   var eject = bazookaLocal(26);
   spawnCasing(eject.x,eject.y-6,player.angle);
@@ -1041,10 +1043,27 @@ function update(dt){
       b.age+=dt;var spd=Math.hypot(b.vx,b.vy);
       if(b.age<0.35&&spd>0.1){var dirX=b.vx/spd,dirY=b.vy/spd;b.vx+=dirX*ROCKET_THRUST*dt;b.vy+=dirY*ROCKET_THRUST*dt;var newSpd=Math.hypot(b.vx,b.vy);if(newSpd>ROCKET_SPEED){b.vx=(b.vx/newSpd)*ROCKET_SPEED;b.vy=(b.vy/newSpd)*ROCKET_SPEED;}}
       b.vy+=60*dt;b.vx+=b.wind*1.8*dt;
-      if(b.target&&b.target.alive&&!b.target.fleeing){var c=bodyCenter(b.target);var dx=c.x-b.x,dy=c.y-b.y;var d=Math.hypot(dx,dy)||1;var steer=Math.min(1,dt*ROCKET_HOMING_STEER);b.vx+=((dx/d)*ROCKET_SPEED-b.vx)*steer;b.vy+=((dy/d)*ROCKET_SPEED-b.vy)*steer;}
+      if(b.target&&b.target.alive&&!b.target.fleeing){
+        var c=bodyCenter(b.target);
+        var dx=c.x-b.x,dy=c.y-b.y;
+        var d=Math.hypot(dx,dy)||1;
+        var steer=Math.min(1,dt*ROCKET_HOMING_STEER);
+        var tx=(dx/d)*ROCKET_SPEED, ty=(dy/d)*ROCKET_SPEED;
+
+        /* === EFEK ZIGZAG / WEAVING PELURU === */
+        b.wobblePhase += dt * ROCKET_WOBBLE_FREQ;                 // osilasi fase
+        var fadeIn  = Math.min(1, b.age*5);                        // masuk halus 0.2s pertama
+        var fadeOut = clamp((d-80)/280, 0, 1);                     // redam saat mendekati target
+        var wobbleMag = Math.tanh(Math.sin(b.wobblePhase)*2.0) * ROCKET_WOBBLE_AMP * fadeIn * fadeOut;
+        tx += (-dy/d) * wobbleMag;                                 // vektor tegak lurus arah tembakan
+        ty += ( dx/d) * wobbleMag;
+
+        b.vx += (tx-b.vx)*steer;
+        b.vy += (ty-b.vy)*steer;
+      }
     } else b.vy+=160*dt;
     b.trail.push({x:b.x,y:b.y,life:0.4,maxLife:0.4});
-    if(b.trail.length>22)b.trail.shift();
+    if(b.trail.length>30)b.trail.shift();
     for(var k=b.trail.length-1;k>=0;k--){b.trail[k].life-=dt;if(b.trail[k].life<=0)b.trail.splice(k,1);}
     var spd=Math.hypot(b.vx,b.vy);
     var steps=Math.max(1,Math.ceil(spd*dt/6));
@@ -1125,12 +1144,10 @@ function drawRiverMid(theme){ctx.fillStyle=theme.mountainMid;ctx.beginPath();ctx
   var riverTop=HORIZON+20,riverBot=HORIZON+120;var wg=ctx.createLinearGradient(0,riverTop,0,riverBot);wg.addColorStop(0,theme.waterDeep);wg.addColorStop(0.4,theme.water);wg.addColorStop(1,theme.waterLight);ctx.fillStyle=wg;ctx.beginPath();ctx.moveTo(0,riverTop);for(var x=0;x<=W;x+=20)ctx.lineTo(x,riverTop+Math.sin(x*0.01+state.time*0.5)*4);ctx.lineTo(W,riverBot);ctx.lineTo(0,riverBot);ctx.closePath();ctx.fill();
   for(var i=0;i<riverRipples.length;i++){var r=riverRipples[i];var yOff=Math.sin(r.phase)*2;ctx.strokeStyle='rgba(255,255,255,'+(r.alpha*(0.5+0.5*Math.sin(r.phase))).toFixed(3)+')';ctx.lineWidth=r.h;ctx.beginPath();ctx.moveTo(r.x-r.w/2,r.y+yOff);ctx.quadraticCurveTo(r.x,r.y+yOff-1.5,r.x+r.w/2,r.y+yOff);ctx.stroke();}}
 function drawForestMid(theme){
-  // Sky gradient
   var skyGrad=ctx.createLinearGradient(0,0,0,HORIZON+30);
   skyGrad.addColorStop(0,'#022c22');skyGrad.addColorStop(0.35,'#065f46');
   skyGrad.addColorStop(0.7,'#10b981');skyGrad.addColorStop(1,'#a7f3d0');
   ctx.fillStyle=skyGrad;ctx.fillRect(0,0,W,HORIZON+30);
-  // Sun shafts (fewer, subtler)
   for(var i=0;i<sunShafts.length;i++){
     var s=sunShafts[i];
     var alpha=s.alpha*(0.65+0.35*Math.sin(state.time*0.8+s.phase));
@@ -1144,7 +1161,6 @@ function drawForestMid(theme){
     ctx.lineTo(s.x+Math.tan(s.angle)*500,500);
     ctx.closePath();ctx.fill();
   }
-  // 2 layers of trees (simpler)
   for(var L=forestLayers.length-1;L>=0;L--){
     var layer=forestLayers[L];
     var trunkCol=L===0?'#022c22':'#064e3b';
@@ -1155,7 +1171,6 @@ function drawForestMid(theme){
       var t=layer.trees[ti];
       var sway=Math.sin(state.time*0.6+t.phase)*t.sway*4;
       var baseY=t.y+30;
-      // Trunk
       ctx.fillStyle=trunkCol;
       ctx.beginPath();
       ctx.moveTo(t.x-t.trunkW/2+sway*0.2,baseY);
@@ -1163,7 +1178,6 @@ function drawForestMid(theme){
       ctx.lineTo(t.x+t.trunkW/2+sway*0.5,baseY-t.trunkH);
       ctx.lineTo(t.x+t.trunkW/2+sway*0.2,baseY);
       ctx.closePath();ctx.fill();
-      // Canopy (simplified - 3 shades)
       var canopyCx=t.x+sway*0.7,canopyCy=baseY-t.trunkH-t.h*0.3;
       ctx.fillStyle=leafDark;
       for(var bi=0;bi<t.canopyBlobs.length;bi++){
@@ -1189,7 +1203,6 @@ function drawForestMid(theme){
       }
     }
   }
-  // Top canopy (few, subtle)
   for(var i=0;i<forestCanopy.length;i++){
     var c=forestCanopy[i];
     var sway=Math.sin(state.time*0.4+c.phase)*5;
@@ -1211,11 +1224,9 @@ function drawMountainGround(theme){var g=ctx.createLinearGradient(0,HORIZON,0,H)
 function drawRiverGround(theme){var g=ctx.createLinearGradient(0,HORIZON+100,0,H);g.addColorStop(0,theme.groundTop);g.addColorStop(1,theme.groundBot);ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(0,HORIZON+100);ctx.lineTo(W*0.15,HORIZON+100);ctx.quadraticCurveTo(W*0.05,HORIZON+200,0,H);ctx.lineTo(0,H);ctx.closePath();ctx.fill();ctx.beginPath();ctx.moveTo(W,HORIZON+100);ctx.lineTo(W*0.85,HORIZON+100);ctx.quadraticCurveTo(W*0.95,HORIZON+200,W,H);ctx.lineTo(W,H);ctx.closePath();ctx.fill();
   var wg=ctx.createLinearGradient(0,HORIZON+100,0,H);wg.addColorStop(0,theme.water);wg.addColorStop(1,theme.waterDeep);ctx.fillStyle=wg;ctx.beginPath();ctx.moveTo(W*0.15,HORIZON+100);ctx.quadraticCurveTo(W*0.5,HORIZON+130,W*0.85,HORIZON+100);ctx.lineTo(W,H);ctx.lineTo(0,H);ctx.closePath();ctx.fill();}
 function drawForestGround(theme){
-  // Ground gradient
   var g=ctx.createLinearGradient(0,HORIZON,0,H);
   g.addColorStop(0,'#022c22');g.addColorStop(0.5,'#011a14');g.addColorStop(1,'#010d0a');
   ctx.fillStyle=g;ctx.fillRect(0,HORIZON,W,H-HORIZON);
-  // Fewer ground ellipses (simpler)
   for(var i=0;i<80;i++){
     var x=Math.random()*W;
     var y=HORIZON+15+Math.random()*(H-HORIZON-15);
@@ -1224,7 +1235,6 @@ function drawForestGround(theme){
     ctx.fillStyle='rgba(6,78,59,.5)';
     ctx.beginPath();ctx.ellipse(x,y,r*1.4,r*0.6,Math.random()*TAU,0,TAU);ctx.fill();
   }
-  // Logs (few)
   for(var i=0;i<forestLogs.length;i++){
     var log=forestLogs[i];
     ctx.save();ctx.translate(log.x,log.y);ctx.rotate(log.rot);
@@ -1236,7 +1246,6 @@ function drawForestGround(theme){
     rrect(ctx,-log.w/2,-log.h/2,log.w,log.h,log.h/2);ctx.fill();
     ctx.restore();
   }
-  // Bushes (few)
   for(var i=0;i<forestBushes.length;i++){
     var b=forestBushes[i];
     var sway=Math.sin(state.time*0.8+b.phase)*1.5;
@@ -1246,7 +1255,6 @@ function drawForestGround(theme){
       ctx.beginPath();ctx.arc(b.x+blob.dx*b.s+sway,b.y+blob.dy*b.s,blob.r*b.s,0,TAU);ctx.fill();
     }
   }
-  // Mushrooms (few)
   for(var i=0;i<forestMushrooms.length;i++){
     var m=forestMushrooms[i];var s=m.s;
     ctx.fillStyle='#fdf6e3';ctx.fillRect(m.x-1.5*s,m.y-6*s,3*s,6*s);
@@ -1271,7 +1279,6 @@ function drawSoldier(){
   var rise=player.peek*24+player.bob;
   var baseX=player.x;
   var baseY=WALL.topY+40-rise;
-  // Shadow
   ctx.save();ctx.globalAlpha=0.55;
   var shG=ctx.createRadialGradient(baseX,WALL.topY+32,0,baseX,WALL.topY+32,52);
   shG.addColorStop(0,'rgba(0,0,0,0.9)');shG.addColorStop(1,'rgba(0,0,0,0)');
@@ -1281,29 +1288,23 @@ function drawSoldier(){
   ctx.translate(baseX+player.aimSwayX*0.35,baseY+player.aimSwayY*0.25);
   ctx.scale(s,s);
   
-  // ============ LEFT LEG ============
   ctx.save();ctx.translate(-14,-4);ctx.rotate(-0.08);
-  // Thigh - tactical pants
   var thighG=ctx.createLinearGradient(-10,0,10,22);
   thighG.addColorStop(0,'#0a1408');thighG.addColorStop(0.35,'#1e2a14');
   thighG.addColorStop(0.7,'#2a3a1a');thighG.addColorStop(1,'#0a1408');
   ctx.fillStyle=thighG;rrect(ctx,-10,0,18,22,4);ctx.fill();
-  // Knee pad
   ctx.fillStyle='#0a0a0a';rrect(ctx,-10,16,18,11,3);ctx.fill();
   ctx.fillStyle='#1a1a1a';rrect(ctx,-8,18,14,6,2);ctx.fill();
   ctx.fillStyle='#2a2a2a';rrect(ctx,-6,20,10,3,1);ctx.fill();
-  // Shin
   var shinG=ctx.createLinearGradient(-9,26,9,46);
   shinG.addColorStop(0,'#0a1408');shinG.addColorStop(0.4,'#1e2a14');
   shinG.addColorStop(0.7,'#2a3a1a');shinG.addColorStop(1,'#0a1408');
   ctx.fillStyle=shinG;rrect(ctx,-9,26,17,20,3);ctx.fill();
-  // Tactical boot
   ctx.fillStyle='#0a0a0a';rrect(ctx,-11,44,21,15,4);ctx.fill();
   ctx.fillStyle='#1a1a1a';rrect(ctx,-11,46,21,4,2);ctx.fill();
   ctx.fillStyle='#2a2a2a';rrect(ctx,-10,49,19,1.5,0.5);ctx.fill();
   ctx.restore();
   
-  // ============ RIGHT LEG ============
   ctx.save();ctx.translate(9,-4);ctx.rotate(0.05);
   var thighG2=ctx.createLinearGradient(-10,0,10,22);
   thighG2.addColorStop(0,'#0a1408');thighG2.addColorStop(0.35,'#2a3a1a');
@@ -1321,27 +1322,22 @@ function drawSoldier(){
   ctx.fillStyle='#2a2a2a';rrect(ctx,-10,49,19,1.5,0.5);ctx.fill();
   ctx.restore();
   
-  // ============ TORSO - plate carrier ============
   var tx=-25,ty=-74,tw=50,th=68;
-  // Base uniform
   var torsoG=ctx.createLinearGradient(tx-6,ty,tx+tw+6,ty+th);
   torsoG.addColorStop(0,'#0a1408');torsoG.addColorStop(0.15,'#1e2a14');
   torsoG.addColorStop(0.45,'#3a4a2a');torsoG.addColorStop(0.7,'#5a6a3a');
   torsoG.addColorStop(0.9,'#2a3a1a');torsoG.addColorStop(1,'#0a1408');
   ctx.fillStyle=torsoG;rrect(ctx,tx,ty,tw,th,12);ctx.fill();
   
-  // Plate carrier (tactical vest)
   var vx=tx+2,vy=ty+8,vw=tw-4,vh=44;
   var vestG=ctx.createLinearGradient(vx,vy,vx+vw,vy+vh);
   vestG.addColorStop(0,'#0a0a0a');vestG.addColorStop(0.3,'#1a1a1a');
   vestG.addColorStop(0.6,'#0f0f0f');vestG.addColorStop(1,'#000');
   ctx.fillStyle=vestG;rrect(ctx,vx,vy,vw,vh,6);ctx.fill();
   
-  // MOLLE webbing rows
   ctx.fillStyle='rgba(70,70,70,0.7)';
   for(var i=0;i<4;i++){ctx.fillRect(vx+3,vy+5+i*9,vw-6,1.8);}
   
-  // Shoulder straps
   ctx.fillStyle='#0a0a0a';
   rrect(ctx,tx+3,ty+1,10,14,3);ctx.fill();
   rrect(ctx,tx+tw-13,ty+1,10,14,3);ctx.fill();
@@ -1349,13 +1345,11 @@ function drawSoldier(){
   rrect(ctx,tx+4,ty+2,8,4,1);ctx.fill();
   rrect(ctx,tx+tw-12,ty+2,8,4,1);ctx.fill();
   
-  // Chest plate accent
   ctx.fillStyle='rgba(100,120,80,0.55)';
   rrect(ctx,vx+5,vy+4,vw-10,9,3);ctx.fill();
   ctx.fillStyle='rgba(140,160,110,0.3)';
   rrect(ctx,vx+8,vy+5,vw-16,3,1.5);ctx.fill();
   
-  // Mag pouches on lower vest
   ctx.fillStyle='#0a0a0a';
   rrect(ctx,vx+3,vy+vh-14,11,11,2);ctx.fill();
   rrect(ctx,vx+16,vy+vh-14,11,11,2);ctx.fill();
@@ -1365,66 +1359,53 @@ function drawSoldier(){
   ctx.fillRect(vx+17,vy+vh-11,9,1.5);
   ctx.fillRect(vx+30,vy+vh-11,9,1.5);
   
-  // Radio on right chest
   ctx.fillStyle='#0a0a0a';
   rrect(ctx,vx+vw-13,vy+3,10,11,2);ctx.fill();
   ctx.fillStyle='#2a4a2a';ctx.fillRect(vx+vw-10,vy+5,4,3);
   ctx.fillStyle='#1a3a1a';ctx.fillRect(vx+vw-10,vy+9,4,2);
-  // Antenna
   ctx.strokeStyle='#0a0a0a';ctx.lineWidth=1.5;
   ctx.beginPath();ctx.moveTo(vx+vw-8,vy+3);ctx.lineTo(vx+vw-8,vy-4);ctx.stroke();
   
-  // ============ HEAD - modern helmet with NVG ============
   ctx.save();ctx.translate(0,-80);ctx.rotate(player.headTurn);ctx.translate(0,80);
   var hy=-94;
   
-  // Neck / collar
   ctx.fillStyle='#1e2a14';
   rrect(ctx,-8,hy+10,16,8,3);ctx.fill();
   
-  // Face (skin)
   var faceG=ctx.createRadialGradient(-4,hy-4,2,-2,hy+2,14);
   faceG.addColorStop(0,'#f5d0b0');faceG.addColorStop(0.35,'#e8b890');
   faceG.addColorStop(0.75,'#b08860');faceG.addColorStop(1,'#8a6040');
   ctx.fillStyle=faceG;ctx.beginPath();ctx.ellipse(0,hy,11,13,0,0,TAU);ctx.fill();
   
-  // Balaclava (dark fabric)
   ctx.fillStyle='#1a1a1a';
   ctx.beginPath();ctx.ellipse(0,hy+4,12.5,13,0,0,TAU);ctx.fill();
-  // Face opening cut
   var faceOpenG=ctx.createRadialGradient(-2,hy+1,2,0,hy+2,10);
   faceOpenG.addColorStop(0,'#f5d0b0');faceOpenG.addColorStop(0.6,'#e8b890');faceOpenG.addColorStop(1,'#b08860');
   ctx.fillStyle=faceOpenG;
   ctx.beginPath();ctx.ellipse(0,hy+2,8,9.5,0,0,TAU);ctx.fill();
   
-  // Eyes (determined look)
   ctx.fillStyle='#0a0a0a';
   ctx.beginPath();ctx.ellipse(-4,hy+2.5,2.2,1.1,0.1,0,TAU);ctx.fill();
   ctx.beginPath();ctx.ellipse(4.5,hy+2.5,2.2,1.1,-0.1,0,TAU);ctx.fill();
-  // Eyebrow shadow
   ctx.fillStyle='rgba(0,0,0,0.35)';
   ctx.beginPath();ctx.ellipse(-4,hy+0.5,2.5,0.8,0,0,TAU);ctx.fill();
   ctx.beginPath();ctx.ellipse(4.5,hy+0.5,2.5,0.8,0,0,TAU);ctx.fill();
   
-  // Tactical goggles (tinted, on face)
   ctx.fillStyle='rgba(80,180,220,0.30)';
   ctx.beginPath();ctx.ellipse(-4,hy+2.5,3.8,2.6,0,0,TAU);ctx.fill();
   ctx.beginPath();ctx.ellipse(4.5,hy+2.5,3.8,2.6,0,0,TAU);ctx.fill();
   ctx.strokeStyle='rgba(20,20,20,0.6)';ctx.lineWidth=0.8;
   ctx.beginPath();ctx.ellipse(-4,hy+2.5,3.8,2.6,0,0,TAU);ctx.stroke();
   ctx.beginPath();ctx.ellipse(4.5,hy+2.5,3.8,2.6,0,0,TAU);ctx.stroke();
-  // Goggle highlight
   ctx.fillStyle='rgba(150,220,255,0.5)';
   ctx.beginPath();ctx.ellipse(-5,hy+1.5,1.2,0.6,0,0,TAU);ctx.fill();
   ctx.beginPath();ctx.ellipse(3.5,hy+1.5,1.2,0.6,0,0,TAU);ctx.fill();
   
-  // Mouth mask (dark fabric covering lower face)
   ctx.fillStyle='#1e1e1e';
   ctx.beginPath();ctx.ellipse(0,hy+8,7,4,0,0,TAU);ctx.fill();
   ctx.fillStyle='#2a2a2a';
   ctx.beginPath();ctx.ellipse(0,hy+8.5,5,2,0,0,TAU);ctx.fill();
   
-  // Helmet (modern combat, high cut)
   var helG=ctx.createRadialGradient(-6,hy-18,3,0,hy-15,26);
   helG.addColorStop(0,'#4a5a3a');helG.addColorStop(0.35,'#2a3a1a');
   helG.addColorStop(0.85,'#0a1408');helG.addColorStop(1,'#000');
@@ -1440,7 +1421,6 @@ function drawSoldier(){
   ctx.quadraticCurveTo(-10,hy-6,-15,hy-1);
   ctx.closePath();ctx.fill();
   
-  // Helmet edge highlight
   ctx.strokeStyle='rgba(120,140,90,0.5)';ctx.lineWidth=1;
   ctx.beginPath();
   ctx.moveTo(-16,hy+2);
@@ -1448,7 +1428,6 @@ function drawSoldier(){
   ctx.quadraticCurveTo(-2,hy-30,6,hy-29);
   ctx.stroke();
   
-  // Helmet side rails
   ctx.fillStyle='#0a0a0a';
   ctx.fillRect(-20,hy-14,3,18);
   ctx.fillRect(17,hy-14,3,18);
@@ -1458,31 +1437,25 @@ function drawSoldier(){
   ctx.fillRect(17,hy-14,3,3);
   ctx.fillRect(17,hy+1,3,3);
   
-  // NVG mount (front center)
   ctx.fillStyle='#1a1a1a';
   rrect(ctx,-4,hy-32,9,6,1.5);ctx.fill();
-  // NVG unit
   ctx.fillStyle='#0a0a0a';
   rrect(ctx,-5,hy-37,11,6,1.5);ctx.fill();
-  // NVG lens
   ctx.fillStyle='#1a3a1a';
   ctx.beginPath();ctx.arc(-1,hy-34,2.5,0,TAU);ctx.fill();
   ctx.fillStyle='#2a4a2a';
   ctx.beginPath();ctx.arc(-1,hy-34,1.8,0,TAU);ctx.fill();
   ctx.fillStyle='rgba(120,220,150,0.8)';
   ctx.beginPath();ctx.arc(-1,hy-34,1,0,TAU);ctx.fill();
-  // NVG side detail
   ctx.fillStyle='#0a0a0a';
   ctx.fillRect(-6,hy-35,2,4);
   ctx.fillRect(5,hy-35,2,4);
   
-  // Helmet camo stripes
   ctx.fillStyle='rgba(90,110,70,0.55)';
   ctx.fillRect(-13,hy-24,9,3);
   ctx.fillRect(4,hy-26,7,3);
   ctx.fillRect(-6,hy-20,5,2);
   
-  // Chin strap
   ctx.strokeStyle='#0a0a0a';ctx.lineWidth=1.5;
   ctx.beginPath();
   ctx.moveTo(-15,hy-1);ctx.quadraticCurveTo(-8,hy+12,0,hy+12);
@@ -1493,7 +1466,6 @@ function drawSoldier(){
   
   ctx.restore();
   
-  // ============ MODERN ROCKET LAUNCHER ============
   ctx.save();
   ctx.translate(8,-50);
   ctx.rotate(player.angle-player.bodyAngle);
@@ -1502,18 +1474,15 @@ function drawSoldier(){
   var tubeStartX=-52,tubeEndX=68,tubeR=8;
   var tubeW=tubeEndX-tubeStartX;
   
-  // === REAR CAP ===
   ctx.fillStyle='#1a1a1a';
   rrect(ctx,tubeStartX-8,-tubeR+1,9,tubeR*2-2,2);ctx.fill();
   ctx.fillStyle='#0a0a0a';
   ctx.beginPath();ctx.arc(tubeStartX-5,0,tubeR-2.5,0,TAU);ctx.fill();
-  // Exhaust vents
   ctx.fillStyle='#2a2a2a';
   for(var i=0;i<3;i++){
     ctx.beginPath();ctx.arc(tubeStartX-5,-tubeR+4+i*4,1.2,0,TAU);ctx.fill();
   }
   
-  // === MAIN TUBE ===
   var tubeG=ctx.createLinearGradient(0,-tubeR,0,tubeR);
   tubeG.addColorStop(0,'#0a0a0a');
   tubeG.addColorStop(0.15,'#3a3a3a');
@@ -1526,7 +1495,6 @@ function drawSoldier(){
   rrect(ctx,tubeStartX,-tubeR,tubeW,tubeR*2,2);
   ctx.fill();
   
-  // === REINFORCED BANDS ===
   ctx.fillStyle='#1a1a1a';
   rrect(ctx,tubeStartX+14,-tubeR-0.8,9,tubeR*2+1.6,2);ctx.fill();
   rrect(ctx,tubeStartX+30,-tubeR-0.8,7,tubeR*2+1.6,2);ctx.fill();
@@ -1534,7 +1502,6 @@ function drawSoldier(){
   ctx.fillRect(tubeStartX+14,-tubeR-0.8,9,1);
   ctx.fillRect(tubeStartX+30,-tubeR-0.8,7,1);
   
-  // === TRIGGER GROUP / PISTOL GRIP ===
   ctx.fillStyle='#1a1a1a';
   ctx.save();
   ctx.translate(tubeStartX+22,tubeR-2);
@@ -1544,7 +1511,6 @@ function drawSoldier(){
   for(var i=0;i<5;i++)ctx.fillRect(2,4+i*3.5,7,1.8);
   ctx.restore();
   
-  // Trigger guard
   ctx.strokeStyle='#0a0a0a';ctx.lineWidth=2.5;
   ctx.beginPath();
   ctx.arc(tubeStartX+32,tubeR+6,7,Math.PI*0.15,Math.PI*1.1);
@@ -1552,7 +1518,6 @@ function drawSoldier(){
   ctx.fillStyle='#1a1a1a';
   rrect(ctx,tubeStartX+30,tubeR+2,3,5,1);ctx.fill();
   
-  // === VERTICAL FOREGRIP ===
   ctx.fillStyle='#1a1a1a';
   rrect(ctx,tubeStartX+44,tubeR-1,9,22,2.5);ctx.fill();
   ctx.fillStyle='#0a0a0a';
@@ -1560,55 +1525,43 @@ function drawSoldier(){
   ctx.fillStyle='#2a2a2a';
   for(var i=0;i<5;i++)ctx.fillRect(tubeStartX+45,tubeR+2+i*3.5,7,1.5);
   
-  // === SCOPE / OPTIC ===
-  // Scope base
   ctx.fillStyle='#0a0a0a';
   rrect(ctx,tubeStartX+8,-tubeR-7,24,6,1.5);ctx.fill();
-  // Scope main tube
   var scopeG=ctx.createLinearGradient(0,-tubeR-13,0,-tubeR-6);
   scopeG.addColorStop(0,'#0a0a0a');scopeG.addColorStop(0.5,'#3a3a3a');scopeG.addColorStop(1,'#0a0a0a');
   ctx.fillStyle=scopeG;
   rrect(ctx,tubeStartX+5,-tubeR-13,28,7,2);ctx.fill();
-  // Scope front lens
   ctx.fillStyle='#1a1a1a';
   ctx.beginPath();ctx.ellipse(tubeStartX+31,-tubeR-9.5,3,2.8,0,0,TAU);ctx.fill();
   ctx.fillStyle='rgba(60,180,255,0.75)';
   ctx.beginPath();ctx.ellipse(tubeStartX+31,-tubeR-9.5,2.3,2.1,0,0,TAU);ctx.fill();
   ctx.fillStyle='rgba(180,230,255,0.95)';
   ctx.beginPath();ctx.ellipse(tubeStartX+30.5,-tubeR-10.2,1,0.7,0,0,TAU);ctx.fill();
-  // Scope rear eyepiece
   ctx.fillStyle='#1a1a1a';
   ctx.beginPath();ctx.ellipse(tubeStartX+6,-tubeR-9.5,2.3,2.4,0,0,TAU);ctx.fill();
   ctx.fillStyle='#0a0a0a';
   ctx.beginPath();ctx.ellipse(tubeStartX+5.5,-tubeR-9.5,1.3,1.4,0,0,TAU);ctx.fill();
-  // Scope mount rings
   ctx.fillStyle='#0a0a0a';
   ctx.fillRect(tubeStartX+11,-tubeR-14,3.5,8);
   ctx.fillRect(tubeStartX+24,-tubeR-14,3.5,8);
   
-  // === LASER DESIGNATOR (small module on top) ===
   ctx.fillStyle='#0a0a0a';
   rrect(ctx,tubeEndX-12,-tubeR-3,10,3,1);ctx.fill();
-  // Red LED (blinking)
   var blink=0.5+0.5*Math.sin(state.time*8);
   ctx.fillStyle='rgba(255,60,60,'+blink.toFixed(2)+')';
   ctx.beginPath();ctx.arc(tubeEndX-3,-tubeR-1.5,1.4,0,TAU);ctx.fill();
   ctx.fillStyle='rgba(255,180,180,'+(blink*0.7).toFixed(2)+')';
   ctx.beginPath();ctx.arc(tubeEndX-3,-tubeR-1.5,0.7,0,TAU);ctx.fill();
   
-  // === FRONT MUZZLE BRAKE (vented) ===
   ctx.fillStyle='#1a1a1a';
   rrect(ctx,tubeEndX,-tubeR-1,11,tubeR*2+2,2.5);ctx.fill();
-  // Vent slots
   ctx.fillStyle='#0a0a0a';
   ctx.fillRect(tubeEndX+2,-tubeR+1.5,7,2);
   ctx.fillRect(tubeEndX+2,-1,7,2);
   ctx.fillRect(tubeEndX+2,tubeR-3.5,7,2);
-  // Muzzle highlight
   ctx.fillStyle='rgba(180,180,180,0.6)';
   ctx.fillRect(tubeEndX,-tubeR+0.5,11,0.8);
   
-  // === MISSILE / WARHEAD TIP ===
   var missileG=ctx.createLinearGradient(tubeEndX+10,-5,tubeEndX+24,0);
   missileG.addColorStop(0,'#1a1a1a');missileG.addColorStop(0.5,'#5a5a5a');missileG.addColorStop(1,'#2a2a2a');
   ctx.fillStyle=missileG;
@@ -1617,13 +1570,11 @@ function drawSoldier(){
   ctx.lineTo(tubeEndX+24,0);
   ctx.lineTo(tubeEndX+10,5);
   ctx.closePath();ctx.fill();
-  // Nose sensor
   ctx.fillStyle='#f43f5e';
   ctx.beginPath();ctx.arc(tubeEndX+22,0,1.6,0,TAU);ctx.fill();
   ctx.fillStyle='rgba(255,255,255,0.95)';
   ctx.beginPath();ctx.arc(tubeEndX+22.3,-0.3,0.6,0,TAU);ctx.fill();
   
-  // === SHOULDER REST ===
   ctx.fillStyle='#1a1a1a';
   rrect(ctx,tubeStartX+3,tubeR-2,16,6,2);ctx.fill();
   ctx.fillStyle='#2a2a2a';
@@ -1789,7 +1740,7 @@ function init(){
     window.addEventListener('resize',handleOrientation);
     window.addEventListener('orientationchange',function(){setTimeout(handleOrientation,150);});
     setTimeout(handleOrientation,100);
-    console.log('✅ PENJAGA LANGIT siap dimainkan');
+    console.log('✅ PENJAGA LANGIT siap dimainkan — peluru zigzag aktif');
   }catch(e){console.error('Init error:',e);}
 }
 
