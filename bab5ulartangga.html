@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ular Tangga Ekonomi — MGE · 4 Level Premium</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,Arial,sans-serif;}
+html,body{height:100%;overflow:hidden;}
+body{background:#050b16;color:#e2e8f0;display:flex;flex-direction:column;user-select:none;-webkit-tap-highlight-color:transparent;font-size:14px;transition:background .6s;}
+
+/* ===== TEMA LEVEL ===== */
+body[data-level="1"]{--c1:#0ea5e9;--c2:#0284c7;--accent:#38bdf8;--glow:rgba(56,189,248,.5);--board-bg:rgba(5,15,30,.7);--cell-bg:rgba(19,41,65,.6);--cell-border:rgba(56,189,248,.35);}
+body[data-level="2"]{--c1:#10b981;--c2:#047857;--accent:#34d399;--glow:rgba(52,211,153,.5);--board-bg:rgba(5,25,18,.7);--cell-bg:rgba(16,50,40,.6);--cell-border:rgba(52,211,153,.4);}
+body[data-level="3"]{--c1:#f59e0b;--c2:#b45309;--accent:#fbbf24;--glow:rgba(251,191,36,.5);--board-bg:rgba(30,18,5,.7);--cell-bg:rgba(60,40,15,.6);--cell-border:rgba(251,191,36,.4);}
+body[data-level="4"]{--c1:#a855f7;--c2:#6d28d9;--accent:#c084fc;--glow:rgba(192,132,252,.5);--board-bg:rgba(20,8,35,.75);--cell-bg:rgba(45,25,70,.6);--cell-border:rgba(192,132,252,.4);}
+
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(var(--cell-border) 1px,transparent 1px),linear-gradient(90deg,var(--cell-border) 1px,transparent 1px);
+  background-size:44px 44px;opacity:.5;
+  mask-image:radial-gradient(ellipse at center,#000 25%,transparent 80%);
+  -webkit-mask-image:radial-gradient(ellipse at center,#000 25%,transparent 80%);
+  animation:gridShift 24s linear infinite;transition:.6s;}
+@keyframes gridShift{to{background-position:44px 44px;}}
+.orb{position:fixed;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0;opacity:.32;transition:background .6s;}
+.orb.a{width:520px;height:520px;background:var(--c1);top:-180px;left:-180px;animation:f1 16s ease-in-out infinite;}
+.orb.b{width:600px;height:600px;background:var(--c2);bottom:-220px;right:-220px;animation:f2 20s ease-in-out infinite;}
+@keyframes f1{0%,100%{transform:translate(0,0)}50%{transform:translate(70px,90px)}}
+@keyframes f2{0%,100%{transform:translate(0,0)}50%{transform:translate(-90px,-70px)}}
+
+/* ============================================================
+   LOADING SCREEN — MGE 3D CIRCLE
+   ============================================================ */
+#loader{position:fixed;inset:0;z-index:9999;background:radial-gradient(circle at center,#0a1830 0%,#050b16 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;transition:opacity .8s,visibility .8s;overflow:hidden;}
+#loader.hide{opacity:0;visibility:hidden;pointer-events:none;}
+
+/* Grid + glow belakang */
+#loader::before{content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(56,189,248,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,0.06) 1px,transparent 1px);
+  background-size:44px 44px;
+  mask-image:radial-gradient(ellipse at center,#000 25%,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse at center,#000 25%,transparent 75%);
+  animation:gridShift 14s linear infinite;pointer-events:none;}
+#loader::after{content:'';position:absolute;width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(14,165,233,.35),transparent 65%);
+  filter:blur(90px);animation:orbPulse 3s ease-in-out infinite;pointer-events:none;}
+@keyframes orbPulse{0%,100%{transform:scale(1);opacity:.6;}50%{transform:scale(1.15);opacity:1;}}
+
+/* Logo MGE 3D */
+.mge-logo-wrap{position:relative;z-index:1;width:170px;height:170px;display:flex;align-items:center;justify-content:center;animation:logoFloat 3s ease-in-out infinite;}
+@keyframes logoFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+
+.mge-ring-outer{position:absolute;inset:0;border-radius:50%;border:3px solid transparent;
+  border-top-color:#38bdf8;border-right-color:#818cf8;border-bottom-color:transparent;border-left-color:#a78bfa;
+  animation:spinRing 1.6s linear infinite;filter:drop-shadow(0 0 12px rgba(56,189,248,0.9));}
+.mge-ring-mid{position:absolute;inset:8px;border-radius:50%;border:2px solid transparent;
+  border-top-color:transparent;border-right-color:#22d3ee;border-bottom-color:#c084fc;border-left-color:transparent;
+  animation:spinRingReverse 2.2s linear infinite;filter:drop-shadow(0 0 8px rgba(34,211,238,.8));}
+.mge-ring-inner{position:absolute;inset:18px;border-radius:50%;border:1.5px dashed rgba(56,189,248,0.55);animation:spinRing 4s linear infinite;}
+
+@keyframes spinRing{to{transform:rotate(360deg);}}
+@keyframes spinRingReverse{to{transform:rotate(-360deg);}}
+
+.mge-circle{position:absolute;inset:26px;border-radius:50%;
+  background:radial-gradient(circle at 30% 25%,#1e3a5f 0%,#0b1b30 55%,#050d18 100%);
+  box-shadow:
+    0 0 0 1px rgba(56,189,248,0.4) inset,
+    0 0 30px rgba(14,165,233,0.7),
+    0 0 80px rgba(56,189,248,0.45),
+    inset 0 -10px 24px rgba(0,0,0,0.7),
+    inset 0 10px 20px rgba(56,189,248,0.15);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.mge-circle::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+  background:conic-gradient(from 0deg,transparent 0%,rgba(56,189,248,0.3) 20%,transparent 40%);
+  animation:shimmer 3s linear infinite;pointer-events:none;}
+@keyframes shimmer{to{transform:rotate(360deg);}}
+
+.mge-text{position:relative;font-size:52px;font-weight:900;letter-spacing:3px;line-height:1;
+  background:linear-gradient(180deg,#e0f2fe 0%,#38bdf8 45%,#6366f1 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  text-shadow:
+    0 1px 0 rgba(56,189,248,0.4),
+    0 2px 0 rgba(56,189,248,0.3),
+    0 3px 0 rgba(99,102,241,0.3),
+    0 4px 10px rgba(0,0,0,0.7),
+    0 0 26px rgba(56,189,248,0.9);
+  filter:drop-shadow(0 0 14px rgba(56,189,248,1));
+  animation:textPulse 2.4s ease-in-out infinite;z-index:2;
+  transform:perspective(600px) rotateX(8deg);}
+@keyframes textPulse{0%,100%{filter:drop-shadow(0 0 14px rgba(56,189,248,1));transform:perspective(600px) rotateX(8deg) scale(1);}50%{filter:drop-shadow(0 0 26px rgba(56,189,248,1));transform:perspective(600px) rotateX(8deg) scale(1.06);}}
+.mge-text::after{content:'MGE';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(255,255,255,0.9) 0%,transparent 55%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  pointer-events:none;z-index:3;}
+
+/* Brand text */
+.brand-text{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:12px;margin-top:6px;animation:fadeInUp .9s ease .2s both;}
+.brand-text .brand-line{width:32px;height:1px;background:linear-gradient(90deg,transparent,#38bdf8,transparent);}
+.brand-text .brand-label{font-size:14px;font-weight:800;letter-spacing:6px;text-transform:uppercase;
+  background:linear-gradient(90deg,#38bdf8 0%,#a78bfa 50%,#38bdf8 100%);background-size:200% 100%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:brandShine 3.5s linear infinite;white-space:nowrap;}
+@keyframes brandShine{0%{background-position:0% 50%;}100%{background-position:200% 50%;}}
+
+.loader-title{position:relative;z-index:1;font-size:15px;font-weight:bold;letter-spacing:4px;text-transform:uppercase;color:#cbd5e1;animation:fadeInUp .8s ease .3s both;}
+.loader-sub{position:relative;z-index:1;color:#64748b;font-size:11px;letter-spacing:2px;text-transform:uppercase;animation:fadeInUp .8s ease .4s both;}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+.loader-bar{position:relative;z-index:1;width:260px;height:4px;background:#132941;border-radius:4px;overflow:hidden;margin-top:4px;animation:fadeInUp .8s ease .5s both;}
+.loader-bar-fill{height:100%;width:0%;background:linear-gradient(90deg,#0ea5e9,#38bdf8,#818cf8);border-radius:4px;box-shadow:0 0 12px rgba(56,189,248,0.7);animation:loadFill 2s cubic-bezier(.65,.05,.36,1) forwards;}
+@keyframes loadFill{0%{width:0%;}40%{width:45%;}70%{width:78%;}100%{width:100%;}}
+
+/* ============================================================
+   SCREEN
+   ============================================================ */
+.screen{position:fixed;inset:0;z-index:10;display:none;flex-direction:column;opacity:0;transition:opacity .4s;}
+.screen.active{display:flex;opacity:1;}
+
+/* ============================================================
+   BERANDA PREMIUM
+   ============================================================ */
+#screen-menu{overflow-y:auto;padding:0;align-items:stretch;}
+.menu-bg-deco{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.menu-bg-deco .glow{position:absolute;border-radius:50%;filter:blur(120px);opacity:.5;}
+.menu-bg-deco .glow.g1{width:500px;height:500px;background:#0ea5e9;top:-150px;left:-100px;}
+.menu-bg-deco .glow.g2{width:600px;height:600px;background:#a855f7;bottom:-250px;right:-180px;}
+.menu-bg-deco .glow.g3{width:400px;height:400px;background:#10b981;top:40%;left:50%;transform:translate(-50%,-50%);opacity:.15;}
+
+.menu-inner{position:relative;z-index:1;max-width:1200px;margin:0 auto;width:100%;padding:26px 28px 60px;}
+
+/* Top bar */
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:36px;}
+.topbar .brand{display:flex;align-items:center;gap:12px;}
+.topbar .brand .mini-mge{width:38px;height:38px;border-radius:50%;
+  background:radial-gradient(circle at 30% 25%,#1e3a5f 0%,#0b1b30 60%,#050d18 100%);
+  box-shadow:0 0 0 1.5px rgba(56,189,248,0.6),0 0 20px rgba(56,189,248,0.5),inset 0 -4px 8px rgba(0,0,0,.6);
+  display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;
+  background-clip:padding-box;color:#7dd3fc;text-shadow:0 0 10px rgba(56,189,248,0.9);}
+.topbar .brand .name{font-size:14px;font-weight:800;letter-spacing:2px;color:#e0f2fe;}
+.topbar .brand .name small{display:block;font-size:9px;letter-spacing:3px;color:#64748b;font-weight:600;margin-top:1px;}
+.topbar .pills{display:flex;gap:8px;}
+.pill{padding:7px 14px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;
+  background:rgba(19,41,65,.7);border:1px solid rgba(56,189,248,.3);color:#7dd3fc;backdrop-filter:blur(10px);}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:1.4fr 1fr;gap:36px;align-items:center;margin-bottom:46px;}
+@media(max-width:900px){.hero{grid-template-columns:1fr;gap:26px;text-align:center;}}
+.hero-left .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:20px;
+  background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.4);
+  font-size:11px;font-weight:800;letter-spacing:2.5px;color:#7dd3fc;text-transform:uppercase;margin-bottom:16px;}
+.hero-left .eyebrow .dot-live{width:6px;height:6px;border-radius:50%;background:#10b981;box-shadow:0 0 8px #10b981;animation:blink 1.5s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+.hero-title{font-size:56px;font-weight:900;letter-spacing:-2px;line-height:1.02;margin-bottom:14px;
+  background:linear-gradient(135deg,#e0f2fe 0%,#38bdf8 40%,#a78bfa 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+@media(max-width:900px){.hero-title{font-size:40px;}}
+.hero-title .line2{display:block;background:linear-gradient(135deg,#a78bfa 0%,#38bdf8 60%,#e0f2fe 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-sub{color:#94a3b8;font-size:14px;line-height:1.7;margin-bottom:22px;max-width:520px;}
+@media(max-width:900px){.hero-sub{margin:0 auto 22px;}}
+.hero-sub b{color:#7dd3fc;}
+
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:26px;}
+@media(max-width:900px){.hero-cta{justify-content:center;}}
+.cta{padding:14px 24px;border:none;border-radius:12px;font-weight:800;font-size:13px;letter-spacing:.5px;cursor:pointer;transition:.28s cubic-bezier(.34,1.56,.64,1);font-family:inherit;display:inline-flex;align-items:center;gap:10px;}
+.cta.primary{background:linear-gradient(135deg,#0ea5e9,#0284c7);color:white;box-shadow:0 10px 26px -8px rgba(14,165,233,.8);}
+.cta.primary:hover{transform:translateY(-3px);box-shadow:0 14px 32px -8px rgba(14,165,233,1);}
+.cta.ghost{background:rgba(19,41,65,.6);color:#e0f2fe;border:1px solid rgba(56,189,248,.35);backdrop-filter:blur(10px);}
+.cta.ghost:hover{background:rgba(56,189,248,.15);border-color:#38bdf8;transform:translateY(-3px);}
+.cta .ic{font-size:18px;}
+
+.hero-stats{display:flex;gap:24px;flex-wrap:wrap;}
+@media(max-width:900px){.hero-stats{justify-content:center;}}
+.hstat .num{font-size:22px;font-weight:900;background:linear-gradient(135deg,#38bdf8,#a78bfa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.hstat .lbl{font-size:10px;letter-spacing:2px;color:#64748b;font-weight:700;text-transform:uppercase;margin-top:2px;}
+
+/* Hero right — kartu preview papan */
+.hero-right{position:relative;}
+.preview-board{position:relative;aspect-ratio:1/1;max-width:360px;margin:0 auto;padding:14px;border-radius:22px;
+  background:linear-gradient(135deg,rgba(14,165,233,.35),rgba(168,85,247,.35),rgba(16,185,129,.35));
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.9),0 0 80px -20px rgba(56,189,248,.6);
+  animation:boardFloat 4s ease-in-out infinite;}
+@keyframes boardFloat{0%,100%{transform:translateY(0) rotate(-1deg);}50%{transform:translateY(-10px) rotate(1deg);}}
+.preview-grid{position:relative;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(6,1fr);gap:4px;width:100%;height:100%;background:rgba(5,15,30,.75);border-radius:14px;padding:8px;}
+.preview-cell{background:rgba(19,41,65,.7);border-radius:5px;border:1.5px solid rgba(56,189,248,.25);}
+.preview-cell.hot{border-color:#fbbf24;background:rgba(245,158,11,.35);box-shadow:0 0 8px rgba(251,191,36,.6);}
+.preview-cell.danger{border-color:#f87171;background:rgba(239,68,68,.35);box-shadow:0 0 8px rgba(248,113,113,.6);}
+.preview-cell.q{border-color:#c084fc;background:rgba(168,85,247,.35);}
+.preview-cell.e{border-color:#7dd3fc;background:rgba(56,189,248,.35);}
+.preview-cell.goal{border-color:#fbbf24;background:rgba(251,191,36,.5);box-shadow:0 0 12px rgba(251,191,36,.9);animation:previewGlow 1.6s infinite;}
+@keyframes previewGlow{0%,100%{box-shadow:0 0 12px rgba(251,191,36,.9);}50%{box-shadow:0 0 24px rgba(251,191,36,1);}}
+.preview-badge{position:absolute;top:-14px;right:-14px;padding:6px 12px;border-radius:20px;
+  background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#0b1b30;font-size:10px;font-weight:900;letter-spacing:1.5px;
+  box-shadow:0 8px 20px -6px rgba(251,191,36,.8);text-transform:uppercase;}
+.preview-caption{position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);
+  padding:6px 14px;border-radius:20px;background:rgba(11,27,48,.95);border:1px solid rgba(56,189,248,.4);
+  font-size:10px;font-weight:800;letter-spacing:2px;color:#7dd3fc;text-transform:uppercase;white-space:nowrap;}
+
+/* Section title */
+.section-title{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+.section-title .bar{width:4px;height:26px;border-radius:2px;background:linear-gradient(180deg,#38bdf8,#a855f7);}
+.section-title h3{font-size:16px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#e0f2fe;}
+.section-title .sub{font-size:11px;color:#64748b;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-left:auto;}
+
+/* Level cards grid */
+.level-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:40px;}
+@media(max-width:1000px){.level-cards{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.level-cards{grid-template-columns:1fr;}}
+
+.lvl-card{position:relative;border-radius:18px;padding:20px 18px;cursor:pointer;overflow:hidden;
+  border:1.5px solid rgba(148,163,184,.2);
+  background:linear-gradient(160deg,rgba(19,41,65,.85),rgba(11,27,48,.85));
+  backdrop-filter:blur(14px);
+  transition:.35s cubic-bezier(.34,1.56,.64,1);
+  display:flex;flex-direction:column;gap:10px;}
+.lvl-card::before{content:'';position:absolute;inset:0;opacity:.18;transition:.35s;pointer-events:none;}
+.lvl-card.lv1::before{background:radial-gradient(circle at 20% 0%,#0ea5e9,transparent 70%);}
+.lvl-card.lv2::before{background:radial-gradient(circle at 20% 0%,#10b981,transparent 70%);}
+.lvl-card.lv3::before{background:radial-gradient(circle at 20% 0%,#f59e0b,transparent 70%);}
+.lvl-card.lv4::before{background:radial-gradient(circle at 20% 0%,#a855f7,transparent 70%);}
+.lvl-card:hover{transform:translateY(-6px);}
+.lvl-card.lv1{border-color:rgba(56,189,248,.5);} .lvl-card.lv1:hover{box-shadow:0 20px 40px -14px rgba(56,189,248,.7);border-color:#38bdf8;}
+.lvl-card.lv2{border-color:rgba(52,211,153,.5);} .lvl-card.lv2:hover{box-shadow:0 20px 40px -14px rgba(52,211,153,.7);border-color:#34d399;}
+.lvl-card.lv3{border-color:rgba(251,191,36,.5);} .lvl-card.lv3:hover{box-shadow:0 20px 40px -14px rgba(251,191,36,.7);border-color:#fbbf24;}
+.lvl-card.lv4{border-color:rgba(192,132,252,.5);} .lvl-card.lv4:hover{box-shadow:0 20px 40px -14px rgba(192,132,252,.7);border-color:#c084fc;}
+
+.lvl-card .card-top{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1;}
+.lvl-card .lvl-num{font-size:11px;font-weight:900;letter-spacing:2px;padding:4px 10px;border-radius:20px;
+  background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.15);}
+.lvl-card.lv1 .lvl-num{color:#7dd3fc;}
+.lvl-card.lv2 .lvl-num{color:#6ee7b7;}
+.lvl-card.lv3 .lvl-num{color:#fcd34d;}
+.lvl-card.lv4 .lvl-num{color:#d8b4fe;}
+.lvl-card .lvl-icon{font-size:32px;filter:drop-shadow(0 6px 12px rgba(0,0,0,.6));}
+.lvl-card .lvl-name{position:relative;z-index:1;font-size:20px;font-weight:900;color:#e0f2fe;letter-spacing:-.4px;margin-top:4px;}
+.lvl-card .lvl-desc{position:relative;z-index:1;font-size:12px;color:#94a3b8;line-height:1.55;min-height:38px;}
+.lvl-card .lvl-meta{position:relative;z-index:1;display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;}
+.lvl-card .tag{font-size:9px;font-weight:800;letter-spacing:1px;padding:4px 9px;border-radius:20px;background:rgba(0,0,0,.4);color:#cbd5e1;border:1px solid rgba(255,255,255,.1);text-transform:uppercase;}
+.lvl-card.lv1 .tag{border-color:rgba(56,189,248,.5);color:#7dd3fc;}
+.lvl-card.lv2 .tag{border-color:rgba(52,211,153,.5);color:#6ee7b7;}
+.lvl-card.lv3 .tag{border-color:rgba(251,191,36,.5);color:#fcd34d;}
+.lvl-card.lv4 .tag{border-color:rgba(192,132,252,.5);color:#d8b4fe;}
+
+.lvl-card .play-btn{position:relative;z-index:1;margin-top:8px;padding:10px 14px;border-radius:10px;font-size:12px;font-weight:800;letter-spacing:1px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.1);color:#e0f2fe;
+  transition:.25s;}
+.lvl-card:hover .play-btn{background:rgba(255,255,255,.08);}
+.lvl-card.lv1:hover .play-btn{background:rgba(56,189,248,.2);border-color:#38bdf8;color:#e0f2fe;}
+.lvl-card.lv2:hover .play-btn{background:rgba(52,211,153,.2);border-color:#34d399;}
+.lvl-card.lv3:hover .play-btn{background:rgba(251,191,36,.2);border-color:#fbbf24;}
+.lvl-card.lv4:hover .play-btn{background:rgba(192,132,252,.2);border-color:#c084fc;}
+.lvl-card.selected{transform:translateY(-6px);}
+.lvl-card.selected .play-btn::after{content:'✓ DIPILIH';font-weight:900;color:#fbbf24;}
+
+/* Quick actions */
+.quick-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:36px;}
+@media(max-width:780px){.quick-actions{grid-template-columns:1fr;}}
+.action-card{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:14px;cursor:pointer;
+  background:rgba(19,41,65,.6);border:1.5px solid rgba(148,163,184,.15);backdrop-filter:blur(10px);transition:.3s;font-family:inherit;text-align:left;color:#e0f2fe;}
+.action-card:hover{border-color:#38bdf8;background:rgba(56,189,248,.1);transform:translateY(-3px);}
+.action-card .aic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;
+  background:linear-gradient(135deg,rgba(56,189,248,.2),rgba(168,85,247,.2));border:1px solid rgba(56,189,248,.35);}
+.action-card .atxt{flex:1;min-width:0;}
+.action-card .atxt b{font-size:13px;font-weight:800;color:#e0f2fe;display:block;margin-bottom:2px;}
+.action-card .atxt small{font-size:11px;color:#94a3b8;line-height:1.4;display:block;}
+.action-card .arr{color:#64748b;font-size:18px;transition:.3s;}
+.action-card:hover .arr{color:#38bdf8;transform:translateX(4px);}
+
+/* Footer */
+.menu-foot{display:flex;justify-content:space-between;align-items:center;padding-top:22px;border-top:1px solid rgba(56,189,248,.15);
+  font-size:11px;color:#475569;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;flex-wrap:wrap;gap:10px;}
+.menu-foot .right{display:flex;gap:16px;}
+.menu-foot .right span{display:inline-flex;align-items:center;gap:6px;}
+
+/* ============================================================
+   GAME SCREEN (tetap)
+   ============================================================ */
+#screen-game{padding:0;}
+.game-head{flex-shrink:0;padding:10px 18px;background:rgba(11,27,48,.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--cell-border);display:flex;justify-content:space-between;align-items:center;transition:.6s;}
+.game-head .logo{font-size:14px;font-weight:800;letter-spacing:1px;color:var(--accent);display:flex;gap:8px;align-items:center;transition:.6s;}
+.game-head .logo .lvlbadge{font-size:10px;background:var(--c1);color:#fff;padding:2px 8px;border-radius:10px;letter-spacing:1px;font-weight:800;}
+.game-head .btn-sm{padding:8px 14px;background:transparent;color:#94a3b8;border:1px solid rgba(148,163,184,.3);border-radius:8px;font-size:12px;cursor:pointer;transition:.25s;font-family:inherit;font-weight:600;}
+.game-head .btn-sm:hover{background:rgba(148,163,184,.1);color:white;}
+
+.game-body{flex:1;display:flex;overflow:hidden;padding:14px;gap:14px;position:relative;z-index:1;}
+@media(max-width:900px){.game-body{flex-direction:column;padding:10px;gap:10px;overflow-y:auto;}}
+
+.board-wrap{flex:1;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;position:relative;}
+.board-frame{position:relative;width:min(100%,calc(100vh - 140px));aspect-ratio:1/1;max-width:680px;padding:10px;border-radius:20px;
+  background:linear-gradient(135deg,var(--c1),var(--c2));
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.9),0 0 80px -20px var(--glow),inset 0 0 30px rgba(0,0,0,.5);transition:.6s;}
+
+.board{position:relative;display:grid;grid-template-columns:repeat(10,1fr);grid-template-rows:repeat(10,1fr);gap:3px;width:100%;height:100%;background:var(--board-bg);border-radius:12px;padding:6px;transition:.6s;}
+
+.board-connections{position:absolute;inset:6px;width:calc(100% - 12px);height:calc(100% - 12px);pointer-events:none;z-index:5;overflow:visible;}
+
+.cell{background:var(--cell-bg);border-radius:6px;display:flex;align-items:flex-start;justify-content:flex-start;padding:4px 5px;font-size:10px;font-weight:700;color:#cbd5e1;position:relative;overflow:hidden;transition:.3s;border:1.5px solid var(--cell-border);box-shadow:inset 0 0 0 1px rgba(0,0,0,.3);}
+.cell .num{position:relative;z-index:2;font-size:10px;letter-spacing:.3px;color:#e2e8f0;text-shadow:0 1px 2px #000;}
+.cell .icon{position:absolute;right:3px;bottom:2px;font-size:15px;opacity:.95;z-index:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,.7));}
+.cell.ladder{background:linear-gradient(135deg,rgba(245,158,11,.35),rgba(245,158,11,.1));border-color:#fbbf24;box-shadow:0 0 8px rgba(251,191,36,.4),inset 0 0 0 1px rgba(0,0,0,.3);}
+.cell.ladder .num{color:#fde68a;}
+.cell.snake{background:linear-gradient(135deg,rgba(239,68,68,.4),rgba(239,68,68,.1));border-color:#f87171;box-shadow:0 0 8px rgba(248,113,113,.4),inset 0 0 0 1px rgba(0,0,0,.3);}
+.cell.snake .num{color:#fecaca;}
+.cell.ladder-target{background:linear-gradient(135deg,rgba(245,158,11,.18),transparent);border-color:rgba(251,191,36,.5);}
+.cell.ladder-target .num{color:#fcd34d;}
+.cell.snake-target{background:linear-gradient(135deg,rgba(239,68,68,.2),transparent);border-color:rgba(248,113,113,.5);}
+.cell.snake-target .num{color:#fca5a5;}
+.cell.question{background:linear-gradient(135deg,rgba(168,85,247,.4),rgba(168,85,247,.1));border-color:#c084fc;box-shadow:0 0 8px rgba(192,132,252,.4);}
+.cell.question .num{color:#e9d5ff;}
+.cell.event{background:linear-gradient(135deg,rgba(56,189,248,.4),rgba(56,189,248,.1));border-color:#7dd3fc;box-shadow:0 0 8px rgba(125,211,252,.4);}
+.cell.event .num{color:#e0f2fe;}
+.cell.start{background:linear-gradient(135deg,rgba(16,185,129,.5),rgba(16,185,129,.2));border-color:#34d399;box-shadow:0 0 10px rgba(52,211,153,.5);}
+.cell.start .num{color:#d1fae5;}
+.cell.finish{background:linear-gradient(135deg,rgba(251,191,36,.6),rgba(251,191,36,.2));border-color:#fbbf24;animation:finishGlow 2s ease-in-out infinite;}
+@keyframes finishGlow{0%,100%{box-shadow:0 0 10px rgba(251,191,36,.6);}50%{box-shadow:0 0 26px rgba(251,191,36,1);}}
+.cell.finish .num{color:#fffbeb;font-size:11px;}
+
+.token{position:absolute;width:7%;aspect-ratio:1/1;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:10;transform:translate(-50%,-50%);transition:left .35s cubic-bezier(.5,0,.2,1),top .35s cubic-bezier(.5,0,.2,1);box-shadow:0 0 0 2.5px rgba(255,255,255,.95),0 4px 12px rgba(0,0,0,.7);pointer-events:none;}
+.token .ic{font-size:14px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.7));}
+.token.p1{background:linear-gradient(135deg,#3b82f6,#1e40af);}
+.token.p2{background:linear-gradient(135deg,#f97316,#c2410c);}
+.token.p3{background:linear-gradient(135deg,#a855f7,#6d28d9);}
+.token.p4{background:linear-gradient(135deg,#10b981,#047857);}
+
+.panel{width:290px;flex-shrink:0;display:flex;flex-direction:column;gap:12px;overflow-y:auto;}
+@media(max-width:900px){.panel{width:100%;flex-direction:row;flex-wrap:wrap;overflow:visible;}}
+.panel-card{background:rgba(11,27,48,.72);backdrop-filter:blur(14px);border:1px solid var(--cell-border);border-radius:14px;padding:14px;transition:.6s;}
+.panel-title{font-size:10px;letter-spacing:2px;color:#94a3b8;text-transform:uppercase;font-weight:800;margin-bottom:10px;}
+
+.dice-area{display:flex;align-items:center;gap:14px;}
+.dice{width:74px;height:74px;flex-shrink:0;border-radius:16px;background:linear-gradient(145deg,#ffffff,#e2e8f0);border:2px solid #cbd5e1;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);padding:10px;gap:3px;box-shadow:0 10px 26px -6px rgba(0,0,0,.8),inset 0 -4px 10px rgba(0,0,0,.15),inset 0 4px 10px rgba(255,255,255,.9);transition:.3s;}
+.dice.rolling{animation:diceRoll .5s ease-in-out;}
+@keyframes diceRoll{0%{transform:rotate(0) scale(1)}25%{transform:rotate(90deg) scale(1.15)}50%{transform:rotate(180deg) scale(.9)}75%{transform:rotate(270deg) scale(1.1)}100%{transform:rotate(360deg) scale(1)}}
+.pip{width:100%;height:100%;border-radius:50%;background:#0f172a;box-shadow:inset 0 2px 3px rgba(0,0,0,.5);opacity:0;}
+.pip.on{opacity:1;}
+.dice-info{flex:1;min-width:0;}
+.dice-info .label{font-size:10px;color:#94a3b8;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;}
+.dice-info .who{font-size:14px;font-weight:800;color:#e0f2fe;margin:2px 0 6px;}
+.dice-info .who .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle;}
+.dice-info .who.p1 .dot{background:#3b82f6;box-shadow:0 0 8px #3b82f6;}
+.dice-info .who.p2 .dot{background:#f97316;box-shadow:0 0 8px #f97316;}
+.dice-info .who.p3 .dot{background:#a855f7;box-shadow:0 0 8px #a855f7;}
+.dice-info .who.p4 .dot{background:#10b981;box-shadow:0 0 8px #10b981;}
+.dice-val{font-size:28px;font-weight:900;color:var(--accent);text-shadow:0 0 16px var(--glow);line-height:1;}
+
+.btn-roll{width:100%;padding:12px;border:none;border-radius:10px;background:linear-gradient(135deg,var(--c1),var(--c2));color:white;font-weight:800;font-size:13px;cursor:pointer;letter-spacing:.5px;box-shadow:0 6px 20px -6px var(--glow);transition:.25s;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-roll:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 26px -6px var(--glow);}
+.btn-roll:disabled{opacity:.35;cursor:not-allowed;}
+
+.player-list{display:flex;flex-direction:column;gap:8px;}
+.player-item{display:flex;align-items:center;gap:10px;padding:8px 10px;background:rgba(19,41,65,.5);border-radius:10px;border:1px solid transparent;transition:.3s;font-size:12px;}
+.player-item.turn{border-color:currentColor;background:rgba(19,41,65,.9);box-shadow:0 0 20px -4px currentColor;}
+.player-item .pic{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;box-shadow:0 0 0 2px rgba(255,255,255,.25);}
+.player-item.p1 .pic{background:linear-gradient(135deg,#3b82f6,#1e40af);}
+.player-item.p2 .pic{background:linear-gradient(135deg,#f97316,#c2410c);}
+.player-item.p3 .pic{background:linear-gradient(135deg,#a855f7,#6d28d9);}
+.player-item.p4 .pic{background:linear-gradient(135deg,#10b981,#047857);}
+.player-item.p1.turn{color:#3b82f6;}
+.player-item.p2.turn{color:#f97316;}
+.player-item.p3.turn{color:#a855f7;}
+.player-item.p4.turn{color:#10b981;}
+.player-item .info{flex:1;min-width:0;}
+.player-item .info .nm{font-weight:800;color:#e0f2fe;font-size:12px;}
+.player-item .info .pos{font-size:10px;color:#94a3b8;margin-top:1px;}
+.player-item .wins{font-size:11px;font-weight:800;color:#fbbf24;}
+
+.log-list{max-height:140px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;scrollbar-width:thin;}
+.log-list::-webkit-scrollbar{width:4px;}
+.log-list::-webkit-scrollbar-thumb{background:#1b3b5d;border-radius:2px;}
+.log-item{font-size:11px;line-height:1.5;color:#cbd5e1;padding:6px 10px;border-radius:8px;background:rgba(19,41,65,.5);border-left:3px solid var(--accent);animation:slideIn .3s ease both;}
+@keyframes slideIn{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:translateX(0)}}
+.log-item.pos{border-left-color:#10b981;color:#d1fae5;}
+.log-item.neg{border-left-color:#ef4444;color:#fecaca;}
+.log-item.warn{border-left-color:#fbbf24;color:#fef3c7;}
+
+.modal-back{position:fixed;inset:0;z-index:200;background:rgba(3,7,15,.9);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:.35s;}
+.modal-back.show{opacity:1;visibility:visible;}
+.modal{background:linear-gradient(160deg,#0f2337,#0a1828);border:1px solid var(--cell-border);border-radius:20px;max-width:540px;width:100%;padding:28px;box-shadow:0 30px 80px -20px rgba(0,0,0,.9),0 0 60px -20px var(--glow);transform:translateY(20px) scale(.96);transition:.4s cubic-bezier(.34,1.56,.64,1);max-height:90vh;overflow-y:auto;}
+.modal-back.show .modal{transform:translateY(0) scale(1);}
+.modal .badge{display:inline-block;padding:5px 14px;font-size:10px;font-weight:800;letter-spacing:2px;border-radius:20px;margin-bottom:14px;text-transform:uppercase;}
+.modal .badge.q{background:rgba(168,85,247,.25);color:#e9d5ff;border:1px solid rgba(168,85,247,.5);}
+.modal .badge.ev{background:rgba(56,189,248,.25);color:#e0f2fe;border:1px solid rgba(56,189,248,.5);}
+.modal .badge.in{background:rgba(56,189,248,.25);color:#e0f2fe;border:1px solid rgba(56,189,248,.5);}
+.modal h2{font-size:20px;color:#e0f2fe;margin-bottom:10px;line-height:1.3;}
+.modal h2.big{font-size:26px;text-align:center;}
+.modal .emoji-big{font-size:60px;text-align:center;margin:6px 0 12px;filter:drop-shadow(0 0 22px var(--glow));animation:bounceIn .6s ease;}
+@keyframes bounceIn{0%{transform:scale(.3);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+.modal p{color:#cbd5e1;font-size:13px;line-height:1.7;margin-bottom:14px;}
+.modal .choices{display:flex;flex-direction:column;gap:8px;margin:16px 0;}
+.choice{padding:12px 16px;background:rgba(19,41,65,.7);border:1px solid var(--cell-border);border-radius:10px;color:#e0f2fe;font-size:13px;cursor:pointer;text-align:left;transition:.25s;font-family:inherit;font-weight:600;}
+.choice:hover:not(:disabled){background:rgba(56,189,248,.15);border-color:var(--accent);transform:translateX(3px);}
+.choice.correct{background:rgba(16,185,129,.3);border-color:#10b981;color:#d1fae5;}
+.choice.wrong{background:rgba(239,68,68,.3);border-color:#ef4444;color:#fecaca;}
+.choice:disabled{cursor:default;}
+.choice .key{display:inline-block;width:22px;height:22px;line-height:22px;text-align:center;border-radius:50%;background:#1b3b5d;color:var(--accent);font-size:11px;font-weight:800;margin-right:10px;vertical-align:middle;}
+.modal .row{display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap;}
+
+.btn{padding:11px 22px;border:none;border-radius:10px;font-weight:800;font-size:13px;cursor:pointer;letter-spacing:.5px;transition:.25s;font-family:inherit;display:inline-flex;align-items:center;gap:8px;}
+.btn.primary{background:linear-gradient(135deg,var(--c1),var(--c2));color:white;box-shadow:0 6px 20px -6px var(--glow);}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 10px 26px -6px var(--glow);}
+.btn.ghost{background:transparent;color:#94a3b8;border:1px solid rgba(148,163,184,.3);}
+.btn.ghost:hover{background:rgba(148,163,184,.1);color:white;}
+
+#screen-win{align-items:center;justify-content:center;padding:24px;overflow-y:auto;}
+.win-card{max-width:540px;width:100%;background:linear-gradient(160deg,rgba(15,35,55,.95),rgba(10,24,40,.95));border:1px solid rgba(251,191,36,.4);border-radius:22px;padding:36px 28px;text-align:center;box-shadow:0 30px 80px -20px rgba(0,0,0,.9),0 0 80px -20px rgba(251,191,36,.5);animation:fadeUp .6s ease both;}
+.win-card .crown{font-size:76px;filter:drop-shadow(0 0 30px rgba(251,191,36,.8));animation:crownBounce 1.5s ease-in-out infinite;}
+@keyframes crownBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.win-card h2{font-size:32px;font-weight:900;letter-spacing:-1px;background:linear-gradient(135deg,#fef3c7,#fbbf24,#f59e0b);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin:12px 0 6px;}
+.win-card .winner-name{font-size:16px;color:#e0f2fe;font-weight:800;margin-bottom:20px;}
+.win-card .winner-name .dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px;vertical-align:middle;}
+.win-card .rank-list{background:rgba(19,41,65,.5);border-radius:12px;padding:14px;margin:18px 0;display:flex;flex-direction:column;gap:8px;}
+.win-card .rank-item{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#cbd5e1;padding:6px 8px;}
+.win-card .rank-item .name{display:flex;align-items:center;gap:8px;font-weight:700;}
+.win-card .rank-item .pos{color:var(--accent);font-weight:800;}
+
+.toast-wrap{position:fixed;top:70px;right:20px;z-index:300;display:flex;flex-direction:column;gap:8px;pointer-events:none;}
+.toast{background:rgba(19,41,65,.95);backdrop-filter:blur(10px);border:1px solid var(--cell-border);padding:10px 16px;border-radius:10px;font-size:12px;color:#e0f2fe;box-shadow:0 10px 30px -10px rgba(0,0,0,.8);animation:toastIn .3s ease both;display:flex;align-items:center;gap:10px;min-width:180px;transition:opacity .4s;}
+.toast.pos{border-color:rgba(16,185,129,.6);}
+.toast.neg{border-color:rgba(239,68,68,.6);}
+.toast.fade{opacity:0;}
+@keyframes toastIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body data-level="1">
+
+<div class="bg-grid"></div>
+<div class="orb a"></div>
+<div class="orb b"></div>
+
+<!-- ============================================================
+     LOADING SCREEN — MGE 3D
+     ============================================================ -->
+<div id="loader">
+  <div class="mge-logo-wrap">
+    <div class="mge-ring-outer"></div>
+    <div class="mge-ring-mid"></div>
+    <div class="mge-ring-inner"></div>
+    <div class="mge-circle">
+      <div class="mge-text">MGE</div>
+    </div>
+  </div>
+
+  <div class="brand-text">
+    <span class="brand-line"></span>
+    <span class="brand-label">MAEDA GAMES EDU</span>
+    <span class="brand-line"></span>
+  </div>
+
+  <div class="loader-title">Memuat Papan Permainan</div>
+
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+
+  <div class="loader-sub">Ular Tangga Ekonomi · Bab 5 · Peran Pelaku Ekonomi</div>
+</div>
+
+<!-- ============================================================
+     BERANDA PREMIUM
+     ============================================================ -->
+<div class="screen" id="screen-menu">
+  <div class="menu-bg-deco">
+    <div class="glow g1"></div>
+    <div class="glow g2"></div>
+    <div class="glow g3"></div>
+  </div>
+
+  <div class="menu-inner">
+    <!-- Topbar -->
+    <div class="topbar">
+      <div class="brand">
+        <div class="mini-mge">MGE</div>
+        <div class="name">ULAR TANGGA EKONOMI<small>Maeda Games Edu</small></div>
+      </div>
+      <div class="pills">
+        <div class="pill">🎓 BAB 5 · PELAKU EKONOMI</div>
+        <div class="pill">🎲 100 SOAL</div>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-left">
+        <div class="eyebrow"><span class="dot-live"></span> GAME EDUKASI INTERAKTIF</div>
+        <h1 class="hero-title">
+          ULAR TANGGA
+          <span class="line2">EKONOMI</span>
+        </h1>
+        <p class="hero-sub">
+          Kuasai materi <b>Peran Pelaku Ekonomi</b> lewat permainan papan interaktif.
+          Pilih level, lempar dadu, naiki tangga, hindari ular, dan jawab pertanyaan
+          untuk menjadi juara ekonomi!
+        </p>
+
+        <div class="hero-cta">
+          <button class="cta primary" onclick="Game.start(2)"><span class="ic">🎮</span> Main Cepat (2 Pemain)</button>
+          <button class="cta ghost" onclick="Game.showRules()"><span class="ic">📘</span> Cara Bermain</button>
+        </div>
+
+        <div class="hero-stats">
+          <div class="hstat"><div class="num">4</div><div class="lbl">Level</div></div>
+          <div class="hstat"><div class="num">100</div><div class="lbl">Soal</div></div>
+          <div class="hstat"><div class="num">2–4</div><div class="lbl">Pemain</div></div>
+          <div class="hstat"><div class="num">10–20</div><div class="lbl">Menit</div></div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="preview-board">
+          <div class="preview-badge">PREVIEW</div>
+          <div class="preview-grid">
+            <div class="preview-cell"></div><div class="preview-cell"></div><div class="preview-cell q"></div><div class="preview-cell"></div><div class="preview-cell hot"></div><div class="preview-cell"></div>
+            <div class="preview-cell"></div><div class="preview-cell e"></div><div class="preview-cell"></div><div class="preview-cell"></div><div class="preview-cell"></div><div class="preview-cell danger"></div>
+            <div class="preview-cell hot"></div><div class="preview-cell"></div><div class="preview-cell"></div><div class="preview-cell q"></div><div class="preview-cell"></div><div class="preview-cell"></div>
+            <div class="preview-cell"></div><div class="preview-cell"></div><div class="preview-cell danger"></div><div class="preview-cell"></div><div class="preview-cell e"></div><div class="preview-cell"></div>
+            <div class="preview-cell q"></div><div class="preview-cell"></div><div class="preview-cell"></div><div class="preview-cell hot"></div><div class="preview-cell"></div><div class="preview-cell"></div>
+            <div class="preview-cell"></div><div class="preview-cell danger"></div><div class="preview-cell"></div><div class="preview-cell"></div><div class="preview-cell"></div><div class="preview-cell goal"></div>
+          </div>
+          <div class="preview-caption">PAPAN 10 × 10 · 100 KOTAK</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Level cards -->
+    <div class="section-title">
+      <div class="bar"></div>
+      <h3>Pilih Level</h3>
+      <div class="sub">25 SOAL / LEVEL · 100 SOAL TOTAL</div>
+    </div>
+
+    <div class="level-cards">
+      <div class="lvl-card lv1" data-level="1" onclick="Game.setLevel(1)">
+        <div class="card-top">
+          <span class="lvl-num">LEVEL 1</span>
+          <span class="lvl-icon">🌊</span>
+        </div>
+        <div class="lvl-name">Dasar</div>
+        <div class="lvl-desc">Pengertian pelaku ekonomi, rumah tangga konsumen, faktor produksi & balas jasa.</div>
+        <div class="lvl-meta">
+          <span class="tag">Mudah</span>
+          <span class="tag">25 Soal</span>
+        </div>
+        <div class="play-btn"><span>PILIH LEVEL</span><span>→</span></div>
+      </div>
+
+      <div class="lvl-card lv2" data-level="2" onclick="Game.setLevel(2)">
+        <div class="card-top">
+          <span class="lvl-num">LEVEL 2</span>
+          <span class="lvl-icon">🌿</span>
+        </div>
+        <div class="lvl-name">Menengah</div>
+        <div class="lvl-desc">RTP, RTN, RTMLN, BUMN/BUMS, ekspor-impor, devisa, dan peran ganda pemerintah.</div>
+        <div class="lvl-meta">
+          <span class="tag">Sedang</span>
+          <span class="tag">25 Soal</span>
+        </div>
+        <div class="play-btn"><span>PILIH LEVEL</span><span>→</span></div>
+      </div>
+
+      <div class="lvl-card lv3" data-level="3" onclick="Game.setLevel(3)">
+        <div class="card-top">
+          <span class="lvl-num">LEVEL 3</span>
+          <span class="lvl-icon">🔥</span>
+        </div>
+        <div class="lvl-name">Mahir</div>
+        <div class="lvl-desc">Koperasi (jenis, prinsip, SHU) dan circular flow diagram 2/3/4 sektor.</div>
+        <div class="lvl-meta">
+          <span class="tag">Sulit</span>
+          <span class="tag">25 Soal</span>
+        </div>
+        <div class="play-btn"><span>PILIH LEVEL</span><span>→</span></div>
+      </div>
+
+      <div class="lvl-card lv4" data-level="4" onclick="Game.setLevel(4)">
+        <div class="card-top">
+          <span class="lvl-num">LEVEL 4</span>
+          <span class="lvl-icon">💜</span>
+        </div>
+        <div class="lvl-name">Tantangan</div>
+        <div class="lvl-desc">Era digital, e-commerce, fintech, UMKM Go Digital, koperasi digital.</div>
+        <div class="lvl-meta">
+          <span class="tag">Expert</span>
+          <span class="tag">25 Soal</span>
+        </div>
+        <div class="play-btn"><span>PILIH LEVEL</span><span>→</span></div>
+      </div>
+    </div>
+
+    <!-- Quick actions -->
+    <div class="section-title">
+      <div class="bar"></div>
+      <h3>Mulai Bermain</h3>
+      <div class="sub">PILIH JUMLAH PEMAIN</div>
+    </div>
+
+    <div class="quick-actions">
+      <button class="action-card" onclick="Game.start(2)">
+        <div class="aic">👥</div>
+        <div class="atxt"><b>2 Pemain — Duel Klasik</b><small>Durasi ± 10 menit · cocok untuk latihan cepat</small></div>
+        <div class="arr">→</div>
+      </button>
+      <button class="action-card" onclick="Game.start(3)">
+        <div class="aic">👥</div>
+        <div class="atxt"><b>3 Pemain — Bertiga Seru</b><small>Durasi ± 15 menit · kompetisi seimbang</small></div>
+        <div class="arr">→</div>
+      </button>
+      <button class="action-card" onclick="Game.start(4)">
+        <div class="aic">👥</div>
+        <div class="atxt"><b>4 Pemain — Rame-rame Kelas</b><small>Durasi ± 20 menit · seru untuk kelompok belajar</small></div>
+        <div class="arr">→</div>
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <div class="menu-foot">
+      <div>© MGE · MAEDA GAMES EDU · BAB 5 — PERAN PELAKU EKONOMI</div>
+      <div class="right">
+        <span>🎲 4 Level</span>
+        <span>📚 100 Soal</span>
+        <span>🎯 Premium Edition</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="screen" id="screen-game">
+  <div class="game-head">
+    <div class="logo">🎲 ULAR TANGGA EKONOMI <span class="lvlbadge" id="lvlBadge">LEVEL 1</span></div>
+    <button class="btn-sm" onclick="Game.backToMenu()">🏠 Menu</button>
+  </div>
+  <div class="game-body">
+    <div class="board-wrap">
+      <div class="board-frame">
+        <div class="board" id="board"></div>
+      </div>
+    </div>
+    <aside class="panel">
+      <div class="panel-card">
+        <div class="dice-area">
+          <div class="dice" id="dice"></div>
+          <div class="dice-info">
+            <div class="label">Giliran</div>
+            <div class="who p1" id="whoTurn"><span class="dot"></span>Pemain 1</div>
+            <div class="dice-val" id="diceVal">–</div>
+          </div>
+        </div>
+        <div style="margin-top:12px;">
+          <button class="btn-roll" id="rollBtn" onclick="Game.roll()">🎲 Lempar Dadu</button>
+        </div>
+      </div>
+      <div class="panel-card">
+        <div class="panel-title">👥 Pemain</div>
+        <div class="player-list" id="playerList"></div>
+      </div>
+      <div class="panel-card">
+        <div class="panel-title">📜 Log Permainan</div>
+        <div class="log-list" id="logList"></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<div class="screen" id="screen-win">
+  <div class="win-card" id="winCard"></div>
+</div>
+
+<div class="modal-back" id="modalBack">
+  <div class="modal" id="modalBox"></div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script>
+/* ============================================================
+   ULAR TANGGA EKONOMI — Premium Edition
+   MGE · Bab 5 · Peran Pelaku Ekonomi
+   ============================================================ */
+
+/* ---------- AUDIO ---------- */
+const Audio = (()=>{
+  let ctx;
+  const getCtx = ()=>{ if(!ctx) ctx = new (window.AudioContext||window.webkitAudioContext)(); return ctx; };
+  function play(freq, dur, type='sine', vol=.05){
+    try{
+      const c = getCtx();
+      const o = c.createOscillator(), g = c.createGain();
+      o.type = type; o.frequency.value = freq;
+      g.gain.setValueAtTime(vol, c.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + dur);
+      o.connect(g); g.connect(c.destination);
+      o.start(); o.stop(c.currentTime + dur);
+    }catch(e){}
+  }
+  return {
+    click(){ play(520,.06,'sine',.04); },
+    dice(){ [0,80,160,240].forEach(d=>setTimeout(()=>play(400+Math.random()*300,.08,'square',.04),d)); },
+    step(){ play(660,.05,'sine',.03); },
+    correct(){ play(700,.1); setTimeout(()=>play(1000,.15),90); setTimeout(()=>play(1300,.2),200); },
+    wrong(){ play(200,.25,'sawtooth',.06); },
+    ladder(){ [523,659,784,1047].forEach((f,i)=>setTimeout(()=>play(f,.15,'triangle',.05),i*70)); },
+    snake(){ play(400,.15,'sawtooth',.05); setTimeout(()=>play(250,.25,'sawtooth',.05),120); },
+    event(){ play(600,.12,'triangle',.05); },
+    win(){ [523,659,784,1047,1319].forEach((f,i)=>setTimeout(()=>play(f,.25,'triangle',.06),i*140)); }
+  };
+})();
+
+/* ---------- PLAYERS ---------- */
+const PLAYERS = [
+  { id:'p1', name:'Pemain 1', icon:'🏠', role:'RTK',   color:'#3b82f6' },
+  { id:'p2', name:'Pemain 2', icon:'🏭', role:'RTP',   color:'#f97316' },
+  { id:'p3', name:'Pemain 3', icon:'🏛️', role:'RTN',   color:'#a855f7' },
+  { id:'p4', name:'Pemain 4', icon:'🌐', role:'RTMLN', color:'#10b981' }
+];
+
+/* ---------- BOARD ---------- */
+const LADDERS = { 3:24, 11:30, 21:46, 37:57, 51:73, 70:90 };
+const SNAKES  = { 18:7, 35:14, 53:31, 67:44, 81:60, 94:76, 99:78 };
+
+const LADDER_PALETTE = [
+  { rail:'#f59e0b', light:'#fcd34d', dark:'#b45309' },
+  { rail:'#ef4444', light:'#fca5a5', dark:'#991b1b' },
+  { rail:'#10b981', light:'#6ee7b7', dark:'#065f46' },
+  { rail:'#3b82f6', light:'#93c5fd', dark:'#1e40af' },
+  { rail:'#a855f7', light:'#d8b4fe', dark:'#6b21a8' },
+  { rail:'#ec4899', light:'#f9a8d4', dark:'#9d174d' },
+  { rail:'#06b6d4', light:'#67e8f9', dark:'#155e75' },
+  { rail:'#84cc16', light:'#bef264', dark:'#3f6212' }
+];
+
+const SNAKE_PALETTE = [
+  { body:'#dc2626', light:'#f87171', dark:'#450a0a', belly:'#fca5a5' },
+  { body:'#f97316', light:'#fb923c', dark:'#7c2d12', belly:'#fdba74' },
+  { body:'#eab308', light:'#facc15', dark:'#713f12', belly:'#fde047' },
+  { body:'#22c55e', light:'#4ade80', dark:'#14532d', belly:'#86efac' },
+  { body:'#06b6d4', light:'#22d3ee', dark:'#164e63', belly:'#67e8f9' },
+  { body:'#8b5cf6', light:'#a78bfa', dark:'#4c1d95', belly:'#c4b5fd' },
+  { body:'#ec4899', light:'#f472b6', dark:'#831843', belly:'#f9a8d4' }
+];
+
+const Q_CELLS = [5,12,25,33,47,58,66,74,82,89,96];
+const E_CELLS = [8,15,29,42,55,69,78,85,92];
+
+/* ============================================================
+   BANK SOAL — 25 SOAL / LEVEL (100 SOAL TOTAL)
+   Murni dari materi Bab 5 — Peran Pelaku Ekonomi
+   ============================================================ */
+const QUESTIONS_BY_LEVEL = {
+  1: [
+    { q:'Pelaku ekonomi yang mengonsumsi barang/jasa & menyediakan faktor produksi adalah...', a:['Rumah Tangga Produsen','Rumah Tangga Konsumen','Rumah Tangga Pemerintah','Masyarakat Luar Negeri'], c:1 },
+    { q:'Kegiatan manusia untuk memenuhi kebutuhan hidupnya meliputi tiga kegiatan pokok, yaitu...', a:['Produksi, distribusi, konsumsi','Produksi, investasi, konsumsi','Distribusi, tabungan, konsumsi','Produksi, konsumsi, menabung'], c:0 },
+    { q:'Manusia disebut sebagai makhluk ekonomi karena...', a:['Selalu menabung','Selalu berusaha memenuhi kebutuhan dengan cara rasional','Selalu berbelanja','Selalu bekerja keras'], c:1 },
+    { q:'Rumah tangga konsumen menyediakan faktor produksi berupa tenaga kerja. Balas jasanya adalah...', a:['Sewa','Upah','Bunga','Laba'], c:1 },
+    { q:'Rumah tangga konsumen menyediakan faktor produksi tanah. Balas jasanya adalah...', a:['Sewa','Upah','Bunga','Laba'], c:0 },
+    { q:'Rumah tangga konsumen menyediakan faktor produksi modal. Balas jasanya adalah...', a:['Sewa','Upah','Bunga','Laba'], c:2 },
+    { q:'Rumah tangga konsumen menyediakan faktor produksi keahlian. Balas jasanya adalah...', a:['Sewa','Upah','Bunga','Laba'], c:3 },
+    { q:'Berikut yang BUKAN pelaku ekonomi utama adalah...', a:['Rumah Tangga Konsumen','Rumah Tangga Produsen','Bank Indonesia','Masyarakat Luar Negeri'], c:2 },
+    { q:'Contoh rumah tangga konsumen adalah...', a:['Keluarga yang membeli kebutuhan di pasar','Pabrik sepatu','PT Pertamina','PLN'], c:0 },
+    { q:'Kegiatan konsumsi adalah...', a:['Menghasilkan barang/jasa','Menyalurkan barang/jasa','Mengurangi atau menghabiskan kegunaan barang/jasa','Menimbun barang'], c:2 },
+    { q:'Pelaku ekonomi adalah...', a:['Pihak yang terlibat dalam kegiatan produksi, distribusi, dan konsumsi','Pihak yang hanya mengonsumsi','Pihak yang hanya memproduksi','Pihak yang hanya mengatur'], c:0 },
+    { q:'Rumah tangga konsumen terdiri atas...', a:['Ayah, ibu, anak, dan anggota keluarga lain','Pemerintah dan swasta','Importir dan eksportir','Bank dan koperasi'], c:0 },
+    { q:'Faktor produksi tenaga kerja disebut juga...', a:['Land','Labor','Capital','Skill'], c:1 },
+    { q:'Faktor produksi tanah disebut juga...', a:['Land','Labor','Capital','Skill'], c:0 },
+    { q:'Faktor produksi modal disebut juga...', a:['Land','Labor','Capital','Skill'], c:2 },
+    { q:'Faktor produksi keahlian disebut juga...', a:['Land','Labor','Capital','Skill'], c:3 },
+    { q:'Contoh kegiatan konsumsi adalah...', a:['Membeli makanan dan pakaian','Menanam padi','Mengantar barang','Membuat roti'], c:0 },
+    { q:'Rumah tangga konsumen menerima pendapatan berupa...', a:['Upah, sewa, bunga, laba','Pajak dan subsidi','Ekspor dan impor','Devisa'], c:0 },
+    { q:'Yang dimaksud dengan pelaku ekonomi adalah...', a:['Semua pihak yang terlibat dalam kegiatan ekonomi','Hanya pemerintah','Hanya perusahaan','Hanya konsumen'], c:0 },
+    { q:'Kegiatan ekonomi yang dilakukan manusia bertujuan untuk...', a:['Memenuhi kebutuhan hidup','Mencari musuh','Bersenang-senang','Menghabiskan uang'], c:0 },
+    { q:'Salah satu contoh rumah tangga konsumen di sekitar kita adalah...', a:['Keluarga yang menyewakan kamar kos','Pabrik tekstil','PT KAI','Bank Indonesia'], c:0 },
+    { q:'Rumah tangga konsumen yang bekerja di kantor menerima...', a:['Gaji/upah','Sewa','Bunga','Laba'], c:0 },
+    { q:'Rumah tangga konsumen yang menabung di bank menerima...', a:['Bunga','Upah','Sewa','Laba'], c:0 },
+    { q:'Rumah tangga konsumen yang menyewakan lahan menerima...', a:['Sewa','Upah','Bunga','Laba'], c:0 },
+    { q:'Rumah tangga konsumen yang membuka usaha sendiri menerima...', a:['Laba','Upah','Sewa','Bunga'], c:0 }
+  ],
+  2: [
+    { q:'PT Pertamina & PLN adalah contoh peran pemerintah sebagai...', a:['Regulator','Konsumen','Produsen','Distributor'], c:2 },
+    { q:'Berikut yang BUKAN peran masyarakat luar negeri adalah...', a:['Konsumen barang ekspor','Produsen barang impor','Penentu kebijakan moneter','Investor penanam modal'], c:2 },
+    { q:'Kegiatan menjual barang/jasa ke luar negeri disebut...', a:['Impor','Ekspor','Distribusi','Investasi'], c:1 },
+    { q:'Rumah tangga produsen yang dimiliki dan dikelola pemerintah disebut...', a:['BUMN','BUMS','Koperasi','UMKM'], c:0 },
+    { q:'Pemerintah menarik pajak dari RTK & RTP. Ini peran pemerintah sebagai...', a:['Konsumen','Produsen','Regulator','Distributor'], c:2 },
+    { q:'Kegiatan menyalurkan barang dari produsen ke konsumen disebut...', a:['Produksi','Konsumsi','Distribusi','Investasi'], c:2 },
+    { q:'Peran rumah tangga produsen sebagai agen pembangunan ditunjukkan oleh...', a:['Membeli barang dari konsumen','Membayar pajak','Membuka lapangan pekerjaan & inovasi','Mengonsumsi barang'], c:2 },
+    { q:'Masyarakat luar negeri yang menanamkan modalnya di Indonesia disebut...', a:['Konsumen','Produsen','Investor','Distributor'], c:2 },
+    { q:'Contoh peran pemerintah sebagai konsumen adalah...', a:['Membangun jalan & jembatan','Menarik pajak','Mengatur harga BBM','Menyediakan listrik'], c:0 },
+    { q:'Perusahaan asing yang membangun pabrik di Indonesia menciptakan...', a:['Lapangan kerja','Utang negara','Pajak baru','Kerusakan lingkungan'], c:0 },
+    { q:'Rumah tangga produsen yang dimiliki perorangan atau swasta disebut...', a:['BUMN','BUMS','Koperasi','RTN'], c:1 },
+    { q:'Contoh BUMN adalah...', a:['PT Pertamina','Warung makan','Pabrik tekstil swasta','Toko kelontong'], c:0 },
+    { q:'Kegiatan membeli barang/jasa dari luar negeri disebut...', a:['Impor','Ekspor','Distribusi','Investasi'], c:0 },
+    { q:'Pemerintah mengatur harga BBM. Ini peran pemerintah sebagai...', a:['Regulator','Konsumen','Produsen','Distributor'], c:0 },
+    { q:'Pemerintah membelanjakan anggaran untuk membeli alat kantor. Ini peran pemerintah sebagai...', a:['Regulator','Konsumen','Produsen','Distributor'], c:1 },
+    { q:'Contoh peran masyarakat luar negeri sebagai sumber tenaga ahli adalah...', a:['Insinyur asing yang bekerja di proyek infrastruktur','Membeli kopi Indonesia','Menjual mobil ke Indonesia','Menanamkan modal'], c:0 },
+    { q:'Devisa adalah...', a:['Alat pembayaran luar negeri yang sah','Pajak dalam negeri','Subsidi pemerintah','Upah tenaga kerja'], c:0 },
+    { q:'PT KAI menyediakan jasa transportasi kereta api. Ini peran pemerintah sebagai...', a:['Regulator','Konsumen','Produsen','Distributor'], c:2 },
+    { q:'RTP sebagai distributor berarti...', a:['Menyalurkan barang/jasa ke konsumen','Memproduksi barang','Mengonsumsi barang','Membayar pajak'], c:0 },
+    { q:'Contoh produk impor yang dijual di Indonesia adalah...', a:['Buah-buahan dari Thailand','Kopi dari Indonesia','Batik dari Solo','Roti dari warung lokal'], c:0 },
+    { q:'Masyarakat luar negeri yang membeli kopi Indonesia berperan sebagai...', a:['Konsumen','Produsen','Investor','Regulator'], c:0 },
+    { q:'Contoh peran pemerintah dalam pembangunan infrastruktur adalah...', a:['Membangun jalan dan jembatan','Menjual barang','Membeli pakaian','Menabung di bank'], c:0 },
+    { q:'BUMN yang mengelola minyak bumi dan gas adalah...', a:['PT Pertamina','PT KAI','PLN','Bank Indonesia'], c:0 },
+    { q:'BUMN yang menyediakan listrik bagi masyarakat adalah...', a:['PLN','PT Pertamina','PT KAI','Koperasi'], c:0 },
+    { q:'Peran ganda pemerintah meliputi...', a:['Regulator, konsumen, produsen','Konsumen dan distributor saja','Produsen saja','Regulator saja'], c:0 }
+  ],
+  3: [
+    { q:'Koperasi berdasarkan asas...', a:['Kekeluargaan','Kekuasaan','Keuntungan pribadi','Persaingan bebas'], c:0 },
+    { q:'Badan usaha milik negara disebut...', a:['BUMN','BUMS','Koperasi','UMKM'], c:0 },
+    { q:'Circular flow diagram 2 sektor melibatkan...', a:['RTK & RTP','RTK, RTP, Pemerintah','RTK, RTP, RTN, RTMLN','Hanya RTK'], c:0 },
+    { q:'Koperasi yang menyalurkan barang kebutuhan sehari-hari untuk anggota disebut...', a:['Koperasi Produksi','Koperasi Jasa','Koperasi Konsumsi','Koperasi Simpan Pinjam'], c:2 },
+    { q:'Sisa Hasil Usaha (SHU) koperasi dibagikan berdasarkan...', a:['Besarnya modal saja','Jasa usaha masing-masing anggota','Kekuasaan','Kesepakatan pengurus'], c:1 },
+    { q:'Perekonomian 3 sektor melibatkan...', a:['RTK & RTP','RTK, RTP, Pemerintah','RTK, RTP, RTN, RTMLN','Hanya RTK'], c:1 },
+    { q:'Perekonomian 4 sektor (terbuka) melibatkan...', a:['RTK & RTP','RTK, RTP, Pemerintah','RTK, RTP, RTN, RTMLN','Hanya RTK'], c:2 },
+    { q:'Dalam circular flow 2 sektor, arus dari RTK ke RTP melalui pasar faktor produksi adalah...', a:['Barang dan jasa','Uang pembayaran','Faktor produksi','Pajak'], c:2 },
+    { q:'Pasar tempat RTP menawarkan hasil produksi kepada RTK disebut...', a:['Pasar faktor produksi','Pasar barang & jasa','Pasar modal','Pasar tenaga kerja'], c:1 },
+    { q:'Koperasi yang menghimpun dan meminjamkan dana kepada anggota disebut...', a:['Koperasi Konsumsi','Koperasi Simpan Pinjam','Koperasi Produksi','Koperasi Jasa'], c:1 },
+    { q:'Kontribusi koperasi & UMKM terhadap PDB nasional sekitar...', a:['21%','41%','61%','81%'], c:2 },
+    { q:'Koperasi yang membantu anggota dalam kegiatan produksi dan pemasaran disebut...', a:['Koperasi Konsumsi','Koperasi Simpan Pinjam','Koperasi Produksi','Koperasi Jasa'], c:2 },
+    { q:'Koperasi yang menyediakan layanan jasa bagi anggota disebut...', a:['Koperasi Konsumsi','Koperasi Simpan Pinjam','Koperasi Produksi','Koperasi Jasa'], c:3 },
+    { q:'Prinsip koperasi antara lain...', a:['Keanggotaan sukarela dan terbuka','Keanggotaan wajib','Dikuasai satu orang','Mencari keuntungan pribadi'], c:0 },
+    { q:'Pengelolaan koperasi dilakukan secara...', a:['Demokratis','Otoriter','Bebas','Sembarangan'], c:0 },
+    { q:'Dalam circular flow 2 sektor, arus dari RTP ke RTK melalui pasar barang & jasa adalah...', a:['Barang dan jasa','Uang pembayaran','Faktor produksi','Pajak'], c:0 },
+    { q:'Pasar faktor produksi adalah tempat...', a:['RTK menawarkan faktor produksi kepada RTP','RTP menjual barang ke RTK','Pemerintah menarik pajak','Luar negeri mengekspor'], c:0 },
+    { q:'Dalam perekonomian 3 sektor, pemerintah menarik... dari RTK & RTP', a:['Pajak','Deviden','Sewa','Bunga'], c:0 },
+    { q:'Pemerintah memberikan subsidi dan transfer payment kepada...', a:['RTK & RTP','Hanya RTK','Hanya RTP','Luar negeri'], c:0 },
+    { q:'Contoh koperasi konsumsi adalah...', a:['Koperasi sekolah','Koperasi petani','Koperasi nelayan','Koperasi angkutan'], c:0 },
+    { q:'Contoh koperasi produksi adalah...', a:['Koperasi petani','Koperasi sekolah','Koperasi angkutan','Koperasi asuransi'], c:0 },
+    { q:'Contoh koperasi jasa adalah...', a:['Koperasi angkutan','Koperasi sekolah','Koperasi petani','Koperasi karyawan'], c:0 },
+    { q:'Koperasi bertujuan...', a:['Meningkatkan kesejahteraan anggota','Mencari laba sebesar-besarnya','Menguasai pasar','Menyaingi BUMN'], c:0 },
+    { q:'Koperasi di Indonesia berlandaskan...', a:['Asas kekeluargaan','Asas persaingan','Asas kekuasaan','Asas keuntungan pribadi'], c:0 },
+    { q:'Circular flow diagram menggambarkan...', a:['Arus uang dan barang antar pelaku ekonomi','Peta Indonesia','Struktur organisasi','Grafik pendapatan'], c:0 }
+  ],
+  4: [
+    { q:'Kegiatan ekonomi yang memanfaatkan teknologi digital disebut...', a:['Ekonomi tradisional','Ekonomi digital','Ekonomi agraris','Ekonomi maritim'], c:1 },
+    { q:'Berikut yang merupakan transformasi pelaku ekonomi di era digital adalah...', a:['Membeli di pasar tradisional dengan uang tunai','Berjualan melalui marketplace dan menerima pembayaran digital','Menukar barang dengan barang (barter)','Menyimpan uang di bawah kasur'], c:1 },
+    { q:'Peran rumah tangga konsumen di era digital ditunjukkan oleh...', a:['Belanja online via e-commerce & dompet digital','Membeli di pasar tradisional','Membarter barang','Menabung di celengan'], c:0 },
+    { q:'Fenomena baru dalam ekonomi digital adalah...', a:['Marketplace & e-commerce','Barter','Pasar tradisional','Koperasi manual'], c:0 },
+    { q:'Contoh revitalisasi koperasi desa di era modern adalah...', a:['Koperasi Desa Merah Putih','Bank Indonesia','PT Pertamina','PLN'], c:0 },
+    { q:'Tantangan pelaku ekonomi di era digital adalah...', a:['Keamanan data & penipuan online','Kekurangan bahan baku','Kurangnya tenaga kerja','Harga barang murah'], c:0 },
+    { q:'Pemerintah di era digital dapat melayani masyarakat melalui...', a:['E-government & pajak online','Layanan manual','Surat pos','Antrean panjang'], c:0 },
+    { q:'Peran koperasi yang berkaitan dengan era digital adalah...', a:['Mengonsolidasikan kekuatan ekonomi rakyat dengan teknologi keuangan','Menutup usaha kecil','Menghapus UMKM','Melarang transaksi online'], c:0 },
+    { q:'Balas jasa atas faktor produksi modal adalah...', a:['Sewa','Upah','Bunga','Laba'], c:2 },
+    { q:'Investor asing yang menanamkan modal di Indonesia merupakan peran...', a:['RTK','RTP','RTN','RTMLN'], c:3 },
+    { q:'Contoh peran RTMLN sebagai sumber devisa negara adalah...', a:['Ekspor barang ke luar negeri','Impor barang dari luar negeri','Membayar pajak','Membeli di pasar lokal'], c:0 },
+    { q:'Contoh ekonomi kreator sebagai pelaku ekonomi baru adalah...', a:['Content creator di media sosial','Petani tradisional','Nelayan','Tukang parkir'], c:0 },
+    { q:'Dompet digital (e-wallet) berfungsi untuk...', a:['Menggantikan uang tunai dalam transaksi','Menyimpan barang','Membuat makanan','Mengantar barang'], c:0 },
+    { q:'Fintech adalah...', a:['Layanan keuangan berbasis teknologi','Pertanian modern','Industri tekstil','Pertambangan'], c:0 },
+    { q:'UMKM Go Digital bertujuan...', a:['Menjangkau pasar lebih luas','Menutup usaha','Mengurangi karyawan','Menghindari pajak'], c:0 },
+    { q:'Marketplace adalah...', a:['Platform online yang menghubungkan penjual dan pembeli','Toko fisik','Pasar tradisional','Gudang penyimpanan'], c:0 },
+    { q:'Peran RTK di era digital adalah...', a:['Belanja online via e-commerce','Bertani','Menambang','Membuat jalan'], c:0 },
+    { q:'Peran RTP di era digital adalah...', a:['Berjualan di marketplace & media sosial','Membeli di pasar','Menjadi pegawai negeri','Menjadi TNI'], c:0 },
+    { q:'Peran pemerintah di era digital adalah...', a:['Menyediakan layanan e-government','Menjual barang di pasar','Menjadi petani','Menjadi nelayan'], c:0 },
+    { q:'Peran RTMLN di era digital adalah...', a:['E-commerce lintas negara & transfer digital','Menjual di pasar tradisional','Bertani di sawah','Menambang emas'], c:0 },
+    { q:'Koperasi di era digital perlu didukung oleh...', a:['Teknologi keuangan & tata kelola modern','Kekuasaan','Persaingan bebas','Kekerasan'], c:0 },
+    { q:'QRIS adalah contoh...', a:['Pembayaran digital','Pajak','Subsidi','Upah'], c:0 },
+    { q:'E-commerce adalah...', a:['Perdagangan elektronik','Pertanian modern','Industri manufaktur','Pertambangan'], c:0 },
+    { q:'Kesenjangan digital adalah...', a:['Kesenjangan akses teknologi','Kesenjangan ekonomi','Kesenjangan sosial','Kesenjangan budaya'], c:0 },
+    { q:'Pelaku ekonomi era digital harus...', a:['Bijak dan literat secara digital','Menghindari teknologi','Menolak perubahan','Tidak peduli'], c:0 }
+  ]
+};
+
+/* ---------- EVENTS ---------- */
+const EVENTS = [
+  { icon:'🌾', title:'Musim Panen Raya', desc:'Hasil pertanian melimpah.', move:+2, type:'pos' },
+  { icon:'💼', title:'Investor Asing Masuk', desc:'Modal asing mengalir (peran RTMLN).', move:+3, type:'pos' },
+  { icon:'✈️', title:'Wisatawan Mancanegara', desc:'Devisa pariwisata naik.', move:+3, type:'pos' },
+  { icon:'📚', title:'Literasi Ekonomi', desc:'Masyarakat makin cerdas.', move:+2, type:'pos' },
+  { icon:'🌍', title:'Krisis Global', desc:'Ekspor menurun.', move:-4, type:'neg' },
+  { icon:'🌊', title:'Bencana Alam', desc:'Infrastruktur rusak.', move:-3, type:'neg' },
+  { icon:'📈', title:'Inflasi Naik', desc:'Harga barang naik.', move:-2, type:'neg' },
+  { icon:'⚡', title:'Terobosan Teknologi', desc:'Inovasi digital (ekonomi digital).', move:+4, type:'pos' },
+  { icon:'🎁', title:'Bonus Ekonomi', desc:'Insentif untukmu.', move:+2, type:'pos' },
+  { icon:'🏭', title:'Pabrik Baru BUMN', desc:'Pemerintah sebagai produsen.', move:+3, type:'pos' },
+  { icon:'🤝', title:'Koperasi Berdaya', desc:'Kesejahteraan anggota naik.', move:+2, type:'pos' },
+  { icon:'📉', title:'UMKM Terdampak', desc:'Penjualan menurun.', move:-2, type:'neg' }
+];
+
+/* ============================================================
+   GAME
+   ============================================================ */
+const Game = {
+  state: {
+    players: [], turnIdx: 0, phase: 'idle', totalPlayers: 2,
+    winner: null, mounted: false, level: 1
+  },
+
+  LEVEL_NAMES: { 1:'Dasar', 2:'Menengah', 3:'Mahir', 4:'Tantangan' },
+
+  setLevel(lvl){
+    Audio.click();
+    this.state.level = lvl;
+    document.body.setAttribute('data-level', lvl);
+    document.getElementById('lvlBadge').textContent = 'LEVEL ' + lvl;
+    // Highlight kartu level
+    document.querySelectorAll('.lvl-card').forEach(c=>c.classList.remove('selected'));
+    const card = document.querySelector(`.lvl-card[data-level="${lvl}"]`);
+    if(card) card.classList.add('selected');
+    UI.toast(`🎯 Level ${lvl} — ${this.LEVEL_NAMES[lvl]}`, '25 soal · Siap dimainkan!', 'pos');
+  },
+
+  showScreen(name){
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    const el = document.getElementById('screen-'+name);
+    if(el) el.classList.add('active');
+  },
+  backToMenu(){ Audio.click(); this.showScreen('menu'); },
+
+  showRules(){
+    Audio.click();
+    UI.modal({
+      badge:'📘 CARA BERMAIN',
+      title:'Aturan Ular Tangga Ekonomi — 4 Level',
+      body:`
+        <p><b>Tujuan:</b> Jadilah pemain pertama yang mencapai <b>kotak 100</b>.</p>
+        <ul style="margin:12px 0 12px 18px;color:#cbd5e1;font-size:13px;line-height:1.8;">
+          <li>Pilih <b>level</b> di beranda (warna papan berubah).</li>
+          <li>Pilih <b>jumlah pemain</b> (2–4).</li>
+          <li>Klik <b>🎲 Lempar Dadu</b> di giliranmu.</li>
+          <li>Token bergerak maju sesuai angka dadu.</li>
+          <li>Jika mendarat di kotak khusus, ikuti efeknya:</li>
+        </ul>
+        <div style="background:rgba(5,15,30,.5);border-radius:10px;padding:14px;margin-bottom:14px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:13px;">
+            <span style="font-size:20px;">🪜</span><b style="color:#fbbf24;min-width:90px;">Tangga</b><span style="color:#94a3b8;">Naik ke kotak lebih tinggi</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:13px;">
+            <span style="font-size:20px;">🐍</span><b style="color:#f87171;min-width:90px;">Ular</b><span style="color:#94a3b8;">Turun ke kotak lebih rendah</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:13px;">
+            <span style="font-size:20px;">❓</span><b style="color:#c084fc;min-width:90px;">Pertanyaan</b><span style="color:#94a3b8;">Benar = +3 langkah, salah = diam</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;">
+            <span style="font-size:20px;">⚡</span><b style="color:#7dd3fc;min-width:90px;">Event</b><span style="color:#94a3b8;">Maju/mundur acak</span>
+          </div>
+        </div>
+        <p style="color:#64748b;font-size:12px;">Materi soal sesuai Bab 5 — Peran Pelaku Ekonomi. Total 100 soal (25 soal/level).</p>
+      `,
+      actions:[{label:'Tutup', style:'ghost'}]
+    });
+  },
+
+  start(numPlayers){
+    Audio.click();
+    this.state.totalPlayers = numPlayers;
+    this.state.players = PLAYERS.slice(0, numPlayers).map((p,i)=>({
+      ...p, index:i, pos:0, finished:false
+    }));
+    this.state.turnIdx = 0;
+    this.state.phase = 'idle';
+    this.state.winner = null;
+
+    this.showScreen('game');
+    this.renderBoard();
+    requestAnimationFrame(()=>{
+      this.state.mounted = true;
+      this.renderTokens();
+    });
+    this.renderPlayerList();
+    this.updateTurnUI();
+    document.getElementById('logList').innerHTML = '';
+    document.getElementById('diceVal').textContent = '–';
+    this.log(`Level ${this.state.level} — ${this.LEVEL_NAMES[this.state.level]} dimulai!`, '');
+    this.log(`Giliran ${this.state.players[0].name} — lempar dadu!`, 'warn');
+    document.getElementById('rollBtn').disabled = false;
+  },
+
+  cellPos(n){
+    const r = Math.floor((n-1)/10);
+    const c0 = (n-1) % 10;
+    const c = (r % 2 === 0) ? c0 : 9 - c0;
+    return { row: 9 - r, col: c };
+  },
+
+  getCellType(n){
+    if(n === 1) return 'start';
+    if(n === 100) return 'finish';
+    if(LADDERS[n]) return 'ladder';
+    if(SNAKES[n]) return 'snake';
+    if(Object.values(LADDERS).includes(n)) return 'ladder-target';
+    if(Object.values(SNAKES).includes(n)) return 'snake-target';
+    if(Q_CELLS.includes(n)) return 'question';
+    if(E_CELLS.includes(n)) return 'event';
+    return 'normal';
+  },
+
+  renderBoard(){
+    const board = document.getElementById('board');
+    board.innerHTML = '<svg class="board-connections" id="boardSvg" xmlns="http://www.w3.org/2000/svg"></svg>';
+
+    for(let n=1; n<=100; n++){
+      const {row, col} = this.cellPos(n);
+      const cell = document.createElement('div');
+      const type = this.getCellType(n);
+      cell.className = 'cell' + (type === 'normal' ? '' : ' ' + type);
+      cell.style.gridRow = (row+1);
+      cell.style.gridColumn = (col+1);
+      cell.dataset.n = n;
+
+      let icon = '';
+      if(type === 'ladder') icon = '🪜';
+      else if(type === 'snake') icon = '🐍';
+      else if(type === 'question') icon = '❓';
+      else if(type === 'event') icon = '⚡';
+      else if(type === 'start') icon = '🏁';
+      else if(type === 'finish') icon = '🏆';
+
+      cell.innerHTML = `<span class="num">${n}</span>${icon ? `<span class="icon">${icon}</span>` : ''}`;
+      board.appendChild(cell);
+    }
+
+    requestAnimationFrame(()=>this.drawConnections());
+  },
+
+  drawConnections(){
+    const board = document.getElementById('board');
+    const svg = document.getElementById('boardSvg');
+    if(!board || !svg) return;
+
+    const boardRect = board.getBoundingClientRect();
+    svg.setAttribute('viewBox', `0 0 ${boardRect.width} ${boardRect.height}`);
+    svg.setAttribute('preserveAspectRatio', 'none');
+
+    const cellSize = boardRect.width / 10;
+    let html = '';
+
+    Object.entries(LADDERS).forEach(([from, to], idx)=>{
+      const a = this.centerOf(board, from, boardRect);
+      const b = this.centerOf(board, to, boardRect);
+      if(a && b){
+        const color = LADDER_PALETTE[idx % LADDER_PALETTE.length];
+        html += this.ladderSvg(a, b, cellSize, color);
+      }
+    });
+
+    Object.entries(SNAKES).forEach(([from, to], idx)=>{
+      const a = this.centerOf(board, from, boardRect);
+      const b = this.centerOf(board, to, boardRect);
+      if(a && b){
+        const color = SNAKE_PALETTE[idx % SNAKE_PALETTE.length];
+        html += this.snakeSvg(a, b, cellSize, color);
+      }
+    });
+
+    svg.innerHTML = html;
+  },
+
+  centerOf(board, n, boardRect){
+    const cell = board.querySelector(`.cell[data-n="${n}"]`);
+    if(!cell) return null;
+    const r = cell.getBoundingClientRect();
+    return {
+      x: r.left + r.width/2 - boardRect.left,
+      y: r.top + r.height/2 - boardRect.top
+    };
+  },
+
+  ladderSvg(a, b, cellSize, color){
+    const dx = b.x - a.x, dy = b.y - a.y;
+    const len = Math.hypot(dx, dy);
+    if(len < 1) return '';
+    const ux = dx/len, uy = dy/len;
+    const px = -uy, py = ux;
+
+    const railOff = cellSize * 0.13;
+    const railW  = Math.max(2.5, cellSize * 0.05);
+    const rungW  = Math.max(1.8, cellSize * 0.04);
+
+    const a1 = { x: a.x + px*railOff, y: a.y + py*railOff };
+    const a2 = { x: a.x - px*railOff, y: a.y - py*railOff };
+    const b1 = { x: b.x + px*railOff, y: b.y + py*railOff };
+    const b2 = { x: b.x - px*railOff, y: b.y - py*railOff };
+
+    let s = '<g class="ladder-conn">';
+    s += `<line x1="${a1.x+1.5}" y1="${a1.y+1.5}" x2="${b1.x+1.5}" y2="${b1.y+1.5}" stroke="rgba(0,0,0,.55)" stroke-width="${railW+1}" stroke-linecap="round"/>`;
+    s += `<line x1="${a2.x+1.5}" y1="${a2.y+1.5}" x2="${b2.x+1.5}" y2="${b2.y+1.5}" stroke="rgba(0,0,0,.55)" stroke-width="${railW+1}" stroke-linecap="round"/>`;
+    s += `<line x1="${a1.x}" y1="${a1.y}" x2="${b1.x}" y2="${b1.y}" stroke="${color.dark}" stroke-width="${railW+1.5}" stroke-linecap="round"/>`;
+    s += `<line x1="${a2.x}" y1="${a2.y}" x2="${b2.x}" y2="${b2.y}" stroke="${color.dark}" stroke-width="${railW+1.5}" stroke-linecap="round"/>`;
+    s += `<line x1="${a1.x}" y1="${a1.y}" x2="${b1.x}" y2="${b1.y}" stroke="${color.rail}" stroke-width="${railW}" stroke-linecap="round"/>`;
+    s += `<line x1="${a2.x}" y1="${a2.y}" x2="${b2.x}" y2="${b2.y}" stroke="${color.rail}" stroke-width="${railW}" stroke-linecap="round"/>`;
+    s += `<line x1="${a1.x}" y1="${a1.y-0.6}" x2="${b1.x}" y2="${b1.y-0.6}" stroke="${color.light}" stroke-width="${railW*0.35}" stroke-linecap="round"/>`;
+    s += `<line x1="${a2.x}" y1="${a2.y-0.6}" x2="${b2.x}" y2="${b2.y-0.6}" stroke="${color.light}" stroke-width="${railW*0.35}" stroke-linecap="round"/>`;
+
+    const rungCount = Math.max(3, Math.floor(len / (cellSize * 0.32)));
+    for(let i=1; i<=rungCount; i++){
+      const t = i / (rungCount + 1);
+      const x1 = a1.x + (b1.x - a1.x) * t;
+      const y1 = a1.y + (b1.y - a1.y) * t;
+      const x2 = a2.x + (b2.x - a2.x) * t;
+      const y2 = a2.y + (b2.y - a2.y) * t;
+      s += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${color.dark}" stroke-width="${rungW+1.2}" stroke-linecap="round"/>`;
+      s += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${color.rail}" stroke-width="${rungW}" stroke-linecap="round"/>`;
+      s += `<line x1="${x1}" y1="${y1-0.5}" x2="${x2}" y2="${y2-0.5}" stroke="${color.light}" stroke-width="${rungW*0.45}" stroke-linecap="round"/>`;
+    }
+    s += '</g>';
+    return s;
+  },
+
+  snakeSvg(head, tail, cellSize, color){
+    const dx = tail.x - head.x, dy = tail.y - head.y;
+    const len = Math.hypot(dx, dy);
+    if(len < 1) return '';
+    const ux = dx/len, uy = dy/len;
+    const px = -uy, py = ux;
+
+    const segments = Math.max(5, Math.round(len / (cellSize * 0.75)));
+    const amplitude = Math.min(cellSize * 0.45, len / 7);
+
+    let path = `M ${head.x.toFixed(1)} ${head.y.toFixed(1)}`;
+    for(let i=0; i<segments; i++){
+      const t1 = (i + 0.5) / segments;
+      const t2 = (i + 1) / segments;
+      const sign = (i % 2 === 0) ? 1 : -1;
+      const mx = head.x + dx * t1 + px * amplitude * sign;
+      const my = head.y + dy * t1 + py * amplitude * sign;
+      const ex = head.x + dx * t2;
+      const ey = head.y + dy * t2;
+      path += ` Q ${mx.toFixed(1)} ${my.toFixed(1)} ${ex.toFixed(1)} ${ey.toFixed(1)}`;
+    }
+
+    const bodyW = Math.max(6, cellSize * 0.13);
+    const headR = Math.max(9, cellSize * 0.22);
+
+    let s = '<g class="snake-conn">';
+    s += `<path d="${path}" fill="none" stroke="rgba(0,0,0,.55)" stroke-width="${bodyW+2}" stroke-linecap="round" stroke-linejoin="round" transform="translate(1.5,1.5)"/>`;
+    s += `<path d="${path}" fill="none" stroke="${color.dark}" stroke-width="${bodyW+2.5}" stroke-linecap="round" stroke-linejoin="round"/>`;
+    s += `<path d="${path}" fill="none" stroke="${color.body}" stroke-width="${bodyW}" stroke-linecap="round" stroke-linejoin="round"/>`;
+    s += `<path d="${path}" fill="none" stroke="${color.light}" stroke-width="${bodyW*0.6}" stroke-linecap="round" stroke-linejoin="round"/>`;
+    s += `<path d="${path}" fill="none" stroke="${color.belly}" stroke-width="${bodyW*0.3}" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="${bodyW*0.55} ${bodyW*0.9}"/>`;
+    s += `<path d="${path}" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="${bodyW*0.18}" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 4"/>`;
+
+    s += `<circle cx="${head.x}" cy="${head.y}" r="${headR}" fill="${color.dark}" stroke="${color.dark}" stroke-width="1.5"/>`;
+    s += `<circle cx="${head.x}" cy="${head.y}" r="${headR-1}" fill="${color.body}"/>`;
+    s += `<circle cx="${head.x}" cy="${head.y}" r="${headR*0.7}" fill="${color.light}"/>`;
+    const eyeR = headR * 0.24;
+    const eyeOX = headR * 0.38;
+    const eyeOY = headR * 0.28;
+    s += `<circle cx="${head.x - eyeOX}" cy="${head.y - eyeOY}" r="${eyeR}" fill="#fff"/>`;
+    s += `<circle cx="${head.x + eyeOX}" cy="${head.y - eyeOY}" r="${eyeR}" fill="#fff"/>`;
+    s += `<circle cx="${head.x - eyeOX}" cy="${head.y - eyeOY}" r="${eyeR*0.55}" fill="#000"/>`;
+    s += `<circle cx="${head.x + eyeOX}" cy="${head.y - eyeOY}" r="${eyeR*0.55}" fill="#000"/>`;
+    s += `<circle cx="${head.x - eyeOX - 0.6}" cy="${head.y - eyeOY - 0.6}" r="${eyeR*0.22}" fill="#fff"/>`;
+    s += `<circle cx="${head.x + eyeOX - 0.6}" cy="${head.y - eyeOY - 0.6}" r="${eyeR*0.22}" fill="#fff"/>`;
+    const tY = head.y - headR;
+    s += `<path d="M ${head.x} ${tY} L ${head.x} ${tY - headR*0.5} M ${head.x} ${tY - headR*0.5} L ${head.x - headR*0.3} ${tY - headR*0.9} M ${head.x} ${tY - headR*0.5} L ${head.x + headR*0.3} ${tY - headR*0.9}" stroke="${color.body}" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+
+    s += '</g>';
+    return s;
+  },
+
+  renderTokens(){
+    document.querySelectorAll('.token').forEach(t=>t.remove());
+    const board = document.getElementById('board');
+    if(!board) return;
+
+    const byPos = {};
+    this.state.players.forEach(p=>{
+      if(p.pos < 1) return;
+      if(!byPos[p.pos]) byPos[p.pos] = [];
+      byPos[p.pos].push(p);
+    });
+
+    Object.entries(byPos).forEach(([pos, players])=>{
+      const n = parseInt(pos);
+      const {row, col} = this.cellPos(n);
+      const total = players.length;
+      players.forEach((p, i)=>{
+        const token = document.createElement('div');
+        token.className = 'token ' + p.id;
+        token.innerHTML = `<span class="ic">${p.icon}</span>`;
+        const baseX = col * 10 + 5;
+        const baseY = row * 10 + 5;
+        const offsetX = (i - (total-1)/2) * 2.4;
+        token.style.left = (baseX + offsetX) + '%';
+        token.style.top = (baseY) + '%';
+        board.appendChild(token);
+      });
+    });
+  },
+
+  renderPlayerList(){
+    const list = document.getElementById('playerList');
+    list.innerHTML = '';
+    this.state.players.forEach((p, i)=>{
+      const el = document.createElement('div');
+      el.className = 'player-item ' + p.id + (i === this.state.turnIdx ? ' turn' : '');
+      el.innerHTML = `
+        <div class="pic">${p.icon}</div>
+        <div class="info">
+          <div class="nm">${p.name} <span style="color:#64748b;font-weight:500;font-size:10px;">(${p.role})</span></div>
+          <div class="pos">Kotak ${p.pos === 0 ? '—' : p.pos}</div>
+        </div>
+        ${p.finished ? '<div class="wins">🏆</div>' : ''}
+      `;
+      list.appendChild(el);
+    });
+  },
+
+  updateTurnUI(){
+    const p = this.state.players[this.state.turnIdx];
+    if(!p) return;
+    const who = document.getElementById('whoTurn');
+    who.className = 'who ' + p.id;
+    who.innerHTML = `<span class="dot"></span>${p.name} <span style="color:#64748b;font-weight:500;font-size:11px;">(${p.role})</span>`;
+    this.renderPlayerList();
+  },
+
+  log(html, cls=''){
+    const list = document.getElementById('logList');
+    const el = document.createElement('div');
+    el.className = 'log-item ' + cls;
+    el.innerHTML = html;
+    list.appendChild(el);
+    list.scrollTop = list.scrollHeight;
+  },
+
+  renderDice(value){
+    const dice = document.getElementById('dice');
+    const pipCount = value;
+    const posMap = {
+      1: [4],
+      2: [0,8],
+      3: [0,4,8],
+      4: [0,2,6,8],
+      5: [0,2,4,6,8],
+      6: [0,2,3,5,6,8]
+    };
+    const on = posMap[pipCount] || [];
+    let html = '';
+    for(let i=0;i<9;i++){
+      html += `<div class="pip${on.includes(i)?' on':''}"></div>`;
+    }
+    dice.innerHTML = html;
+    document.getElementById('diceVal').textContent = value || '–';
+  },
+
+  async roll(){
+    if(this.state.phase !== 'idle') return;
+    if(this.state.winner) return;
+    this.state.phase = 'rolling';
+    document.getElementById('rollBtn').disabled = true;
+
+    const p = this.state.players[this.state.turnIdx];
+    const dice = document.getElementById('dice');
+    Audio.dice();
+
+    dice.classList.add('rolling');
+    const rollInterval = setInterval(()=>{
+      const rv = 1 + Math.floor(Math.random() * 6);
+      this.renderDice(rv);
+    }, 80);
+
+    await this.sleep(600);
+    clearInterval(rollInterval);
+    dice.classList.remove('rolling');
+
+    const value = 1 + Math.floor(Math.random() * 6);
+    this.renderDice(value);
+
+    this.log(`<b>${p.name}</b> melempar: <b style="color:var(--accent);">${value}</b>`, '');
+    UI.toast(`🎲 ${value}`, `${p.name} jalan ${value} langkah`, 'pos');
+
+    await this.sleep(400);
+    await this.movePlayer(p, value);
+    await this.resolveCell(p);
+  },
+
+  async movePlayer(p, steps){
+    this.state.phase = 'moving';
+    for(let i=0; i<steps; i++){
+      if(p.pos >= 100) break;
+      p.pos += 1;
+      this.renderTokens();
+      this.renderPlayerList();
+      Audio.step();
+      await this.sleep(220);
+    }
+    if(p.pos >= 100){
+      p.pos = 100;
+      p.finished = true;
+      this.renderTokens();
+      this.renderPlayerList();
+    }
+  },
+
+  async resolveCell(p){
+    this.state.phase = 'resolving';
+
+    if(p.pos >= 100){
+      this.state.winner = p;
+      this.log(`🏆 <b style="color:#fbbf24;">${p.name} MENCAPAI FINISH!</b>`, 'pos');
+      Audio.win();
+      await this.sleep(900);
+      this.showWin();
+      return;
+    }
+
+    if(LADDERS[p.pos]){
+      const target = LADDERS[p.pos];
+      Audio.ladder();
+      this.log(`🪜 <b>${p.name}</b> naik tangga: ${p.pos} → ${target}`, 'pos');
+      UI.toast('🪜 Naik Tangga!', `${p.pos} → ${target}`, 'pos');
+      await this.sleep(500);
+      p.pos = target;
+      this.renderTokens();
+      this.renderPlayerList();
+      await this.sleep(800);
+      this.endTurn();
+      return;
+    }
+
+    if(SNAKES[p.pos]){
+      const target = SNAKES[p.pos];
+      Audio.snake();
+      this.log(`🐍 <b>${p.name}</b> kena ular: ${p.pos} → ${target}`, 'neg');
+      UI.toast('🐍 Kena Ular!', `${p.pos} → ${target}`, 'neg');
+      await this.sleep(500);
+      p.pos = target;
+      this.renderTokens();
+      this.renderPlayerList();
+      await this.sleep(800);
+      this.endTurn();
+      return;
+    }
+
+    if(Q_CELLS.includes(p.pos)){ await this.askQuestion(p); return; }
+    if(E_CELLS.includes(p.pos)){ await this.triggerEvent(p); return; }
+
+    this.endTurn();
+  },
+
+  getQuestion(){
+    const pool = QUESTIONS_BY_LEVEL[this.state.level] || QUESTIONS_BY_LEVEL[1];
+    return pool[Math.floor(Math.random() * pool.length)];
+  },
+
+  async askQuestion(p){
+    const q = this.getQuestion();
+    Audio.event();
+
+    const choiceHtml = q.a.map((txt, i)=>
+      `<button class="choice" data-i="${i}"><span class="key">${String.fromCharCode(65+i)}</span>${txt}</button>`
+    ).join('');
+
+    const correct = await new Promise(resolve=>{
+      UI.modal({
+        badge:'❓ PERTANYAAN · LEVEL ' + this.state.level,
+        title:'',
+        body:`
+          <p style="font-size:12px;color:#64748b;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-bottom:6px;">Kotak ${p.pos} · ${p.name}</p>
+          <h2 style="font-size:16px;color:#e0f2fe;line-height:1.5;margin-bottom:10px;">${q.q}</h2>
+          <div class="choices">${choiceHtml}</div>
+        `,
+        actions:[], noClose:true
+      });
+
+      document.querySelectorAll('.choice').forEach(btn=>{
+        btn.onclick = ()=>{
+          const picked = parseInt(btn.dataset.i);
+          const isCorrect = picked === q.c;
+          document.querySelectorAll('.choice').forEach(b=>{
+            b.disabled = true;
+            if(parseInt(b.dataset.i) === q.c) b.classList.add('correct');
+            else if(parseInt(b.dataset.i) === picked) b.classList.add('wrong');
+          });
+          if(isCorrect){
+            Audio.correct();
+            this.log(`✅ <b>${p.name}</b> BENAR! +3 langkah`, 'pos');
+          } else {
+            Audio.wrong();
+            this.log(`❌ <b>${p.name}</b> SALAH. Diam.`, 'neg');
+          }
+          setTimeout(()=>{ UI.closeModal(); resolve(isCorrect); }, 1500);
+        };
+      });
+    });
+
+    if(correct){
+      await this.movePlayer(p, 3);
+      if(p.pos >= 100){
+        p.finished = true;
+        p.pos = 100;
+        this.state.winner = p;
+        this.renderTokens();
+        this.renderPlayerList();
+        Audio.win();
+        await this.sleep(700);
+        this.showWin();
+        return;
+      }
+    }
+    this.endTurn();
+  },
+
+  async triggerEvent(p){
+    const ev = EVENTS[Math.floor(Math.random() * EVENTS.length)];
+    Audio.event();
+
+    await new Promise(resolve=>{
+      UI.modal({
+        badge:'⚡ EVENT EKONOMI · LEVEL ' + this.state.level,
+        title:'',
+        body:`
+          <div style="text-align:center;">
+            <div class="emoji-big">${ev.icon}</div>
+            <h2 class="big" style="background:linear-gradient(135deg,#e0f2fe,var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">${ev.title}</h2>
+            <p style="margin-top:8px;">${ev.desc}</p>
+            <div style="margin-top:16px;font-size:22px;font-weight:900;color:${ev.type==='pos'?'#34d399':'#f87171'};">
+              ${ev.move > 0 ? '▲' : '▼'} ${Math.abs(ev.move)} langkah
+            </div>
+          </div>
+        `,
+        actions:[{ label:'Lanjut →', onClick:()=>resolve() }],
+        noClose:true
+      });
+      setTimeout(()=>{
+        if(document.getElementById('modalBack').classList.contains('show')){
+          UI.closeModal(); resolve();
+        }
+      }, 4000);
+    });
+
+    if(ev.move > 0){
+      this.log(`⚡ <b>${p.name}</b>: ${ev.title} → maju ${ev.move}`, 'pos');
+      await this.sleep(300);
+      await this.movePlayer(p, ev.move);
+      if(p.pos >= 100){
+        p.finished = true;
+        p.pos = 100;
+        this.state.winner = p;
+        this.renderTokens();
+        this.renderPlayerList();
+        Audio.win();
+        await this.sleep(700);
+        this.showWin();
+        return;
+      }
+    } else {
+      this.log(`⚡ <b>${p.name}</b>: ${ev.title} → mundur ${Math.abs(ev.move)}`, 'neg');
+      await this.sleep(300);
+      for(let i=0; i<Math.abs(ev.move); i++){
+        if(p.pos <= 1) break;
+        p.pos -= 1;
+        this.renderTokens();
+        this.renderPlayerList();
+        Audio.step();
+        await this.sleep(200);
+      }
+    }
+    this.endTurn();
+  },
+
+  endTurn(){
+    if(this.state.winner) return;
+    this.state.phase = 'idle';
+    this.state.turnIdx = (this.state.turnIdx + 1) % this.state.players.length;
+    let safety = 0;
+    while(this.state.players[this.state.turnIdx].finished && safety < 10){
+      this.state.turnIdx = (this.state.turnIdx + 1) % this.state.players.length;
+      safety++;
+    }
+    this.updateTurnUI();
+    const p = this.state.players[this.state.turnIdx];
+    this.log(`— Giliran ${p.name} —`, 'warn');
+    document.getElementById('rollBtn').disabled = false;
+  },
+
+  showWin(){
+    const p = this.state.winner;
+    const sorted = [...this.state.players].sort((a,b)=>b.pos - a.pos);
+    const card = document.getElementById('winCard');
+    card.innerHTML = `
+      <div class="crown">👑</div>
+      <h2>SELAMAT!</h2>
+      <div class="winner-name">
+        <span class="dot" style="background:${p.color};box-shadow:0 0 12px ${p.color};"></span>
+        ${p.name} (${p.role}) Menang!
+      </div>
+      <div class="rank-list">
+        ${sorted.map((pl, i)=>{
+          const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '🏅';
+          return `<div class="rank-item">
+            <span class="name">${medal} <span class="dot" style="background:${pl.color};box-shadow:0 0 8px ${pl.color};"></span>${pl.name}</span>
+            <span class="pos">Kotak ${pl.pos}</span>
+          </div>`;
+        }).join('')}
+      </div>
+      <p style="color:#94a3b8;font-size:12px;line-height:1.7;margin-bottom:20px;">
+        🎓 <b style="color:var(--accent);">Refleksi:</b> Setiap pelaku ekonomi punya peran penting. Keberuntungan dadu dan pengetahuan ekonomi sama-sama menentukan kemenangan!
+      </p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn ghost" onclick="Game.backToMenu()">🏠 Menu</button>
+        <button class="btn primary" onclick="Game.start(Game.state.totalPlayers)">🔄 Main Lagi</button>
+      </div>
+    `;
+    this.showScreen('win');
+  },
+
+  sleep(ms){ return new Promise(r=>setTimeout(r, ms)); }
+};
+
+/* ============================================================
+   UI MODAL
+   ============================================================ */
+const UI = {
+  modal({badge, title, body, actions=[], noClose=false}){
+    const box = document.getElementById('modalBox');
+    box.innerHTML = `
+      ${badge ? `<span class="badge ${badge.includes('❓')?'q':'ev'}">${badge}</span>` : ''}
+      ${title ? `<h2>${title}</h2>` : ''}
+      <div>${body}</div>
+      ${actions.length ? `<div class="row">${actions.map((a,i)=>`<button class="btn ${a.style||'primary'}" data-a="${i}">${a.label}</button>`).join('')}</div>` : ''}
+    `;
+    document.getElementById('modalBack').classList.add('show');
+    if(!noClose){
+      document.getElementById('modalBack').onclick = (e)=>{
+        if(e.target.id === 'modalBack') UI.closeModal();
+      };
+    } else {
+      document.getElementById('modalBack').onclick = null;
+    }
+    actions.forEach((a,i)=>{
+      const btn = box.querySelector(`[data-a="${i}"]`);
+      if(btn) btn.onclick = ()=>{ Audio.click(); UI.closeModal(); if(a.onClick) a.onClick(); };
+    });
+  },
+  closeModal(){ document.getElementById('modalBack').classList.remove('show'); },
+  toast(title, text, type='pos'){
+    const wrap = document.getElementById('toastWrap');
+    const t = document.createElement('div');
+    t.className = 'toast ' + type;
+    t.innerHTML = `<span style="font-size:18px;">${type==='pos'?'✅':'❌'}</span><div><b>${title}</b><br><small style="color:#94a3b8;">${text}</small></div>`;
+    wrap.appendChild(t);
+    setTimeout(()=>t.classList.add('fade'), 2400);
+    setTimeout(()=>t.remove(), 3000);
+  }
+};
+
+/* ============================================================
+   INIT
+   ============================================================ */
+window.addEventListener('load', ()=>{
+  Game.renderDice(1);
+  setTimeout(()=>{
+    const ld = document.getElementById('loader');
+    if(ld){ ld.classList.add('hide'); setTimeout(()=>ld.remove(), 800); }
+    Game.showScreen('menu');
+    Game.setLevel(1); // Set default level 1
+  }, 2400);
+});
+setTimeout(()=>{
+  const ld = document.getElementById('loader');
+  if(ld && !ld.classList.contains('hide')){
+    ld.classList.add('hide');
+    Game.showScreen('menu');
+    Game.setLevel(1);
+    setTimeout(()=>ld.remove(), 800);
+  }
+}, 5000);
+
+document.addEventListener('keydown', (e)=>{
+  if(e.code === 'Space'){
+    e.preventDefault();
+    const btn = document.getElementById('rollBtn');
+    if(btn && !btn.disabled && document.getElementById('screen-game').classList.contains('active')) btn.click();
+  }
+  if(e.key === 'Escape') UI.closeModal();
+});
+
+let resizeT;
+window.addEventListener('resize', ()=>{
+  clearTimeout(resizeT);
+  resizeT = setTimeout(()=>{
+    if(Game.state.mounted){
+      Game.drawConnections();
+      Game.renderTokens();
+    }
+  }, 200);
+});
+</script>
+</body>
+</html>
