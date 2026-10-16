@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MGE — Bangun Rumah Impian Indonesia | Bab 6 Ekonomi</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+  :root{--bg:#050c17;--panel:#0b1b30;--line:#1b3b5d;--cyan:#38bdf8;--cyan2:#0ea5e9;
+    --purple:#a78bfa;--green:#10b981;--red:#ef4444;--amber:#f59e0b}
+  html,body{height:100%;overflow:hidden;background:var(--bg);color:#fff}
+
+  /* LOADER */
+  #loader{position:fixed;inset:0;z-index:9999;background:#07111f;display:flex;
+    flex-direction:column;align-items:center;justify-content:center;gap:22px;
+    transition:opacity .7s ease,visibility .7s ease}
+  #loader.hide{opacity:0;visibility:hidden;pointer-events:none}
+  #loader::before{content:'';position:absolute;inset:0;
+    background-image:linear-gradient(rgba(56,189,248,.06) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(56,189,248,.06) 1px,transparent 1px);
+    background-size:44px 44px;mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%);
+    -webkit-mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%);
+    animation:gridMove 12s linear infinite}
+  @keyframes gridMove{to{background-position:44px 44px}}
+  #loader::after{content:'';position:absolute;width:520px;height:520px;border-radius:50%;
+    background:radial-gradient(circle,rgba(14,165,233,.35),transparent 65%);
+    filter:blur(90px);animation:orbPulse 3s ease-in-out infinite}
+  @keyframes orbPulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.15);opacity:1}}
+  .mge-logo-wrap{position:relative;z-index:1;width:140px;height:140px;display:flex;
+    align-items:center;justify-content:center;animation:logoFloat 3s ease-in-out infinite}
+  @keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  .mge-ring-outer{position:absolute;inset:0;border-radius:50%;border:2px solid transparent;
+    border-top-color:#38bdf8;border-right-color:#818cf8;border-left-color:#a78bfa;
+    animation:spinRing 1.6s linear infinite;filter:drop-shadow(0 0 8px rgba(56,189,248,.9))}
+  .mge-ring-inner{position:absolute;inset:12px;border-radius:50%;
+    border:1.5px dashed rgba(56,189,248,.5);animation:spinRingR 4s linear infinite}
+  @keyframes spinRing{to{transform:rotate(360deg)}}
+  @keyframes spinRingR{to{transform:rotate(-360deg)}}
+  .mge-circle{position:absolute;inset:20px;border-radius:50%;
+    background:radial-gradient(circle at 30% 25%,#1e3a5f 0%,#0b1b30 55%,#050d18 100%);
+    box-shadow:0 0 0 1px rgba(56,189,248,.35) inset,0 0 24px rgba(14,165,233,.55),
+      0 0 60px rgba(56,189,248,.35),inset 0 -8px 20px rgba(0,0,0,.6);
+    display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .mge-circle::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+    background:conic-gradient(from 0deg,transparent 0%,rgba(56,189,248,.25) 20%,transparent 40%);
+    animation:shimmer 3s linear infinite}
+  @keyframes shimmer{to{transform:rotate(360deg)}}
+  .mge-text{position:relative;font-size:42px;font-weight:900;letter-spacing:2px;
+    background:linear-gradient(180deg,#e0f2fe 0%,#38bdf8 45%,#6366f1 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    text-shadow:0 4px 8px rgba(0,0,0,.6),0 0 22px rgba(56,189,248,.85);z-index:2}
+  .brand-text{position:relative;z-index:1;display:flex;align-items:center;gap:10px}
+  .brand-text .brand-line{width:26px;height:1px;
+    background:linear-gradient(90deg,transparent,#38bdf8,transparent)}
+  .brand-text .brand-label{font-size:12px;font-weight:700;letter-spacing:5px;
+    background:linear-gradient(90deg,#38bdf8,#a78bfa,#38bdf8);background-size:200% 100%;
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    animation:brandShine 3.5s linear infinite;white-space:nowrap}
+  @keyframes brandShine{to{background-position:200% 50%}}
+  .loader-title{position:relative;z-index:1;font-size:14px;font-weight:bold;
+    letter-spacing:4px;text-transform:uppercase;color:#cbd5e1}
+  .loader-sub{position:relative;z-index:1;color:#64748b;font-size:11px;letter-spacing:2px;
+    text-transform:uppercase}
+  .loader-bar{position:relative;z-index:1;width:240px;height:4px;background:#132941;
+    border-radius:4px;overflow:hidden;margin-top:4px}
+  .loader-bar-fill{height:100%;width:0%;border-radius:4px;
+    background:linear-gradient(90deg,#0ea5e9,#38bdf8,#818cf8);
+    box-shadow:0 0 12px rgba(56,189,248,.7);
+    animation:loadFill 1.9s cubic-bezier(.65,.05,.36,1) forwards}
+  @keyframes loadFill{0%{width:0}40%{width:45%}70%{width:78%}100%{width:100%}}
+
+  /* APP */
+  #app{display:flex;flex-direction:column;height:100%}
+  header{padding:10px 18px;display:flex;justify-content:space-between;align-items:center;
+    background:#0b1b30;border-bottom:2px solid var(--cyan2);flex-shrink:0;z-index:60;gap:10px}
+  .logo{font-size:14px;font-weight:bold;color:var(--cyan);display:flex;align-items:center;
+    gap:8px;white-space:nowrap}
+  .logo .sub{color:#64748b;font-size:11px;font-weight:normal;letter-spacing:1px}
+  .hud-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+  .chip{background:#132941;border:1px solid #2a4a6a;border-radius:20px;padding:6px 14px;
+    font-size:12px;font-weight:bold;color:#7dd3fc;white-space:nowrap}
+  .chip b{color:#fff}
+  .btn-ghost{background:transparent;border:1px solid #2a4a6a;color:#94a3b8;border-radius:8px;
+    padding:6px 12px;font-size:12px;cursor:pointer;transition:.2s;font-weight:bold;font-family:inherit}
+  .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+
+  .stage{flex:1;display:flex;min-height:0;position:relative}
+  #view{position:relative;flex:1 1 58%;min-width:0;background:#050c17;overflow:hidden}
+  #view canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .view-hud{position:absolute;top:14px;left:14px;display:flex;gap:8px;flex-wrap:wrap;
+    pointer-events:none;z-index:5}
+  .view-hud .chip{background:rgba(11,27,48,.85);backdrop-filter:blur(6px)}
+  .view-hint{position:absolute;bottom:12px;left:14px;font-size:11px;color:#475569;
+    letter-spacing:.5px;pointer-events:none;z-index:5}
+  .progress-bar{position:absolute;bottom:0;left:0;right:0;height:4px;background:#0b1b30;z-index:4}
+  .progress-bar i{display:block;height:100%;width:0%;
+    background:linear-gradient(90deg,#0ea5e9,#38bdf8,#a78bfa);
+    box-shadow:0 0 12px rgba(56,189,248,.8);transition:width .6s cubic-bezier(.2,.9,.3,1)}
+
+  .preview-banner{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);
+    background:rgba(11,27,48,.9);backdrop-filter:blur(10px);border:1px solid #2a4a6a;
+    border-radius:14px;padding:10px 20px;font-size:12px;color:#94a3b8;
+    display:none;z-index:6;text-align:center;max-width:90%;
+    box-shadow:0 8px 30px rgba(0,0,0,.5);pointer-events:none}
+  .preview-banner.show{display:block;animation:slideUp .5s ease}
+  .preview-banner b{color:#38bdf8}
+
+  .encourage-banner{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);
+    background:linear-gradient(135deg,rgba(15,42,26,.95),rgba(10,31,18,.95));
+    backdrop-filter:blur(10px);border:1px solid #10b981;border-left:4px solid #34d399;
+    border-radius:14px;padding:14px 22px;font-size:13px;color:#d1fae5;line-height:1.6;
+    display:none;z-index:6;text-align:center;max-width:92%;
+    box-shadow:0 12px 40px rgba(16,185,129,.3);pointer-events:none}
+  .encourage-banner.show{display:block;animation:slideUp .6s ease}
+  .encourage-banner b{color:#34d399;display:block;margin-bottom:4px;font-size:14px}
+
+  @keyframes slideUp{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+
+  #panel{flex:0 0 42%;max-width:620px;background:linear-gradient(180deg,#0b1b30,#081524);
+    border-left:1px solid var(--line);overflow-y:auto;padding:18px 20px 30px;position:relative}
+  #panel::-webkit-scrollbar{width:7px}
+  #panel::-webkit-scrollbar-thumb{background:#1b3b5d;border-radius:4px}
+
+  .lvl-badge{display:flex;gap:12px;align-items:center;background:#132941;border:1px solid #2a4a6a;
+    border-radius:14px;padding:11px 14px;margin-bottom:12px}
+  .lvl-badge .ico{font-size:24px;line-height:1}
+  .lvl-name{font-size:13.5px;font-weight:bold;color:#38bdf8}
+  .lvl-sub{font-size:11px;color:#64748b;margin-top:2px;line-height:1.4}
+
+  .dots{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+  .dot{flex:1 1 calc(100%/7 - 6px);min-width:14px;height:6px;border-radius:4px;
+    background:#132941;border:1px solid #1b3b5d;transition:.4s}
+  .dot.on{background:linear-gradient(90deg,#10b981,#34d399);border-color:#10b981;
+    box-shadow:0 0 8px rgba(16,185,129,.7)}
+
+  .qnum{font-size:11px;font-weight:bold;letter-spacing:1.5px;color:#fbbf24;
+    text-transform:uppercase;margin-bottom:6px}
+  .qtext{font-size:15px;line-height:1.55;color:#e0f2fe;margin-bottom:14px;font-weight:bold}
+
+  .opt{display:flex;gap:11px;width:100%;text-align:left;background:#132941;
+    border:1px solid #2a4a6a;border-radius:11px;padding:11px 13px;color:#cbd5e1;
+    font-size:13px;cursor:pointer;transition:.2s;margin-bottom:8px;line-height:1.5;
+    font-family:inherit;align-items:flex-start}
+  .opt:hover:not(:disabled){background:#1b3b5d;border-color:var(--cyan);transform:translateX(3px)}
+  .opt .key{width:24px;height:24px;border-radius:7px;background:#1b3b5d;display:flex;
+    align-items:center;justify-content:center;font-weight:bold;color:#7dd3fc;
+    flex-shrink:0;font-size:12px;transition:.2s}
+  .opt.correct{background:#0f2a1a;border-color:var(--green);color:#d1fae5}
+  .opt.correct .key{background:var(--green);color:#04241a}
+  .opt.wrong{background:#2a1010;border-color:var(--red);color:#fecaca;opacity:.85}
+  .opt.wrong .key{background:var(--red);color:#2a0b0b}
+  .opt:disabled{cursor:default}
+  .opt.shake{animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}
+    40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+
+  .explain{display:none;margin-top:12px;padding:12px 14px;border-radius:11px;
+    font-size:12.5px;line-height:1.6;background:linear-gradient(135deg,#0f2a1a,#0a1f12);
+    border-left:4px solid var(--green);color:#d1fae5}
+  .explain.show{display:block;animation:slideUpSm .35s ease}
+  .explain.hint{background:linear-gradient(135deg,#2a1a0f,#1f1308);
+    border-left-color:var(--amber);color:#fef3c7}
+  .explain strong{color:#34d399}
+  .explain.hint strong{color:#fbbf24}
+  @keyframes slideUpSm{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+  .closing-box{background:linear-gradient(135deg,#0f2a1a,#0a1f12);border:1px solid #10b981;
+    border-radius:14px;padding:22px 20px;text-align:center;margin-top:6px;
+    animation:slideUpSm .5s ease}
+  .closing-box .cb-ico{font-size:42px;margin-bottom:8px;line-height:1}
+  .closing-box h3{color:#34d399;font-size:16px;margin-bottom:10px}
+  .closing-box p{color:#d1fae5;font-size:13px;line-height:1.7;margin-bottom:10px;text-align:justify}
+  .closing-box p:last-child{margin-bottom:0}
+  .closing-box .quote{color:#7dd3fc;font-style:italic;font-size:12.5px;
+    border-left:3px solid #38bdf8;padding-left:12px;text-align:left;margin-top:14px}
+
+  #toast{position:absolute;top:44%;left:50%;transform:translate(-50%,-50%) scale(.7);
+    font-size:26px;font-weight:900;letter-spacing:1px;opacity:0;pointer-events:none;
+    z-index:30;text-shadow:0 0 24px currentColor;transition:.3s}
+  #toast.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+
+  .overlay{position:absolute;inset:0;background:rgba(5,12,23,.9);backdrop-filter:blur(8px);
+    display:none;align-items:center;justify-content:center;z-index:70;padding:20px;
+    overflow-y:auto}
+  .overlay.show{display:flex;animation:fadeIn .3s ease}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+  .card{background:linear-gradient(160deg,#0f2337,#0b1b30);border:1px solid #2a4a6a;
+    border-radius:20px;padding:26px 26px;max-width:520px;width:100%;text-align:center;
+    box-shadow:0 24px 60px rgba(0,0,0,.6),0 0 0 1px rgba(56,189,248,.1) inset;
+    animation:popIn .45s cubic-bezier(.2,1.2,.3,1);margin:auto}
+  @keyframes popIn{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+  .card .big{font-size:48px;margin-bottom:8px;line-height:1}
+  .card h2{font-size:20px;color:#38bdf8;margin-bottom:8px}
+  .card p{color:#94a3b8;font-size:13px;line-height:1.65;margin-bottom:16px}
+  .card .stats{display:flex;gap:10px;justify-content:center;margin-bottom:18px;flex-wrap:wrap}
+  .stat{background:#132941;border:1px solid #2a4a6a;border-radius:11px;padding:9px 14px;min-width:86px}
+  .stat .v{font-size:18px;font-weight:900;color:#38bdf8}
+  .stat .l{font-size:10px;color:#64748b;letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+  .btn-main{background:linear-gradient(135deg,#0ea5e9,#0284c7);color:#fff;border:none;
+    border-radius:11px;padding:12px 28px;font-size:13.5px;font-weight:bold;cursor:pointer;
+    transition:.25s;box-shadow:0 6px 18px rgba(14,165,233,.35);font-family:inherit}
+  .btn-main:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(14,165,233,.55)}
+  .btn-main:active{transform:translateY(0)}
+  .btn-main.green{background:linear-gradient(135deg,#10b981,#059669);
+    box-shadow:0 6px 18px rgba(16,185,129,.4)}
+  .btn-main.green:hover{box-shadow:0 10px 24px rgba(16,185,129,.6)}
+
+  .house-select-card{max-width:980px;padding:24px}
+  .house-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+  .house-card{background:linear-gradient(170deg,#0f2337,#0b1b30);border:1.5px solid #2a4a6a;
+    border-radius:16px;padding:16px 14px;cursor:pointer;transition:.25s;text-align:center;
+    display:flex;flex-direction:column;gap:8px}
+  .house-card:hover,.house-card.hovered{border-color:var(--cyan);transform:translateY(-4px);
+    box-shadow:0 14px 30px rgba(14,165,233,.3)}
+  .house-card .h-ico{font-size:48px;line-height:1;margin-bottom:2px}
+  .house-card .h-name{font-size:14px;font-weight:bold;color:#e0f2fe;line-height:1.3}
+  .house-card .h-desc{font-size:11.5px;color:#94a3b8;line-height:1.5;flex:1}
+  .house-card .h-tag{display:inline-block;font-size:10px;font-weight:bold;letter-spacing:1px;
+    padding:3px 9px;border-radius:10px;background:#132941;color:#7dd3fc;margin-top:4px}
+
+  .finish-card{max-width:600px;background:linear-gradient(160deg,#0f2a1a,#0a1f12);
+    border:1.5px solid #10b981;box-shadow:0 24px 60px rgba(16,185,129,.3),
+      0 0 0 1px rgba(52,211,153,.15) inset}
+  .finish-card h2{color:#34d399}
+  .finish-card .big{filter:drop-shadow(0 0 20px rgba(52,211,153,.7))}
+  .finish-card p{color:#d1fae5}
+  .finish-card .stat{background:rgba(11,27,48,.7);border-color:#10b981}
+  .finish-card .stat .v{color:#34d399}
+  .finish-quote{margin:16px 0;padding:14px 16px;background:rgba(11,27,48,.5);
+    border-left:3px solid #38bdf8;border-radius:10px;color:#7dd3fc;font-style:italic;
+    font-size:12.5px;line-height:1.7;text-align:left}
+
+  @media (max-width:900px){
+    .stage{flex-direction:column}
+    #view{flex:0 0 42%}
+    #panel{flex:1 1 auto;max-width:none;border-left:none;border-top:1px solid var(--line);
+      padding:14px 14px 22px}
+    .logo .sub{display:none}
+    .qtext{font-size:13.5px}
+    .opt{font-size:12px;padding:10px 11px}
+    .card{padding:20px 18px}
+    .card h2{font-size:17px}
+    .house-grid{grid-template-columns:1fr}
+    .house-card{flex-direction:row;text-align:left;gap:14px;align-items:center;padding:12px 14px}
+    .house-card .h-ico{font-size:34px}
+    .house-card .h-info{flex:1}
+    .preview-banner{font-size:11px;padding:8px 14px}
+    .encourage-banner{font-size:11.5px;padding:11px 16px}
+  }
+
+  /* =====================================================
+     HOUSE SELECTION — overlay transparan agar pratinjau 3D
+     rumah lengkap tetap terlihat di belakang kartu
+     ===================================================== */
+  #houseOverlay.overlay{
+    background: linear-gradient(180deg,
+      rgba(5,12,23,.55) 0%,
+      rgba(5,12,23,.05) 22%,
+      rgba(5,12,23,.05) 55%,
+      rgba(5,12,23,.70) 85%,
+      rgba(5,12,23,.95) 100%);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    align-items: flex-end;
+    padding: 14px 14px 16px;
+    pointer-events: none;
+  }
+  #houseOverlay .house-select-card{
+    background: rgba(11,27,48,.9);
+    backdrop-filter: blur(16px) saturate(1.15);
+    -webkit-backdrop-filter: blur(16px) saturate(1.15);
+    border: 1px solid #2a4a6a;
+    border-radius: 16px;
+    padding: 14px 18px 16px;
+    max-width: 900px;
+    max-height: 82%;
+    overflow-y: auto;
+    margin: 0 auto;
+    pointer-events: auto;
+    box-shadow: 0 22px 55px rgba(0,0,0,.7),
+                0 0 0 1px rgba(56,189,248,.08) inset;
+  }
+  #houseOverlay .house-select-card .big   { font-size:30px;   margin-bottom:2px }
+  #houseOverlay .house-select-card h2     { font-size:15.5px; margin-bottom:4px }
+  #houseOverlay .house-select-card > p    { font-size:11.5px; margin-bottom:10px }
+  #houseOverlay .house-grid                { gap:10px; margin-top:8px }
+  #houseOverlay .house-card                { padding:11px 11px; border-radius:12px }
+  #houseOverlay .house-card .h-ico         { font-size:32px; margin-bottom:0 }
+  #houseOverlay .house-card .h-name        { font-size:12.5px }
+  #houseOverlay .house-card .h-desc        { font-size:10.5px; line-height:1.45 }
+  #houseOverlay .house-card .h-tag         { font-size:9px;  padding:2px 8px }
+
+  body:has(#houseOverlay.show) .preview-banner{
+    top: 58px;
+    bottom: auto;
+  }
+
+  @media (max-width:900px){
+    #houseOverlay.overlay{ padding: 8px 8px 10px; }
+    #houseOverlay .house-select-card{
+      padding:10px 12px 12px; border-radius:12px; max-height:88%;
+    }
+    #houseOverlay .house-select-card .big { font-size:22px;   margin-bottom:0 }
+    #houseOverlay .house-select-card h2   { font-size:13px;   margin-bottom:3px }
+    #houseOverlay .house-select-card > p  { display:none }
+    #houseOverlay .house-grid             { gap:6px; margin-top:6px }
+    #houseOverlay .house-card             { padding:8px 10px }
+    #houseOverlay .house-card .h-ico      { font-size:26px }
+    #houseOverlay .house-card .h-name     { font-size:12px }
+    #houseOverlay .house-card .h-desc     { font-size:10px }
+
+    body:has(#houseOverlay.show) .preview-banner{
+      top: 44px; bottom: auto;
+      font-size:10px; padding:6px 12px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="mge-logo-wrap">
+    <div class="mge-ring-outer"></div>
+    <div class="mge-ring-inner"></div>
+    <div class="mge-circle"><div class="mge-text">MGE</div></div>
+  </div>
+  <div class="brand-text">
+    <span class="brand-line"></span>
+    <span class="brand-label">MAEDA GAMES EDU</span>
+    <span class="brand-line"></span>
+  </div>
+  <div class="loader-title">Menyiapkan Lahan</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+  <div class="loader-sub">Bab 6 · 3 Rumah Impian Indonesia</div>
+</div>
+
+<div id="app">
+  <header>
+    <div class="logo">🏡 <span>RUMAH IMPIAN</span> <span class="sub">— BAB 6 EKONOMI</span></div>
+    <div class="hud-right">
+      <div class="chip">⭐ <b id="scoreVal">0</b></div>
+      <div class="chip">🧱 <b id="partsVal">0</b>/40</div>
+      <div class="chip" id="houseChip">🏠 —</div>
+      <button class="btn-ghost" id="resetCam">⟳ Kamera</button>
+    </div>
+  </header>
+
+  <div class="stage">
+    <div id="view">
+      <div class="view-hud">
+        <div class="chip" id="lvlChip">🏗️ Level 1</div>
+      </div>
+      <div class="view-hint">🖱️ Drag untuk memutar · Scroll untuk zoom</div>
+
+      <div class="preview-banner" id="previewBanner">
+        ✨ <b>Pratinjau Rumah Impianmu</b> — Beginilah hasil akhir jika semua soal terjawab dengan benar
+      </div>
+
+      <div class="encourage-banner" id="encourageBanner">
+        <b>🌟 Ilmu yang kamu bangun hari ini adalah fondasi masa depanmu</b>
+        Setiap jawaban benar adalah bata yang menyusun masa depan cerah. Teruslah belajar — karena pengetahuan adalah investasi terbaik yang tak akan pernah hilang.
+      </div>
+
+      <div id="toast"></div>
+      <div class="progress-bar"><i id="progressFill"></i></div>
+
+      <div class="overlay show" id="houseOverlay">
+        <div class="card house-select-card">
+          <div class="big">🏘️</div>
+          <h2>Pilih Rumah Impianmu</h2>
+          <p>Arahkan kursor ke setiap rumah untuk melihat <strong style="color:#38bdf8">pratinjau 3D hasil akhirnya</strong>. Setiap rumah memiliki <strong style="color:#38bdf8">soal sendiri yang unik</strong> — 40 soal (6 level).</p>
+          <div class="house-grid" id="houseGrid"></div>
+        </div>
+      </div>
+
+      <div class="overlay" id="startOverlay">
+        <div class="card">
+          <div class="big" id="stBig">🏡</div>
+          <h2 id="stTitle">Bangun Rumah Impian</h2>
+          <p id="stText">Jawab 40 pertanyaan dengan benar dan bangun rumah impianmu bagian demi bagian!</p>
+          <div class="stats">
+            <div class="stat"><div class="v">6</div><div class="l">Level</div></div>
+            <div class="stat"><div class="v">40</div><div class="l">Soal</div></div>
+            <div class="stat"><div class="v">40</div><div class="l">Bagian</div></div>
+          </div>
+          <button class="btn-main" id="startBtn">🚀 Mulai Membangun</button>
+          <button class="btn-ghost" id="backHouse" style="margin-top:10px;padding:9px 20px;font-size:12px">← Ganti Rumah</button>
+        </div>
+      </div>
+
+      <div class="overlay" id="lvlOverlay">
+        <div class="card">
+          <div class="big" id="lvlOvIcon">✅</div>
+          <h2 id="lvlOvTitle">Level Selesai!</h2>
+          <p id="lvlOvText">Bagian rumah berhasil dibangun.</p>
+          <div class="stats">
+            <div class="stat"><div class="v" id="lvlOvScore">0</div><div class="l">Poin</div></div>
+            <div class="stat"><div class="v" id="lvlOvParts">0</div><div class="l">Bagian</div></div>
+          </div>
+          <button class="btn-main" id="lvlNextBtn">Lanjut →</button>
+        </div>
+      </div>
+
+      <div class="overlay" id="finOverlay">
+        <div class="card finish-card">
+          <div class="big">🏡✨</div>
+          <h2>Rumah Impianmu Telah Berdiri!</h2>
+          <p id="finText">Selamat! Kamu telah menyelesaikan seluruh perjalanan belajar Bab 6.</p>
+          <div class="stats">
+            <div class="stat"><div class="v" id="finScore">0</div><div class="l">Poin</div></div>
+            <div class="stat"><div class="v" id="finAcc">0%</div><div class="l">Akurasi</div></div>
+            <div class="stat"><div class="v" id="finRank">—</div><div class="l">Peringkat</div></div>
+          </div>
+          <div class="finish-quote">
+            "Pendidikan adalah senjata paling ampuh untuk mengubah dunia." — Nelson Mandela
+          </div>
+          <p style="color:#a7f3d0;font-size:12.5px;margin-bottom:18px">
+            Kamu baru saja membangun lebih dari sekadar rumah — kamu membangun <strong style="color:#34d399">pemahaman</strong>,
+            <strong style="color:#34d399">ketekunan</strong>, dan <strong style="color:#34d399">fondasi ilmu</strong> yang akan menopang masa depanmu.
+          </p>
+          <button class="btn-main green" id="viewHouseBtn">🏠 Lihat Rumahku</button>
+        </div>
+      </div>
+    </div>
+
+    <aside id="panel">
+      <div class="lvl-badge">
+        <span class="ico" id="lvlIcon">🏗️</span>
+        <div>
+          <div class="lvl-name" id="lvlName">Level 1</div>
+          <div class="lvl-sub" id="lvlSub">Memuat…</div>
+        </div>
+      </div>
+      <div class="dots" id="dots"></div>
+      <div class="qnum" id="qnum">Soal 1 dari 6</div>
+      <div class="qtext" id="qtext">Memuat soal…</div>
+      <div id="opts"></div>
+      <div class="explain" id="explain"></div>
+    </aside>
+  </div>
+</div>
+
+<script>
+  setTimeout(function(){
+    var l = document.getElementById('loader');
+    if(l && !l.classList.contains('hide')){ l.classList.add('hide'); setTimeout(function(){l.remove();},800); }
+  }, 6000);
+</script>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+}}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+/* =========================================================
+   1. SCENE
+   ========================================================= */
+const viewEl = document.getElementById('view');
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x050c17);
+scene.fog = new THREE.FogExp2(0x050c17, 0.008);
+
+const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 800);
+camera.position.set(30, 22, 38);
+
+const renderer = new THREE.WebGLRenderer({ antialias:true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+viewEl.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(0, 4, 0);
+controls.enableDamping = true;
+controls.dampingFactor = 0.07;
+controls.enablePan = false;
+controls.minDistance = 20;
+controls.maxDistance = 80;
+controls.minPolarAngle = 0.20;
+controls.maxPolarAngle = Math.PI / 2 - 0.05;
+controls.autoRotate = true;
+controls.autoRotateSpeed = 0.42;
+
+scene.add(new THREE.HemisphereLight(0xb8d8ff, 0x0a1420, 1.0));
+const sun = new THREE.DirectionalLight(0xfff2d8, 2.5);
+sun.position.set(28, 42, 22);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+sun.shadow.camera.near = 1; sun.shadow.camera.far = 140;
+sun.shadow.camera.left = -40; sun.shadow.camera.right = 40;
+sun.shadow.camera.top = 40; sun.shadow.camera.bottom = -40;
+sun.shadow.bias = -0.0006;
+scene.add(sun);
+const rim = new THREE.DirectionalLight(0x818cf8, 1.0);
+rim.position.set(-24, 14, -22); scene.add(rim);
+const accent = new THREE.PointLight(0x38bdf8, 80, 50, 2);
+accent.position.set(0, 9, 0); scene.add(accent);
+
+const ground = new THREE.Mesh(
+  new THREE.CircleGeometry(120, 64),
+  new THREE.MeshStandardMaterial({ color:0x0a1626, roughness:0.95 })
+);
+ground.rotation.x = -Math.PI/2; ground.receiveShadow = true;
+scene.add(ground);
+const grid = new THREE.GridHelper(240, 240, 0x1b3b5d, 0x0f1f33);
+grid.position.y = 0.02; grid.material.transparent = true; grid.material.opacity = 0.4;
+scene.add(grid);
+const halo = new THREE.Mesh(
+  new THREE.RingGeometry(20, 27, 64),
+  new THREE.MeshBasicMaterial({ color:0x0ea5e9, transparent:true, opacity:0.09, side:THREE.DoubleSide })
+);
+halo.rotation.x = -Math.PI/2; halo.position.y = 0.04; scene.add(halo);
+
+/* =========================================================
+   2. MATERIALS
+   ========================================================= */
+const M = {
+  dark:      new THREE.MeshStandardMaterial({ color:0x0a1626, roughness:0.95 }),
+  paving:    new THREE.MeshStandardMaterial({ color:0x2c3a48, roughness:0.88 }),
+  paving2:   new THREE.MeshStandardMaterial({ color:0x3d4a58, roughness:0.85 }),
+  concrete:  new THREE.MeshStandardMaterial({ color:0xd8d2c4, roughness:0.9, metalness:0.05 }),
+  concrete2: new THREE.MeshStandardMaterial({ color:0x8a8674, roughness:0.9, metalness:0.05 }),
+  stone:     new THREE.MeshStandardMaterial({ color:0x9c8d76, roughness:0.95 }),
+  stoneDark: new THREE.MeshStandardMaterial({ color:0x5f5445, roughness:0.95 }),
+  wall:      new THREE.MeshStandardMaterial({ color:0xf0e6d2, roughness:0.88 }),
+  wallWarm:  new THREE.MeshStandardMaterial({ color:0xe8d4b0, roughness:0.88 }),
+  wood:      new THREE.MeshStandardMaterial({ color:0x8b5a2b, roughness:0.9 }),
+  woodDark:  new THREE.MeshStandardMaterial({ color:0x4a2e15, roughness:0.92 }),
+  teak:      new THREE.MeshStandardMaterial({ color:0x6b4420, roughness:0.85, metalness:0.1 }),
+  roofRed:   new THREE.MeshStandardMaterial({ color:0x8b2e1f, roughness:0.8 }),
+  roofBrown: new THREE.MeshStandardMaterial({ color:0x5c3a1e, roughness:0.85 }),
+  roofMetal: new THREE.MeshStandardMaterial({ color:0x4a5568, roughness:0.5, metalness:0.7 }),
+  glass:     new THREE.MeshStandardMaterial({ color:0x7dd3fc, transparent:true, opacity:0.42,
+                                              roughness:0.05, metalness:0.4,
+                                              emissive:0x0ea5e9, emissiveIntensity:0.3 }),
+  metal:     new THREE.MeshStandardMaterial({ color:0x2a2a2a, metalness:0.85, roughness:0.35 }),
+  metalLite: new THREE.MeshStandardMaterial({ color:0x94a3b8, metalness:0.85, roughness:0.3 }),
+  rust:      new THREE.MeshStandardMaterial({ color:0x8b4513, metalness:0.6, roughness:0.7 }),
+  glow:      new THREE.MeshStandardMaterial({ color:0x38bdf8, emissive:0x38bdf8, emissiveIntensity:2.4, roughness:0.4 }),
+  glowSoft:  new THREE.MeshStandardMaterial({ color:0x38bdf8, emissive:0x0ea5e9, emissiveIntensity:1.0, roughness:0.5 }),
+  neon:      new THREE.MeshStandardMaterial({ color:0xf472b6, emissive:0xf472b6, emissiveIntensity:2.4, roughness:0.4 }),
+  warmGlow:  new THREE.MeshStandardMaterial({ color:0xfbbf24, emissive:0xf59e0b, emissiveIntensity:2.0, roughness:0.4 }),
+  gold:      new THREE.MeshStandardMaterial({ color:0xfbbf24, emissive:0xf59e0b, emissiveIntensity:0.9,
+                                              roughness:0.28, metalness:0.85 }),
+  leaf:      new THREE.MeshStandardMaterial({ color:0x22c55e, roughness:0.9, emissive:0x065f46, emissiveIntensity:0.3 }),
+  leafDark:  new THREE.MeshStandardMaterial({ color:0x15803d, roughness:0.9 }),
+  leafPalm:  new THREE.MeshStandardMaterial({ color:0x166534, roughness:0.85 }),
+  trunk:     new THREE.MeshStandardMaterial({ color:0x6b4a2f, roughness:0.95 }),
+  water:     new THREE.MeshStandardMaterial({ color:0x38bdf8, transparent:true, opacity:0.72,
+                                              emissive:0x0284c7, emissiveIntensity:0.6,
+                                              roughness:0.1, metalness:0.5 }),
+  poolTile:  new THREE.MeshStandardMaterial({ color:0x0ea5e9, roughness:0.3, metalness:0.4,
+                                              emissive:0x0369a1, emissiveIntensity:0.35 }),
+  solar:     new THREE.MeshStandardMaterial({ color:0x0f2b4a, roughness:0.22, metalness:0.8,
+                                              emissive:0x0369a1, emissiveIntensity:0.45 }),
+  brick:     new THREE.MeshStandardMaterial({ color:0x8b4a2b, roughness:0.95 }),
+  carBody:   new THREE.MeshStandardMaterial({ color:0xcbd5e1, roughness:0.3, metalness:0.8 }),
+  ecoCar:    new THREE.MeshStandardMaterial({ color:0x86efac, roughness:0.3, metalness:0.7,
+                                              emissive:0x10b981, emissiveIntensity:0.2 }),
+  flowerPink:new THREE.MeshStandardMaterial({ color:0xf472b6, emissive:0xf472b6, emissiveIntensity:0.6, roughness:0.6 }),
+  flowerYel: new THREE.MeshStandardMaterial({ color:0xfbbf24, emissive:0xfbbf24, emissiveIntensity:0.6, roughness:0.6 }),
+  flowerPur: new THREE.MeshStandardMaterial({ color:0xa78bfa, emissive:0xa78bfa, emissiveIntensity:0.6, roughness:0.6 }),
+};
+
+/* =========================================================
+   3. HELPERS
+   ========================================================= */
+let house = new THREE.Group();
+scene.add(house);
+let previewHouse = null;
+
+const popList = [];
+const bursts = [];
+
+function easeOutBack(x){ const c1=1.70158, c3=c1+1; return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2); }
+
+function box(parent, w, h, d, mat, x, y, z, rot){
+  const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+  m.position.set(x, y, z);
+  if (rot) m.rotation.set(rot[0]||0, rot[1]||0, rot[2]||0);
+  m.castShadow = true; m.receiveShadow = true;
+  parent.add(m); return m;
+}
+function cyl(parent, rt, rb, h, seg, mat, x, y, z, rot){
+  const m = new THREE.Mesh(new THREE.CylinderGeometry(rt, rb, h, seg), mat);
+  m.position.set(x, y, z);
+  if (rot) m.rotation.set(rot[0]||0, rot[1]||0, rot[2]||0);
+  m.castShadow = true; m.receiveShadow = true;
+  parent.add(m); return m;
+}
+function sph(parent, r, mat, x, y, z){
+  const m = new THREE.Mesh(new THREE.SphereGeometry(r, 16, 12), mat);
+  m.position.set(x, y, z);
+  m.castShadow = true; m.receiveShadow = true;
+  parent.add(m); return m;
+}
+function cone(parent, r, h, seg, mat, x, y, z, rotY){
+  const m = new THREE.Mesh(new THREE.ConeGeometry(r, h, seg), mat);
+  m.position.set(x, y, z);
+  if (rotY) m.rotation.y = rotY;
+  m.castShadow = true; m.receiveShadow = true;
+  parent.add(m); return m;
+}
+function pyramid(parent, w, d, h, mat, x, y, z){
+  const geo = new THREE.ConeGeometry(1, 1, 4);
+  geo.rotateY(Math.PI/4);
+  geo.scale(w*Math.SQRT2, h, d*Math.SQRT2);
+  const m = new THREE.Mesh(geo, mat);
+  m.position.set(x, y + h/2, z);
+  m.castShadow = true; m.receiveShadow = true;
+  parent.add(m); return m;
+}
+function buildLand(g, w, d, mat){
+  box(g, w, 0.3, d, M.dark, 0, -0.15, 0);
+  box(g, w - 2, 0.2, d - 2, mat || M.paving, 0, 0.1, 0);
+}
+
+function part(builder){
+  return function(){
+    const g = new THREE.Group();
+    builder(g);
+    house.add(g);
+    g.scale.setScalar(0.001);
+    popList.push({ obj: g, t: 0, dur: 0.9 });
+    spawnBurst(new THREE.Vector3(0, 4, 0), 22);
+  };
+}
+function spawnBurst(pos, n){
+  n = n || 22;
+  const positions = new Float32Array(n*3);
+  const vels = [];
+  for (let i = 0; i < n; i++){
+    positions[i*3]   = pos.x + (Math.random()-0.5)*8;
+    positions[i*3+1] = pos.y + (Math.random()-0.5)*5;
+    positions[i*3+2] = pos.z + (Math.random()-0.5)*8;
+    vels.push(new THREE.Vector3((Math.random()-0.5)*8, Math.random()*8+3, (Math.random()-0.5)*8));
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  const mat = new THREE.PointsMaterial({ color:0x7dd3fc, size:0.28, transparent:true,
+    opacity:1, depthWrite:false, blending:THREE.AdditiveBlending });
+  const pts = new THREE.Points(geo, mat);
+  scene.add(pts);
+  bursts.push({ pts, vels, life:0, max:1.4 });
+}
+
+/* =========================================================
+   4. QUESTION BANKS — 3 × 40 SOAL UNIK
+   Level: [6, 6, 7, 7, 7, 7] = 40 soal / rumah
+   ========================================================= */
+const LEVEL_QS = [6, 6, 7, 7, 7, 7];
+const TOTAL_PARTS = 40;
+
+/* ---------- BANK 1 — KONSEP & INDIKATOR EKONOMI ---------- */
+const BANK1 = [
+  // L1 (6)
+  {q:"Pembangunan ekonomi adalah proses…",o:["Peningkatan jumlah penduduk suatu negara","Peningkatan pendapatan per kapita & kesejahteraan jangka panjang","Kegiatan jual beli barang antarnegara","Peningkatan produksi barang secara kuantitatif saja"],a:1,h:"Ada dimensi jangka panjang & kesejahteraan.",e:"Pembangunan ekonomi = proses peningkatan pendapatan per kapita dan kesejahteraan masyarakat dalam jangka panjang."},
+  {q:"Pertumbuhan ekonomi bersifat…",o:["Kualitatif","Kuantitatif (angka)","Deskriptif","Kualitatif dan kuantitatif"],a:1,h:"Diukur dengan angka PDB.",e:"Pertumbuhan ekonomi bersifat kuantitatif, diukur melalui kenaikan PDB."},
+  {q:"Pembangunan ekonomi mencakup aspek…",o:["Hanya kuantitatif","Hanya kualitatif","Kualitatif dan kuantitatif","Hanya moneter"],a:2,h:"Bukan sekadar angka.",e:"Pembangunan ekonomi mencakup aspek kualitatif & kuantitatif: pendidikan, kesehatan, pemerataan, pendapatan."},
+  {q:"Tujuan utama pembangunan ekonomi adalah…",o:["Memperbesar anggaran militer","Meningkatkan kesejahteraan masyarakat","Menambah utang luar negeri","Memperbanyak jumlah penduduk"],a:1,h:"Orientasinya pada rakyat.",e:"Tujuan utama pembangunan ekonomi adalah meningkatkan kesejahteraan masyarakat secara merata."},
+  {q:"Berikut yang BUKAN tujuan pembangunan ekonomi adalah…",o:["Menciptakan lapangan pekerjaan","Mengurangi kesenjangan ekonomi","Memperbesar anggaran militer","Meningkatkan kualitas SDM"],a:2,h:"Bukan soal kekuatan militer.",e:"Tujuan pembangunan ekonomi berorientasi pada kesejahteraan rakyat, bukan anggaran militer."},
+  {q:"Contoh nyata pembangunan ekonomi di sekitar kita adalah…",o:["Membeli barang impor","Pembangunan jalan tol","Menonton TV","Bermain game online"],a:1,h:"Infrastruktur yang mempercepat distribusi.",e:"Pembangunan jalan tol mempercepat distribusi barang dan menurunkan biaya logistik."},
+  // L2 (6)
+  {q:"Perbedaan utama pertumbuhan & pembangunan ekonomi terletak pada…",o:["Nama penemunya","Sifatnya (kuantitatif vs kualitatif+kuantitatif)","Warna sampulnya","Jumlah penduduknya"],a:1,h:"Satu mengukur angka, satu mengukur kualitas hidup.",e:"Pertumbuhan bersifat kuantitatif; pembangunan mencakup kualitatif dan kuantitatif."},
+  {q:"Pertumbuhan ekonomi suatu negara biasanya diukur dengan…",o:["Jumlah penduduk","PDB (Produk Domestik Bruto)","Luas wilayah","Jumlah gunung berapi"],a:1,h:"Singkatan tiga huruf.",e:"Pertumbuhan ekonomi diukur melalui kenaikan PDB."},
+  {q:"PDB adalah…",o:["Nilai barang impor","Nilai total barang & jasa yang diproduksi suatu negara dalam setahun","Pajak ekspor","Jumlah penduduk bekerja"],a:1,h:"Produk Domestik Bruto.",e:"PDB adalah nilai total barang dan jasa yang diproduksi suatu negara dalam satu tahun."},
+  {q:"Pendapatan per kapita dihitung dengan cara…",o:["PDB dikali jumlah penduduk","PDB dibagi jumlah penduduk","PDB dikurangi inflasi","PDB ditambah utang"],a:1,h:"Per kapita = per kepala.",e:"Pendapatan per kapita = PDB dibagi jumlah penduduk."},
+  {q:"IPM (Indeks Pembangunan Manusia) mengukur…",o:["Jumlah penduduk","Kualitas hidup (pendidikan, kesehatan, pendapatan)","Nilai ekspor","Utang luar negeri"],a:1,h:"Tiga dimensi utama.",e:"IPM mengukur kualitas hidup melalui pendidikan, kesehatan, dan pendapatan."},
+  {q:"Gini Ratio mengukur…",o:["Tingkat inflasi","Tingkat kesenjangan pendapatan","Jumlah penduduk","Nilai PDB"],a:1,h:"Dari nama ahli statistik Italia.",e:"Gini Ratio mengukur tingkat kesenjangan pendapatan dalam masyarakat."},
+  // L3 (7)
+  {q:"Semakin kecil nilai Gini Ratio, berarti distribusi pendapatan semakin…",o:["Timpang","Merata","Tinggi","Rendah"],a:1,h:"Kecil = adil.",e:"Semakin kecil Gini Ratio, semakin merata distribusi pendapatan."},
+  {q:"Tingkat pengangguran menunjukkan…",o:["Jumlah penduduk","Persentase angkatan kerja tanpa pekerjaan","Jumlah pensiunan","Jumlah pelajar"],a:1,h:"Berkaitan dengan angkatan kerja.",e:"Tingkat pengangguran menunjukkan persentase angkatan kerja yang tidak memiliki pekerjaan."},
+  {q:"Garis kemiskinan digunakan untuk mengukur…",o:["Jumlah orang kaya","Batas pendapatan minimum seseorang dianggap miskin","Nilai ekspor","Jumlah tabungan"],a:1,h:"Batas minimum.",e:"Garis kemiskinan adalah batas pendapatan minimum seseorang dianggap miskin."},
+  {q:"Indeks Pembangunan Manusia (IPM) terdiri dari tiga dimensi utama, yaitu…",o:["Politik, hukum, keamanan","Pendidikan, kesehatan, standar hidup layak","Ekspor, impor, investasi","Pajak, subsidi, retribusi"],a:1,h:"Tiga hal dasar kehidupan.",e:"IPM dibentuk dari tiga dimensi: pendidikan (harapan & rata-rata lama sekolah), kesehatan (umur harapan hidup), dan standar hidup layak (pengeluaran per kapita)."},
+  {q:"Pembangunan ekonomi yang ideal adalah yang…",o:["Hanya mementingkan pertumbuhan","Menyeimbangkan pertumbuhan & pemerataan","Hanya mementingkan pemerataan","Mengabaikan keduanya"],a:1,h:"Dua hal yang harus seimbang.",e:"Pembangunan ideal menyeimbangkan pertumbuhan dan pemerataan agar berkelanjutan."},
+  {q:"Pembangunan ekonomi berkelanjutan harus memperhatikan…",o:["Keuntungan jangka pendek saja","Kelestarian lingkungan & generasi mendatang","Jumlah gedung tinggi","Harga saham"],a:1,h:"Berkelanjutan = tidak merusak masa depan.",e:"Pembangunan berkelanjutan memperhatikan kelestarian lingkungan dan kebutuhan generasi mendatang."},
+  {q:"Kualitas SDM yang tinggi akan mendorong pembangunan ekonomi karena…",o:["Menurunkan produktivitas","Meningkatkan produktivitas & inovasi","Menambah pengangguran","Mengurangi investasi"],a:1,h:"Hubungan SDM dan produktivitas.",e:"SDM berkualitas tinggi meningkatkan produktivitas dan kemampuan inovasi, yang mendorong pembangunan ekonomi."},
+  // L4 (7) — Inflasi & Pengangguran
+  {q:"Inflasi adalah…",o:["Penurunan harga barang","Kenaikan harga barang secara umum & terus-menerus","Stabilitas harga","Barter barang"],a:1,h:"Harga naik terus.",e:"Inflasi adalah kenaikan harga barang secara umum dan terus-menerus."},
+  {q:"Inflasi ringan justru bermanfaat bagi perekonomian karena…",o:["Menurunkan pendapatan","Mendorong produsen meningkatkan produksi","Membuat orang malas bekerja","Menurunkan nilai uang"],a:1,h:"Stimulus positif bagi produsen.",e:"Inflasi ringan (di bawah 10%) mendorong produsen bergairah meningkatkan produksi."},
+  {q:"Kebijakan moneter untuk mengatasi inflasi antara lain…",o:["Menambah jumlah uang beredar","Menaikkan suku bunga & menjual SBI","Menurunkan pajak","Menaikkan subsidi"],a:1,h:"Bank sentral yang berperan.",e:"Kebijakan moneter mengatasi inflasi dengan menaikkan suku bunga dan menjual SBI agar uang beredar berkurang."},
+  {q:"Pengangguran struktural terjadi karena…",o:["Perubahan musim","Perubahan struktur ekonomi (mis. dari agraris ke industri)","Krisis global saja","Kemalasan seseorang"],a:1,h:"Perubahan mendasar dalam ekonomi.",e:"Pengangguran struktural terjadi karena perubahan struktur ekonomi sehingga keterampilan pekerja tidak lagi sesuai."},
+  {q:"Pengangguran siklikal terjadi karena…",o:["Perubahan musim","Resesi/kelesuan ekonomi","Perubahan teknologi","Pengangguran sukarela"],a:1,h:"Berkaitan dengan siklus ekonomi.",e:"Pengangguran siklikal terjadi karena resesi atau kelesuan ekonomi yang menurunkan permintaan tenaga kerja."},
+  {q:"Cara mengatasi pengangguran antara lain…",o:["Menutup perusahaan","Membuka lapangan kerja & pelatihan kerja","Menaikkan pajak","Mengurangi investasi"],a:1,h:"Solusi bersifat membuka peluang.",e:"Mengatasi pengangguran dengan membuka lapangan kerja, mengadakan pelatihan kerja, dan meningkatkan investasi."},
+  {q:"Dampak pengangguran yang tinggi bagi negara adalah…",o:["Meningkatkan PDB","Meningkatkan kriminalitas & kemiskinan","Meningkatkan tabungan","Menurunkan inflasi"],a:1,h:"Dampak sosial negatif.",e:"Pengangguran tinggi meningkatkan kriminalitas, kemiskinan, dan menurunkan kesejahteraan masyarakat."},
+  // L5 (7) — Pembangunan Berkelanjutan
+  {q:"Pembangunan berkelanjutan adalah pembangunan yang…",o:["Mengutamakan keuntungan sesaat","Memenuhi kebutuhan saat ini tanpa mengorbankan generasi mendatang","Mengabaikan lingkungan","Hanya fokus ekonomi"],a:1,h:"Ada dimensi waktu.",e:"Pembangunan berkelanjutan memenuhi kebutuhan saat ini tanpa mengorbankan kemampuan generasi mendatang memenuhi kebutuhannya."},
+  {q:"Tiga pilar pembangunan berkelanjutan adalah…",o:["Politik, militer, ekonomi","Ekonomi, sosial, lingkungan","Budaya, agama, teknologi","Hukum, HAM, demokrasi"],a:1,h:"Tiga aspek seimbang.",e:"Tiga pilar pembangunan berkelanjutan: ekonomi, sosial, dan lingkungan."},
+  {q:"Contoh sumber energi terbarukan adalah…",o:["Batu bara","Minyak bumi","Panel surya & kincir angin","Gas alam"],a:2,h:"Yang tidak akan habis.",e:"Energi terbarukan contohnya panel surya (matahari) dan kincir angin."},
+  {q:"Green economy (ekonomi hijau) adalah…",o:["Ekonomi berbasis uang hijau","Ekonomi yang rendah karbon, efisien sumber daya & inklusif sosial","Ekonomi pertanian","Ekonomi tanpa teknologi"],a:1,h:"Ramah lingkungan.",e:"Ekonomi hijau adalah ekonomi yang rendah karbon, efisien dalam sumber daya, dan inklusif secara sosial."},
+  {q:"Dampak pembangunan yang mengabaikan lingkungan adalah…",o:["Peningkatan kesejahteraan abadi","Kerusakan lingkungan & bencana alam","Kualitas udara meningkat","Hutan semakin luas"],a:1,h:"Konsekuensi negatif.",e:"Mengabaikan lingkungan menyebabkan kerusakan alam, polusi, dan bencana seperti banjir dan tanah longsor."},
+  {q:"SDGs adalah…",o:["Sistem Dagang Global","Sustainable Development Goals (Tujuan Pembangunan Berkelanjutan)","Sistem Data Generasi","Studi Demografi Global"],a:1,h:"Program global PBB.",e:"SDGs adalah Sustainable Development Goals — 17 tujuan pembangunan berkelanjutan yang disepakati PBB."},
+  {q:"Peran generasi muda dalam pembangunan berkelanjutan adalah…",o:["Menunggu pemerintah saja","Berinovasi & peduli lingkungan sejak dini","Menambah polusi","Mengabaikan pendidikan"],a:1,h:"Agen perubahan.",e:"Generasi muda berperan sebagai agen perubahan: berinovasi, peduli lingkungan, dan menyebarkan kesadaran."},
+  // L6 (7) — Campuran
+  {q:"Faktor yang mempengaruhi pembangunan ekonomi antara lain…",o:["SDA, SDM, modal, teknologi","Cuaca & hobi","Warna kulit","Selera makan"],a:0,h:"Banyak faktor.",e:"Faktor pembangunan ekonomi: sumber daya alam, sumber daya manusia, modal, dan teknologi."},
+  {q:"Modal pembangunan (capital) meliputi…",o:["Hanya uang tunai","Investasi fisik, manusia, & sosial","Hanya mesin","Hanya tanah"],a:1,h:"Beragam bentuk modal.",e:"Modal pembangunan meliputi investasi fisik (mesin, gedung), manusia (pendidikan), dan sosial (kepercayaan, jaringan)."},
+  {q:"Investasi bermanfaat untuk pembangunan karena…",o:["Menambah pengangguran","Menciptakan lapangan kerja & menambah kapasitas produksi","Mengurangi PDB","Menambah utang saja"],a:1,h:"Efek berganda.",e:"Investasi menciptakan lapangan kerja, menambah kapasitas produksi, dan mendorong pertumbuhan ekonomi."},
+  {q:"Peran pemerintah dalam pembangunan ekonomi adalah…",o:["Hanya mengumpulkan pajak","Mengatur, menyediakan infrastruktur, & melindungi masyarakat","Menghambat swasta","Menguasai semua usaha"],a:1,h:"Regulator & fasilitator.",e:"Pemerintah berperan sebagai pengatur, penyedia infrastruktur, dan pelindung masyarakat dalam pembangunan."},
+  {q:"Pajak digunakan pemerintah untuk…",o:["Membeli barang pribadi","Membiayai pembangunan & pelayanan publik","Menambah gaji pejabat saja","Menyimpan di luar negeri"],a:1,h:"Kepentingan bersama.",e:"Pajak digunakan untuk membiayai pembangunan, pendidikan, kesehatan, dan pelayanan publik."},
+  {q:"Ketimpangan pendapatan yang tinggi mengakibatkan…",o:["Kemakmuran merata","Kesenjangan sosial & menghambat pembangunan","Pertumbuhan cepat","Inflasi nol"],a:1,h:"Ketimpangan = masalah.",e:"Ketimpangan pendapatan tinggi menyebabkan kesenjangan sosial dan menghambat pembangunan yang inklusif."},
+  {q:"Upaya pemerataan pendapatan antara lain…",o:["Menaikkan pajak orang miskin","Progresivitas pajak & program bantuan sosial","Menghapus upah minimum","Melarang serikat pekerja"],a:1,h:"Berpihak pada yang lemah.",e:"Pemerataan dilakukan dengan pajak progresif, bantuan sosial, pendidikan gratis, dan pemberdayaan UMKM."},
+];
+
+/* ---------- BANK 2 — SEJARAH EKONOMI INDONESIA ---------- */
+const BANK2 = [
+  // L1 (6)
+  {q:"Kondisi perekonomian Indonesia pada masa awal kemerdekaan sangat buruk karena…",o:["Terlalu banyak investor asing","Inflasi sangat tinggi (hyperinflasi)","Terlalu banyak uang","Terlalu makmur"],a:1,h:"Uang kehilangan nilai dengan cepat.",e:"Masa awal kemerdekaan mengalami hyperinflasi yang sangat tinggi."},
+  {q:"Penyebab utama hyperinflasi awal kemerdekaan adalah…",o:["Banyaknya investor","Mata uang Jepang & Belanda beredar tak terkendali","Pajak terlalu rendah","Ekspor berlebih"],a:1,h:"Banyak mata uang beredar.",e:"Peredaran mata uang Jepang, Belanda, dan RIS yang tidak terkendali menyebabkan hyperinflasi."},
+  {q:"Pinjaman Nasional dilakukan pemerintah Indonesia pada tahun…",o:["1945","1946","1950","1965"],a:1,h:"Setahun setelah kemerdekaan.",e:"Pinjaman Nasional dilakukan pada tahun 1946 untuk membiayai pembangunan."},
+  {q:"Konferensi Ekonomi tahun 1946 membahas…",o:["Pesta rakyat","Masalah ekonomi & rencana pembangunan","Perang","Olahraga"],a:1,h:"Fokus pada perencanaan.",e:"Konferensi Ekonomi 1946 membahas masalah ekonomi dan menetapkan rencana pembangunan."},
+  {q:"Rencana Kasimo bertujuan untuk…",o:["Swasembada pangan","Membangun jalan tol","Membeli senjata","Membangun bandara"],a:0,h:"Berkaitan dengan bahan makanan pokok.",e:"Rencana Kasimo bertujuan mencapai swasembada pangan dengan menanam bahan makanan pokok."},
+  {q:"Tokoh yang mencetuskan Rencana Kasimo adalah…",o:["Mohammad Hatta","I.J. Kasimo","Soekarno","Sjafruddin Prawiranegara"],a:1,h:"Sesuai nama rencananya.",e:"Rencana Kasimo dicetuskan oleh I.J. Kasimo, menteri urusan bahan makanan saat itu."},
+  // L2 (6)
+  {q:"De Javasche Bank dinasionalisasi menjadi Bank Indonesia pada tahun…",o:["1945","1946","1953","1965"],a:2,h:"Tujuh tahun setelah kemerdekaan.",e:"De Javasche Bank dinasionalisasi menjadi Bank Indonesia pada tahun 1953."},
+  {q:"Tujuan nasionalisasi De Javasche Bank adalah…",o:["Menambah utang","Memiliki bank sentral sendiri & mengendalikan moneter","Menjual ke Belanda","Menutup bank"],a:1,h:"Kedaulatan ekonomi.",e:"Nasionalisasi bertujuan memiliki bank sentral sendiri dan mengendalikan kebijakan moneter Indonesia."},
+  {q:"ORI (Oeang Republik Indonesia) pertama kali diterbitkan pada…",o:["17 Agustus 1945","30 Oktober 1946","1 Januari 1950","17 Agustus 1950"],a:1,h:"Tahun setelah proklamasi.",e:"ORI pertama kali diterbitkan pada 30 Oktober 1946 sebagai mata uang resmi Republik Indonesia."},
+  {q:"Blokade ekonomi Belanda bertujuan…",o:["Membantu Indonesia","Melemahkan ekonomi Republik Indonesia","Menambah ekspor","Membuka jalur dagang"],a:1,h:"Upaya mematikan ekonomi.",e:"Blokade ekonomi Belanda bertujuan melemahkan ekonomi Republik Indonesia dengan menutup jalur perdagangan."},
+  {q:"Bank Indonesia berperan sebagai…",o:["Bank umum","Bank sentral","Bank swasta","Koperasi"],a:1,h:"Lembaga tertinggi moneter.",e:"Bank Indonesia adalah bank sentral yang bertugas menjaga stabilitas Rupiah dan mengatur kebijakan moneter."},
+  {q:"Kebijakan Gunting Sjafruddin dilakukan pada tahun…",o:["1946","1950","1959","1965"],a:2,h:"Era Demokrasi Terpimpin.",e:"Gunting Sjafruddin (1959) adalah pemotongan nilai uang untuk mengatasi inflasi."},
+  // L3 (7)
+  {q:"Repelita adalah…",o:["Rencana Pembangunan Lima Tahun","Rencana Perdagangan Lima Tahun","Rapat Pembangunan","Rencana Pajak"],a:0,h:"Singkatan lima tahun.",e:"Repelita (Rencana Pembangunan Lima Tahun) adalah program pembangunan pada masa Orde Baru."},
+  {q:"Repelita pertama dimulai pada tahun…",o:["1965","1969","1975","1984"],a:1,h:"Awal Orde Baru.",e:"Repelita I dimulai tahun 1969/1970 setelah era Orde Baru dimulai."},
+  {q:"Tujuan utama Repelita adalah…",o:["Membangun militer","Meningkatkan kesejahteraan & pertumbuhan ekonomi","Menambah utang","Memperluas wilayah"],a:1,h:"Kesejahteraan rakyat.",e:"Repelita bertujuan meningkatkan kesejahteraan rakyat melalui pertumbuhan ekonomi dan pemerataan."},
+  {q:"Indonesia berhasil mencapai swasembada beras pada tahun…",o:["1965","1975","1984","1998"],a:2,h:"Tahun 1980-an.",e:"Indonesia berhasil mencapai swasembada beras pada tahun 1984."},
+  {q:"Program BIMAS bertujuan untuk…",o:["Membangun industri","Meningkatkan produksi padi melalui bimbingan massal","Membangun jalan","Mengembangkan militer"],a:1,h:"Berkaitan dengan pertanian.",e:"BIMAS (Bimbingan Massal) bertujuan meningkatkan produksi padi melalui penyuluhan dan bantuan sarana pertanian."},
+  {q:"Trilogi pembangunan Orde Baru meliputi…",o:["Politik, militer, ekonomi","Pertumbuhan, pemerataan, stabilitas","Pendidikan, kesehatan, sosial","Ekspor, impor, investasi"],a:1,h:"Tiga tujuan seimbang.",e:"Trilogi pembangunan: pertumbuhan ekonomi tinggi, pemerataan pembangunan, dan stabilitas nasional."},
+  {q:"Fokus utama pembangunan Orde Baru pada awal pemerintahannya adalah…",o:["Industri berat","Stabilisasi ekonomi & rehabilitasi infrastruktur","Pariwisata","Pertahanan"],a:1,h:"Memperbaiki ekonomi dulu.",e:"Fokus awal Orde Baru: stabilisasi ekonomi, rehabilitasi infrastruktur, dan pengendalian inflasi."},
+  // L4 (7)
+  {q:"Krisis moneter yang memicu jatuhnya Orde Baru terjadi pada…",o:["1965","1984","1997/1998","2008"],a:2,h:"Menjelang era Reformasi.",e:"Krisis moneter 1997/1998 memicu jatuhnya Orde Baru dan dimulainya Reformasi."},
+  {q:"Krisis moneter Asia 1997 dimulai dari negara…",o:["Indonesia","Thailand","Malaysia","Filipina"],a:1,h:"Negara gajah putih.",e:"Krisis Asia 1997 dimulai dari Thailand dengan jatuhnya nilai Baht."},
+  {q:"Dampak krisis 1998 bagi Indonesia antara lain…",o:["Rupiah menguat","Rupiah melemah drastis & harga melonjak","Inflasi nol","Pengangguran turun"],a:1,h:"Nilai mata uang jatuh.",e:"Krisis 1998 membuat Rupiah melemah drastis dari Rp2.400 menjadi Rp16.000/USD dan harga melonjak."},
+  {q:"Otonomi daerah mulai diterapkan pada era…",o:["Awal kemerdekaan","Orde Baru","Reformasi","Kolonial"],a:2,h:"Setelah 1998.",e:"Otonomi daerah mulai diterapkan pada era Reformasi sebagai wujud demokratisasi ekonomi."},
+  {q:"Tujuan otonomi daerah adalah…",o:["Menguatkan pusat","Mempercepat pembangunan & pelayanan publik di daerah","Mengurangi APBD","Melemahkan daerah"],a:1,h:"Mendekatkan pelayanan.",e:"Otonomi daerah bertujuan mempercepat pembangunan dan mendekatkan pelayanan publik ke masyarakat."},
+  {q:"Era Reformasi dimulai pada tahun…",o:["1945","1966","1998","2004"],a:2,h:"Setelah Soeharto mundur.",e:"Era Reformasi dimulai tahun 1998 setelah Presiden Soeharto mengundurkan diri."},
+  {q:"UU yang menjadi dasar otonomi daerah adalah…",o:["UU No. 22/1999 & UU No. 25/1999","UU No. 1/1945","UU No. 5/1974","UU No. 20/2003"],a:0,h:"Dua UU tahun 1999.",e:"Otonomi daerah didasarkan pada UU No. 22/1999 (Pemerintahan Daerah) dan UU No. 25/1999 (Perimbangan Keuangan)."},
+  // L5 (7)
+  {q:"RPJMN adalah singkatan dari…",o:["Rencana Pembangunan Jangka Menengah Nasional","Rencana Penghematan Jangka Menengah","Rapat Pengusaha Jawa Madura","Rencana Pajak Jangka Menengah"],a:0,h:"Dokumen perencanaan nasional.",e:"RPJMN adalah Rencana Pembangunan Jangka Menengah Nasional, berlaku 5 tahun."},
+  {q:"RPJPN adalah singkatan dari…",o:["Rencana Pembangunan Jangka Panjang Nasional","Rencana Pajak Jangka Panjang","Rapat Pembangunan","Rencana Penghematan"],a:0,h:"20 tahun.",e:"RPJPN adalah Rencana Pembangunan Jangka Panjang Nasional, berlaku 20 tahun."},
+  {q:"Bappenas adalah…",o:["Badan Perencanaan Pembangunan Nasional","Badan Pajak Nasional","Bank Pembangunan","Badan Pertanahan"],a:0,h:"Lembaga perencana.",e:"Bappenas (Badan Perencanaan Pembangunan Nasional) adalah lembaga yang menyusun rencana pembangunan."},
+  {q:"Visi Indonesia Emas 2045 adalah…",o:["Menjadi negara maju & sejahtera pada 2045","Menjadi negara militer","Menambah utang","Menutup diri"],a:0,h:"100 tahun merdeka.",e:"Visi Indonesia Emas 2045: Indonesia menjadi negara maju, adil, makmur pada 100 tahun kemerdekaan."},
+  {q:"Salah satu pilar Visi Indonesia 2045 adalah…",o:["Pembangunan manusia & penguasaan IPTEK","Perang","Isolasi","Monopoli"],a:0,h:"Fokus pada kualitas manusia.",e:"Pilar Visi 2045 antara lain: pembangunan manusia & penguasaan IPTEK, pembangunan ekonomi berkelanjutan, pemerataan, dan ketahanan nasional."},
+  {q:"Tujuan pembangunan nasional menurut Pembukaan UUD 1945 adalah…",o:["Memperkaya penguasa","Melindungi segenap bangsa & memajukan kesejahteraan umum","Menjajah negara lain","Menambah militer"],a:1,h:"Cita-cita luhur.",e:"Tujuan nasional: melindungi segenap bangsa, memajukan kesejahteraan umum, mencerdaskan kehidupan bangsa, dan ikut melaksanakan ketertiban dunia."},
+  {q:"Prioritas pembangunan Indonesia saat ini antara lain…",o:["Infrastruktur, SDM, & ekonomi hijau","Menambah utang saja","Isolasi ekonomi","Militerisasi"],a:0,h:"Tiga fokus utama.",e:"Prioritas pembangunan Indonesia: infrastruktur, pengembangan SDM, dan transisi ekonomi hijau."},
+  // L6 (7)
+  {q:"Pelaku ekonomi di Indonesia meliputi…",o:["Rumah tangga, perusahaan, pemerintah, masyarakat luar negeri","Hanya pemerintah","Hanya perusahaan","Hanya rumah tangga"],a:0,h:"Empat sektor.",e:"Pelaku ekonomi: rumah tangga konsumsi, perusahaan, pemerintah, dan masyarakat luar negeri."},
+  {q:"BUMN adalah…",o:["Badan Usaha Milik Negara","Bank Umum Milik Negara","Badan Urusan Militer","Biro Urusan Masyarakat"],a:0,h:"Dimiliki negara.",e:"BUMN adalah Badan Usaha Milik Negara yang modalnya sebagian atau seluruhnya milik negara."},
+  {q:"Koperasi berperan dalam perekonomian Indonesia karena…",o:["Berdasarkan asas kekeluargaan & menyejahterakan anggota","Mencari untung sebesar-besarnya","Dikuasai asing","Menghambat ekonomi"],a:0,h:"Sesuai UUD 1945.",e:"Koperasi berdasarkan asas kekeluargaan dan bertujuan menyejahterakan anggota serta masyarakat."},
+  {q:"UMKM penting bagi perekonomian Indonesia karena…",o:["Menyerap banyak tenaga kerja & menyumbang PDB","Tidak berpengaruh","Hanya untuk orang kaya","Menghambat pertumbuhan"],a:0,h:"Kontribusi besar.",e:"UMKM menyerap sekitar 97% tenaga kerja dan menyumbang lebih dari 60% PDB Indonesia."},
+  {q:"Pajak berfungsi sebagai…",o:["Sumber pendapatan negara & alat pemerataan","Sumber masalah","Pengurang gaji","Alat penindasan"],a:0,h:"Dua fungsi utama.",e:"Pajak berfungsi sebagai sumber pendapatan negara dan alat pemerataan pendapatan."},
+  {q:"APBN adalah…",o:["Anggaran Pendapatan dan Belanja Negara","Alat Pembayaran Bank Negara","Asosiasi Pedagang","Angsuran Pembangunan"],a:0,h:"Dokumen keuangan negara.",e:"APBN adalah Anggaran Pendapatan dan Belanja Negara yang disusun setiap tahun oleh pemerintah & DPR."},
+  {q:"Subsidi pemerintah diberikan untuk…",o:["Membantu masyarakat berpenghasilan rendah & produsen lokal","Menambah beban rakyat","Memperkaya pejabat","Mengurangi produksi"],a:0,h:"Membantu yang lemah.",e:"Subsidi bertujuan membantu masyarakat berpenghasilan rendah dan mendorong produsen lokal."},
+];
+
+/* ---------- BANK 3 — PERDAGANGAN INTERNASIONAL ---------- */
+const BANK3 = [
+  // L1 (6)
+  {q:"Perdagangan internasional adalah…",o:["Jual beli dalam satu negara","Jual beli barang/jasa antarnegara atas dasar kesepakatan bersama","Barter antar desa","Hadiah antarnegara"],a:1,h:"Lintas batas negara.",e:"Perdagangan internasional adalah jual beli barang/jasa antarnegara atas dasar kesepakatan bersama."},
+  {q:"Perdagangan dalam negeri menggunakan mata uang…",o:["Berbeda-beda","Sama (Rupiah)","Dolar AS","Emas"],a:1,h:"Satu negara, satu mata uang.",e:"Perdagangan dalam negeri menggunakan mata uang yang sama, yaitu Rupiah."},
+  {q:"Perdagangan internasional menggunakan alat pembayaran yang disebut…",o:["Rupiah","Devisa","Cek","Kartu kredit"],a:1,h:"Bisa berupa mata uang asing, emas, surat berharga.",e:"Perdagangan internasional menggunakan devisa sebagai alat pembayaran."},
+  {q:"Berikut yang termasuk manfaat perdagangan internasional adalah…",o:["Menambah devisa & memperluas pasar","Menutup akses teknologi","Menaikkan harga semua barang","Menghilangkan pengangguran"],a:0,h:"Manfaat bagi negara.",e:"Manfaat perdagangan internasional antara lain menambah devisa dan memperluas pasar."},
+  {q:"Berikut yang BUKAN manfaat perdagangan internasional adalah…",o:["Memenuhi kebutuhan negara","Menambah devisa","Menutup akses teknologi dari luar negeri","Transfer teknologi"],a:2,h:"Justru sebaliknya.",e:"Perdagangan internasional membuka akses teknologi, bukan menutupnya."},
+  {q:"Spesialisasi produksi berarti…",o:["Membuat semua jenis barang","Fokus pada produk unggulan","Berhenti produksi","Membeli semua dari luar"],a:1,h:"Fokus pada keunggulan.",e:"Spesialisasi produksi berarti setiap negara fokus pada produk unggulannya."},
+  // L2 (6)
+  {q:"Transfer teknologi dari perdagangan internasional bermanfaat bagi…",o:["Negara maju saja","Negara berkembang","Tidak ada yang diuntungkan","Hanya perusahaan besar"],a:1,h:"Yang sedang belajar teknologi.",e:"Transfer teknologi dari negara maju bermanfaat bagi negara berkembang."},
+  {q:"Kurs valuta asing adalah…",o:["Pajak impor","Nilai tukar mata uang suatu negara terhadap mata uang negara lain","Bunga bank","Harga barang"],a:1,h:"Berkaitan dengan nilai tukar.",e:"Kurs valuta asing adalah nilai tukar mata uang suatu negara terhadap mata uang negara lain."},
+  {q:"Keuntungan komparatif berarti suatu negara memproduksi barang dengan…",o:["Biaya paling mahal","Biaya relatif lebih murah dibanding negara lain","Kualitas paling rendah","Jumlah paling sedikit"],a:1,h:"Bandingkan biaya relatif.",e:"Keuntungan komparatif berarti memproduksi barang dengan biaya relatif lebih murah dibanding negara lain."},
+  {q:"Perdagangan internasional dapat mempererat…",o:["Permusuhan","Hubungan diplomatik antarnegara","Perang","Persaingan senjata"],a:1,h:"Hubungan baik antarnegara.",e:"Perdagangan internasional dapat mempererat hubungan diplomatik antarnegara."},
+  {q:"Faktor pendorong perdagangan internasional - perbedaan SDA, contohnya…",o:["Indonesia ekspor hasil tambang","Indonesia impor padi","Indonesia menutup perdagangan","Indonesia berhenti ekspor"],a:0,h:"Kekayaan alam berbeda tiap negara.",e:"Perbedaan SDA mendorong perdagangan, misalnya Indonesia mengekspor hasil tambang."},
+  {q:"Faktor pendorong - perbedaan SDM, contohnya…",o:["Semua negara punya SDM sama","Negara dengan tenaga kerja terampil memproduksi barang bernilai tinggi","SDM tidak berpengaruh","Hanya mesin yang penting"],a:1,h:"Kualitas tenaga kerja berbeda.",e:"Negara dengan tenaga kerja terampil memproduksi barang bernilai tinggi."},
+  // L3 (7)
+  {q:"Faktor penghambat - konflik & peperangan mengakibatkan…",o:["Perdagangan lancar","Situasi keamanan tidak stabil menghambat perdagangan","Harga barang turun","Ekspor naik pesat"],a:1,h:"Keamanan tidak stabil.",e:"Konflik dan peperangan membuat situasi keamanan tidak stabil dan menghambat perdagangan."},
+  {q:"Faktor penghambat - biaya transportasi yang tinggi karena…",o:["Semua negara bertetangga","Jarak antarnegara jauh","Transportasi gratis","Tidak ada transportasi"],a:1,h:"Berkaitan dengan jarak.",e:"Jarak antarnegara yang jauh menyebabkan biaya transportasi tinggi."},
+  {q:"Faktor penghambat - perbedaan standar & regulasi mengakibatkan…",o:["Semua barang bebas","Barang harus memenuhi standar berbeda tiap negara","Tidak ada standar","Standar sama semua"],a:1,h:"Regulasi tiap negara berbeda.",e:"Perbedaan standar dan regulasi membuat barang harus memenuhi syarat berbeda tiap negara."},
+  {q:"Faktor pendorong - perbedaan IPTEK, contohnya…",o:["Semua negara sama teknologinya","Negara maju unggul teknologi","Teknologi tidak penting","Hanya tenaga manual"],a:1,h:"Teknologi canggih tidak merata.",e:"Negara maju unggul teknologi canggih yang tidak dimiliki negara berkembang."},
+  {q:"Faktor pendorong - perbedaan biaya produksi mengakibatkan…",o:["Barang jadi mahal semua","Barang dari negara berbiaya rendah lebih kompetitif","Tidak ada perdagangan","Semua barang gratis"],a:1,h:"Yang murah lebih laku.",e:"Barang dari negara berbiaya produksi rendah lebih kompetitif di pasar internasional."},
+  {q:"Faktor pendorong - perbedaan selera, contohnya…",o:["Semua orang punya selera sama","Masyarakat berbagai negara punya selera berbeda","Selera tidak berpengaruh","Hanya ada satu selera"],a:1,h:"Selera berbeda antar negara.",e:"Masyarakat berbagai negara memiliki selera berbeda terhadap barang dan jasa."},
+  {q:"Dampak globalisasi ekonomi bagi Indonesia adalah…",o:["Hanya positif","Hanya negatif","Positif (pasar luas) & negatif (persaingan ketat)","Tidak ada dampak"],a:2,h:"Dua sisi.",e:"Globalisasi membuka pasar luas tetapi juga menghadirkan persaingan ketat dari produk asing."},
+  // L4 (7)
+  {q:"Tarif atau bea masuk adalah…",o:["Hadiah dari pemerintah","Pajak yang dikenakan pada barang impor","Subsidi ekspor","Bunga bank"],a:1,h:"Dibayar di bea cukai.",e:"Tarif atau bea masuk adalah pajak yang dikenakan pada barang impor."},
+  {q:"Tujuan utama kebijakan tarif adalah…",o:["Menghilangkan produk lokal","Melindungi produk dalam negeri & menambah pendapatan negara","Menurunkan harga impor","Mempermudah impor"],a:1,h:"Melindungi + menambah kas negara.",e:"Tarif bertujuan melindungi produk dalam negeri dan menambah pendapatan negara."},
+  {q:"Kuota impor adalah…",o:["Pajak impor","Batasan jumlah barang yang boleh diimpor","Hadiah untuk importir","Subsidi impor"],a:1,h:"Ada batas jumlahnya.",e:"Kuota impor adalah batasan jumlah barang yang boleh diimpor dalam periode tertentu."},
+  {q:"Larangan impor dilakukan untuk melindungi…",o:["Keuntungan importir","Kesehatan, keamanan & moral masyarakat","Perusahaan asing","Harga barang"],a:1,h:"Kepentingan publik.",e:"Larangan impor melindungi kesehatan, keamanan, dan moral masyarakat."},
+  {q:"Subsidi diberikan pemerintah kepada…",o:["Importir","Produsen dalam negeri","Negara asing","Bank asing"],a:1,h:"Membantu produsen lokal.",e:"Subsidi diberikan kepada produsen dalam negeri untuk menurunkan biaya produksi."},
+  {q:"Dumping adalah kebijakan…",o:["Menjual barang mahal ke luar negeri","Menjual barang ke luar negeri lebih murah dari dalam negeri","Tidak menjual ke luar negeri","Membeli barang dari luar"],a:1,h:"Harga ekspor lebih murah.",e:"Dumping adalah menjual barang ke luar negeri lebih murah daripada di dalam negeri atau di bawah biaya produksi."},
+  {q:"Premi diberikan kepada…",o:["Konsumen","Produsen yang berhasil mengekspor","Importir","Bank"],a:1,h:"Hadiah untuk eksportir.",e:"Premi diberikan kepada produsen yang berhasil mengekspor sebagai dorongan."},
+  // L5 (7)
+  {q:"Kebijakan proteksi bertujuan untuk…",o:["Memperbanyak impor","Melindungi industri dalam negeri dari persaingan asing","Menurunkan harga produk lokal","Menghilangkan industri lokal"],a:1,h:"Melindungi industri lokal.",e:"Kebijakan proteksi bertujuan melindungi industri dalam negeri dari persaingan asing."},
+  {q:"Ekspor adalah kegiatan…",o:["Membeli barang dari luar negeri","Menjual barang/jasa dari dalam negeri ke luar negeri","Menyimpan barang di gudang","Meminjam uang dari bank"],a:1,h:"Menjual ke luar negeri.",e:"Ekspor adalah kegiatan menjual barang/jasa dari dalam negeri ke luar negeri."},
+  {q:"Impor adalah kegiatan…",o:["Menjual ke luar negeri","Membeli barang/jasa dari luar negeri","Menyimpan barang","Menghancurkan barang"],a:1,h:"Membeli dari luar negeri.",e:"Impor adalah kegiatan membeli barang/jasa dari luar negeri."},
+  {q:"Contoh ekspor migas Indonesia adalah…",o:["Beras ke Thailand","LNG ke Jepang & Korea","Kopi ke Vietnam","Tekstil ke Malaysia"],a:1,h:"Berkaitan dengan gas alam cair.",e:"Contoh ekspor migas Indonesia adalah LNG (Liquefied Natural Gas) ke Jepang dan Korea."},
+  {q:"Berikut yang merupakan sumber devisa negara adalah…",o:["Ekspor, pariwisata, investasi, remitansi","Hanya pajak","Hanya utang","Hanya hibah"],a:0,h:"Banyak sumbernya.",e:"Sumber devisa: ekspor, pariwisata, investasi asing, pinjaman luar negeri, remitansi TKI, dan hibah."},
+  {q:"Fungsi devisa antara lain…",o:["Membiayai impor & membayar utang luar negeri","Membeli makanan","Membayar pajak lokal","Membeli saham dalam negeri"],a:0,h:"Untuk transaksi internasional.",e:"Devisa berfungsi membiayai impor, membayar utang luar negeri, membiayai pembangunan, dan menjaga stabilitas Rupiah."},
+  {q:"Remitansi adalah…",o:["Pajak ekspor","Kiriman uang dari tenaga kerja Indonesia di luar negeri","Subsidi pemerintah","Bantuan asing"],a:1,h:"Dikirim oleh TKI.",e:"Remitansi adalah kiriman uang dari tenaga kerja Indonesia di luar negeri kepada keluarganya."},
+  // L6 (7)
+  {q:"Neraca perdagangan adalah…",o:["Catatan jumlah penduduk","Selisih nilai ekspor & impor suatu negara","Daftar pajak","Daftar utang"],a:1,h:"Ekspor vs impor.",e:"Neraca perdagangan adalah selisih antara nilai ekspor dan impor suatu negara."},
+  {q:"Surplus neraca perdagangan terjadi apabila…",o:["Impor lebih besar dari ekspor","Ekspor lebih besar dari impor","Ekspor sama dengan impor","Tidak ada ekspor"],a:1,h:"Menang di ekspor.",e:"Surplus neraca perdagangan terjadi bila nilai ekspor lebih besar daripada impor."},
+  {q:"Defisit neraca perdagangan terjadi apabila…",o:["Ekspor lebih besar","Impor lebih besar dari ekspor","Ekspor sama dengan impor","Tidak ada impor"],a:1,h:"Kalah di ekspor.",e:"Defisit neraca perdagangan terjadi bila nilai impor lebih besar daripada ekspor."},
+  {q:"MEA (Masyarakat Ekonomi ASEAN) bertujuan…",o:["Menambah hambatan dagang","Menciptakan pasar tunggal & arus bebas barang/jasa/tenaga kerja ASEAN","Menutup ASEAN dari dunia","Memperkuat militer ASEAN"],a:1,h:"Integrasi ekonomi ASEAN.",e:"MEA bertujuan menciptakan pasar tunggal dengan arus bebas barang, jasa, investasi, dan tenaga kerja terampil di ASEAN."},
+  {q:"Ekonomi digital adalah…",o:["Ekonomi tanpa uang","Aktivitas ekonomi berbasis teknologi digital & internet","Ekonomi barter","Ekonomi tertutup"],a:1,h:"Berbasis teknologi.",e:"Ekonomi digital adalah aktivitas ekonomi yang memanfaatkan teknologi digital dan internet."},
+  {q:"E-commerce lintas negara mempermudah…",o:["Menutup perdagangan","Transaksi jual beli langsung antar pelaku di berbagai negara","Mengurangi pelanggan","Menaikkan pajak saja"],a:1,h:"Belanja dari luar negeri.",e:"E-commerce lintas negara mempermudah konsumen dan produsen bertransaksi langsung tanpa perantara."},
+  {q:"Peran generasi muda dalam ekonomi global adalah…",o:["Menunggu saja","Berinovasi, menguasai teknologi, & berwirausaha","Menolak perubahan","Hanya konsumen"],a:1,h:"Agen perubahan.",e:"Generasi muda berperan sebagai inovator, penguasa teknologi, dan wirausaha di ekonomi global."},
+];
+
+const BANKS = { modern: BANK1, loft: BANK2, eco: BANK3 };
+
+/* =========================================================
+   5. HOUSE BLUEPRINTS (LEVELS: 6+6+7+7+7+7 = 40)
+   ========================================================= */
+
+/* ---------- H1: Modern Tropis Minimalis ---------- */
+const H1 = {
+  id:'modern', name:'Modern Tropis Minimalis',
+  desc:'Rumah 2 lantai atap datar, kaca lebar, secondary skin kayu, kolam renang & taman tropis.',
+  icon:'🏠', tag:'2 LANTAI',
+  levels:[
+    // L1 (6): Lahan & Pagar
+    [
+      g => buildLand(g, 34, 28, M.paving),
+      g => box(g, 30, 0.15, 24, M.paving2, 0, 0.22, 0),
+      g => { // front fence + gate posts
+        for (let x=-15; x<=15; x+=1.6){ if(Math.abs(x)<3.4) continue;
+          box(g, 0.5, 2.2, 0.5, M.concrete2, x, 1.1, 12);
+          if(x+1.6<=15 && Math.abs(x+1.6)>=3.4) box(g, 1.1, 1.5, 0.1, M.metal, x+0.8, 1.1, 12); }
+        box(g, 0.9, 3.8, 0.9, M.stone, -3.2, 1.9, 12);
+        box(g, 0.9, 3.8, 0.9, M.stone,  3.2, 1.9, 12);
+        box(g, 1.1, 0.4, 1.1, M.batik, -3.2, 4.05, 12);
+        box(g, 1.1, 0.4, 1.1, M.batik,  3.2, 4.05, 12);
+      },
+      g => { // back fence
+        for (let x=-15; x<=15; x+=1.6){ box(g, 0.5, 2.2, 0.5, M.concrete2, x, 1.1, -12);
+          if(x+1.6<=15) box(g, 1.1, 1.5, 0.1, M.metal, x+0.8, 1.1, -12); }
+      },
+      g => { // side fences
+        for (let z=-11; z<=11; z+=1.6){
+          box(g, 0.5, 2.2, 0.5, M.concrete2, -15, 1.1, z);
+          box(g, 0.5, 2.2, 0.5, M.concrete2, 15, 1.1, z);
+          box(g, 0.1, 1.5, 1.1, M.metal, -15, 1.1, z+0.8);
+          box(g, 0.1, 1.5, 1.1, M.metal, 15, 1.1, z+0.8);
+        }
+      },
+      g => { // gate + nameplate
+        box(g, 5.8, 2.7, 0.18, M.metal, 0, 1.6, 12);
+        for (let x=-2.6; x<=2.6; x+=0.35){ if(Math.abs(x)<0.15) continue;
+          box(g, 0.09, 2.7, 0.24, M.metal, x, 1.6, 12); }
+        box(g, 7.4, 0.4, 0.6, M.concrete, 0, 4.25, 12);
+        box(g, 7.6, 0.14, 0.7, M.glow, 0, 4.55, 12);
+      },
+      g => { // guard post
+        box(g, 3.4, 0.4, 3.4, M.concrete, -10, 0.3, 9);
+        box(g, 3.1, 2.9, 0.18, M.wallWarm, -10, 1.95, 7.6);
+        box(g, 0.18, 2.9, 3.1, M.wallWarm, -11.4, 1.95, 9);
+        box(g, 0.12, 1.6, 2.8, M.glass, -8.55, 2.1, 9);
+        box(g, 3.0, 1.6, 0.12, M.glass, -10, 2.1, 10.55);
+        pyramid(g, 3.4, 3.4, 1.2, M.roofRed, -10, 3.4, 9);
+        box(g, 1.6, 0.7, 0.7, M.wood, -10.4, 0.9, 9);
+        sph(g, 0.16, M.warmGlow, -10, 3.0, 9);
+        box(g, 0.05, 0.5, 0.05, M.metal, -10, 3.25, 9);
+      },
+    ],
+    // L2 (6): Bangunan Utama
+    [
+      g => { for (let i=-3; i<=3; i++) for (let j=-2; j<=2; j++)
+        box(g, 1.6, 0.5, 1.6, M.concrete, i*2.4, 0.4, j*2.4); },
+      g => box(g, 16.5, 0.3, 12, M.concrete, 0, 0.9, 0),
+      g => { // walls + front door
+        box(g, 16, 3.4, 0.3, M.wall, 0, 2.7, -6);
+        box(g, 0.3, 3.4, 12, M.wall, -8, 2.7, 0);
+        box(g, 0.3, 3.4, 12, M.wall,  8, 2.7, 0);
+        box(g, 5.2, 3.4, 0.3, M.wall, -5.4, 2.7, 6);
+        box(g, 5.2, 3.4, 0.3, M.wall,  5.4, 2.7, 6);
+        box(g, 5, 0.8, 0.3, M.wall, 0, 4.5, 6);
+        box(g, 3.4, 3, 0.18, M.woodDark, 0, 2.6, 6.1);
+        box(g, 1.5, 2.5, 0.08, M.wood, -0.75, 2.6, 6.22);
+        box(g, 1.5, 2.5, 0.08, M.wood,  0.75, 2.6, 6.22);
+        box(g, 0.9, 0.4, 0.06, M.batik, -0.75, 3.5, 6.26);
+        box(g, 0.9, 0.4, 0.06, M.batik,  0.75, 3.5, 6.26);
+        sph(g, 0.1, M.gold, -0.18, 2.4, 6.24);
+        sph(g, 0.1, M.gold,  0.18, 2.4, 6.24);
+      },
+      g => { // windows
+        [-5.4, 5.4].forEach(x => {
+          box(g, 3.6, 2, 0.16, M.glass, x, 2.85, 6.1);
+          box(g, 3.9, 0.2, 0.28, M.wood, x, 3.95, 6.15);
+          box(g, 3.9, 0.2, 0.28, M.wood, x, 1.75, 6.15); });
+        box(g, 6, 2, 0.16, M.glass, 0, 2.85, -6.1);
+      },
+      g => { // terrace
+        box(g, 9, 0.35, 2.8, M.concrete, 0, 1.05, 7);
+        box(g, 9.2, 0.08, 0.12, M.glowSoft, 0, 1.24, 8.35);
+        box(g, 8, 0.08, 8, M.paving2, 0, 0.15, 7);
+      },
+      g => { // upper overhang
+        box(g, 11, 0.3, 3.4, M.concrete, 0, 4.6, 6.5);
+        box(g, 11.2, 0.1, 0.15, M.glow, 0, 4.8, 8.2);
+        [-5, 5].forEach(x => box(g, 0.4, 3.4, 0.4, M.concrete, x, 2.9, 7.7));
+        sph(g, 0.14, M.warmGlow, -3, 4.4, 6.5);
+        sph(g, 0.14, M.warmGlow,  0, 4.4, 6.5);
+        sph(g, 0.14, M.warmGlow,  3, 4.4, 6.5);
+      },
+    ],
+    // L3 (7): Lantai 2
+    [
+      g => box(g, 17, 0.45, 13, M.concrete, 0, 4.5, 0),
+      g => { box(g, 16.4, 3, 0.3, M.wall, 0, 6.25, -6);
+        box(g, 0.3, 3, 12.4, M.wall, -8.2, 6.25, 0);
+        box(g, 0.3, 3, 12.4, M.wall,  8.2, 6.25, 0);
+        box(g, 4, 3, 0.3, M.wall, -6, 6.25, 6);
+        box(g, 4, 3, 0.3, M.wall,  6, 6.25, 6); },
+      g => { [-6, 6].forEach(x => { box(g, 3.2, 1.8, 0.16, M.glass, x, 6.4, 6.1);
+          box(g, 3.5, 0.18, 0.28, M.wood, x, 7.4, 6.15); });
+        box(g, 5, 1.8, 0.16, M.glass, 0, 6.4, -6.1); },
+      g => { box(g, 9, 0.3, 2, M.concrete, 0, 4.75, 6.3);
+        box(g, 9.3, 0.1, 0.15, M.metal, 0, 5.95, 7.2);
+        box(g, 9.1, 0.8, 0.08, M.glass, 0, 5.5, 7.2);
+        for (let x=-4; x<=4; x+=0.8) box(g, 0.08, 0.9, 0.08, M.wood, x, 5.4, 7.2); },
+      g => { for (let i=0; i<10; i++)
+          box(g, 1.8, 0.3, 0.7, M.concrete, 9.4, 1.3+i*0.33, 5.5 - i*0.55);
+        for (let i=0; i<10; i++)
+          box(g, 0.1, 1.1, 0.1, M.metal, 8.5, 1.85+i*0.33, 5.5 - i*0.55); },
+      g => { [-6, 6].forEach(x => { box(g, 0.16, 1.8, 4, M.glass, x, 6.4, 0); }); },
+      g => { box(g, 1.4, 0.6, 0.6, M.leaf, -6, 5.05, 6.6);
+        box(g, 1.4, 0.6, 0.6, M.leaf,  6, 5.05, 6.6);
+        box(g, 1.3, 0.5, 0.5, M.woodDark, -2, 5.05, 6.3);
+        box(g, 1.3, 0.5, 0.5, M.woodDark,  2, 5.05, 6.3); },
+      g => { box(g, 1.4, 0.5, 1.4, M.glowSoft, -8, 8.8, -7);
+        box(g, 1.4, 0.5, 1.4, M.glowSoft,  8, 8.8, -7); },
+    ],
+    // L4 (7): Atap
+    [
+      g => { box(g, 18, 0.4, 14, M.dark, 0, 7.2, 0);
+        box(g, 18.4, 0.12, 0.4, M.glow, 0, 7.44, 7);
+        box(g, 18.4, 0.12, 0.4, M.glow, 0, 7.44, -7);
+        box(g, 0.4, 0.12, 14.4, M.glow, -9.2, 7.44, 0);
+        box(g, 0.4, 0.12, 14.4, M.glow,  9.2, 7.44, 0); },
+      g => { box(g, 5, 2, 0.3, M.wall, -6, 7.2, 7);
+        box(g, 5, 2, 0.3, M.wall,  6, 7.2, 7); },
+      g => box(g, 6, 0.35, 2.4, M.concrete, 0, 7.7, 8),
+      g => { box(g, 8, 2, 1.6, M.wall, 0, 8.4, -3);
+        box(g, 8.4, 0.3, 1.8, M.concrete, 0, 9.55, -3);
+        box(g, 0.7, 3, 0.7, M.metalLite, -3, 8.5, -3);
+        box(g, 0.7, 3, 0.7, M.metalLite,  3, 8.5, -3); },
+      g => { box(g, 4, 0.15, 3, M.solar, -10, 8, 0, [-0.2, 0, 0]);
+        box(g, 4, 0.15, 3, M.solar,  10, 8, 0, [-0.2, 0, 0]);
+        box(g, 3, 0.15, 2, M.solar, 0, 8.3, -6); },
+      g => { for (let x=-5; x<=5; x+=1.2)
+          box(g, 0.7, 0.25, 0.1, M.batik, x, 7.75, 8.85);
+        box(g, 11.5, 0.15, 0.15, M.glow, 0, 7.95, 8.85); },
+      g => { box(g, 3, 0.2, 2, M.glass, 0, 9.2, 0);
+        box(g, 3.3, 0.08, 0.12, M.glow, 0, 9.3, -1.05);
+        box(g, 3.3, 0.08, 0.12, M.glow, 0, 9.3,  1.05); },
+      g => { box(g, 2, 0.5, 0.5, M.warmGlow, -9, 7.5, -6);
+        box(g, 2, 0.5, 0.5, M.warmGlow,  9, 7.5, -6);
+        box(g, 0.2, 3, 0.2, M.metal, -8.2, 8.8, -6);
+        box(g, 0.2, 3, 0.2, M.metal,  8.2, 8.8, -6); },
+    ],
+    // L5 (7): Kolam & Taman
+    [
+      g => { box(g, 8, 0.5, 4, M.poolTile, 6, 0.35, 9);
+        box(g, 7.4, 0.1, 3.4, M.poolTile, 6, 0.6, 9);
+        box(g, 7.2, 0.12, 3.2, M.water, 6, 0.68, 9); },
+      g => { box(g, 10, 0.15, 0.6, M.wood, 6, 0.75, 11.3);
+        box(g, 10, 0.15, 0.6, M.wood, 6, 0.75, 6.7);
+        box(g, 0.6, 0.15, 4.6, M.wood, 1.3, 0.75, 9);
+        box(g, 0.6, 0.15, 4.6, M.wood, 10.7, 0.75, 9); },
+      g => { box(g, 0.9, 0.6, 0.6, M.poolTile, 3.5, 0.75, 9);
+        box(g, 0.9, 0.4, 0.6, M.poolTile, 3.5, 0.6, 8.4); },
+      g => { [-1.5, 1.5].forEach(s => { box(g, 0.7, 0.5, 1.8, M.woodDark, 6+s, 1, 11.6);
+          box(g, 0.7, 0.7, 0.5, M.woodDark, 6+s, 1.4, 12.2); }); },
+      g => { cyl(g, 0.08, 0.08, 2.6, 8, M.metalLite, 6, 2, 11);
+        cone(g, 2, 0.4, 10, M.roofRed, 6, 3.4, 11); },
+      g => { box(g, 0.8, 0.5, 0.8, M.leafDark, 1.8, 0.9, 8);
+        box(g, 0.8, 0.5, 0.8, M.leafDark, 10.2, 0.9, 8);
+        sph(g, 0.2, M.glow, 2, 0.75, 7.2);
+        sph(g, 0.2, M.glow, 10, 0.75, 7.2); },
+      g => { sph(g, 0.25, M.gold, 7, 0.85, 9);
+        sph(g, 0.25, M.gold, 5, 0.85, 9.5);
+        box(g, 0.6, 0.6, 0.6, M.poolTile, 6, 0.7, 7); },
+    ],
+    // L6 (7): Sentuhan Akhir
+    [
+      g => { box(g, 10, 0.2, 4, M.leafDark, -10, 0.35, 8);
+        for (let i=0; i<4; i++)
+          box(g, 0.7, 0.15, 0.7, M.stone, -10+i*1.2, 0.5, 7 + (i%2)*0.9); },
+      g => { const colors=[M.flowerPink,M.flowerYel,M.flowerPur];
+        for (let i=0; i<26; i++)
+          sph(g, 0.18, colors[i%3], -13 + Math.random()*8, 0.55, 6.5 + Math.random()*3); },
+      g => { function t(x,z,s){ cyl(g, 0.18*s, 0.22*s, 2.2*s, 8, M.trunk, x, 1.1*s, z);
+          sph(g, 1.05*s, M.leafDark, x, 2.8*s, z);
+          sph(g, 0.75*s, M.leafDark, x+0.6*s, 2.3*s, z+0.4*s);
+          sph(g, 0.65*s, M.leafDark, x-0.5*s, 2.5*s, z-0.4*s); }
+        t(-13, -9, 1.3); t(13, -10, 1.1); t(13, 3, 1); t(-13, -2, 0.95); },
+      g => { box(g, 7, 0.3, 7, M.concrete, -11, 3.4, -3);
+        [[-3, -3], [3, -3], [-3, 3], [3, 3]].forEach(([dx, dz]) =>
+          box(g, 0.3, 3.2, 0.3, M.concrete, -11+dx, 1.7, -3+dz));
+        box(g, 6.6, 0.12, 0.15, M.glow, -11, 3.6, 0);
+        for (let x=-3; x<=3; x+=0.5) box(g, 0.12, 0.8, 0.15, M.wood, -11+x, 3.95, 0); },
+      g => { const car = new THREE.Group();
+        car.position.set(-11, 0.7, -3);
+        box(car, 4.4, 0.75, 2, M.carBody, 0, 0.4, 0);
+        box(car, 2.6, 0.6, 1.8, M.glass, -0.2, 1.05, 0);
+        box(car, 4.5, 0.08, 2.1, M.glow, 0, 0.05, 0);
+        sph(car, 0.15, M.warmGlow, 2.1, 0.55, 0.65);
+        sph(car, 0.15, M.warmGlow, 2.1, 0.55, -0.65);
+        [[1.5,0.95],[1.5,-0.95],[-1.5,0.95],[-1.5,-0.95]].forEach(([x,z]) => {
+          const w = new THREE.Mesh(new THREE.CylinderGeometry(0.42,0.42,0.26,12), M.metal);
+          w.position.set(x, 0.42, z); w.rotation.x = Math.PI/2;
+          w.castShadow = true; car.add(w); });
+        g.add(car); },
+      g => { cyl(g, 0.9, 0.9, 2.4, 20, M.metalLite, 13, 1.55, -4);
+        cyl(g, 0.95, 0.95, 0.18, 20, M.glow, 13, 2.85, -4);
+        cyl(g, 0.95, 0.95, 0.18, 20, M.glow, 13, 0.25, -4);
+        box(g, 1.3, 1.3, 1, M.concrete2, 13, 0.85, 0);
+        box(g, 1, 0.6, 0.06, M.glow, 13, 0.85, -0.53); },
+      g => { box(g, 3, 1.6, 0.12, M.batik, -8.3, 3.4, 3.5);
+        box(g, 3, 1.6, 0.12, M.batik,  8.3, 3.4, 3.5);
+        box(g, 0.55, 0.55, 0.55, M.gold, -5, 4.75, 8.2);
+        box(g, 0.55, 0.55, 0.55, M.gold,  5, 4.75, 8.2);
+        box(g, 1.4, 0.8, 0.1, M.glow, 9.6, 3.4, 6.2);
+        cyl(g, 0.04, 0.04, 2, 6, M.metal, 0, 10.4, 0);
+        box(g, 1.2, 0.5, 0.05, M.glow, 0.5, 11.2, 0); },
+    ],
+  ],
+};
+
+/* ---------- H2: Loft Industrial Urban ---------- */
+const H2 = {
+  id:'loft', name:'Loft Industrial Urban',
+  desc:'Rumah loft bergaya industrial — beton ekspos, jendela pabrik besar, tangga spiral, atap miring metal, & taman vertikal.',
+  icon:'🏭', tag:'LOFT',
+  levels:[
+    // L1 (6): Lahan & Pagar
+    [
+      g => buildLand(g, 36, 28, M.paving),
+      g => { box(g, 32, 0.15, 24, M.concrete2, 0, 0.22, 0);
+        for (let i=-6; i<=6; i++) for (let j=-5; j<=5; j++)
+          if ((i+j)%2===0) box(g, 2.2, 0.05, 2.2, M.paving2, i*2.4, 0.31, j*2.4); },
+      g => { // front iron fence
+        for (let x=-16; x<=16; x+=0.8){ if (Math.abs(x)<3.2) continue;
+          box(g, 0.08, 2.4, 0.08, M.metal, x, 1.2, 13); }
+        box(g, 32, 0.15, 0.15, M.metal, 0, 2.4, 13);
+        box(g, 32, 0.15, 0.15, M.metal, 0, 0.15, 13); },
+      g => { // back fence
+        for (let x=-16; x<=16; x+=0.8)
+          box(g, 0.08, 2.4, 0.08, M.metal, x, 1.2, -13);
+        box(g, 32, 0.15, 0.15, M.metal, 0, 2.4, -13); },
+      g => { // side fences
+        for (let z=-12; z<=12; z+=0.8){
+          box(g, 0.08, 2.4, 0.08, M.metal, -16, 1.2, z);
+          box(g, 0.08, 2.4, 0.08, M.metal,  16, 1.2, z); }
+        box(g, 0.15, 0.15, 26, M.metal, -16, 2.4, 0);
+        box(g, 0.15, 0.15, 26, M.metal,  16, 2.4, 0); },
+      g => { // industrial gate + nameplate
+        box(g, 6, 3, 0.2, M.metal, 0, 1.6, 13);
+        for (let i=0; i<8; i++) box(g, 5.6, 0.15, 0.3, M.metalLite, 0, 0.6+i*0.34, 13.1);
+        box(g, 6.4, 0.4, 0.5, M.concrete2, 0, 3.2, 13);
+        box(g, 6.6, 0.15, 0.6, M.glow, 0, 3.45, 13);
+        box(g, 2.2, 0.8, 0.1, M.rust, -10, 3.5, 13);
+        box(g, 2.4, 0.08, 0.15, M.glow, -10, 3.9, 13); },
+    ],
+    // L2 (6): Struktur Utama
+    [
+      g => { // concrete pillars
+        [[-7,-5],[7,-5],[-7,5],[7,5],[-3,0],[3,0]].forEach(([x,z]) =>
+          box(g, 1, 8, 1, M.concrete2, x, 4, z)); },
+      g => { // exposed brick walls (back & sides)
+        box(g, 16, 8, 0.4, M.brick, 0, 4, -6);
+        box(g, 0.4, 8, 12, M.brick, -8, 4, 0);
+        box(g, 0.4, 8, 12, M.brick,  8, 4, 0); },
+      g => { // steel beams
+        box(g, 16.5, 0.35, 0.35, M.metal, 0, 8.2, 0);
+        box(g, 16.5, 0.35, 0.35, M.metal, 0, 8.2, -3);
+        box(g, 16.5, 0.35, 0.35, M.metal, 0, 8.2, 3);
+        box(g, 0.35, 0.35, 12, M.metal, -8, 8.2, 0);
+        box(g, 0.35, 0.35, 12, M.metal,  8, 8.2, 0);
+        box(g, 0.35, 0.35, 12, M.metal,  0, 8.2, 0); },
+      g => { // factory windows
+        for (let i=0; i<3; i++) {
+          box(g, 3.5, 5.5, 0.2, M.glass, -5 + i*5, 4.5, -6.2);
+          box(g, 3.7, 0.2, 0.4, M.metal, -5 + i*5, 7.3, -6.2);
+          box(g, 3.7, 0.2, 0.4, M.metal, -5 + i*5, 1.7, -6.2);
+          for (let k=0; k<3; k++)
+            box(g, 3.5, 0.1, 0.25, M.metal, -5 + i*5, 2.5 + k*1.7, -6.2); } },
+      g => { // rolling door
+        box(g, 5, 6, 0.3, M.metal, 0, 3, 6);
+        for (let i=0; i<15; i++) box(g, 4.8, 0.28, 0.35, M.metalLite, 0, 0.4+i*0.4, 6.1);
+        box(g, 5.4, 0.5, 0.5, M.concrete2, 0, 6.5, 6); },
+      g => { // loading dock
+        box(g, 6, 0.6, 3, M.concrete2, 0, 0.3, 8.5);
+        box(g, 5.8, 0.2, 0.3, M.glow, 0, 0.7, 9.9);
+        for (let i=0; i<6; i++)
+          box(g, 0.15, 1.5, 0.15, M.metal, -2.5 + i*1, 0.9, 9.9); },
+    ],
+    // L3 (7): Lantai 2 Mezzanine
+    [
+      g => box(g, 17, 0.5, 13, M.concrete2, 0, 4.5, 0),
+      g => { for (let x=-8; x<=8; x+=0.6)
+          box(g, 0.08, 1, 0.08, M.metal, x, 5.25, 6.5);
+        box(g, 17, 0.1, 0.15, M.metal, 0, 5.75, 6.5);
+        box(g, 17, 0.1, 0.15, M.metal, 0, 4.85, 6.5); },
+      g => { for (let i=0; i<3; i++) {
+          box(g, 3, 3, 0.2, M.glass, -5 + i*5, 6.5, -6.2);
+          box(g, 3.2, 0.15, 0.35, M.metal, -5 + i*5, 8.1, -6.2); } },
+      g => { // spiral staircase
+        const baseX = 4, baseZ = 2;
+        for (let i=0; i<12; i++) {
+          const angle = i * 0.5;
+          box(g, 2, 0.15, 0.8, M.metal, baseX + Math.cos(angle)*1.2, 1 + i*0.35, baseZ + Math.sin(angle)*1.2, [0, angle, 0]); }
+        cyl(g, 0.15, 0.15, 4.5, 8, M.metal, baseX, 2.25, baseZ); },
+      g => { box(g, 8, 3.5, 0.4, M.brick, -4, 6.25, -6);
+        box(g, 0.4, 3.5, 6, M.brick, -8, 6.25, -3);
+        box(g, 0.4, 3.5, 6, M.brick,  8, 6.25, -3); },
+      g => { // ducts & pipes
+        cyl(g, 0.35, 0.35, 12, 12, M.metalLite, -6, 7.8, 0, [0, 0, Math.PI/2]);
+        cyl(g, 0.25, 0.25, 10, 12, M.metalLite, -5.5, 8.5, -3, [0, 0, Math.PI/2]);
+        for (let i=0; i<4; i++)
+          box(g, 0.6, 0.6, 0.6, M.metalLite, -8 + i*4, 7.5, -5); },
+      g => { // skylight above mezzanine
+        box(g, 4, 0.15, 4, M.glass, 2, 8.4, 2);
+        box(g, 4.4, 0.3, 0.3, M.metal, 2, 8.4, 0);
+        box(g, 4.4, 0.3, 0.3, M.metal, 2, 8.4, 4);
+        box(g, 0.3, 0.3, 4.4, M.metal, 0, 8.4, 2);
+        box(g, 0.3, 0.3, 4.4, M.metal, 4, 8.4, 2); },
+    ],
+    // L4 (7): Atap Industrial
+    [
+      g => { box(g, 9, 0.2, 14, M.roofMetal, -4.5, 10.2, 0, [0, 0, -0.3]);
+        box(g, 9, 0.2, 14, M.roofMetal,  4.5, 10.2, 0, [0, 0,  0.3]);
+        box(g, 0.5, 0.5, 14.5, M.metal, 0, 11.3, 0); },
+      g => { for (let z=-6; z<=6; z+=3) {
+          box(g, 8, 0.25, 0.25, M.metal, 0, 9.6, z, [0, 0, -0.3]);
+          box(g, 8, 0.25, 0.25, M.metal, 0, 9.6, z, [0, 0,  0.3]); } },
+      g => { for (let i=0; i<3; i++) {
+          box(g, 2, 0.15, 1.5, M.glass, -3, 10.6, -4 + i*4, [0, 0, -0.3]);
+          box(g, 2, 0.15, 1.5, M.glass,  3, 10.6, -4 + i*4, [0, 0,  0.3]); } },
+      g => { // chimney
+        box(g, 1.2, 3, 1.2, M.brick, -7, 11, -4);
+        box(g, 1.4, 0.3, 1.4, M.metal, -7, 12.6, -4);
+        cyl(g, 0.15, 0.15, 0.5, 8, M.metal, -7, 12.9, -4); },
+      g => { // AC units
+        [[-3, -5], [2, 5]].forEach(([x,z]) => {
+          box(g, 1.8, 1.2, 1.8, M.metalLite, x, 11, z);
+          box(g, 1.6, 0.15, 1.6, M.metal, x, 11.7, z);
+          for (let i=0; i<3; i++)
+            box(g, 1.7, 0.1, 0.15, M.metal, x, 10.6 + i*0.4, z + 0.9); }); },
+      g => { box(g, 10, 0.15, 1, M.metalLite, 0, 11.2, 0);
+        for (let i=0; i<15; i++)
+          box(g, 0.6, 0.05, 0.8, M.metal, -5 + i*0.7, 11.28, 0); },
+      g => { // rooftop sign
+        box(g, 0.15, 1.5, 0.15, M.metal, 6, 11.5, 5);
+        box(g, 0.15, 1.5, 0.15, M.metal, 8, 11.5, 5);
+        box(g, 2.4, 1.2, 0.15, M.neon, 7, 12.5, 5); },
+    ],
+    // L5 (7): Interior & Detail
+    [
+      g => { for (let i=0; i<4; i++) {
+          cyl(g, 0.03, 0.03, 2, 6, M.metal, -5 + i*3.3, 6.7, 0);
+          cone(g, 0.5, 0.7, 12, M.warmGlow, -5 + i*3.3, 5.5, 0); } },
+      g => { // industrial furniture
+        box(g, 3, 0.15, 1.5, M.woodDark, -4, 1, 2);
+        box(g, 0.2, 1, 0.2, M.metal, -5.3, 0.5, 1.4);
+        box(g, 0.2, 1, 0.2, M.metal, -2.7, 0.5, 1.4);
+        box(g, 0.2, 1, 0.2, M.metal, -5.3, 0.5, 2.6);
+        box(g, 0.2, 1, 0.2, M.metal, -2.7, 0.5, 2.6); },
+      g => { // green wall
+        box(g, 0.2, 4, 6, M.leafDark, -7.7, 2, 0);
+        for (let i=0; i<15; i++)
+          box(g, 0.15, 0.4, 0.4, M.leaf, -7.6, 0.5 + Math.floor(i/3)*0.8, -2.7 + (i%3)*0.9); },
+      g => { [[-6, 4], [5, 4]].forEach(([x,z]) => {
+          cyl(g, 0.15, 0.2, 0.15, 12, M.metal, x, 0.1, z);
+          cyl(g, 0.06, 0.06, 3, 6, M.metal, x, 1.6, z);
+          cone(g, 0.5, 0.6, 12, M.warmGlow, x, 3, z); }); },
+      g => { [[-5, -3], [6, -3], [3, 3]].forEach(([x,z]) => {
+          cyl(g, 0.5, 0.4, 0.6, 12, M.woodDark, x, 0.3, z);
+          sph(g, 0.7, M.leafDark, x, 1.4, z);
+          sph(g, 0.5, M.leaf, x, 1.9, z); }); },
+      g => { box(g, 0.1, 2, 1.5, M.brick, 7.8, 3, -3);
+        box(g, 0.1, 2, 1.5, M.glowSoft, 7.8, 3, 3); },
+      g => { // bar counter
+        box(g, 6, 1.1, 0.8, M.woodDark, 4, 0.55, -4);
+        box(g, 6.2, 0.1, 0.9, M.metalLite, 4, 1.15, -4);
+        for (let i=0; i<5; i++)
+          cyl(g, 0.2, 0.2, 0.15, 12, M.gold, 2 + i*1, 1.3, -4); },
+    ],
+    // L6 (7): Sentuhan Akhir
+    [
+      g => { box(g, 0.3, 8, 6, M.leafDark, 8.3, 4, 0);
+        const colors=[M.leaf, M.leafDark];
+        for (let i=0; i<20; i++)
+          box(g, 0.15, 0.3, 0.3, colors[i%2], 8.2, 0.6 + Math.floor(i/4)*1.5, -2.7 + (i%4)*1.5); },
+      g => { [[-11, -8], [11, -8], [-11, 8], [11, 8]].forEach(([x,z]) => {
+          cyl(g, 0.25, 0.3, 2.5, 8, M.trunk, x, 1.25, z);
+          sph(g, 1.4, M.leafDark, x, 3.2, z);
+          sph(g, 0.9, M.leaf, x+0.5, 3.8, z+0.3); }); },
+      g => { // neon sign
+        box(g, 0.15, 3, 0.15, M.metal, 5, 6, -6.4);
+        box(g, 0.15, 3, 0.15, M.metal, 9, 6, -6.4);
+        box(g, 4, 1.2, 0.2, M.neon, 7, 7, -6.4);
+        box(g, 4.2, 0.15, 0.3, M.metal, 7, 7.6, -6.4);
+        box(g, 4.2, 0.15, 0.3, M.metal, 7, 6.4, -6.4); },
+      g => { // bike rack
+        for (let i=0; i<4; i++) {
+          cyl(g, 0.05, 0.05, 0.8, 6, M.metal, 8 + i*0.4, 0.4, 8);
+          box(g, 0.05, 0.05, 0.4, M.metal, 8 + i*0.4, 0.8, 8); }
+        cyl(g, 0.3, 0.3, 0.05, 12, M.metal, 8.6, 0.35, 8);
+        cyl(g, 0.3, 0.3, 0.05, 12, M.metal, 9.4, 0.35, 8);
+        box(g, 1.2, 0.05, 0.05, M.metal, 9, 0.6, 8);
+        box(g, 0.05, 0.5, 0.05, M.metal, 8.6, 0.6, 8);
+        box(g, 0.05, 0.5, 0.05, M.metal, 9.4, 0.6, 8); },
+      g => { // motorbike
+        const moto = new THREE.Group();
+        moto.position.set(-9, 0, 8);
+        box(moto, 1.6, 0.5, 0.5, M.metal, 0, 0.5, 0);
+        box(moto, 0.5, 0.3, 0.4, M.metal, 0.6, 0.9, 0);
+        box(moto, 0.6, 0.15, 0.4, M.woodDark, -0.3, 0.85, 0);
+        [[0.6, 0], [-0.6, 0]].forEach(([x, z]) => {
+          const w = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.28, 0.1, 12), M.metal);
+          w.position.set(x, 0.28, z); w.rotation.x = Math.PI/2; w.castShadow = true;
+          moto.add(w); });
+        box(moto, 0.15, 0.15, 0.15, M.warmGlow, 0.8, 1.1, 0);
+        g.add(moto); },
+      g => { // letterbox
+        box(g, 0.8, 1.2, 0.5, M.metal, 3, 0.6, 13);
+        box(g, 0.7, 0.15, 0.55, M.glow, 3, 1.25, 13);
+        box(g, 0.15, 0.8, 0.15, M.metal, 3, 1.6, 13);
+        box(g, 0.4, 0.15, 0.05, M.gold, 3, 1.15, 13.28); },
+      g => { // LED strips
+        box(g, 19, 0.05, 0.15, M.glow, 0, 8.5, 6.5);
+        box(g, 19, 0.05, 0.15, M.glow, 0, 8.5, -6.5);
+        box(g, 0.15, 0.05, 13, M.glow, -8.5, 8.5, 0);
+        box(g, 0.15, 0.05, 13, M.glow,  8.5, 8.5, 0); },
+    ],
+  ],
+};
+
+/* ---------- H3: Smart Eco Future Home ---------- */
+const H3 = {
+  id:'eco', name:'Smart Eco Future Home',
+  desc:'Rumah masa depan ramah lingkungan — panel surya, atap hijau, kaca lengkung, kolam infinity, & taman vertikal pintar.',
+  icon:'🌿', tag:'FUTURISTIK',
+  levels:[
+    // L1 (6): Lahan & Fondasi
+    [
+      g => buildLand(g, 36, 30, M.paving),
+      g => { // eco pathway
+        box(g, 32, 0.15, 26, M.leafDark, 0, 0.22, 0);
+        for (let i=-6; i<=6; i++)
+          box(g, 2, 0.05, 2, M.stone, i*2.5, 0.32, 9); },
+      g => { // front glass fence
+        for (let x=-16; x<=16; x+=1.6){ if (Math.abs(x)<2.5) continue;
+          box(g, 0.15, 2.2, 0.15, M.metalLite, x, 1.1, 13); }
+        box(g, 32, 0.08, 0.15, M.metalLite, 0, 2.2, 13);
+        box(g, 32, 0.08, 0.15, M.metalLite, 0, 0.15, 13);
+        for (let x=-16; x<=16; x+=1.6){ if (Math.abs(x)<2.5) continue;
+          box(g, 1.5, 2, 0.06, M.glass, x+0.8, 1.1, 13); } },
+      g => { // back hedges
+        for (let x=-16; x<=16; x+=1.2)
+          box(g, 1.1, 1.8, 0.7, M.leafDark, x, 0.9, -13);
+        box(g, 33, 0.3, 0.3, M.leaf, 0, 1.85, -13); },
+      g => { // side glass fences
+        for (let z=-12; z<=12; z+=1.6){
+          box(g, 0.15, 2.2, 0.15, M.metalLite, -16, 1.1, z);
+          box(g, 0.15, 2.2, 0.15, M.metalLite,  16, 1.1, z);
+          box(g, 0.06, 2, 1.5, M.glass, -16, 1.1, z+0.8);
+          box(g, 0.06, 2, 1.5, M.glass,  16, 1.1, z+0.8); } },
+      g => { // solar gate + arch pillars
+        box(g, 5, 3, 0.3, M.glass, 0, 1.6, 13);
+        box(g, 5.4, 0.3, 0.4, M.metalLite, 0, 3.2, 13);
+        box(g, 5.6, 0.1, 0.5, M.glow, 0, 3.4, 13);
+        box(g, 1.5, 0.15, 0.4, M.solar, 0, 3.2, 13);
+        box(g, 0.6, 4.5, 0.6, M.stone, -3, 2.25, 13);
+        box(g, 0.6, 4.5, 0.6, M.stone,  3, 2.25, 13);
+        sph(g, 0.4, M.glow, -3, 4.7, 13);
+        sph(g, 0.4, M.glow,  3, 4.7, 13); },
+    ],
+    // L2 (6): Struktur Futuristik
+    [
+      g => { // curved platform
+        cyl(g, 8, 8, 0.5, 32, M.concrete, 0, 0.9, 0);
+        cyl(g, 7.5, 7.5, 0.3, 32, M.wall, 0, 1.2, 0); },
+      g => { // main curved walls
+        cyl(g, 6, 6, 6, 32, M.wall, 0, 4.5, 0);
+        cyl(g, 5.7, 5.7, 6.01, 32, M.wall, 0, 4.5, 0); },
+      g => { // curved glass facade (front)
+        for (let i=-5; i<=5; i++) {
+          const a = i * 0.28;
+          box(g, 0.9, 5, 0.15, M.glass, Math.sin(a)*5.7, 4, Math.cos(a)*5.7, [0, a, 0]); } },
+      g => { // entrance canopy
+        box(g, 3, 3.5, 0.3, M.glass, 0, 3, 6);
+        box(g, 3.4, 0.25, 0.4, M.metalLite, 0, 5, 6);
+        box(g, 3.6, 0.1, 0.5, M.glow, 0, 5.2, 6);
+        box(g, 5, 0.2, 3, M.wall, 0, 6.5, 7);
+        box(g, 5.2, 0.08, 3.2, M.glowSoft, 0, 6.7, 7); },
+      g => { // window strips
+        box(g, 4, 0.15, 3, M.glass, -6, 4, 0);
+        box(g, 4, 0.15, 3, M.glass,  6, 4, 0);
+        box(g, 0.15, 3, 5, M.glass, -6, 4, -3);
+        box(g, 0.15, 3, 5, M.glass,  6, 4, -3);
+        box(g, 0.15, 3, 5, M.glass, 0, 4, -6); },
+      g => { // hanging garden band
+        cyl(g, 6.2, 6.2, 0.6, 32, M.leafDark, 0, 2.5, 0);
+        for (let i=0; i<24; i++) {
+          const a = i * (Math.PI*2/24);
+          sph(g, 0.35, M.leaf, Math.sin(a)*6.2, 2.6, Math.cos(a)*6.2); } },
+    ],
+    // L3 (7): Lantai 2
+    [
+      g => { cyl(g, 7, 7, 0.4, 32, M.wall, 0, 7.2, 0);
+        cyl(g, 6.6, 6.6, 0.3, 32, M.concrete, 0, 7.4, 0); },
+      g => { // glass railing
+        for (let i=-8; i<=8; i++) {
+          const a = i * 0.22;
+          box(g, 0.6, 1, 0.08, M.glass, Math.sin(a)*6.8, 8, Math.cos(a)*6.8, [0, a, 0]); }
+        cyl(g, 6.9, 6.9, 0.08, 32, M.metalLite, 0, 8.5, 0); },
+      g => { // upper glass walls
+        for (let i=-8; i<=8; i++) {
+          const a = i * 0.22;
+          box(g, 0.7, 3, 0.12, M.glass, Math.sin(a)*5.5, 9, Math.cos(a)*5.5, [0, a, 0]); } },
+      g => { // floating balcony
+        box(g, 5, 0.3, 2.5, M.wall, 0, 7.5, 8);
+        for (let i=-2; i<=2; i++)
+          box(g, 0.08, 1, 0.08, M.metalLite, i*1.2, 8.15, 9);
+        box(g, 5, 0.08, 0.08, M.metalLite, 0, 8.65, 9); },
+      g => { // LED strips
+        cyl(g, 7.05, 7.05, 0.05, 32, M.glow, 0, 7.45, 0);
+        cyl(g, 6.95, 6.95, 0.05, 32, M.glowSoft, 0, 7.85, 0); },
+      g => { // upper plants
+        for (let i=0; i<12; i++) {
+          const a = i * (Math.PI*2/12);
+          cyl(g, 0.4, 0.35, 0.5, 10, M.woodDark, Math.sin(a)*5.8, 7.6, Math.cos(a)*5.8);
+          sph(g, 0.5, M.leafDark, Math.sin(a)*5.8, 8.4, Math.cos(a)*5.8); } },
+      g => { // side extension
+        box(g, 4, 3, 5, M.wall, -8, 9, 0);
+        box(g, 0.15, 3, 4, M.glass, -5.9, 9, 0);
+        box(g, 4.2, 0.3, 5.2, M.wall, -8, 10.7, 0); },
+    ],
+    // L4 (7): Atap Hijau & Solar
+    [
+      g => { cyl(g, 7.2, 7.2, 0.4, 32, M.wall, 0, 10.9, 0);
+        cyl(g, 7.4, 7.4, 0.15, 32, M.metalLite, 0, 11.1, 0); },
+      g => { // solar panels
+        for (let i=0; i<4; i++) {
+          box(g, 2, 0.15, 2, M.solar, -4 + i*2.7, 11.5, -4, [-0.3, 0, 0]);
+          box(g, 2.2, 0.1, 2.2, M.metal, -4 + i*2.7, 11.35, -4); }
+        for (let i=0; i<4; i++) {
+          box(g, 2, 0.15, 2, M.solar, -4 + i*2.7, 11.5, 4, [-0.3, 0, 0]);
+          box(g, 2.2, 0.1, 2.2, M.metal, -4 + i*2.7, 11.35, 4); } },
+      g => { // green roof garden
+        cyl(g, 6, 6, 0.4, 32, M.leafDark, 0, 11.5, 0);
+        for (let i=0; i<16; i++) {
+          const a = i * (Math.PI*2/16);
+          sph(g, 0.45, M.leaf, Math.sin(a)*4.5, 11.9, Math.cos(a)*4.5); } },
+      g => { // wind turbine
+        cyl(g, 0.15, 0.2, 4, 8, M.metalLite, 4, 14, 0);
+        box(g, 0.3, 0.3, 0.3, M.metal, 4, 16, 0);
+        for (let i=0; i<3; i++) {
+          const a = i * (Math.PI*2/3);
+          const bx = 4 + Math.sin(a) * 1.1;
+          const by = 16 + Math.cos(a) * 1.1;
+          const b = box(g, 0.15, 2.2, 0.1, M.wall, bx, by, 0);
+          b.rotation.z = -a; } },
+      g => { // satellite dish
+        cyl(g, 0.15, 0.15, 1, 8, M.metalLite, -4, 12, 2);
+        const dish = new THREE.Mesh(new THREE.SphereGeometry(0.8, 16, 8, 0, Math.PI*2, 0, Math.PI/2), M.metalLite);
+        dish.position.set(-4, 12.8, 2);
+        dish.rotation.x = Math.PI/2;
+        dish.castShadow = true;
+        g.add(dish); },
+      g => { // skylight dome
+        const dome = new THREE.Mesh(new THREE.SphereGeometry(1.5, 20, 12, 0, Math.PI*2, 0, Math.PI/2), M.glass);
+        dome.position.set(-3, 11.4, 0);
+        dome.castShadow = true;
+        g.add(dome);
+        cyl(g, 1.6, 1.6, 0.15, 20, M.metalLite, -3, 11.35, 0); },
+      g => { // roof plants & antennas
+        for (let i=0; i<6; i++) {
+          cyl(g, 0.4, 0.35, 0.5, 10, M.woodDark, -5 + i*2, 12, -6);
+          sph(g, 0.5, M.leafDark, -5 + i*2, 12.8, -6); }
+        cyl(g, 0.08, 0.08, 3, 6, M.metalLite, 6, 13, -3);
+        sph(g, 0.15, M.glow, 6, 14.5, -3); },
+    ],
+    // L5 (7): Kolam & Teknologi
+    [
+      g => { // infinity pool
+        box(g, 10, 0.8, 4, M.poolTile, 6, 0.5, 10);
+        box(g, 9.6, 0.15, 3.6, M.poolTile, 6, 0.9, 10);
+        box(g, 9.4, 0.15, 3.4, M.water, 6, 0.98, 10);
+        box(g, 10.4, 0.15, 0.15, M.metalLite, 6, 1.1, 12); },
+      g => { // glass deck
+        box(g, 12, 0.15, 6, M.glass, 6, 0.7, 6);
+        for (let x=-5; x<=5; x+=1)
+          box(g, 0.08, 0.7, 0.08, M.metalLite, 6+x, 0.35, 4); },
+      g => { // LED water lights
+        for (let i=0; i<5; i++)
+          sph(g, 0.15, M.glow, 2 + i*2, 0.65, 10);
+        box(g, 10.4, 0.08, 0.08, M.glowSoft, 6, 1.15, 10); },
+      g => { // robotic lawn
+        box(g, 8, 0.1, 4, M.leafDark, -6, 0.3, 10);
+        cyl(g, 0.5, 0.5, 0.2, 16, M.metalLite, -6, 0.4, 10);
+        sph(g, 0.1, M.glow, -6, 0.6, 10); },
+      g => { // EV charging station
+        box(g, 0.6, 1.8, 0.4, M.metalLite, -12, 1.2, 2);
+        box(g, 0.5, 0.4, 0.1, M.glow, -12, 1.9, 2.2);
+        box(g, 0.15, 0.6, 0.15, M.metal, -12, 0.3, 2);
+        box(g, 0.35, 0.35, 0.1, M.glowSoft, -12, 1.3, 2.22); },
+      g => { // electric car
+        const car = new THREE.Group();
+        car.position.set(-12, 0, 5);
+        box(car, 4.4, 0.65, 2, M.ecoCar, 0, 0.5, 0);
+        box(car, 2.4, 0.55, 1.7, M.glass, -0.2, 1.1, 0);
+        box(car, 4.6, 0.1, 2.1, M.glow, 0, 0.15, 0);
+        sph(car, 0.15, M.warmGlow, 2.1, 0.65, 0.6);
+        sph(car, 0.15, M.warmGlow, 2.1, 0.65, -0.6);
+        [[1.5,0.95],[1.5,-0.95],[-1.5,0.95],[-1.5,-0.95]].forEach(([x,z]) => {
+          const w = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.4, 0.25, 12), M.metal);
+          w.position.set(x, 0.4, z); w.rotation.x = Math.PI/2; w.castShadow = true;
+          car.add(w); });
+        cyl(car, 0.06, 0.06, 1.5, 6, M.glowSoft, -2.2, 0.7, 0);
+        g.add(car); },
+      g => { // drone landing pad + drone
+        cyl(g, 1.5, 1.5, 0.15, 20, M.metalLite, 11, 0.6, -3);
+        cyl(g, 1.3, 1.3, 0.1, 20, M.glowSoft, 11, 0.75, -3);
+        box(g, 0.5, 0.15, 0.5, M.metal, 11, 1, -3);
+        sph(g, 0.15, M.warmGlow, 11, 0.95, -3);
+        [[-0.4, -0.4], [0.4, -0.4], [-0.4, 0.4], [0.4, 0.4]].forEach(([x, z]) => {
+          cyl(g, 0.15, 0.15, 0.05, 8, M.metalLite, 11+x, 1.05, -3+z); }); },
+    ],
+    // L6 (7): Sentuhan Akhir
+    [
+      g => { // vertical garden
+        box(g, 0.4, 8, 4, M.leafDark, -7.2, 6, -2);
+        const colors = [M.leaf, M.leafDark, M.flowerPink, M.flowerYel];
+        for (let i=0; i<24; i++)
+          box(g, 0.15, 0.35, 0.35, colors[i%4], -7, 2.5 + Math.floor(i/6)*1.5, -3.5 + (i%6)*1.3); },
+      g => { // bio-dome
+        const dome = new THREE.Mesh(new THREE.SphereGeometry(2.5, 20, 12, 0, Math.PI*2, 0, Math.PI/2), M.glass);
+        dome.position.set(-11, 0.5, -9);
+        dome.castShadow = true;
+        g.add(dome);
+        cyl(g, 2.5, 2.5, 0.3, 24, M.metalLite, -11, 0.35, -9);
+        for (let i=0; i<5; i++)
+          sph(g, 0.4, M.leafDark, -11 + (Math.random()-0.5)*3, 0.9 + Math.random()*1, -9 + (Math.random()-0.5)*3); },
+      g => { // smart lamp posts
+        [[-13, 6], [-13, -2], [13, 6], [13, -2]].forEach(([x, z]) => {
+          cyl(g, 0.15, 0.2, 0.2, 12, M.metal, x, 0.1, z);
+          cyl(g, 0.1, 0.1, 4.5, 8, M.metal, x, 2.35, z);
+          cyl(g, 0.35, 0.35, 0.4, 16, M.glow, x, 4.7, z);
+          sph(g, 0.4, M.glow, x, 5, z); }); },
+      g => { // futuristic plants
+        [[-14, -6], [14, -6], [-14, 10], [14, 10]].forEach(([x, z]) => {
+          cyl(g, 0.3, 0.4, 1.5, 10, M.metalLite, x, 0.75, z);
+          sph(g, 1.2, M.glowSoft, x, 2, z);
+          sph(g, 0.7, M.leaf, x, 2.7, z); }); },
+      g => { // holo sign
+        box(g, 6, 0.15, 0.15, M.metalLite, 0, 0.8, 14);
+        box(g, 6, 0.15, 0.15, M.metalLite, 0, 1.5, 14);
+        box(g, 5.6, 0.4, 0.15, M.glow, 0, 1.15, 14);
+        box(g, 0.15, 0.15, 0.4, M.metalLite, -3, 1.15, 14);
+        box(g, 0.15, 0.15, 0.4, M.metalLite,  3, 1.15, 14); },
+      g => { // garden lights
+        for (let i=0; i<8; i++) {
+          const x = -12 + i*3.5;
+          cyl(g, 0.06, 0.06, 0.8, 6, M.metal, x, 0.5, 8);
+          sph(g, 0.18, M.warmGlow, x, 0.95, 8); }
+        for (let i=0; i<6; i++) {
+          const z = -10 + i*4;
+          cyl(g, 0.06, 0.06, 0.8, 6, M.metal, -14, 0.5, z);
+          sph(g, 0.18, M.warmGlow, -14, 0.95, z); } },
+      g => { // rooftop beacon
+        cyl(g, 0.15, 0.15, 2, 8, M.metal, 0, 12, 0);
+        sph(g, 0.5, M.glow, 0, 13.3, 0);
+        cyl(g, 0.6, 0.5, 0.3, 16, M.metalLite, 0, 12.15, 0); },
+    ],
+  ],
+};
+
+function prepHouse(H){
+  H.parts = H.levels.map(level => level.map(b => part(b)));
+  return H;
+}
+prepHouse(H1); prepHouse(H2); prepHouse(H3);
+const HOUSES = [H1, H2, H3];
+
+/* =========================================================
+   6. PREVIEW
+   ========================================================= */
+function buildPreview(H){
+  clearPreview();
+  previewHouse = new THREE.Group();
+  H.levels.forEach(level => {
+    level.forEach(builder => {
+      const g = new THREE.Group();
+      builder(g);
+      previewHouse.add(g);
+    });
+  });
+  previewHouse.scale.setScalar(1);
+  scene.add(previewHouse);
+}
+function clearPreview(){
+  if (previewHouse){
+    scene.remove(previewHouse);
+    previewHouse.traverse(o => { if (o.geometry) o.geometry.dispose(); });
+    previewHouse = null;
+  }
+}
+
+/* =========================================================
+   7. GAME STATE
+   ========================================================= */
+const state = {
+  house: null, level: 0, q: 0, score: 0, built: 0,
+  attempts: 0, mistakes: 0, answered: 0,
+  locked: true, finished: false, builtMap: {},
+};
+
+const $ = id => document.getElementById(id);
+const scoreVal = $('scoreVal'), partsVal = $('partsVal'), lvlChip = $('lvlChip');
+const lvlIcon = $('lvlIcon'), lvlName = $('lvlName'), lvlSub = $('lvlSub');
+const dotsEl = $('dots'), qnumEl = $('qnum'), qtextEl = $('qtext'), optsEl = $('opts');
+const explainEl = $('explain'), progressFill = $('progressFill'), toastEl = $('toast');
+const houseChip = $('houseChip');
+const houseOverlay = $('houseOverlay'), startOverlay = $('startOverlay');
+const lvlOverlay = $('lvlOverlay'), finOverlay = $('finOverlay');
+const previewBanner = $('previewBanner'), encourageBanner = $('encourageBanner');
+
+/* =========================================================
+   8. HOUSE SELECTION UI
+   ========================================================= */
+(function buildHouseGrid(){
+  const grid = $('houseGrid');
+  HOUSES.forEach(H => {
+    const c = document.createElement('div');
+    c.className = 'house-card';
+    c.dataset.houseId = H.id;
+    c.innerHTML = `
+      <div class="h-ico">${H.icon}</div>
+      <div class="h-info">
+        <div class="h-name">${H.name}</div>
+        <div class="h-desc">${H.desc}</div>
+        <div class="h-tag">${H.tag} · 6 LEVEL · 40 SOAL</div>
+      </div>`;
+    c.addEventListener('click', () => selectHouse(H));
+    c.addEventListener('mouseenter', () => {
+      buildPreview(H);
+      document.querySelectorAll('.house-card').forEach(el => el.classList.remove('hovered'));
+      c.classList.add('hovered');
+    });
+    grid.appendChild(c);
+  });
+
+  setTimeout(() => {
+    buildPreview(H1);
+    previewBanner.classList.add('show');
+    const first = grid.querySelector('.house-card');
+    if (first) first.classList.add('hovered');
+  }, 300);
+})();
+
+function clearHouse(){
+  scene.remove(house);
+  house.traverse(o => { if (o.geometry) o.geometry.dispose(); });
+  house = new THREE.Group();
+  scene.add(house);
+  popList.length = 0;
+  bursts.forEach(b => { scene.remove(b.pts); b.pts.geometry.dispose(); b.pts.material.dispose(); });
+  bursts.length = 0;
+}
+
+function selectHouse(H){
+  state.house = H;
+  clearPreview();
+  previewBanner.classList.remove('show');
+  encourageBanner.classList.remove('show');
+  clearHouse();
+  houseChip.textContent = H.icon + ' ' + H.name;
+  $('stBig').textContent = H.icon;
+  $('stTitle').textContent = 'Bangun: ' + H.name;
+  $('stText').textContent = H.desc;
+  houseOverlay.classList.remove('show');
+  startOverlay.classList.add('show');
+  controls.autoRotate = true;
+}
+
+$('backHouse').addEventListener('click', () => {
+  startOverlay.classList.remove('show');
+  houseOverlay.classList.add('show');
+  clearHouse();
+  clearPreview();
+  state.house = null;
+  buildPreview(H1);
+  previewBanner.classList.add('show');
+  document.querySelectorAll('.house-card').forEach(el => el.classList.remove('hovered'));
+  const first = document.querySelector('.house-card');
+  if (first) first.classList.add('hovered');
+});
+
+/* =========================================================
+   9. QUESTION FLOW
+   ========================================================= */
+function getQuestion(house, level, idx){
+  const bank = BANKS[house.id];
+  let gi = 0;
+  for (let i=0; i<level; i++) gi += LEVEL_QS[i];
+  gi += idx;
+  return bank[gi];
+}
+
+function renderDots(){
+  dotsEl.innerHTML = '';
+  const total = LEVEL_QS[state.level];
+  for (let i = 0; i < total; i++){
+    const d = document.createElement('div');
+    d.className = 'dot' + (state.builtMap[state.level + '-' + i] ? ' on' : '');
+    d.style.flex = '1 1 calc(100%/' + total + ' - 6px)';
+    dotsEl.appendChild(d);
+  }
+}
+
+function updateProgress(){
+  progressFill.style.width = (state.built / TOTAL_PARTS * 100) + '%';
+  partsVal.textContent = state.built;
+}
+
+function showExplain(text, ok){
+  explainEl.className = 'explain show' + (ok ? '' : ' hint');
+  explainEl.innerHTML = text;
+}
+function hideExplain(){ explainEl.className = 'explain'; explainEl.innerHTML = ''; }
+
+function showToast(text, color){
+  toastEl.textContent = text;
+  toastEl.style.color = color;
+  toastEl.classList.add('show');
+  clearTimeout(toastEl._t);
+  toastEl._t = setTimeout(() => toastEl.classList.remove('show'), 1200);
+}
+
+const LEVEL_NAMES = [
+  'Fondasi & Lahan', 'Bangunan Utama', 'Lantai Atas', 'Atap', 'Detail & Interior', 'Sentuhan Akhir'
+];
+const LEVEL_ICONS = ['🏗️','🏠','🏢','🏛️','🎨','✨'];
+
+function renderQuestion(){
+  const H = state.house;
+  const q = getQuestion(H, state.level, state.q);
+  const total = LEVEL_QS[state.level];
+
+  state.attempts = 0;
+  state.locked = false;
+
+  lvlIcon.textContent = LEVEL_ICONS[state.level];
+  lvlName.textContent = 'Level ' + (state.level + 1) + ' — ' + LEVEL_NAMES[state.level];
+  lvlSub.textContent = H.name;
+  lvlChip.textContent = LEVEL_ICONS[state.level] + ' Level ' + (state.level + 1);
+
+  qnumEl.textContent = `Soal ${state.q + 1} dari ${total}`;
+  qtextEl.textContent = q.q;
+
+  hideExplain();
+  renderDots();
+
+  optsEl.innerHTML = '';
+  const keys = ['A','B','C','D'];
+  q.o.forEach((opt, i) => {
+    const b = document.createElement('button');
+    b.className = 'opt';
+    b.innerHTML = `<span class="key">${keys[i]}</span><span>${opt}</span>`;
+    b.addEventListener('click', () => answer(i, b));
+    optsEl.appendChild(b);
+  });
+}
+
+function answer(i, btn){
+  if (state.locked || state.finished) return;
+  const H = state.house;
+  const q = getQuestion(H, state.level, state.q);
+  const total = LEVEL_QS[state.level];
+
+  if (i === q.a){
+    state.locked = true;
+    state.answered++;
+    btn.classList.add('correct');
+    Array.from(optsEl.children).forEach(o => o.disabled = true);
+
+    const pts = state.attempts === 0 ? 100 : (state.attempts === 1 ? 50 : 25);
+    state.score += pts;
+    scoreVal.textContent = state.score;
+
+    showToast('+' + pts, '#34d399');
+    showExplain('✅ <strong>Benar!</strong> ' + q.e, true);
+
+    H.parts[state.level][state.q]();
+    state.built++;
+    state.builtMap[state.level + '-' + state.q] = true;
+    updateProgress();
+    renderDots();
+
+    setTimeout(() => {
+      state.q++;
+      if (state.q >= total) levelComplete();
+      else renderQuestion();
+    }, 2000);
+  } else {
+    state.attempts++;
+    state.mistakes++;
+    btn.classList.add('wrong','shake');
+    btn.disabled = true;
+    setTimeout(() => btn.classList.remove('shake'), 420);
+    showToast('Salah', '#f87171');
+    if (state.attempts >= 2) showExplain('💡 <strong>Petunjuk:</strong> ' + q.h, false);
+    else showExplain('❌ Belum tepat. Coba lagi!', false);
+  }
+}
+
+function levelComplete(){
+  if (state.level >= 5){ finishGame(); return; }
+  $('lvlOvIcon').textContent = '🎉';
+  $('lvlOvTitle').textContent = 'Level ' + (state.level + 1) + ' Selesai!';
+  $('lvlOvText').textContent = LEVEL_NAMES[state.level] + ' untuk ' + state.house.name + ' selesai dibangun.';
+  $('lvlOvScore').textContent = state.score;
+  $('lvlOvParts').textContent = state.built + '/' + TOTAL_PARTS;
+  lvlOverlay.classList.add('show');
+}
+
+/* =========================================================
+   10. FINISH
+   ========================================================= */
+function finishGame(){
+  state.finished = true;
+  state.locked = true;
+
+  const total = state.answered + state.mistakes;
+  const acc = total > 0 ? Math.round(state.answered / total * 100) : 100;
+  let rank = 'Pemula';
+  if (state.score >= 3600) rank = 'Sultan Ekonomi';
+  else if (state.score >= 3000) rank = 'Arsitek Handal';
+  else if (state.score >= 2200) rank = 'Pembangun Muda';
+  else if (state.score >= 1400) rank = 'Pelajar Rajin';
+
+  $('finScore').textContent = state.score;
+  $('finAcc').textContent = acc + '%';
+  $('finRank').textContent = rank;
+  $('finText').innerHTML = 'Selamat! <strong style="color:#34d399">' + state.house.name +
+    '</strong> berhasil kamu bangun. Setiap jawaban benar adalah bata yang menyusun masa depanmu.';
+
+  finOverlay.classList.add('show');
+  controls.autoRotateSpeed = 1.4;
+  spawnBurst(new THREE.Vector3(0, 8, 0), 70);
+
+  setTimeout(() => {
+    if (!state.finished) return;
+    lvlIcon.textContent = '🌟';
+    lvlName.textContent = 'Perjalanan Selesai';
+    lvlSub.textContent = 'Kamu telah menuntaskan Bab 6';
+    qnumEl.textContent = 'SELESAI';
+    qtextEl.textContent = 'Pesan untuk Masa Depanmu';
+    dotsEl.innerHTML = '';
+    optsEl.innerHTML = `
+      <div class="closing-box">
+        <div class="cb-ico">🎓</div>
+        <h3>Ilmu adalah Fondasi Masa Depan</h3>
+        <p>Setiap pertanyaan yang kamu jawab hari ini adalah <strong style="color:#34d399">bata</strong> yang membangun
+        pemahamanmu tentang ekonomi, masyarakat, dan dunia.</p>
+        <p>Rumah yang kamu bangun melambangkan <strong style="color:#34d399">masa depan</strong> yang bisa kamu
+        raih dengan terus belajar, tekun, dan percaya pada kemampuanmu.</p>
+        <p class="quote">"Orang yang berhenti belajar akan menjadi pemilik masa lalu.
+        Orang yang terus belajar akan menjadi pemilik masa depan."</p>
+      </div>`;
+    explainEl.className = 'explain';
+    explainEl.innerHTML = '';
+  }, 400);
+}
+
+/* =========================================================
+   11. BUTTONS
+   ========================================================= */
+$('startBtn').addEventListener('click', () => {
+  startOverlay.classList.remove('show');
+  clearPreview();
+  previewBanner.classList.remove('show');
+  encourageBanner.classList.remove('show');
+  state.level = 0; state.q = 0; state.score = 0; state.built = 0;
+  state.attempts = 0; state.mistakes = 0; state.answered = 0;
+  state.locked = false; state.finished = false; state.builtMap = {};
+  scoreVal.textContent = 0; partsVal.textContent = 0;
+  updateProgress();
+  renderQuestion();
+});
+
+$('lvlNextBtn').addEventListener('click', () => {
+  lvlOverlay.classList.remove('show');
+  state.level++;
+  state.q = 0;
+  renderQuestion();
+});
+
+$('viewHouseBtn').addEventListener('click', () => {
+  finOverlay.classList.remove('show');
+  encourageBanner.classList.add('show');
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = 0.8;
+});
+
+$('resetCam').addEventListener('click', () => {
+  camera.position.set(30, 22, 38);
+  controls.target.set(0, 5, 0);
+  controls.update();
+});
+
+/* =========================================================
+   12. RESIZE + RENDER LOOP
+   ========================================================= */
+function resize(){
+  const w = viewEl.clientWidth, h = viewEl.clientHeight;
+  if (w === 0 || h === 0) return;
+  camera.aspect = w / h; camera.updateProjectionMatrix();
+  renderer.setSize(w, h, false);
+}
+window.addEventListener('resize', resize);
+resize();
+
+const clock = new THREE.Clock();
+function animate(){
+  requestAnimationFrame(animate);
+  const dt = Math.min(clock.getDelta(), 0.05);
+  const t = clock.elapsedTime;
+
+  controls.update();
+
+  for (let i = popList.length - 1; i >= 0; i--){
+    const p = popList[i];
+    p.t += dt;
+    const k = Math.min(p.t / p.dur, 1);
+    p.obj.scale.setScalar(Math.max(0.001, easeOutBack(k)));
+    if (k >= 1){ p.obj.scale.setScalar(1); popList.splice(i, 1); }
+  }
+
+  for (let i = bursts.length - 1; i >= 0; i--){
+    const b = bursts[i];
+    b.life += dt;
+    const pos = b.pts.geometry.attributes.position;
+    for (let j = 0; j < b.vels.length; j++){
+      pos.array[j*3]   += b.vels[j].x * dt;
+      pos.array[j*3+1] += b.vels[j].y * dt;
+      pos.array[j*3+2] += b.vels[j].z * dt;
+      b.vels[j].y -= 10 * dt;
+    }
+    pos.needsUpdate = true;
+    b.pts.material.opacity = Math.max(0, 1 - b.life / b.max);
+    if (b.life >= b.max){
+      scene.remove(b.pts);
+      b.pts.geometry.dispose(); b.pts.material.dispose();
+      bursts.splice(i, 1);
+    }
+  }
+
+  halo.material.opacity = 0.06 + Math.sin(t * 1.3) * 0.03;
+  halo.rotation.z += dt * 0.1;
+  accent.intensity = 70 + Math.sin(t * 2.0) * 16;
+
+  renderer.render(scene, camera);
+}
+animate();
+
+/* =========================================================
+   13. LOADER
+   ========================================================= */
+function hideLoader(){
+  const l = document.getElementById('loader');
+  if (!l || l.classList.contains('hide')) return;
+  setTimeout(() => { l.classList.add('hide'); setTimeout(() => l.remove(), 800); }, 1500);
+}
+window.addEventListener('load', hideLoader);
+setTimeout(hideLoader, 2600);
+</script>
+
+</body>
+</html>
