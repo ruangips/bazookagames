@@ -80,13 +80,13 @@ h1{font-size:26px;background:linear-gradient(180deg,#fff,#f0d878);-webkit-backgr
 .li-motivation .li-mot-star{display:block;margin-bottom:4px;font-size:18px;font-style:normal}
 .touch-controls{position:absolute;inset:0;pointer-events:none;z-index:15;display:none}
 .touch-controls.on{display:block}
-.touch-btn{position:absolute;pointer-events:auto;background:rgba(18,24,45,.78);border:2px solid rgba(212,175,55,.6);border-radius:50%;width:64px;height:64px;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:#fdf6e3;user-select:none;touch-action:none;cursor:pointer}
+.touch-btn{position:absolute;pointer-events:auto;background:rgba(18,24,45,.78);border:2px solid rgba(212,175,55,.6);border-radius:50%;width:64px;height:64px;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:#fdf6e3;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:none;cursor:pointer}
 .touch-btn:active,.touch-btn.pressed{background:rgba(212,175,55,.75);transform:scale(.94);color:#0a0820}
-.touch-btn.left{left:14px;bottom:60px}
-.touch-btn.right{left:90px;bottom:60px}
-.touch-fire{position:absolute;right:14px;bottom:60px;width:84px;height:84px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f43f5e,#9f1239);border:3px solid rgba(253,230,180,.85);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:#fff;pointer-events:auto;user-select:none;touch-action:none;cursor:pointer}
+.touch-btn.left{left:calc(14px + env(safe-area-inset-left,0px));bottom:calc(60px + env(safe-area-inset-bottom,0px))}
+.touch-btn.right{left:calc(90px + env(safe-area-inset-left,0px));bottom:calc(60px + env(safe-area-inset-bottom,0px))}
+.touch-fire{position:absolute;right:calc(14px + env(safe-area-inset-right,0px));bottom:calc(60px + env(safe-area-inset-bottom,0px));width:88px;height:88px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f43f5e,#9f1239);border:3px solid rgba(253,230,180,.85);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;color:#fff;pointer-events:auto;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:none;cursor:pointer;z-index:16}
 .touch-fire:active,.touch-fire.pressed{transform:scale(.94)}
-.touch-reload{position:absolute;right:14px;bottom:154px;width:54px;height:54px;border-radius:50%;background:rgba(167,139,250,.92);border:2px solid rgba(196,181,253,.95);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#0a0620;pointer-events:auto;user-select:none;touch-action:none;cursor:pointer}
+.touch-reload{position:absolute;right:calc(14px + env(safe-area-inset-right,0px));bottom:calc(158px + env(safe-area-inset-bottom,0px));width:56px;height:56px;border-radius:50%;background:rgba(167,139,250,.92);border:2px solid rgba(196,181,253,.95);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#0a0620;pointer-events:auto;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:none;cursor:pointer;z-index:16}
 .touch-reload:active,.touch-reload.pressed{transform:scale(.94)}
 .level-progress{display:flex;gap:2px;justify-content:center;margin-top:4px;flex-wrap:wrap}
 .lp-dot{width:4px;height:4px;border-radius:50%;background:rgba(212,175,55,.32);transition:all .3s}
@@ -268,7 +268,8 @@ h1.title-main{font-family:'Arial Black','Segoe UI',Impact,sans-serif;font-size:4
   <div class="panel" style="text-align:left">
     <h2 style="color:#f0d878;margin-bottom:14px;text-align:center">📖 CARA MAIN</h2>
     <p style="line-height:1.8;font-size:13px">
-      📱 <b>HP</b> — tombol ← → gerak, 🔥 luncurkan peluru, 🔄 reload<br>
+      📱 <b>HP</b> — tombol ← → gerak, 🔥 luncurkan peluru (bisa ditahan), 🔄 reload<br>
+      👆 <b>Tap musuh</b> — langsung kunci & tembak sasaran<br>
       🖱️ <b>Mouse</b> — bidik pesawat & klik untuk meluncurkan peluru<br>
       ⌨️ <b>A/D</b> atau <b>←/→</b> — geser penembak<br>
       ⌨️ <b>Spasi</b> — luncurkan · <b>R</b> — reload · <b>P/Esc</b> — pause<br>
@@ -560,11 +561,11 @@ var QUESTIONS_PER_LEVEL = 11;
 var PASS_THRESHOLD = 8;
 var MAX_LIVES = 5;
 /* === PELURU DIPERLAMBAT & ZIGZAG === */
-var ROCKET_SPEED = 250;          // sebelumnya 380 — lebih lambat agar zigzag terlihat
+var ROCKET_SPEED = 250;
 var ROCKET_HOMING_STEER = 5;
-var ROCKET_THRUST = 420;         // sebelumnya 600 — akselerasi disesuaikan
-var ROCKET_WOBBLE_AMP = 210;     // amplitudo osilasi tegak lurus (zigzag)
-var ROCKET_WOBBLE_FREQ = 20;     // kecepatan osilasi (rad/s)
+var ROCKET_THRUST = 420;
+var ROCKET_WOBBLE_AMP = 210;
+var ROCKET_WOBBLE_FREQ = 20;
 
 var PAL = {
   soldier:{uniform:'#3a4a2a',uniformDark:'#1a2410',uniformLight:'#5a6a3a',uniformShadow:'#0a1408',helmet:'#1a2410',skin:'#e8b890',skinDark:'#b08860',skinLight:'#f5d0b0',vest:'#1a1a1a',strap:'#0a0a0a',boot:'#0a0a0a'},
@@ -685,7 +686,7 @@ function bazookaLocal(localX){var s=player.s;var rise=player.peek*24+player.bob;
 function PIVOT(){return bazookaLocal(0);}
 function bazookaTip(){return bazookaLocal(98-state.recoil*0.55);}
 var keys = {};
-var touchState = {left:false,right:false};
+var touchState = {left:false,right:false,fire:false};
 function currentLevel(){return LEVELS[state.levelIndex];}
 function currentTheme(){return currentLevel().theme;}
 
@@ -773,7 +774,7 @@ function reset(){
   player.angle=0;player.target=0;player.bodyAngle=0;player.headTurn=0;
   player.leanX=0;player.leanY=0;player.aimSwayPhase=0;player.aimSwayX=0;player.aimSwayY=0;
   player.vx=0;player.targetVx=0;player.peek=0;player.bob=0;player.walkPhase=0;
-  touchState.left=false;touchState.right=false;
+  touchState.left=false;touchState.right=false;touchState.fire=false;
   updateHudAll();
 }
 
@@ -809,6 +810,20 @@ function fire(){
   if(state.ammo===0&&state.reloading<=0){setTimeout(function(){if(!state.gameOver&&state.ammo===0)startReload();},350);}
 }
 function startReload(){if(state.reloading>0||state.ammo===5)return;state.reloading=1.8;SFX.reload();}
+function doTouchFire(){
+  if(state.gameOver||state.paused||state.roundLock||state.reloading>0||state.ammo<=0||state.cooldown>0)return;
+  var e=state.lockTarget;
+  if(!e||!e.alive||e.fleeing||e.fastReturn)e=findNearestEnemy();
+  if(e){
+    var c=bodyCenter(e);var p=PIVOT();
+    var ang=clamp(Math.atan2(c.y-p.y,c.x-p.x),-1.4,0.45);
+    player.target=ang;player.angle=ang;
+    state.lockTarget=e;state.pendingTarget=e;
+    fire();
+  } else {
+    fire();
+  }
+}
 
 function triggerFlee(e){if(e.fleeing||!e.alive)return;e.fleeing=true;e.fleeVx=rnd(300,450);e.fleeVy=rnd(-220,-140);SFX.flee();for(var i=0;i<12;i++)spawnParticle({x:e.x+rnd(-30,30),y:e.gy+rnd(-10,10),vx:rnd(-60,60),vy:rnd(-30,30),life:rnd(0.5,1.0),size:rnd(6,13)*e.s,color:FX.goldLight,grav:-10,smoke:true});}
 
@@ -1037,6 +1052,7 @@ function update(dt){
   if(state.aimGuideTimer<0)state.aimGuideTimer=0;
 
   if(state.pendingFire&&state.cooldown<=0&&!state.roundLock&&state.reloading<=0){if(Math.abs(player.target-player.angle)<0.10){state.pendingFire=false;fire();}}
+  if(touchState.fire)doTouchFire();
   for(var i=state.bullets.length-1;i>=0;i--){
     var b=state.bullets[i];
     if(!b.enemyBullet){
@@ -1050,12 +1066,11 @@ function update(dt){
         var steer=Math.min(1,dt*ROCKET_HOMING_STEER);
         var tx=(dx/d)*ROCKET_SPEED, ty=(dy/d)*ROCKET_SPEED;
 
-        /* === EFEK ZIGZAG / WEAVING PELURU === */
-        b.wobblePhase += dt * ROCKET_WOBBLE_FREQ;                 // osilasi fase
-        var fadeIn  = Math.min(1, b.age*5);                        // masuk halus 0.2s pertama
-        var fadeOut = clamp((d-80)/280, 0, 1);                     // redam saat mendekati target
+        b.wobblePhase += dt * ROCKET_WOBBLE_FREQ;
+        var fadeIn  = Math.min(1, b.age*5);
+        var fadeOut = clamp((d-80)/280, 0, 1);
         var wobbleMag = Math.tanh(Math.sin(b.wobblePhase)*2.0) * ROCKET_WOBBLE_AMP * fadeIn * fadeOut;
-        tx += (-dy/d) * wobbleMag;                                 // vektor tegak lurus arah tembakan
+        tx += (-dy/d) * wobbleMag;
         ty += ( dx/d) * wobbleMag;
 
         b.vx += (tx-b.vx)*steer;
@@ -1624,12 +1639,43 @@ function render(){ctx.save();if(state.shake>0&&settings.shake){var s=state.shake
 
 var lastT = performance.now();
 function loop(now){try{var dt=(now-lastT)/1000;lastT=now;if(dt>0.05)dt=0.05;if(state.running&&!state.paused)update(dt);render();}catch(e){console.error('Loop error:',e);}requestAnimationFrame(loop);}
-function canvasPos(ev){var r=cvs.getBoundingClientRect();return{x:(ev.clientX-r.left)*(W/r.width),y:(ev.clientY-r.top)*(H/r.height)};}
-cvs.addEventListener('pointermove',function(ev){if(IS_TOUCH)return;var p=canvasPos(ev);state.mouse.x=p.x;state.mouse.y=p.y;if(!state.gameOver&&!state.paused)aimAt(p.x,p.y);});
-cvs.addEventListener('pointerdown',function(ev){if(IS_TOUCH)return;ev.preventDefault();ensureAudio();if(state.gameOver||state.paused)return;var p=canvasPos(ev);state.mouse.x=p.x;state.mouse.y=p.y;aimAt(p.x,p.y);if(!state.roundLock&&state.reloading<=0){state.pendingTarget=findTargetAtMouse()||state.lockTarget;state.pendingFire=true;}});
+
+function canvasPos(ev){
+  var r=cvs.getBoundingClientRect();
+  var elAR=r.width/r.height, cvAR=W/H, rw,rh,rx,ry;
+  if(elAR>cvAR){rh=r.height;rw=rh*cvAR;rx=r.left+(r.width-rw)/2;ry=r.top;}
+  else{rw=r.width;rh=rw/cvAR;rx=r.left;ry=r.top+(r.height-rh)/2;}
+  return {x:(ev.clientX-rx)*(W/rw), y:(ev.clientY-ry)*(H/rh)};
+}
+function handleCanvasAim(ev){
+  var p=canvasPos(ev);
+  state.mouse.x=p.x;state.mouse.y=p.y;
+  if(state.gameOver||state.paused)return null;
+  aimAt(p.x,p.y);
+  return p;
+}
+cvs.addEventListener('pointermove',function(ev){
+  if(IS_TOUCH)return;
+  handleCanvasAim(ev);
+});
+cvs.addEventListener('pointerdown',function(ev){
+  if(ev.cancelable)ev.preventDefault();
+  ensureAudio();
+  var p=handleCanvasAim(ev);
+  if(!p)return;
+  if(state.roundLock||state.reloading>0)return;
+  if(IS_TOUCH){
+    var t=findTargetAtMouse();
+    if(t&&t.alive&&!t.fleeing&&!t.fastReturn){state.pendingTarget=t;state.pendingFire=true;}
+  } else {
+    state.pendingTarget=findTargetAtMouse()||state.lockTarget;
+    state.pendingFire=true;
+  }
+},{passive:false});
+
 window.addEventListener('keydown',function(ev){var k=ev.key;if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown',' '].indexOf(k)>=0)ev.preventDefault();if(keys[k])return;keys[k]=true;ensureAudio();if(state.gameOver){if(k===' ')doRestart();return;}if(k===' '){if(!state.roundLock&&state.reloading<=0){state.pendingTarget=findTargetAtMouse()||state.lockTarget;state.pendingFire=true;}}if(k==='r'||k==='R')startReload();if(k==='p'||k==='P'||k==='Escape')togglePause();});
 window.addEventListener('keyup',function(ev){keys[ev.key]=false;});
-window.addEventListener('blur',function(){for(var k in keys)keys[k]=false;touchState.left=false;touchState.right=false;});
+window.addEventListener('blur',function(){for(var k in keys)keys[k]=false;touchState.left=false;touchState.right=false;touchState.fire=false;});
 
 function bindTouchButton(el,onDown,onUp){if(!el)return;var lastDown=0;
   var down=function(ev){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();var now=performance.now();if(now-lastDown<80)return;lastDown=now;ensureAudio();el.classList.add('pressed');if(onDown)onDown();};
@@ -1642,20 +1688,22 @@ function bindTouchControls(){
   bindTouchButton(document.getElementById('tLeft'),function(){touchState.left=true;},function(){touchState.left=false;});
   bindTouchButton(document.getElementById('tRight'),function(){touchState.right=true;},function(){touchState.right=false;});
   bindTouchButton(document.getElementById('tFire'),function(){
-    if(state.gameOver||state.paused)return;
-    if(state.roundLock||state.reloading>0)return;
-    var e = state.lockTarget;
-    if(!e || !e.alive || e.fleeing || e.fastReturn){e = findNearestEnemy();}
-    if(e){var c=bodyCenter(e);var p=PIVOT();var ang=clamp(Math.atan2(c.y-p.y,c.x-p.x),-1.4,0.45);player.target=ang;player.angle=ang;state.lockTarget=e;state.pendingTarget=e;if(state.cooldown<=0){fire();}else{state.pendingFire=true;}}
-    else{if(state.cooldown<=0)fire();}
-  },null);
+    touchState.fire=true;
+    doTouchFire();
+  },function(){
+    touchState.fire=false;
+  });
   bindTouchButton(document.getElementById('tReload'),function(){if(!state.gameOver&&!state.paused)startReload();},null);
 }
 
 function updateTouchControlsVisibility(){var ctrls=document.getElementById('touchCtrls');if(!ctrls)return;var on=IS_TOUCH&&settings.touch;if(on)ctrls.classList.add('on');else ctrls.classList.remove('on');}
 
-function showScreen(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});var el=document.getElementById(id);if(el)el.classList.add('active');}
-function togglePause(){if(state.gameOver)return;state.paused=!state.paused;var e=document.getElementById('pauseOv');if(e){if(state.paused)e.classList.add('active');else e.classList.remove('active');}}
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  var el=document.getElementById(id);if(el)el.classList.add('active');
+  if(id==='game')setTimeout(updateTouchControlsVisibility,0);
+}
+function togglePause(){if(state.gameOver)return;state.paused=!state.paused;if(state.paused){touchState.left=false;touchState.right=false;touchState.fire=false;}var e=document.getElementById('pauseOv');if(e){if(state.paused)e.classList.add('active');else e.classList.remove('active');}}
 function updateMenuProgress(){var e=document.getElementById('progressVal');if(!e)return;var idx=getUnlockedLevel();e.textContent='LEVEL '+(idx+1)+'/'+TOTAL_LEVELS;}
 
 function renderLevelGrid(){
@@ -1737,10 +1785,10 @@ function init(){
     document.addEventListener('dblclick',function(e){e.preventDefault();});
     requestAnimationFrame(loop);
     setInterval(updateHudWind,100);
-    window.addEventListener('resize',handleOrientation);
-    window.addEventListener('orientationchange',function(){setTimeout(handleOrientation,150);});
+    window.addEventListener('resize',function(){handleOrientation();updateTouchControlsVisibility();});
+    window.addEventListener('orientationchange',function(){setTimeout(function(){handleOrientation();updateTouchControlsVisibility();},150);});
     setTimeout(handleOrientation,100);
-    console.log('✅ PENJAGA LANGIT siap dimainkan — peluru zigzag aktif');
+    console.log('✅ PENJAGA LANGIT siap dimainkan — kontrol sentuh diperbaiki');
   }catch(e){console.error('Init error:',e);}
 }
 
