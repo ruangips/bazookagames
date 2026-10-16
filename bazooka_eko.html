@@ -511,6 +511,16 @@
       color: #93a4b8;
       border-color: rgba(148,163,184,.25);
     }
+    .game-badge.orange {
+      background: rgba(249,115,22,.12);
+      color: #f97316;
+      border-color: rgba(249,115,22,.3);
+    }
+    .game-badge.cyan {
+      background: rgba(6,182,212,.12);
+      color: #06b6d4;
+      border-color: rgba(6,182,212,.3);
+    }
 
     .bab-card.premium { border-color: rgba(251,191,36,.22); }
     .bab-card.premium:hover,
@@ -548,6 +558,32 @@
       height: 2px;
       border-radius: 0 0 4px 4px;
       background: linear-gradient(90deg, transparent, #22c55e, transparent);
+      opacity: .7;
+    }
+
+    .bab-card.ular { border-color: rgba(249,115,22,.22); }
+    .bab-card.ular:hover,
+    .bab-card.ular:active { border-color: rgba(249,115,22,.65); }
+    .bab-card.ular::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 24px; right: 24px;
+      height: 2px;
+      border-radius: 0 0 4px 4px;
+      background: linear-gradient(90deg, transparent, #f97316, transparent);
+      opacity: .7;
+    }
+
+    .bab-card.masadepan { border-color: rgba(6,182,212,.22); }
+    .bab-card.masadepan:hover,
+    .bab-card.masadepan:active { border-color: rgba(6,182,212,.65); }
+    .bab-card.masadepan::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 24px; right: 24px;
+      height: 2px;
+      border-radius: 0 0 4px 4px;
+      background: linear-gradient(90deg, transparent, #06b6d4, transparent);
       opacity: .7;
     }
 
@@ -874,20 +910,20 @@
         <span class="game-badge green">🏦 Bank Game</span>
       </a>
 
-      <a href="ekonomi-bab5.html"
-         class="bab-card" target="_blank" rel="noopener noreferrer">
+      <a href="https://ruangips.github.io/bazookagames/bab5ulartangga.html"
+         class="bab-card ular" target="_blank" rel="noopener noreferrer">
         <div class="icon">🌍</div>
         <h3>Bab 5 — Perdagangan Internasional</h3>
         <p>Ekspor, impor, dan kerja sama ekonomi antarnegara.</p>
-        <span class="game-badge soon">⏳ Segera Hadir</span>
+        <span class="game-badge orange">🎲 Ular Tangga</span>
       </a>
 
-      <a href="ekonomi-bab6.html"
-         class="bab-card" target="_blank" rel="noopener noreferrer">
+      <a href="https://ruangips.github.io/bazookagames/bab6rmhmasadepan.html"
+         class="bab-card masadepan" target="_blank" rel="noopener noreferrer">
         <div class="icon">💳</div>
         <h3>Bab 6 — Ekonomi Digital</h3>
         <p>Literasi finansial, uang digital, dan ekonomi berbasis teknologi.</p>
-        <span class="game-badge soon">⏳ Segera Hadir</span>
+        <span class="game-badge cyan">🏠 Rumah Masa Depan</span>
       </a>
 
     </div>
