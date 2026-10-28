@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Tikus Jenius Sejarah — Solo & Duel</title>
 
-<!-- SEO & Sharing (og:image opsional, hilang jika preview.png tidak ada) -->
 <meta name="description" content="Game edukasi sejarah IPS interaktif. Pukul tikus berjawaban benar! Mode Solo dan Duel 2 kelompok.">
 <meta name="theme-color" content="#a82a18">
 <meta name="author" content="MGE">
@@ -16,13 +15,10 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tikus Jenius Sejarah">
 
-<!-- Favicon: inline SVG (tidak butuh file) -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='88'%3E%F0%9F%90%AD%3C/text%3E%3C/svg%3E">
 
-<!-- PWA Manifest: inline data URI (install-able saat di-host) -->
 <link rel="manifest" href='data:application/manifest+json,{"name":"Tikus Jenius Sejarah","short_name":"Tikus Sejarah","start_url":"./","scope":"./","display":"standalone","background_color":"%230f2d12","theme_color":"%23a82a18","description":"Game edukasi sejarah IPS","icons":[]}'>
 
-<!-- Fonts: async, tidak blok render -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -340,7 +336,7 @@ body.solo-mode #midDiv, body.solo-mode #midLogo{display:none}
     </div>
 
     <div class="rules-mini">
-      <b>Cara bermain:</b> soal sejarah muncul di atas. Pukul tikus berjawaban benar → <b>+10</b>. Salah pukul → <b>-3</b> dan nyawa berkurang. Punya <b>3 nyawa</b>. Jawab benar <b>3× berturut-turut</b> → bonus <b>+5</b> tiap jawaban! Setelah selesai, ringkasan materi bisa dibaca.
+      <b>Cara bermain:</b> soal sejarah muncul di atas. Setiap soal punya 4 jawaban (1 benar + 3 salah) yang muncul bergiliran. Pukul tikus berjawaban benar → <b>+10</b>. Salah pukul → <b>-3</b> dan nyawa berkurang. Punya <b>3 nyawa</b>. Jawab benar <b>3× berturut-turut</b> → bonus <b>+5</b> tiap jawaban!
     </div>
 
     <div style="font-size:13px;color:var(--ink3)">
@@ -515,7 +511,6 @@ function bank(){
 }
 const BANK=bank();
 
-/* AUDIO */
 let ctx=null, muted=LS.get(KEY_MUTE,'0')==='1';
 function updateMuteUI(){ $('#btnMuteUI').textContent = muted ? '🔇' : '🔊'; }
 function ac(){ if(!ctx){try{ctx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){ctx=null;}} if(ctx&&ctx.state==='suspended'){try{ctx.resume();}catch(e){}} return ctx; }
@@ -539,7 +534,6 @@ const sfx={
 };
 function vibrate(ms){ try{ if(navigator.vibrate) navigator.vibrate(ms); }catch(e){} }
 
-/* SVG mole & ground */
 function moleSVG(){
   return `
 <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -646,9 +640,8 @@ function decoHTML(seed){
   return items.join('');
 }
 
-/* STATE */
 let MODE='duel';
-function mkPlayer(id){return{id:id,score:0,lives:3,idx:0,benar:0,salah:0,streak:0,maxStreak:0,qs:[],results:[],holes:[],run:false,spawnT:0,gridEl:id===1?$('#grid1'):$('#grid2'),qEl:id===1?$('#q1'):$('#q2'),sideEl:id===1?$('#sideP1'):$('#sideP2'),hamEl:id===1?$('#ham1'):$('#ham2')};}
+function mkPlayer(id){return{id:id,score:0,lives:3,idx:0,benar:0,salah:0,streak:0,maxStreak:0,qs:[],results:[],holes:[],run:false,spawnT:0,_answerQueue:null,gridEl:id===1?$('#grid1'):$('#grid2'),qEl:id===1?$('#q1'):$('#q2'),sideEl:id===1?$('#sideP1'):$('#sideP2'),hamEl:id===1?$('#ham1'):$('#ham2')};}
 const P={1:mkPlayer(1),2:mkPlayer(2)};
 let gameRun=false,gameDone=false,paused=false;
 let sharedQs=[];
@@ -679,27 +672,56 @@ function impactRing(x,y,color){const r=document.createElement('div');r.className
 let hamT={1:0,2:0};
 function hammer(p,x,y){const h=p.hamEl;h.style.display='block';h.style.left=x+'px';h.style.top=y+'px';h.classList.add('down');clearTimeout(hamT[p.id]);hamT[p.id]=setTimeout(()=>h.classList.remove('down'),110);}
 
+/* ===== POP ONE: rotasi 4 jawaban per soal ===== */
 function popOne(p){
   if(!gameRun||gameDone||paused||!p.run)return;
   const cfg=DIFFICULTY[DIFF];
   if(p.holes.filter(h=>h.up).length>=cfg.maxUp)return;
   const free=p.holes.filter(h=>!h.up&&!h.busy);if(!free.length)return;
   const q=p.qs[p.idx];if(!q)return;
-  const ans=q.a;
-  const used=p.holes.filter(h=>h.up).map(h=>h.ans);
-  const pool=q.d.concat([ans]).filter(v=>used.indexOf(v)<0);
-  if(!pool.length)return;
-  const val=pick(pool);const h=pick(free);
-  h.ans=val;h.papan.textContent=val;h.busy=true;h.up=true;
-  h.mole.className='mole up';sfx.pop();
-  const dur=cfg.moleMin+rand(0,cfg.moleMax-cfg.moleMin);clearTimeout(h.timer);h.timer=setTimeout(()=>sink(h),dur);
+
+  // Antrean 4 jawaban: [benar, salah1, salah2, salah3] diacak sekali per soal.
+  if(!p._answerQueue) p._answerQueue = shuffle([q.a, q.d[0], q.d[1], q.d[2]]);
+
+  const used = p.holes.filter(h=>h.up).map(h=>h.ans);
+  let val = null;
+
+  for(let i = 0; i < p._answerQueue.length; i++){
+    const candidate = p._answerQueue[i];
+    if(used.indexOf(candidate) < 0){
+      val = candidate;
+      p._answerQueue.splice(i, 1);
+      p._answerQueue.push(candidate);
+      break;
+    }
+  }
+
+  if(val === null){
+    const all = [q.a, q.d[0], q.d[1], q.d[2]];
+    for(let i = 0; i < all.length; i++){
+      if(used.indexOf(all[i]) < 0){ val = all[i]; break; }
+    }
+    if(val === null) val = pick(all);
+  }
+
+  const h = pick(free);
+  h.ans = val;
+  h.papan.textContent = val;
+  h.busy = true; h.up = true;
+  h.mole.className = 'mole up';
+  sfx.pop();
+  const dur = cfg.moleMin + rand(0, cfg.moleMax - cfg.moleMin);
+  clearTimeout(h.timer);
+  h.timer = setTimeout(() => sink(h), dur);
 }
 function sink(h){clearTimeout(h.timer);h.up=false;h.busy=false;h.ans=null;h.mole.className='mole';}
 function hitFx(h,cls){h.up=false;h.mole.classList.add(cls);setTimeout(()=>{h.mole.classList.remove('up','ok','bad');h.busy=false;h.ans=null;},320);}
 function sinkAll(p){p.holes.forEach(h=>{clearTimeout(h.timer);h.up=false;h.busy=false;h.ans=null;h.mole.className='mole';});}
 function scheduleSpawn(p,delay){clearTimeout(p.spawnT);p.spawnT=setTimeout(()=>spawnLoop(p),delay);}
 function spawnLoop(p){if(!gameRun||gameDone||paused||!p.run)return;popOne(p);const cfg=DIFFICULTY[DIFF];p.spawnT=setTimeout(()=>spawnLoop(p),cfg.gapMin+rand(0,cfg.gapMax-cfg.gapMin));}
-function newQ(p){const q=p.qs[p.idx];if(!q)return;setQ(p,q.q);setProgUI(p);}
+
+/* NEW QUESTION: reset antrean jawaban */
+function newQ(p){const q=p.qs[p.idx];if(!q)return;p._answerQueue=null;setQ(p,q.q);setProgUI(p);}
 
 function whack(p,h,x,y){
   if(!gameRun||gameDone||paused||!p.run||!h||!h.up)return;
@@ -776,11 +798,11 @@ function startGame(mode){
   $('#toast').className='';$('#ctrlBar').classList.remove('hide');
   sinkAll(P[1]);sinkAll(P[2]);
   sharedQs=shuffle(BANK).slice(0,TOTAL);
-  P[1].score=0;P[1].lives=3;P[1].idx=0;P[1].benar=0;P[1].salah=0;P[1].streak=0;P[1].maxStreak=0;
+  P[1].score=0;P[1].lives=3;P[1].idx=0;P[1].benar=0;P[1].salah=0;P[1].streak=0;P[1].maxStreak=0;P[1]._answerQueue=null;
   P[1].qs=sharedQs;P[1].results=P[1].qs.map(()=>({correct:null,attempts:0}));P[1].run=true;
   setQ(P[1],'');setScoreUI(P[1],false);setLivesUI(P[1]);setProgUI(P[1]);setStreakUI(P[1]);
   if(mode==='duel'){
-    P[2].score=0;P[2].lives=3;P[2].idx=0;P[2].benar=0;P[2].salah=0;P[2].streak=0;P[2].maxStreak=0;
+    P[2].score=0;P[2].lives=3;P[2].idx=0;P[2].benar=0;P[2].salah=0;P[2].streak=0;P[2].maxStreak=0;P[2]._answerQueue=null;
     P[2].qs=sharedQs;P[2].results=P[2].qs.map(()=>({correct:null,attempts:0}));P[2].run=true;
     setQ(P[2],'');setScoreUI(P[2],false);setLivesUI(P[2]);setProgUI(P[2]);setStreakUI(P[2]);
   }else{
@@ -875,7 +897,7 @@ function goHome(force){
   $('#ovEnd').classList.add('hide');$('#ovReview').classList.add('hide');$('#ovPause').classList.add('hide');$('#ovTitle').classList.remove('hide');
   $('#ctrlBar').classList.add('hide');$('#modeTag').classList.remove('show');
   $('#bestSolo').textContent=LS.get(KEY_BEST_SOLO,'0');$('#best1').textContent=LS.get(KEY_BEST1,'0');$('#best2').textContent=LS.get(KEY_BEST2,'0');
-  [P[1],P[2]].forEach(p=>{p.score=0;p.lives=3;p.idx=0;p.benar=0;p.salah=0;p.streak=0;p.maxStreak=0;p.run=false;setQ(p,'');setScoreUI(p,false);setLivesUI(p);setStreakUI(p);(p.id===1?$('#tProg1'):$('#tProg2')).textContent='1/'+TOTAL;});
+  [P[1],P[2]].forEach(p=>{p.score=0;p.lives=3;p.idx=0;p.benar=0;p.salah=0;p.streak=0;p.maxStreak=0;p.run=false;p._answerQueue=null;setQ(p,'');setScoreUI(p,false);setLivesUI(p);setStreakUI(p);(p.id===1?$('#tProg1'):$('#tProg2')).textContent='1/'+TOTAL;});
   applyMode('duel');if(!force)sfx.pop();
 }
 
